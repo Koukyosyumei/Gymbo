@@ -20,17 +20,17 @@ inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
         state,
         {}); // Construct a Trace with the current state and empty children
   } else if (maxDepth > 0) {
-    std::cout << "pc: " << pc << " v- " << (prog[pc].instr == InstrType::Dup)
-              << std::endl;
     Instr instr = prog[pc];
     std::vector<SymState> newStates;
     symStep(state, instr, newStates);
     std::vector<Trace> children;
     for (SymState newState : newStates) {
+      std::cout << "pc: " << newState.pc << std::endl;
+      newState.print();
+
       Trace child = symRun(maxDepth - 1, prog, newState);
       children.push_back(child);
     }
-
     return Trace(state, children);
   } else {
     return Trace(
@@ -42,6 +42,7 @@ inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
 inline void symStep(SymState &state, Instr instr,
                     std::vector<SymState> &result) {
   SymState new_state = state;
+
   switch (instr.instr) {
   case InstrType::Not: {
     Sym *w = new_state.symbolic_stack.back();
@@ -120,7 +121,6 @@ inline void symStep(SymState &state, Instr instr,
     break;
   }
   case InstrType::Push: {
-    std::cout << "Push " << instr.word << std::endl;
     new_state.symbolic_stack.push(Sym(SymType::SCon, instr.word));
     new_state.pc++;
     result.emplace_back(new_state);
