@@ -4,6 +4,7 @@
 #include <iostream>
 #include <list>
 #include <map>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -89,6 +90,27 @@ struct Sym {
     case (SymType::SAdd): {
       result = "(" + left->toString() + "+" + right->toString() + ")";
     }
+    case (SymType::SCon): {
+      result += wordToSignedInt(word);
+    }
+    case (SymType::SAny): {
+      result += std::to_string(var_idx);
+    }
+    case (SymType::SEq): {
+      result += left->toString() + " = " + right->toString();
+    }
+    case (SymType::SNot): {
+      result += "~(" + left->toString() + ")";
+    }
+    case (SymType::SAnd): {
+      result += left->toString() + " and " + right->toString();
+    }
+    case (SymType::SOr): {
+      result += left->toString() + " or " + right->toString();
+    }
+    case (SymType::SLt): {
+      result += left->toString() + " < " + right->toString();
+    }
     }
     return result;
   }
@@ -103,10 +125,27 @@ struct SymState {
   Linkedlist<Sym> symbolic_stack;
   std::vector<Sym> path_constraints;
 
+  SymState() : pc(0), var_cnt(0){};
   SymState(int pc, int varcnt, std::map<Word32, Sym> mem,
            Linkedlist<Sym> symbolic_stack, std::vector<Sym> path_constraints)
       : pc(pc), mem(mem), symbolic_stack(symbolic_stack),
         path_constraints(path_constraints) {}
+
+  void print() {
+    std::cout << "Stack: [";
+    LLNode<Sym> *tmp = symbolic_stack.head;
+    while (tmp != NULL) {
+      std::cout << tmp->data.toString() << ", ";
+    }
+    std::cout << "]\n";
+
+    std::cout << "Path Constraints: ";
+    for (Sym &sym : path_constraints) {
+      sym.toString();
+      std::cout << " and ";
+    }
+    std::cout << std::endl;
+  }
 };
 
 // Define a tree structure for SymState

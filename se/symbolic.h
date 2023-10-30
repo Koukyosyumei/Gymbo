@@ -15,7 +15,6 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
   int pc = state.pc;
   // Extract other elements from the state, e.g., mem, stack, cs
-
   if (prog[pc].instr == InstrType::Done) {
     return Trace(
         state,
@@ -128,6 +127,7 @@ inline void symStep(SymState &state, Instr instr,
     Sym *w = new_state.symbolic_stack.back();
     new_state.pc++;
     new_state.symbolic_stack.push(*w);
+    result.emplace_back(new_state);
     break;
   }
   case InstrType::Pop: {
@@ -148,6 +148,8 @@ inline void symStep(SymState &state, Instr instr,
       true_state.path_constraints.emplace_back(*cond);
       false_state.pc++;
       false_state.path_constraints.emplace_back(Sym(SymType::SNot, cond));
+      result.emplace_back(true_state);
+      result.emplace_back(false_state);
     }
     break;
   }

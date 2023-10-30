@@ -40,11 +40,11 @@ public:
 // Linked list class to
 // implement a linked list.
 template <typename T> class Linkedlist {
+public:
   LLNode<T> *ghost;
   LLNode<T> *head;
   LLNode<T> *tail;
 
-public:
   // Default constructor
   Linkedlist() {
     ghost = NULL;
@@ -58,7 +58,7 @@ public:
     // Assign to head
     if (head == NULL) {
       head = newNode;
-      tail = newNode;
+      tail = head;
       return;
     }
 
@@ -69,22 +69,33 @@ public:
 
   T *back() {
     if (tail == NULL) {
-      fprintf(stderr, "tail of linked-list is null\n");
+      fprintf(stderr, "Warning... tail of linked-list is null\n");
     }
     return &(tail->data);
   }
 
   void pop() {
     if (tail == NULL) {
+      fprintf(stderr, "Warning... tail is NULL when trying to pop\n");
       return;
     }
+
+    LLNode<T> *current_tail = tail;
+    tail = tail->prev;
+    if (tail != NULL) {
+      tail->next = NULL;
+    }
+
+    if (current_tail == head) {
+      head = NULL;
+    }
+
     if (ghost == NULL) {
-      ghost = tail;
+      ghost = current_tail;
     } else {
-      ghost->next = tail;
+      ghost->next = current_tail;
+      current_tail->prev = ghost;
       ghost = tail;
     }
-    tail = tail->prev;
-    tail->next = NULL;
   }
 };
