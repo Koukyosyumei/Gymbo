@@ -10,7 +10,7 @@
 // Include the necessary headers directly.
 
 Trace symRun(int maxDepth, Prog &prog, SymState &state);
-std::vector<SymState> symStep(SymState &state, Instr instr);
+void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
   int pc = state.pc;
@@ -22,9 +22,9 @@ inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
         {}); // Construct a Trace with the current state and empty children
   } else if (maxDepth > 0) {
     Instr instr = prog[pc];
-    std::vector<SymState> newStates = symStep(state, instr);
+    std::vector<SymState> newStates;
+    symStep(state, instr, newStates);
     std::vector<Trace> children;
-
     for (SymState newState : newStates) {
       Trace child = symRun(maxDepth - 1, prog, newState);
       children.push_back(child);
@@ -38,9 +38,9 @@ inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
   }
 }
 
-inline std::vector<SymState> symStep(SymState &state, Instr instr) {
+inline void symStep(SymState &state, Instr instr,
+                    std::vector<SymState> &result) {
   SymState new_state = state;
-  std::vector<SymState> result;
   switch (instr.instr) {
   case InstrType::Not: {
     Sym *w = new_state.symbolic_stack.back();
@@ -48,6 +48,7 @@ inline std::vector<SymState> symStep(SymState &state, Instr instr) {
     new_state.pc++;
     new_state.symbolic_stack.push(Sym(SymType::SNot, w));
     result.emplace_back(new_state);
+    break;
   }
   case InstrType::Add: {
     Sym *l = new_state.symbolic_stack.back();
@@ -115,21 +116,25 @@ inline std::vector<SymState> symStep(SymState &state, Instr instr) {
     new_state.pc++;
     new_state.var_cnt++;
     result.emplace_back(new_state);
+    break;
   }
   case InstrType::Push: {
     new_state.symbolic_stack.push(Sym(SymType::SCon, instr.word));
     new_state.pc++;
     result.emplace_back(new_state);
+    break;
   }
   case InstrType::Dup: {
     Sym *w = new_state.symbolic_stack.back();
     new_state.pc++;
     new_state.symbolic_stack.push(*w);
+    break;
   }
   case InstrType::Pop: {
     new_state.symbolic_stack.pop();
     new_state.pc++;
     result.emplace_back(new_state);
+    break;
   }
   case InstrType::JmpIf: {
     Sym *cond = new_state.symbolic_stack.back();
@@ -144,6 +149,7 @@ inline std::vector<SymState> symStep(SymState &state, Instr instr) {
       false_state.pc++;
       false_state.path_constraints.emplace_back(Sym(SymType::SNot, cond));
     }
+    break;
   }
   default:
     throw std::runtime_error("Unsupported instruction");

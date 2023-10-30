@@ -38,6 +38,7 @@ public:
   InstrType instr;
   Word32 word;
 
+  Instr(InstrType instr) : instr(instr) {}
   Instr(InstrType instr, Word32 word) : instr(instr), word(word) {}
 };
 
@@ -80,6 +81,16 @@ struct Sym {
     } else {
       word = val;
     }
+  }
+
+  std::string toString() {
+    std::string result;
+    switch (symtype) {
+    case (SymType::SAdd): {
+      result = "(" + left->toString() + "+" + right->toString() + ")";
+    }
+    }
+    return result;
   }
 };
 
