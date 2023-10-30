@@ -12,6 +12,6 @@ int main() {
 
   SymState init;
   Trace trace = symRun(32, prg, init);
-
+  trace.print();
   std::cout << 1 << std::endl;
 }

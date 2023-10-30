@@ -51,6 +51,17 @@ public:
     head = NULL;
     tail = NULL;
   }
+
+  uint32_t len() {
+    LLNode<T> *tmp = head;
+    uint32_t cnt = 0;
+    while (tmp != NULL) {
+      cnt++;
+      tmp = tmp->next;
+    }
+    return cnt;
+  }
+
   void push(T data) {
     // Create the new Node.
     LLNode<T> *newNode = new LLNode<T>(data);

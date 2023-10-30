@@ -12,7 +12,7 @@
 
 using Word32 = uint32_t;
 
-enum InstrType : uint8_t {
+enum class InstrType {
   Add,
   JmpIf,
   And,
@@ -85,31 +85,40 @@ struct Sym {
   }
 
   std::string toString() {
-    std::string result;
+    std::string result = "";
     switch (symtype) {
     case (SymType::SAdd): {
       result = "(" + left->toString() + "+" + right->toString() + ")";
+      break;
     }
     case (SymType::SCon): {
-      result += wordToSignedInt(word);
+      // std::cout << "word: " << wordToSignedInt(word);
+      result += std::to_string(wordToSignedInt(word));
+      break;
     }
     case (SymType::SAny): {
-      result += std::to_string(var_idx);
+      result += "var_" + std::to_string(var_idx);
+      break;
     }
     case (SymType::SEq): {
       result += left->toString() + " = " + right->toString();
+      break;
     }
     case (SymType::SNot): {
       result += "~(" + left->toString() + ")";
+      break;
     }
     case (SymType::SAnd): {
       result += left->toString() + " and " + right->toString();
+      break;
     }
     case (SymType::SOr): {
       result += left->toString() + " or " + right->toString();
+      break;
     }
     case (SymType::SLt): {
       result += left->toString() + " < " + right->toString();
+      break;
     }
     }
     return result;
@@ -136,14 +145,16 @@ struct SymState {
     LLNode<Sym> *tmp = symbolic_stack.head;
     while (tmp != NULL) {
       std::cout << tmp->data.toString() << ", ";
+      tmp = tmp->next;
     }
     std::cout << "]\n";
 
     std::cout << "Path Constraints: ";
     for (Sym &sym : path_constraints) {
-      sym.toString();
+      std::cout << sym.toString();
       std::cout << " and ";
     }
+    std::cout << " 1";
     std::cout << std::endl;
   }
 };
@@ -155,4 +166,12 @@ struct Trace {
 
   Trace(SymState data, std::vector<Trace> children)
       : data(data), children(children) {}
+
+  void print(int indent_cnt = 0) {
+    std::cout << "PC: " << std::to_string(data.pc) << std::endl;
+    data.print();
+    for (Trace &trace : children) {
+      trace.print();
+    }
+  }
 };
