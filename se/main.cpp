@@ -1,4 +1,5 @@
 #include "concretes.h"
+#include "parser.h"
 #include "symbolic.h"
 #include "type.h"
 
