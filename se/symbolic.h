@@ -14,6 +14,9 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
   int pc = state.pc;
+  std::cout << "pc: " << pc << std::endl;
+  state.print();
+
   // Extract other elements from the state, e.g., mem, stack, cs
   if (prog[pc].instr == InstrType::Done) {
     return Trace(
@@ -25,9 +28,6 @@ inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
     symStep(state, instr, newStates);
     std::vector<Trace> children;
     for (SymState newState : newStates) {
-      std::cout << "pc: " << newState.pc << std::endl;
-      newState.print();
-
       Trace child = symRun(maxDepth - 1, prog, newState);
       children.push_back(child);
     }
