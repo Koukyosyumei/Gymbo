@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdlib>
 #include <ctype.h>
 #include <stdarg.h>
 #include <stdbool.h>
@@ -58,11 +59,11 @@ struct LVar {
   LVar *next;
   char *name;
   int len;
-  int addr;
+  int offset;
 };
 
 // Consumes the current token if it matches `op`.
-inline bool consume(Token *token, char *op) {
+inline bool consume(Token *&token, char *op) {
   if (token->kind != TK_RESERVED || strlen(op) != token->len ||
       memcmp(token->str, op, token->len))
     return false;
@@ -70,7 +71,7 @@ inline bool consume(Token *token, char *op) {
   return true;
 }
 
-inline bool consume_tok(Token *token, TokenKind tok) {
+inline bool consume_tok(Token *&token, TokenKind tok) {
   if (token->kind != tok) {
     return false;
   }
@@ -78,7 +79,7 @@ inline bool consume_tok(Token *token, TokenKind tok) {
   return true;
 }
 
-inline Token *consume_ident(Token *token) {
+inline Token *consume_ident(Token *&token) {
   if (token->kind != TK_IDENT)
     return NULL;
   Token *t = token;
@@ -87,7 +88,7 @@ inline Token *consume_ident(Token *token) {
 }
 
 // Ensure that the current token is `op`.
-inline void expect(Token *token, char *user_input, char *op) {
+inline void expect(Token *&token, char *user_input, char *op) {
   if (token->kind != TK_RESERVED || strlen(op) != token->len ||
       memcmp(token->str, op, token->len)) {
     char em[] = "expected \"%s\"";
@@ -97,7 +98,7 @@ inline void expect(Token *token, char *user_input, char *op) {
 }
 
 // Ensure that the current token is TK_NUM.
-inline int expect_number(Token *token, char *user_input) {
+inline int expect_number(Token *&token, char *user_input) {
   if (token->kind != TK_NUM) {
     char em[] = "expected a number";
     error_at(user_input, token->str, em);
@@ -111,7 +112,7 @@ inline bool at_eof(Token *token) { return token->kind == TK_EOF; }
 
 // Create a new token and add it as the next token of `cur`.
 inline Token *new_token(TokenKind kind, Token *cur, char *str, int len) {
-  Token *tok = new Token();
+  Token *tok = (Token *)std::calloc(1, sizeof(Token));
   tok->kind = kind;
   tok->str = str;
   tok->len = len;
@@ -183,7 +184,8 @@ inline Token *tokenize(char *user_input) {
       continue;
     }
 
-    // error_at(user_input, p, "invalid token");
+    char em[] = "invalid token\n";
+    error_at(user_input, p, em);
   }
 
   new_token(TK_EOF, cur, p, 0);

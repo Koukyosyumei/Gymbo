@@ -41,6 +41,35 @@ public:
 
   Instr(InstrType instr) : instr(instr) {}
   Instr(InstrType instr, Word32 word) : instr(instr), word(word) {}
+
+  void print() {
+    switch (instr) {
+    case (InstrType::Add): {
+      printf("Add\n");
+      return;
+    }
+    case (InstrType::JmpIf): {
+      printf("JmpIf\n");
+      return;
+    }
+    case (InstrType::Lt): {
+      printf("Lt\n");
+      return;
+    }
+    case (InstrType::Read): {
+      printf("Read\n");
+      return;
+    }
+    case (InstrType::Done): {
+      printf("Done\n");
+      return;
+    }
+    case (InstrType::Push): {
+      printf("Push %d\n", word);
+      return;
+    }
+    }
+  }
 };
 
 // Define the Prog type
