@@ -14,7 +14,7 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
   int pc = state.pc;
-  std::cout << "pc: " << pc << " ";
+  std::cout << "pc: " << pc << ", ";
   prog[pc].print();
   state.print();
   std::cout << "---\n";
