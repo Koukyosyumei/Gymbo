@@ -197,7 +197,7 @@ struct SymState {
 
     std::cout << "Memory: {";
     for (auto t : mem) {
-      std::cout << t.first << ": " << t.second << ", ";
+      std::cout << "var_" << t.first << ": " << t.second << ", ";
     }
     std::cout << "}\n";
 

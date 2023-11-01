@@ -8,7 +8,7 @@ int main() {
   // char user_input[] = "1 + 1;";
   // char user_input[] = "a = 1; return a;";
   // char user_input[] = "if (a < 2) return a; if (b == 3) return b;";
-  char user_input[] = "if (a < 2) 1 + 1;";
+  char user_input[] = "if (a < 2) return a; else if (b == 3) a = 5;";
 
   Node *node;
   std::vector<Node *> code;
