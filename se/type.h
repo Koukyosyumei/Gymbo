@@ -30,7 +30,8 @@ enum class InstrType {
   Dup,
   Over,
   RotL,
-  Done
+  Done,
+  Nop,
 };
 
 // Define the Instr enum
@@ -62,6 +63,14 @@ public:
     }
     case (InstrType::Done): {
       printf("Done\n");
+      return;
+    }
+    case (InstrType::Nop): {
+      printf("Nop\n");
+      return;
+    }
+    case (InstrType::Swap): {
+      printf("Swap\n");
       return;
     }
     case (InstrType::Push): {

@@ -1,34 +1,33 @@
 #include "compiler.h"
 #include "parser.h"
 #include "tokenizer.h"
+#include "type.h"
 #include <iostream>
 
 int main() {
+  // char user_input[] = "1 + 1;";
+  // char user_input[] = "if (a < 1) return a;";
+  char user_input[] = "if (a < 1) 1 + 1; return a; if (b < 1) return b;";
+
   Node *node;
   std::vector<Node *> code;
   Prog prg;
+  SymState init;
 
-  char user_input[] = "1 + 1;";
-  std::cout << 1 << std::endl;
   Token *token = tokenize(user_input);
-
-  std::cout << 2 << std::endl;
   program(token, user_input, code);
-  std::cout << 3 << std::endl;
-
-  std::cout << code.size() << std::endl;
 
   for (int i = 0; i < code.size(); i++) {
-    std::cout << code[i]->kind << std::endl;
-    gen(code[i], prg);
+    if (code[i] != nullptr) {
+      gen(code[i], prg);
+    }
   }
-  std::cout << 4 << std::endl;
 
-  std::cout << " .. " << prg.size() << std::endl;
-
+  /*
   for (int j = 0; j < prg.size(); j++) {
     prg[j].print();
   }
+  */
 
-  std::cout << 5 << std::endl;
+  Trace trace = symRun(32, prg, init);
 }

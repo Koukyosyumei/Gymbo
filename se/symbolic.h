@@ -149,7 +149,7 @@ inline void symStep(SymState &state, Instr instr,
     if (addr->symtype == SymType::SCon) {
       SymState true_state = new_state;
       SymState false_state = new_state;
-      true_state.pc = wordToInt(addr->word);
+      true_state.pc += wordToInt(addr->word - 2);
       true_state.path_constraints.emplace_back(*cond);
       false_state.pc++;
       false_state.path_constraints.emplace_back(Sym(SymType::SNot, cond));
@@ -158,7 +158,12 @@ inline void symStep(SymState &state, Instr instr,
     }
     break;
   }
+  case InstrType::Nop: {
+    break;
+  }
   default:
+    std::cout << 123 << std::endl;
+    instr.print();
     throw std::runtime_error("Unsupported instruction");
   }
 }

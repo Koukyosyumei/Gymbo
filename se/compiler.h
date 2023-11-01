@@ -8,8 +8,8 @@ inline void gen_lval(Node *node, Prog &prg) {
     char em[] = "lvar is not a variable";
     error(em);
   }
-  // その変数の場所をstackにpushする
-  prg.emplace_back(Instr(InstrType::Push, node->offset));
+  prg.emplace_back(Instr(InstrType::Read));
+  // prg.emplace_back(Instr(InstrType::Push, node->offset));
 }
 
 inline void gen(Node *node, Prog &prg) {
@@ -19,22 +19,32 @@ inline void gen(Node *node, Prog &prg) {
   }
 
   switch (node->kind) {
-  case ND_IF:
+  case ND_IF: {
     gen(node->cond, prg);
+    Prog if_true_prg;
+    gen(node->lhs, if_true_prg);
+    prg.emplace_back(
+        Instr(InstrType::Push, 4)); // relative address to true clause
+    prg.emplace_back(Instr(InstrType::Swap));
     prg.emplace_back(Instr(InstrType::JmpIf));
-    gen(node->lhs, prg);
+    prg.emplace_back(Instr(InstrType::Nop)); // currently not support else
+    prg.insert(prg.end(), if_true_prg.begin(), if_true_prg.end());
     return;
-  case ND_NUM:
+  }
+  case ND_NUM: {
     prg.emplace_back(Instr(InstrType::Push, node->val));
     return;
-  case ND_LVAR:
+  }
+  case ND_LVAR: {
     gen_lval(node, prg);
     return;
-  case ND_ASSIGN:
+  }
+  case ND_ASSIGN: {
     gen_lval(node->lhs, prg);
     gen(node->rhs, prg);
     prg.emplace_back(Instr(InstrType::Store));
     return;
+  }
   }
 
   gen(node->lhs, prg);
