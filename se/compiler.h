@@ -23,7 +23,11 @@ inline void gen(Node *node, Prog &prg) {
     gen(node->cond, prg);
     Prog then_prg, els_prg;
     gen(node->then, then_prg);
-    gen(node->els, els_prg);
+    if (node->els != nullptr) {
+      gen(node->els, els_prg);
+    } else {
+      els_prg.emplace_back(Instr(InstrType::Nop));
+    }
     prg.emplace_back(
         Instr(InstrType::Push,
               3 + els_prg.size())); // relative address to true clause
