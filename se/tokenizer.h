@@ -40,6 +40,7 @@ typedef enum {
   TK_RESERVED, // Keywords or punctuators
   TK_RETURN,
   TK_IF,
+  TK_ELSE,
   TK_FOR,
   TK_IDENT,
   TK_NUM, // Integer literals
@@ -154,6 +155,12 @@ inline Token *tokenize(char *user_input) {
     if (strncmp(p, "if", 2) == 0 && !is_alnum(p[2])) {
       cur = new_token(TK_IF, cur, p, 2);
       p += 2;
+      continue;
+    }
+
+    if (strncmp(p, "else", 4) == 0 && !is_alnum(p[4])) {
+      cur = new_token(TK_ELSE, cur, p, 4);
+      p += 4;
       continue;
     }
 

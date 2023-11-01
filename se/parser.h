@@ -22,6 +22,7 @@ char LETTER_DIV[] = "/";
 char LETTER_LP[] = "(";
 char LETTER_RP[] = ")";
 char LETTER_SC[] = ";";
+char LETTER_ELSE[] = "else";
 
 typedef enum {
   ND_ADD, // +
@@ -47,6 +48,8 @@ struct Node {
   Node *lhs;     // Left-hand side
   Node *rhs;     // Right-hand side
   Node *cond;
+  Node *then;
+  Node *els;
   int val; // Used if kind == ND_NUM
   int offset;
 };
@@ -197,7 +200,10 @@ inline Node *stmt(Token *&token, char *user_input) {
     expect(token, user_input, LETTER_LP);
     node->cond = expr(token, user_input);
     expect(token, user_input, LETTER_RP);
-    node->lhs = stmt(token, user_input);
+    node->then = stmt(token, user_input);
+    if (consume_tok(token, TK_ELSE)) {
+      node->els = stmt(token, user_input);
+    }
   } else {
     node = expr(token, user_input);
     expect(token, user_input, LETTER_SC);

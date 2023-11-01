@@ -21,14 +21,16 @@ inline void gen(Node *node, Prog &prg) {
   switch (node->kind) {
   case ND_IF: {
     gen(node->cond, prg);
-    Prog if_true_prg;
-    gen(node->lhs, if_true_prg);
+    Prog then_prg, els_prg;
+    gen(node->then, then_prg);
+    gen(node->els, els_prg);
     prg.emplace_back(
-        Instr(InstrType::Push, 4)); // relative address to true clause
+        Instr(InstrType::Push,
+              3 + els_prg.size())); // relative address to true clause
     prg.emplace_back(Instr(InstrType::Swap));
     prg.emplace_back(Instr(InstrType::JmpIf));
-    prg.emplace_back(Instr(InstrType::Nop)); // currently not support else
-    prg.insert(prg.end(), if_true_prg.begin(), if_true_prg.end());
+    prg.insert(prg.end(), els_prg.begin(), els_prg.end());
+    prg.insert(prg.end(), then_prg.begin(), then_prg.end());
     return;
   }
   case ND_NUM: {
