@@ -6,7 +6,7 @@
 
 int main() {
   // char user_input[] = "1 + 1;";
-  char user_input[] = "if (a < 1) if (a == 3) return a; else return 1;";
+  char user_input[] = "a = 1; return a;";
   // char user_input[] = "if (a < 2) 1 + 1; if (b == 3) return b;";
 
   Node *node;

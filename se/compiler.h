@@ -8,8 +8,7 @@ inline void gen_lval(Node *node, Prog &prg) {
     char em[] = "lvar is not a variable";
     error(em);
   }
-  prg.emplace_back(Instr(InstrType::Read));
-  // prg.emplace_back(Instr(InstrType::Push, node->offset));
+  prg.emplace_back(Instr(InstrType::Push, node->offset));
 }
 
 inline void gen(Node *node, Prog &prg) {
@@ -30,8 +29,8 @@ inline void gen(Node *node, Prog &prg) {
     }
     prg.emplace_back(
         Instr(InstrType::Push,
-              3 + els_prg.size())); // relative address to true clause
-    prg.emplace_back(Instr(InstrType::Swap));
+              2 + els_prg.size())); // relative address to true clause
+    // prg.emplace_back(Instr(InstrType::Swap));
     prg.emplace_back(Instr(InstrType::JmpIf));
     prg.insert(prg.end(), els_prg.begin(), els_prg.end());
     prg.insert(prg.end(), then_prg.begin(), then_prg.end());
@@ -43,11 +42,14 @@ inline void gen(Node *node, Prog &prg) {
   }
   case ND_LVAR: {
     gen_lval(node, prg);
+    prg.emplace_back(Instr(InstrType::Load));
     return;
   }
   case ND_ASSIGN: {
     gen_lval(node->lhs, prg);
+    prg.emplace_back(Instr(InstrType::Load));
     gen(node->rhs, prg);
+    prg.emplace_back(Instr(InstrType::Swap));
     prg.emplace_back(Instr(InstrType::Store));
     return;
   }

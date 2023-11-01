@@ -14,8 +14,10 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
   int pc = state.pc;
-  std::cout << "pc: " << pc << std::endl;
+  std::cout << "pc: " << pc << " ";
+  prog[pc].print();
   state.print();
+  std::cout << "---\n";
 
   // Extract other elements from the state, e.g., mem, stack, cs
   if (prog[pc].instr == InstrType::Done) {
@@ -113,6 +115,24 @@ inline void symStep(SymState &state, Instr instr,
     result.emplace_back(new_state);
     break;
   }
+  case InstrType::Store: {
+    Sym *addr = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    Sym *w = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    new_state.mem.emplace(wordToInt(addr->var_idx), w->word);
+    new_state.pc++;
+    result.emplace_back(new_state);
+    break;
+  }
+  case InstrType::Load: {
+    Sym *addr = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    new_state.symbolic_stack.push(Sym(SymType::SAny, addr->word));
+    new_state.pc++;
+    result.emplace_back(new_state);
+    break;
+  }
   case InstrType::Read: {
     new_state.symbolic_stack.push(Sym(SymType::SAny, new_state.var_cnt));
     new_state.pc++;
@@ -162,8 +182,6 @@ inline void symStep(SymState &state, Instr instr,
     break;
   }
   default:
-    std::cout << 123 << std::endl;
-    instr.print();
     throw std::runtime_error("Unsupported instruction");
   }
 }

@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <iostream>
 #include <list>
-#include <map>
 #include <string>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -57,6 +57,10 @@ public:
       printf("Lt\n");
       return;
     }
+    case (InstrType::Load): {
+      printf("Load\n");
+      return;
+    }
     case (InstrType::Read): {
       printf("Read\n");
       return;
@@ -73,6 +77,10 @@ public:
       printf("Swap\n");
       return;
     }
+    case (InstrType::Store): {
+      printf("Store\n");
+      return;
+    }
     case (InstrType::Push): {
       printf("Push %d\n", word);
       return;
@@ -85,7 +93,7 @@ public:
 using Prog = std::vector<Instr>;
 
 // Define the Mem type
-using Mem = std::map<Word32, Word32>;
+using Mem = std::unordered_map<Word32, Word32>;
 
 // Define the State type
 // using State = std::tuple<int, Mem, std::vector<Word32>>;
@@ -168,13 +176,13 @@ struct Sym {
 struct SymState {
   int pc;
   int var_cnt;
-  std::map<Word32, Sym> mem;
+  Mem mem;
   Linkedlist<Sym> symbolic_stack;
   std::vector<Sym> path_constraints;
 
   SymState() : pc(0), var_cnt(0){};
-  SymState(int pc, int varcnt, std::map<Word32, Sym> mem,
-           Linkedlist<Sym> symbolic_stack, std::vector<Sym> path_constraints)
+  SymState(int pc, int varcnt, Mem mem, Linkedlist<Sym> symbolic_stack,
+           std::vector<Sym> path_constraints)
       : pc(pc), mem(mem), symbolic_stack(symbolic_stack),
         path_constraints(path_constraints) {}
 
@@ -186,6 +194,12 @@ struct SymState {
       tmp = tmp->next;
     }
     std::cout << "]\n";
+
+    std::cout << "Memory: {";
+    for (auto t : mem) {
+      std::cout << t.first << ": " << t.second << ", ";
+    }
+    std::cout << "}\n";
 
     std::cout << "Path Constraints: ";
     for (Sym &sym : path_constraints) {
