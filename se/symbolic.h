@@ -55,9 +55,9 @@ inline void symStep(SymState &state, Instr instr,
     break;
   }
   case InstrType::Add: {
-    Sym *l = new_state.symbolic_stack.back();
-    new_state.symbolic_stack.pop();
     Sym *r = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    Sym *l = new_state.symbolic_stack.back();
     new_state.symbolic_stack.pop();
     new_state.pc++;
     new_state.symbolic_stack.push(Sym(SymType::SAdd, l, r));
@@ -65,9 +65,9 @@ inline void symStep(SymState &state, Instr instr,
     break;
   }
   case InstrType::And: {
-    Sym *l = new_state.symbolic_stack.back();
-    new_state.symbolic_stack.pop();
     Sym *r = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    Sym *l = new_state.symbolic_stack.back();
     new_state.symbolic_stack.pop();
     new_state.pc++;
     new_state.symbolic_stack.push(Sym(SymType::SAnd, l, r));
@@ -75,9 +75,9 @@ inline void symStep(SymState &state, Instr instr,
     break;
   }
   case InstrType::Or: {
-    Sym *l = new_state.symbolic_stack.back();
-    new_state.symbolic_stack.pop();
     Sym *r = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    Sym *l = new_state.symbolic_stack.back();
     new_state.symbolic_stack.pop();
     new_state.pc++;
     new_state.symbolic_stack.push(Sym(SymType::SOr, l, r));
@@ -85,9 +85,9 @@ inline void symStep(SymState &state, Instr instr,
     break;
   }
   case InstrType::Lt: {
-    Sym *l = new_state.symbolic_stack.back();
-    new_state.symbolic_stack.pop();
     Sym *r = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    Sym *l = new_state.symbolic_stack.back();
     new_state.symbolic_stack.pop();
     new_state.pc++;
     new_state.symbolic_stack.push(Sym(SymType::SLt, l, r));
@@ -95,9 +95,9 @@ inline void symStep(SymState &state, Instr instr,
     break;
   }
   case InstrType::Eq: {
-    Sym *l = new_state.symbolic_stack.back();
-    new_state.symbolic_stack.pop();
     Sym *r = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    Sym *l = new_state.symbolic_stack.back();
     new_state.symbolic_stack.pop();
     new_state.pc++;
     new_state.symbolic_stack.push(Sym(SymType::SEq, l, r));
@@ -179,6 +179,7 @@ inline void symStep(SymState &state, Instr instr,
     break;
   }
   case InstrType::Nop: {
+    new_state.pc++;
     break;
   }
   default:

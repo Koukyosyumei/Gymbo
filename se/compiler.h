@@ -29,8 +29,8 @@ inline void gen(Node *node, Prog &prg) {
     }
     prg.emplace_back(
         Instr(InstrType::Push,
-              2 + els_prg.size())); // relative address to true clause
-    // prg.emplace_back(Instr(InstrType::Swap));
+              3 + els_prg.size())); // relative address to true clause
+    prg.emplace_back(Instr(InstrType::Swap));
     prg.emplace_back(Instr(InstrType::JmpIf));
     prg.insert(prg.end(), els_prg.begin(), els_prg.end());
     prg.insert(prg.end(), then_prg.begin(), then_prg.end());

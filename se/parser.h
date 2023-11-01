@@ -216,5 +216,5 @@ inline void program(Token *&token, char *user_input,
                     std::vector<Node *> &code) {
   while (!at_eof(token))
     code.emplace_back(stmt(token, user_input));
-  // code.emplace_back(nullptr);
+  code.emplace_back(nullptr);
 }

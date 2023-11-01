@@ -6,8 +6,9 @@
 
 int main() {
   // char user_input[] = "1 + 1;";
-  char user_input[] = "a = 1; return a;";
-  // char user_input[] = "if (a < 2) 1 + 1; if (b == 3) return b;";
+  // char user_input[] = "a = 1; return a;";
+  // char user_input[] = "if (a < 2) return a; if (b == 3) return b;";
+  char user_input[] = "if (a < 2) 1 + 1;";
 
   Node *node;
   std::vector<Node *> code;
@@ -20,6 +21,8 @@ int main() {
   for (int i = 0; i < code.size(); i++) {
     if (code[i] != nullptr) {
       gen(code[i], prg);
+    } else {
+      prg.emplace_back(Instr(InstrType::Done));
     }
   }
 
@@ -28,4 +31,5 @@ int main() {
   }
 
   Trace trace = symRun(32, prg, init);
+  std::cout << "Complete" << std::endl;
 }
