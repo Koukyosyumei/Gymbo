@@ -1,7 +1,6 @@
 #pragma once
 #include <array>
 #include <cstdint>
-#include <iostream>
 #include <list>
 #include <string>
 #include <unordered_map>
@@ -15,6 +14,7 @@ using Word32 = uint32_t;
 enum class InstrType {
   Add,
   JmpIf,
+  Jmp,
   And,
   Or,
   Not,
@@ -51,6 +51,10 @@ public:
     }
     case (InstrType::JmpIf): {
       printf("JmpIf\n");
+      return;
+    }
+    case (InstrType::Jmp): {
+      printf("Jmp\n");
       return;
     }
     case (InstrType::Lt): {
@@ -138,7 +142,6 @@ struct Sym {
       break;
     }
     case (SymType::SCon): {
-      // std::cout << "word: " << wordToSignedInt(word);
       result += std::to_string(wordToSignedInt(word));
       break;
     }
@@ -187,27 +190,25 @@ struct SymState {
         path_constraints(path_constraints) {}
 
   void print() {
-    std::cout << "Stack: [";
+    printf("Stack: [");
     LLNode<Sym> *tmp = symbolic_stack.head;
     while (tmp != NULL) {
-      std::cout << tmp->data.toString() << ", ";
+      printf("%s, ", tmp->data.toString().c_str());
       tmp = tmp->next;
     }
-    std::cout << "]\n";
+    printf("]\n");
 
-    std::cout << "Memory: {";
+    printf("Memory: {");
     for (auto t : mem) {
-      std::cout << "var_" << t.first << ": " << t.second << ", ";
+      printf("var_%d: %d, ", t.first, t.second);
     }
-    std::cout << "}\n";
+    printf("}\n");
 
-    std::cout << "Path Constraints: ";
+    printf("Path Constraints: ");
     for (Sym &sym : path_constraints) {
-      std::cout << sym.toString();
-      std::cout << " and ";
+      printf("%s and ", sym.toString().c_str());
     }
-    std::cout << " 1";
-    std::cout << std::endl;
+    printf(" 1\n");
   }
 };
 
@@ -220,7 +221,7 @@ struct Trace {
       : data(data), children(children) {}
 
   void print(int indent_cnt = 0) {
-    std::cout << "PC: " << std::to_string(data.pc) << std::endl;
+    printf("PC: %d\n", data.pc);
     data.print();
     for (Trace &trace : children) {
       trace.print();
