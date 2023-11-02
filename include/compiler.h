@@ -3,6 +3,14 @@
 #include "tokenizer.h"
 #include "type.h"
 
+/**
+ * Generates virtual instructions for a given AST node, representing the
+ * left-hand side of a variable assignment expression.
+ *
+ * @param node The AST node representing the left-hand side of a variable
+ * assignment expression.
+ * @param prg The virtual program to append the generated instructions to.
+ */
 inline void gen_lval(Node *node, Prog &prg) {
   if (node->kind != ND_LVAR) {
     char em[] = "lvar is not a variable";
@@ -11,6 +19,12 @@ inline void gen_lval(Node *node, Prog &prg) {
   prg.emplace_back(Instr(InstrType::Push, node->offset));
 }
 
+/**
+ * Generates virtual instructions for a given AST node.
+ *
+ * @param node The AST node to generate LLVM instructions for.
+ * @param prg The virtual program to append the generated instructions to.
+ */
 inline void gen(Node *node, Prog &prg) {
   if (node->kind == ND_RETURN) {
     prg.emplace_back(Instr(InstrType::Done));
@@ -22,14 +36,16 @@ inline void gen(Node *node, Prog &prg) {
     gen(node->cond, prg);
     Prog then_prg, els_prg;
     gen(node->then, then_prg);
+
     if (node->els != nullptr) {
       gen(node->els, els_prg);
     } else {
       els_prg.emplace_back(Instr(InstrType::Nop));
     }
-    prg.emplace_back(
-        Instr(InstrType::Push,
-              3 + els_prg.size())); // relative address to true clause
+    els_prg.emplace_back(Instr(InstrType::Push, 1 + then_prg.size()));
+    els_prg.emplace_back(Instr(InstrType::Jmp));
+
+    prg.emplace_back(Instr(InstrType::Push, 3 + els_prg.size()));
     prg.emplace_back(Instr(InstrType::Swap));
     prg.emplace_back(Instr(InstrType::JmpIf));
     prg.insert(prg.end(), els_prg.begin(), els_prg.end());

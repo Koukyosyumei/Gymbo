@@ -3,27 +3,47 @@
 #include <string>
 #include <vector>
 
-#include "type.h" // Assuming you have a Types.h file with enum Instr defined
-#include "utils.h" // Assuming you have a Util.h file with required functions and headers
-
-// Import statements are not directly translatable to C++.
-// Include the necessary headers directly.
+#include "gd.h"
+#include "type.h"
+#include "utils.h"
 
 Trace symRun(int maxDepth, Prog &prog, SymState &state);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
+/**
+ * Performs symbolic execution of a program.
+ *
+ * @param maxDepth The maximum depth of the symbolic exploration tree.
+ * @param prog The program to be symbolically executed.
+ * @param state The initial state of the program.
+ * @return A trace of the symbolic execution.
+ */
 inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
   int pc = state.pc;
-  std::cout << "pc: " << pc << ", ";
+  printf("pc: %d, ", pc);
   prog[pc].print();
   state.print();
-  std::cout << "---\n";
 
-  // Extract other elements from the state, e.g., mem, stack, cs
+  if (state.path_constraints.size() != 0) {
+    GDOptimizer optimizer;
+    std::unordered_map<int, int> params = {};
+    bool is_sat = optimizer.solve(state.path_constraints, params);
+    if (!is_sat) {
+      printf("\x1b[31m");
+    } else {
+      printf("\x1b[32m");
+    }
+    printf("IS_SAT - %d\x1b[39m, params = {", is_sat);
+    for (auto &p : params) {
+      printf("%d: %d, ", p.first, p.second);
+    }
+    printf("}\n");
+  }
+
+  printf("---\n");
+
   if (prog[pc].instr == InstrType::Done) {
-    return Trace(
-        state,
-        {}); // Construct a Trace with the current state and empty children
+    return Trace(state, {});
   } else if (maxDepth > 0) {
     Instr instr = prog[pc];
     std::vector<SymState> newStates;
@@ -35,12 +55,18 @@ inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
     }
     return Trace(state, children);
   } else {
-    return Trace(
-        state,
-        {}); // Construct a Trace with the current state and empty children
+    return Trace(state, {});
   }
 }
 
+/**
+ * Symbolically executes a single instruction of a program.
+ *
+ * @param state The state of the program before the instruction is executed.
+ * @param instr The instruction to be executed.
+ * @param result A list of new states, each of which represents a possible
+ * outcome of executing the instruction.
+ */
 inline void symStep(SymState &state, Instr instr,
                     std::vector<SymState> &result) {
   SymState new_state = state;
@@ -173,13 +199,24 @@ inline void symStep(SymState &state, Instr instr,
       true_state.path_constraints.emplace_back(*cond);
       false_state.pc++;
       false_state.path_constraints.emplace_back(Sym(SymType::SNot, cond));
-      result.emplace_back(false_state);
       result.emplace_back(true_state);
+      result.emplace_back(false_state);
     }
+    break;
+  }
+  case InstrType::Jmp: {
+    Sym *addr = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    new_state.pc += wordToInt(addr->word);
+    result.emplace_back(new_state);
     break;
   }
   case InstrType::Nop: {
     new_state.pc++;
+    result.emplace_back(new_state);
+    break;
+  }
+  case InstrType::Done: {
     break;
   }
   default:

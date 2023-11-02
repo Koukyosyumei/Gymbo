@@ -63,7 +63,13 @@ struct LVar {
   int offset;
 };
 
-// Consumes the current token if it matches `op`.
+/**
+ * Consumes the current token if it matches `op`.
+ *
+ * @param token A pointer to the current token.
+ * @param op The token to consume.
+ * @return True if the token was consumed, false otherwise.
+ */
 inline bool consume(Token *&token, char *op) {
   if (token->kind != TK_RESERVED || strlen(op) != token->len ||
       memcmp(token->str, op, token->len))
@@ -72,6 +78,13 @@ inline bool consume(Token *&token, char *op) {
   return true;
 }
 
+/**
+ * Consumes the current token if it matches `op`.
+ *
+ * @param token A pointer to the current token.
+ * @param op The token to consume.
+ * @return True if the token was consumed, false otherwise.
+ */
 inline bool consume_tok(Token *&token, TokenKind tok) {
   if (token->kind != tok) {
     return false;
@@ -80,6 +93,13 @@ inline bool consume_tok(Token *&token, TokenKind tok) {
   return true;
 }
 
+/**
+ * Consumes the current token if it is an identifier.
+ *
+ * @param token A pointer to the current token.
+ * @return A pointer to the consumed identifier token, or NULL if the current
+ * token is not an identifier.
+ */
 inline Token *consume_ident(Token *&token) {
   if (token->kind != TK_IDENT)
     return NULL;
@@ -88,7 +108,14 @@ inline Token *consume_ident(Token *&token) {
   return t;
 }
 
-// Ensure that the current token is `op`.
+/**
+ * Ensures that the current token matches `op`.
+ *
+ * @param token A pointer to the current token.
+ * @param user_input The source code of the program.
+ * @param op The token to expect.
+ * @throws An error if the current token does not match `op`.
+ */
 inline void expect(Token *&token, char *user_input, char *op) {
   if (token->kind != TK_RESERVED || strlen(op) != token->len ||
       memcmp(token->str, op, token->len)) {
@@ -98,7 +125,13 @@ inline void expect(Token *&token, char *user_input, char *op) {
   token = token->next;
 }
 
-// Ensure that the current token is TK_NUM.
+/**
+ * Ensures that the current token is a number.
+ *
+ * @param token A pointer to the current token.
+ * @param user_input The source code of the program.
+ * @throws An error if the current token is not a number.
+ */
 inline int expect_number(Token *&token, char *user_input) {
   if (token->kind != TK_NUM) {
     char em[] = "expected a number";
@@ -109,9 +142,24 @@ inline int expect_number(Token *&token, char *user_input) {
   return val;
 }
 
+/**
+ * Checks if the current token is at the end of the program.
+ *
+ * @param token A pointer to the current token.
+ * @return True if the current token is at the end of the program, false
+ * otherwise.
+ */
 inline bool at_eof(Token *token) { return token->kind == TK_EOF; }
 
-// Create a new token and add it as the next token of `cur`.
+/**
+ * Creates a new token and adds it as the next token of `cur`.
+ *
+ * @param kind The kind of token to create.
+ * @param cur A pointer to the current token.
+ * @param str The string of the token to create.
+ * @param len The length of the token to create.
+ * @return A pointer to the newly created token.
+ */
 inline Token *new_token(TokenKind kind, Token *cur, char *str, int len) {
   Token *tok = (Token *)std::calloc(1, sizeof(Token));
   tok->kind = kind;
@@ -121,11 +169,23 @@ inline Token *new_token(TokenKind kind, Token *cur, char *str, int len) {
   return tok;
 }
 
+/**
+ * Checks if the string `p` starts with the string `q`.
+ *
+ * @param p A pointer to the string to check.
+ * @param q A pointer to the string to check against.
+ * @return True if `p` starts with `q`, false otherwise.
+ */
 inline bool startswith(char *p, char *q) {
   return memcmp(p, q, strlen(q)) == 0;
 }
 
-// Tokenize `user_input` and returns new tokens.
+/**
+ * Tokenizes a given string and returns a linked list of tokens.
+ *
+ * @param user_input The string to be tokenized.
+ * @return A linked list of tokens.
+ */
 inline Token *tokenize(char *user_input) {
   char *p = user_input;
   Token head;
