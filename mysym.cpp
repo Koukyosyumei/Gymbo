@@ -1,7 +1,7 @@
-#include "compiler.h"
-#include "parser.h"
-#include "tokenizer.h"
-#include "type.h"
+#include "include/compiler.h"
+#include "include/parser.h"
+#include "include/tokenizer.h"
+#include "include/type.h"
 #include <iostream>
 
 int main() {
