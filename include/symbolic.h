@@ -3,15 +3,20 @@
 #include <string>
 #include <vector>
 
-#include "type.h" // Assuming you have a Types.h file with enum Instr defined
-#include "utils.h" // Assuming you have a Util.h file with required functions and headers
-
-// Import statements are not directly translatable to C++.
-// Include the necessary headers directly.
+#include "type.h"
+#include "utils.h"
 
 Trace symRun(int maxDepth, Prog &prog, SymState &state);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
+/**
+ * Performs symbolic execution of a program.
+ *
+ * @param maxDepth The maximum depth of the symbolic exploration tree.
+ * @param prog The program to be symbolically executed.
+ * @param state The initial state of the program.
+ * @return A trace of the symbolic execution.
+ */
 inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
   int pc = state.pc;
   printf("pc: %d, ", pc);
@@ -19,11 +24,8 @@ inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
   state.print();
   printf("---\n");
 
-  // Extract other elements from the state, e.g., mem, stack, cs
   if (prog[pc].instr == InstrType::Done) {
-    return Trace(
-        state,
-        {}); // Construct a Trace with the current state and empty children
+    return Trace(state, {});
   } else if (maxDepth > 0) {
     Instr instr = prog[pc];
     std::vector<SymState> newStates;
@@ -35,12 +37,18 @@ inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
     }
     return Trace(state, children);
   } else {
-    return Trace(
-        state,
-        {}); // Construct a Trace with the current state and empty children
+    return Trace(state, {});
   }
 }
 
+/**
+ * Symbolically executes a single instruction of a program.
+ *
+ * @param state The state of the program before the instruction is executed.
+ * @param instr The instruction to be executed.
+ * @param result A list of new states, each of which represents a possible
+ * outcome of executing the instruction.
+ */
 inline void symStep(SymState &state, Instr instr,
                     std::vector<SymState> &result) {
   SymState new_state = state;
