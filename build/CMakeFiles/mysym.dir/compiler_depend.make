@@ -3,12 +3,7 @@
 
 CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/mysym.cpp \
   /usr/include/stdc-predef.h \
-  /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/compiler.h \
-  /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/parser.h \
-  /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/tokenizer.h \
-  /usr/include/c++/11/cstdlib \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
+  /usr/include/unistd.h \
   /usr/include/features.h \
   /usr/include/features-time64.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -17,11 +12,28 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/types.h \
+  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+  /usr/include/x86_64-linux-gnu/bits/time64.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/linux/close_range.h \
+  /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/compiler.h \
+  /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/parser.h \
+  /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/tokenizer.h \
+  /usr/include/c++/11/cstdlib \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h \
   /usr/include/c++/11/pstl/pstl_config.h \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
@@ -29,9 +41,6 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
-  /usr/include/x86_64-linux-gnu/bits/types.h \
-  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
-  /usr/include/x86_64-linux-gnu/bits/time64.h \
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
@@ -341,31 +350,27 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
 
 /usr/include/locale.h:
 
-/usr/include/c++/11/clocale:
-
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
 /usr/include/stdint.h:
 
-/usr/include/c++/11/bits/nested_exception.h:
-
 /usr/include/c++/11/bits/ostream_insert.h:
 
 /usr/include/c++/11/bits/exception_ptr.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+/usr/include/x86_64-linux-gnu/bits/wchar2.h:
 
-/usr/include/alloca.h:
+/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
-/usr/include/x86_64-linux-gnu/sys/types.h:
+/usr/include/c++/11/bits/postypes.h:
 
-/usr/include/stdlib.h:
+/usr/include/c++/11/bits/stl_list.h:
 
-/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
+/usr/include/c++/11/bits/basic_ios.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+/usr/include/c++/11/bits/stringfwd.h:
 
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
@@ -377,7 +382,19 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
+/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
+
 /usr/include/x86_64-linux-gnu/bits/select2.h:
+
+/usr/include/c++/11/typeinfo:
+
+/usr/include/wchar.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
@@ -389,11 +406,97 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
 
 /usr/include/c++/11/bits/stl_iterator_base_funcs.h:
 
-/usr/include/endian.h:
+/usr/include/x86_64-linux-gnu/sys/types.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+/usr/include/stdlib.h:
 
-/usr/include/c++/11/bits/stl_iterator_base_types.h:
+/usr/include/alloca.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+/usr/include/c++/11/bits/streambuf_iterator.h:
+
+/usr/include/c++/11/bits/exception_defines.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
+
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
+
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
+
+/usr/include/x86_64-linux-gnu/sys/select.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/c++/11/iosfwd:
+
+/usr/include/c++/11/pstl/pstl_config.h:
+
+/usr/include/c++/11/clocale:
+
+/usr/include/x86_64-linux-gnu/bits/confname.h:
+
+/usr/include/c++/11/cstdint:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/usr/include/x86_64-linux-gnu/bits/unistd.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
+
+/usr/include/x86_64-linux-gnu/bits/environments.h:
+
+/usr/include/x86_64-linux-gnu/bits/time.h:
+
+/usr/include/c++/11/bits/stl_pair.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+
+/usr/include/c++/11/bits/alloc_traits.h:
+
+/usr/include/c++/11/map:
+
+/usr/include/string.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+
+/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/utils.h:
+
+/usr/include/strings.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
+
+/usr/include/ctype.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+
+/usr/include/c++/11/bits/nested_exception.h:
+
+/usr/include/unistd.h:
+
+/usr/include/c++/11/vector:
+
+/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/symbolic.h:
+
+/usr/include/x86_64-linux-gnu/bits/types.h:
+
+/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+/usr/include/c++/11/bits/exception.h:
 
 /usr/include/wctype.h:
 
@@ -409,35 +512,33 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
 
 /usr/include/c++/11/ext/type_traits.h:
 
-/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+/usr/include/c++/11/ext/string_conversions.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdlib.h:
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
+/usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
 
-/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
+/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
-/usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
+/usr/include/endian.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdio2.h:
+/usr/include/c++/11/bits/stl_iterator_base_types.h:
 
-/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/utils.h:
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
 
-/usr/include/strings.h:
+/usr/include/c++/11/ostream:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
+/usr/include/c++/11/bits/cxxabi_init_exception.h:
 
-/usr/include/ctype.h:
+/usr/include/linux/close_range.h:
 
-/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/symbolic.h:
-
-/usr/include/x86_64-linux-gnu/bits/types.h:
+/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/compiler.h:
 
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
@@ -447,59 +548,25 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:
 
-/usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
+/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
-/usr/include/x86_64-linux-gnu/bits/time.h:
+/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
-/usr/include/c++/11/bits/stl_pair.h:
+/usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
 
-/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
-/usr/include/c++/11/bits/alloc_traits.h:
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:
 
-/usr/include/c++/11/pstl/pstl_config.h:
+/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
 
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
-/usr/include/x86_64-linux-gnu/gnu/stubs.h:
-
-/usr/include/c++/11/bits/postypes.h:
-
-/usr/include/c++/11/bits/cxxabi_init_exception.h:
-
-/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/compiler.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
-
-/usr/include/c++/11/bits/exception.h:
-
-/usr/include/c++/11/cstdint:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
-/usr/include/c++/11/bits/streambuf_iterator.h:
-
-/usr/include/c++/11/bits/exception_defines.h:
-
-/usr/include/x86_64-linux-gnu/sys/select.h:
-
-/usr/include/asm-generic/errno.h:
-
-/usr/include/c++/11/iosfwd:
-
-/usr/include/c++/11/ext/string_conversions.h:
-
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
-
-/usr/include/features.h:
+/usr/include/x86_64-linux-gnu/bits/stdlib.h:
 
 /usr/include/c++/11/cwchar:
+
+/usr/include/features.h:
 
 /usr/include/stdio.h:
 
@@ -531,23 +598,11 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
 
 /usr/include/c++/11/bits/memoryfwd.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
-
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio.h:
 
 /usr/include/c++/11/stdlib.h:
-
-/usr/include/c++/11/map:
-
-/usr/include/string.h:
 
 /usr/include/linux/errno.h:
 
@@ -557,13 +612,17 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
 
 /usr/include/sched.h:
 
-/usr/include/x86_64-linux-gnu/sys/cdefs.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/c++/11/ios:
 
-/usr/include/c++/11/vector:
+/usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
+
+/usr/include/c++/11/exception:
+
+/usr/include/c++/11/bits/stl_algobase.h:
 
 /usr/include/c++/11/bits/functexcept.h:
 
@@ -573,11 +632,11 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h:
 
-/usr/include/c++/11/cstdlib:
+/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/tokenizer.h:
 
 /usr/include/c++/11/bits/allocator.h:
 
-/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/tokenizer.h:
+/usr/include/c++/11/cstdlib:
 
 /usr/include/c++/11/type_traits:
 
@@ -629,8 +688,6 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
 
 /usr/include/c++/11/bits/stl_bvector.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
-
 /usr/include/c++/11/bits/functional_hash.h:
 
 /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/include/type.h:
@@ -641,42 +698,12 @@ CMakeFiles/mysym.dir/mysym.cpp.o: /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/m
 
 /usr/include/c++/11/bits/ostream.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
-
 /usr/include/features-time64.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
 
 /usr/include/c++/11/bits/range_access.h:
 
 /mnt/c/Users/kanka/Desktop/Git_Public/SymGym/mysym.cpp:
 
 /usr/include/c++/11/iostream:
-
-/usr/include/c++/11/ostream:
-
-/usr/include/c++/11/bits/stl_list.h:
-
-/usr/include/c++/11/bits/basic_ios.tcc:
-
-/usr/include/c++/11/bits/stringfwd.h:
-
-/usr/include/c++/11/typeinfo:
-
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-
-/usr/include/wchar.h:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
-
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/wchar2.h:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
-
-/usr/include/c++/11/bits/stl_algobase.h:
-
-/usr/include/c++/11/exception:
