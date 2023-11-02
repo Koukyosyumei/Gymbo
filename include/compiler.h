@@ -81,11 +81,15 @@ inline void gen(Node *node, Prog &prg) {
   case ND_EQ:
     prg.emplace_back(Instr(InstrType::Eq));
     return;
+  case ND_NE:
+    prg.emplace_back(Instr(InstrType::Eq));
+    prg.emplace_back(Instr(InstrType::Not));
+    break;
   case ND_LT:
     prg.emplace_back(Instr(InstrType::Lt));
     return;
   }
 
-  char em[] = "Node is not supported";
+  char em[] = "Unsupported Node";
   error(em);
 }
