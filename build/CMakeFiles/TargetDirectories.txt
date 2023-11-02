@@ -1,5 +1,0 @@
-/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/build/CMakeFiles/mysym.dir
-/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/build/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/build/include/CMakeFiles/edit_cache.dir
-/mnt/c/Users/kanka/Desktop/Git_Public/SymGym/build/include/CMakeFiles/rebuild_cache.dir
