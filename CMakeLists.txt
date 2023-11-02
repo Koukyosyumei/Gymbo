@@ -13,5 +13,5 @@ include(GNUInstallDirs)
 
 add_subdirectory(${SOURCE_DIR})
 
-add_executable(mysym mysym.cpp)
-target_link_libraries(mysym libmysym)
+add_executable(gymbo gymbo.cpp)
+target_link_libraries(gymbo libgymbo)
