@@ -1,33 +1,54 @@
-#include <iostream>
-#include <map>
-#include <string>
-#include <vector>
-
 #include "gd.h"
 #include "type.h"
 #include "utils.h"
+#include <cstdint>
+#include <unordered_map>
 
-Trace symRun(int maxDepth, Prog &prog, SymState &state);
+Trace symRun(Prog &prog, SymState &state,
+             std::unordered_map<
+                 std::string, std::pair<bool, std::unordered_map<int, int>>> &,
+             int maxDepth);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 /**
  * Performs symbolic execution of a program.
  *
- * @param maxDepth The maximum depth of the symbolic exploration tree.
  * @param prog The program to be symbolically executed.
  * @param state The initial state of the program.
+ * @constrains_cache The cache for already found path constraints
+ * @param maxDepth The maximum depth of the symbolic exploration tree.
  * @return A trace of the symbolic execution.
  */
-inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
+inline Trace
+symRun(Prog &prog, SymState &state,
+       std::unordered_map<std::string,
+                          std::pair<bool, std::unordered_map<int, int>>>
+           &constraints_cache,
+       int maxDepth = 64) {
   int pc = state.pc;
   printf("pc: %d, ", pc);
   prog[pc].print();
   state.print();
 
   if (state.path_constraints.size() != 0) {
-    GDOptimizer optimizer;
+    std::string constraints_str = "";
+    for (int i = 0; i < state.path_constraints.size(); i++) {
+      constraints_str += state.path_constraints[i].toString();
+    }
+
     std::unordered_map<int, int> params = {};
-    bool is_sat = optimizer.solve(state.path_constraints, params);
+    bool is_sat;
+
+    if (constraints_cache.find(constraints_str) != constraints_cache.end()) {
+      is_sat = constraints_cache[constraints_str].first;
+      params = constraints_cache[constraints_str].second;
+    } else {
+      GDOptimizer optimizer;
+      is_sat = optimizer.solve(state.path_constraints, params);
+      constraints_cache.emplace(constraints_str,
+                                std::make_pair(is_sat, params));
+    }
+
     if (!is_sat) {
       printf("\x1b[31m");
     } else {
@@ -50,7 +71,7 @@ inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
     symStep(state, instr, newStates);
     std::vector<Trace> children;
     for (SymState newState : newStates) {
-      Trace child = symRun(maxDepth - 1, prog, newState);
+      Trace child = symRun(prog, newState, constraints_cache, maxDepth - 1);
       children.push_back(child);
     }
     return Trace(state, children);
