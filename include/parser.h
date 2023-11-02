@@ -84,6 +84,13 @@ Node *new_num(int val) {
 }
 
 // relational = add ("<" add | "<=" add | ">" add | ">=" add)*
+/**
+ * Parses a relational expression from a C-like language program.
+ *
+ * @param token The first token in the relational expression.
+ * @param user_input The source code of the program.
+ * @return An AST node representing the relational expression.
+ */
 Node *relational(Token *&token, char *user_input) {
   Node *node = add(token, user_input);
 
@@ -101,6 +108,13 @@ Node *relational(Token *&token, char *user_input) {
   }
 }
 
+/**
+ * Parses an assignment statement from a C-like language program.
+ *
+ * @param token The first token in the assignment statement.
+ * @param user_input The source code of the program.
+ * @return An AST node representing the assignment statement.
+ */
 Node *assign(Token *&token, char *user_input) {
   char LETTER_ASS[] = "=";
   Node *node = equality(token, user_input);
@@ -110,11 +124,25 @@ Node *assign(Token *&token, char *user_input) {
 }
 
 // expr = equality
+/**
+ * Parses an expression from a C-like language program.
+ *
+ * @param token The first token in the expression.
+ * @param user_input The source code of the program.
+ * @return An AST node representing the expression.
+ */
 Node *expr(Token *&token, char *user_input) {
   return assign(token, user_input);
 }
 
 // equality = relational ("==" relational | "!=" relational)*
+/**
+ * Parses an equality expression from a C-like language program.
+ *
+ * @param token The first token in the equality expression.
+ * @param user_input The source code of the program.
+ * @return An AST node representing the equality expression.
+ */
 Node *equality(Token *&token, char *user_input) {
 
   Node *node = relational(token, user_input);
@@ -212,6 +240,13 @@ inline Node *stmt(Token *&token, char *user_input) {
   return node;
 }
 
+/**
+ * Parses a C-like language program into an AST.
+ *
+ * @param token The first token in the program.
+ * @param user_input The source code of the program.
+ * @return A vector of AST nodes representing the program.
+ */
 inline void program(Token *&token, char *user_input,
                     std::vector<Node *> &code) {
   while (!at_eof(token))
