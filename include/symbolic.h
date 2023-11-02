@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+#include "gd.h"
 #include "type.h"
 #include "utils.h"
 
@@ -22,6 +23,23 @@ inline Trace symRun(int maxDepth, Prog &prog, SymState &state) {
   printf("pc: %d, ", pc);
   prog[pc].print();
   state.print();
+
+  if (state.path_constraints.size() != 0) {
+    GDOptimizer optimizer;
+    std::unordered_map<int, int> params = {};
+    bool is_sat = optimizer.solve(state.path_constraints, params);
+    if (!is_sat) {
+      printf("\x1b[31m");
+    } else {
+      printf("\x1b[32m");
+    }
+    printf("IS_SAT - %d\x1b[39m, params = {", is_sat);
+    for (auto &p : params) {
+      printf("%d: %d, ", p.first, p.second);
+    }
+    printf("}\n");
+  }
+
   printf("---\n");
 
   if (prog[pc].instr == InstrType::Done) {

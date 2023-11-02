@@ -4,6 +4,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <utility>
 #include <vector>
 
@@ -34,7 +35,6 @@ enum class InstrType {
   Nop,
 };
 
-// Define the Instr enum
 class Instr {
 public:
   InstrType instr;
@@ -46,61 +46,55 @@ public:
   void print() {
     switch (instr) {
     case (InstrType::Add): {
-      printf("Add\n");
+      printf("add\n");
       return;
     }
     case (InstrType::JmpIf): {
-      printf("JmpIf\n");
+      printf("jmpIf\n");
       return;
     }
     case (InstrType::Jmp): {
-      printf("Jmp\n");
+      printf("jmp\n");
       return;
     }
     case (InstrType::Lt): {
-      printf("Lt\n");
+      printf("lt\n");
       return;
     }
     case (InstrType::Load): {
-      printf("Load\n");
+      printf("load\n");
       return;
     }
     case (InstrType::Read): {
-      printf("Read\n");
+      printf("read\n");
       return;
     }
     case (InstrType::Done): {
-      printf("Done\n");
+      printf("ret\n");
       return;
     }
     case (InstrType::Nop): {
-      printf("Nop\n");
+      printf("nop\n");
       return;
     }
     case (InstrType::Swap): {
-      printf("Swap\n");
+      printf("swap\n");
       return;
     }
     case (InstrType::Store): {
-      printf("Store\n");
+      printf("store\n");
       return;
     }
     case (InstrType::Push): {
-      printf("Push %d\n", word);
+      printf("push %d\n", word);
       return;
     }
     }
   }
 };
 
-// Define the Prog type
 using Prog = std::vector<Instr>;
-
-// Define the Mem type
 using Mem = std::unordered_map<Word32, Word32>;
-
-// Define the State type
-// using State = std::tuple<int, Mem, std::vector<Word32>>;
 
 struct State {
   int pc;
@@ -111,9 +105,62 @@ struct State {
       : pc(pc), mem(mem), stack(stack) {}
 };
 
+struct Grad {
+  std::unordered_map<int, int> val;
+  Grad(std::unordered_map<int, int> val) : val(val) {}
+  Grad operator+(const Grad &other) {
+    std::unordered_map<int, int> result = val;
+    for (auto &r : result) {
+      if (other.val.find(r.first) != other.val.end()) {
+        result.at(r.first) += other.val.at(r.first);
+      }
+    }
+    for (auto &r : other.val) {
+      if (result.find(r.first) == result.end()) {
+        result.emplace(std::make_pair(r.first, r.second));
+      }
+    }
+    return Grad(result);
+  }
+  Grad operator+(int w) {
+    std::unordered_map<int, int> result = val;
+    for (auto &r : result) {
+      result.at(r.first) += w;
+    }
+    return Grad(result);
+  }
+  Grad operator-(const Grad &other) {
+    std::unordered_map<int, int> result = val;
+    for (auto &r : result) {
+      if (other.val.find(r.first) != other.val.end()) {
+        result.at(r.first) -= other.val.at(r.first);
+      }
+    }
+    for (auto &r : other.val) {
+      if (result.find(r.first) == result.end()) {
+        result.emplace(std::make_pair(r.first, r.second));
+      }
+    }
+    return Grad(result);
+  }
+  Grad operator*(int w) {
+    std::unordered_map<int, int> result = val;
+    for (auto &r : result) {
+      result.at(r.first) *= w;
+    }
+    return Grad(result);
+  }
+  Grad abs() {
+    std::unordered_map<int, int> result = val;
+    for (auto &r : result) {
+      result.emplace(std::make_pair(r.first, std::abs(r.second)));
+    }
+    return Grad(result);
+  }
+};
+
 enum class SymType { SAdd, SEq, SNot, SOr, SCon, SAnd, SLt, SAny };
 
-// Define the Sym struct
 struct Sym {
   SymType symtype;
   Sym *left;
@@ -134,6 +181,95 @@ struct Sym {
     }
   }
 
+  void gather_var_ids(std::unordered_set<int> &result) {
+    switch (symtype) {
+    case (SymType::SAdd): {
+      left->gather_var_ids(result);
+      right->gather_var_ids(result);
+      return;
+    }
+    case (SymType::SAny): {
+      result.emplace(var_idx);
+    }
+    case (SymType::SEq): {
+      left->gather_var_ids(result);
+      right->gather_var_ids(result);
+      return;
+    }
+    case (SymType::SNot): {
+      left->gather_var_ids(result);
+      return;
+    }
+    case (SymType::SAnd): {
+      left->gather_var_ids(result);
+      right->gather_var_ids(result);
+      return;
+    }
+    case (SymType::SLt): {
+      left->gather_var_ids(result);
+      right->gather_var_ids(result);
+      return;
+    }
+    default:
+      return;
+    }
+  }
+
+  int eval(const std::unordered_map<int, int> &cvals) {
+    switch (symtype) {
+    case (SymType::SAdd): {
+      return left->eval(cvals) + right->eval(cvals);
+    }
+    case (SymType::SCon): {
+      return wordToSignedInt(word);
+    }
+    case (SymType::SAny): {
+      return cvals.at(var_idx);
+    }
+    case (SymType::SEq): {
+      return std::abs(left->eval(cvals) - right->eval(cvals));
+    }
+    case (SymType::SNot): {
+      return left->eval(cvals) * (-1) + 1;
+    }
+    case (SymType::SAnd): {
+      return left->eval(cvals) + right->eval(cvals);
+    }
+    case (SymType::SLt): {
+      return left->eval(cvals) - right->eval(cvals) + 1;
+    }
+    }
+    return 0;
+  }
+
+  Grad grad() {
+    switch (symtype) {
+    case (SymType::SAdd): {
+      return left->grad() + right->grad();
+    }
+    case (SymType::SCon): {
+      return Grad({});
+    }
+    case (SymType::SAny): {
+      std::unordered_map<int, int> tmp = {{var_idx, 1}};
+      return Grad(tmp);
+    }
+    case (SymType::SEq): {
+      return (left->grad() - right->grad()).abs();
+    }
+    case (SymType::SNot): {
+      return left->grad() * (-1);
+    }
+    case (SymType::SAnd): {
+      return left->grad() + right->grad();
+    }
+    case (SymType::SLt): {
+      return left->grad() - right->grad();
+    }
+    }
+    return Grad({});
+  }
+
   std::string toString() {
     std::string result = "";
     switch (symtype) {
@@ -150,19 +286,19 @@ struct Sym {
       break;
     }
     case (SymType::SEq): {
-      result += left->toString() + " = " + right->toString();
+      result += left->toString() + " == " + right->toString();
       break;
     }
     case (SymType::SNot): {
-      result += "~(" + left->toString() + ")";
+      result += "!(" + left->toString() + ")";
       break;
     }
     case (SymType::SAnd): {
-      result += left->toString() + " and " + right->toString();
+      result += left->toString() + " && " + right->toString();
       break;
     }
     case (SymType::SOr): {
-      result += left->toString() + " or " + right->toString();
+      result += left->toString() + " || " + right->toString();
       break;
     }
     case (SymType::SLt): {
@@ -173,8 +309,6 @@ struct Sym {
     return result;
   }
 };
-
-// Define the SymState type
 
 struct SymState {
   int pc;
@@ -212,7 +346,6 @@ struct SymState {
   }
 };
 
-// Define a tree structure for SymState
 struct Trace {
   SymState data;
   std::vector<Trace> children;
