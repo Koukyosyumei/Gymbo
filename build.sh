@@ -1,4 +1,4 @@
 cmake -S . -B build
 cmake --build build
 
-cp build/mysym mysym
+cp build/gymbo gymbo
