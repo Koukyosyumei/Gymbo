@@ -87,5 +87,14 @@ int main(int argc, char *argv[]) {
     printf("#Total Path Constraints: %d\n", num_unique_path_constraints);
     printf("#SAT: %d\n", num_sat);
     printf("#UNSAT: %d\n", num_unsat);
+
+    if (verbose_level >= 0) {
+      printf("List of UNSAT Path Constraints\n");
+      for (auto &cc : cache_constraints) {
+        if (!cc.second.first) {
+          printf("# %s\n", cc.first.c_str());
+        }
+      }
+    }
   }
 }
