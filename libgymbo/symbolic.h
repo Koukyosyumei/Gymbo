@@ -188,7 +188,14 @@ inline void symStep(SymState &state, Instr instr,
     new_state.symbolic_stack.pop();
     Sym *w = new_state.symbolic_stack.back();
     new_state.symbolic_stack.pop();
-    new_state.mem.emplace(wordToInt(addr->var_idx), w->word);
+    if (w->symtype == SymType::SCon) {
+      new_state.mem.emplace(wordToInt(addr->var_idx), w->word);
+    } else if (w->symtype == SymType::SAny) {
+      if (new_state.mem.find(wordToInt(w->var_idx)) != new_state.mem.end()) {
+        new_state.mem.emplace(wordToInt(addr->var_idx),
+                              new_state.mem[wordToInt(w->var_idx)]);
+      }
+    }
     new_state.pc++;
     result.emplace_back(new_state);
     break;
