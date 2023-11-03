@@ -13,6 +13,25 @@ git clone https://github.com/Koukyosyumei/Gymbo.git
 ./build.sh
 ```
 
+## Grammer of Input Source Codes
+
+Gymbo currently supports the C-like program whose BNF is as follows:
+
+```
+program    = stmt*
+stmt       = expr ";"
+           | "if" "(" expr ")" stmt ("else" stmt)? 
+           | "return" expr ";"
+expr       = assign
+assign     = equality ("=" assign)?
+equality   = relational ("==" relational | "!=" relational)*
+relational = add ("<" add | "<=" add | ">" add | ">=" add)*
+add        = mul ("+" mul | "-" mul)*
+mul        = unary ("*" unary | "/" unary)*
+unary      = ("+" | "-")? primary
+primary    = num | ident | "(" expr ")"
+```
+
 ## CLI Tool
 
 ```bash
