@@ -5,7 +5,7 @@ project("libmyplan" LANGUAGES C CXX)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -mtune=native -march=native")
 
-set(SOURCE_DIR  "include")
+set(SOURCE_DIR  "libgymbo")
 
 include(GNUInstallDirs)
 

@@ -81,11 +81,28 @@ inline void gen(Node *node, Prog &prg) {
   case ND_EQ:
     prg.emplace_back(Instr(InstrType::Eq));
     return;
+  case ND_NE:
+    prg.emplace_back(Instr(InstrType::Eq));
+    prg.emplace_back(Instr(InstrType::Not));
+    break;
   case ND_LT:
     prg.emplace_back(Instr(InstrType::Lt));
     return;
+  case ND_LE:
+    prg.emplace_back(Instr(InstrType::Le));
+    return;
   }
 
-  char em[] = "Node is not supported";
+  char em[] = "Unsupported Node";
   error(em);
+}
+
+inline void compile_ast(std::vector<Node *> code, Prog &prg) {
+  for (int i = 0; i < code.size(); i++) {
+    if (code[i] != nullptr) {
+      gen(code[i], prg);
+    } else {
+      prg.emplace_back(Instr(InstrType::Done));
+    }
+  }
 }

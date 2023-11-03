@@ -20,6 +20,7 @@ enum class InstrType {
   Or,
   Not,
   Lt,
+  Le,
   Eq,
   Push,
   Store,
@@ -61,6 +62,10 @@ public:
       printf("lt\n");
       return;
     }
+    case (InstrType::Le): {
+      printf("le\n");
+      return;
+    }
     case (InstrType::Load): {
       printf("load\n");
       return;
@@ -95,6 +100,9 @@ public:
 
 using Prog = std::vector<Instr>;
 using Mem = std::unordered_map<Word32, Word32>;
+using PathConstraintsTable =
+    std::unordered_map<std::string,
+                       std::pair<bool, std::unordered_map<int, int>>>;
 
 struct State {
   int pc;
@@ -138,7 +146,7 @@ struct Grad {
     }
     for (auto &r : other.val) {
       if (result.find(r.first) == result.end()) {
-        result.emplace(std::make_pair(r.first, r.second));
+        result.emplace(std::make_pair(r.first, -1 * r.second));
       }
     }
     return Grad(result);
@@ -159,7 +167,7 @@ struct Grad {
   }
 };
 
-enum class SymType { SAdd, SEq, SNot, SOr, SCon, SAnd, SLt, SAny };
+enum class SymType { SAdd, SEq, SNot, SOr, SCon, SAnd, SLt, SLe, SAny };
 
 struct Sym {
   SymType symtype;
@@ -190,6 +198,7 @@ struct Sym {
     }
     case (SymType::SAny): {
       result.emplace(var_idx);
+      return;
     }
     case (SymType::SEq): {
       left->gather_var_ids(result);
@@ -206,6 +215,11 @@ struct Sym {
       return;
     }
     case (SymType::SLt): {
+      left->gather_var_ids(result);
+      right->gather_var_ids(result);
+      return;
+    }
+    case (SymType::SLe): {
       left->gather_var_ids(result);
       right->gather_var_ids(result);
       return;
@@ -238,14 +252,19 @@ struct Sym {
     case (SymType::SLt): {
       return left->eval(cvals) - right->eval(cvals) + 1;
     }
+    case (SymType::SLe): {
+      return left->eval(cvals) - right->eval(cvals);
     }
-    return 0;
+    default: {
+      return 0;
+    }
+    }
   }
 
-  Grad grad() {
+  Grad grad(const std::unordered_map<int, int> &cvals) {
     switch (symtype) {
     case (SymType::SAdd): {
-      return left->grad() + right->grad();
+      return left->grad(cvals) + right->grad(cvals);
     }
     case (SymType::SCon): {
       return Grad({});
@@ -255,19 +274,34 @@ struct Sym {
       return Grad(tmp);
     }
     case (SymType::SEq): {
-      return (left->grad() - right->grad()).abs();
+      int lv = left->eval(cvals);
+      int rv = right->eval(cvals);
+      Grad lg = left->grad(cvals);
+      Grad rg = right->grad(cvals);
+      if (lv == rv) {
+        return Grad({});
+      } else if (lv > rv) {
+        return lg - rg;
+      } else {
+        return rg - lg;
+      }
     }
     case (SymType::SNot): {
-      return left->grad() * (-1);
+      return left->grad(cvals) * (-1);
     }
     case (SymType::SAnd): {
-      return left->grad() + right->grad();
+      return left->grad(cvals) + right->grad(cvals);
     }
     case (SymType::SLt): {
-      return left->grad() - right->grad();
+      return left->grad(cvals) - right->grad(cvals);
+    }
+    case (SymType::SLe): {
+      return left->grad(cvals) - right->grad(cvals);
+    }
+    default: {
+      return Grad({});
     }
     }
-    return Grad({});
   }
 
   std::string toString() {
@@ -303,6 +337,10 @@ struct Sym {
     }
     case (SymType::SLt): {
       result += left->toString() + " < " + right->toString();
+      break;
+    }
+    case (SymType::SLe): {
+      result += left->toString() + " <= " + right->toString();
       break;
     }
     }

@@ -1,28 +1,37 @@
 #include <unistd.h>
 
-#include "include/compiler.h"
-#include "include/parser.h"
-#include "include/tokenizer.h"
-#include "include/type.h"
+#include "libgymbo/compiler.h"
+#include "libgymbo/gd.h"
+#include "libgymbo/parser.h"
+#include "libgymbo/tokenizer.h"
+#include "libgymbo/type.h"
 
 char *user_input;
 int max_depth = 256;
-bool print_prg = false;
+int verbose_level = 1;
+int num_itrs = 100;
+int step_size = 1;
 
 void parse_args(int argc, char *argv[]) {
   int opt;
   user_input = argv[1];
-  while ((opt = getopt(argc, argv, "d:p")) != -1) {
+  while ((opt = getopt(argc, argv, "d:v:i:a:")) != -1) {
     switch (opt) {
     case 'd':
       max_depth = atoi(optarg);
       break;
-    case 'p':
-      print_prg = true;
+    case 'v':
+      verbose_level = atoi(optarg);
+      break;
+    case 'i':
+      num_itrs = atoi(optarg);
+      break;
+    case 'a':
+      step_size = atoi(optarg);
       break;
     default:
       printf("unknown parameter %s is specified", optarg);
-      printf("Usage: %s [-d] ...\n", argv[0]);
+      printf("Usage: %s [-d], [-v] ...\n", argv[0]);
       break;
     }
   }
@@ -31,36 +40,47 @@ void parse_args(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
   parse_args(argc, argv);
 
-  // char user_input[] = "1 + 1;";
-  // char user_input[] = "a = 1; return a;";
-  // char user_input[] = "if (a < 2) return a; if (b == 3) return b;";
-  // char user_input[] = "if (a < 2)\n return a;\n else\n if (b == 3)\n a = 5;";
-
   Node *node;
   std::vector<Node *> code;
   Prog prg;
+  GDOptimizer optimizer(num_itrs, step_size);
   SymState init;
+  PathConstraintsTable cache_constraints;
 
+  printf("Compiling the input program...\n");
   Token *token = tokenize(user_input);
-  program(token, user_input, code);
+  generate_ast(token, user_input, code);
+  compile_ast(code, prg);
 
-  for (int i = 0; i < code.size(); i++) {
-    if (code[i] != nullptr) {
-      gen(code[i], prg);
-    } else {
-      prg.emplace_back(Instr(InstrType::Done));
-    }
-  }
-
-  if (print_prg) {
-    printf("Compiled Stack Machine...\n\n");
+  if (verbose_level >= 2) {
+    printf("...Compiled Stack Machine...\n");
     for (int j = 0; j < prg.size(); j++) {
       prg[j].print();
     }
-    printf("-------------------------\n\n");
+    printf("----------------------------\n");
   }
 
-  printf("Start Symbolic Execution...\n\n");
-  Trace trace = symRun(32, prg, init);
+  printf("Start Symbolic Execution...\n");
+  Trace trace =
+      symRun(prg, optimizer, init, cache_constraints, max_depth, verbose_level);
   printf("---------------------------\n");
+
+  printf("Result Summary\n");
+  int num_unique_path_constraints = cache_constraints.size();
+  int num_sat = 0;
+  int num_unsat = 0;
+  for (auto &cc : cache_constraints) {
+    if (cc.second.first) {
+      num_sat++;
+    } else {
+      num_unsat++;
+    }
+  }
+  if (num_unique_path_constraints == 0) {
+    printf("No Path Constraints Found");
+  } else {
+    printf("#Total Path Constraints: %d\n", num_unique_path_constraints);
+    printf("#SAT: %d\n", num_sat);
+    printf("#UNSAT: %d\n", num_unsat);
+  }
 }
