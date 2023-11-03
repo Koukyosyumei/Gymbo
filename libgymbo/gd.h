@@ -1,15 +1,19 @@
 #pragma once
-#include "type.h"
+#include <random>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
 
+#include "type.h"
+
 struct GDOptimizer {
 
-  int num_epochs, lr;
+  int num_epochs, lr, seed, param_low, param_high;
 
-  GDOptimizer(int num_epochs = 100, int lr = 1)
-      : num_epochs(num_epochs), lr(lr) {}
+  GDOptimizer(int num_epochs = 100, int lr = 1, int param_low = -10,
+              int param_high = 10, int seed = 42)
+      : num_epochs(num_epochs), lr(lr), param_low(param_low),
+        param_high(param_high), seed(seed) {}
 
   bool eval(std::vector<Sym> &path_constraints,
             std::unordered_map<int, int> params) {
@@ -27,6 +31,9 @@ struct GDOptimizer {
       return true;
     }
 
+    std::mt19937 gen(seed);
+    std::uniform_int_distribution<> dist(param_low, param_high);
+
     std::unordered_map<int, int> is_const;
     std::unordered_set<int> unique_var_ids;
 
@@ -36,7 +43,7 @@ struct GDOptimizer {
 
     for (int i : unique_var_ids) {
       if (params.find(i) == params.end()) {
-        params.emplace(std::make_pair(i, 0));
+        params.emplace(std::make_pair(i, dist(gen)));
         is_const.emplace(std::make_pair(i, false));
       } else {
         is_const.emplace(std::make_pair(i, is_init_params_const));
