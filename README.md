@@ -55,6 +55,7 @@ primary    = num | ident | "(" expr ")"
 - `-t`: Set the maximum number of trials of gradient descent (default: 3) 
 - `-l`: Set the minimum value of initial parameters (default: -10)
 - `-h`: Set the maximum value of initial parameters (default: 10)
+- `-s`: Set the random seed (default: 42)
 
 ```bash
 ./gymbo "if (a < 3) if (a > 4) return 1;" -v 0
