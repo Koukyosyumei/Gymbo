@@ -18,6 +18,8 @@ git clone https://github.com/Koukyosyumei/Gymbo.git
 ## Header-Only Library
 
 ```cpp
+char user_input[] = "if (a < 3) return 1;"
+
 std::vector<Node *> code;
 Prog prg;
 GDOptimizer optimizer(num_itrs, step_size);
