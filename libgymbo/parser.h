@@ -217,19 +217,19 @@ inline Node *primary(Token *&token, char *user_input) {
 inline Node *stmt(Token *&token, char *user_input) {
   Node *node;
 
-  if (consume_tok(token, TK_RETURN)) {
+  if (consume_tok(token, TOKEN_RETURN)) {
     node = new Node();
     node->kind = ND_RETURN;
     node->lhs = expr(token, user_input);
     expect(token, user_input, LETTER_SC);
-  } else if (consume_tok(token, TK_IF)) {
+  } else if (consume_tok(token, TOKEN_IF)) {
     node = new Node();
     node->kind = ND_IF;
     expect(token, user_input, LETTER_LP);
     node->cond = expr(token, user_input);
     expect(token, user_input, LETTER_RP);
     node->then = stmt(token, user_input);
-    if (consume_tok(token, TK_ELSE)) {
+    if (consume_tok(token, TOKEN_ELSE)) {
       node->els = stmt(token, user_input);
     }
   } else {

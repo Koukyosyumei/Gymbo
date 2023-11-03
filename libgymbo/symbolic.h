@@ -3,9 +3,11 @@
 #include "utils.h"
 #include <cstdint>
 #include <unordered_map>
+#include <utility>
 
-Trace symRun(Prog &prog, GDOptimizer &optimizer, SymState &state,
-             PathConstraintsTable &, int maxDepth, int verbose_level);
+Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
+                PathConstraintsTable &, int maxDepth, bool ignore_memory,
+                int verbose_level);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 /**
@@ -17,9 +19,10 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
  * @param maxDepth The maximum depth of the symbolic exploration tree.
  * @return A trace of the symbolic execution.
  */
-inline Trace symRun(Prog &prog, GDOptimizer &optimizer, SymState &state,
-                    PathConstraintsTable &constraints_cache, int maxDepth = 64,
-                    int verbose_level = 1) {
+inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
+                       PathConstraintsTable &constraints_cache,
+                       int maxDepth = 64, bool ignore_memory = false,
+                       int verbose_level = 1) {
   int pc = state.pc;
   if (verbose_level >= 1) {
     printf("pc: %d, ", pc);
@@ -34,6 +37,12 @@ inline Trace symRun(Prog &prog, GDOptimizer &optimizer, SymState &state,
     }
 
     std::unordered_map<int, int> params = {};
+    if (!ignore_memory) {
+      for (auto &p : state.mem) {
+        params.emplace(std::make_pair(p.first, p.second));
+      }
+    }
+
     bool is_sat;
 
     if (constraints_cache.find(constraints_str) != constraints_cache.end()) {
@@ -71,8 +80,8 @@ inline Trace symRun(Prog &prog, GDOptimizer &optimizer, SymState &state,
     symStep(state, instr, newStates);
     std::vector<Trace> children;
     for (SymState newState : newStates) {
-      Trace child = symRun(prog, optimizer, newState, constraints_cache,
-                           maxDepth - 1, verbose_level);
+      Trace child = run_gymbo(prog, optimizer, newState, constraints_cache,
+                              maxDepth - 1, ignore_memory, verbose_level);
       children.push_back(child);
     }
     return Trace(state, children);
@@ -109,6 +118,16 @@ inline void symStep(SymState &state, Instr instr,
     new_state.symbolic_stack.pop();
     new_state.pc++;
     new_state.symbolic_stack.push(Sym(SymType::SAdd, l, r));
+    result.emplace_back(new_state);
+    break;
+  }
+  case InstrType::Sub: {
+    Sym *r = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    Sym *l = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    new_state.pc++;
+    new_state.symbolic_stack.push(Sym(SymType::SSub, l, r));
     result.emplace_back(new_state);
     break;
   }
@@ -178,7 +197,24 @@ inline void symStep(SymState &state, Instr instr,
     new_state.symbolic_stack.pop();
     Sym *w = new_state.symbolic_stack.back();
     new_state.symbolic_stack.pop();
-    new_state.mem.emplace(wordToInt(addr->var_idx), w->word);
+    if (w->symtype == SymType::SCon) {
+      if (new_state.mem.find(wordToInt(addr->var_idx)) == new_state.mem.end()) {
+        new_state.mem.emplace(wordToInt(addr->var_idx), w->word);
+      } else {
+        new_state.mem.at(wordToInt(addr->var_idx)) = w->word;
+      }
+    } else if (w->symtype == SymType::SAny) {
+      if (new_state.mem.find(wordToInt(w->var_idx)) != new_state.mem.end()) {
+        if (new_state.mem.find(wordToInt(addr->var_idx)) ==
+            new_state.mem.end()) {
+          new_state.mem.emplace(wordToInt(addr->var_idx),
+                                new_state.mem[wordToInt(w->var_idx)]);
+        } else {
+          new_state.mem.at(wordToInt(addr->var_idx)) =
+              new_state.mem[wordToInt(w->var_idx)];
+        }
+      }
+    }
     new_state.pc++;
     result.emplace_back(new_state);
     break;

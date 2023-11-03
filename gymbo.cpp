@@ -11,11 +11,12 @@ int max_depth = 256;
 int verbose_level = 1;
 int num_itrs = 100;
 int step_size = 1;
+bool ignore_memory = false;
 
 void parse_args(int argc, char *argv[]) {
   int opt;
   user_input = argv[1];
-  while ((opt = getopt(argc, argv, "d:v:i:a:")) != -1) {
+  while ((opt = getopt(argc, argv, "d:v:i:a:m")) != -1) {
     switch (opt) {
     case 'd':
       max_depth = atoi(optarg);
@@ -29,9 +30,14 @@ void parse_args(int argc, char *argv[]) {
     case 'a':
       step_size = atoi(optarg);
       break;
+    case 'm':
+      ignore_memory = true;
+      break;
     default:
       printf("unknown parameter %s is specified", optarg);
-      printf("Usage: %s [-d], [-v] ...\n", argv[0]);
+      printf("Usage: %s [-d: max_depth], [-v: verbose level], [-i: num_itrs], "
+             "[-a: step_size], [-m: ignore_memory] ...\n",
+             argv[0]);
       break;
     }
   }
@@ -40,7 +46,6 @@ void parse_args(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
   parse_args(argc, argv);
 
-  Node *node;
   std::vector<Node *> code;
   Prog prg;
   GDOptimizer optimizer(num_itrs, step_size);
@@ -61,8 +66,8 @@ int main(int argc, char *argv[]) {
   }
 
   printf("Start Symbolic Execution...\n");
-  Trace trace =
-      symRun(prg, optimizer, init, cache_constraints, max_depth, verbose_level);
+  run_gymbo(prg, optimizer, init, cache_constraints, max_depth, ignore_memory,
+            verbose_level);
   printf("---------------------------\n");
 
   printf("Result Summary\n");
@@ -82,5 +87,14 @@ int main(int argc, char *argv[]) {
     printf("#Total Path Constraints: %d\n", num_unique_path_constraints);
     printf("#SAT: %d\n", num_sat);
     printf("#UNSAT: %d\n", num_unsat);
+
+    if (verbose_level >= 0) {
+      printf("List of UNSAT Path Constraints\n");
+      for (auto &cc : cache_constraints) {
+        if (!cc.second.first) {
+          printf("# %s\n", cc.first.c_str());
+        }
+      }
+    }
   }
 }

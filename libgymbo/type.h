@@ -14,6 +14,7 @@ using Word32 = uint32_t;
 
 enum class InstrType {
   Add,
+  Sub,
   JmpIf,
   Jmp,
   And,
@@ -167,7 +168,7 @@ struct Grad {
   }
 };
 
-enum class SymType { SAdd, SEq, SNot, SOr, SCon, SAnd, SLt, SLe, SAny };
+enum class SymType { SAdd, SSub, SEq, SNot, SOr, SCon, SAnd, SLt, SLe, SAny };
 
 struct Sym {
   SymType symtype;
@@ -192,6 +193,11 @@ struct Sym {
   void gather_var_ids(std::unordered_set<int> &result) {
     switch (symtype) {
     case (SymType::SAdd): {
+      left->gather_var_ids(result);
+      right->gather_var_ids(result);
+      return;
+    }
+    case (SymType::SSub): {
       left->gather_var_ids(result);
       right->gather_var_ids(result);
       return;
@@ -234,6 +240,9 @@ struct Sym {
     case (SymType::SAdd): {
       return left->eval(cvals) + right->eval(cvals);
     }
+    case (SymType::SSub): {
+      return left->eval(cvals) - right->eval(cvals);
+    }
     case (SymType::SCon): {
       return wordToSignedInt(word);
     }
@@ -265,6 +274,9 @@ struct Sym {
     switch (symtype) {
     case (SymType::SAdd): {
       return left->grad(cvals) + right->grad(cvals);
+    }
+    case (SymType::SSub): {
+      return left->grad(cvals) - right->grad(cvals);
     }
     case (SymType::SCon): {
       return Grad({});
@@ -309,6 +321,10 @@ struct Sym {
     switch (symtype) {
     case (SymType::SAdd): {
       result = "(" + left->toString() + "+" + right->toString() + ")";
+      break;
+    }
+    case (SymType::SSub): {
+      result = "(" + left->toString() + "-" + right->toString() + ")";
       break;
     }
     case (SymType::SCon): {

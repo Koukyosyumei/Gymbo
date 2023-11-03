@@ -2,7 +2,13 @@
 
 <img src="img/gymbo.drawio.svg">
 
-Gymbo is a Proof of Concept for Gradient-based Symbolic Execution Engine implemented from scratch. Gymbo uses gradient descent to solve path constraints. 
+Gymbo is a Proof of Concept for a Gradient-based Symbolic Execution Engine, implemented from scratch. Building on recent advancements that utilize gradient descent to solve SMT-like formulas [3, 4], Gymbo leverages gradient descent to discover input values that fulfill each path constraint during symbolic execution.
+
+Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of rui314/chibicc [1], while the symbolic execution approach is inspired by beala/symbolic [2].
+
+Compared to other prominent symbolic execution tools, Gymbo's implementation is notably simpler and more compact. We hope that this project will assist individuals in grasping the fundamental principles of symbolic execution and SMT problem-solving through gradient descent.
+
+Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated.
 
 ## Install
 
@@ -10,6 +16,27 @@ Gymbo is a Proof of Concept for Gradient-based Symbolic Execution Engine impleme
 git clone https://github.com/Koukyosyumei/Gymbo.git
 ./build.sh
 ```
+
+## Input Source Code Grammar
+
+Gymbo presently supports C-like programs with the following BNF grammar:
+
+```
+program    = stmt*
+stmt       = expr ";"
+           | "if" "(" expr ")" stmt ("else" stmt)? 
+           | "return" expr ";"
+expr       = assign
+assign     = equality ("=" assign)?
+equality   = relational ("==" relational | "!=" relational)*
+relational = add ("<" add | "<=" add | ">" add | ">=" add)*
+add        = mul ("+" mul | "-" mul)*
+mul        = unary ("*" unary | "/" unary)*
+unary      = ("+" | "-")? primary
+primary    = num | ident | "(" expr ")"
+```
+
+> Please note that Gymbo only tracks + and - operations within conditional statements for path constraints.
 
 ## CLI Tool
 
@@ -19,14 +46,20 @@ git clone https://github.com/Koukyosyumei/Gymbo.git
 
 The tool accepts the following command-line options:
 
-- `-d` [max\_depth]: Set the maximum depth for symbolic execution (default: 256).
-- `-v` [verbose\_level]: Set the verbosity level (default: 1). Use 0 for minimal output.
-- `-i` [num\_itrs]: Set the number of iterations for gradient descent (default: 100).
-- `-a` [step\_size]: Set the step size for gradient descent (default: 1).
+- `-d`: Set the maximum depth for symbolic execution (default: 256).
+- `-v`: Set the verbosity level (default: 1). Use 0 for minimal output.
+- `-i`: Set the number of iterations for gradient descent (default: 100).
+- `-a`: Set the step size for gradient descent (default: 1).
 
 ## Header-Only Library
 
 ```cpp
+#include "libgymbo/compiler.h"
+#include "libgymbo/gd.h"
+#include "libgymbo/parser.h"
+#include "libgymbo/tokenizer.h"
+#include "libgymbo/type.h"
+
 char user_input[] = "if (a < 3) return 1;"
 
 std::vector<Node *> code;
@@ -39,7 +72,7 @@ Token *token = tokenize(user_input);
 generate_ast(token, user_input, code);
 compile_ast(code, prg);
 
-symRun(prg, optimizer, init, cache_constraints);
+run_gymbo(prg, optimizer, init, cache_constraints);
 ```
 
 ## Reference
@@ -47,4 +80,4 @@ symRun(prg, optimizer, init, cache_constraints);
 - [1] https://github.com/rui314/chibicc
 - [2] https://github.com/beala/symbolic
 - [3] Chen, Peng, Jianzhong Liu, and Hao Chen. "Matryoshka: fuzzing deeply nested branches." Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security. 2019.
-
+- [4] Minghao Liu, Kunhang Lv, Pei Huang, Rui Han, Fuqi Jia, Yu Zhang, Feifei Ma, Jian Zhang. "NRAgo: Solving SMT(NRA) Formulas with Gradient-based Optimization." IEEE/ACM International Conference on Automated Software Engineering, 2023
