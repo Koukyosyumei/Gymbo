@@ -2,9 +2,13 @@
 
 <img src="img/gymbo.drawio.svg">
 
-Gymbo is a Proof of Concept for Gradient-based Symbolic Execution Engine implemented from scratch. Based on the recent works adopting gradient descent to solve SMT-like formulas [3, 4], Gymbo uses gradient descent to find inputs that satisfy each path constraint during symbolic execution.
+Gymbo is a Proof of Concept for a Gradient-based Symbolic Execution Engine, implemented from scratch. Building on recent advancements that utilize gradient descent to solve SMT-like formulas [3, 4], Gymbo leverages gradient descent to discover input values that fulfill each path constraint during symbolic execution.
 
-Gymbo is implemented from scratch in C++, so that you need only the standard libraries. The compiling from source codes to stack machines is based on the implementation of `rui314/chibicc` [1], and the implementation of symbolic execution is inspired by `beala/symbolic` [2].
+Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of rui314/chibicc [1], while the symbolic execution approach is inspired by beala/symbolic [2].
+
+Compared to other prominent symbolic execution tools, Gymbo's implementation is notably simpler and more compact. We hope that this project will assist individuals in grasping the fundamental principles of symbolic execution and SMT problem-solving through gradient descent.
+
+Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated.
 
 ## Install
 
@@ -13,9 +17,9 @@ git clone https://github.com/Koukyosyumei/Gymbo.git
 ./build.sh
 ```
 
-## Grammer of Input Source Codes
+## Input Source Code Grammar
 
-Gymbo currently supports the C-like program whose BNF is as follows:
+Gymbo presently supports C-like programs with the following BNF grammar:
 
 ```
 program    = stmt*
@@ -31,6 +35,8 @@ mul        = unary ("*" unary | "/" unary)*
 unary      = ("+" | "-")? primary
 primary    = num | ident | "(" expr ")"
 ```
+
+> Please note that Gymbo only tracks + and - operations within conditional statements for path constraints.
 
 ## CLI Tool
 
