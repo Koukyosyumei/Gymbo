@@ -1,2 +1,2 @@
 prg=$(cat < example/simple.gym)
-./gymbo "${prg}" -p
+./gymbo "${prg}" -v 2
