@@ -69,7 +69,7 @@ primary    = num | ident | "(" expr ")"
 ># var_1 < 3 and 4 < var_1 and  1
 ```
 
-<img src="img/vernose2.gif">
+<img src="img/verbose2.gif">
 
 ## Header-Only Library
 
