@@ -11,11 +11,12 @@ int max_depth = 256;
 int verbose_level = 1;
 int num_itrs = 100;
 int step_size = 1;
+bool ignore_memory = false;
 
 void parse_args(int argc, char *argv[]) {
   int opt;
   user_input = argv[1];
-  while ((opt = getopt(argc, argv, "d:v:i:a:")) != -1) {
+  while ((opt = getopt(argc, argv, "d:v:i:a:m")) != -1) {
     switch (opt) {
     case 'd':
       max_depth = atoi(optarg);
@@ -29,9 +30,14 @@ void parse_args(int argc, char *argv[]) {
     case 'a':
       step_size = atoi(optarg);
       break;
+    case 'm':
+      ignore_memory = true;
+      break;
     default:
       printf("unknown parameter %s is specified", optarg);
-      printf("Usage: %s [-d], [-v] ...\n", argv[0]);
+      printf("Usage: %s [-d: max_depth], [-v: verbose level], [-i: num_itrs], "
+             "[-a: step_size], [-m: ignore_memory] ...\n",
+             argv[0]);
       break;
     }
   }
@@ -60,7 +66,8 @@ int main(int argc, char *argv[]) {
   }
 
   printf("Start Symbolic Execution...\n");
-  run_gymbo(prg, optimizer, init, cache_constraints, max_depth, verbose_level);
+  run_gymbo(prg, optimizer, init, cache_constraints, max_depth, ignore_memory,
+            verbose_level);
   printf("---------------------------\n");
 
   printf("Result Summary\n");

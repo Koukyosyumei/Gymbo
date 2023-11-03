@@ -3,9 +3,11 @@
 #include "utils.h"
 #include <cstdint>
 #include <unordered_map>
+#include <utility>
 
 Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
-                PathConstraintsTable &, int maxDepth, int verbose_level);
+                PathConstraintsTable &, int maxDepth, bool ignore_memory,
+                int verbose_level);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 /**
@@ -19,7 +21,8 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
  */
 inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        PathConstraintsTable &constraints_cache,
-                       int maxDepth = 64, int verbose_level = 1) {
+                       int maxDepth = 64, bool ignore_memory = false,
+                       int verbose_level = 1) {
   int pc = state.pc;
   if (verbose_level >= 1) {
     printf("pc: %d, ", pc);
@@ -34,6 +37,12 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
     }
 
     std::unordered_map<int, int> params = {};
+    if (!ignore_memory) {
+      for (auto &p : state.mem) {
+        params.emplace(std::make_pair(p.first, p.second));
+      }
+    }
+
     bool is_sat;
 
     if (constraints_cache.find(constraints_str) != constraints_cache.end()) {
@@ -72,7 +81,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
     std::vector<Trace> children;
     for (SymState newState : newStates) {
       Trace child = run_gymbo(prog, optimizer, newState, constraints_cache,
-                              maxDepth - 1, verbose_level);
+                              maxDepth - 1, ignore_memory, verbose_level);
       children.push_back(child);
     }
     return Trace(state, children);
