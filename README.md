@@ -44,4 +44,7 @@ symRun(prg, optimizer, init, cache_constraints);
 
 ## Reference
 
+- [1] https://github.com/rui314/chibicc
+- [2] https://github.com/beala/symbolic
+- [3] Chen, Peng, Jianzhong Liu, and Hao Chen. "Matryoshka: fuzzing deeply nested branches." Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security. 2019.
 
