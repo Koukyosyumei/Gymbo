@@ -2,7 +2,7 @@
 
 <img src="img/gymbo.drawio.svg">
 
-Gymbo is a Proof of Concept for Gradient-based Symbolic Execution Engine implemented from scratch. Gymbo uses gradient descent to find inputs that satisfy each path constraint.
+Gymbo is a Proof of Concept for Gradient-based Symbolic Execution Engine implemented from scratch. Based on the recent works adopting gradient descent to solve SMT-like formulas [3, 4], Gymbo uses gradient descent to find inputs that satisfy each path constraint during symbolic execution.
 
 Gymbo is implemented from scratch in C++, so that you need only the standard libraries. The compiling from source codes to stack machines is based on the implementation of `rui314/chibicc` [1], and the implementation of symbolic execution is inspired by `beala/symbolic` [2].
 
@@ -55,4 +55,4 @@ run_gymbo(prg, optimizer, init, cache_constraints);
 - [1] https://github.com/rui314/chibicc
 - [2] https://github.com/beala/symbolic
 - [3] Chen, Peng, Jianzhong Liu, and Hao Chen. "Matryoshka: fuzzing deeply nested branches." Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security. 2019.
-
+- [4] Minghao Liu, Kunhang Lv, Pei Huang, Rui Han, Fuqi Jia, Yu Zhang, Feifei Ma, Jian Zhang. "NRAgo: Solving SMT(NRA) Formulas with Gradient-based Optimization." IEEE/ACM International Conference on Automated Software Engineering, 2023
