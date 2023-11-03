@@ -36,20 +36,40 @@ unary      = ("+" | "-")? primary
 primary    = num | ident | "(" expr ")"
 ```
 
-> Please note that Gymbo only tracks + and - operations within conditional statements for path constraints.
+> Please note that Gymbo currently ignores `*` and `/` when solving path constraints.
 
 ## CLI Tool
 
-```bash
- ./gymbo "if (a < 3) return 1;"
-```
-
-The tool accepts the following command-line options:
+`gymbo` command accepts the following command-line options:
 
 - `-d`: Set the maximum depth for symbolic execution (default: 256).
-- `-v`: Set the verbosity level (default: 1). Use 0 for minimal output.
+- `-v`: Set the verbosity level (default: 1). Use -1 for minimal output.
+```
+    -1: the number of satisfiable path constraints and unsatisfiable path constraints.
+    0: + the list of unsatisfiable path constraints.
+    1: + trace at each operation, including the content of the virtual stack and memory.
+    2: + complete stack machine.
+```
 - `-i`: Set the number of iterations for gradient descent (default: 100).
 - `-a`: Set the step size for gradient descent (default: 1).
+
+- Examples
+
+```bash
+./gymbo "if (a < 3) if (a > 4) return 1;" -v 0
+
+>Compiling the input program...
+>Start Symbolic Execution...
+>---------------------------
+>Result Summary
+>#Total Path Constraints: 4
+>#SAT: 3
+>#UNSAT: 1
+>List of UNSAT Path Constraints
+># var_1 < 3 and 4 < var_1 and  1
+```
+
+<img src="img/verbose2.gif">
 
 ## Header-Only Library
 
