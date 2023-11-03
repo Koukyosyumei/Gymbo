@@ -36,7 +36,7 @@ unary      = ("+" | "-")? primary
 primary    = num | ident | "(" expr ")"
 ```
 
-> Please note that Gymbo only tracks + and - operations within conditional statements for path constraints.
+> Please note that Gymbo currently ignores `*` and `/` when solving path constraints.
 
 ## CLI Tool
 
@@ -59,10 +59,10 @@ The tool accepts the following command-line options:
 - `-d`: Set the maximum depth for symbolic execution (default: 256).
 - `-v`: Set the verbosity level (default: 1). Use -1 for minimal output.
 ```
-        -1: the number of satisfiable path constraints and unsatisfiable path constraints.
-         0: + the list of unsatisfiable path constraints.
-         1: + trace at each operation, including the content of the virtual stack and memory.
-         2: + complete stack machine.
+    -1: the number of satisfiable path constraints and unsatisfiable path constraints.
+    0: + the list of unsatisfiable path constraints.
+    1: + trace at each operation, including the content of the virtual stack and memory.
+    2: + complete stack machine.
 ```
 - `-i`: Set the number of iterations for gradient descent (default: 100).
 - `-a`: Set the step size for gradient descent (default: 1).
