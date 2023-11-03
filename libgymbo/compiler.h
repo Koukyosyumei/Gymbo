@@ -78,6 +78,9 @@ inline void gen(Node *node, Prog &prg) {
   case ND_ADD:
     prg.emplace_back(Instr(InstrType::Add));
     return;
+  case ND_SUB:
+    prg.emplace_back(Instr(InstrType::Sub));
+    return;
   case ND_EQ:
     prg.emplace_back(Instr(InstrType::Eq));
     return;

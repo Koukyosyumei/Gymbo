@@ -112,6 +112,16 @@ inline void symStep(SymState &state, Instr instr,
     result.emplace_back(new_state);
     break;
   }
+  case InstrType::Sub: {
+    Sym *r = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    Sym *l = new_state.symbolic_stack.back();
+    new_state.symbolic_stack.pop();
+    new_state.pc++;
+    new_state.symbolic_stack.push(Sym(SymType::SSub, l, r));
+    result.emplace_back(new_state);
+    break;
+  }
   case InstrType::And: {
     Sym *r = new_state.symbolic_stack.back();
     new_state.symbolic_stack.pop();
