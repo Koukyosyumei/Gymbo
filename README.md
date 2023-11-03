@@ -53,8 +53,6 @@ primary    = num | ident | "(" expr ")"
 - `-i`: Set the number of iterations for gradient descent (default: 100).
 - `-a`: Set the step size for gradient descent (default: 1).
 
-- Examples
-
 ```bash
 ./gymbo "if (a < 3) if (a > 4) return 1;" -v 0
 
