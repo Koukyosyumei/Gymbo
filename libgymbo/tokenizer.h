@@ -37,21 +37,21 @@ inline void error_at(char *user_input, char *loc, char *fmt, ...) {
 }
 
 typedef enum {
-  TK_RESERVED, // Keywords or punctuators
-  TK_RETURN,
-  TK_IF,
-  TK_ELSE,
-  TK_FOR,
-  TK_IDENT,
-  TK_NUM, // Integer literals
-  TK_EOF, // End-of-file markers
+  TOKEN_RESERVED, // Keywords or punctuators
+  TOKEN_RETURN,
+  TOKEN_IF,
+  TOKEN_ELSE,
+  TOKEN_FOR,
+  TOKEN_IDENT,
+  TOKEN_NUM, // Integer literals
+  TOKEN_EOF, // End-of-file markers
 } TokenKind;
 
 typedef struct Token Token;
 struct Token {
   TokenKind kind; // Token kind
   Token *next;    // Next token
-  int val;        // If kind is TK_NUM, its value
+  int val;        // If kind is TOKEN_NUM, its value
   char *str;      // Token string
   int len;        // Token length
 };
@@ -71,7 +71,7 @@ struct LVar {
  * @return True if the token was consumed, false otherwise.
  */
 inline bool consume(Token *&token, char *op) {
-  if (token->kind != TK_RESERVED || strlen(op) != token->len ||
+  if (token->kind != TOKEN_RESERVED || strlen(op) != token->len ||
       memcmp(token->str, op, token->len))
     return false;
   token = token->next;
@@ -101,7 +101,7 @@ inline bool consume_tok(Token *&token, TokenKind tok) {
  * token is not an identifier.
  */
 inline Token *consume_ident(Token *&token) {
-  if (token->kind != TK_IDENT)
+  if (token->kind != TOKEN_IDENT)
     return NULL;
   Token *t = token;
   token = token->next;
@@ -117,7 +117,7 @@ inline Token *consume_ident(Token *&token) {
  * @throws An error if the current token does not match `op`.
  */
 inline void expect(Token *&token, char *user_input, char *op) {
-  if (token->kind != TK_RESERVED || strlen(op) != token->len ||
+  if (token->kind != TOKEN_RESERVED || strlen(op) != token->len ||
       memcmp(token->str, op, token->len)) {
     char em[] = "expected \"%s\"";
     error_at(user_input, token->str, em, op);
@@ -133,7 +133,7 @@ inline void expect(Token *&token, char *user_input, char *op) {
  * @throws An error if the current token is not a number.
  */
 inline int expect_number(Token *&token, char *user_input) {
-  if (token->kind != TK_NUM) {
+  if (token->kind != TOKEN_NUM) {
     char em[] = "expected a number";
     error_at(user_input, token->str, em);
   }
@@ -149,7 +149,7 @@ inline int expect_number(Token *&token, char *user_input) {
  * @return True if the current token is at the end of the program, false
  * otherwise.
  */
-inline bool at_eof(Token *token) { return token->kind == TK_EOF; }
+inline bool at_eof(Token *token) { return token->kind == TOKEN_EOF; }
 
 /**
  * Creates a new token and adds it as the next token of `cur`.
@@ -207,38 +207,38 @@ inline Token *tokenize(char *user_input) {
     // Multi-letter punctuator
     if (startswith(p, LETTER_EQ) || startswith(p, LETTER_NEQ) ||
         startswith(p, LETTER_LEQ) || startswith(p, LETTER_GEQ)) {
-      cur = new_token(TK_RESERVED, cur, p, 2);
+      cur = new_token(TOKEN_RESERVED, cur, p, 2);
       p += 2;
       continue;
     }
 
     if (strncmp(p, "if", 2) == 0 && !is_alnum(p[2])) {
-      cur = new_token(TK_IF, cur, p, 2);
+      cur = new_token(TOKEN_IF, cur, p, 2);
       p += 2;
       continue;
     }
 
     if (strncmp(p, "else", 4) == 0 && !is_alnum(p[4])) {
-      cur = new_token(TK_ELSE, cur, p, 4);
+      cur = new_token(TOKEN_ELSE, cur, p, 4);
       p += 4;
       continue;
     }
 
     if (strncmp(p, "return", 6) == 0 && !is_alnum(p[6])) {
-      cur = new_token(TK_RETURN, cur, p, 6);
+      cur = new_token(TOKEN_RETURN, cur, p, 6);
       p += 6;
       continue;
     }
 
     // Single-letter punctuator
     if (strchr("+-*/()<>=;", *p)) {
-      cur = new_token(TK_RESERVED, cur, p++, 1);
+      cur = new_token(TOKEN_RESERVED, cur, p++, 1);
       continue;
     }
 
     // Integer literal
     if (isdigit(*p)) {
-      cur = new_token(TK_NUM, cur, p, 0);
+      cur = new_token(TOKEN_NUM, cur, p, 0);
       char *q = p;
       cur->val = strtol(p, &p, 10);
       cur->len = p - q;
@@ -246,7 +246,7 @@ inline Token *tokenize(char *user_input) {
     }
 
     if ('a' <= *p && *p <= 'z') {
-      cur = new_token(TK_IDENT, cur, p++, 0);
+      cur = new_token(TOKEN_IDENT, cur, p++, 0);
       cur->len = 1;
       continue;
     }
@@ -255,6 +255,6 @@ inline Token *tokenize(char *user_input) {
     error_at(user_input, p, em);
   }
 
-  new_token(TK_EOF, cur, p, 0);
+  new_token(TOKEN_EOF, cur, p, 0);
   return head.next;
 }

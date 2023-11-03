@@ -4,8 +4,8 @@
 #include <cstdint>
 #include <unordered_map>
 
-Trace symRun(Prog &prog, GDOptimizer &optimizer, SymState &state,
-             PathConstraintsTable &, int maxDepth, int verbose_level);
+Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
+                PathConstraintsTable &, int maxDepth, int verbose_level);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 /**
@@ -17,9 +17,9 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
  * @param maxDepth The maximum depth of the symbolic exploration tree.
  * @return A trace of the symbolic execution.
  */
-inline Trace symRun(Prog &prog, GDOptimizer &optimizer, SymState &state,
-                    PathConstraintsTable &constraints_cache, int maxDepth = 64,
-                    int verbose_level = 1) {
+inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
+                       PathConstraintsTable &constraints_cache,
+                       int maxDepth = 64, int verbose_level = 1) {
   int pc = state.pc;
   if (verbose_level >= 1) {
     printf("pc: %d, ", pc);
@@ -71,8 +71,8 @@ inline Trace symRun(Prog &prog, GDOptimizer &optimizer, SymState &state,
     symStep(state, instr, newStates);
     std::vector<Trace> children;
     for (SymState newState : newStates) {
-      Trace child = symRun(prog, optimizer, newState, constraints_cache,
-                           maxDepth - 1, verbose_level);
+      Trace child = run_gymbo(prog, optimizer, newState, constraints_cache,
+                              maxDepth - 1, verbose_level);
       children.push_back(child);
     }
     return Trace(state, children);

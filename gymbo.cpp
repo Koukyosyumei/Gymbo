@@ -40,7 +40,6 @@ void parse_args(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
   parse_args(argc, argv);
 
-  Node *node;
   std::vector<Node *> code;
   Prog prg;
   GDOptimizer optimizer(num_itrs, step_size);
@@ -61,8 +60,7 @@ int main(int argc, char *argv[]) {
   }
 
   printf("Start Symbolic Execution...\n");
-  Trace trace =
-      symRun(prg, optimizer, init, cache_constraints, max_depth, verbose_level);
+  run_gymbo(prg, optimizer, init, cache_constraints, max_depth, verbose_level);
   printf("---------------------------\n");
 
   printf("Result Summary\n");
