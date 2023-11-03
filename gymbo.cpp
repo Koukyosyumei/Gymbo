@@ -1,29 +1,28 @@
 #include <unistd.h>
-#include <unordered_map>
 
-#include "include/compiler.h"
-#include "include/parser.h"
-#include "include/tokenizer.h"
-#include "include/type.h"
+#include "libgymbo/compiler.h"
+#include "libgymbo/parser.h"
+#include "libgymbo/tokenizer.h"
+#include "libgymbo/type.h"
 
 char *user_input;
 int max_depth = 256;
-bool print_prg = false;
+int verbose_level = 1;
 
 void parse_args(int argc, char *argv[]) {
   int opt;
   user_input = argv[1];
-  while ((opt = getopt(argc, argv, "d:p")) != -1) {
+  while ((opt = getopt(argc, argv, "d:v:")) != -1) {
     switch (opt) {
     case 'd':
       max_depth = atoi(optarg);
       break;
-    case 'p':
-      print_prg = true;
+    case 'v':
+      verbose_level = atoi(optarg);
       break;
     default:
       printf("unknown parameter %s is specified", optarg);
-      printf("Usage: %s [-d] ...\n", argv[0]);
+      printf("Usage: %s [-d], [-v] ...\n", argv[0]);
       break;
     }
   }
@@ -36,29 +35,41 @@ int main(int argc, char *argv[]) {
   std::vector<Node *> code;
   Prog prg;
   SymState init;
-  std::unordered_map<std::string, std::pair<bool, std::unordered_map<int, int>>>
-      cache_constraints;
+  PathConstraintsTable cache_constraints;
 
+  printf("Compiling the input program...\n\n");
   Token *token = tokenize(user_input);
-  program(token, user_input, code);
+  generate_ast(token, user_input, code);
+  compile_ast(code, prg);
 
-  for (int i = 0; i < code.size(); i++) {
-    if (code[i] != nullptr) {
-      gen(code[i], prg);
-    } else {
-      prg.emplace_back(Instr(InstrType::Done));
-    }
-  }
-
-  if (print_prg) {
-    printf("Compiled Stack Machine...\n\n");
+  if (verbose_level >= 2) {
+    printf("...Compiled Stack Machine...\n\n");
     for (int j = 0; j < prg.size(); j++) {
       prg[j].print();
     }
-    printf("-------------------------\n\n");
+    printf("----------------------------\n\n");
   }
 
   printf("Start Symbolic Execution...\n\n");
-  Trace trace = symRun(prg, init, cache_constraints, max_depth);
-  printf("---------------------------\n");
+  Trace trace = symRun(prg, init, cache_constraints, max_depth, verbose_level);
+  printf("---------------------------\n\n");
+
+  printf("Result Summary\n");
+  int num_unique_path_constraints = cache_constraints.size();
+  int num_sat = 0;
+  int num_unsat = 0;
+  for (auto &cc : cache_constraints) {
+    if (cc.second.first) {
+      num_sat++;
+    } else {
+      num_unsat++;
+    }
+  }
+  if (num_unique_path_constraints == 0) {
+    printf("No Path Constraints Found");
+  } else {
+    printf("#Total Path Constraints: %d\n", num_unique_path_constraints);
+    printf("#SAT: %d\n", num_sat);
+    printf("#UNSAT: %d\n", num_unsat);
+  }
 }

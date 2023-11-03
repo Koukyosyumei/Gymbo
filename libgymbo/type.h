@@ -100,6 +100,9 @@ public:
 
 using Prog = std::vector<Instr>;
 using Mem = std::unordered_map<Word32, Word32>;
+using PathConstraintsTable =
+    std::unordered_map<std::string,
+                       std::pair<bool, std::unordered_map<int, int>>>;
 
 struct State {
   int pc;

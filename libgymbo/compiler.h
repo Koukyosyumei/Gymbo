@@ -96,3 +96,13 @@ inline void gen(Node *node, Prog &prg) {
   char em[] = "Unsupported Node";
   error(em);
 }
+
+inline void compile_ast(std::vector<Node *> code, Prog &prg) {
+  for (int i = 0; i < code.size(); i++) {
+    if (code[i] != nullptr) {
+      gen(code[i], prg);
+    } else {
+      prg.emplace_back(Instr(InstrType::Done));
+    }
+  }
+}

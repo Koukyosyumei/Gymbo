@@ -4,10 +4,8 @@
 #include <cstdint>
 #include <unordered_map>
 
-Trace symRun(Prog &prog, SymState &state,
-             std::unordered_map<
-                 std::string, std::pair<bool, std::unordered_map<int, int>>> &,
-             int maxDepth);
+Trace symRun(Prog &prog, SymState &state, PathConstraintsTable &, int maxDepth,
+             int verbose_level);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 /**
@@ -19,16 +17,15 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
  * @param maxDepth The maximum depth of the symbolic exploration tree.
  * @return A trace of the symbolic execution.
  */
-inline Trace
-symRun(Prog &prog, SymState &state,
-       std::unordered_map<std::string,
-                          std::pair<bool, std::unordered_map<int, int>>>
-           &constraints_cache,
-       int maxDepth = 64) {
+inline Trace symRun(Prog &prog, SymState &state,
+                    PathConstraintsTable &constraints_cache, int maxDepth = 64,
+                    int verbose_level = 1) {
   int pc = state.pc;
-  printf("pc: %d, ", pc);
-  prog[pc].print();
-  state.print();
+  if (verbose_level >= 1) {
+    printf("pc: %d, ", pc);
+    prog[pc].print();
+    state.print();
+  }
 
   if (state.path_constraints.size() != 0) {
     std::string constraints_str = "";
@@ -49,19 +46,23 @@ symRun(Prog &prog, SymState &state,
                                 std::make_pair(is_sat, params));
     }
 
-    if (!is_sat) {
-      printf("\x1b[31m");
-    } else {
-      printf("\x1b[32m");
+    if (verbose_level >= 1) {
+      if (!is_sat) {
+        printf("\x1b[31m");
+      } else {
+        printf("\x1b[32m");
+      }
+      printf("IS_SAT - %d\x1b[39m, params = {", is_sat);
+      for (auto &p : params) {
+        printf("%d: %d, ", p.first, p.second);
+      }
+      printf("}\n");
     }
-    printf("IS_SAT - %d\x1b[39m, params = {", is_sat);
-    for (auto &p : params) {
-      printf("%d: %d, ", p.first, p.second);
-    }
-    printf("}\n");
   }
 
-  printf("---\n");
+  if (verbose_level >= 1) {
+    printf("---\n");
+  }
 
   if (prog[pc].instr == InstrType::Done) {
     return Trace(state, {});
@@ -71,7 +72,8 @@ symRun(Prog &prog, SymState &state,
     symStep(state, instr, newStates);
     std::vector<Trace> children;
     for (SymState newState : newStates) {
-      Trace child = symRun(prog, newState, constraints_cache, maxDepth - 1);
+      Trace child = symRun(prog, newState, constraints_cache, maxDepth - 1,
+                           verbose_level);
       children.push_back(child);
     }
     return Trace(state, children);

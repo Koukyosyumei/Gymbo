@@ -247,8 +247,8 @@ inline Node *stmt(Token *&token, char *user_input) {
  * @param user_input The source code of the program.
  * @return A vector of AST nodes representing the program.
  */
-inline void program(Token *&token, char *user_input,
-                    std::vector<Node *> &code) {
+inline void generate_ast(Token *&token, char *user_input,
+                         std::vector<Node *> &code) {
   while (!at_eof(token))
     code.emplace_back(stmt(token, user_input));
   code.emplace_back(nullptr);
