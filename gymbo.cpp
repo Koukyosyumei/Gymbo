@@ -1,6 +1,7 @@
 #include <unistd.h>
 
 #include "libgymbo/compiler.h"
+#include "libgymbo/gd.h"
 #include "libgymbo/parser.h"
 #include "libgymbo/tokenizer.h"
 #include "libgymbo/type.h"
@@ -8,17 +9,25 @@
 char *user_input;
 int max_depth = 256;
 int verbose_level = 1;
+int num_itrs = 100;
+int step_size = 1;
 
 void parse_args(int argc, char *argv[]) {
   int opt;
   user_input = argv[1];
-  while ((opt = getopt(argc, argv, "d:v:")) != -1) {
+  while ((opt = getopt(argc, argv, "d:v:i:a:")) != -1) {
     switch (opt) {
     case 'd':
       max_depth = atoi(optarg);
       break;
     case 'v':
       verbose_level = atoi(optarg);
+      break;
+    case 'i':
+      num_itrs = atoi(optarg);
+      break;
+    case 'a':
+      step_size = atoi(optarg);
       break;
     default:
       printf("unknown parameter %s is specified", optarg);
@@ -34,6 +43,7 @@ int main(int argc, char *argv[]) {
   Node *node;
   std::vector<Node *> code;
   Prog prg;
+  GDOptimizer optimizer(num_itrs, step_size);
   SymState init;
   PathConstraintsTable cache_constraints;
 
@@ -51,7 +61,8 @@ int main(int argc, char *argv[]) {
   }
 
   printf("Start Symbolic Execution...\n");
-  Trace trace = symRun(prg, init, cache_constraints, max_depth, verbose_level);
+  Trace trace =
+      symRun(prg, optimizer, init, cache_constraints, max_depth, verbose_level);
   printf("---------------------------\n");
 
   printf("Result Summary\n");

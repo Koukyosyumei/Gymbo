@@ -4,8 +4,8 @@
 #include <cstdint>
 #include <unordered_map>
 
-Trace symRun(Prog &prog, SymState &state, PathConstraintsTable &, int maxDepth,
-             int verbose_level);
+Trace symRun(Prog &prog, GDOptimizer &optimizer, SymState &state,
+             PathConstraintsTable &, int maxDepth, int verbose_level);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 /**
@@ -17,7 +17,7 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
  * @param maxDepth The maximum depth of the symbolic exploration tree.
  * @return A trace of the symbolic execution.
  */
-inline Trace symRun(Prog &prog, SymState &state,
+inline Trace symRun(Prog &prog, GDOptimizer &optimizer, SymState &state,
                     PathConstraintsTable &constraints_cache, int maxDepth = 64,
                     int verbose_level = 1) {
   int pc = state.pc;
@@ -40,7 +40,6 @@ inline Trace symRun(Prog &prog, SymState &state,
       is_sat = constraints_cache[constraints_str].first;
       params = constraints_cache[constraints_str].second;
     } else {
-      GDOptimizer optimizer;
       is_sat = optimizer.solve(state.path_constraints, params);
       constraints_cache.emplace(constraints_str,
                                 std::make_pair(is_sat, params));
@@ -72,8 +71,8 @@ inline Trace symRun(Prog &prog, SymState &state,
     symStep(state, instr, newStates);
     std::vector<Trace> children;
     for (SymState newState : newStates) {
-      Trace child = symRun(prog, newState, constraints_cache, maxDepth - 1,
-                           verbose_level);
+      Trace child = symRun(prog, optimizer, newState, constraints_cache,
+                           maxDepth - 1, verbose_level);
       children.push_back(child);
     }
     return Trace(state, children);
