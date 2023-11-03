@@ -1,6 +1,6 @@
 # Gymbo: Gradient-based Symbolic Execution 
 
-<img src="img/gymbo.drawio.svg" width="300" height="200">
+<img src="img/gymbo.drawio.svg">
 
 ## Install
 
