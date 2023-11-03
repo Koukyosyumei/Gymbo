@@ -41,7 +41,17 @@ primary    = num | ident | "(" expr ")"
 ## CLI Tool
 
 ```bash
- ./gymbo "if (a < 3) return 1;"
+./gymbo "if (a < 3) if (a > 4) return 1;" -v 0
+
+>Compiling the input program...
+>Start Symbolic Execution...
+>---------------------------
+>Result Summary
+>#Total Path Constraints: 4
+>#SAT: 3
+>#UNSAT: 1
+>List of UNSAT Path Constraints
+># var_1 < 3 and 4 < var_1 and  1
 ```
 
 The tool accepts the following command-line options:
