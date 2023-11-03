@@ -37,22 +37,22 @@ int main(int argc, char *argv[]) {
   SymState init;
   PathConstraintsTable cache_constraints;
 
-  printf("Compiling the input program...\n\n");
+  printf("Compiling the input program...\n");
   Token *token = tokenize(user_input);
   generate_ast(token, user_input, code);
   compile_ast(code, prg);
 
   if (verbose_level >= 2) {
-    printf("...Compiled Stack Machine...\n\n");
+    printf("...Compiled Stack Machine...\n");
     for (int j = 0; j < prg.size(); j++) {
       prg[j].print();
     }
-    printf("----------------------------\n\n");
+    printf("----------------------------\n");
   }
 
-  printf("Start Symbolic Execution...\n\n");
+  printf("Start Symbolic Execution...\n");
   Trace trace = symRun(prg, init, cache_constraints, max_depth, verbose_level);
-  printf("---------------------------\n\n");
+  printf("---------------------------\n");
 
   printf("Result Summary\n");
   int num_unique_path_constraints = cache_constraints.size();
