@@ -6,6 +6,8 @@
 
 #include "type.h"
 
+namespace gymbo {
+
 struct GDOptimizer {
 
   int num_epochs, lr, seed, param_low, param_high;
@@ -72,3 +74,4 @@ struct GDOptimizer {
     return is_sat;
   }
 };
+} // namespace gymbo

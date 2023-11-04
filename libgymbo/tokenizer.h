@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+namespace gymbo {
 inline bool is_alpha(char c) {
   return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || c == '_';
 }
@@ -258,3 +259,4 @@ inline Token *tokenize(char *user_input) {
   new_token(TOKEN_EOF, cur, p, 0);
   return head.next;
 }
+} // namespace gymbo

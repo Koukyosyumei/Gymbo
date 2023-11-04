@@ -3,6 +3,8 @@
 #include "tokenizer.h"
 #include "type.h"
 
+namespace gymbo {
+
 /**
  * Generates virtual instructions for a given AST node, representing the
  * left-hand side of a variable assignment expression.
@@ -109,3 +111,4 @@ inline void compile_ast(std::vector<Node *> code, Prog &prg) {
     }
   }
 }
+} // namespace gymbo

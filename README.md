@@ -75,6 +75,8 @@ primary    = num | ident | "(" expr ")"
 
 ## Header-Only Library
 
+Since gymbo consists of the header-only library, you can easily create your own symbolic execution engine.
+
 ```cpp
 #include "libgymbo/compiler.h"
 #include "libgymbo/gd.h"
@@ -84,17 +86,21 @@ primary    = num | ident | "(" expr ")"
 
 char user_input[] = "if (a < 3) return 1;"
 
-std::vector<Node *> code;
-Prog prg;
-GDOptimizer optimizer(num_itrs, step_size);
-SymState init;
-PathConstraintsTable cache_constraints;
+std::vector<gymbo::Node *> code;
+gymbo::Prog prg;
+gymbo::GDOptimizer optimizer(num_itrs, step_size);
+gymbo::SymState init;
+gymbo::PathConstraintsTable cache_constraints;
 
-Token *token = tokenize(user_input);
-generate_ast(token, user_input, code);
-compile_ast(code, prg);
+// tokenize the input source code
+gymbo::Token *token = gymbo::tokenize(user_input);
+// generate AST from the tokens
+gymbo::generate_ast(token, user_input, code);
+// construct virtual stack machine from AST
+gymbo::compile_ast(code, prg);
 
-run_gymbo(prg, optimizer, init, cache_constraints);
+// execute gradient-based symbolie execution
+gymbo::run_gymbo(prg, optimizer, init, cache_constraints);
 ```
 
 ## Reference
