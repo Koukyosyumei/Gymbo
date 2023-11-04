@@ -10,6 +10,8 @@
 
 #include "utils.h"
 
+namespace gymbo {
+
 using Word32 = uint32_t;
 
 enum class InstrType {
@@ -415,3 +417,4 @@ struct Trace {
     }
   }
 };
+} // namespace gymbo

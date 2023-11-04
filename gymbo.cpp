@@ -46,16 +46,16 @@ void parse_args(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
   parse_args(argc, argv);
 
-  std::vector<Node *> code;
-  Prog prg;
-  GDOptimizer optimizer(num_itrs, step_size);
-  SymState init;
-  PathConstraintsTable cache_constraints;
+  std::vector<gymbo::Node *> code;
+  gymbo::Prog prg;
+  gymbo::GDOptimizer optimizer(num_itrs, step_size);
+  gymbo::SymState init;
+  gymbo::PathConstraintsTable cache_constraints;
 
   printf("Compiling the input program...\n");
-  Token *token = tokenize(user_input);
-  generate_ast(token, user_input, code);
-  compile_ast(code, prg);
+  gymbo::Token *token = gymbo::tokenize(user_input);
+  gymbo::generate_ast(token, user_input, code);
+  gymbo::compile_ast(code, prg);
 
   if (verbose_level >= 2) {
     printf("...Compiled Stack Machine...\n");
@@ -66,8 +66,8 @@ int main(int argc, char *argv[]) {
   }
 
   printf("Start Symbolic Execution...\n");
-  run_gymbo(prg, optimizer, init, cache_constraints, max_depth, ignore_memory,
-            verbose_level);
+  gymbo::run_gymbo(prg, optimizer, init, cache_constraints, max_depth,
+                   ignore_memory, verbose_level);
   printf("---------------------------\n");
 
   printf("Result Summary\n");

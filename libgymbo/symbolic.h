@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <utility>
 
+namespace gymbo {
 Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                 PathConstraintsTable &, int maxDepth, bool ignore_memory,
                 int verbose_level);
@@ -292,3 +293,4 @@ inline void symStep(SymState &state, Instr instr,
     throw std::runtime_error("Unsupported instruction");
   }
 }
+} // namespace gymbo

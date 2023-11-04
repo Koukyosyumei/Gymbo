@@ -4,6 +4,7 @@
 #include <unordered_set>
 #include <utility>
 
+namespace gymbo {
 struct GDOptimizer {
 
   int num_epochs, lr;
@@ -65,3 +66,4 @@ struct GDOptimizer {
     return is_sat;
   }
 };
+} // namespace gymbo

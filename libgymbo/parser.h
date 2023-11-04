@@ -24,6 +24,8 @@ char LETTER_RP[] = ")";
 char LETTER_SC[] = ";";
 char LETTER_ELSE[] = "else";
 
+namespace gymbo {
+
 typedef enum {
   ND_ADD, // +
   ND_SUB, // -
@@ -253,3 +255,4 @@ inline void generate_ast(Token *&token, char *user_input,
     code.emplace_back(stmt(token, user_input));
   code.emplace_back(nullptr);
 }
+} // namespace gymbo
