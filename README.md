@@ -73,6 +73,8 @@ primary    = num | ident | "(" expr ")"
 
 ## Header-Only Library
 
+Since gymbo consists of the header-only library, you can easily create your own symbolic execution engine.
+
 ```cpp
 #include "libgymbo/compiler.h"
 #include "libgymbo/gd.h"
