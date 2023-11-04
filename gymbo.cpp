@@ -11,12 +11,16 @@ int max_depth = 256;
 int verbose_level = 1;
 int num_itrs = 100;
 int step_size = 1;
+int max_num_trials = 3;
+int param_low = -10;
+int param_high = 10;
+int seed = 42;
 bool ignore_memory = false;
 
 void parse_args(int argc, char *argv[]) {
   int opt;
   user_input = argv[1];
-  while ((opt = getopt(argc, argv, "d:v:i:a:m")) != -1) {
+  while ((opt = getopt(argc, argv, "d:v:i:a:t:l:h:s:m")) != -1) {
     switch (opt) {
     case 'd':
       max_depth = atoi(optarg);
@@ -30,13 +34,26 @@ void parse_args(int argc, char *argv[]) {
     case 'a':
       step_size = atoi(optarg);
       break;
+    case 't':
+      max_num_trials = atoi(optarg);
+      break;
+    case 'l':
+      param_low = atoi(optarg);
+      break;
+    case 'h':
+      param_high = atoi(optarg);
+      break;
+    case 's':
+      seed = atoi(optarg);
+      break;
     case 'm':
       ignore_memory = true;
       break;
     default:
       printf("unknown parameter %s is specified", optarg);
       printf("Usage: %s [-d: max_depth], [-v: verbose level], [-i: num_itrs], "
-             "[-a: step_size], [-m: ignore_memory] ...\n",
+             "[-a: step_size], [-t: max_num_trials], [-l: param_low], [-h: "
+             "param_high], [-s: seed], [-m: ignore_memory] ...\n",
              argv[0]);
       break;
     }
@@ -48,7 +65,8 @@ int main(int argc, char *argv[]) {
 
   std::vector<gymbo::Node *> code;
   gymbo::Prog prg;
-  gymbo::GDOptimizer optimizer(num_itrs, step_size);
+  gymbo::GDOptimizer optimizer(num_itrs, step_size, param_low, param_high,
+                               seed);
   gymbo::SymState init;
   gymbo::PathConstraintsTable cache_constraints;
 
@@ -67,7 +85,7 @@ int main(int argc, char *argv[]) {
 
   printf("Start Symbolic Execution...\n");
   gymbo::run_gymbo(prg, optimizer, init, cache_constraints, max_depth,
-                   ignore_memory, verbose_level);
+                   max_num_trials, ignore_memory, verbose_level);
   printf("---------------------------\n");
 
   printf("Result Summary\n");

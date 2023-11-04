@@ -7,9 +7,19 @@
 
 namespace gymbo {
 Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
-                PathConstraintsTable &, int maxDepth, bool ignore_memory,
-                int verbose_level);
+                PathConstraintsTable &, int maxDepth, int max_num_trials,
+                bool ignore_memory, int verbose_level);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
+
+void initialize_params(std::unordered_map<int, int> &params, SymState &state,
+                       bool ignore_memory) {
+  params = {};
+  if (!ignore_memory) {
+    for (auto &p : state.mem) {
+      params.emplace(std::make_pair(p.first, p.second));
+    }
+  }
+}
 
 /**
  * Performs symbolic execution of a program.
@@ -22,8 +32,8 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
  */
 inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        PathConstraintsTable &constraints_cache,
-                       int maxDepth = 64, bool ignore_memory = false,
-                       int verbose_level = 1) {
+                       int maxDepth = 64, int max_num_trials = 3,
+                       bool ignore_memory = false, int verbose_level = 1) {
   int pc = state.pc;
   if (verbose_level >= 1) {
     printf("pc: %d, ", pc);
@@ -39,11 +49,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
     constraints_str += " 1";
 
     std::unordered_map<int, int> params = {};
-    if (!ignore_memory) {
-      for (auto &p : state.mem) {
-        params.emplace(std::make_pair(p.first, p.second));
-      }
-    }
+    initialize_params(params, state, ignore_memory);
 
     bool is_sat;
 
@@ -51,7 +57,14 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
       is_sat = constraints_cache[constraints_str].first;
       params = constraints_cache[constraints_str].second;
     } else {
-      is_sat = optimizer.solve(state.path_constraints, params);
+      for (int j = 0; j < max_num_trials; j++) {
+        is_sat = optimizer.solve(state.path_constraints, params);
+        if (is_sat) {
+          break;
+        }
+        optimizer.seed += 1;
+        initialize_params(params, state, ignore_memory);
+      }
       constraints_cache.emplace(constraints_str,
                                 std::make_pair(is_sat, params));
     }
@@ -82,8 +95,9 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
     symStep(state, instr, newStates);
     std::vector<Trace> children;
     for (SymState newState : newStates) {
-      Trace child = run_gymbo(prog, optimizer, newState, constraints_cache,
-                              maxDepth - 1, ignore_memory, verbose_level);
+      Trace child =
+          run_gymbo(prog, optimizer, newState, constraints_cache, maxDepth - 1,
+                    max_num_trials, ignore_memory, verbose_level);
       children.push_back(child);
     }
     return Trace(state, children);
