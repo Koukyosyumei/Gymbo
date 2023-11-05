@@ -36,7 +36,7 @@ unary      = ("+" | "-")? primary
 primary    = num | ident | "(" expr ")"
 ```
 
-> Please note that Gymbo currently ignores `*` and `/` when solving path constraints.
+> Please note that Gymbo currently ignores `/` when solving path constraints.
 
 ## CLI Tool
 
