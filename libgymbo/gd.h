@@ -62,7 +62,17 @@ struct GDOptimizer {
           grads = grads + path_constraints[i].grad(params);
           for (auto &g : grads.val) {
             if (!is_const.at(g.first)) {
-              params.at(g.first) -= lr * g.second;
+              if (lr > 0) {
+                params.at(g.first) -= lr * g.second;
+              } else {
+                int sign = 0;
+                if (g.second > 0) {
+                  sign = 1;
+                } else if (g.second < 0) {
+                  sign = -1;
+                }
+                params.at(g.first) -= sign;
+              }
             }
           }
         }
