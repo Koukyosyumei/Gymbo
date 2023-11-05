@@ -17,6 +17,7 @@ using Word32 = uint32_t;
 enum class InstrType {
   Add,
   Sub,
+  Mul,
   JmpIf,
   Jmp,
   And,
@@ -51,6 +52,14 @@ public:
     switch (instr) {
     case (InstrType::Add): {
       printf("add\n");
+      return;
+    }
+    case (InstrType::Sub): {
+      printf("sub\n");
+      return;
+    }
+    case (InstrType::Mul): {
+      printf("mul\n");
       return;
     }
     case (InstrType::JmpIf): {
@@ -96,6 +105,9 @@ public:
     case (InstrType::Push): {
       printf("push %d\n", word);
       return;
+    }
+    default: {
+      printf("unknown\n");
     }
     }
   }
@@ -170,7 +182,19 @@ struct Grad {
   }
 };
 
-enum class SymType { SAdd, SSub, SEq, SNot, SOr, SCon, SAnd, SLt, SLe, SAny };
+enum class SymType {
+  SAdd,
+  SSub,
+  SMul,
+  SEq,
+  SNot,
+  SOr,
+  SCon,
+  SAnd,
+  SLt,
+  SLe,
+  SAny
+};
 
 struct Sym {
   SymType symtype;
@@ -200,6 +224,11 @@ struct Sym {
       return;
     }
     case (SymType::SSub): {
+      left->gather_var_ids(result);
+      right->gather_var_ids(result);
+      return;
+    }
+    case (SymType::SMul): {
       left->gather_var_ids(result);
       right->gather_var_ids(result);
       return;
@@ -245,6 +274,9 @@ struct Sym {
     case (SymType::SSub): {
       return left->eval(cvals) - right->eval(cvals);
     }
+    case (SymType::SMul): {
+      return left->eval(cvals) * right->eval(cvals);
+    }
     case (SymType::SCon): {
       return wordToSignedInt(word);
     }
@@ -279,6 +311,10 @@ struct Sym {
     }
     case (SymType::SSub): {
       return left->grad(cvals) - right->grad(cvals);
+    }
+    case (SymType::SMul): {
+      return left->grad(cvals) * right->eval(cvals) +
+             right->grad(cvals) * left->eval(cvals);
     }
     case (SymType::SCon): {
       return Grad({});
@@ -327,6 +363,10 @@ struct Sym {
     }
     case (SymType::SSub): {
       result = "(" + left->toString() + "-" + right->toString() + ")";
+      break;
+    }
+    case (SymType::SMul): {
+      result = "(" + left->toString() + "*" + right->toString() + ")";
       break;
     }
     case (SymType::SCon): {
