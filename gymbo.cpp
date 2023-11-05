@@ -15,12 +15,13 @@ int max_num_trials = 3;
 int param_low = -10;
 int param_high = 10;
 int seed = 42;
+bool sign_grad = true;
 bool ignore_memory = false;
 
 void parse_args(int argc, char *argv[]) {
   int opt;
   user_input = argv[1];
-  while ((opt = getopt(argc, argv, "d:v:i:a:t:l:h:s:m")) != -1) {
+  while ((opt = getopt(argc, argv, "d:v:i:a:t:l:h:s:gm")) != -1) {
     switch (opt) {
     case 'd':
       max_depth = atoi(optarg);
@@ -46,6 +47,9 @@ void parse_args(int argc, char *argv[]) {
     case 's':
       seed = atoi(optarg);
       break;
+    case 'g':
+      sign_grad = false;
+      break;
     case 'm':
       ignore_memory = true;
       break;
@@ -53,7 +57,8 @@ void parse_args(int argc, char *argv[]) {
       printf("unknown parameter %s is specified", optarg);
       printf("Usage: %s [-d: max_depth], [-v: verbose level], [-i: num_itrs], "
              "[-a: step_size], [-t: max_num_trials], [-l: param_low], [-h: "
-             "param_high], [-s: seed], [-m: ignore_memory] ...\n",
+             "param_high], [-s: seed], [-g off_sign_grad], [-m: ignore_memory] "
+             "...\n",
              argv[0]);
       break;
     }
@@ -66,7 +71,7 @@ int main(int argc, char *argv[]) {
   std::vector<gymbo::Node *> code;
   gymbo::Prog prg;
   gymbo::GDOptimizer optimizer(num_itrs, step_size, param_low, param_high,
-                               seed);
+                               sign_grad, seed);
   gymbo::SymState init;
   gymbo::PathConstraintsTable cache_constraints;
 

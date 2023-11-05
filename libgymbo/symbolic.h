@@ -28,6 +28,9 @@ void initialize_params(std::unordered_map<int, int> &params, SymState &state,
  * @param state The initial state of the program.
  * @constrains_cache The cache for already found path constraints
  * @param maxDepth The maximum depth of the symbolic exploration tree.
+ * @param max_num_trials The maximum number of trials for each gradient descent.
+ * @param ignore_memory If true, ignore the constraints derived from the memory.
+ * @param verbose_level Level of verbose.
  * @return A trace of the symbolic execution.
  */
 inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
