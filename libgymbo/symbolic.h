@@ -11,6 +11,17 @@ Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                 bool ignore_memory, int verbose_level);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
+/**
+ * @brief Initialize Parameter Values from Memory.
+ *
+ * This function initializes parameter values from memory, provided that
+ * `ignore_memory` is set to false.
+ *
+ * @param params A map to store parameter values.
+ * @param state The symbolic state of the program.
+ * @param ignore_memory A flag indicating whether memory constraints should be
+ * ignored.
+ */
 void initialize_params(std::unordered_map<int, int> &params, SymState &state,
                        bool ignore_memory) {
   params = {};
@@ -22,15 +33,22 @@ void initialize_params(std::unordered_map<int, int> &params, SymState &state,
 }
 
 /**
- * Performs symbolic execution of a program.
+ * @brief Symbolically Execute a Program with Gradient Descent Optimization.
  *
- * @param prog The program to be symbolically executed.
- * @param state The initial state of the program.
- * @constrains_cache The cache for already found path constraints
- * @param maxDepth The maximum depth of the symbolic exploration tree.
- * @param max_num_trials The maximum number of trials for each gradient descent.
- * @param ignore_memory If true, ignore the constraints derived from the memory.
- * @param verbose_level Level of verbose.
+ * This function conducts symbolic execution of a given program while
+ * simultaneously optimizing the path constraints using the provided gradient
+ * descent optimizer, `GDOptimizer`.
+ *
+ * @param prog The program to symbolically execute.
+ * @param optimizer The gradient descent optimizer for parameter optimization.
+ * @param state The initial symbolic state of the program.
+ * @param constraints_cache A cache for previously found path constraints.
+ * @param maxDepth The maximum depth of symbolic exploration (default: 64).
+ * @param max_num_trials The maximum number of trials for each gradient descent
+ * (default: 3).
+ * @param ignore_memory If set to true, constraints derived from memory will be
+ * ignored (default: false).
+ * @param verbose_level The level of verbosity (default: 1).
  * @return A trace of the symbolic execution.
  */
 inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
@@ -110,12 +128,16 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
 }
 
 /**
- * Symbolically executes a single instruction of a program.
+ * @brief Symbolically Execute a Single Instruction of a Program.
+ *
+ * This function symbolically executes a single instruction of a program and
+ * generates new symbolic states, representing possible outcomes of the
+ * instruction's execution.
  *
  * @param state The state of the program before the instruction is executed.
  * @param instr The instruction to be executed.
- * @param result A list of new states, each of which represents a possible
- * outcome of executing the instruction.
+ * @param result A list of new symbolic states, each representing a possible
+ * outcome.
  */
 inline void symStep(SymState &state, Instr instr,
                     std::vector<SymState> &result) {
