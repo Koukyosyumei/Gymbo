@@ -1,4 +1,5 @@
 #include "gd.h"
+#include "sat.h"
 #include "type.h"
 #include "utils.h"
 #include <cstdint>
@@ -79,10 +80,25 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
       params = constraints_cache[constraints_str].second;
     } else {
       for (int j = 0; j < max_num_trials; j++) {
-        is_sat = optimizer.solve(state.path_constraints, params);
+        std::unordered_map<std::string, gymbo::Sym *> unique_terms_map;
+        std::unordered_map<std::string, bool> assignments_map;
+        std::shared_ptr<Expr> path_constraints_expr =
+            pathconstraints2expr(state.path_constraints, unique_terms_map);
+        std::cout << path_constraints_expr->to_string() << std::endl;
+        is_sat = satisfiableDPLL(path_constraints_expr, assignments_map);
+        std::cout << "Ass \n";
+        for (auto &a : assignments_map) {
+          std::cout << a.first << " " << a.second << std::endl;
+        }
+        std::cout << "IS_SAT_DDL_ " << is_sat << std::endl;
+        if (is_sat) {
+          is_sat =
+              optimizer.solve(state.path_constraints, assignments_map, params);
+        }
         if (is_sat) {
           break;
         }
+        std::cout << "--" << std::endl;
         optimizer.seed += 1;
         initialize_params(params, state, ignore_memory);
       }

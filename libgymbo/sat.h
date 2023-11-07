@@ -507,19 +507,20 @@ satisfiableDPLL(std::shared_ptr<Expr> expr,
                 std::unordered_map<std::string, bool> &assignments_map) {
   std::shared_ptr<Expr> expr2 = literalElimination(
       cnf(unitPropagation(expr, assignments_map)), assignments_map);
+  std::cout << "expr2: " << expr2->to_string() << std::endl;
   std::pair<bool, std::string> freevar = expr2->freeVar();
   if (!freevar.first) {
-    return expr->unConst();
+    return expr2->unConst();
   } else {
     std::string var = freevar.second;
-    auto trueGuess = expr->guessVar(var, true)->simplify();
+    auto trueGuess = expr2->guessVar(var, true)->simplify();
     std::unordered_map<std::string, bool> true_assignments_map(assignments_map);
     true_assignments_map[var] = true;
     if (satisfiableDPLL(trueGuess, true_assignments_map)) {
       assignments_map = true_assignments_map;
       return true;
     }
-    auto falseGuess = expr->guessVar(var, false)->simplify();
+    auto falseGuess = expr2->guessVar(var, false)->simplify();
     std::unordered_map<std::string, bool> false_assignments_map(
         assignments_map);
     false_assignments_map[var] = false;
@@ -531,31 +532,38 @@ satisfiableDPLL(std::shared_ptr<Expr> expr,
   }
 }
 
-inline std::shared_ptr<Expr> sym2expr(gymbo::Sym *sym) {
+inline std::shared_ptr<Expr>
+sym2expr(gymbo::Sym *sym,
+         std::unordered_map<std::string, gymbo::Sym *> &unique_sym_map) {
   switch (sym->symtype) {
   case (gymbo::SymType::SAnd): {
-    return std::make_shared<And>(sym2expr(sym->left), sym2expr(sym->right));
+    return std::make_shared<And>(sym2expr(sym->left, unique_sym_map),
+                                 sym2expr(sym->right, unique_sym_map));
   }
   case (gymbo::SymType::SNot): {
-    return std::make_shared<Not>(sym2expr(sym->left));
+    return std::make_shared<Not>(sym2expr(sym->left, unique_sym_map));
   }
   case (gymbo::SymType::SOr): {
-    return std::make_shared<Or>(sym2expr(sym->left), sym2expr(sym->right));
+    return std::make_shared<Or>(sym2expr(sym->left, unique_sym_map),
+                                sym2expr(sym->right, unique_sym_map));
   }
   default: {
+    unique_sym_map.insert({sym->toString(), sym});
     return std::make_shared<Var>(sym->toString());
   }
   }
 }
 
-inline std::shared_ptr<Expr>
-pathconstraints2expr(std::vector<gymbo::Sym> &constraints) {
+inline std::shared_ptr<Expr> pathconstraints2expr(
+    std::vector<gymbo::Sym> &constraints,
+    std::unordered_map<std::string, gymbo::Sym *> &unique_sym_map) {
   if (constraints.size() == 0) {
     return std::make_shared<Const>(true);
   } else {
-    std::shared_ptr<Expr> res = sym2expr(&constraints[0]);
+    std::shared_ptr<Expr> res = sym2expr(&constraints[0], unique_sym_map);
     for (int i = 1; i < constraints.size(); i++) {
-      res = std::make_shared<And>(res, sym2expr(&constraints[i]));
+      res =
+          std::make_shared<And>(res, sym2expr(&constraints[i], unique_sym_map));
     }
     return res;
   }
