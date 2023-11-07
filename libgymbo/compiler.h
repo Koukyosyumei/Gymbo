@@ -92,7 +92,7 @@ inline void gen(Node *node, Prog &prg) {
   case ND_NE:
     prg.emplace_back(Instr(InstrType::Eq));
     prg.emplace_back(Instr(InstrType::Not));
-    break;
+    return;
   case ND_LT:
     prg.emplace_back(Instr(InstrType::Lt));
     return;

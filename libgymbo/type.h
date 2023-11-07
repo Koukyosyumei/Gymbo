@@ -290,7 +290,10 @@ struct Sym {
       return left->eval(cvals) * (-1) + 1;
     }
     case (SymType::SAnd): {
-      return left->eval(cvals) + right->eval(cvals);
+      return std::max(0, left->eval(cvals)) + std::max(0, right->eval(cvals));
+    }
+    case (SymType::SOr): {
+      return std::max(0, left->eval(cvals)) * std::max(0, right->eval(cvals));
     }
     case (SymType::SLt): {
       return left->eval(cvals) - right->eval(cvals) + 1;
@@ -340,7 +343,24 @@ struct Sym {
       return left->grad(cvals) * (-1);
     }
     case (SymType::SAnd): {
-      return left->grad(cvals) + right->grad(cvals);
+      int lv = left->eval(cvals);
+      int rv = right->eval(cvals);
+      Grad res({});
+      if (lv > 0) {
+        res = res + left->grad(cvals);
+      }
+      if (rv > 0) {
+        res = res + right->grad(cvals);
+      }
+      return res;
+    }
+    case (SymType::SOr): {
+      int lv = left->eval(cvals);
+      int rv = right->eval(cvals);
+      if (lv > 0 && rv > 0) {
+        return left->grad(cvals) * rv + right->grad(cvals) * lv;
+      }
+      return Grad({});
     }
     case (SymType::SLt): {
       return left->grad(cvals) - right->grad(cvals);
