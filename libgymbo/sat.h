@@ -360,7 +360,7 @@ inline std::shared_ptr<Expr> Not::guessVar(std::string var, bool val) {
 }
 
 inline std::shared_ptr<Expr> Const::guessVar(std::string var, bool val) {
-  return std::make_shared<Const>(val);
+  return std::make_shared<Const>(value);
 }
 
 inline std::shared_ptr<Expr> And::simplify() {
@@ -516,7 +516,7 @@ satisfiableDPLL(std::shared_ptr<Expr> expr,
     std::unordered_map<std::string, bool> true_assignments_map(assignments_map);
     true_assignments_map[var] = true;
     if (satisfiableDPLL(trueGuess, true_assignments_map)) {
-      assignments_map = true_assignments_map;
+      assignments_map[var] = true;
       return true;
     }
     auto falseGuess = expr2->guessVar(var, false)->simplify();
@@ -524,7 +524,7 @@ satisfiableDPLL(std::shared_ptr<Expr> expr,
         assignments_map);
     false_assignments_map[var] = false;
     if (satisfiableDPLL(falseGuess, false_assignments_map)) {
-      assignments_map = false_assignments_map;
+      assignments_map[var] = false;
       return true;
     }
     return false;

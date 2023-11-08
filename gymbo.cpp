@@ -17,11 +17,12 @@ int param_high = 10;
 int seed = 42;
 bool sign_grad = true;
 bool ignore_memory = false;
+bool use_dpll = false;
 
 void parse_args(int argc, char *argv[]) {
   int opt;
   user_input = argv[1];
-  while ((opt = getopt(argc, argv, "d:v:i:a:t:l:h:s:gm")) != -1) {
+  while ((opt = getopt(argc, argv, "d:v:i:a:t:l:h:s:gmp")) != -1) {
     switch (opt) {
     case 'd':
       max_depth = atoi(optarg);
@@ -52,6 +53,9 @@ void parse_args(int argc, char *argv[]) {
       break;
     case 'm':
       ignore_memory = true;
+      break;
+    case 'p':
+      use_dpll = true;
       break;
     default:
       printf("unknown parameter %s is specified", optarg);
@@ -90,10 +94,11 @@ int main(int argc, char *argv[]) {
 
   printf("Start Symbolic Execution...\n");
   gymbo::run_gymbo(prg, optimizer, init, cache_constraints, max_depth,
-                   max_num_trials, ignore_memory, verbose_level);
+                   max_num_trials, ignore_memory, use_dpll, verbose_level);
   printf("---------------------------\n");
 
   printf("Result Summary\n");
+  printf("#Loops Spent for Gradient Descent: %d\n", optimizer.num_used_itr);
   int num_unique_path_constraints = cache_constraints.size();
   int num_sat = 0;
   int num_unsat = 0;
