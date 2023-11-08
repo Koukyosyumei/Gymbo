@@ -54,15 +54,10 @@ struct GDOptimizer {
    * @return `true` if all constraints are satisfied; otherwise, `false`.
    */
   bool eval(std::vector<Sym> &path_constraints,
-            std::unordered_map<std::string, bool> &assignments,
-            std::unordered_map<int, int> &params) {
+            std::unordered_map<int, int> params) {
     bool result = true;
     for (int i = 0; i < path_constraints.size(); i++) {
-      if (assignments[path_constraints[i].toString()]) {
-        result = result && (path_constraints[i].eval(params) <= 0);
-      } else {
-        result = result && (path_constraints[i].eval(params) <= 0);
-      }
+      result = result && (path_constraints[i].eval(params) <= 0);
     }
     return result;
   }
@@ -84,7 +79,6 @@ struct GDOptimizer {
    * otherwise, `false`.
    */
   bool solve(std::vector<Sym> &path_constraints,
-             std::unordered_map<std::string, bool> &assignments,
              std::unordered_map<int, int> &params,
              bool is_init_params_const = true) {
     if (path_constraints.size() == 0) {
@@ -111,46 +105,31 @@ struct GDOptimizer {
     }
 
     int itr = 0;
-    bool is_sat = eval(path_constraints, assignments, params);
+    bool is_sat = eval(path_constraints, params);
 
     while ((!is_sat) && (itr < num_epochs)) {
       Grad grads = Grad({});
       for (int i = 0; i < path_constraints.size(); i++) {
-        bool ass = assignments[path_constraints[i].toString()];
-        bool stop = false;
-        if (ass) {
-          stop = path_constraints[i].eval(params) <= 0;
-        } else {
-          stop = path_constraints[i].eval(params) > 0;
-        }
-        if (!stop) {
+        if (path_constraints[i].eval(params) > 0) {
           grads = grads + path_constraints[i].grad(params);
-          for (auto &g : grads.val) {
-            if (!is_const.at(g.first)) {
-              if (!sign_grad) {
-                if (ass) {
-                  params.at(g.first) -= lr * g.second;
-                } else {
-                  params.at(g.first) += lr * g.second;
-                }
-              } else {
-                int sign = 0;
-                if (g.second > 0) {
-                  sign = 1;
-                } else if (g.second < 0) {
-                  sign = -1;
-                }
-                if (ass) {
-                  params.at(g.first) -= lr * sign;
-                } else {
-                  params.at(g.first) += lr * sign;
-                }
-              }
+        }
+      }
+      for (auto &g : grads.val) {
+        if (!is_const.at(g.first)) {
+          if (!sign_grad) {
+            params.at(g.first) -= lr * g.second;
+          } else {
+            int sign = 0;
+            if (g.second > 0) {
+              sign = 1;
+            } else if (g.second < 0) {
+              sign = -1;
             }
+            params.at(g.first) -= lr * sign;
           }
         }
       }
-      is_sat = eval(path_constraints, assignments, params);
+      is_sat = eval(path_constraints, params);
       itr++;
     }
     return is_sat;

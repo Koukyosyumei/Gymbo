@@ -507,10 +507,9 @@ satisfiableDPLL(std::shared_ptr<Expr> expr,
                 std::unordered_map<std::string, bool> &assignments_map) {
   std::shared_ptr<Expr> expr2 = literalElimination(
       cnf(unitPropagation(expr, assignments_map)), assignments_map);
-  std::cout << "expr2: " << expr2->to_string() << std::endl;
   std::pair<bool, std::string> freevar = expr2->freeVar();
   if (!freevar.first) {
-    return expr2->unConst();
+    return expr2->simplify()->unConst();
   } else {
     std::string var = freevar.second;
     auto trueGuess = expr2->guessVar(var, true)->simplify();
