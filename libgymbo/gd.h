@@ -27,6 +27,8 @@ struct GDOptimizer {
   int num_epochs, lr, seed, param_low, param_high;
   bool sign_grad;
 
+  int num_used_itr;
+
   /**
    * @brief Constructor for GDOptimizer.
    *
@@ -41,7 +43,8 @@ struct GDOptimizer {
   GDOptimizer(int num_epochs = 100, int lr = 1, int param_low = -10,
               int param_high = 10, bool sign_grad = true, int seed = 42)
       : num_epochs(num_epochs), lr(std::max(1, lr)), param_low(param_low),
-        param_high(param_high), sign_grad(sign_grad), seed(seed) {}
+        param_high(param_high), sign_grad(sign_grad), seed(seed),
+        num_used_itr(0) {}
 
   /**
    * @brief Evaluate if path constraints are satisfied for given parameters.
@@ -131,6 +134,7 @@ struct GDOptimizer {
       }
       is_sat = eval(path_constraints, params);
       itr++;
+      num_used_itr++;
     }
     return is_sat;
   }

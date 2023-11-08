@@ -1,4 +1,5 @@
 #include "gd.h"
+#include "sat.h"
 #include "type.h"
 #include "utils.h"
 #include <cstdint>
@@ -8,7 +9,7 @@
 namespace gymbo {
 Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                 PathConstraintsTable &, int maxDepth, int max_num_trials,
-                bool ignore_memory, int verbose_level);
+                bool ignore_memory, bool use_dpll, int verbose_level);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 /**
@@ -54,7 +55,8 @@ void initialize_params(std::unordered_map<int, int> &params, SymState &state,
 inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        PathConstraintsTable &constraints_cache,
                        int maxDepth = 64, int max_num_trials = 3,
-                       bool ignore_memory = false, int verbose_level = 1) {
+                       bool ignore_memory = false, bool use_dpll = false,
+                       int verbose_level = 1) {
   int pc = state.pc;
   if (verbose_level >= 1) {
     printf("pc: %d, ", pc);
@@ -78,8 +80,32 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
       is_sat = constraints_cache[constraints_str].first;
       params = constraints_cache[constraints_str].second;
     } else {
+      std::unordered_map<std::string, gymbo::Sym *> unique_terms_map;
+      std::unordered_map<std::string, bool> assignments_map;
+      std::shared_ptr<Expr> path_constraints_expr =
+          pathconstraints2expr(state.path_constraints, unique_terms_map);
+
       for (int j = 0; j < max_num_trials; j++) {
-        is_sat = optimizer.solve(state.path_constraints, params);
+        if (use_dpll) {
+          // solver DPLL
+          is_sat = satisfiableDPLL(path_constraints_expr, assignments_map);
+
+          std::vector<Sym> new_constraints;
+          for (auto &ass : assignments_map) {
+            if (ass.second) {
+              new_constraints.emplace_back(*unique_terms_map[ass.first]);
+            } else {
+              new_constraints.emplace_back(
+                  Sym(SymType::SNot, unique_terms_map[ass.first]));
+            }
+          }
+
+          if (is_sat) {
+            is_sat = optimizer.solve(new_constraints, params);
+          }
+        } else {
+          is_sat = optimizer.solve(state.path_constraints, params);
+        }
         if (is_sat) {
           break;
         }
@@ -118,7 +144,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
     for (SymState newState : newStates) {
       Trace child =
           run_gymbo(prog, optimizer, newState, constraints_cache, maxDepth - 1,
-                    max_num_trials, ignore_memory, verbose_level);
+                    max_num_trials, ignore_memory, use_dpll, verbose_level);
       children.push_back(child);
     }
     return Trace(state, children);
