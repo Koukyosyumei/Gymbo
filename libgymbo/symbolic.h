@@ -3,6 +3,7 @@
 #include "type.h"
 #include "utils.h"
 #include <cstdint>
+#include <memory>
 #include <unordered_map>
 #include <utility>
 
@@ -85,10 +86,8 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
       std::shared_ptr<Expr> path_constraints_expr =
           pathconstraints2expr(state.path_constraints, unique_terms_map);
 
-      for (int j = 0; j < max_num_trials; j++) {
-        if (use_dpll) {
-          // solver DPLL
-          is_sat = satisfiableDPLL(path_constraints_expr, assignments_map);
+      if (use_dpll) {
+        while (satisfiableDPLL(path_constraints_expr, assignments_map)) {
 
           std::vector<Sym> new_constraints;
           for (auto &ass : assignments_map) {
@@ -100,17 +99,45 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
             }
           }
 
-          if (is_sat) {
+          for (int j = 0; j < max_num_trials; j++) {
             is_sat = optimizer.solve(new_constraints, params);
+            if (is_sat) {
+              break;
+            }
+            optimizer.seed += 1;
+            initialize_params(params, state, ignore_memory);
           }
-        } else {
+
+          if (is_sat) {
+            break;
+          }
+
+          // add feedback
+          std::shared_ptr<Expr> learnt_constraints =
+              std::make_shared<Const>(false);
+          for (auto &ass : assignments_map) {
+            if (ass.second) {
+              learnt_constraints = std::make_shared<Or>(
+                  learnt_constraints,
+                  std::make_shared<Not>(std::make_shared<Var>(ass.first)));
+            } else {
+              learnt_constraints = std::make_shared<Or>(
+                  learnt_constraints, std::make_shared<Var>(ass.first));
+            }
+          }
+
+          path_constraints_expr =
+              std::make_shared<And>(path_constraints_expr, learnt_constraints);
+        }
+      } else {
+        for (int j = 0; j < max_num_trials; j++) {
           is_sat = optimizer.solve(state.path_constraints, params);
+          if (is_sat) {
+            break;
+          }
+          optimizer.seed += 1;
+          initialize_params(params, state, ignore_memory);
         }
-        if (is_sat) {
-          break;
-        }
-        optimizer.seed += 1;
-        initialize_params(params, state, ignore_memory);
       }
       constraints_cache.emplace(constraints_str,
                                 std::make_pair(is_sat, params));
