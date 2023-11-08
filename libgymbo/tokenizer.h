@@ -197,6 +197,8 @@ inline Token *tokenize(char *user_input) {
   char LETTER_NEQ[] = "!=";
   char LETTER_LEQ[] = "<=";
   char LETTER_GEQ[] = ">=";
+  char LETTER_AND[] = "&&";
+  char LETTER_OR[] = "||";
 
   while (*p) {
     // Skip whitespace characters.
@@ -207,7 +209,8 @@ inline Token *tokenize(char *user_input) {
 
     // Multi-letter punctuator
     if (startswith(p, LETTER_EQ) || startswith(p, LETTER_NEQ) ||
-        startswith(p, LETTER_LEQ) || startswith(p, LETTER_GEQ)) {
+        startswith(p, LETTER_LEQ) || startswith(p, LETTER_GEQ) ||
+        startswith(p, LETTER_AND) || startswith(p, LETTER_OR)) {
       cur = new_token(TOKEN_RESERVED, cur, p, 2);
       p += 2;
       continue;
