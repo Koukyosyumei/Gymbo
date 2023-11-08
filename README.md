@@ -56,6 +56,7 @@ primary    = num | ident | "(" expr ")"
 - `-l`: Set the minimum value of initial parameters (default: -10)
 - `-h`: Set the maximum value of initial parameters (default: 10)
 - `-s`: Set the random seed (default: 42)
+- `-p`: (optional) If set, use DPLL to determine the assignment for each term. Otherwise, solve the loss function directly transformed from the path constraints.
 
 ```bash
 ./gymbo "if (a < 3) if (a > 4) return 1;" -v 0

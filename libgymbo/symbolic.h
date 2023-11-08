@@ -80,14 +80,14 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
       is_sat = constraints_cache[constraints_str].first;
       params = constraints_cache[constraints_str].second;
     } else {
-      for (int j = 0; j < max_num_trials; j++) {
+      std::unordered_map<std::string, gymbo::Sym *> unique_terms_map;
+      std::unordered_map<std::string, bool> assignments_map;
+      std::shared_ptr<Expr> path_constraints_expr =
+          pathconstraints2expr(state.path_constraints, unique_terms_map);
 
+      for (int j = 0; j < max_num_trials; j++) {
         if (use_dpll) {
           // solver DPLL
-          std::unordered_map<std::string, gymbo::Sym *> unique_terms_map;
-          std::unordered_map<std::string, bool> assignments_map;
-          std::shared_ptr<Expr> path_constraints_expr =
-              pathconstraints2expr(state.path_constraints, unique_terms_map);
           is_sat = satisfiableDPLL(path_constraints_expr, assignments_map);
 
           std::vector<Sym> new_constraints;
@@ -99,6 +99,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                   Sym(SymType::SNot, unique_terms_map[ass.first]));
             }
           }
+
           if (is_sat) {
             is_sat = optimizer.solve(new_constraints, params);
           }
