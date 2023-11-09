@@ -249,7 +249,7 @@ public:
     name = "Not";
   }
 
-  std::string to_string() override { return "(!" + expr->to_string() + ")"; }
+  std::string to_string() override { return "(!(" + expr->to_string() + "))"; }
 
   bool evaluate() override { return !expr->evaluate(); }
 
@@ -468,7 +468,11 @@ literalElimination(std::shared_ptr<Expr> expr,
     std::string var = assignment.first;
     bool value = assignment.second;
     expr = expr->guessVar(var, value);
-    assignments_map[var] = value;
+    if (assignments_map.find(var) == assignments_map.end()) {
+      assignments_map.emplace(var, value);
+    } else {
+      assignments_map[var] = value;
+    }
   }
 
   return expr;
@@ -496,7 +500,11 @@ unitPropagation(std::shared_ptr<Expr> expr,
     std::string var = assignment.first;
     bool value = assignment.second;
     expr = expr->guessVar(var, value);
-    assignments_map[var] = value;
+    if (assignments_map.find(var) == assignments_map.end()) {
+      assignments_map.emplace(var, value);
+    } else {
+      assignments_map[var] = value;
+    }
   }
 
   return expr;
@@ -505,28 +513,42 @@ unitPropagation(std::shared_ptr<Expr> expr,
 inline bool
 satisfiableDPLL(std::shared_ptr<Expr> expr,
                 std::unordered_map<std::string, bool> &assignments_map) {
-  std::shared_ptr<Expr> expr2 = literalElimination(
-      cnf(unitPropagation(expr, assignments_map)), assignments_map);
+  // std::shared_ptr<Expr> expr2 = literalElimination(
+  //     cnf(unitPropagation(expr, assignments_map)), assignments_map);
+  std::shared_ptr<Expr> expr2 = cnf(unitPropagation(expr, assignments_map));
+
   std::pair<bool, std::string> freevar = expr2->freeVar();
   if (!freevar.first) {
     return expr2->simplify()->unConst();
   } else {
     std::string var = freevar.second;
+
     auto trueGuess = expr2->guessVar(var, true)->simplify();
-    std::unordered_map<std::string, bool> true_assignments_map(assignments_map);
-    true_assignments_map[var] = true;
+    std::unordered_map<std::string, bool> true_assignments_map =
+        assignments_map;
+    if (true_assignments_map.find(var) == true_assignments_map.end()) {
+      true_assignments_map.emplace(var, true);
+    } else {
+      true_assignments_map[var] = true;
+    }
     if (satisfiableDPLL(trueGuess, true_assignments_map)) {
-      assignments_map[var] = true;
+      assignments_map = true_assignments_map;
       return true;
     }
+
     auto falseGuess = expr2->guessVar(var, false)->simplify();
-    std::unordered_map<std::string, bool> false_assignments_map(
-        assignments_map);
-    false_assignments_map[var] = false;
+    std::unordered_map<std::string, bool> false_assignments_map =
+        assignments_map;
+    if (false_assignments_map.find(var) == false_assignments_map.end()) {
+      false_assignments_map.emplace(var, false);
+    } else {
+      false_assignments_map[var] = false;
+    }
     if (satisfiableDPLL(falseGuess, false_assignments_map)) {
-      assignments_map[var] = false;
+      assignments_map = false_assignments_map;
       return true;
     }
+
     return false;
   }
 }

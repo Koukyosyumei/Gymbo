@@ -473,7 +473,7 @@ struct SymState {
 
     printf("Path Constraints: ");
     for (Sym &sym : path_constraints) {
-      printf("%s and ", sym.toString().c_str());
+      printf("(%s) && ", sym.toString().c_str());
     }
     printf(" 1\n");
   }
