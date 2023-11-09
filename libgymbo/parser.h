@@ -19,6 +19,9 @@ char LETTER_PLUS[] = "+";
 char LETTER_MINUS[] = "-";
 char LETTER_MUL[] = "*";
 char LETTER_DIV[] = "/";
+char LETTER_AND[] = "&&";
+char LETTER_OR[] = "||";
+char LETTER_NOT[] = "!";
 char LETTER_LP[] = "(";
 char LETTER_RP[] = ")";
 char LETTER_SC[] = ";";
@@ -31,6 +34,9 @@ typedef enum {
   ND_SUB, // -
   ND_MUL, // *
   ND_DIV, // /
+  ND_AND, // &&
+  ND_OR,  // ||
+  ND_NOT, // !
   ND_EQ,  // ==
   ND_NE,  // !=
   ND_LT,  // <
@@ -60,6 +66,7 @@ Node *assign(Token *&token, char *user_input);
 Node *expr(Token *&token, char *user_input);
 Node *equality(Token *&token, char *user_input);
 Node *relational(Token *&token, char *user_input);
+Node *logical(Token *&token, char *user_input);
 Node *add(Token *&token, char *user_input);
 Node *mul(Token *&token, char *user_input);
 Node *unary(Token *&token, char *user_input);
@@ -85,6 +92,78 @@ Node *new_num(int val) {
   return node;
 }
 
+// expr = assign
+/**
+ * Parses an expression from a C-like language program.
+ *
+ * @param token The first token in the expression.
+ * @param user_input The source code of the program.
+ * @return An AST node representing the expression.
+ */
+Node *expr(Token *&token, char *user_input) {
+  return assign(token, user_input);
+}
+
+// assign = logical ("=" assign)?
+/**
+ * Parses an assignment statement from a C-like language program.
+ *
+ * @param token The first token in the assignment statement.
+ * @param user_input The source code of the program.
+ * @return An AST node representing the assignment statement.
+ */
+Node *assign(Token *&token, char *user_input) {
+  char LETTER_ASS[] = "=";
+  Node *node = logical(token, user_input);
+  if (consume(token, LETTER_ASS))
+    node = new_binary(ND_ASSIGN, node, assign(token, user_input));
+  return node;
+}
+
+// logical = equality ("&&" equality | "||" equality)*
+/**
+ * Parses a logical expression from a C-like language program.
+ *
+ * @param token The first token in the logical expression.
+ * @param user_input The source code of the program.
+ * @return An AST node representing the logical expression.
+ */
+Node *logical(Token *&token, char *user_input) {
+
+  Node *node = equality(token, user_input);
+
+  for (;;) {
+    if (consume(token, LETTER_AND))
+      node = new_binary(ND_AND, node, equality(token, user_input));
+    else if (consume(token, LETTER_OR))
+      node = new_binary(ND_OR, node, equality(token, user_input));
+    else
+      return node;
+  }
+}
+
+// equality = relational ("==" relational | "!=" relational)*
+/**
+ * Parses an equality expression from a C-like language program.
+ *
+ * @param token The first token in the equality expression.
+ * @param user_input The source code of the program.
+ * @return An AST node representing the equality expression.
+ */
+Node *equality(Token *&token, char *user_input) {
+
+  Node *node = relational(token, user_input);
+
+  for (;;) {
+    if (consume(token, LETTER_EQ))
+      node = new_binary(ND_EQ, node, relational(token, user_input));
+    else if (consume(token, LETTER_NEQ))
+      node = new_binary(ND_NE, node, relational(token, user_input));
+    else
+      return node;
+  }
+}
+
 // relational = add ("<" add | "<=" add | ">" add | ">=" add)*
 /**
  * Parses a relational expression from a C-like language program.
@@ -105,55 +184,6 @@ Node *relational(Token *&token, char *user_input) {
       node = new_binary(ND_LT, add(token, user_input), node);
     else if (consume(token, LETTER_GEQ))
       node = new_binary(ND_LE, add(token, user_input), node);
-    else
-      return node;
-  }
-}
-
-/**
- * Parses an assignment statement from a C-like language program.
- *
- * @param token The first token in the assignment statement.
- * @param user_input The source code of the program.
- * @return An AST node representing the assignment statement.
- */
-Node *assign(Token *&token, char *user_input) {
-  char LETTER_ASS[] = "=";
-  Node *node = equality(token, user_input);
-  if (consume(token, LETTER_ASS))
-    node = new_binary(ND_ASSIGN, node, assign(token, user_input));
-  return node;
-}
-
-// expr = equality
-/**
- * Parses an expression from a C-like language program.
- *
- * @param token The first token in the expression.
- * @param user_input The source code of the program.
- * @return An AST node representing the expression.
- */
-Node *expr(Token *&token, char *user_input) {
-  return assign(token, user_input);
-}
-
-// equality = relational ("==" relational | "!=" relational)*
-/**
- * Parses an equality expression from a C-like language program.
- *
- * @param token The first token in the equality expression.
- * @param user_input The source code of the program.
- * @return An AST node representing the equality expression.
- */
-Node *equality(Token *&token, char *user_input) {
-
-  Node *node = relational(token, user_input);
-
-  for (;;) {
-    if (consume(token, LETTER_EQ))
-      node = new_binary(ND_EQ, node, relational(token, user_input));
-    else if (consume(token, LETTER_NEQ))
-      node = new_binary(ND_NE, node, relational(token, user_input));
     else
       return node;
   }

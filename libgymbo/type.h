@@ -62,6 +62,18 @@ public:
       printf("mul\n");
       return;
     }
+    case (InstrType::And): {
+      printf("and\n");
+      return;
+    }
+    case (InstrType::Or): {
+      printf("or\n");
+      return;
+    }
+    case (InstrType::Not): {
+      printf("not\n");
+      return;
+    }
     case (InstrType::JmpIf): {
       printf("jmpIf\n");
       return;
@@ -247,6 +259,11 @@ struct Sym {
       return;
     }
     case (SymType::SAnd): {
+      left->gather_var_ids(result);
+      right->gather_var_ids(result);
+      return;
+    }
+    case (SymType::SOr): {
       left->gather_var_ids(result);
       right->gather_var_ids(result);
       return;
@@ -456,7 +473,7 @@ struct SymState {
 
     printf("Path Constraints: ");
     for (Sym &sym : path_constraints) {
-      printf("%s and ", sym.toString().c_str());
+      printf("(%s) && ", sym.toString().c_str());
     }
     printf(" 1\n");
   }
