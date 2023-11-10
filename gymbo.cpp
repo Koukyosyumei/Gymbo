@@ -11,7 +11,7 @@ int max_depth = 256;
 int verbose_level = 1;
 int num_itrs = 100;
 int step_size = 1;
-int max_num_trials = 100;
+int max_num_trials = 10;
 int param_low = -10;
 int param_high = 10;
 int seed = 42;
@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
   gymbo::generate_ast(token, user_input, code);
   gymbo::compile_ast(code, prg);
 
-  if (verbose_level >= 2) {
+  if (verbose_level >= 3) {
     printf("...Compiled Stack Machine...\n");
     for (int j = 0; j < prg.size(); j++) {
       prg[j].print();
