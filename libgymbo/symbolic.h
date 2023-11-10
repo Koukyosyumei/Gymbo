@@ -50,6 +50,8 @@ void initialize_params(std::unordered_map<int, int> &params, SymState &state,
  * (default: 3).
  * @param ignore_memory If set to true, constraints derived from memory will be
  * ignored (default: false).
+ * @param use_dpll If set to true, use DPLL to decide the initial assignment for
+ * each term. (default: false)
  * @param verbose_level The level of verbosity (default: 1).
  * @return A trace of the symbolic execution.
  */
@@ -59,7 +61,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        bool ignore_memory = false, bool use_dpll = false,
                        int verbose_level = 1) {
   int pc = state.pc;
-  if (verbose_level >= 1) {
+  if (verbose_level >= 2) {
     printf("pc: %d, ", pc);
     prog[pc].print();
     state.print();
@@ -75,11 +77,13 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
     std::unordered_map<int, int> params = {};
     initialize_params(params, state, ignore_memory);
 
-    bool is_sat;
+    bool is_sat = false;
+    bool is_unknown_path_constraint = true;
 
     if (constraints_cache.find(constraints_str) != constraints_cache.end()) {
       is_sat = constraints_cache[constraints_str].first;
       params = constraints_cache[constraints_str].second;
+      is_unknown_path_constraint = false;
     } else {
       std::unordered_map<std::string, gymbo::Sym *> unique_terms_map;
       std::unordered_map<std::string, bool> assignments_map;
@@ -144,20 +148,24 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
     }
 
     if (verbose_level >= 1) {
-      if (!is_sat) {
-        printf("\x1b[31m");
-      } else {
-        printf("\x1b[32m");
+      if ((verbose_level >= 1 && is_unknown_path_constraint) ||
+          (verbose_level >= 2)) {
+        if (!is_sat) {
+          printf("\x1b[31m");
+        } else {
+          printf("\x1b[32m");
+        }
+        printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc, is_sat,
+               constraints_str.c_str());
+        for (auto &p : params) {
+          printf("%d: %d, ", p.first, p.second);
+        }
+        printf("}\n");
       }
-      printf("IS_SAT - %d\x1b[39m, params = {", is_sat);
-      for (auto &p : params) {
-        printf("%d: %d, ", p.first, p.second);
-      }
-      printf("}\n");
     }
   }
 
-  if (verbose_level >= 1) {
+  if (verbose_level >= 2) {
     printf("---\n");
   }
 

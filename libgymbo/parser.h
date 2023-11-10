@@ -26,6 +26,8 @@ char LETTER_LP[] = "(";
 char LETTER_RP[] = ")";
 char LETTER_SC[] = ";";
 char LETTER_ELSE[] = "else";
+char LETTER_LB[] = "{";
+char LETTER_RB[] = "}";
 
 namespace gymbo {
 
@@ -46,7 +48,8 @@ typedef enum {
   ND_NUM, // Integer
   ND_RETURN,
   ND_IF,
-  ND_FOR
+  ND_FOR,
+  ND_BLOCK,
 } NodeKind;
 
 // AST node type
@@ -58,6 +61,7 @@ struct Node {
   Node *cond;
   Node *then;
   Node *els;
+  std::vector<Node *> blocks;
   int val; // Used if kind == ND_NUM
   int offset;
 };
@@ -249,7 +253,16 @@ inline Node *primary(Token *&token, char *user_input) {
 inline Node *stmt(Token *&token, char *user_input) {
   Node *node;
 
-  if (consume_tok(token, TOKEN_RETURN)) {
+  if (consume(token, LETTER_LB)) {
+    node = new Node();
+    node->kind = ND_BLOCK;
+    while (true) {
+      node->blocks.emplace_back(stmt(token, user_input));
+      if (consume(token, LETTER_RB)) {
+        break;
+      }
+    }
+  } else if (consume_tok(token, TOKEN_RETURN)) {
     node = new Node();
     node->kind = ND_RETURN;
     node->lhs = expr(token, user_input);

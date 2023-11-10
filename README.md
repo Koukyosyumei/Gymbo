@@ -4,11 +4,9 @@
 
 Gymbo is a Proof of Concept for a Gradient-based Symbolic Execution Engine, implemented from scratch. Building on recent advancements that utilize gradient descent to solve SMT formulas `[1, 2]`, Gymbo leverages gradient descent to discover input values that fulfill each path constraint during symbolic execution.
 
-Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of `rui314/chibicc [3]`, while the symbolic execution approach is inspired by `beala/symbolic [4]`.
-
 Compared to other prominent symbolic execution tools, Gymbo's implementation is notably simpler and more compact. We hope that this project will assist individuals in grasping the fundamental principles of symbolic execution and SMT problem-solving through gradient descent.
 
-Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated.
+> Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated.
 
 ## Install
 
@@ -24,6 +22,7 @@ Gymbo presently supports C-like programs with the following BNF grammar:
 ```
 program    = stmt*
 stmt       = expr ";"
+           | "{" stmt* "}"
            | "if" "(" expr ")" stmt ("else" stmt)? 
            | "return" expr ";"
 expr       = assign
@@ -39,6 +38,26 @@ primary    = num | ident | "(" expr ")"
 
 > Please note that Gymbo currently ignores `/` when solving path constraints.
 
+## Internal Algorithm
+
+Gymbo converts the path constraint into a numerical loss function, which becomes negative only when the path constraint is satisfied. Gymbo uses the following transformation rule (currently supporting only integer variables):
+
+```
+!(a)     => -a + 1
+(a < b)  => a - b + 1
+(a <= b) => a - b
+(a > b)  => b - a + 1
+(a >= b) => b - a
+(a == b) => abs(a - b)
+(a != b) => -abs(a - b) + 1
+(a && b) => max(0, a) + max(0, b)
+(a || b) => max(0, a) * max(0, b)
+```
+
+For example, `(a < 3) && (!(a < 3) || (b == 5))` becomes `(a - 2) + (max(0, (3 - a)) * max(0, abs(b - 5)))`.
+
+Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each unique term, sometimes resulting in better scalability. For example, applying DPLL to the above example leads to `(a < 3)` being true and `(b == 5)` being true. Gymbo then converts this assignment into a loss function to be solved: `(a - 2) + max(0, abs(b - 5))`.
+
 ## CLI Tool
 
 `gymbo` command accepts the following command-line options:
@@ -47,9 +66,10 @@ primary    = num | ident | "(" expr ")"
 - `-v`: Set the verbosity level (default: 1). Use -1 for minimal output.
 ```
     -1: the number of satisfiable path constraints and unsatisfiable path constraints.
-    0: + the list of unsatisfiable path constraints.
-    1: + trace at each operation, including the content of the virtual stack and memory.
-    2: + complete stack machine.
+    0: + the list of unique unsatisfiable path constraints.
+    1: + estimated concrete parameters for each path constraint.
+    2: + trace at each operation, including the content of the virtual stack and memory.
+    3: + complete stack machine.
 ```
 - `-i`: Set the number of iterations for gradient descent (default: 100).
 - `-a`: Set the step size for gradient descent (default: 1).
@@ -104,6 +124,10 @@ gymbo::compile_ast(code, prg);
 // execute gradient-based symbolie execution
 gymbo::run_gymbo(prg, optimizer, init, cache_constraints);
 ```
+
+## Acknowledgement
+
+Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of `rui314/chibicc [3]`, while the symbolic execution approach is inspired by `beala/symbolic [4]`.
 
 ## Reference
 
