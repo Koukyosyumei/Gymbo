@@ -24,6 +24,7 @@ Gymbo presently supports C-like programs with the following BNF grammar:
 ```
 program    = stmt*
 stmt       = expr ";"
+           | "{" stmt* "}"
            | "if" "(" expr ")" stmt ("else" stmt)? 
            | "return" expr ";"
 expr       = assign
