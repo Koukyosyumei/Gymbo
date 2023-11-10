@@ -4,11 +4,9 @@
 
 Gymbo is a Proof of Concept for a Gradient-based Symbolic Execution Engine, implemented from scratch. Building on recent advancements that utilize gradient descent to solve SMT formulas `[1, 2]`, Gymbo leverages gradient descent to discover input values that fulfill each path constraint during symbolic execution.
 
-Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of `rui314/chibicc [3]`, while the symbolic execution approach is inspired by `beala/symbolic [4]`.
-
 Compared to other prominent symbolic execution tools, Gymbo's implementation is notably simpler and more compact. We hope that this project will assist individuals in grasping the fundamental principles of symbolic execution and SMT problem-solving through gradient descent.
 
-Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated.
+> Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated.
 
 ## Install
 
@@ -42,7 +40,7 @@ primary    = num | ident | "(" expr ")"
 
 ## Internal Algorithm
 
-Gymbo converts the path constraint to a numerical loss function that becomes negative only when the path constraint is satisfied. Specifically, Gymbo uses the following transformation rule. Note that Gymbo currently supports only integer variables.
+Gymbo converts the path constraint into a numerical loss function, which becomes negative only when the path constraint is satisfied. Gymbo uses the following transformation rule (currently supporting only integer variables):
 
 ```
 !(a)     => -a + 1
@@ -56,9 +54,9 @@ Gymbo converts the path constraint to a numerical loss function that becomes neg
 (a || b) => max(0, a) * max(0, b)
 ```
 
-For example, `(a < 3) && (!(a < 3) || (b == 5))` becomes `(a - 2) + (max(0, (3 - a)) * max(0, abs(b - 5)))`. 
+For example, `(a < 3) && (!(a < 3) || (b == 5))` becomes `(a - 2) + (max(0, (3 - a)) * max(0, abs(b - 5)))`.
 
-In addition, we can optionally use DPLL to decide the assignment for each unique term, sometimes resulting in better scalability. For example, applying DPLL to the above exaple leads to `(a < 3) is true and (b == 5) is true`. Then, Gymbo uses converts this assignment to a loss function to be solved; `(a - 2) + max(0, abs(b - 5))`.
+Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each unique term, sometimes resulting in better scalability. For example, applying DPLL to the above example leads to `(a < 3)` being true and `(b == 5)` being true. Gymbo then converts this assignment into a loss function to be solved: `(a - 2) + max(0, abs(b - 5))`.
 
 ## CLI Tool
 
@@ -126,6 +124,10 @@ gymbo::compile_ast(code, prg);
 // execute gradient-based symbolie execution
 gymbo::run_gymbo(prg, optimizer, init, cache_constraints);
 ```
+
+## Acknowledgement
+
+Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of `rui314/chibicc [3]`, while the symbolic execution approach is inspired by `beala/symbolic [4]`.
 
 ## Reference
 
