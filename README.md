@@ -48,9 +48,10 @@ primary    = num | ident | "(" expr ")"
 - `-v`: Set the verbosity level (default: 1). Use -1 for minimal output.
 ```
     -1: the number of satisfiable path constraints and unsatisfiable path constraints.
-    0: + the list of unsatisfiable path constraints.
-    1: + trace at each operation, including the content of the virtual stack and memory.
-    2: + complete stack machine.
+    0: + the list of unique unsatisfiable path constraints.
+    1: + estimated concrete parameters for each path constraint.
+    2: + trace at each operation, including the content of the virtual stack and memory.
+    3: + complete stack machine.
 ```
 - `-i`: Set the number of iterations for gradient descent (default: 100).
 - `-a`: Set the step size for gradient descent (default: 1).
