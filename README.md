@@ -40,6 +40,26 @@ primary    = num | ident | "(" expr ")"
 
 > Please note that Gymbo currently ignores `/` when solving path constraints.
 
+## Internal Algorithm
+
+Gymbo converts the path constraint to a numerical loss function that becomes negative only when the path constraint is satisfied. Specifically, Gymbo uses the following transformation rule. Note that Gymbo currently supports only integer variables.
+
+```
+!(a)     => -a + 1
+(a < b)  => a - b + 1
+(a <= b) => a - b
+(a > b)  => b - a + 1
+(a >= b) => b - a
+(a == b) => abs(a - b)
+(a != b) => -abs(a - b) + 1
+(a && b) => max(0, a) + max(0, b)
+(a || b) => max(0, a) * max(0, b)
+```
+
+For example, `(a < 3) && (!(a < 3) || (b == 5))` becomes `(a - 2) + (max(0, (3 - a)) * max(0, abs(b - 5)))`. 
+
+In addition, we can optionally use DPLL to decide the assignment for each unique term, sometimes resulting in better scalability. For example, applying DPLL to the above exaple leads to `(a < 3) is true and (b == 5) is true`. Then, Gymbo uses converts this assignment to a loss function to be solved; `(a - 2) + max(0, abs(b - 5))`.
+
 ## CLI Tool
 
 `gymbo` command accepts the following command-line options:
