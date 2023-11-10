@@ -235,7 +235,7 @@ inline Token *tokenize(char *user_input) {
     }
 
     // Single-letter punctuator
-    if (strchr("+-*/()<>=;", *p)) {
+    if (strchr("+-*/()<>=;{}", *p)) {
       cur = new_token(TOKEN_RESERVED, cur, p++, 1);
       continue;
     }

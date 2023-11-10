@@ -28,12 +28,18 @@ inline void gen_lval(Node *node, Prog &prg) {
  * @param prg The virtual program to append the generated instructions to.
  */
 inline void gen(Node *node, Prog &prg) {
-  if (node->kind == ND_RETURN) {
+
+  switch (node->kind) {
+  case (ND_RETURN): {
     prg.emplace_back(Instr(InstrType::Done));
     return;
   }
-
-  switch (node->kind) {
+  case (ND_BLOCK): {
+    for (Node *b : node->blocks) {
+      gen(b, prg);
+    }
+    return;
+  }
   case ND_IF: {
     gen(node->cond, prg);
     Prog then_prg, els_prg;
