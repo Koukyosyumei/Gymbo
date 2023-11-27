@@ -1,27 +1,23 @@
 #pragma once
 #include <bitset>
+#include <cmath>
 #include <cstdint>
+#include <cstring>
 #include <iostream>
 #include <string>
-#include <cstring>
-#include <cmath>
 
-inline bool is_integer(float x){
-  return std::floor(x)==x;
+inline bool is_integer(float x) { return std::floor(x) == x; }
+
+inline uint32_t FloatToWord(float val) {
+    uint32_t word;
+    std::memcpy(&word, &val, sizeof(val));
+    return word;
 }
 
-inline uint32_t FloatToWord(float val)
-{
-  uint32_t word;
-  std::memcpy(&word, &val, sizeof(val));
-  return word;
-}
- 
-inline float wordToFloat(uint32_t word)
-{
-  float val;
-  std::memcpy(&val, &word, sizeof(word));
-  return val;
+inline float wordToFloat(uint32_t word) {
+    float val;
+    std::memcpy(&val, &word, sizeof(word));
+    return val;
 }
 
 inline int wordToInt(uint32_t word) { return static_cast<int>(word); }
@@ -33,11 +29,11 @@ inline int wordToInt(uint32_t word) { return static_cast<int>(word); }
  * @return The signed int equivalent of the word.
  */
 inline int wordToSignedInt(uint32_t word) {
-  if (word & 0x80000000) {
-    return -static_cast<int>(wordToSignedInt(~word + 1));
-  } else {
-    return static_cast<int>(word);
-  }
+    if (word & 0x80000000) {
+        return -static_cast<int>(wordToSignedInt(~word + 1));
+    } else {
+        return static_cast<int>(word);
+    }
 }
 
 /**
@@ -80,14 +76,15 @@ inline bool isNegative(uint32_t word) { return (word & 0x80000000) != 0; }
  */
 inline std::string valName(int i) { return "val_" + std::to_string(i); }
 
-template <typename T> class LLNode {
-public:
-  T data;
-  LLNode *next;
-  LLNode *prev;
+template <typename T>
+class LLNode {
+   public:
+    T data;
+    LLNode *next;
+    LLNode *prev;
 
-  // Default constructor
-  LLNode(T data) : data(data), next(NULL), prev(NULL) {}
+    // Default constructor
+    LLNode(T data) : data(data), next(NULL), prev(NULL) {}
 };
 
 /**
@@ -95,87 +92,88 @@ public:
  *
  * @tparam T The type of data to store in the linked list.
  */
-template <typename T> class Linkedlist {
-public:
-  LLNode<T> *ghost;
-  LLNode<T> *head;
-  LLNode<T> *tail;
+template <typename T>
+class Linkedlist {
+   public:
+    LLNode<T> *ghost;
+    LLNode<T> *head;
+    LLNode<T> *tail;
 
-  Linkedlist() : ghost(NULL), head(NULL), tail(NULL) {}
+    Linkedlist() : ghost(NULL), head(NULL), tail(NULL) {}
 
-  /**
-   * Returns the length of the linked list.
-   *
-   * @return The length of the linked list.
-   */
-  uint32_t len() {
-    LLNode<T> *tmp = head;
-    uint32_t cnt = 0;
-    while (tmp != NULL) {
-      cnt++;
-      tmp = tmp->next;
-    }
-    return cnt;
-  }
-
-  /**
-   * Pushes a new element onto the back of the linked list.
-   *
-   * @param data The element to push onto the linked list.
-   */
-  void push(T data) {
-    // Create the new Node.
-    LLNode<T> *newNode = new LLNode<T>(data);
-
-    // Assign to head
-    if (head == NULL) {
-      head = newNode;
-      tail = head;
-      return;
+    /**
+     * Returns the length of the linked list.
+     *
+     * @return The length of the linked list.
+     */
+    uint32_t len() {
+        LLNode<T> *tmp = head;
+        uint32_t cnt = 0;
+        while (tmp != NULL) {
+            cnt++;
+            tmp = tmp->next;
+        }
+        return cnt;
     }
 
-    tail->next = newNode;
-    newNode->prev = tail;
-    tail = newNode;
-  }
+    /**
+     * Pushes a new element onto the back of the linked list.
+     *
+     * @param data The element to push onto the linked list.
+     */
+    void push(T data) {
+        // Create the new Node.
+        LLNode<T> *newNode = new LLNode<T>(data);
 
-  /**
-   * Returns the element at the back of the linked list.
-   *
-   * @return The element at the back of the linked list.
-   */
-  T *back() {
-    if (tail == NULL) {
-      fprintf(stderr, "Warning... tail of linked-list is null\n");
-    }
-    return &(tail->data);
-  }
+        // Assign to head
+        if (head == NULL) {
+            head = newNode;
+            tail = head;
+            return;
+        }
 
-  /**
-   * Pops the element at the back of the linked list.
-   */
-  void pop() {
-    if (tail == NULL) {
-      fprintf(stderr, "Warning... tail is NULL when trying to pop\n");
-      return;
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
     }
 
-    LLNode<T> *current_tail = tail;
-    tail = tail->prev;
-    if (tail != NULL) {
-      tail->next = NULL;
+    /**
+     * Returns the element at the back of the linked list.
+     *
+     * @return The element at the back of the linked list.
+     */
+    T *back() {
+        if (tail == NULL) {
+            fprintf(stderr, "Warning... tail of linked-list is null\n");
+        }
+        return &(tail->data);
     }
 
-    if (current_tail == head) {
-      head = NULL;
-    }
+    /**
+     * Pops the element at the back of the linked list.
+     */
+    void pop() {
+        if (tail == NULL) {
+            fprintf(stderr, "Warning... tail is NULL when trying to pop\n");
+            return;
+        }
 
-    if (ghost == NULL) {
-      ghost = current_tail;
-    } else {
-      ghost->next = current_tail;
-      current_tail->prev = ghost;
-      ghost = tail;
+        LLNode<T> *current_tail = tail;
+        tail = tail->prev;
+        if (tail != NULL) {
+            tail->next = NULL;
+        }
+
+        if (current_tail == head) {
+            head = NULL;
+        }
+
+        if (ghost == NULL) {
+            ghost = current_tail;
+        } else {
+            ghost->next = current_tail;
+            current_tail->prev = ghost;
+            ghost = tail;
+        }
     }
-  }
 };
