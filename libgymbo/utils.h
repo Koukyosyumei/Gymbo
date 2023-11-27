@@ -4,6 +4,11 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <cmath>
+
+inline bool is_integer(float x){
+  return std::floor(x)==x;
+}
 
 inline uint32_t FloatToWord(float val)
 {

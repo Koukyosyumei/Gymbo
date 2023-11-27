@@ -393,6 +393,8 @@ struct Sym {
 
   std::string toString() {
     std::string result = "";
+    float tmp_word; 
+
     switch (symtype) {
     case (SymType::SAdd): {
       result = "(" + left->toString() + "+" + right->toString() + ")";
@@ -407,7 +409,12 @@ struct Sym {
       break;
     }
     case (SymType::SCon): {
-      result += std::to_string(wordToFloat(word));
+      tmp_word = wordToFloat(word);
+      if (is_integer(tmp_word)) {
+        result += std::to_string((int)tmp_word);
+      } else {
+        result += std::to_string(tmp_word);
+      }
       break;
     }
     case (SymType::SAny): {

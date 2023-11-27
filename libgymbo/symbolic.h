@@ -158,7 +158,11 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc, is_sat,
                constraints_str.c_str());
         for (auto &p : params) {
-          printf("%d: %lf, ", p.first, p.second);
+          if (is_integer(p.second)) {
+            printf("%d: %d, ", p.first, (int)p.second);
+          } else {  
+            printf("%d: %f, ", p.first, p.second);
+          }
         }
         printf("}\n");
       }
