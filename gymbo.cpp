@@ -10,7 +10,8 @@ char *user_input;
 int max_depth = 256;
 int verbose_level = 1;
 int num_itrs = 100;
-int step_size = 1;
+float step_size = 1.0f;
+float eps = 1.0f;
 int max_num_trials = 10;
 int param_low = -10;
 int param_high = 10;
@@ -22,7 +23,7 @@ bool use_dpll = false;
 void parse_args(int argc, char *argv[]) {
   int opt;
   user_input = argv[1];
-  while ((opt = getopt(argc, argv, "d:v:i:a:t:l:h:s:gmp")) != -1) {
+  while ((opt = getopt(argc, argv, "d:v:i:a:e:t:l:h:s:gmp")) != -1) {
     switch (opt) {
     case 'd':
       max_depth = atoi(optarg);
@@ -34,7 +35,10 @@ void parse_args(int argc, char *argv[]) {
       num_itrs = atoi(optarg);
       break;
     case 'a':
-      step_size = atoi(optarg);
+      step_size = atof(optarg);
+      break;
+    case 'e':
+      eps = atof(optarg);
       break;
     case 't':
       max_num_trials = atoi(optarg);
@@ -74,7 +78,7 @@ int main(int argc, char *argv[]) {
 
   std::vector<gymbo::Node *> code;
   gymbo::Prog prg;
-  gymbo::GDOptimizer optimizer(num_itrs, step_size, param_low, param_high,
+  gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low, param_high,
                                sign_grad, seed);
   gymbo::SymState init;
   gymbo::PathConstraintsTable cache_constraints;

@@ -62,7 +62,7 @@ struct Node {
   Node *then;
   Node *els;
   std::vector<Node *> blocks;
-  int val; // Used if kind == ND_NUM
+  float val; // Used if kind == ND_NUM
   int offset;
 };
 
@@ -90,7 +90,7 @@ Node *new_binary(NodeKind kind, Node *lhs, Node *rhs) {
   return node;
 }
 
-Node *new_num(int val) {
+Node *new_num(float val) {
   Node *node = new_node(ND_NUM);
   node->val = val;
   return node;

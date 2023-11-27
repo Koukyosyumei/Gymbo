@@ -24,7 +24,8 @@ namespace gymbo {
  */
 struct GDOptimizer {
 
-  int num_epochs, lr, seed, param_low, param_high;
+  int num_epochs, seed;
+  float lr, eps, param_low, param_high;
   bool sign_grad;
 
   int num_used_itr;
@@ -40,9 +41,9 @@ struct GDOptimizer {
    * standard gradient descent. (default true).
    * @param seed Random seed for initializing parameter values (default: 42).
    */
-  GDOptimizer(int num_epochs = 100, int lr = 1, int param_low = -10,
-              int param_high = 10, bool sign_grad = true, int seed = 42)
-      : num_epochs(num_epochs), lr(std::max(1, lr)), param_low(param_low),
+  GDOptimizer(int num_epochs = 100, float lr = 1.0, float eps = 1.0, float param_low = -10.0,
+              float param_high = 10.0, bool sign_grad = true, int seed = 42)
+      : num_epochs(num_epochs), lr(lr), eps(eps), param_low(param_low),
         param_high(param_high), sign_grad(sign_grad), seed(seed),
         num_used_itr(0) {}
 
@@ -57,10 +58,10 @@ struct GDOptimizer {
    * @return `true` if all constraints are satisfied; otherwise, `false`.
    */
   bool eval(std::vector<Sym> &path_constraints,
-            std::unordered_map<int, int> params) {
+            std::unordered_map<int, float> params) {
     bool result = true;
     for (int i = 0; i < path_constraints.size(); i++) {
-      result = result && (path_constraints[i].eval(params) <= 0);
+      result = result && (path_constraints[i].eval(params, eps) <= 0.0f);
     }
     return result;
   }
@@ -82,7 +83,7 @@ struct GDOptimizer {
    * otherwise, `false`.
    */
   bool solve(std::vector<Sym> &path_constraints,
-             std::unordered_map<int, int> &params,
+             std::unordered_map<int, float> &params,
              bool is_init_params_const = true) {
     if (path_constraints.size() == 0) {
       return true;
@@ -91,7 +92,7 @@ struct GDOptimizer {
     std::mt19937 gen(seed);
     std::uniform_int_distribution<> dist(param_low, param_high);
 
-    std::unordered_map<int, int> is_const;
+    std::unordered_map<int, bool> is_const;
     std::unordered_set<int> unique_var_ids;
 
     for (int i = 0; i < path_constraints.size(); i++) {
@@ -113,8 +114,8 @@ struct GDOptimizer {
     while ((!is_sat) && (itr < num_epochs)) {
       Grad grads = Grad({});
       for (int i = 0; i < path_constraints.size(); i++) {
-        if (path_constraints[i].eval(params) > 0) {
-          grads = grads + path_constraints[i].grad(params);
+        if (path_constraints[i].eval(params, eps) > 0.0f) {
+          grads = grads + path_constraints[i].grad(params,eps);
         }
       }
       for (auto &g : grads.val) {
@@ -122,11 +123,11 @@ struct GDOptimizer {
           if (!sign_grad) {
             params.at(g.first) -= lr * g.second;
           } else {
-            int sign = 0;
-            if (g.second > 0) {
-              sign = 1;
-            } else if (g.second < 0) {
-              sign = -1;
+            float sign = 0.0f;
+            if (g.second > 0.0f) {
+              sign = 1.0;
+            } else if (g.second < 0.0f) {
+              sign = -1.0f;
             }
             params.at(g.first) -= lr * sign;
           }

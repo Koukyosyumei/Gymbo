@@ -24,12 +24,12 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
  * @param ignore_memory A flag indicating whether memory constraints should be
  * ignored.
  */
-void initialize_params(std::unordered_map<int, int> &params, SymState &state,
+void initialize_params(std::unordered_map<int, float> &params, SymState &state,
                        bool ignore_memory) {
   params = {};
   if (!ignore_memory) {
     for (auto &p : state.mem) {
-      params.emplace(std::make_pair(p.first, p.second));
+      params.emplace(std::make_pair(p.first, wordToFloat(p.second)));
     }
   }
 }
@@ -70,11 +70,11 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
   if (state.path_constraints.size() != 0) {
     std::string constraints_str = "";
     for (int i = 0; i < state.path_constraints.size(); i++) {
-      constraints_str += "(" + state.path_constraints[i].toString() + ") && ";
+      constraints_str += "(" + state.path_constraints[i].toString(true) + ") && ";
     }
     constraints_str += " 1";
 
-    std::unordered_map<int, int> params = {};
+    std::unordered_map<int, float> params = {};
     initialize_params(params, state, ignore_memory);
 
     bool is_sat = false;
@@ -158,7 +158,11 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc, is_sat,
                constraints_str.c_str());
         for (auto &p : params) {
-          printf("%d: %d, ", p.first, p.second);
+          if (is_integer(p.second)) {
+            printf("%d: %d, ", p.first, (int)p.second);
+          } else {  
+            printf("%d: %f, ", p.first, p.second);
+          }
         }
         printf("}\n");
       }

@@ -569,8 +569,8 @@ sym2expr(gymbo::Sym *sym,
                                 sym2expr(sym->right, unique_sym_map));
   }
   default: {
-    unique_sym_map.insert({sym->toString(), sym});
-    return std::make_shared<Var>(sym->toString());
+    unique_sym_map.insert({sym->toString(true), sym});
+    return std::make_shared<Var>(sym->toString(true));
   }
   }
 }

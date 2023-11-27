@@ -3,6 +3,26 @@
 #include <cstdint>
 #include <iostream>
 #include <string>
+#include <cstring>
+#include <cmath>
+
+inline bool is_integer(float x){
+  return std::floor(x)==x;
+}
+
+inline uint32_t FloatToWord(float val)
+{
+  uint32_t word;
+  std::memcpy(&word, &val, sizeof(val));
+  return word;
+}
+ 
+inline float wordToFloat(uint32_t word)
+{
+  float val;
+  std::memcpy(&val, &word, sizeof(word));
+  return val;
+}
 
 inline int wordToInt(uint32_t word) { return static_cast<int>(word); }
 
