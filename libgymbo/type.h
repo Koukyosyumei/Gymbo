@@ -391,29 +391,33 @@ struct Sym {
     }
   }
 
-  std::string toString() {
+  std::string toString(bool convert_to_num) {
     std::string result = "";
     float tmp_word; 
 
     switch (symtype) {
     case (SymType::SAdd): {
-      result = "(" + left->toString() + "+" + right->toString() + ")";
+      result = "(" + left->toString(convert_to_num) + "+" + right->toString(convert_to_num) + ")";
       break;
     }
     case (SymType::SSub): {
-      result = "(" + left->toString() + "-" + right->toString() + ")";
+      result = "(" + left->toString(convert_to_num) + "-" + right->toString(convert_to_num) + ")";
       break;
     }
     case (SymType::SMul): {
-      result = "(" + left->toString() + "*" + right->toString() + ")";
+      result = "(" + left->toString(convert_to_num) + "*" + right->toString(convert_to_num) + ")";
       break;
     }
     case (SymType::SCon): {
+      if (convert_to_num) {                        
       tmp_word = wordToFloat(word);
       if (is_integer(tmp_word)) {
         result += std::to_string((int)tmp_word);
       } else {
         result += std::to_string(tmp_word);
+      }
+      } else {
+        result += std::to_string(word);
       }
       break;
     }
@@ -422,27 +426,27 @@ struct Sym {
       break;
     }
     case (SymType::SEq): {
-      result += left->toString() + " == " + right->toString();
+      result += left->toString(convert_to_num) + " == " + right->toString(convert_to_num);
       break;
     }
     case (SymType::SNot): {
-      result += "!(" + left->toString() + ")";
+      result += "!(" + left->toString(convert_to_num) + ")";
       break;
     }
     case (SymType::SAnd): {
-      result += left->toString() + " && " + right->toString();
+      result += left->toString(convert_to_num) + " && " + right->toString(convert_to_num);
       break;
     }
     case (SymType::SOr): {
-      result += left->toString() + " || " + right->toString();
+      result += left->toString(convert_to_num) + " || " + right->toString(convert_to_num);
       break;
     }
     case (SymType::SLt): {
-      result += left->toString() + " < " + right->toString();
+      result += left->toString(convert_to_num) + " < " + right->toString(convert_to_num);
       break;
     }
     case (SymType::SLe): {
-      result += left->toString() + " <= " + right->toString();
+      result += left->toString(convert_to_num) + " <= " + right->toString(convert_to_num);
       break;
     }
     }
@@ -467,7 +471,7 @@ struct SymState {
     printf("Stack: [");
     LLNode<Sym> *tmp = symbolic_stack.head;
     while (tmp != NULL) {
-      printf("%s, ", tmp->data.toString().c_str());
+      printf("%s, ", tmp->data.toString(false).c_str());
       tmp = tmp->next;
     }
     printf("]\n");
@@ -486,7 +490,7 @@ struct SymState {
 
     printf("Path Constraints: ");
     for (Sym &sym : path_constraints) {
-      printf("(%s) && ", sym.toString().c_str());
+      printf("(%s) && ", sym.toString(true).c_str());
     }
     printf(" 1\n");
   }
