@@ -2,6 +2,7 @@
 #include "symbolic.h"
 #include "tokenizer.h"
 #include "type.h"
+#include "utils.h"
 
 namespace gymbo {
 
@@ -61,7 +62,7 @@ inline void gen(Node *node, Prog &prg) {
     return;
   }
   case ND_NUM: {
-    prg.emplace_back(Instr(InstrType::Push, node->val));
+    prg.emplace_back(Instr(InstrType::Push, FloatToWord(node->val)));
     return;
   }
   case ND_LVAR: {

@@ -129,7 +129,7 @@ using Prog = std::vector<Instr>;
 using Mem = std::unordered_map<Word32, Word32>;
 using PathConstraintsTable =
     std::unordered_map<std::string,
-                       std::pair<bool, std::unordered_map<int, int>>>;
+                       std::pair<bool, std::unordered_map<int, float>>>;
 
 struct State {
   int pc;
@@ -141,10 +141,10 @@ struct State {
 };
 
 struct Grad {
-  std::unordered_map<int, int> val;
-  Grad(std::unordered_map<int, int> val) : val(val) {}
+  std::unordered_map<int, float> val;
+  Grad(std::unordered_map<int, float> val) : val(val) {}
   Grad operator+(const Grad &other) {
-    std::unordered_map<int, int> result = val;
+    std::unordered_map<int, float> result = val;
     for (auto &r : result) {
       if (other.val.find(r.first) != other.val.end()) {
         result.at(r.first) += other.val.at(r.first);
@@ -157,15 +157,15 @@ struct Grad {
     }
     return Grad(result);
   }
-  Grad operator+(int w) {
-    std::unordered_map<int, int> result = val;
+  Grad operator+(float w) {
+    std::unordered_map<int, float> result = val;
     for (auto &r : result) {
       result.at(r.first) += w;
     }
     return Grad(result);
   }
   Grad operator-(const Grad &other) {
-    std::unordered_map<int, int> result = val;
+    std::unordered_map<int, float> result = val;
     for (auto &r : result) {
       if (other.val.find(r.first) != other.val.end()) {
         result.at(r.first) -= other.val.at(r.first);
@@ -173,20 +173,20 @@ struct Grad {
     }
     for (auto &r : other.val) {
       if (result.find(r.first) == result.end()) {
-        result.emplace(std::make_pair(r.first, -1 * r.second));
+        result.emplace(std::make_pair(r.first, -1.0f * r.second));
       }
     }
     return Grad(result);
   }
-  Grad operator*(int w) {
-    std::unordered_map<int, int> result = val;
+  Grad operator*(float w) {
+    std::unordered_map<int, float> result = val;
     for (auto &r : result) {
       result.at(r.first) *= w;
     }
     return Grad(result);
   }
   Grad abs() {
-    std::unordered_map<int, int> result = val;
+    std::unordered_map<int, float> result = val;
     for (auto &r : result) {
       result.emplace(std::make_pair(r.first, std::abs(r.second)));
     }
@@ -220,7 +220,7 @@ struct Sym {
   Sym(SymType symtype, Sym *left, Sym *right)
       : symtype(symtype), left(left), right(right) {}
 
-  Sym(SymType symtype, int val) : symtype(symtype) {
+  Sym(SymType symtype, Word32 val) : symtype(symtype) {
     if (symtype == SymType::SAny) {
       var_idx = val;
     } else {
@@ -283,71 +283,71 @@ struct Sym {
     }
   }
 
-  int eval(const std::unordered_map<int, int> &cvals) {
+  float eval(const std::unordered_map<int, float> &cvals, float eps) {
     switch (symtype) {
     case (SymType::SAdd): {
-      return left->eval(cvals) + right->eval(cvals);
+      return left->eval(cvals, eps) + right->eval(cvals, eps);
     }
     case (SymType::SSub): {
-      return left->eval(cvals) - right->eval(cvals);
+      return left->eval(cvals, eps) - right->eval(cvals, eps);
     }
     case (SymType::SMul): {
-      return left->eval(cvals) * right->eval(cvals);
+      return left->eval(cvals, eps) * right->eval(cvals, eps);
     }
     case (SymType::SCon): {
-      return wordToSignedInt(word);
+      return wordToFloat(word);
     }
     case (SymType::SAny): {
       return cvals.at(var_idx);
     }
     case (SymType::SEq): {
-      return std::abs(left->eval(cvals) - right->eval(cvals));
+      return std::abs(left->eval(cvals, eps) - right->eval(cvals, eps));
     }
     case (SymType::SNot): {
-      return left->eval(cvals) * (-1) + 1;
+      return left->eval(cvals, eps) * (-1.0f) + eps;
     }
     case (SymType::SAnd): {
-      return std::max(0, left->eval(cvals)) + std::max(0, right->eval(cvals));
+      return std::max(0.0f, left->eval(cvals, eps)) + std::max(0.0f, right->eval(cvals, eps));
     }
     case (SymType::SOr): {
-      return std::max(0, left->eval(cvals)) * std::max(0, right->eval(cvals));
+      return std::max(0.0f, left->eval(cvals, eps)) * std::max(0.0f, right->eval(cvals, eps));
     }
     case (SymType::SLt): {
-      return left->eval(cvals) - right->eval(cvals) + 1;
+      return left->eval(cvals, eps) - right->eval(cvals, eps) + eps;
     }
     case (SymType::SLe): {
-      return left->eval(cvals) - right->eval(cvals);
+      return left->eval(cvals, eps) - right->eval(cvals, eps);
     }
     default: {
-      return 0;
+      return 0.0f;
     }
     }
   }
 
-  Grad grad(const std::unordered_map<int, int> &cvals) {
+  Grad grad(const std::unordered_map<int, float> &cvals, float eps) {
     switch (symtype) {
     case (SymType::SAdd): {
-      return left->grad(cvals) + right->grad(cvals);
+      return left->grad(cvals, eps) + right->grad(cvals, eps);
     }
     case (SymType::SSub): {
-      return left->grad(cvals) - right->grad(cvals);
+      return left->grad(cvals, eps) - right->grad(cvals, eps);
     }
     case (SymType::SMul): {
-      return left->grad(cvals) * right->eval(cvals) +
-             right->grad(cvals) * left->eval(cvals);
+      return left->grad(cvals, eps) * right->eval(cvals, eps) +
+             right->grad(cvals, eps) * left->eval(cvals, eps);
     }
     case (SymType::SCon): {
       return Grad({});
     }
     case (SymType::SAny): {
-      std::unordered_map<int, int> tmp = {{var_idx, 1}};
+      std::unordered_map<int, float> tmp = {{var_idx, 1.0f}};
       return Grad(tmp);
     }
     case (SymType::SEq): {
-      int lv = left->eval(cvals);
-      int rv = right->eval(cvals);
-      Grad lg = left->grad(cvals);
-      Grad rg = right->grad(cvals);
+      float lv = left->eval(cvals, eps);
+      float rv = right->eval(cvals, eps);
+      Grad lg = left->grad(cvals, eps);
+      Grad rg = right->grad(cvals, eps);
       if (lv == rv) {
         return Grad({});
       } else if (lv > rv) {
@@ -357,33 +357,33 @@ struct Sym {
       }
     }
     case (SymType::SNot): {
-      return left->grad(cvals) * (-1);
+      return left->grad(cvals, eps) * (-1.0f);
     }
     case (SymType::SAnd): {
-      int lv = left->eval(cvals);
-      int rv = right->eval(cvals);
+      float lv = left->eval(cvals, eps);
+      float rv = right->eval(cvals, eps);
       Grad res({});
-      if (lv > 0) {
-        res = res + left->grad(cvals);
+      if (lv > 0.0f) {
+        res = res + left->grad(cvals, eps);
       }
-      if (rv > 0) {
-        res = res + right->grad(cvals);
+      if (rv > 0.0f) {
+        res = res + right->grad(cvals, eps);
       }
       return res;
     }
     case (SymType::SOr): {
-      int lv = left->eval(cvals);
-      int rv = right->eval(cvals);
-      if (lv > 0 && rv > 0) {
-        return left->grad(cvals) * rv + right->grad(cvals) * lv;
+      float lv = left->eval(cvals, eps);
+      float rv = right->eval(cvals, eps);
+      if (lv > 0.0f && rv > 0.0f) {
+        return left->grad(cvals, eps) * rv + right->grad(cvals, eps) * lv;
       }
       return Grad({});
     }
     case (SymType::SLt): {
-      return left->grad(cvals) - right->grad(cvals);
+      return left->grad(cvals, eps) - right->grad(cvals, eps);
     }
     case (SymType::SLe): {
-      return left->grad(cvals) - right->grad(cvals);
+      return left->grad(cvals, eps) - right->grad(cvals, eps);
     }
     default: {
       return Grad({});
@@ -407,11 +407,11 @@ struct Sym {
       break;
     }
     case (SymType::SCon): {
-      result += std::to_string(wordToSignedInt(word));
+      result += std::to_string(wordToFloat(word));
       break;
     }
     case (SymType::SAny): {
-      result += "var_" + std::to_string(var_idx);
+      result += "var_" + std::to_string((int)wordToFloat(var_idx));
       break;
     }
     case (SymType::SEq): {
@@ -466,8 +466,8 @@ struct SymState {
     printf("]\n");
 
     printf("Memory: {");
-    for (auto t : mem) {
-      printf("var_%d: %d, ", t.first, t.second);
+    for (auto t : mem) {  
+      printf("var_%d: %f, ", (int)t.first, wordToFloat(t.second));
     }
     printf("}\n");
 

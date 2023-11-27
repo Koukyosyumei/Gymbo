@@ -24,7 +24,7 @@ void symStep(SymState &state, Instr instr, std::vector<SymState> &);
  * @param ignore_memory A flag indicating whether memory constraints should be
  * ignored.
  */
-void initialize_params(std::unordered_map<int, int> &params, SymState &state,
+void initialize_params(std::unordered_map<int, float> &params, SymState &state,
                        bool ignore_memory) {
   params = {};
   if (!ignore_memory) {
@@ -74,7 +74,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
     }
     constraints_str += " 1";
 
-    std::unordered_map<int, int> params = {};
+    std::unordered_map<int, float> params = {};
     initialize_params(params, state, ignore_memory);
 
     bool is_sat = false;
@@ -158,7 +158,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc, is_sat,
                constraints_str.c_str());
         for (auto &p : params) {
-          printf("%d: %d, ", p.first, p.second);
+          printf("%d: %lf, ", p.first, p.second);
         }
         printf("}\n");
       }

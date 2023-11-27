@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <iostream>
 
 namespace gymbo {
 inline bool is_alpha(char c) {
@@ -52,7 +53,7 @@ typedef struct Token Token;
 struct Token {
   TokenKind kind; // Token kind
   Token *next;    // Next token
-  int val;        // If kind is TOKEN_NUM, its value
+  float val;     // If kind is TOKEN_NUM, its value
   char *str;      // Token string
   int len;        // Token length
 };
@@ -133,12 +134,12 @@ inline void expect(Token *&token, char *user_input, char *op) {
  * @param user_input The source code of the program.
  * @throws An error if the current token is not a number.
  */
-inline int expect_number(Token *&token, char *user_input) {
+inline float expect_number(Token *&token, char *user_input) {
   if (token->kind != TOKEN_NUM) {
     char em[] = "expected a number";
     error_at(user_input, token->str, em);
   }
-  int val = token->val;
+  float val = token->val;
   token = token->next;
   return val;
 }
@@ -240,11 +241,11 @@ inline Token *tokenize(char *user_input) {
       continue;
     }
 
-    // Integer literal
-    if (isdigit(*p)) {
+    // Numerical literal
+    if (isdigit(*p) || (*p == '.' && isdigit(p[1]))) {
       cur = new_token(TOKEN_NUM, cur, p, 0);
       char *q = p;
-      cur->val = strtol(p, &p, 10);
+      cur->val = strtof(p, &p);
       cur->len = p - q;
       continue;
     }
