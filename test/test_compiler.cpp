@@ -3,12 +3,14 @@
 
 TEST(GymboCompilerTest, Pipeline) {
     char user_input[] = "if (a > 3) return 1;";
+
+    std::unordered_map<std::string, int> vc;
     std::vector<gymbo::Node *> code;
     gymbo::Prog prg;
     gymbo::SymState init;
     gymbo::PathConstraintsTable cache_constraints;
 
-    gymbo::Token *token = gymbo::tokenize(user_input);
+    gymbo::Token *token = gymbo::tokenize(user_input, vc);
     gymbo::generate_ast(token, user_input, code);
     gymbo::compile_ast(code, prg);
 

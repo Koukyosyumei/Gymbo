@@ -1,5 +1,4 @@
 #include <unistd.h>
-#include <unordered_map>
 
 #include "libgymbo/compiler.h"
 #include "libgymbo/gd.h"
@@ -8,7 +7,7 @@
 #include "libgymbo/type.h"
 
 char *user_input;
-int max_depth = 65536;
+int max_depth = 256;
 int verbose_level = 1;
 int num_itrs = 100;
 float step_size = 1.0f;
@@ -77,7 +76,6 @@ void parse_args(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
   parse_args(argc, argv);
 
-  std::unordered_map<std::string, int> var_counter;
   std::vector<gymbo::Node *> code;
   gymbo::Prog prg;
   gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low, param_high,
@@ -86,7 +84,7 @@ int main(int argc, char *argv[]) {
   gymbo::PathConstraintsTable cache_constraints;
 
   printf("Compiling the input program...\n");
-  gymbo::Token *token = gymbo::tokenize(user_input, var_counter);
+  gymbo::Token *token = gymbo::tokenize(user_input);
   gymbo::generate_ast(token, user_input, code);
   gymbo::compile_ast(code, prg);
 
@@ -96,13 +94,6 @@ int main(int argc, char *argv[]) {
       prg[j].print();
     }
     printf("----------------------------\n");
-  }
-
-  if (verbose_level >= 1) {
-    printf("...Variables\n");
-    for (auto &kv : var_counter) {
-      printf("%s: %d\n", kv.first.c_str(), kv.second);
-    }
   }
 
   printf("Start Symbolic Execution...\n");

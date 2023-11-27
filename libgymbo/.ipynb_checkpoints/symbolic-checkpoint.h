@@ -68,115 +68,109 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         state.print();
     }
 
+    if (state.path_constraints.size() != 0) {
+        std::string constraints_str = "";
+        for (int i = 0; i < state.path_constraints.size(); i++) {
+            constraints_str +=
+                "(" + state.path_constraints[i].toString(true) + ") && ";
+        }
+        constraints_str += " 1";
 
-    if (constraints_cache.size() < 1) {
-        if (state.path_constraints.size() != 0) {
-            std::string constraints_str = "";
-            for (int i = 0; i < state.path_constraints.size(); i++) {
-                constraints_str +=
-                    "(" + state.path_constraints[i].toString(true) + ") && ";
-            }
-            constraints_str += " 1";
+        std::unordered_map<int, float> params = {};
+        initialize_params(params, state, ignore_memory);
 
-            std::unordered_map<int, float> params = {};
-            initialize_params(params, state, ignore_memory);
+        bool is_sat = false;
+        bool is_unknown_path_constraint = true;
 
-            bool is_sat = false;
-            bool is_unknown_path_constraint = true;
+        if (constraints_cache.find(constraints_str) !=
+            constraints_cache.end()) {
+            is_sat = constraints_cache[constraints_str].first;
+            params = constraints_cache[constraints_str].second;
+            is_unknown_path_constraint = false;
+        } else {
+            std::unordered_map<std::string, gymbo::Sym *> unique_terms_map;
+            std::unordered_map<std::string, bool> assignments_map;
+            std::shared_ptr<Expr> path_constraints_expr =
+                pathconstraints2expr(state.path_constraints, unique_terms_map);
 
-            if (constraints_cache.find(constraints_str) !=
-                constraints_cache.end()) {
-                is_sat = constraints_cache[constraints_str].first;
-                params = constraints_cache[constraints_str].second;
-                is_unknown_path_constraint = false;
-            } else {
-                std::unordered_map<std::string, gymbo::Sym *> unique_terms_map;
-                std::unordered_map<std::string, bool> assignments_map;
-                std::shared_ptr<Expr> path_constraints_expr =
-                    pathconstraints2expr(state.path_constraints,
-                                         unique_terms_map);
-
-                if (use_dpll) {
-                    while (satisfiableDPLL(path_constraints_expr,
-                                           assignments_map)) {
-                        std::vector<Sym> new_constraints;
-                        for (auto &ass : assignments_map) {
-                            if (ass.second) {
-                                new_constraints.emplace_back(
-                                    *unique_terms_map[ass.first]);
-                            } else {
-                                new_constraints.emplace_back(
-                                    Sym(SymType::SNot,
-                                        unique_terms_map[ass.first]));
-                            }
+            if (use_dpll) {
+                while (
+                    satisfiableDPLL(path_constraints_expr, assignments_map)) {
+                    std::vector<Sym> new_constraints;
+                    for (auto &ass : assignments_map) {
+                        if (ass.second) {
+                            new_constraints.emplace_back(
+                                *unique_terms_map[ass.first]);
+                        } else {
+                            new_constraints.emplace_back(Sym(
+                                SymType::SNot, unique_terms_map[ass.first]));
                         }
-
-                        for (int j = 0; j < max_num_trials; j++) {
-                            is_sat = optimizer.solve(new_constraints, params);
-                            if (is_sat) {
-                                break;
-                            }
-                            optimizer.seed += 1;
-                            initialize_params(params, state, ignore_memory);
-                        }
-
-                        if (is_sat) {
-                            break;
-                        }
-
-                        // add feedback
-                        std::shared_ptr<Expr> learnt_constraints =
-                            std::make_shared<Const>(false);
-                        for (auto &ass : assignments_map) {
-                            if (ass.second) {
-                                learnt_constraints = std::make_shared<Or>(
-                                    learnt_constraints,
-                                    std::make_shared<Not>(
-                                        std::make_shared<Var>(ass.first)));
-                            } else {
-                                learnt_constraints = std::make_shared<Or>(
-                                    learnt_constraints,
-                                    std::make_shared<Var>(ass.first));
-                            }
-                        }
-
-                        path_constraints_expr = std::make_shared<And>(
-                            path_constraints_expr, learnt_constraints);
                     }
-                } else {
+
                     for (int j = 0; j < max_num_trials; j++) {
-                        is_sat =
-                            optimizer.solve(state.path_constraints, params);
+                        is_sat = optimizer.solve(new_constraints, params);
                         if (is_sat) {
                             break;
                         }
                         optimizer.seed += 1;
                         initialize_params(params, state, ignore_memory);
                     }
-                }
-                constraints_cache.emplace(constraints_str,
-                                          std::make_pair(is_sat, params));
-            }
 
-            if (verbose_level >= 1) {
-                if ((verbose_level >= 1 && is_unknown_path_constraint) ||
-                    (verbose_level >= 2)) {
-                    if (!is_sat) {
-                        printf("\x1b[31m");
-                    } else {
-                        printf("\x1b[32m");
+                    if (is_sat) {
+                        break;
                     }
-                    printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc,
-                           is_sat, constraints_str.c_str());
-                    for (auto &p : params) {
-                        if (is_integer(p.second)) {
-                            printf("%d: %d, ", p.first, (int)p.second);
+
+                    // add feedback
+                    std::shared_ptr<Expr> learnt_constraints =
+                        std::make_shared<Const>(false);
+                    for (auto &ass : assignments_map) {
+                        if (ass.second) {
+                            learnt_constraints = std::make_shared<Or>(
+                                learnt_constraints,
+                                std::make_shared<Not>(
+                                    std::make_shared<Var>(ass.first)));
                         } else {
-                            printf("%d: %f, ", p.first, p.second);
+                            learnt_constraints = std::make_shared<Or>(
+                                learnt_constraints,
+                                std::make_shared<Var>(ass.first));
                         }
                     }
-                    printf("}\n");
+
+                    path_constraints_expr = std::make_shared<And>(
+                        path_constraints_expr, learnt_constraints);
                 }
+            } else {
+                for (int j = 0; j < max_num_trials; j++) {
+                    is_sat = optimizer.solve(state.path_constraints, params);
+                    if (is_sat) {
+                        break;
+                    }
+                    optimizer.seed += 1;
+                    initialize_params(params, state, ignore_memory);
+                }
+            }
+            constraints_cache.emplace(constraints_str,
+                                      std::make_pair(is_sat, params));
+        }
+
+        if (verbose_level >= 1) {
+            if ((verbose_level >= 1 && is_unknown_path_constraint) ||
+                (verbose_level >= 2)) {
+                if (!is_sat) {
+                    printf("\x1b[31m");
+                } else {
+                    printf("\x1b[32m");
+                }
+                printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc, is_sat,
+                       constraints_str.c_str());
+                for (auto &p : params) {
+                    if (is_integer(p.second)) {
+                        printf("%d: %d, ", p.first, (int)p.second);
+                    } else {
+                        printf("%d: %f, ", p.first, p.second);
+                    }
+                }
+                printf("}\n");
             }
         }
     }
@@ -187,24 +181,17 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
 
     if (prog[pc].instr == InstrType::Done) {
         return Trace(state, {});
-    } else if (maxDepth > 0 && constraints_cache.size() < 1) {
+    } else if (maxDepth > 0) {
         Instr instr = prog[pc];
         std::vector<SymState> newStates;
         symStep(state, instr, newStates);
         std::vector<Trace> children;
         for (SymState newState : newStates) {
-            if (constraints_cache.size() >= 1) {
-                return Trace(state, {});
-            }
-
             Trace child = run_gymbo(
                 prog, optimizer, newState, constraints_cache, maxDepth - 1,
                 max_num_trials, ignore_memory, use_dpll, verbose_level);
             children.push_back(child);
         }
-        if (constraints_cache.size() >= 1) {
-                return Trace(state, {});
-            }
         return Trace(state, children);
     } else {
         return Trace(state, {});
