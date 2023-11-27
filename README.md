@@ -40,21 +40,23 @@ primary    = num | ident | "(" expr ")"
 
 ## Internal Algorithm
 
-Gymbo converts the path constraint into a numerical loss function, which becomes negative only when the path constraint is satisfied. Gymbo uses the following transformation rule (currently supporting only integer variables):
+Gymbo converts the path constraint into a numerical loss function, which becomes negative only when the path constraint is satisfied. Gymbo uses the following transformation rule:
 
 ```
-!(a)     => -a + 1
-(a < b)  => a - b + 1
+!(a)     => -a + eps
+(a < b)  => a - b + eps
 (a <= b) => a - b
-(a > b)  => b - a + 1
+(a > b)  => b - a + eps
 (a >= b) => b - a
 (a == b) => abs(a - b)
-(a != b) => -abs(a - b) + 1
+(a != b) => -abs(a - b) + eps
 (a && b) => max(0, a) + max(0, b)
 (a || b) => max(0, a) * max(0, b)
 ```
 
-For example, `(a < 3) && (!(a < 3) || (b == 5))` becomes `(a - 2) + (max(0, (3 - a)) * max(0, abs(b - 5)))`.
+Here, `eps` is the smallest positive value of the type for a and b.
+
+For example, when `a` and `b` are integers (`eps = 1`),  `(a < 3) && (!(a < 3) || (b == 5))` becomes `(a - 2) + (max(0, (3 - a)) * max(0, abs(b - 5)))`.
 
 Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each unique term, sometimes resulting in better scalability. For example, applying DPLL to the above example leads to `(a < 3)` being true and `(b == 5)` being true. Gymbo then converts this assignment into a loss function to be solved: `(a - 2) + max(0, abs(b - 5))`.
 
@@ -72,7 +74,8 @@ Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each un
     3: + complete stack machine.
 ```
 - `-i`: Set the number of iterations for gradient descent (default: 100).
-- `-a`: Set the step size for gradient descent (default: 1).
+- `-a`: Set the step size for gradient descent (default: 1.0).
+- `-e`: Set the eps for the differentiable expression (default: 1.0).
 - `-t`: Set the maximum number of trials of gradient descent (default: 3) 
 - `-l`: Set the minimum value of initial parameters (default: -10)
 - `-h`: Set the maximum value of initial parameters (default: 10)
