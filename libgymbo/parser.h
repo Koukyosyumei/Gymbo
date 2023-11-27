@@ -7,8 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <functional>
-#include <string>
 #include <vector>
 
 char LETTER_EQ[] = "==";
