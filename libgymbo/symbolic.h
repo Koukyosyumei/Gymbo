@@ -29,7 +29,7 @@ void initialize_params(std::unordered_map<int, float> &params, SymState &state,
   params = {};
   if (!ignore_memory) {
     for (auto &p : state.mem) {
-      params.emplace(std::make_pair(p.first, p.second));
+      params.emplace(std::make_pair(p.first, wordToFloat(p.second)));
     }
   }
 }
