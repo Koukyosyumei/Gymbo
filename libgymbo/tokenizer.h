@@ -6,7 +6,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unordered_map>
 #include <iostream>
+#include <cstring>
 
 namespace gymbo {
 inline bool is_alpha(char c) {
@@ -56,6 +58,7 @@ struct Token {
   float val;     // If kind is TOKEN_NUM, its value
   char *str;      // Token string
   int len;        // Token length
+  int var_id;      // Var ID 
 };
 
 struct LVar {
@@ -201,6 +204,8 @@ inline Token *tokenize(char *user_input) {
   char LETTER_AND[] = "&&";
   char LETTER_OR[] = "||";
 
+  std::unordered_map<std::string, int> var_counter;  
+
   while (*p) {
     // Skip whitespace characters.
     if (isspace(*p)) {
@@ -250,11 +255,34 @@ inline Token *tokenize(char *user_input) {
       continue;
     }
 
+    // Variables
+    if (is_alpha(*p)) {
+      char *q = p;
+      while (is_alnum(*p))
+        p++;
+
+      char var_name[(p - q) + 1];
+      strncpy(var_name, q, (p - q));
+      var_name[p - q] = '\0';
+      std::string var_name_s(var_name);
+
+      if (var_counter.find(var_name_s) == var_counter.end()) {
+        var_counter.emplace(var_name_s, (int)var_counter.size());
+      }
+
+      cur = new_token(TOKEN_IDENT, cur, q, p - q);
+      cur->var_id = var_counter[var_name_s];  
+
+      continue;
+    }
+
+    /*
     if ('a' <= *p && *p <= 'z') {
       cur = new_token(TOKEN_IDENT, cur, p++, 0);
       cur->len = 1;
       continue;
     }
+    */
 
     char em[] = "invalid token\n";
     error_at(user_input, p, em);

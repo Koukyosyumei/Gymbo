@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <functional>
+#include <string>
 #include <vector>
 
 char LETTER_EQ[] = "==";
@@ -243,7 +245,7 @@ inline Node *primary(Token *&token, char *user_input) {
   if (tok) {
     Node *node = (Node *)std::calloc(1, sizeof(Node));
     node->kind = ND_LVAR;
-    node->offset = (tok->str[0] - 'a' + 1); //* 8;
+    node->offset = tok->var_id;
     return node;
   }
 
