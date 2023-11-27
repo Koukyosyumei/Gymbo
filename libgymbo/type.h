@@ -418,7 +418,7 @@ struct Sym {
       break;
     }
     case (SymType::SAny): {
-      result += "var_" + std::to_string((int)wordToFloat(var_idx));
+      result += "var_" + std::to_string(var_idx);
       break;
     }
     case (SymType::SEq): {
@@ -473,8 +473,14 @@ struct SymState {
     printf("]\n");
 
     printf("Memory: {");
-    for (auto t : mem) {  
-      printf("var_%d: %f, ", (int)t.first, wordToFloat(t.second));
+    float tmp_word;
+    for (auto t : mem) {
+      tmp_word = wordToFloat(t.second);
+      if (is_integer(tmp_word)) {
+        printf("var_%d: %d, ", (int)t.first, (int)tmp_word);
+      } else {
+        printf("var_%d: %f, ", (int)t.first, tmp_word);
+      }
     }
     printf("}\n");
 
