@@ -50,7 +50,7 @@ void initialize_params(std::unordered_map<int, float> &params, SymState &state,
  * @param optimizer The gradient descent optimizer for parameter optimization.
  * @param state The initial symbolic state of the program.
  * @param target_pcs The set of pc where gymbo executes path-constraints
- * solving. If this set is empty, gymbo solves all path-constraints.
+ * solving. If this set is empty or contains -1, gymbo solves all path-constraints.
  * @param constraints_cache A cache for previously found path constraints.
  * @param maxDepth The maximum depth of symbolic exploration (default: 64).
  * @param max_num_trials The maximum number of trials for each gradient descent
@@ -75,8 +75,9 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         state.print();
     }
 
-    bool is_target =
-        ((target_pcs.size() == 0) || (target_pcs.find(pc) != target_pcs.end()));
+    bool is_target = ((target_pcs.size() == 0) ||
+                      (target_pcs.find(-1) != target_pcs.end()) ||
+                      (target_pcs.find(pc) != target_pcs.end()));
 
     if (state.path_constraints.size() != 0 && is_target) {
         std::string constraints_str = "";
@@ -203,9 +204,10 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         symStep(state, instr, newStates);
         std::vector<Trace> children;
         for (SymState newState : newStates) {
-            Trace child = run_gymbo(
-                prog, optimizer, newState, target_pcs, constraints_cache, maxDepth - 1,
-                max_num_trials, ignore_memory, use_dpll, verbose_level);
+            Trace child =
+                run_gymbo(prog, optimizer, newState, target_pcs,
+                          constraints_cache, maxDepth - 1, max_num_trials,
+                          ignore_memory, use_dpll, verbose_level);
             children.push_back(child);
         }
         return Trace(state, children);
