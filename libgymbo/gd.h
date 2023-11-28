@@ -25,7 +25,7 @@ namespace gymbo {
 struct GDOptimizer {
     int num_epochs, seed;
     float lr, eps, param_low, param_high;
-    bool sign_grad;
+    bool sign_grad, init_param_uniform_int;
 
     int num_used_itr;
 
@@ -38,17 +38,22 @@ struct GDOptimizer {
      * @param param_high Upper bound for parameter initialization (default: 10).
      * @param sign_grad If true, use sign gradient descent. Otherwise, use
      * standard gradient descent. (default true).
+     * @param init_param_uniform_int Flag indicating whether initial parameter
+     * values are drawn from the uniform int distribution or uniform real
+     * distribution (default true).
      * @param seed Random seed for initializing parameter values (default: 42).
      */
     GDOptimizer(int num_epochs = 100, float lr = 1.0, float eps = 1.0,
                 float param_low = -10.0, float param_high = 10.0,
-                bool sign_grad = true, int seed = 42)
+                bool sign_grad = true, bool init_param_uniform_int = true,
+                int seed = 42)
         : num_epochs(num_epochs),
           lr(lr),
           eps(eps),
           param_low(param_low),
           param_high(param_high),
           sign_grad(sign_grad),
+          init_param_uniform_int(init_param_uniform_int),
           seed(seed),
           num_used_itr(0) {}
 
@@ -95,8 +100,8 @@ struct GDOptimizer {
         }
 
         std::mt19937 gen(seed);
-        // std::uniform_int_distribution<> dist(param_low, param_high);
-        std::uniform_real_distribution<float> dist(param_low, param_high);
+        std::uniform_int_distribution<> idist(param_low, param_high);
+        std::uniform_real_distribution<float> rdist(param_low, param_high);
 
         std::unordered_map<int, bool> is_const;
         std::unordered_set<int> unique_var_ids;
@@ -107,7 +112,11 @@ struct GDOptimizer {
 
         for (int i : unique_var_ids) {
             if (params.find(i) == params.end()) {
-                params.emplace(std::make_pair(i, dist(gen)));
+                if (init_param_uniform_int) {
+                    params.emplace(std::make_pair(i, idist(gen)));
+                } else {
+                    params.emplace(std::make_pair(i, rdist(gen)));
+                }
                 is_const.emplace(std::make_pair(i, false));
             } else {
                 is_const.emplace(std::make_pair(i, is_init_params_const));

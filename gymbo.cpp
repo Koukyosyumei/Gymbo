@@ -21,11 +21,12 @@ int seed = 42;
 bool sign_grad = true;
 bool ignore_memory = false;
 bool use_dpll = false;
+bool init_param_uniform_int = true;
 
 void parse_args(int argc, char *argv[]) {
     int opt;
     user_input = argv[1];
-    while ((opt = getopt(argc, argv, "d:v:i:a:e:t:l:h:s:gmp")) != -1) {
+    while ((opt = getopt(argc, argv, "d:v:i:a:e:t:l:h:s:gmrp")) != -1) {
         switch (opt) {
             case 'd':
                 max_depth = atoi(optarg);
@@ -57,6 +58,9 @@ void parse_args(int argc, char *argv[]) {
             case 'g':
                 sign_grad = false;
                 break;
+            case 'r':
+                init_param_uniform_int = false;
+                break;
             case 'm':
                 ignore_memory = true;
                 break;
@@ -70,7 +74,8 @@ void parse_args(int argc, char *argv[]) {
                     "num_itrs], "
                     "[-a: step_size], [-t: max_num_trials], [-l: param_low], "
                     "[-h: "
-                    "param_high], [-s: seed], [-g off_sign_grad], [-m: "
+                    "param_high], [-s: seed], [-g off_sign_grad], [-r "
+                    "off_init_param_uniform_int], [-m: "
                     "ignore_memory] "
                     "...\n",
                     argv[0]);
@@ -85,10 +90,11 @@ int main(int argc, char *argv[]) {
     std::unordered_map<std::string, int> var_counter;
     std::vector<gymbo::Node *> code;
     std::unordered_map<int, std::string> id2varname;
-    
+
     gymbo::Prog prg;
     gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low,
-                                 param_high, sign_grad, seed);
+                                 param_high, sign_grad, init_param_uniform_int,
+                                 seed);
     gymbo::SymState init;
     gymbo::PathConstraintsTable cache_constraints;
 
