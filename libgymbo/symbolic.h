@@ -14,8 +14,8 @@ namespace gymbo {
 Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                 std::unordered_set<int> &taregt_pcs,
                 PathConstraintsTable &constraints_cache, int maxDepth,
-                int max_num_trials, bool ignore_memory, bool use_dpll,
-                int verbose_level);
+                int maxSAT, int maxUNSAT, int max_num_trials,
+                bool ignore_memory, bool use_dpll, int verbose_level);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 /**
@@ -54,6 +54,8 @@ void initialize_params(std::unordered_map<int, float> &params, SymState &state,
  * path-constraints.
  * @param constraints_cache A cache for previously found path constraints.
  * @param maxDepth The maximum depth of symbolic exploration.
+ * @param maxSAT The maximum number of SAT constraints to collect.
+ * @param maxUNSAT The maximum number of UNSAT constraints to collect.
  * @param max_num_trials The maximum number of trials for each gradient descent.
  * @param ignore_memory If set to true, constraints derived from memory will be
  * ignored.
@@ -65,8 +67,8 @@ void initialize_params(std::unordered_map<int, float> &params, SymState &state,
 inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        std::unordered_set<int> &target_pcs,
                        PathConstraintsTable &constraints_cache, int maxDepth,
-                       int max_num_trials, bool ignore_memory, bool use_dpll,
-                       int verbose_level) {
+                       int maxSAT, int maxUNSAT, int max_num_trials,
+                       bool ignore_memory, bool use_dpll, int verbose_level) {
     int pc = state.pc;
     if (verbose_level >= 2) {
         printf("pc: %d, ", pc);
@@ -159,6 +161,11 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                     initialize_params(params, state, ignore_memory);
                 }
             }
+            if (is_sat) {
+                maxSAT--;
+            } else {
+                maxUNSAT--;
+            }
             constraints_cache.emplace(constraints_str,
                                       std::make_pair(is_sat, params));
         }
@@ -197,16 +204,16 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
 
     if (prog[pc].instr == InstrType::Done) {
         return Trace(state, {});
-    } else if (maxDepth > 0) {
+    } else if (maxDepth > 0 && maxSAT > 0 && maxUNSAT > 0) {
         Instr instr = prog[pc];
         std::vector<SymState> newStates;
         symStep(state, instr, newStates);
         std::vector<Trace> children;
         for (SymState newState : newStates) {
-            Trace child =
-                run_gymbo(prog, optimizer, newState, target_pcs,
-                          constraints_cache, maxDepth - 1, max_num_trials,
-                          ignore_memory, use_dpll, verbose_level);
+            Trace child = run_gymbo(prog, optimizer, newState, target_pcs,
+                                    constraints_cache, maxDepth - 1, maxSAT,
+                                    maxUNSAT, max_num_trials, ignore_memory,
+                                    use_dpll, verbose_level);
             children.push_back(child);
         }
         return Trace(state, children);

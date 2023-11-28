@@ -11,6 +11,8 @@
 
 char *user_input;
 int max_depth = 65536;
+int maxSAT = 65536;
+int maxUNSAT = 65536;
 int verbose_level = 1;
 int num_itrs = 100;
 float step_size = 1.0f;
@@ -122,8 +124,8 @@ int main(int argc, char *argv[]) {
 
     printf("Start Symbolic Execution...\n");
     gymbo::run_gymbo(prg, optimizer, init, target_pcs, cache_constraints,
-                     max_depth, max_num_trials, ignore_memory, use_dpll,
-                     verbose_level);
+                     max_depth, maxSAT, maxUNSAT, max_num_trials, ignore_memory,
+                     use_dpll, verbose_level);
     printf("---------------------------\n");
 
     printf("Result Summary\n");
@@ -157,11 +159,9 @@ int main(int argc, char *argv[]) {
                     printf("   {");
                     for (auto p : cc.second.second) {
                         if (is_integer(p.second)) {
-                            printf("var_%d:%d, ", p.first,
-                                   (int)p.second);
+                            printf("var_%d:%d, ", p.first, (int)p.second);
                         } else {
-                            printf("var_%d:%f, ", p.first,
-                                   p.second);
+                            printf("var_%d:%f, ", p.first, p.second);
                         }
                     }
                     printf("}\n");

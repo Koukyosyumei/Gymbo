@@ -7,7 +7,7 @@ from sklearn.datasets import make_classification
 import pylibgymbo as plg
 
 max_depth = 65536
-verbose_level = -2
+verbose_level = 2
 num_itrs = 100
 step_size = 0.01
 eps = 0.000001
@@ -24,21 +24,23 @@ def dump_mlp(clf, feature_vars, indent_char="", endl="\n", precision=8):
     code = ""
     len_layers = len(clf.coefs_)
     for c, n in enumerate(feature_vars):
-        code += f"{indent_char}h_0_{c} = {n};{endl}"
+        code += f"{indent_char}h_0_{c}_a = {n};{endl}"
 
     for layer_id in range(len_layers):
         code += endl
         for j in range(clf.coefs_[layer_id].shape[1]):
-            code += f"{indent_char}h_{layer_id + 1}_{j} = {format_str.format(clf.intercepts_[layer_id][j])}"
+            code += f"{indent_char}h_{layer_id + 1}_{j}_b = {format_str.format(clf.intercepts_[layer_id][j])}"
             for c in range(len(clf.coefs_[layer_id][:, j])):
-                code += f" + ({format_str.format(clf.coefs_[layer_id][c, j])} * h_{layer_id}_{c})"
+                code += f" + ({format_str.format(clf.coefs_[layer_id][c, j])} * h_{layer_id}_{c}_a)"
             code += f";{endl}"
             if layer_id < len_layers - 1:
                 if clf.activation == "relu":
-                    code += f"{indent_char}if(h_{layer_id + 1}_{j} < 0){endl}"
-                    code += f"{indent_char} h_{layer_id + 1}_{j} = 0;{endl}"
+                    code += f"{indent_char}if(h_{layer_id + 1}_{j}_b < 0){endl}"
+                    code += f"{indent_char} h_{layer_id + 1}_{j}_a = 0;{endl}"
+                    code += f"{indent_char}else{endl}"
+                    code += f"{indent_char} h_{layer_id + 1}_{j}_a = h_{layer_id + 1}_{j}_b;{endl}"
             else:
-                code += f"{indent_char}y_{j} = h_{layer_id + 1}_{j};{endl}"
+                code += f"{indent_char}y_{j} = h_{layer_id + 1}_{j}_a;{endl}"
     return code
 
 
@@ -53,7 +55,7 @@ if __name__ == "__main__":
     )
 
     clf = MLPClassifier(
-        hidden_layer_sizes=(2), activation="relu", random_state=1, max_iter=100
+        hidden_layer_sizes=(10), activation="relu", random_state=1, max_iter=100
     )
     clf.fit(X_train, y_train)
 
