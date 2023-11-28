@@ -1,3 +1,4 @@
+#pragma once
 #include <cstdint>
 #include <memory>
 #include <unordered_map>
@@ -67,7 +68,6 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         prog[pc].print();
         state.print();
     }
-
 
     if (constraints_cache.size() < 1) {
         if (state.path_constraints.size() != 0) {
@@ -170,7 +170,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                            is_sat, constraints_str.c_str());
                     for (auto &p : params) {
                         if (state.mem.find(p.first) != state.mem.end()) {
-                           continue;         
+                            continue;
                         }
                         if (is_integer(p.second)) {
                             printf("%d: %d, ", p.first, (int)p.second);
@@ -206,8 +206,8 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
             children.push_back(child);
         }
         if (constraints_cache.size() >= 1) {
-                return Trace(state, {});
-            }
+            return Trace(state, {});
+        }
         return Trace(state, children);
     } else {
         return Trace(state, {});

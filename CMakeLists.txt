@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-project("libmyplan" LANGUAGES C CXX)
+project("libgymbo" LANGUAGES C CXX)
 
 # find_package(Threads REQUIRED)
 
@@ -9,6 +9,10 @@ set(SOURCE_DIR  "libgymbo")
 set(TEST_DIR  "test")
 
 include(GNUInstallDirs)
+
+find_package(Python COMPONENTS Interpreter Development)
+find_package(pybind11 CONFIG)
+pybind11_add_module(pylibgymbo src/main.cpp)
 
 # include_directories("${PROJECT_SOURCE_DIR}/")
 

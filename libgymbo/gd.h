@@ -95,7 +95,8 @@ struct GDOptimizer {
         }
 
         std::mt19937 gen(seed);
-        std::uniform_int_distribution<> dist(param_low, param_high);
+        // std::uniform_int_distribution<> dist(param_low, param_high);
+        std::uniform_real_distribution<float> dist(param_low, param_high);
 
         std::unordered_map<int, bool> is_const;
         std::unordered_set<int> unique_var_ids;
