@@ -1,20 +1,18 @@
 [build-system]
 requires = [
     "setuptools>=42",
-    "wheel",
-    "ninja",
-    "cmake>=3.12",
+    "pybind11>=2.10.0",
 ]
 build-backend = "setuptools.build_meta"
 
 [project]
 
-name = "gymbo"
+name = "pymlgymbo"
 version = "0.0.0"
 authors = [
   { name="Hideaki Takahashi" },
 ]
-description = "Security and Privacy Risk Simulator for Machine Learning"
+description = "Gradient-based Symbolic Execution Tool"
 readme = "README.md"
 license = {file = "LICENSE"}
 
@@ -29,18 +27,6 @@ package-dir = {"" = "src"}
 
 [tool.isort]
 profile = "black"
-
-[tool.mypy]
-files = "setup.py"
-strict = true
-show_error_codes = true
-enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
-warn_unreachable = true
-
-[[tool.mypy.overrides]]
-module = ["ninja"]
-ignore_missing_imports = true
-
 
 [tool.pytest.ini_options]
 minversion = "6.0"

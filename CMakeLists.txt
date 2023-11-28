@@ -10,12 +10,6 @@ set(TEST_DIR  "test")
 
 include(GNUInstallDirs)
 
-find_package(Python COMPONENTS Interpreter Development)
-find_package(pybind11 CONFIG)
-pybind11_add_module(pylibgymbo src/main.cpp)
-
-# include_directories("${PROJECT_SOURCE_DIR}/")
-
 add_subdirectory(${SOURCE_DIR})
 
 add_executable(gymbo gymbo.cpp)
