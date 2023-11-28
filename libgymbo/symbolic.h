@@ -165,9 +165,11 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                 printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc, is_sat,
                        constraints_str.c_str());
                 for (auto &p : params) {
+                    // ignore concrete variables
                     if (state.mem.find(p.first) != state.mem.end()) {
                         continue;
                     }
+                    // only show symbolic variables
                     if (is_integer(p.second)) {
                         printf("%d: %d, ", p.first, (int)p.second);
                     } else {
