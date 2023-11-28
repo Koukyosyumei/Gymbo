@@ -8,12 +8,12 @@ import pylibgymbo as plg
 import pymlgymbo as pmg
 
 max_depth = 65536
-maxSAT = 5
-maxUNSAT = 65536
-verbose_level = -2
+maxSAT = 2
+maxUNSAT = 5
+verbose_level = 1
 num_itrs = 100
 step_size = 0.01
-eps = 0.000001
+eps = 0.000000001
 max_num_trials = 10
 seed = 42
 sign_grad = False
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     )
 
     clf = MLPClassifier(
-        hidden_layer_sizes=(2), activation="relu", random_state=1, max_iter=100
+        hidden_layer_sizes=(4), activation="relu", random_state=1, max_iter=100
     )
     clf.fit(X_train, y_train)
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     y_pred = clf.predict(x_origin.reshape(1, -1)).item()
 
     feature_names = [
-        f"var_{j}" if j in symbolic_vars_id else str(x_origin[j])
+        f"sv_{j}" if j in symbolic_vars_id else str(x_origin[j])
         for j in range(x_origin.shape[0])
     ]
 
@@ -65,7 +65,7 @@ if __name__ == "__main__":
         "("
         + " && ".join(
             [
-                f"(var_{i} >= {param_low}) && (var_{i} <= {param_high})"
+                f"(sv_{i} >= {param_low}) && (sv_{i} <= {param_high})"
                 for i in symbolic_vars_id
             ]
         )
@@ -75,6 +75,8 @@ if __name__ == "__main__":
     mlp_code += (
         f"\nif ({adv_condition} && {perturbation_condition})\n return 1;\nreturn 0;"
     )
+
+    print(mlp_code)
 
     optimizer = plg.GDOptimizer(
         num_itrs,
@@ -131,12 +133,14 @@ if __name__ == "__main__":
         vs = list(constraints.values())[j][1]
 
         for i in symbolic_vars_id:
-            if var_counter[f"var_{i}"] not in vs:
+            if var_counter[f"sv_{i}"] not in vs:
                 break
-            x_adv[i] = vs[var_counter[f"var_{i}"]]
+            x_adv[i] = vs[var_counter[f"sv_{i}"]]
 
         print(
             list(constraints.values())[j],
             clf.predict(x_origin.reshape(1, -1)),
+            clf.predict_proba(x_origin.reshape(1, -1)),
             clf.predict(x_adv.reshape(1, -1)),
+            clf.predict_proba(x_adv.reshape(1, -1)),
         )

@@ -49,5 +49,5 @@ def dump_sklearn_MLPClassifier(
                     code += f"{indent_char}else{endl}"
                     code += f"{indent_char} h_{layer_id + 1}_{j}_a = h_{layer_id + 1}_{j}_b;{endl}"
             else:
-                code += f"{indent_char}y_{j} = h_{layer_id + 1}_{j}_a;{endl}"
+                code += f"{indent_char}y_{j} = h_{layer_id + 1}_{j}_b;{endl}"
     return code

@@ -3,5 +3,5 @@ b = a + 3;
 c = b;
 e = c + d;
 
-if (e > 6)
+if (f > e)
     return 1;

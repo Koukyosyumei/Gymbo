@@ -14,7 +14,7 @@ namespace gymbo {
 Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                 std::unordered_set<int> &taregt_pcs,
                 PathConstraintsTable &constraints_cache, int maxDepth,
-                int maxSAT, int maxUNSAT, int max_num_trials,
+                int &maxSAT, int &maxUNSAT, int max_num_trials,
                 bool ignore_memory, bool use_dpll, int verbose_level);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
@@ -67,7 +67,7 @@ void initialize_params(std::unordered_map<int, float> &params, SymState &state,
 inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        std::unordered_set<int> &target_pcs,
                        PathConstraintsTable &constraints_cache, int maxDepth,
-                       int maxSAT, int maxUNSAT, int max_num_trials,
+                       int &maxSAT, int &maxUNSAT, int max_num_trials,
                        bool ignore_memory, bool use_dpll, int verbose_level) {
     int pc = state.pc;
     if (verbose_level >= 2) {
