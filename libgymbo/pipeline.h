@@ -1,6 +1,7 @@
 #include <unistd.h>
 
 #include <unordered_map>
+#include <unordered_set>
 #include <utility>
 
 #include "compiler.h"
@@ -25,13 +26,14 @@ inline std::pair<std::unordered_map<std::string, int>, Prog> gcompile(
 }
 
 inline PathConstraintsTable gexecute(Prog &prg, GDOptimizer &optimizer,
+                                    std::unordered_set<int>& target_pcs,    
                                     int max_depth, int max_num_trials,
                                     bool ignore_memory, bool use_dpll,
                                     bool verbose_level) {
     SymState init;
     PathConstraintsTable cache_constraints;
 
-    run_gymbo(prg, optimizer, init, cache_constraints, max_depth,
+    run_gymbo(prg, optimizer, init, target_pcs, cache_constraints, max_depth,
               max_num_trials, ignore_memory, use_dpll, verbose_level);
 
     return cache_constraints;

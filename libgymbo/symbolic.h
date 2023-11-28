@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <memory>
 #include <unordered_map>
+#include <unordered_set>
 #include <utility>
 
 #include "gd.h"
@@ -11,8 +12,10 @@
 
 namespace gymbo {
 Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
-                PathConstraintsTable &, int maxDepth, int max_num_trials,
-                bool ignore_memory, bool use_dpll, int verbose_level);
+                std::unordered_set<int> &taregt_pcs,
+                PathConstraintsTable &constraints_cache, int maxDepth,
+                int max_num_trials, bool ignore_memory, bool use_dpll,
+                int verbose_level);
 void symStep(SymState &state, Instr instr, std::vector<SymState> &);
 
 /**
@@ -46,6 +49,8 @@ void initialize_params(std::unordered_map<int, float> &params, SymState &state,
  * @param prog The program to symbolically execute.
  * @param optimizer The gradient descent optimizer for parameter optimization.
  * @param state The initial symbolic state of the program.
+ * @param target_pcs The set of pc where gymbo executes path-constraints
+ * solving. If this set is empty, gymbo solves all path-constraints.
  * @param constraints_cache A cache for previously found path constraints.
  * @param maxDepth The maximum depth of symbolic exploration (default: 64).
  * @param max_num_trials The maximum number of trials for each gradient descent
@@ -58,6 +63,7 @@ void initialize_params(std::unordered_map<int, float> &params, SymState &state,
  * @return A trace of the symbolic execution.
  */
 inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
+                       std::unordered_set<int> &target_pcs,
                        PathConstraintsTable &constraints_cache,
                        int maxDepth = 64, int max_num_trials = 3,
                        bool ignore_memory = false, bool use_dpll = false,
@@ -69,7 +75,10 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         state.print();
     }
 
-    if (state.path_constraints.size() != 0) {
+    bool is_target =
+        ((target_pcs.size() == 0) || (target_pcs.find(pc) != target_pcs.end()));
+
+    if (state.path_constraints.size() != 0 && is_target) {
         std::string constraints_str = "";
         for (int i = 0; i < state.path_constraints.size(); i++) {
             constraints_str +=
@@ -155,7 +164,8 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         }
 
         if (verbose_level >= 1) {
-            if ((verbose_level >= 1 && is_unknown_path_constraint) ||
+            if ((verbose_level >= 1 && is_unknown_path_constraint &&
+                 is_target) ||
                 (verbose_level >= 2)) {
                 if (!is_sat) {
                     printf("\x1b[31m");
@@ -194,7 +204,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         std::vector<Trace> children;
         for (SymState newState : newStates) {
             Trace child = run_gymbo(
-                prog, optimizer, newState, constraints_cache, maxDepth - 1,
+                prog, optimizer, newState, target_pcs, constraints_cache, maxDepth - 1,
                 max_num_trials, ignore_memory, use_dpll, verbose_level);
             children.push_back(child);
         }

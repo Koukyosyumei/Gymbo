@@ -1,6 +1,7 @@
 #include <unistd.h>
 
 #include <unordered_map>
+#include <unordered_set>
 
 #include "libgymbo/compiler.h"
 #include "libgymbo/gd.h"
@@ -97,6 +98,7 @@ int main(int argc, char *argv[]) {
                                  seed);
     gymbo::SymState init;
     gymbo::PathConstraintsTable cache_constraints;
+    std::unordered_set<int> target_pcs;
 
     printf("Compiling the input program...\n");
     gymbo::Token *token = gymbo::tokenize(user_input, var_counter);
@@ -119,8 +121,9 @@ int main(int argc, char *argv[]) {
     // }
 
     printf("Start Symbolic Execution...\n");
-    gymbo::run_gymbo(prg, optimizer, init, cache_constraints, max_depth,
-                     max_num_trials, ignore_memory, use_dpll, verbose_level);
+    gymbo::run_gymbo(prg, optimizer, init, target_pcs, cache_constraints,
+                     max_depth, max_num_trials, ignore_memory, use_dpll,
+                     verbose_level);
     printf("---------------------------\n");
 
     printf("Result Summary\n");
