@@ -29,7 +29,7 @@ inline PathConstraintsTable gexecute(Prog &prg, GDOptimizer &optimizer,
                                     std::unordered_set<int>& target_pcs,    
                                     int max_depth, int max_num_trials,
                                     bool ignore_memory, bool use_dpll,
-                                    bool verbose_level) {
+                                    int verbose_level) {
     SymState init;
     PathConstraintsTable cache_constraints;
 
