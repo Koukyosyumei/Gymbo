@@ -28,7 +28,7 @@ PYBIND11_MODULE(pylibgymbo, m) {
     py::class_<gymbo::PathConstraintsTable>(m, "PathConstraintsTable");
     py::class_<gymbo::Token>(m, "Token");
     py::class_<gymbo::Instr>(m, "Instr")
-        .def("print", &gymbo::Instr::print);
+        .def("toString", &gymbo::Instr::toString);
     py::class_<gymbo::InstrType>(m, "InstrType");
 
 #ifdef VERSION_INFO
