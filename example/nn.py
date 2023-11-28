@@ -9,8 +9,8 @@ import pymlgymbo as pmg
 
 max_depth = 65536
 maxSAT = 2
-maxUNSAT = 5
-verbose_level = 1
+maxUNSAT = 10
+verbose_level = -1
 num_itrs = 100
 step_size = 0.01
 eps = 0.000000001
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     )
 
     clf = MLPClassifier(
-        hidden_layer_sizes=(4), activation="relu", random_state=1, max_iter=100
+        hidden_layer_sizes=(2), activation="relu", random_state=1, max_iter=100
     )
     clf.fit(X_train, y_train)
 
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     num_symbolic_vars = 1
     symbolic_vars_id = random.sample(list(range(X_train.shape[1])), num_symbolic_vars)
 
-    idx = 1
+    idx = 0
     x_origin = X[idx]
     y_origin = y[idx]
     y_pred = clf.predict(x_origin.reshape(1, -1)).item()
@@ -75,8 +75,6 @@ if __name__ == "__main__":
     mlp_code += (
         f"\nif ({adv_condition} && {perturbation_condition})\n return 1;\nreturn 0;"
     )
-
-    print(mlp_code)
 
     optimizer = plg.GDOptimizer(
         num_itrs,
@@ -132,15 +130,15 @@ if __name__ == "__main__":
 
         vs = list(constraints.values())[j][1]
 
+        sv_dict = {}    
         for i in symbolic_vars_id:
             if var_counter[f"sv_{i}"] not in vs:
                 break
             x_adv[i] = vs[var_counter[f"sv_{i}"]]
+            sv_dict[f"sv_{i}"] = vs[var_counter[f"sv_{i}"]]
 
         print(
-            list(constraints.values())[j],
-            clf.predict(x_origin.reshape(1, -1)),
-            clf.predict_proba(x_origin.reshape(1, -1)),
-            clf.predict(x_adv.reshape(1, -1)),
-            clf.predict_proba(x_adv.reshape(1, -1)),
+            f"pred for x_original: {clf.predict(x_origin.reshape(1, -1)).item()},",
+            f"pred for x_adv: {clf.predict(x_adv.reshape(1, -1)).item()}, ",
+            sv_dict,
         )

@@ -125,16 +125,21 @@ struct GDOptimizer {
 
         int itr = 0;
         bool is_sat = eval(path_constraints, params);
+        bool is_converge = false;
 
-        while ((!is_sat) && (itr < num_epochs)) {
+        while ((!is_sat) && (!is_converge) && (itr < num_epochs)) {
             Grad grads = Grad({});
             for (int i = 0; i < path_constraints.size(); i++) {
                 if (path_constraints[i].eval(params, eps) > 0.0f) {
                     grads = grads + path_constraints[i].grad(params, eps);
                 }
             }
+            is_converge = true;
             for (auto &g : grads.val) {
                 if (!is_const.at(g.first)) {
+                    if (g.second != 0.0f) {
+                        is_converge = false;
+                    }
                     if (!sign_grad) {
                         params.at(g.first) -= lr * g.second;
                     } else {
