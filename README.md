@@ -125,7 +125,27 @@ gymbo::generate_ast(token, user_input, code);
 gymbo::compile_ast(code, prg);
 
 // execute gradient-based symbolie execution
-gymbo::run_gymbo(prg, optimizer, init, cache_constraints);
+gymbo::run_gymbo(prg, optimizer, init, cache_constraints, ...);
+```
+
+## Python API
+
+### Install 
+
+```
+pip install git+https://github.com/Koukyosyumei/Gymbo
+```
+
+### Example
+
+```Python
+import pylibgymbo as plg
+
+inp = "a = 1; if (a == 1) return 2;"
+var_counter, prg = plg.gcompile(inp)
+
+optimizer = plg.GDOptimizer(num_itrs, step_size, ...)
+constraints = plg.gexecute(prg, optimizer, ...)
 ```
 
 ## Acknowledgement
