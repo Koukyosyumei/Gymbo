@@ -342,17 +342,35 @@ inline void symStep(SymState &state, Instr instr,
                 } else {
                     new_state.mem.at(wordToInt(addr->var_idx)) = w->word;
                 }
-            } else if (w->symtype == SymType::SAny) {
-                if (new_state.mem.find(wordToInt(w->var_idx)) !=
+            } else if ((w->symtype == SymType::SAny) &&
+                       (new_state.mem.find(wordToInt(w->var_idx)) !=
+                        new_state.mem.end())) {
+                if (new_state.mem.find(wordToInt(addr->var_idx)) ==
                     new_state.mem.end()) {
-                    if (new_state.mem.find(wordToInt(addr->var_idx)) ==
-                        new_state.mem.end()) {
-                        new_state.mem.emplace(
-                            wordToInt(addr->var_idx),
-                            new_state.mem[wordToInt(w->var_idx)]);
+                    new_state.mem.emplace(wordToInt(addr->var_idx),
+                                          new_state.mem[wordToInt(w->var_idx)]);
+                } else {
+                    new_state.mem.at(wordToInt(addr->var_idx)) =
+                        new_state.mem[wordToInt(w->var_idx)];
+                }
+            } else {
+                if (new_state.smem.find(wordToInt(addr->var_idx)) ==
+                    new_state.smem.end()) {
+                    if (new_state.smem.find(wordToInt(w->var_idx)) ==
+                        new_state.smem.end()) {
+                        new_state.smem.emplace(wordToInt(addr->var_idx), *w);
                     } else {
-                        new_state.mem.at(wordToInt(addr->var_idx)) =
-                            new_state.mem[wordToInt(w->var_idx)];
+                        new_state.smem.emplace(
+                            wordToInt(addr->var_idx),
+                            new_state.smem[wordToInt(w->var_idx)]);
+                    }
+                } else {
+                    if (new_state.smem.find(wordToInt(w->var_idx)) ==
+                        new_state.smem.end()) {
+                        new_state.smem.at(wordToInt(addr->var_idx)) = *w;
+                    } else {
+                        new_state.smem.at(wordToInt(addr->var_idx)) =
+                            new_state.smem[wordToInt(w->var_idx)];
                     }
                 }
             }
@@ -363,7 +381,13 @@ inline void symStep(SymState &state, Instr instr,
         case InstrType::Load: {
             Sym *addr = new_state.symbolic_stack.back();
             new_state.symbolic_stack.pop();
-            new_state.symbolic_stack.push(Sym(SymType::SAny, addr->word));
+            if (new_state.smem.find(wordToInt(addr->word)) !=
+                new_state.smem.end()) {
+                new_state.symbolic_stack.push(
+                    new_state.smem[wordToInt(addr->word)]);
+            } else {
+                new_state.symbolic_stack.push(Sym(SymType::SAny, addr->word));
+            }
             new_state.pc++;
             result.emplace_back(new_state);
             break;
