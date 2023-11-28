@@ -50,24 +50,23 @@ void initialize_params(std::unordered_map<int, float> &params, SymState &state,
  * @param optimizer The gradient descent optimizer for parameter optimization.
  * @param state The initial symbolic state of the program.
  * @param target_pcs The set of pc where gymbo executes path-constraints
- * solving. If this set is empty or contains -1, gymbo solves all path-constraints.
+ * solving. If this set is empty or contains -1, gymbo solves all
+ * path-constraints.
  * @param constraints_cache A cache for previously found path constraints.
- * @param maxDepth The maximum depth of symbolic exploration (default: 64).
- * @param max_num_trials The maximum number of trials for each gradient descent
- * (default: 3).
+ * @param maxDepth The maximum depth of symbolic exploration.
+ * @param max_num_trials The maximum number of trials for each gradient descent.
  * @param ignore_memory If set to true, constraints derived from memory will be
- * ignored (default: false).
+ * ignored.
  * @param use_dpll If set to true, use DPLL to decide the initial assignment for
- * each term. (default: false)
- * @param verbose_level The level of verbosity (default: 1).
+ * each term.
+ * @param verbose_level The level of verbosity.
  * @return A trace of the symbolic execution.
  */
 inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        std::unordered_set<int> &target_pcs,
-                       PathConstraintsTable &constraints_cache,
-                       int maxDepth = 64, int max_num_trials = 3,
-                       bool ignore_memory = false, bool use_dpll = false,
-                       int verbose_level = 1) {
+                       PathConstraintsTable &constraints_cache, int maxDepth,
+                       int max_num_trials, bool ignore_memory, bool use_dpll,
+                       int verbose_level) {
     int pc = state.pc;
     if (verbose_level >= 2) {
         printf("pc: %d, ", pc);

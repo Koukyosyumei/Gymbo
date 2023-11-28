@@ -22,7 +22,7 @@ PYBIND11_MODULE(pylibgymbo, m) {
     m.def("gexecute", &gymbo::gexecute, R"pbdoc(gexecute)pbdoc");
 
     py::class_<gymbo::GDOptimizer>(m, "GDOptimizer")
-        .def(py::init<int, float, float, float, float, bool, int>());
+        .def(py::init<int, float, float, float, float, bool, bool, int>());
     py::class_<gymbo::SymState>(m, "SymState");
     py::class_<gymbo::Prog>(m, "Prog");
     py::class_<gymbo::PathConstraintsTable>(m, "PathConstraintsTable");
