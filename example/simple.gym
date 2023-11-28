@@ -1,1 +1,7 @@
-if (a > 3) return 1;
+a = 1;
+b = a + 3;
+c = b;
+e = c + d;
+
+if (e > 6)
+    return 1;

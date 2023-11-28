@@ -466,18 +466,22 @@ struct Sym {
     }
 };
 
+using SMem = std::unordered_map<Word32, Sym>;
+
 struct SymState {
     int pc;
     int var_cnt;
     Mem mem;
+    SMem smem;
     Linkedlist<Sym> symbolic_stack;
     std::vector<Sym> path_constraints;
 
     SymState() : pc(0), var_cnt(0){};
-    SymState(int pc, int varcnt, Mem mem, Linkedlist<Sym> symbolic_stack,
+    SymState(int pc, int varcnt, Mem mem, SMem smem, Linkedlist<Sym> symbolic_stack,
              std::vector<Sym> path_constraints)
         : pc(pc),
           mem(mem),
+          smem(smem),
           symbolic_stack(symbolic_stack),
           path_constraints(path_constraints) {}
 
@@ -499,6 +503,12 @@ struct SymState {
             } else {
                 printf("var_%d: %f, ", (int)t.first, tmp_word);
             }
+        }
+        printf("}\n");
+
+        printf("Symbolic Memory: {");
+        for (auto t: smem) {
+            printf("var_%d: %s, ", (int)t.first, t.second.toString(true).c_str());
         }
         printf("}\n");
 
