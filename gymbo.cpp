@@ -111,12 +111,12 @@ int main(int argc, char *argv[]) {
         printf("----------------------------\n");
     }
 
-    if (verbose_level >= 1) {
-        printf("...Variables\n");
-        for (auto &kv : var_counter) {
-            printf("%s: %d\n", kv.first.c_str(), kv.second);
-        }
-    }
+    // if (verbose_level >= 1) {
+    //    printf("...Variables\n");
+    //    for (auto &kv : var_counter) {
+    //        printf("%s: %d\n", kv.first.c_str(), kv.second);
+    //    }
+    // }
 
     printf("Start Symbolic Execution...\n");
     gymbo::run_gymbo(prg, optimizer, init, cache_constraints, max_depth,

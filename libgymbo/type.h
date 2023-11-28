@@ -49,77 +49,64 @@ class Instr {
     Instr(InstrType instr, Word32 word) : instr(instr), word(word) {}
 
     void print() {
+        printf("%s\n", toString().c_str());
+    }
+
+    std::string toString() {
         switch (instr) {
             case (InstrType::Add): {
-                printf("add\n");
-                return;
+                return "add";
             }
             case (InstrType::Sub): {
-                printf("sub\n");
-                return;
+                return "sub";
             }
             case (InstrType::Mul): {
-                printf("mul\n");
-                return;
+                return "mul";
             }
             case (InstrType::And): {
-                printf("and\n");
-                return;
+                return "and";
             }
             case (InstrType::Or): {
-                printf("or\n");
-                return;
+                return "or";
             }
             case (InstrType::Not): {
-                printf("not\n");
-                return;
+                return "not";
             }
             case (InstrType::JmpIf): {
-                printf("jmpIf\n");
-                return;
+                return "jmpIf";
             }
             case (InstrType::Jmp): {
-                printf("jmp\n");
-                return;
+                return "jmp";
             }
             case (InstrType::Lt): {
-                printf("lt\n");
-                return;
+                return "lt";
             }
             case (InstrType::Le): {
-                printf("le\n");
-                return;
+                return "le";
             }
             case (InstrType::Load): {
-                printf("load\n");
-                return;
+                return "load";
             }
             case (InstrType::Read): {
-                printf("read\n");
-                return;
+                return "read";
             }
             case (InstrType::Done): {
-                printf("ret\n");
-                return;
+                return "ret";
             }
             case (InstrType::Nop): {
-                printf("nop\n");
-                return;
+                return "nop";
             }
             case (InstrType::Swap): {
-                printf("swap\n");
-                return;
+                return "swap";
             }
             case (InstrType::Store): {
-                printf("store\n");
-                return;
+                return "store";
             }
             case (InstrType::Push): {
-                printf("push %d\n", word);
-                return;
+                return "push " + std::to_string(word);
             }
             default: {
-                printf("unknown\n");
+                return "unknown";
             }
         }
     }
