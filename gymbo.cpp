@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
 
     std::unordered_map<std::string, int> var_counter;
     std::vector<gymbo::Node *> code;
-    std::unordered_map<int, std::string> id2varname;
+    // std::unordered_map<int, std::string> id2varname;
 
     gymbo::Prog prg;
     gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low,
@@ -146,9 +146,9 @@ int main(int argc, char *argv[]) {
         printf("#UNSAT: %d\n", num_unsat);
 
         if (verbose_level >= 0) {
-            for (auto vc : var_counter) {
-                id2varname.emplace(vc.second, vc.first);
-            }
+            // for (auto vc : var_counter) {
+            //    id2varname.emplace(vc.second, vc.first);
+            // }
 
             printf("List of SAT Path Constraints\n");
             for (auto &cc : cache_constraints) {
@@ -157,10 +157,10 @@ int main(int argc, char *argv[]) {
                     printf("   {");
                     for (auto p : cc.second.second) {
                         if (is_integer(p.second)) {
-                            printf("%s:%d, ", id2varname[p.first].c_str(),
+                            printf("var_%d:%d, ", p.first,
                                    (int)p.second);
                         } else {
-                            printf("%s:%f, ", id2varname[p.first].c_str(),
+                            printf("var_%d:%f, ", p.first,
                                    p.second);
                         }
                     }
