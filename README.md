@@ -150,9 +150,9 @@ constraints = plg.gexecute(prg, optimizer, ...)
 
 ## `pymlgymbo`: Debugging Machine Learning Models
 
-One practical usage of Gymbo is debugging ML models like neural networks to detect the unexpected befaviours.
+One practical usage of Gymbo is debugging ML models like neural networks to detect unexpected behaviors.
 
-We offer some helper functions within `pymlgymbo` library to convert the ML models of famous Python library like sklearn and PyTorch to the program that gymbo can prosess.
+We offer some helper functions within `pymlgymbo` library to convert the ML models of famous Python library like sklearn and PyTorch to the program that gymbo can process.
 
 The following code generates the adversarial examples against a neural network, as proposed in "Gopinath, Divya, et al. "Symbolic execution for importance analysis and adversarial generation in neural networks." 2019 IEEE 30th International Symposium on Software Reliability Engineering (ISSRE). IEEE, 2019."
 
