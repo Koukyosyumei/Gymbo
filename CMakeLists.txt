@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-project("libmyplan" LANGUAGES C CXX)
+project("libgymbo" LANGUAGES C CXX)
 
 # find_package(Threads REQUIRED)
 
@@ -9,8 +9,6 @@ set(SOURCE_DIR  "libgymbo")
 set(TEST_DIR  "test")
 
 include(GNUInstallDirs)
-
-# include_directories("${PROJECT_SOURCE_DIR}/")
 
 add_subdirectory(${SOURCE_DIR})
 

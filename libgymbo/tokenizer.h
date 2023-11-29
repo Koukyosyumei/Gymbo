@@ -191,7 +191,8 @@ inline bool startswith(char *p, char *q) {
  * @param user_input The string to be tokenized.
  * @return A linked list of tokens.
  */
-inline Token *tokenize(char *user_input) {
+inline Token *tokenize(char *user_input,
+                       std::unordered_map<std::string, int> &var_counter) {
     char *p = user_input;
     Token head;
     head.next = NULL;
@@ -203,8 +204,6 @@ inline Token *tokenize(char *user_input) {
     char LETTER_GEQ[] = ">=";
     char LETTER_AND[] = "&&";
     char LETTER_OR[] = "||";
-
-    std::unordered_map<std::string, int> var_counter;
 
     while (*p) {
         // Skip whitespace characters.

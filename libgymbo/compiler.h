@@ -1,3 +1,4 @@
+#pragma once
 #include "parser.h"
 #include "symbolic.h"
 #include "tokenizer.h"

@@ -48,78 +48,63 @@ class Instr {
     Instr(InstrType instr) : instr(instr) {}
     Instr(InstrType instr, Word32 word) : instr(instr), word(word) {}
 
-    void print() {
+    void print() { printf("%s\n", toString().c_str()); }
+
+    std::string toString() {
         switch (instr) {
             case (InstrType::Add): {
-                printf("add\n");
-                return;
+                return "add";
             }
             case (InstrType::Sub): {
-                printf("sub\n");
-                return;
+                return "sub";
             }
             case (InstrType::Mul): {
-                printf("mul\n");
-                return;
+                return "mul";
             }
             case (InstrType::And): {
-                printf("and\n");
-                return;
+                return "and";
             }
             case (InstrType::Or): {
-                printf("or\n");
-                return;
+                return "or";
             }
             case (InstrType::Not): {
-                printf("not\n");
-                return;
+                return "not";
             }
             case (InstrType::JmpIf): {
-                printf("jmpIf\n");
-                return;
+                return "jmpIf";
             }
             case (InstrType::Jmp): {
-                printf("jmp\n");
-                return;
+                return "jmp";
             }
             case (InstrType::Lt): {
-                printf("lt\n");
-                return;
+                return "lt";
             }
             case (InstrType::Le): {
-                printf("le\n");
-                return;
+                return "le";
             }
             case (InstrType::Load): {
-                printf("load\n");
-                return;
+                return "load";
             }
             case (InstrType::Read): {
-                printf("read\n");
-                return;
+                return "read";
             }
             case (InstrType::Done): {
-                printf("ret\n");
-                return;
+                return "ret";
             }
             case (InstrType::Nop): {
-                printf("nop\n");
-                return;
+                return "nop";
             }
             case (InstrType::Swap): {
-                printf("swap\n");
-                return;
+                return "swap";
             }
             case (InstrType::Store): {
-                printf("store\n");
-                return;
+                return "store";
             }
             case (InstrType::Push): {
-                printf("push %d\n", word);
-                return;
+                return "push " + std::to_string(word);
             }
             default: {
-                printf("unknown\n");
+                return "unknown";
             }
         }
     }
@@ -280,6 +265,103 @@ struct Sym {
             }
             default:
                 return;
+        }
+    }
+
+    Sym *psimplify(const Mem &cvals) {
+        Sym *tmp_left, *tmp_right;
+
+        switch (symtype) {
+            case (SymType::SAny): {
+                if (cvals.find(var_idx) != cvals.end()) {
+                    return new Sym(SymType::SCon, cvals.at(var_idx));
+                } else {
+                    return this;
+                }
+            }
+            case (SymType::SAdd): {
+                if (left->symtype == SymType::SCon &&
+                    right->symtype == SymType::SCon) {
+                    return new Sym(SymType::SCon,
+                                   FloatToWord(wordToFloat(left->word) +
+                                               wordToFloat(right->word)));
+                } else {
+                    tmp_left = left->psimplify(cvals);
+                    tmp_right = right->psimplify(cvals);
+                    if (tmp_left->symtype == SymType::SCon &&
+                        tmp_right->symtype == SymType::SCon) {
+                        return new Sym(
+                            SymType::SCon,
+                            FloatToWord(wordToFloat(tmp_left->word) +
+                                        wordToFloat(tmp_right->word)));
+                    }
+                    return new Sym(SymType::SAdd, tmp_left, tmp_right);
+                }
+            }
+            case (SymType::SSub): {
+                if (left->symtype == SymType::SCon &&
+                    right->symtype == SymType::SCon) {
+                    return new Sym(SymType::SCon,
+                                   FloatToWord(wordToFloat(left->word) -
+                                               wordToFloat(right->word)));
+                } else {
+                    tmp_left = left->psimplify(cvals);
+                    tmp_right = right->psimplify(cvals);
+                    if (tmp_left->symtype == SymType::SCon &&
+                        tmp_right->symtype == SymType::SCon) {
+                        return new Sym(
+                            SymType::SCon,
+                            FloatToWord(wordToFloat(tmp_left->word) -
+                                        wordToFloat(tmp_right->word)));
+                    }
+                    return new Sym(SymType::SSub, tmp_left, tmp_right);
+                }
+            }
+            case (SymType::SMul): {
+                if (left->symtype == SymType::SCon &&
+                    right->symtype == SymType::SCon) {
+                    return new Sym(SymType::SCon,
+                                   FloatToWord(wordToFloat(left->word) *
+                                               wordToFloat(right->word)));
+                } else {
+                    tmp_left = left->psimplify(cvals);
+                    tmp_right = right->psimplify(cvals);
+                    if (tmp_left->symtype == SymType::SCon &&
+                        tmp_right->symtype == SymType::SCon) {
+                        return new Sym(
+                            SymType::SCon,
+                            FloatToWord(wordToFloat(tmp_left->word) *
+                                        wordToFloat(tmp_right->word)));
+                    }
+                    return new Sym(SymType::SMul, tmp_left, tmp_right);
+                }
+            }
+            case (SymType::SEq): {
+                return new Sym(SymType::SEq, left->psimplify(cvals),
+                               right->psimplify(cvals));
+            }
+            case (SymType::SAnd): {
+                return new Sym(SymType::SAnd, left->psimplify(cvals),
+                               right->psimplify(cvals));
+            }
+            case (SymType::SOr): {
+                return new Sym(SymType::SOr, left->psimplify(cvals),
+                               right->psimplify(cvals));
+            }
+            case (SymType::SLt): {
+                return new Sym(SymType::SLt, left->psimplify(cvals),
+                               right->psimplify(cvals));
+            }
+            case (SymType::SLe): {
+                return new Sym(SymType::SLe, left->psimplify(cvals),
+                               right->psimplify(cvals));
+            }
+            case (SymType::SNot): {
+                return new Sym(SymType::SNot, left->psimplify(cvals));
+            }
+            default: {
+                return this;
+            }
         }
     }
 
@@ -477,8 +559,8 @@ struct SymState {
     std::vector<Sym> path_constraints;
 
     SymState() : pc(0), var_cnt(0){};
-    SymState(int pc, int varcnt, Mem mem, SMem smem, Linkedlist<Sym> symbolic_stack,
-             std::vector<Sym> path_constraints)
+    SymState(int pc, int varcnt, Mem mem, SMem smem,
+             Linkedlist<Sym> symbolic_stack, std::vector<Sym> path_constraints)
         : pc(pc),
           mem(mem),
           smem(smem),
@@ -494,7 +576,7 @@ struct SymState {
         }
         printf("]\n");
 
-        printf("Memory: {");
+        printf("Concrete Memory: {");
         float tmp_word;
         for (auto t : mem) {
             tmp_word = wordToFloat(t.second);
@@ -507,8 +589,9 @@ struct SymState {
         printf("}\n");
 
         printf("Symbolic Memory: {");
-        for (auto t: smem) {
-            printf("var_%d: %s, ", (int)t.first, t.second.toString(true).c_str());
+        for (auto t : smem) {
+            printf("var_%d: %s, ", (int)t.first,
+                   t.second.toString(true).c_str());
         }
         printf("}\n");
 
