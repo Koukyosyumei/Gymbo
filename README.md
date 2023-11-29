@@ -175,29 +175,9 @@ adv_condition = (
         + ")"
     )
 
-optimizer = plg.GDOptimizer(
-        num_itrs,
-        step_size,
-        eps,
-        param_low,
-        param_high,
-        sign_grad,
-        init_param_uniform_int,
-        seed,
-    )
+optimizer = plg.GDOptimizer(num_itrs, step_size, ...)
 var_counter, prg = plg.gcompile(mlp_code)
-constraints = plg.gexecute(
-        prg,
-        optimizer,
-        target_pcs,
-        max_depth,
-        maxSAT,
-        maxUNSAT,
-        max_num_trials,
-        ignore_memory,
-        use_dpll,
-        verbose_level,
-    )
+constraints = plg.gexecute(prg, optimizer, target_pcs, ...)
 ```
 
 ## Acknowledgement
