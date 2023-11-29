@@ -148,6 +148,10 @@ optimizer = plg.GDOptimizer(num_itrs, step_size, ...)
 constraints = plg.gexecute(prg, optimizer, ...)
 ```
 
+## Debugging Neural Networks
+
+One practical usage of Gymbo is debugging neural networks to detect the unexpected befaviours.
+
 ## Acknowledgement
 
 Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of `rui314/chibicc [3]`, while the symbolic execution approach is inspired by `beala/symbolic [4]`.
