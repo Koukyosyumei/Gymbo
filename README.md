@@ -98,7 +98,7 @@ Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each un
 
 <img src="img/verbose2.gif">
 
-## `libgymbo`: Header-Only Library
+## `libgymbo`: Header-only Library
 
 Since gymbo consists of the header-only library, you can easily create your own symbolic execution engine.
 
@@ -128,7 +128,7 @@ gymbo::compile_ast(code, prg);
 gymbo::run_gymbo(prg, optimizer, init, cache_constraints, ...);
 ```
 
-## `pylibgymbo`: Python API
+## Python API
 
 ### Install 
 
@@ -136,7 +136,7 @@ gymbo::run_gymbo(prg, optimizer, init, cache_constraints, ...);
 pip install git+https://github.com/Koukyosyumei/Gymbo
 ```
 
-### Example
+### `pylibgymbo`: Python Wrapper for `libgymbo`
 
 ```Python
 import pylibgymbo as plg
@@ -148,7 +148,7 @@ optimizer = plg.GDOptimizer(num_itrs, step_size, ...)
 constraints = plg.gexecute(prg, optimizer, ...)
 ```
 
-## `pymlgymbo`: Debugging Machine Learning Models
+### `pymlgymbo`: Debugging Machine Learning Models
 
 One practical usage of Gymbo is debugging ML models like neural networks to detect unexpected behaviors.
 
