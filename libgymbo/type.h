@@ -48,9 +48,7 @@ class Instr {
     Instr(InstrType instr) : instr(instr) {}
     Instr(InstrType instr, Word32 word) : instr(instr), word(word) {}
 
-    void print() {
-        printf("%s\n", toString().c_str());
-    }
+    void print() { printf("%s\n", toString().c_str()); }
 
     std::string toString() {
         switch (instr) {
@@ -270,6 +268,96 @@ struct Sym {
         }
     }
 
+    Sym *psimplify() {
+        Sym *tmp_left, *tmp_right;
+
+        switch (symtype) {
+            case (SymType::SAdd): {
+                if (left->symtype == SymType::SCon &&
+                    right->symtype == SymType::SCon) {
+                    return new Sym(SymType::SCon,
+                                   FloatToWord(wordToFloat(left->word) +
+                                               wordToFloat(right->word)));
+                } else {
+                    tmp_left = left->psimplify();
+                    tmp_right = right->psimplify();
+                    if (tmp_left->symtype == SymType::SCon &&
+                        tmp_right->symtype == SymType::SCon) {
+                        return new Sym(
+                            SymType::SCon,
+                            FloatToWord(wordToFloat(tmp_left->word) +
+                                        wordToFloat(tmp_right->word)));
+                    }
+                    return new Sym(SymType::SAdd, tmp_left, tmp_right);
+                }
+            }
+            case (SymType::SSub): {
+                if (left->symtype == SymType::SCon &&
+                    right->symtype == SymType::SCon) {
+                    return new Sym(SymType::SCon,
+                                   FloatToWord(wordToFloat(left->word) -
+                                               wordToFloat(right->word)));
+                } else {
+                    tmp_left = left->psimplify();
+                    tmp_right = right->psimplify();
+                    if (tmp_left->symtype == SymType::SCon &&
+                        tmp_right->symtype == SymType::SCon) {
+                        return new Sym(
+                            SymType::SCon,
+                            FloatToWord(wordToFloat(tmp_left->word) -
+                                        wordToFloat(tmp_right->word)));
+                    }
+                    return new Sym(SymType::SSub, tmp_left, tmp_right);
+                }
+            }
+            case (SymType::SMul): {
+                if (left->symtype == SymType::SCon &&
+                    right->symtype == SymType::SCon) {
+                    return new Sym(SymType::SCon,
+                                   FloatToWord(wordToFloat(left->word) *
+                                               wordToFloat(right->word)));
+                } else {
+                    tmp_left = left->psimplify();
+                    tmp_right = right->psimplify();
+                    if (tmp_left->symtype == SymType::SCon &&
+                        tmp_right->symtype == SymType::SCon) {
+                        return new Sym(
+                            SymType::SCon,
+                            FloatToWord(wordToFloat(tmp_left->word) *
+                                        wordToFloat(tmp_right->word)));
+                    }
+                    return new Sym(SymType::SMul, tmp_left, tmp_right);
+                }
+            }
+            case (SymType::SEq): {
+                return new Sym(SymType::SEq, left->psimplify(),
+                               right->psimplify());
+            }
+            case (SymType::SAnd): {
+                return new Sym(SymType::SAnd, left->psimplify(),
+                               right->psimplify());
+            }
+            case (SymType::SOr): {
+                return new Sym(SymType::SOr, left->psimplify(),
+                               right->psimplify());
+            }
+            case (SymType::SLt): {
+                return new Sym(SymType::SLt, left->psimplify(),
+                               right->psimplify());
+            }
+            case (SymType::SLe): {
+                return new Sym(SymType::SLe, left->psimplify(),
+                               right->psimplify());
+            }
+            case (SymType::SNot): {
+                return new Sym(SymType::SNot, left->psimplify());
+            }
+            default: {
+                return this;
+            }
+        }
+    }
+
     float eval(const std::unordered_map<int, float> &cvals, float eps) {
         switch (symtype) {
             case (SymType::SAdd): {
@@ -464,8 +552,8 @@ struct SymState {
     std::vector<Sym> path_constraints;
 
     SymState() : pc(0), var_cnt(0){};
-    SymState(int pc, int varcnt, Mem mem, SMem smem, Linkedlist<Sym> symbolic_stack,
-             std::vector<Sym> path_constraints)
+    SymState(int pc, int varcnt, Mem mem, SMem smem,
+             Linkedlist<Sym> symbolic_stack, std::vector<Sym> path_constraints)
         : pc(pc),
           mem(mem),
           smem(smem),
@@ -494,8 +582,9 @@ struct SymState {
         printf("}\n");
 
         printf("Symbolic Memory: {");
-        for (auto t: smem) {
-            printf("var_%d: %s, ", (int)t.first, t.second.toString(true).c_str());
+        for (auto t : smem) {
+            printf("var_%d: %s, ", (int)t.first,
+                   t.second.toString(true).c_str());
         }
         printf("}\n");
 
