@@ -98,7 +98,7 @@ Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each un
 
 <img src="img/verbose2.gif">
 
-## Header-Only Library
+## `libgymbo`: Header-Only Library
 
 Since gymbo consists of the header-only library, you can easily create your own symbolic execution engine.
 
@@ -128,7 +128,7 @@ gymbo::compile_ast(code, prg);
 gymbo::run_gymbo(prg, optimizer, init, cache_constraints, ...);
 ```
 
-## Python API
+## `pylibgymbo`: Python API
 
 ### Install 
 
@@ -148,9 +148,57 @@ optimizer = plg.GDOptimizer(num_itrs, step_size, ...)
 constraints = plg.gexecute(prg, optimizer, ...)
 ```
 
-## Debugging Neural Networks
+## `pymlgymbo`: Debugging Machine Learning Models
 
-One practical usage of Gymbo is debugging neural networks to detect the unexpected befaviours.
+One practical usage of Gymbo is debugging ML models like neural networks to detect the unexpected befaviours.
+
+We offer some helper functions within `pymlgymbo` library to convert the ML models of famous Python library like sklearn and PyTorch to the program that gymbo can prosess.
+
+The following code generates the adversarial examples against a neural network, as proposed in "Gopinath, Divya, et al. "Symbolic execution for importance analysis and adversarial generation in neural networks." 2019 IEEE 30th International Symposium on Software Reliability Engineering (ISSRE). IEEE, 2019."
+
+```python
+from sklearn.neural_network import MLPClassifier
+
+import pylibgymbo as plg
+import pymlgymbo as pmg
+
+clf = MLPClassifier(activation="relu")
+clf.fit(X_train, y_train)
+
+
+mlp_code = pmg.dump_sklearn_MLPClassifier(clf, feature_names)
+adv_condition = (
+        "("
+        + " || ".join(
+            [f"(y_{c} > y_{y_pred})" for c in range(len(clf.classes_)) if y_pred != c]
+        )
+        + ")"
+    )
+
+optimizer = plg.GDOptimizer(
+        num_itrs,
+        step_size,
+        eps,
+        param_low,
+        param_high,
+        sign_grad,
+        init_param_uniform_int,
+        seed,
+    )
+var_counter, prg = plg.gcompile(mlp_code)
+constraints = plg.gexecute(
+        prg,
+        optimizer,
+        target_pcs,
+        max_depth,
+        maxSAT,
+        maxUNSAT,
+        max_num_trials,
+        ignore_memory,
+        use_dpll,
+        verbose_level,
+    )
+```
 
 ## Acknowledgement
 

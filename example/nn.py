@@ -94,22 +94,6 @@ if __name__ == "__main__":
         if i > 0 and prg[i - 1].toString() == "jmp":
             target_pc = i
 
-    """
-    target_pcs = {0}
-    plg.gexecute(
-        prg,
-        optimizer,
-        target_pcs,
-        max_depth,
-        maxSAT,
-        maxUNSAT,
-        max_num_trials,
-        ignore_memory,
-        use_dpll,
-        verbose_level,
-    )
-    """
-
     target_pcs = {target_pc}
     constraints = plg.gexecute(
         prg,
