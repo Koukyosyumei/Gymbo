@@ -268,10 +268,17 @@ struct Sym {
         }
     }
 
-    Sym *psimplify() {
+    Sym *psimplify(const Mem &cvals) {
         Sym *tmp_left, *tmp_right;
 
         switch (symtype) {
+            case (SymType::SAny): {
+                if (cvals.find(var_idx) != cvals.end()) {
+                    return new Sym(SymType::SCon, cvals.at(var_idx));
+                } else {
+                    return this;
+                }
+            }
             case (SymType::SAdd): {
                 if (left->symtype == SymType::SCon &&
                     right->symtype == SymType::SCon) {
@@ -279,8 +286,8 @@ struct Sym {
                                    FloatToWord(wordToFloat(left->word) +
                                                wordToFloat(right->word)));
                 } else {
-                    tmp_left = left->psimplify();
-                    tmp_right = right->psimplify();
+                    tmp_left = left->psimplify(cvals);
+                    tmp_right = right->psimplify(cvals);
                     if (tmp_left->symtype == SymType::SCon &&
                         tmp_right->symtype == SymType::SCon) {
                         return new Sym(
@@ -298,8 +305,8 @@ struct Sym {
                                    FloatToWord(wordToFloat(left->word) -
                                                wordToFloat(right->word)));
                 } else {
-                    tmp_left = left->psimplify();
-                    tmp_right = right->psimplify();
+                    tmp_left = left->psimplify(cvals);
+                    tmp_right = right->psimplify(cvals);
                     if (tmp_left->symtype == SymType::SCon &&
                         tmp_right->symtype == SymType::SCon) {
                         return new Sym(
@@ -317,8 +324,8 @@ struct Sym {
                                    FloatToWord(wordToFloat(left->word) *
                                                wordToFloat(right->word)));
                 } else {
-                    tmp_left = left->psimplify();
-                    tmp_right = right->psimplify();
+                    tmp_left = left->psimplify(cvals);
+                    tmp_right = right->psimplify(cvals);
                     if (tmp_left->symtype == SymType::SCon &&
                         tmp_right->symtype == SymType::SCon) {
                         return new Sym(
@@ -330,27 +337,27 @@ struct Sym {
                 }
             }
             case (SymType::SEq): {
-                return new Sym(SymType::SEq, left->psimplify(),
-                               right->psimplify());
+                return new Sym(SymType::SEq, left->psimplify(cvals),
+                               right->psimplify(cvals));
             }
             case (SymType::SAnd): {
-                return new Sym(SymType::SAnd, left->psimplify(),
-                               right->psimplify());
+                return new Sym(SymType::SAnd, left->psimplify(cvals),
+                               right->psimplify(cvals));
             }
             case (SymType::SOr): {
-                return new Sym(SymType::SOr, left->psimplify(),
-                               right->psimplify());
+                return new Sym(SymType::SOr, left->psimplify(cvals),
+                               right->psimplify(cvals));
             }
             case (SymType::SLt): {
-                return new Sym(SymType::SLt, left->psimplify(),
-                               right->psimplify());
+                return new Sym(SymType::SLt, left->psimplify(cvals),
+                               right->psimplify(cvals));
             }
             case (SymType::SLe): {
-                return new Sym(SymType::SLe, left->psimplify(),
-                               right->psimplify());
+                return new Sym(SymType::SLe, left->psimplify(cvals),
+                               right->psimplify(cvals));
             }
             case (SymType::SNot): {
-                return new Sym(SymType::SNot, left->psimplify());
+                return new Sym(SymType::SNot, left->psimplify(cvals));
             }
             default: {
                 return this;
@@ -569,7 +576,7 @@ struct SymState {
         }
         printf("]\n");
 
-        printf("Memory: {");
+        printf("Concrete Memory: {");
         float tmp_word;
         for (auto t : mem) {
             tmp_word = wordToFloat(t.second);

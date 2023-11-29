@@ -94,6 +94,7 @@ if __name__ == "__main__":
         if i > 0 and prg[i - 1].toString() == "jmp":
             target_pc = i
 
+    """
     target_pcs = {0}
     plg.gexecute(
         prg,
@@ -107,6 +108,7 @@ if __name__ == "__main__":
         use_dpll,
         verbose_level,
     )
+    """
 
     target_pcs = {target_pc}
     constraints = plg.gexecute(

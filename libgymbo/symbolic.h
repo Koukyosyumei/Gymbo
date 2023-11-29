@@ -430,7 +430,7 @@ inline void symStep(SymState &state, Instr instr,
             break;
         }
         case InstrType::JmpIf: {
-            Sym *cond = new_state.symbolic_stack.back()->psimplify();
+            Sym *cond = new_state.symbolic_stack.back()->psimplify(new_state.mem);
             new_state.symbolic_stack.pop();
             Sym *addr = new_state.symbolic_stack.back();
             new_state.symbolic_stack.pop();
