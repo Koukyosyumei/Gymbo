@@ -10,7 +10,7 @@ import pymlgymbo as pmg
 max_depth = 65536
 maxSAT = 2
 maxUNSAT = 10
-verbose_level = 2
+verbose_level = -1
 num_itrs = 100
 step_size = 0.01
 eps = 0.000000001
