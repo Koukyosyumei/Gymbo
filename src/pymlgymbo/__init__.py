@@ -1,1 +1,1 @@
-from .converter import dump_sklearn_MLPClassifier  # noqa: F401
+from .converter_sklearn import dump_sklearn_MLP  # noqa: F401

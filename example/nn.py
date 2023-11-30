@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     # Convert NN to a c-like program
     feature_names = [f"sv_{j}" for j in range(X_train.shape[1])]
-    mlp_code = pmg.dump_sklearn_MLPClassifier(clf, feature_names)
+    mlp_code = pmg.dump_sklearn_MLP(clf, feature_names)
 
     # Prepare the condition that the adversarial example should satisfy
     param_low = X.min()

@@ -1,4 +1,4 @@
-def dump_sklearn_MLPClassifier(
+def dump_sklearn_MLP(
     clf, feature_vars, indent_char="", endl="\n", precision=8
 ):
     """
@@ -10,21 +10,21 @@ def dump_sklearn_MLPClassifier(
     structure and parameters.
 
     Args:
-        clf (MLPClassifier): The trained scikit-learn MLPClassifier.
+        clf (MLPClassifier|MLPRegssor): The trained scikit-learn MLP.
         feature_vars (list): List of feature variable names.
         indent_char (str, optional): Character used for indentation. Defaults to an empty string.
         endl (str, optional): String representing the end of a line. Defaults to "\n".
         precision (int, optional): Number of decimal places for formatting. Defaults to 8.
 
     Returns:
-    str: The formatted code representation of the MLPClassifier.
+    str: The formatted code representation of the MLP.
 
     Example:
     ```python
     from sklearn.neural_network import MLPClassifier
 
     # Assuming clf and feature_vars are defined
-    code_representation = dump_sklearn_MLPClassifier(clf, feature_vars)
+    code_representation = dump_sklearn_MLP(clf, feature_vars)
     print(code_representation)
     ```
     """
