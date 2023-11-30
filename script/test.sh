@@ -1,4 +1,4 @@
-./build.sh
+./script/build.sh
 
 # test for c++
 cd build
