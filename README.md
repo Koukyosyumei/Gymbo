@@ -100,7 +100,7 @@ Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each un
 
 ## `libgymbo`: Header-only Library
 
-Since gymbo consists of the header-only library, you can easily create your own symbolic execution engine.
+Since gymbo consists of the header-only library, you can easily create your own symbolic execution tool.
 
 ```cpp
 #include "libgymbo/compiler.h"
@@ -145,7 +145,7 @@ inp = "a = 1; if (a == 1) return 2;"
 var_counter, prg = plg.gcompile(inp)
 
 optimizer = plg.GDOptimizer(num_itrs, step_size, ...)
-constraints = plg.gexecute(prg, optimizer, ...)
+constraints = plg.gexecute(prg, init_symstate, optimizer, ...)
 ```
 
 ### `pymlgymbo`: Debugging Machine Learning Models
@@ -177,7 +177,7 @@ adv_condition = (
 
 optimizer = plg.GDOptimizer(num_itrs, step_size, ...)
 var_counter, prg = plg.gcompile(mlp_code)
-constraints = plg.gexecute(prg, optimizer, target_pcs, ...)
+constraints = plg.gexecute(prg, init_symstate, optimizer, target_pcs, ...)
 ```
 
 ## Acknowledgement
