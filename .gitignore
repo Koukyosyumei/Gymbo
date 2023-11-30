@@ -2,6 +2,8 @@ gymbo
 
 *.soln
 
+Testing/
+
 # Prerequisites
 *.d
 
