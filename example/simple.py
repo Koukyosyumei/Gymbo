@@ -40,8 +40,8 @@ if __name__ == "__main__":
     target_pc = {12}
     constraints = plg.gexecute(
         prg,
-        init_symstate,
         optimizer,
+        init_symstate,
         target_pc,
         max_depth,
         maxSAT,
@@ -57,8 +57,8 @@ if __name__ == "__main__":
     target_pc = {-1}
     constraints = plg.gexecute(
         prg,
-        init_symstate,
         optimizer,
+        init_symstate,
         target_pc,
         max_depth,
         maxSAT,

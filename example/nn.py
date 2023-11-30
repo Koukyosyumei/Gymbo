@@ -108,8 +108,8 @@ if __name__ == "__main__":
     target_pcs = {target_pc}
     constraints = plg.gexecute(
         prg,
-        init_symstate,
         optimizer,
+        init_symstate,
         target_pcs,
         max_depth,
         maxSAT,

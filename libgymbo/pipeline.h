@@ -25,8 +25,8 @@ inline std::pair<std::unordered_map<std::string, int>, Prog> gcompile(
     return std::make_pair(var_counter, prg);
 }
 
-inline PathConstraintsTable gexecute(Prog &prg, SymState &init,
-                                     GDOptimizer &optimizer,
+inline PathConstraintsTable gexecute(Prog &prg, GDOptimizer &optimizer,
+                                     SymState &init,
                                      std::unordered_set<int> &target_pcs,
                                      int max_depth, int maxSAT, int maxUNSAT,
                                      int max_num_trials, bool ignore_memory,
