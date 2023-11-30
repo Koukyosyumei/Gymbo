@@ -48,10 +48,7 @@ if __name__ == "__main__":
     y_origin = y[idx]
     y_pred = clf.predict(x_origin.reshape(1, -1)).item()
 
-    feature_names = [
-        f"sv_{j}" if j in symbolic_vars_id else str(x_origin[j])
-        for j in range(x_origin.shape[0])
-    ]
+    feature_names = [f"sv_{j}" for j in range(x_origin.shape[0])]
 
     mlp_code = pmg.dump_sklearn_MLPClassifier(clf, feature_names)
     adv_condition = (
@@ -94,9 +91,16 @@ if __name__ == "__main__":
         if i > 0 and prg[i - 1].toString() == "jmp":
             target_pc = i
 
+    init_symstate = plg.SymState()
+
+    for j in range(x_origin.shape[0]):
+        if j not in symbolic_vars_id:
+            init_symstate.set_concrete_val(var_counter[f"sv_{j}"], x_origin[j])
+
     target_pcs = {target_pc}
     constraints = plg.gexecute(
         prg,
+        init_symstate,
         optimizer,
         target_pcs,
         max_depth,
@@ -116,7 +120,7 @@ if __name__ == "__main__":
 
         vs = list(constraints.values())[j][1]
 
-        sv_dict = {}    
+        sv_dict = {}
         for i in symbolic_vars_id:
             if var_counter[f"sv_{i}"] not in vs:
                 break

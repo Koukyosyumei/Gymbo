@@ -559,13 +559,18 @@ struct SymState {
     std::vector<Sym> path_constraints;
 
     SymState() : pc(0), var_cnt(0){};
-    SymState(int pc, int varcnt, Mem mem, SMem smem,
+    SymState(int pc, int var_cnt, Mem mem, SMem smem,
              Linkedlist<Sym> symbolic_stack, std::vector<Sym> path_constraints)
         : pc(pc),
+          var_cnt(var_cnt),
           mem(mem),
           smem(smem),
           symbolic_stack(symbolic_stack),
           path_constraints(path_constraints) {}
+
+    void set_concrete_val(int var_id, float val) {
+        mem.emplace(var_id, FloatToWord(val));
+    }
 
     void print() {
         printf("Stack: [");
