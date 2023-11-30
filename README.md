@@ -100,7 +100,7 @@ Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each un
 
 ## `libgymbo`: Header-only Library
 
-Since gymbo consists of the header-only library, you can easily create your own symbolic execution engine.
+Since gymbo consists of the header-only library, you can easily create your own symbolic execution tool.
 
 ```cpp
 #include "libgymbo/compiler.h"
