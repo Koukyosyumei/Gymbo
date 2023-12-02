@@ -166,7 +166,7 @@ clf = MLPClassifier(activation="relu")
 clf.fit(X_train, y_train)
 
 
-mlp_code = pmg.dump_sklearn_MLPClassifier(clf, feature_names)
+mlp_code = pmg.dump_sklearn_MLP(clf, feature_names)
 adv_condition = (
         "("
         + " || ".join(
