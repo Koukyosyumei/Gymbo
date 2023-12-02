@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['children_274',['children',['../structgymbo_1_1Trace.html#ad6bd2092e3b5f010bd89e253c8bdd0aa',1,'gymbo::Trace']]]
+  ['blocks_380',['blocks',['../structgymbo_1_1Node.html#a53b58d8241b12ca3eaaf2eb9489d5e3c',1,'gymbo::Node']]]
 ];

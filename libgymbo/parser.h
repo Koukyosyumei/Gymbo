@@ -135,15 +135,15 @@ typedef enum {
  * @brief Structure representing a node in the Abstract Syntax Tree (AST).
  */
 struct Node {
-    NodeKind kind;  // Node kind
-    Node *lhs;      // Left-hand side
-    Node *rhs;      // Right-hand side
-    Node *cond;
-    Node *then;
-    Node *els;
-    std::vector<Node *> blocks;
-    float val;  // Used if kind == ND_NUM
-    int offset;
+    NodeKind kind;               ///< Node kind
+    Node *lhs;                   ///< Left-hand side
+    Node *rhs;                   ///< Right-hand side
+    Node *cond;                  ///< Condition
+    Node *then;                  ///< 'Then' branch
+    Node *els;                   ///< 'Else' branch
+    std::vector<Node *> blocks;  ///< Vector of child blocks
+    float val;                   ///< Used if kind is ND_NUM
+    int offset;                  ///< Offset
 };
 
 Node *assign(Token *&token, char *user_input);

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['smem_326',['SMem',['../type_8h.html#ac714ceb538af2de2adce25193f0e5eaf',1,'gymbo']]]
+  ['smem_446',['SMem',['../namespacegymbo.html#ac714ceb538af2de2adce25193f0e5eaf',1,'gymbo']]]
 ];

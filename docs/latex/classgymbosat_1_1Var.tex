@@ -30,8 +30,7 @@ Collaboration diagram for gymbosat\+::Var\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classgymbosat_1_1Var_a1edb862e80c7ba3865da7f929f9ce48c}\label{classgymbosat_1_1Var_a1edb862e80c7ba3865da7f929f9ce48c}} 
-{\bfseries Var} (std\+::string name)
+\mbox{\hyperlink{classgymbosat_1_1Var_a1edb862e80c7ba3865da7f929f9ce48c}{Var}} (std\+::string \mbox{\hyperlink{classgymbosat_1_1Var_a3e0fd6fa0fdb3a52b73624e7143f92a5}{name}})
 \item 
 std\+::string \mbox{\hyperlink{classgymbosat_1_1Var_ab22296034c16195902c0bb01799722e1}{to\+\_\+string}} () override
 \begin{DoxyCompactList}\small\item\em Convert the logical expression to a string representation. \end{DoxyCompactList}\item 
@@ -55,17 +54,31 @@ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgymbosat_1_1Expr}{Expr}} $>$ \mb
 \begin{DoxyCompactList}\small\item\em Get the right child expression. \end{DoxyCompactList}\item 
 std\+::unordered\+\_\+set$<$ std\+::string $>$ \mbox{\hyperlink{classgymbosat_1_1Var_a695a80ac8aea702f65bbc5ba0d34ab60}{literals}} () override
 \begin{DoxyCompactList}\small\item\em Get the literals present in the logical expression. \end{DoxyCompactList}\item 
-std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{sat_8h_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}} $>$ \mbox{\hyperlink{classgymbosat_1_1Var_a4429d6094daba3dd3278166676540a01}{literal\+Polarity}} (std\+::string var) override
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{namespacegymbosat_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}} $>$ \mbox{\hyperlink{classgymbosat_1_1Var_a4429d6094daba3dd3278166676540a01}{literal\+Polarity}} (std\+::string var) override
 \begin{DoxyCompactList}\small\item\em Get the polarities of literals with respect to a specific variable. \end{DoxyCompactList}\item 
 std\+::pair$<$ std\+::string, bool $>$ \mbox{\hyperlink{classgymbosat_1_1Var_aa59b38a82e6b503c295635c0dc68adef}{unit\+Clause}} () override
 \begin{DoxyCompactList}\small\item\em Get a unit clause from the logical expression. \end{DoxyCompactList}\item 
 std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgymbosat_1_1Expr}{Expr}} $>$ $>$ \mbox{\hyperlink{classgymbosat_1_1Var_a02163d40505204998ef8f84dd256c2a5}{clauses}} () override
 \begin{DoxyCompactList}\small\item\em Get a vector of clauses present in the logical expression. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classgymbosat_1_1Var_a3e0fd6fa0fdb3a52b73624e7143f92a5}{name}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 Class representing a variable in a logical expression. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgymbosat_1_1Var_a1edb862e80c7ba3865da7f929f9ce48c}\label{classgymbosat_1_1Var_a1edb862e80c7ba3865da7f929f9ce48c}} 
+\index{gymbosat::Var@{gymbosat::Var}!Var@{Var}}
+\index{Var@{Var}!gymbosat::Var@{gymbosat::Var}}
+\doxysubsubsection{\texorpdfstring{Var()}{Var()}}
+{\footnotesize\ttfamily gymbosat\+::\+Var\+::\+Var (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classgymbosat_1_1Var_a02163d40505204998ef8f84dd256c2a5}\label{classgymbosat_1_1Var_a02163d40505204998ef8f84dd256c2a5}} 
@@ -215,7 +228,7 @@ Implements \mbox{\hyperlink{classgymbosat_1_1Expr_a4d946a615d7d11020d5c9f0ee8fff
 \index{gymbosat::Var@{gymbosat::Var}!literalPolarity@{literalPolarity}}
 \index{literalPolarity@{literalPolarity}!gymbosat::Var@{gymbosat::Var}}
 \doxysubsubsection{\texorpdfstring{literalPolarity()}{literalPolarity()}}
-{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{sat_8h_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}}$>$ gymbosat\+::\+Var\+::literal\+Polarity (\begin{DoxyParamCaption}\item[{std\+::string}]{var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{namespacegymbosat_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}}$>$ gymbosat\+::\+Var\+::literal\+Polarity (\begin{DoxyParamCaption}\item[{std\+::string}]{var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -317,6 +330,15 @@ Pair representing a unit clause\+: (literal, value).
 
 
 Implements \mbox{\hyperlink{classgymbosat_1_1Expr_a766c9fc6f0ac28161a19e7a7184f61b6}{gymbosat\+::\+Expr}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classgymbosat_1_1Var_a3e0fd6fa0fdb3a52b73624e7143f92a5}\label{classgymbosat_1_1Var_a3e0fd6fa0fdb3a52b73624e7143f92a5}} 
+\index{gymbosat::Var@{gymbosat::Var}!name@{name}}
+\index{name@{name}!gymbosat::Var@{gymbosat::Var}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily std\+::string gymbosat\+::\+Var\+::name\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

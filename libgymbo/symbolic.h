@@ -473,7 +473,7 @@ inline void symStep(SymState &state, Instr instr,
             break;
         }
         default:
-            throw std::runtime_error("Unsupported instruction");
+            fprintf(stderr, "Detect unsupported instruction\n");
     }
 }
 }  // namespace gymbo

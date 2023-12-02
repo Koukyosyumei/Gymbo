@@ -30,7 +30,6 @@ Collaboration diagram for gymbosat\+::Expr\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classgymbosat_1_1Expr_af468583262a2936a1df0329a6331abb7}\label{classgymbosat_1_1Expr_af468583262a2936a1df0329a6331abb7}} 
 virtual \mbox{\hyperlink{classgymbosat_1_1Expr_af468583262a2936a1df0329a6331abb7}{$\sim$\+Expr}} ()
 \begin{DoxyCompactList}\small\item\em Destructor for the \mbox{\hyperlink{classgymbosat_1_1Expr}{Expr}} class. \end{DoxyCompactList}\item 
 virtual std\+::string \mbox{\hyperlink{classgymbosat_1_1Expr_a85bcfafb66b9e5fde802840c213fbcec}{to\+\_\+string}} ()=0
@@ -55,7 +54,7 @@ virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgymbosat_1_1Expr}{Expr}}
 \begin{DoxyCompactList}\small\item\em Get the right child expression. \end{DoxyCompactList}\item 
 virtual std\+::unordered\+\_\+set$<$ std\+::string $>$ \mbox{\hyperlink{classgymbosat_1_1Expr_aa7775d2a1555fd55529b1ed699ca84ea}{literals}} ()=0
 \begin{DoxyCompactList}\small\item\em Get the literals present in the logical expression. \end{DoxyCompactList}\item 
-virtual std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{sat_8h_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}} $>$ \mbox{\hyperlink{classgymbosat_1_1Expr_adea7d5e5285df79237a4b72a8b82c66d}{literal\+Polarity}} (std\+::string var)=0
+virtual std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{namespacegymbosat_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}} $>$ \mbox{\hyperlink{classgymbosat_1_1Expr_adea7d5e5285df79237a4b72a8b82c66d}{literal\+Polarity}} (std\+::string var)=0
 \begin{DoxyCompactList}\small\item\em Get the polarities of literals with respect to a specific variable. \end{DoxyCompactList}\item 
 virtual std\+::pair$<$ std\+::string, bool $>$ \mbox{\hyperlink{classgymbosat_1_1Expr_a766c9fc6f0ac28161a19e7a7184f61b6}{unit\+Clause}} ()=0
 \begin{DoxyCompactList}\small\item\em Get a unit clause from the logical expression. \end{DoxyCompactList}\item 
@@ -64,7 +63,7 @@ virtual std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgymbosa
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{sat_8h_a6d86d55f55f58425a61afe7f71066024}{Op\+Code}} \mbox{\hyperlink{classgymbosat_1_1Expr_aa84655ea020547722c7433af5c009d27}{opcode}}
+\mbox{\hyperlink{namespacegymbosat_a6d86d55f55f58425a61afe7f71066024}{Op\+Code}} \mbox{\hyperlink{classgymbosat_1_1Expr_aa84655ea020547722c7433af5c009d27}{opcode}}
 \item 
 std\+::string \mbox{\hyperlink{classgymbosat_1_1Expr_ad4a359e63fbd7d3fe3cb598300a1c61e}{name}}
 \end{DoxyCompactItemize}
@@ -72,6 +71,19 @@ std\+::string \mbox{\hyperlink{classgymbosat_1_1Expr_ad4a359e63fbd7d3fe3cb598300
 
 \doxysubsection{Detailed Description}
 Base class for representing logical expressions. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgymbosat_1_1Expr_af468583262a2936a1df0329a6331abb7}\label{classgymbosat_1_1Expr_af468583262a2936a1df0329a6331abb7}} 
+\index{gymbosat::Expr@{gymbosat::Expr}!````~Expr@{$\sim$Expr}}
+\index{````~Expr@{$\sim$Expr}!gymbosat::Expr@{gymbosat::Expr}}
+\doxysubsubsection{\texorpdfstring{$\sim$Expr()}{~Expr()}}
+{\footnotesize\ttfamily virtual gymbosat\+::\+Expr\+::$\sim$\+Expr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor for the \mbox{\hyperlink{classgymbosat_1_1Expr}{Expr}} class. 
+
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classgymbosat_1_1Expr_a2546fb8aae5d6557ff7b7063dcc94562}\label{classgymbosat_1_1Expr_a2546fb8aae5d6557ff7b7063dcc94562}} 
@@ -221,7 +233,7 @@ Implemented in \mbox{\hyperlink{classgymbosat_1_1Const_a0ba707c7cdda3b55db862df1
 \index{gymbosat::Expr@{gymbosat::Expr}!literalPolarity@{literalPolarity}}
 \index{literalPolarity@{literalPolarity}!gymbosat::Expr@{gymbosat::Expr}}
 \doxysubsubsection{\texorpdfstring{literalPolarity()}{literalPolarity()}}
-{\footnotesize\ttfamily virtual std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{sat_8h_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}}$>$ gymbosat\+::\+Expr\+::literal\+Polarity (\begin{DoxyParamCaption}\item[{std\+::string}]{var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{namespacegymbosat_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}}$>$ gymbosat\+::\+Expr\+::literal\+Polarity (\begin{DoxyParamCaption}\item[{std\+::string}]{var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -337,7 +349,7 @@ Name associated with the expression. \mbox{\Hypertarget{classgymbosat_1_1Expr_aa
 \index{gymbosat::Expr@{gymbosat::Expr}!opcode@{opcode}}
 \index{opcode@{opcode}!gymbosat::Expr@{gymbosat::Expr}}
 \doxysubsubsection{\texorpdfstring{opcode}{opcode}}
-{\footnotesize\ttfamily \mbox{\hyperlink{sat_8h_a6d86d55f55f58425a61afe7f71066024}{Op\+Code}} gymbosat\+::\+Expr\+::opcode}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacegymbosat_a6d86d55f55f58425a61afe7f71066024}{Op\+Code}} gymbosat\+::\+Expr\+::opcode}
 
 Operation code for the expression. 
 

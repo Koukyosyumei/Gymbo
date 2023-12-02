@@ -20,20 +20,20 @@ Gymbo presently supports C-\/like programs with the following BNF grammar\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{program    = \mbox{\hyperlink{parser_8h_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}}*}
-\DoxyCodeLine{\mbox{\hyperlink{parser_8h_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}}       = \mbox{\hyperlink{parser_8h_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} \textcolor{stringliteral}{"{};"{}}}
-\DoxyCodeLine{         | \textcolor{stringliteral}{"{}\{"{}} \mbox{\hyperlink{parser_8h_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}}* \textcolor{stringliteral}{"{}\}"{}}}
-\DoxyCodeLine{         | \textcolor{stringliteral}{"{}if"{}} \textcolor{stringliteral}{"{}("{}} \mbox{\hyperlink{parser_8h_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} \textcolor{stringliteral}{"{})"{}} \mbox{\hyperlink{parser_8h_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}} (\textcolor{stringliteral}{"{}else"{}} stmt)?}
-\DoxyCodeLine{         | \textcolor{stringliteral}{"{}return"{}} \mbox{\hyperlink{parser_8h_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} \textcolor{stringliteral}{"{};"{}}}
-\DoxyCodeLine{\mbox{\hyperlink{parser_8h_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}}       = \mbox{\hyperlink{parser_8h_a47b7251f53d2ee3e14494fb9f7a2bc72}{assign}}}
-\DoxyCodeLine{\mbox{\hyperlink{parser_8h_a47b7251f53d2ee3e14494fb9f7a2bc72}{assign}}     = \mbox{\hyperlink{parser_8h_aee43a52e33ae6335a16161d16abd1079}{logical}} (\textcolor{stringliteral}{"{}="{}} assign)?}
-\DoxyCodeLine{\mbox{\hyperlink{parser_8h_aee43a52e33ae6335a16161d16abd1079}{logical}}    = \mbox{\hyperlink{parser_8h_a93198308f32bb09209f19ea243dfbd7e}{equality}} (\textcolor{stringliteral}{"{}\&\&"{}} equality | \textcolor{stringliteral}{"{}||"{}} equality)*}
-\DoxyCodeLine{\mbox{\hyperlink{parser_8h_a93198308f32bb09209f19ea243dfbd7e}{equality}}   = \mbox{\hyperlink{parser_8h_a7782376e331d91dd967f5a7b1c23c1ba}{relational}} (\textcolor{stringliteral}{"{}=="{}} relational | \textcolor{stringliteral}{"{}!="{}} relational)*}
-\DoxyCodeLine{\mbox{\hyperlink{parser_8h_a7782376e331d91dd967f5a7b1c23c1ba}{relational}} = \mbox{\hyperlink{parser_8h_a7b0b70c62f575e191b45877710aecc9c}{add}} (\textcolor{stringliteral}{"{}<"{}} add | \textcolor{stringliteral}{"{}<="{}} add | \textcolor{stringliteral}{"{}>"{}} add | \textcolor{stringliteral}{"{}>="{}} add)*}
-\DoxyCodeLine{\mbox{\hyperlink{parser_8h_a7b0b70c62f575e191b45877710aecc9c}{add}}        = \mbox{\hyperlink{parser_8h_a586e5510f2ba9c76f7bcb78a3dafd69a}{mul}} (\textcolor{stringliteral}{"{}+"{}} mul | \textcolor{stringliteral}{"{}-\/"{}} mul)*}
-\DoxyCodeLine{\mbox{\hyperlink{parser_8h_a586e5510f2ba9c76f7bcb78a3dafd69a}{mul}}        = \mbox{\hyperlink{parser_8h_ac29372113d1f5d63e50aec27aa2bab58}{unary}} (\textcolor{stringliteral}{"{}*"{}} unary | \textcolor{stringliteral}{"{}/"{}} unary)*}
-\DoxyCodeLine{\mbox{\hyperlink{parser_8h_ac29372113d1f5d63e50aec27aa2bab58}{unary}}      = (\textcolor{stringliteral}{"{}+"{}} | \textcolor{stringliteral}{"{}-\/"{}})? primary}
-\DoxyCodeLine{primary    = num | ident | \textcolor{stringliteral}{"{}("{}} expr \textcolor{stringliteral}{"{})"{}}}
+\DoxyCodeLine{program    = \mbox{\hyperlink{namespacegymbo_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}}*}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}}       = \mbox{\hyperlink{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} \textcolor{stringliteral}{"{};"{}}}
+\DoxyCodeLine{         | \textcolor{stringliteral}{"{}\{"{}} \mbox{\hyperlink{namespacegymbo_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}}* \textcolor{stringliteral}{"{}\}"{}}}
+\DoxyCodeLine{         | \textcolor{stringliteral}{"{}if"{}} \textcolor{stringliteral}{"{}("{}} \mbox{\hyperlink{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} \textcolor{stringliteral}{"{})"{}} \mbox{\hyperlink{namespacegymbo_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}} (\textcolor{stringliteral}{"{}else"{}} \mbox{\hyperlink{namespacegymbo_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}})?}
+\DoxyCodeLine{         | \textcolor{stringliteral}{"{}return"{}} \mbox{\hyperlink{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} \textcolor{stringliteral}{"{};"{}}}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}}       = \mbox{\hyperlink{namespacegymbo_a47b7251f53d2ee3e14494fb9f7a2bc72}{assign}}}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a47b7251f53d2ee3e14494fb9f7a2bc72}{assign}}     = \mbox{\hyperlink{namespacegymbo_aee43a52e33ae6335a16161d16abd1079}{logical}} (\textcolor{stringliteral}{"{}="{}} \mbox{\hyperlink{namespacegymbo_a47b7251f53d2ee3e14494fb9f7a2bc72}{assign}})?}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_aee43a52e33ae6335a16161d16abd1079}{logical}}    = \mbox{\hyperlink{namespacegymbo_a93198308f32bb09209f19ea243dfbd7e}{equality}} (\textcolor{stringliteral}{"{}\&\&"{}} \mbox{\hyperlink{namespacegymbo_a93198308f32bb09209f19ea243dfbd7e}{equality}} | \textcolor{stringliteral}{"{}||"{}} \mbox{\hyperlink{namespacegymbo_a93198308f32bb09209f19ea243dfbd7e}{equality}})*}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a93198308f32bb09209f19ea243dfbd7e}{equality}}   = \mbox{\hyperlink{namespacegymbo_a7782376e331d91dd967f5a7b1c23c1ba}{relational}} (\textcolor{stringliteral}{"{}=="{}} \mbox{\hyperlink{namespacegymbo_a7782376e331d91dd967f5a7b1c23c1ba}{relational}} | \textcolor{stringliteral}{"{}!="{}} \mbox{\hyperlink{namespacegymbo_a7782376e331d91dd967f5a7b1c23c1ba}{relational}})*}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a7782376e331d91dd967f5a7b1c23c1ba}{relational}} = \mbox{\hyperlink{namespacegymbo_a7b0b70c62f575e191b45877710aecc9c}{add}} (\textcolor{stringliteral}{"{}<"{}} \mbox{\hyperlink{namespacegymbo_a7b0b70c62f575e191b45877710aecc9c}{add}} | \textcolor{stringliteral}{"{}<="{}} \mbox{\hyperlink{namespacegymbo_a7b0b70c62f575e191b45877710aecc9c}{add}} | \textcolor{stringliteral}{"{}>"{}} \mbox{\hyperlink{namespacegymbo_a7b0b70c62f575e191b45877710aecc9c}{add}} | \textcolor{stringliteral}{"{}>="{}} \mbox{\hyperlink{namespacegymbo_a7b0b70c62f575e191b45877710aecc9c}{add}})*}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a7b0b70c62f575e191b45877710aecc9c}{add}}        = \mbox{\hyperlink{namespacegymbo_a586e5510f2ba9c76f7bcb78a3dafd69a}{mul}} (\textcolor{stringliteral}{"{}+"{}} \mbox{\hyperlink{namespacegymbo_a586e5510f2ba9c76f7bcb78a3dafd69a}{mul}} | \textcolor{stringliteral}{"{}-\/"{}} \mbox{\hyperlink{namespacegymbo_a586e5510f2ba9c76f7bcb78a3dafd69a}{mul}})*}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a586e5510f2ba9c76f7bcb78a3dafd69a}{mul}}        = \mbox{\hyperlink{namespacegymbo_ac29372113d1f5d63e50aec27aa2bab58}{unary}} (\textcolor{stringliteral}{"{}*"{}} \mbox{\hyperlink{namespacegymbo_ac29372113d1f5d63e50aec27aa2bab58}{unary}} | \textcolor{stringliteral}{"{}/"{}} \mbox{\hyperlink{namespacegymbo_ac29372113d1f5d63e50aec27aa2bab58}{unary}})*}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_ac29372113d1f5d63e50aec27aa2bab58}{unary}}      = (\textcolor{stringliteral}{"{}+"{}} | \textcolor{stringliteral}{"{}-\/"{}})? \mbox{\hyperlink{namespacegymbo_aab835796afd998bcd50e272c9eb29d00}{primary}}}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_aab835796afd998bcd50e272c9eb29d00}{primary}}    = num | ident | \textcolor{stringliteral}{"{}("{}} \mbox{\hyperlink{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} \textcolor{stringliteral}{"{})"{}}}
 
 \end{DoxyCode}
 
@@ -106,12 +106,20 @@ Since gymbo consists of the header-\/only library, you can easily create your ow
 \DoxyCodeLine{\textcolor{keywordtype}{char} user\_input[] = \textcolor{stringliteral}{"{}if (a < 3) return 1;"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::vector<gymbo::Node *> code;}
-\DoxyCodeLine{\mbox{\hyperlink{type_8h_a9b6a88c2be45a5e3fd3f053681f89733}{gymbo::Prog}} prg;}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{gymbo::Prog}} prg;}
 \DoxyCodeLine{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{gymbo::GDOptimizer}} optimizer(num\_itrs, step\_size);}
 \DoxyCodeLine{\mbox{\hyperlink{structgymbo_1_1SymState}{gymbo::SymState}} init;}
-\DoxyCodeLine{\mbox{\hyperlink{type_8h_aea0120f1cdc1417f9b6b8480ac562389}{gymbo::PathConstraintsTable}} cache\_constraints;}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{gymbo::PathConstraintsTable}} cache\_constraints;}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// ... (Code snippet from README)}}
+\DoxyCodeLine{\textcolor{comment}{// tokenize the input source code}}
+\DoxyCodeLine{\mbox{\hyperlink{structgymbo_1_1Token}{gymbo::Token}} *token = \mbox{\hyperlink{namespacegymbo_a89c8cb7e3b04d3d02f0cba69ab593981}{gymbo::tokenize}}(user\_input);}
+\DoxyCodeLine{\textcolor{comment}{// generate AST from the tokens}}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a5e7728b7fbac9bf79ae665cf9b94f443}{gymbo::generate\_ast}}(token, user\_input, code);}
+\DoxyCodeLine{\textcolor{comment}{// construct virtual stack machine from AST}}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}{gymbo::compile\_ast}}(code, prg);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// execute gradient-\/based symbolie execution}}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a8aa21505f18c246fc0adafb360939fe0}{gymbo::run\_gymbo}}(prg, optimizer, init, cache\_constraints, ...);}
 
 \end{DoxyCode}
 \hypertarget{index_python_sec}{}\doxysection{Python API}\label{index_python_sec}

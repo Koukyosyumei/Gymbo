@@ -1,4 +1,10 @@
 /**
+ * @file main.h
+ * @brief Main Header
+ * @author Hideaki Takahashi
+ */
+
+/**
  * @mainpage Gymbo: Gradient-based Symbolic Execution
  *
  * @image html /img/gymbo.drawio.svg
@@ -125,7 +131,15 @@
  * gymbo::SymState init;
  * gymbo::PathConstraintsTable cache_constraints;
  *
- * // ... (Code snippet from README)
+ * // tokenize the input source code
+ * gymbo::Token *token = gymbo::tokenize(user_input);
+ * // generate AST from the tokens
+ * gymbo::generate_ast(token, user_input, code);
+ * // construct virtual stack machine from AST
+ * gymbo::compile_ast(code, prg);
+ *
+ * // execute gradient-based symbolie execution
+ * gymbo::run_gymbo(prg, optimizer, init, cache_constraints, ...);
  * ```
  *
  * @section python_sec Python API

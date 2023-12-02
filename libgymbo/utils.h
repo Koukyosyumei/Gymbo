@@ -9,23 +9,57 @@
 #include <cmath>
 #include <cstdint>
 #include <cstring>
-#include <iostream>
 #include <string>
 
+/**
+ * @brief Checks if a float is an integer.
+ *
+ * The `is_integer` function checks if a given float value is an integer.
+ *
+ * @param x The float value to check.
+ * @return `true` if the float is an integer, otherwise `false`.
+ */
 inline bool is_integer(float x) { return std::floor(x) == x; }
 
+/**
+ * @brief Converts a float value to a 32-bit word representation.
+ *
+ * The `FloatToWord` function converts a float value to its 32-bit word
+ * representation using memcpy.
+ *
+ * @param val The float value to convert.
+ * @return The 32-bit word representation of the float.
+ */
 inline uint32_t FloatToWord(float val) {
     uint32_t word;
     std::memcpy(&word, &val, sizeof(val));
     return word;
 }
 
+/**
+ * @brief Converts a 32-bit word representation to a float value.
+ *
+ * The `wordToFloat` function converts a 32-bit word representation to its
+ * corresponding float value using memcpy.
+ *
+ * @param word The 32-bit word representation.
+ * @return The float value.
+ */
 inline float wordToFloat(uint32_t word) {
     float val;
     std::memcpy(&val, &word, sizeof(word));
     return val;
 }
 
+/**
+ * @brief Converts a 32-bit word representation to an integer value.
+ *
+ * The `wordToInt` function converts a 32-bit word representation to its
+ * corresponding integer value using static_cast.
+ *
+ * @param word The 32-bit word representation.
+ * @return The integer value.
+ */
 inline int wordToInt(uint32_t word) { return static_cast<int>(word); }
 
 /**

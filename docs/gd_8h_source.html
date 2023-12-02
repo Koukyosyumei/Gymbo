@@ -75,7 +75,7 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="type_8h.html">type.h</a>&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>gymbo {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacegymbo.html">gymbo</a> {</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structgymbo_1_1GDOptimizer.html">   28</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> {</div>
 <div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structgymbo_1_1GDOptimizer.html#a7d5521480b4f536710d5a06897fa65bd">   29</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structgymbo_1_1GDOptimizer.html#a7d5521480b4f536710d5a06897fa65bd">num_epochs</a>;    </div>
@@ -118,7 +118,7 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        }</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        std::mt19937 <a class="code" href="compiler_8h.html#ae193b98ee15e54838e9a8433aff4c379">gen</a>(<a class="code" href="structgymbo_1_1GDOptimizer.html#ab1631b9a0026ed9c12721df5900eb347">seed</a>);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        std::mt19937 <a class="code" href="namespacegymbo.html#ae193b98ee15e54838e9a8433aff4c379">gen</a>(<a class="code" href="structgymbo_1_1GDOptimizer.html#ab1631b9a0026ed9c12721df5900eb347">seed</a>);</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        std::uniform_int_distribution&lt;&gt; idist(<a class="code" href="structgymbo_1_1GDOptimizer.html#a7a81435ec290f50a98eaff343ab61d63">param_low</a>, <a class="code" href="structgymbo_1_1GDOptimizer.html#ab14c4f9993f80b8e023a4c456c6e0b5f">param_high</a>);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        std::uniform_real_distribution&lt;float&gt; rdist(<a class="code" href="structgymbo_1_1GDOptimizer.html#a7a81435ec290f50a98eaff343ab61d63">param_low</a>, <a class="code" href="structgymbo_1_1GDOptimizer.html#ab14c4f9993f80b8e023a4c456c6e0b5f">param_high</a>);</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
@@ -132,9 +132,9 @@ $(function() {
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : unique_var_ids) {</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordflow">if</span> (params.find(i) == params.end()) {</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="structgymbo_1_1GDOptimizer.html#a2a35f800649f9c57bc1f7d23f9f6110b">init_param_uniform_int</a>) {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                    params.emplace(std::make_pair(i, idist(<a class="code" href="compiler_8h.html#ae193b98ee15e54838e9a8433aff4c379">gen</a>)));</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                    params.emplace(std::make_pair(i, idist(<a class="code" href="namespacegymbo.html#ae193b98ee15e54838e9a8433aff4c379">gen</a>)));</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                    params.emplace(std::make_pair(i, rdist(<a class="code" href="compiler_8h.html#ae193b98ee15e54838e9a8433aff4c379">gen</a>)));</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                    params.emplace(std::make_pair(i, rdist(<a class="code" href="namespacegymbo.html#ae193b98ee15e54838e9a8433aff4c379">gen</a>)));</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                }</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                is_const.emplace(std::make_pair(i, <span class="keyword">false</span>));</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            } <span class="keywordflow">else</span> {</div>
@@ -180,7 +180,8 @@ $(function() {
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    }</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;};</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;}  <span class="comment">// namespace gymbo</span></div>
-<div class="ttc" id="acompiler_8h_html_ae193b98ee15e54838e9a8433aff4c379"><div class="ttname"><a href="compiler_8h.html#ae193b98ee15e54838e9a8433aff4c379">gymbo::gen</a></div><div class="ttdeci">void gen(Node *node, Prog &amp;prg)</div><div class="ttdef"><b>Definition:</b> compiler.h:35</div></div>
+<div class="ttc" id="anamespacegymbo_html"><div class="ttname"><a href="namespacegymbo.html">gymbo</a></div><div class="ttdef"><b>Definition:</b> compiler.h:11</div></div>
+<div class="ttc" id="anamespacegymbo_html_ae193b98ee15e54838e9a8433aff4c379"><div class="ttname"><a href="namespacegymbo.html#ae193b98ee15e54838e9a8433aff4c379">gymbo::gen</a></div><div class="ttdeci">void gen(Node *node, Prog &amp;prg)</div><div class="ttdef"><b>Definition:</b> compiler.h:35</div></div>
 <div class="ttc" id="astructgymbo_1_1GDOptimizer_html"><div class="ttname"><a href="structgymbo_1_1GDOptimizer.html">gymbo::GDOptimizer</a></div><div class="ttdoc">Gradient Descent Optimizer for Symbolic Path Constraints.</div><div class="ttdef"><b>Definition:</b> gd.h:28</div></div>
 <div class="ttc" id="astructgymbo_1_1GDOptimizer_html_a1dab2d9895b58c4dda052a00cf8058ee"><div class="ttname"><a href="structgymbo_1_1GDOptimizer.html#a1dab2d9895b58c4dda052a00cf8058ee">gymbo::GDOptimizer::sign_grad</a></div><div class="ttdeci">bool sign_grad</div><div class="ttdef"><b>Definition:</b> gd.h:34</div></div>
 <div class="ttc" id="astructgymbo_1_1GDOptimizer_html_a2a35f800649f9c57bc1f7d23f9f6110b"><div class="ttname"><a href="structgymbo_1_1GDOptimizer.html#a2a35f800649f9c57bc1f7d23f9f6110b">gymbo::GDOptimizer::init_param_uniform_int</a></div><div class="ttdeci">bool init_param_uniform_int</div><div class="ttdef"><b>Definition:</b> gd.h:36</div></div>

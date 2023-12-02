@@ -21,14 +21,19 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \includegraphics[width=199pt]{symbolic_8h__dep__incl}
 \end{center}
 \end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacegymbo}{gymbo}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-Trace \mbox{\hyperlink{symbolic_8h_a8aa21505f18c246fc0adafb360939fe0}{gymbo\+::run\+\_\+gymbo}} (Prog \&prog, GDOptimizer \&optimizer, Sym\+State \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, Path\+Constraints\+Table \&constraints\+\_\+cache, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
+Trace \mbox{\hyperlink{namespacegymbo_a8aa21505f18c246fc0adafb360939fe0}{gymbo\+::run\+\_\+gymbo}} (Prog \&prog, GDOptimizer \&optimizer, Sym\+State \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, Path\+Constraints\+Table \&constraints\+\_\+cache, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
 \begin{DoxyCompactList}\small\item\em Symbolically Execute a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{symbolic_8h_a70694fc6a91234300048503b2fe15a9b}{gymbo\+::sym\+Step}} (Sym\+State \&state, Instr instr, std\+::vector$<$ Sym\+State $>$ \&result)
+void \mbox{\hyperlink{namespacegymbo_a70694fc6a91234300048503b2fe15a9b}{gymbo\+::sym\+Step}} (Sym\+State \&state, Instr instr, std\+::vector$<$ Sym\+State $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Symbolically Execute a Single Instruction of a Program. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{symbolic_8h_a50a6f585caaa9c8ca66826268b46dcc9}{gymbo\+::initialize\+\_\+params}} (std\+::unordered\+\_\+map$<$ int, float $>$ \&params, Sym\+State \&state, bool ignore\+\_\+memory)
+void \mbox{\hyperlink{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}{gymbo\+::initialize\+\_\+params}} (std\+::unordered\+\_\+map$<$ int, float $>$ \&params, Sym\+State \&state, bool ignore\+\_\+memory)
 \begin{DoxyCompactList}\small\item\em Initialize Parameter Values from Memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -38,90 +43,3 @@ Core implementation of gradient-\/based symbolic execution.
 \begin{DoxyAuthor}{Author}
 Hideaki Takahashi 
 \end{DoxyAuthor}
-
-
-\doxysubsection{Function Documentation}
-\mbox{\Hypertarget{symbolic_8h_a50a6f585caaa9c8ca66826268b46dcc9}\label{symbolic_8h_a50a6f585caaa9c8ca66826268b46dcc9}} 
-\index{symbolic.h@{symbolic.h}!initialize\_params@{initialize\_params}}
-\index{initialize\_params@{initialize\_params}!symbolic.h@{symbolic.h}}
-\doxysubsubsection{\texorpdfstring{initialize\_params()}{initialize\_params()}}
-{\footnotesize\ttfamily void gymbo\+::initialize\+\_\+params (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{params,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{bool}]{ignore\+\_\+memory }\end{DoxyParamCaption})}
-
-
-
-Initialize Parameter Values from Memory. 
-
-This function initializes parameter values from memory, provided that {\ttfamily ignore\+\_\+memory} is set to false.
-
-
-\begin{DoxyParams}{Parameters}
-{\em params} & A map to store parameter values. \\
-\hline
-{\em state} & The symbolic state of the program. \\
-\hline
-{\em ignore\+\_\+memory} & A flag indicating whether memory constraints should be ignored. \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{symbolic_8h_a8aa21505f18c246fc0adafb360939fe0}\label{symbolic_8h_a8aa21505f18c246fc0adafb360939fe0}} 
-\index{symbolic.h@{symbolic.h}!run\_gymbo@{run\_gymbo}}
-\index{run\_gymbo@{run\_gymbo}!symbolic.h@{symbolic.h}}
-\doxysubsubsection{\texorpdfstring{run\_gymbo()}{run\_gymbo()}}
-{\footnotesize\ttfamily Trace gymbo\+::run\+\_\+gymbo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{\mbox{\hyperlink{type_8h_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{int}]{max\+Depth,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Symbolically Execute a Program with Gradient Descent Optimization. 
-
-This function conducts symbolic execution of a given program while simultaneously optimizing the path constraints using the provided gradient descent optimizer, {\ttfamily GDOptimizer}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em prog} & The program to symbolically execute. \\
-\hline
-{\em optimizer} & The gradient descent optimizer for parameter optimization. \\
-\hline
-{\em state} & The initial symbolic state of the program. \\
-\hline
-{\em target\+\_\+pcs} & The set of pc where gymbo executes path-\/constraints solving. If this set is empty or contains -\/1, gymbo solves all path-\/constraints. \\
-\hline
-{\em constraints\+\_\+cache} & A cache for previously found path constraints. \\
-\hline
-{\em max\+Depth} & The maximum depth of symbolic exploration. \\
-\hline
-{\em max\+SAT} & The maximum number of SAT constraints to collect. \\
-\hline
-{\em max\+UNSAT} & The maximum number of UNSAT constraints to collect. \\
-\hline
-{\em max\+\_\+num\+\_\+trials} & The maximum number of trials for each gradient descent. \\
-\hline
-{\em ignore\+\_\+memory} & If set to true, constraints derived from memory will be ignored. \\
-\hline
-{\em use\+\_\+dpll} & If set to true, use DPLL to decide the initial assignment for each term. \\
-\hline
-{\em verbose\+\_\+level} & The level of verbosity. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A trace of the symbolic execution. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{symbolic_8h_a70694fc6a91234300048503b2fe15a9b}\label{symbolic_8h_a70694fc6a91234300048503b2fe15a9b}} 
-\index{symbolic.h@{symbolic.h}!symStep@{symStep}}
-\index{symStep@{symStep}!symbolic.h@{symbolic.h}}
-\doxysubsubsection{\texorpdfstring{symStep()}{symStep()}}
-{\footnotesize\ttfamily void gymbo\+::sym\+Step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{\mbox{\hyperlink{classgymbo_1_1Instr}{Instr}}}]{instr,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Symbolically Execute a Single Instruction of a Program. 
-
-This function symbolically executes a single instruction of a program and generates new symbolic states, representing possible outcomes of the instruction\textquotesingle{}s execution.
-
-
-\begin{DoxyParams}{Parameters}
-{\em state} & The state of the program before the instruction is executed. \\
-\hline
-{\em instr} & The instruction to be executed. \\
-\hline
-{\em result} & A list of new symbolic states, each representing a possible outcome. \\
-\hline
-\end{DoxyParams}

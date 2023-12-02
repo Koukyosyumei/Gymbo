@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">symbolic.h File Reference</div>  </div>
@@ -93,12 +94,11 @@ Include dependency graph for symbolic.h:</div>
 <area shape="rect" title=" " alt="" coords="441,229,501,256"/>
 <area shape="rect" title=" " alt="" coords="525,229,587,256"/>
 <area shape="rect" href="utils_8h.html" title="Utility funcitons and classes." alt="" coords="611,229,674,256"/>
-<area shape="rect" title=" " alt="" coords="393,304,452,331"/>
-<area shape="rect" title=" " alt="" coords="477,304,539,331"/>
-<area shape="rect" title=" " alt="" coords="564,304,631,331"/>
-<area shape="rect" title=" " alt="" coords="655,304,721,331"/>
-<area shape="rect" title=" " alt="" coords="745,304,825,331"/>
-<area shape="rect" title=" " alt="" coords="849,304,908,331"/>
+<area shape="rect" title=" " alt="" coords="439,304,497,331"/>
+<area shape="rect" title=" " alt="" coords="522,304,585,331"/>
+<area shape="rect" title=" " alt="" coords="609,304,676,331"/>
+<area shape="rect" title=" " alt="" coords="700,304,767,331"/>
+<area shape="rect" title=" " alt="" coords="791,304,849,331"/>
 <area shape="rect" title=" " alt="" coords="415,155,492,181"/>
 </map>
 </div>
@@ -114,238 +114,27 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 <p><a href="symbolic_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacegymbo"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html">gymbo</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8aa21505f18c246fc0adafb360939fe0"><td class="memItemLeft" align="right" valign="top">Trace&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbolic_8h.html#a8aa21505f18c246fc0adafb360939fe0">gymbo::run_gymbo</a> (Prog &amp;prog, GDOptimizer &amp;optimizer, SymState &amp;state, std::unordered_set&lt; int &gt; &amp;target_pcs, PathConstraintsTable &amp;constraints_cache, int maxDepth, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
-<tr class="memdesc:a8aa21505f18c246fc0adafb360939fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Program with Gradient Descent Optimization.  <a href="symbolic_8h.html#a8aa21505f18c246fc0adafb360939fe0">More...</a><br /></td></tr>
+<tr class="memitem:a8aa21505f18c246fc0adafb360939fe0"><td class="memItemLeft" align="right" valign="top">Trace&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a8aa21505f18c246fc0adafb360939fe0">gymbo::run_gymbo</a> (Prog &amp;prog, GDOptimizer &amp;optimizer, SymState &amp;state, std::unordered_set&lt; int &gt; &amp;target_pcs, PathConstraintsTable &amp;constraints_cache, int maxDepth, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
+<tr class="memdesc:a8aa21505f18c246fc0adafb360939fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Program with Gradient Descent Optimization.  <a href="namespacegymbo.html#a8aa21505f18c246fc0adafb360939fe0">More...</a><br /></td></tr>
 <tr class="separator:a8aa21505f18c246fc0adafb360939fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70694fc6a91234300048503b2fe15a9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbolic_8h.html#a70694fc6a91234300048503b2fe15a9b">gymbo::symStep</a> (SymState &amp;state, Instr instr, std::vector&lt; SymState &gt; &amp;result)</td></tr>
-<tr class="memdesc:a70694fc6a91234300048503b2fe15a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Single Instruction of a Program.  <a href="symbolic_8h.html#a70694fc6a91234300048503b2fe15a9b">More...</a><br /></td></tr>
+<tr class="memitem:a70694fc6a91234300048503b2fe15a9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a70694fc6a91234300048503b2fe15a9b">gymbo::symStep</a> (SymState &amp;state, Instr instr, std::vector&lt; SymState &gt; &amp;result)</td></tr>
+<tr class="memdesc:a70694fc6a91234300048503b2fe15a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Single Instruction of a Program.  <a href="namespacegymbo.html#a70694fc6a91234300048503b2fe15a9b">More...</a><br /></td></tr>
 <tr class="separator:a70694fc6a91234300048503b2fe15a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50a6f585caaa9c8ca66826268b46dcc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbolic_8h.html#a50a6f585caaa9c8ca66826268b46dcc9">gymbo::initialize_params</a> (std::unordered_map&lt; int, float &gt; &amp;params, SymState &amp;state, bool ignore_memory)</td></tr>
-<tr class="memdesc:a50a6f585caaa9c8ca66826268b46dcc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Parameter Values from Memory.  <a href="symbolic_8h.html#a50a6f585caaa9c8ca66826268b46dcc9">More...</a><br /></td></tr>
+<tr class="memitem:a50a6f585caaa9c8ca66826268b46dcc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a50a6f585caaa9c8ca66826268b46dcc9">gymbo::initialize_params</a> (std::unordered_map&lt; int, float &gt; &amp;params, SymState &amp;state, bool ignore_memory)</td></tr>
+<tr class="memdesc:a50a6f585caaa9c8ca66826268b46dcc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Parameter Values from Memory.  <a href="namespacegymbo.html#a50a6f585caaa9c8ca66826268b46dcc9">More...</a><br /></td></tr>
 <tr class="separator:a50a6f585caaa9c8ca66826268b46dcc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Core implementation of gradient-based symbolic execution. </p>
 <dl class="section author"><dt>Author</dt><dd>Hideaki Takahashi </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a50a6f585caaa9c8ca66826268b46dcc9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50a6f585caaa9c8ca66826268b46dcc9">&#9670;&nbsp;</a></span>initialize_params()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void gymbo::initialize_params </td>
-          <td>(</td>
-          <td class="paramtype">std::unordered_map&lt; int, float &gt; &amp;&#160;</td>
-          <td class="paramname"><em>params</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
-          <td class="paramname"><em>state</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>ignore_memory</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Initialize Parameter Values from Memory. </p>
-<p>This function initializes parameter values from memory, provided that <code>ignore_memory</code> is set to false.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">params</td><td>A map to store parameter values. </td></tr>
-    <tr><td class="paramname">state</td><td>The symbolic state of the program. </td></tr>
-    <tr><td class="paramname">ignore_memory</td><td>A flag indicating whether memory constraints should be ignored. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a8aa21505f18c246fc0adafb360939fe0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8aa21505f18c246fc0adafb360939fe0">&#9670;&nbsp;</a></span>run_gymbo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Trace gymbo::run_gymbo </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="type_8h.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;&#160;</td>
-          <td class="paramname"><em>prog</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;&#160;</td>
-          <td class="paramname"><em>optimizer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
-          <td class="paramname"><em>state</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::unordered_set&lt; int &gt; &amp;&#160;</td>
-          <td class="paramname"><em>target_pcs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="type_8h.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;&#160;</td>
-          <td class="paramname"><em>constraints_cache</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>maxDepth</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>maxSAT</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>maxUNSAT</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>max_num_trials</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>ignore_memory</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>use_dpll</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>verbose_level</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Symbolically Execute a Program with Gradient Descent Optimization. </p>
-<p>This function conducts symbolic execution of a given program while simultaneously optimizing the path constraints using the provided gradient descent optimizer, <code>GDOptimizer</code>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">prog</td><td>The program to symbolically execute. </td></tr>
-    <tr><td class="paramname">optimizer</td><td>The gradient descent optimizer for parameter optimization. </td></tr>
-    <tr><td class="paramname">state</td><td>The initial symbolic state of the program. </td></tr>
-    <tr><td class="paramname">target_pcs</td><td>The set of pc where gymbo executes path-constraints solving. If this set is empty or contains -1, gymbo solves all path-constraints. </td></tr>
-    <tr><td class="paramname">constraints_cache</td><td>A cache for previously found path constraints. </td></tr>
-    <tr><td class="paramname">maxDepth</td><td>The maximum depth of symbolic exploration. </td></tr>
-    <tr><td class="paramname">maxSAT</td><td>The maximum number of SAT constraints to collect. </td></tr>
-    <tr><td class="paramname">maxUNSAT</td><td>The maximum number of UNSAT constraints to collect. </td></tr>
-    <tr><td class="paramname">max_num_trials</td><td>The maximum number of trials for each gradient descent. </td></tr>
-    <tr><td class="paramname">ignore_memory</td><td>If set to true, constraints derived from memory will be ignored. </td></tr>
-    <tr><td class="paramname">use_dpll</td><td>If set to true, use DPLL to decide the initial assignment for each term. </td></tr>
-    <tr><td class="paramname">verbose_level</td><td>The level of verbosity. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A trace of the symbolic execution. </dd></dl>
-
-</div>
-</div>
-<a id="a70694fc6a91234300048503b2fe15a9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70694fc6a91234300048503b2fe15a9b">&#9670;&nbsp;</a></span>symStep()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void gymbo::symStep </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
-          <td class="paramname"><em>state</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classgymbo_1_1Instr.html">Instr</a>&#160;</td>
-          <td class="paramname"><em>instr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>result</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Symbolically Execute a Single Instruction of a Program. </p>
-<p>This function symbolically executes a single instruction of a program and generates new symbolic states, representing possible outcomes of the instruction's execution.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">state</td><td>The state of the program before the instruction is executed. </td></tr>
-    <tr><td class="paramname">instr</td><td>The instruction to be executed. </td></tr>
-    <tr><td class="paramname">result</td><td>A list of new symbolic states, each representing a possible outcome. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
