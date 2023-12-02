@@ -8,6 +8,8 @@ Compared to other prominent symbolic execution tools, Gymbo's implementation is 
 
 > Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated.
 
+<img src="img/symbolic_nn.drawio.svg">
+
 ## Install
 
 ```bash
