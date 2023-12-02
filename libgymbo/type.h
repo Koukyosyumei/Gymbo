@@ -12,8 +12,14 @@
 
 namespace gymbo {
 
+/**
+ * @brief Alias for 32-bit unsigned integer.
+ */
 using Word32 = uint32_t;
 
+/**
+ * @brief Enum representing different instruction types.
+ */
 enum class InstrType {
     Add,
     Sub,
@@ -40,16 +46,36 @@ enum class InstrType {
     Nop,
 };
 
+/**
+ * @brief Class representing an instruction.
+ */
 class Instr {
    public:
     InstrType instr;
     Word32 word;
 
+    /**
+     * @brief Constructor for an instruction without additional data.
+     * @param instr The type of the instruction.
+     */
     Instr(InstrType instr) : instr(instr) {}
+
+    /**
+     * @brief Constructor for an instruction with additional data.
+     * @param instr The type of the instruction.
+     * @param word Additional data associated with the instruction.
+     */
     Instr(InstrType instr, Word32 word) : instr(instr), word(word) {}
 
+    /**
+     * @brief Prints a human-readable representation of the instruction.
+     */
     void print() { printf("%s\n", toString().c_str()); }
 
+    /**
+     * @brief Converts the instruction to a string representation.
+     * @return A string representation of the instruction.
+     */
     std::string toString() {
         switch (instr) {
             case (InstrType::Add): {
@@ -110,8 +136,22 @@ class Instr {
     }
 };
 
+/**
+ * @brief Alias for a program, represented as a vector of instructions.
+ */
 using Prog = std::vector<Instr>;
+
+/**
+ * @brief Alias for memory, represented as an unordered map of 32-bit words.
+ */
 using Mem = std::unordered_map<Word32, Word32>;
+
+/**
+ * @brief Alias for a table of path constraints. The key is the string
+ * representation of the constraint and the value is the pair of its
+ * satifiability and the map whose key is the variable id and the value is the
+ * concrete value that makes the constraint true.
+ */
 using PathConstraintsTable =
     std::unordered_map<std::string,
                        std::pair<bool, std::unordered_map<int, float>>>;
@@ -125,8 +165,17 @@ struct State {
         : pc(pc), mem(mem), stack(stack) {}
 };
 
+/**
+ * @brief Struct representing the gradient of a symbolic expression.
+ */
 struct Grad {
-    std::unordered_map<int, float> val;
+    std::unordered_map<int, float>
+        val; /**< Map of variable indices to gradient values. */
+
+    /**
+     * @brief Constructor for the gradient.
+     * @param val Map of variable indices to gradient values.
+     */
     Grad(std::unordered_map<int, float> val) : val(val) {}
     Grad operator+(const Grad &other) {
         std::unordered_map<int, float> result = val;
@@ -179,6 +228,9 @@ struct Grad {
     }
 };
 
+/**
+ * @brief Enum representing different symbolic expression types.
+ */
 enum class SymType {
     SAdd,
     SSub,
@@ -193,12 +245,15 @@ enum class SymType {
     SAny
 };
 
+/**
+ * @brief Struct representing a symbolic expression.
+ */
 struct Sym {
-    SymType symtype;
-    Sym *left;
-    Sym *right;
-    Word32 word;
-    int var_idx;
+    SymType symtype; /**< The type of the symbolic expression. */
+    Sym *left;       /**< Pointer to the left child of the expression. */
+    Sym *right;      /**< Pointer to the right child of the expression. */
+    Word32 word;     /**< Additional data associated with the expression. */
+    int var_idx; /**< Index of the variable associated with the expression. */
 
     Sym() {}
     Sym(SymType symtype, Sym *left) : symtype(symtype), left(left) {}
@@ -213,6 +268,10 @@ struct Sym {
         }
     }
 
+    /**
+     * @brief Gathers variable indices from the symbolic expression.
+     * @param result Set to store gathered variable indices.
+     */
     void gather_var_ids(std::unordered_set<int> &result) {
         switch (symtype) {
             case (SymType::SAdd): {
@@ -268,6 +327,12 @@ struct Sym {
         }
     }
 
+    /**
+     * @brief Simplifies the symbolic expression by evaluating constant
+     * subexpressions.
+     * @param cvals Map of variable indices to constant values.
+     * @return Simplified symbolic expression.
+     */
     Sym *psimplify(const Mem &cvals) {
         Sym *tmp_left, *tmp_right;
 
@@ -365,6 +430,12 @@ struct Sym {
         }
     }
 
+    /**
+     * @brief Evaluates the symbolic expression given concrete variable values.
+     * @param cvals Map of variable indices to concrete values.
+     * @param eps The smallest positive value of the target type.
+     * @return Result of the symbolic expression evaluation.
+     */
     float eval(const std::unordered_map<int, float> &cvals, float eps) {
         switch (symtype) {
             case (SymType::SAdd): {
@@ -409,6 +480,13 @@ struct Sym {
         }
     }
 
+    /**
+     * @brief Computes the gradient of the symbolic expression given concrete
+     * variable values.
+     * @param cvals Map of variable indices to concrete values.
+     * @param eps Small value to handle numerical instability.
+     * @return Gradient of the symbolic expression.
+     */
     Grad grad(const std::unordered_map<int, float> &cvals, float eps) {
         switch (symtype) {
             case (SymType::SAdd): {
@@ -477,6 +555,12 @@ struct Sym {
         }
     }
 
+    /**
+     * @brief Converts the symbolic expression to a string representation.
+     * @param convert_to_num Whether to convert constants to numeric
+     * representations.
+     * @return String representation of the symbolic expression.
+     */
     std::string toString(bool convert_to_num) {
         std::string result = "";
         float tmp_word;
@@ -548,17 +632,38 @@ struct Sym {
     }
 };
 
+/**
+ * @brief Alias for symbolic memory, represented as an unordered map of symbolic
+ * expressions.
+ */
 using SMem = std::unordered_map<Word32, Sym>;
 
+/**
+ * @brief Struct representing the symbolic state of the symbolic execution.
+ */
 struct SymState {
-    int pc;
-    int var_cnt;
-    Mem mem;
-    SMem smem;
-    Linkedlist<Sym> symbolic_stack;
-    std::vector<Sym> path_constraints;
+    int pc;                         /**< Program counter. */
+    int var_cnt;                    /**< Variable count. */
+    Mem mem;                        /**< Concrete memory. */
+    SMem smem;                      /**< Symbolic memory. */
+    Linkedlist<Sym> symbolic_stack; /**< Symbolic stack. */
+    std::vector<Sym>
+        path_constraints; /**< Vector of symbolic path constraints. */
 
+    /**
+     * @brief Default constructor for symbolic state.
+     */
     SymState() : pc(0), var_cnt(0){};
+
+    /**
+     * @brief Constructor for symbolic state with specified values.
+     * @param pc Program counter.
+     * @param var_cnt Variable count.
+     * @param mem Concrete memory.
+     * @param smem Symbolic memory.
+     * @param symbolic_stack Symbolic stack.
+     * @param path_constraints Vector of symbolic path constraints.
+     */
     SymState(int pc, int var_cnt, Mem mem, SMem smem,
              Linkedlist<Sym> symbolic_stack, std::vector<Sym> path_constraints)
         : pc(pc),
@@ -568,10 +673,18 @@ struct SymState {
           symbolic_stack(symbolic_stack),
           path_constraints(path_constraints) {}
 
+    /**
+     * @brief Sets a concrete value for a variable in the symbolic state.
+     * @param var_id Index of the variable.
+     * @param val Concrete value to set.
+     */
     void set_concrete_val(int var_id, float val) {
         mem.emplace(var_id, FloatToWord(val));
     }
 
+    /**
+     * @brief Prints a human-readable representation of the symbolic state.
+     */
     void print() {
         printf("Stack: [");
         LLNode<Sym> *tmp = symbolic_stack.head;
@@ -608,13 +721,25 @@ struct SymState {
     }
 };
 
+/**
+ * @brief Struct representing a trace in symbolic execution.
+ */
 struct Trace {
-    SymState data;
-    std::vector<Trace> children;
+    SymState data;               /**< Symbolic state of the trace. */
+    std::vector<Trace> children; /**< Children traces. */
 
+    /**
+     * @brief Constructor for a trace.
+     * @param data Symbolic state of the trace.
+     * @param children Children traces.
+     */
     Trace(SymState data, std::vector<Trace> children)
         : data(data), children(children) {}
 
+    /**
+     * @brief Prints a human-readable representation of the trace.
+     * @param indent_cnt Number of spaces to indent the output.
+     */
     void print(int indent_cnt = 0) {
         printf("PC: %d\n", data.pc);
         data.print();
