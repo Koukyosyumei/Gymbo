@@ -5,8 +5,6 @@
  */
 
 #pragma once
-#include <unistd.h>
-
 #include "compiler.h"
 #include "symbolic.h"
 
