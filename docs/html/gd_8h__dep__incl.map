@@ -1,6 +1,0 @@
-<map id="libgymbo/gd.h" name="libgymbo/gd.h">
-<area shape="rect" id="node1" title="Implementation of gradient descent optimizer." alt="" coords="25,5,139,32"/>
-<area shape="rect" id="node2" href="$pipeline_8h.html" title="Basic workloads of gradient&#45;based symbolic execution." alt="" coords="5,229,156,256"/>
-<area shape="rect" id="node3" href="$symbolic_8h.html" title="Core implementation of gradient&#45;based symbolic execution." alt="" coords="61,80,220,107"/>
-<area shape="rect" id="node4" href="$compiler_8h.html" title="Implementation of compiler." alt="" coords="62,155,217,181"/>
-</map>
