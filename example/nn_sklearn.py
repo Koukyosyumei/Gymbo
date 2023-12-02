@@ -121,6 +121,7 @@ if __name__ == "__main__":
     )
 
     # Check the performance of generated adversarial examples
+    print("Result")
     for j in range(len(constraints)):
         x_adv = x_origin.copy()
 
