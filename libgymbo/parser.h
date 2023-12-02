@@ -5,14 +5,6 @@
  */
 
 #pragma once
-#include <ctype.h>
-#include <stdarg.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <cstdlib>
 #include <vector>
 
 #include "tokenizer.h"
@@ -178,7 +170,8 @@ Node *new_node(NodeKind kind) {
 }
 
 /**
- * @brief Create a new binary AST node with the given kind, left-hand side, and right-hand side.
+ * @brief Create a new binary AST node with the given kind, left-hand side, and
+ * right-hand side.
  *
  * @param kind The kind of the node.
  * @param lhs The left-hand side of the binary operation.
@@ -193,7 +186,8 @@ Node *new_binary(NodeKind kind, Node *lhs, Node *rhs) {
 }
 
 /**
- * @brief Create a new AST node representing a numeric value with the given value.
+ * @brief Create a new AST node representing a numeric value with the given
+ * value.
  *
  * @param val The numeric value of the node.
  * @return A pointer to the newly created numeric node.
@@ -306,7 +300,7 @@ Node *relational(Token *&token, char *user_input) {
 
 /**
  * @brief Parse and construct an AST node representing addition or subtraction.
- * 
+ *
  * add = mul ("+" mul | "-" mul)*
  *
  * @param token A reference to the current token.
@@ -327,8 +321,9 @@ inline Node *add(Token *&token, char *user_input) {
 }
 
 /**
- * @brief Parse and construct an AST node representing multiplication or division.
- * 
+ * @brief Parse and construct an AST node representing multiplication or
+ * division.
+ *
  * mul = unary ("*" unary | "/" unary)*
  *
  * @param token A reference to the current token.
@@ -350,7 +345,7 @@ inline Node *mul(Token *&token, char *user_input) {
 
 /**
  * @brief Parse and construct an AST node representing unary operations.
- * 
+ *
  * unary = ("+" | "-")? unary
  *       | primary
  *
@@ -367,7 +362,7 @@ inline Node *unary(Token *&token, char *user_input) {
 
 /**
  * @brief Parse and construct an AST node representing primary expressions.
- * 
+ *
  * primary = "(" expr ")" | num | ident
  *
  * @param token A reference to the current token.

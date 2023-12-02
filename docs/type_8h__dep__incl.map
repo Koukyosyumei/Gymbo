@@ -1,8 +1,8 @@
 <map id="libgymbo/type.h" name="libgymbo/type.h">
-<area shape="rect" id="node1" title="Implementatations of basic alias, types, and classes." alt="" coords="5,5,133,32"/>
-<area shape="rect" id="node2" href="$compiler_8h.html" title="Implementation of compiler." alt="" coords="39,229,193,256"/>
-<area shape="rect" id="node3" href="$pipeline_8h.html" title="Basic workloads of gradient&#45;based symbolic execution." alt="" coords="41,304,191,331"/>
-<area shape="rect" id="node4" href="$gd_8h.html" title="Implementation of gradient descent optimizer." alt="" coords="251,80,365,107"/>
-<area shape="rect" id="node5" href="$symbolic_8h.html" title="Core implementation of gradient&#45;based symbolic execution." alt="" coords="71,155,230,181"/>
-<area shape="rect" id="node6" href="$sat_8h.html" title="Implementation of SAT solver." alt="" coords="107,80,226,107"/>
+<area shape="rect" id="node1" title="Implementatations of basic alias, types, and classes." alt="" coords="113,5,241,32"/>
+<area shape="rect" id="node2" href="$compiler_8h.html" title="Implementation of compiler." alt="" coords="5,155,160,181"/>
+<area shape="rect" id="node4" href="$gd_8h.html" title="Implementation of gradient descent optimizer." alt="" coords="120,80,235,107"/>
+<area shape="rect" id="node6" href="$sat_8h.html" title="Implementation of SAT solver." alt="" coords="259,80,378,107"/>
+<area shape="rect" id="node3" href="$pipeline_8h.html" title="Basic workloads of gradient&#45;based symbolic execution." alt="" coords="98,229,249,256"/>
+<area shape="rect" id="node5" href="$symbolic_8h.html" title="Core implementation of gradient&#45;based symbolic execution." alt="" coords="185,155,343,181"/>
 </map>

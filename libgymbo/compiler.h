@@ -6,10 +6,7 @@
 
 #pragma once
 #include "parser.h"
-#include "symbolic.h"
-#include "tokenizer.h"
 #include "type.h"
-#include "utils.h"
 
 namespace gymbo {
 

@@ -7,8 +7,8 @@ Compared to other prominent symbolic execution tools, Gymbo\textquotesingle{}s i
 One practical usage of Gymbo is debugging ML models like neural networks to detect unexpected behaviors. For example, you can generate adversarial examples with Gymbo by converting neural networks to imperative programs.
 
 \begin{quote}
-Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated. \end{quote}
-\hypertarget{index_install_sec}{}\doxysection{Install}\label{index_install_sec}
+Please note that Gymbo is currently under development and may have bugs. \end{quote}
+Your feedback and contributions are always greatly appreciated.\hypertarget{index_install_sec}{}\doxysection{Install}\label{index_install_sec}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{git clone https://github.com/Koukyosyumei/Gymbo.git}
@@ -23,7 +23,7 @@ Gymbo presently supports C-\/like programs with the following BNF grammar\+:
 \DoxyCodeLine{program    = \mbox{\hyperlink{parser_8h_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}}*}
 \DoxyCodeLine{\mbox{\hyperlink{parser_8h_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}}       = \mbox{\hyperlink{parser_8h_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} \textcolor{stringliteral}{"{};"{}}}
 \DoxyCodeLine{         | \textcolor{stringliteral}{"{}\{"{}} \mbox{\hyperlink{parser_8h_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}}* \textcolor{stringliteral}{"{}\}"{}}}
-\DoxyCodeLine{         | \textcolor{stringliteral}{"{}if"{}} \textcolor{stringliteral}{"{}("{}} \mbox{\hyperlink{parser_8h_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} \textcolor{stringliteral}{"{})"{}} \mbox{\hyperlink{parser_8h_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}} (\textcolor{stringliteral}{"{}else"{}} stmt)? }
+\DoxyCodeLine{         | \textcolor{stringliteral}{"{}if"{}} \textcolor{stringliteral}{"{}("{}} \mbox{\hyperlink{parser_8h_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} \textcolor{stringliteral}{"{})"{}} \mbox{\hyperlink{parser_8h_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}} (\textcolor{stringliteral}{"{}else"{}} stmt)?}
 \DoxyCodeLine{         | \textcolor{stringliteral}{"{}return"{}} \mbox{\hyperlink{parser_8h_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} \textcolor{stringliteral}{"{};"{}}}
 \DoxyCodeLine{\mbox{\hyperlink{parser_8h_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}}       = \mbox{\hyperlink{parser_8h_a47b7251f53d2ee3e14494fb9f7a2bc72}{assign}}}
 \DoxyCodeLine{\mbox{\hyperlink{parser_8h_a47b7251f53d2ee3e14494fb9f7a2bc72}{assign}}     = \mbox{\hyperlink{parser_8h_aee43a52e33ae6335a16161d16abd1079}{logical}} (\textcolor{stringliteral}{"{}="{}} assign)?}
@@ -80,7 +80,16 @@ Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each un
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{./gymbo "{}if (a < 3) if (a > 4) return 1;"{} -\/v 0}
-\DoxyCodeLine{// ... (Example output from README)}
+\DoxyCodeLine{}
+\DoxyCodeLine{>Compiling the input program...}
+\DoxyCodeLine{>Start Symbolic Execution...}
+\DoxyCodeLine{>-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{>Result Summary}
+\DoxyCodeLine{>\#Total Path Constraints: 4}
+\DoxyCodeLine{>\#SAT: 3}
+\DoxyCodeLine{>\#UNSAT: 1}
+\DoxyCodeLine{>List of UNSAT Path Constraints}
+\DoxyCodeLine{>\# var\_1 < 3 and 4 < var\_1 and  1}
 
 \end{DoxyCode}
 \hypertarget{index_lib_sec}{}\doxysection{libgymbo\+: Header-\/only Library}\label{index_lib_sec}
@@ -144,7 +153,8 @@ The following code generates the adversarial examples against a neural network, 
 \DoxyCodeLine{adv\_condition = (}
 \DoxyCodeLine{      "{}("{}}
 \DoxyCodeLine{      + "{} || "{}.join(}
-\DoxyCodeLine{          [f"{}(y\_\{c\} > y\_\{y\_pred\})"{} for c in range(len(clf.classes\_)) if y\_pred != c]}
+\DoxyCodeLine{          [f"{}(y\_\{c\} > y\_\{y\_pred\})"{} for c in range(len(clf.classes\_)) if}
+\DoxyCodeLine{y\_pred != c]}
 \DoxyCodeLine{      )}
 \DoxyCodeLine{      + "{})"{}}
 \DoxyCodeLine{  )}
@@ -154,26 +164,20 @@ The following code generates the adversarial examples against a neural network, 
 \DoxyCodeLine{constraints = plg.gexecute(prg, init\_symstate, optimizer, target\_pcs, ...)}
 
 \end{DoxyCode}
-\hypertarget{index_document_sec}{}\doxysection{Document}\label{index_document_sec}
-
-\begin{DoxyItemize}
-\item Manual Build
-\end{DoxyItemize}
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{sudo apt-\/get install doxygen}
-\DoxyCodeLine{}
-\DoxyCodeLine{doxygen Doxyfile}
-
-\end{DoxyCode}
 \hypertarget{index_acknowledgement_sec}{}\doxysection{Acknowledgement}\label{index_acknowledgement_sec}
 Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of {\ttfamily rui314/chibicc \mbox{[}4\mbox{]}}, while the symbolic execution approach is inspired by {\ttfamily beala/symbolic \mbox{[}5\mbox{]}}.\hypertarget{index_reference_sec}{}\doxysection{Reference}\label{index_reference_sec}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{-\/ [1] Chen, Peng, Jianzhong Liu, and Hao Chen. \textcolor{stringliteral}{"{}Matryoshka: fuzzing deeply nested branches."{}} Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security. 2019.}
-\DoxyCodeLine{-\/ [2] Minghao Liu, Kunhang Lv, Pei Huang, Rui Han, Fuqi Jia, Yu Zhang, Feifei Ma, Jian Zhang. \textcolor{stringliteral}{"{}NRAgo: Solving SMT(NRA) Formulas with Gradient-\/based Optimization."{}} IEEE/ACM International Conference on Automated Software Engineering, 2023}
-\DoxyCodeLine{-\/ [3] Gopinath, Divya, et al. \textcolor{stringliteral}{"{}Symbolic execution for importance analysis and adversarial generation in neural networks."{}} 2019 IEEE 30th International Symposium on Software Reliability Engineering (ISSRE). IEEE, 2019.}
+\DoxyCodeLine{-\/ [1] Chen, Peng, Jianzhong Liu, and Hao Chen. \textcolor{stringliteral}{"{}Matryoshka: fuzzing deeply}}
+\DoxyCodeLine{\textcolor{stringliteral}{nested branches."{}} Proceedings of the 2019 ACM SIGSAC Conference on Computer}
+\DoxyCodeLine{and Communications Security. 2019.}
+\DoxyCodeLine{-\/ [2] Minghao Liu, Kunhang Lv, Pei Huang, Rui Han, Fuqi Jia, Yu Zhang, Feifei}
+\DoxyCodeLine{Ma, Jian Zhang. \textcolor{stringliteral}{"{}NRAgo: Solving SMT(NRA) Formulas with Gradient-\/based}}
+\DoxyCodeLine{\textcolor{stringliteral}{Optimization."{}} IEEE/ACM International Conference on Automated Software}
+\DoxyCodeLine{Engineering, 2023}
+\DoxyCodeLine{-\/ [3] Gopinath, Divya, et al. \textcolor{stringliteral}{"{}Symbolic execution for importance analysis and}}
+\DoxyCodeLine{\textcolor{stringliteral}{adversarial generation in neural networks."{}} 2019 IEEE 30th International}
+\DoxyCodeLine{Symposium on Software Reliability Engineering (ISSRE). IEEE, 2019.}
 \DoxyCodeLine{-\/ [4] https:\textcolor{comment}{//github.com/rui314/chibicc}}
 \DoxyCodeLine{-\/ [5] https:\textcolor{comment}{//github.com/beala/symbolic}}
 

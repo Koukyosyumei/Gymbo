@@ -4,17 +4,11 @@
  * @author Hideaki Takahashi
  */
 
+#pragma once
 #include <unistd.h>
 
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-
 #include "compiler.h"
-#include "gd.h"
-#include "parser.h"
-#include "tokenizer.h"
-#include "type.h"
+#include "symbolic.h"
 
 namespace gymbo {
 
