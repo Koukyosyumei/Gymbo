@@ -12,7 +12,7 @@ Gradient Descent Optimizer for Symbolic Path Constraints.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structgymbo_1_1GDOptimizer_ac17fe6d6ef5d781ae590c0a8fb6e567b}{GDOptimizer}} (int num\+\_\+epochs=100, float lr=1.\+0, float eps=1.\+0, float param\+\_\+low=-\/10.\+0, float param\+\_\+high=10.\+0, bool sign\+\_\+grad=true, bool init\+\_\+param\+\_\+uniform\+\_\+int=true, int seed=42)
+\mbox{\hyperlink{structgymbo_1_1GDOptimizer_ac17fe6d6ef5d781ae590c0a8fb6e567b}{GDOptimizer}} (int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}{num\+\_\+epochs}}=100, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}{lr}}=1.\+0, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}{eps}}=1.\+0, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}{param\+\_\+low}}=-\/10.\+0, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}{param\+\_\+high}}=10.\+0, bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}{sign\+\_\+grad}}=true, bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}{init\+\_\+param\+\_\+uniform\+\_\+int}}=true, int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}{seed}}=42)
 \begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_aabe2fc9e0528d282c105a1e723d75f02}{eval}} (std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$ \&path\+\_\+constraints, std\+::unordered\+\_\+map$<$ int, float $>$ params)
 \begin{DoxyCompactList}\small\item\em Evaluate if path constraints are satisfied for given parameters. \end{DoxyCompactList}\item 
@@ -22,32 +22,30 @@ bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab5737f4c5c901f4b0fe8effc4f8808
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}\label{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}} 
-int {\bfseries num\+\_\+epochs}
+int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}{num\+\_\+epochs}}
+\begin{DoxyCompactList}\small\item\em Maximum number of optimization epochs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}\label{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}} 
+float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}{lr}}
+\begin{DoxyCompactList}\small\item\em Learning rate for gradient descent. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}\label{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}} 
+float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}{eps}}
+\begin{DoxyCompactList}\small\item\em The smallest positive value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}\label{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}} 
+float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}{param\+\_\+low}}
+\begin{DoxyCompactList}\small\item\em Lower bound for parameter initialization. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}\label{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}} 
+float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}{param\+\_\+high}}
+\begin{DoxyCompactList}\small\item\em Upper bound for parameter initialization. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}{sign\+\_\+grad}}
+\item 
+bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}{init\+\_\+param\+\_\+uniform\+\_\+int}}
 \item 
 \mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}\label{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}} 
-int {\bfseries seed}
-\item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}\label{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}} 
-float {\bfseries lr}
-\item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}\label{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}} 
-float {\bfseries eps}
-\item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}\label{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}} 
-float {\bfseries param\+\_\+low}
-\item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}\label{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}} 
-float {\bfseries param\+\_\+high}
-\item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}\label{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}} 
-bool {\bfseries sign\+\_\+grad}
-\item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}\label{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}} 
-bool {\bfseries init\+\_\+param\+\_\+uniform\+\_\+int}
-\item 
+int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}{seed}}
+\begin{DoxyCompactList}\small\item\em Random seed for initializing parameter values. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a3882db1f66c2141d2535cdef17b108f8}\label{structgymbo_1_1GDOptimizer_a3882db1f66c2141d2535cdef17b108f8}} 
-int {\bfseries num\+\_\+used\+\_\+itr}
-\end{DoxyCompactItemize}
+int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a3882db1f66c2141d2535cdef17b108f8}{num\+\_\+used\+\_\+itr}}
+\begin{DoxyCompactList}\small\item\em Number of used iterations during optimization. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -78,6 +76,8 @@ Constructor for \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}.
 {\em num\+\_\+epochs} & Maximum number of optimization epochs (default\+: 100). \\
 \hline
 {\em lr} & Learning rate for gradient descent (default\+: 1). \\
+\hline
+{\em eps} & The smallest positive value of the target type (default\+: 1.\+0). \\
 \hline
 {\em param\+\_\+low} & Lower bound for parameter initialization (default\+: -\/10). \\
 \hline
@@ -140,6 +140,21 @@ This function attempts to find parameter values that satisfy the given path cons
 {\ttfamily true} if the constraints are satisfied after optimization; otherwise, {\ttfamily false}. 
 \end{DoxyReturn}
 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}\label{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!init\_param\_uniform\_int@{init\_param\_uniform\_int}}
+\index{init\_param\_uniform\_int@{init\_param\_uniform\_int}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{init\_param\_uniform\_int}{init\_param\_uniform\_int}}
+{\footnotesize\ttfamily bool gymbo\+::\+GDOptimizer\+::init\+\_\+param\+\_\+uniform\+\_\+int}
+
+Flag indicating whether initial parameter values are drawn from the uniform int distribution or uniform real distribution (default true). \mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}\label{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!sign\_grad@{sign\_grad}}
+\index{sign\_grad@{sign\_grad}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{sign\_grad}{sign\_grad}}
+{\footnotesize\ttfamily bool gymbo\+::\+GDOptimizer\+::sign\+\_\+grad}
+
+If true, use sign gradient descent. Otherwise, use standard gradient descent. (default true). 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

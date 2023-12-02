@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['polarity_235',['Polarity',['../sat_8h.html#ab93a240afc8d89ec25d1bb528545f6d2',1,'gymbosat']]]
+  ['opcode_320',['OpCode',['../sat_8h.html#a6d86d55f55f58425a61afe7f71066024',1,'gymbosat']]]
 ];

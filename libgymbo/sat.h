@@ -179,6 +179,11 @@ class Var : public Expr {
  */
 class And : public Expr {
    public:
+    /**
+     * @brief Constructor for the And class.
+     * @param left Left child expression.
+     * @param right Right child expression.
+     */
     And(std::shared_ptr<Expr> left, std::shared_ptr<Expr> right)
         : left(left), right(right) {
         opcode = OpCode::AND;
@@ -267,6 +272,11 @@ class And : public Expr {
  */
 class Or : public Expr {
    public:
+    /**
+     * @brief Constructor for the Or class.
+     * @param left Left child expression.
+     * @param right Right child expression.
+     */
     Or(std::shared_ptr<Expr> left, std::shared_ptr<Expr> right)
         : left(left), right(right) {
         opcode = OpCode::OR;
@@ -365,6 +375,10 @@ class Or : public Expr {
  */
 class Not : public Expr {
    public:
+    /**
+     * @brief Constructor for the Not class.
+     * @param expr Child expression to negate.
+     */
     Not(std::shared_ptr<Expr> expr) : expr(expr) {
         opcode = OpCode::NOT;
         name = "Not";
@@ -427,6 +441,10 @@ class Not : public Expr {
  */
 class Const : public Expr {
    public:
+    /**
+     * @brief Constructor for the Const class.
+     * @param value Boolean value of the constant.
+     */
     Const(bool value) : value(value) {
         opcode = OpCode::CONST;
         std::string name = "Const";

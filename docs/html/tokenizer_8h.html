@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -122,19 +121,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Token.html">gymbo::Token</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure representing a token.  <a href="structgymbo_1_1Token.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1LVar.html">gymbo::LVar</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a974fd402608912002ea0cc26aaf6b04a"><td class="memItemLeft" align="right" valign="top"><a id="a974fd402608912002ea0cc26aaf6b04a"></a>
-typedef struct Token&#160;</td><td class="memItemRight" valign="bottom"><b>gymbo::Token</b></td></tr>
-<tr class="separator:a974fd402608912002ea0cc26aaf6b04a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a886e58c66782cda4ff74ad10b5a6b646"><td class="memItemLeft" align="right" valign="top"><a id="a886e58c66782cda4ff74ad10b5a6b646"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>TokenKind</b> { <br />
+<tr class="memitem:a886e58c66782cda4ff74ad10b5a6b646"><td class="memItemLeft" align="right" valign="top"><a id="a886e58c66782cda4ff74ad10b5a6b646"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tokenizer_8h.html#a886e58c66782cda4ff74ad10b5a6b646">gymbo::TokenKind</a> { <br />
 &#160;&#160;<b>TOKEN_RESERVED</b>
 , <b>TOKEN_RETURN</b>
 , <b>TOKEN_IF</b>
@@ -146,21 +138,22 @@ Enumerations</h2></td></tr>
 , <b>TOKEN_EOF</b>
 <br />
  }</td></tr>
+<tr class="memdesc:a886e58c66782cda4ff74ad10b5a6b646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration representing different token kinds. <br /></td></tr>
 <tr class="separator:a886e58c66782cda4ff74ad10b5a6b646"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aab49b70724bec7c8b7ee2a6a2fd31771"><td class="memItemLeft" align="right" valign="top"><a id="aab49b70724bec7c8b7ee2a6a2fd31771"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>gymbo::is_alpha</b> (char c)</td></tr>
+<tr class="memitem:aab49b70724bec7c8b7ee2a6a2fd31771"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tokenizer_8h.html#aab49b70724bec7c8b7ee2a6a2fd31771">gymbo::is_alpha</a> (char c)</td></tr>
+<tr class="memdesc:aab49b70724bec7c8b7ee2a6a2fd31771"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a character is an alphabetical character or underscore.  <a href="tokenizer_8h.html#aab49b70724bec7c8b7ee2a6a2fd31771">More...</a><br /></td></tr>
 <tr class="separator:aab49b70724bec7c8b7ee2a6a2fd31771"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f75e72416f1f4de36d005b6935c0136"><td class="memItemLeft" align="right" valign="top"><a id="a9f75e72416f1f4de36d005b6935c0136"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>gymbo::is_alnum</b> (char c)</td></tr>
+<tr class="memitem:a9f75e72416f1f4de36d005b6935c0136"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tokenizer_8h.html#a9f75e72416f1f4de36d005b6935c0136">gymbo::is_alnum</a> (char c)</td></tr>
+<tr class="memdesc:a9f75e72416f1f4de36d005b6935c0136"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a character is an alphanumeric character.  <a href="tokenizer_8h.html#a9f75e72416f1f4de36d005b6935c0136">More...</a><br /></td></tr>
 <tr class="separator:a9f75e72416f1f4de36d005b6935c0136"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd45221e5385a56b69288384e8e393aa"><td class="memItemLeft" align="right" valign="top"><a id="afd45221e5385a56b69288384e8e393aa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gymbo::error</b> (char *fmt,...)</td></tr>
+<tr class="memitem:afd45221e5385a56b69288384e8e393aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tokenizer_8h.html#afd45221e5385a56b69288384e8e393aa">gymbo::error</a> (char *fmt,...)</td></tr>
+<tr class="memdesc:afd45221e5385a56b69288384e8e393aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reports an error and exits the program.  <a href="tokenizer_8h.html#afd45221e5385a56b69288384e8e393aa">More...</a><br /></td></tr>
 <tr class="separator:afd45221e5385a56b69288384e8e393aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74bef918aba1493fe3b0f94b0c34a92e"><td class="memItemLeft" align="right" valign="top"><a id="a74bef918aba1493fe3b0f94b0c34a92e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gymbo::error_at</b> (char *user_input, char *loc, char *fmt,...)</td></tr>
+<tr class="memitem:a74bef918aba1493fe3b0f94b0c34a92e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tokenizer_8h.html#a74bef918aba1493fe3b0f94b0c34a92e">gymbo::error_at</a> (char *user_input, char *loc, char *fmt,...)</td></tr>
+<tr class="memdesc:a74bef918aba1493fe3b0f94b0c34a92e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reports an error location and exits the program.  <a href="tokenizer_8h.html#a74bef918aba1493fe3b0f94b0c34a92e">More...</a><br /></td></tr>
 <tr class="separator:a74bef918aba1493fe3b0f94b0c34a92e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a351aaa8f55935e9d65f1c33b143ffdc1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tokenizer_8h.html#a351aaa8f55935e9d65f1c33b143ffdc1">gymbo::consume</a> (Token *&amp;token, char *op)</td></tr>
 <tr class="separator:a351aaa8f55935e9d65f1c33b143ffdc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -316,7 +309,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>gymbo::error_at</b> (
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TokenKind&#160;</td>
+          <td class="paramtype"><a class="el" href="tokenizer_8h.html#a886e58c66782cda4ff74ad10b5a6b646">TokenKind</a>&#160;</td>
           <td class="paramname"><em>tok</em>&#160;</td>
         </tr>
         <tr>
@@ -331,15 +324,119 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>gymbo::error_at</b> (
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Consumes the current token if it matches <code>op</code>.</p>
+<p>Consumes the current token if it matches <code>tok</code>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">token</td><td>A pointer to the current token. </td></tr>
-    <tr><td class="paramname">op</td><td>The token to consume. </td></tr>
+    <tr><td class="paramname">tok</td><td>The token to consume. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the token was consumed, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="afd45221e5385a56b69288384e8e393aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd45221e5385a56b69288384e8e393aa">&#9670;&nbsp;</a></span>error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::error </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reports an error and exits the program. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fmt</td><td>The format string for the error message. </td></tr>
+    <tr><td class="paramname">...</td><td>Additional arguments for the format string. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a74bef918aba1493fe3b0f94b0c34a92e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74bef918aba1493fe3b0f94b0c34a92e">&#9670;&nbsp;</a></span>error_at()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::error_at </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>user_input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reports an error location and exits the program. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_input</td><td>The input string. </td></tr>
+    <tr><td class="paramname">loc</td><td>The location of the error. </td></tr>
+    <tr><td class="paramname">fmt</td><td>The format string for the error message. </td></tr>
+    <tr><td class="paramname">...</td><td>Additional arguments for the format string. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -450,6 +547,76 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>gymbo::error_at</b> (
 
 </div>
 </div>
+<a id="a9f75e72416f1f4de36d005b6935c0136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f75e72416f1f4de36d005b6935c0136">&#9670;&nbsp;</a></span>is_alnum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gymbo::is_alnum </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a character is an alphanumeric character. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>The character to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the character is an alphanumeric character, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aab49b70724bec7c8b7ee2a6a2fd31771"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab49b70724bec7c8b7ee2a6a2fd31771">&#9670;&nbsp;</a></span>is_alpha()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gymbo::is_alpha </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a character is an alphabetical character or underscore. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>The character to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the character is an alphabetical character or underscore, false otherwise. </dd></dl>
+
+</div>
+</div>
 <a id="a09b17fb4e9dfe3e5c6e03ad57bcfecf4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a09b17fb4e9dfe3e5c6e03ad57bcfecf4">&#9670;&nbsp;</a></span>new_token()</h2>
 
@@ -462,7 +629,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>gymbo::error_at</b> (
         <tr>
           <td class="memname">Token* gymbo::new_token </td>
           <td>(</td>
-          <td class="paramtype">TokenKind&#160;</td>
+          <td class="paramtype"><a class="el" href="tokenizer_8h.html#a886e58c66782cda4ff74ad10b5a6b646">TokenKind</a>&#160;</td>
           <td class="paramname"><em>kind</em>, </td>
         </tr>
         <tr>
@@ -591,6 +758,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>gymbo::error_at</b> (
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">user_input</td><td>The string to be tokenized. </td></tr>
+    <tr><td class="paramname">var_counter</td><td>The map to store the mapping from variable name to variable id. </td></tr>
   </table>
   </dd>
 </dl>

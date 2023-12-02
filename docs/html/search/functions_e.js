@@ -1,6 +1,12 @@
 var searchData=
 [
-  ['unconst_205',['unConst',['../classgymbosat_1_1Expr.html#a462170452606863e487f0807be83a96a',1,'gymbosat::Expr::unConst()'],['../classgymbosat_1_1Var.html#a48452af858f886d121455123176cbb63',1,'gymbosat::Var::unConst()'],['../classgymbosat_1_1And.html#a6d4e1f0b5d1d9379e90ed5d80e0fcf3a',1,'gymbosat::And::unConst()'],['../classgymbosat_1_1Or.html#a84aa719f774ffd20a78a4cfa4a931c7a',1,'gymbosat::Or::unConst()'],['../classgymbosat_1_1Not.html#a5d09bc42cae0a9bf522c5375d7ba8f70',1,'gymbosat::Not::unConst()'],['../classgymbosat_1_1Const.html#a3b3a3ef47d754c53d913ec0cebf6ec36',1,'gymbosat::Const::unConst()']]],
-  ['unitclause_206',['unitClause',['../classgymbosat_1_1Expr.html#a766c9fc6f0ac28161a19e7a7184f61b6',1,'gymbosat::Expr::unitClause()'],['../classgymbosat_1_1Var.html#aa59b38a82e6b503c295635c0dc68adef',1,'gymbosat::Var::unitClause()'],['../classgymbosat_1_1And.html#afffae51480f5b0ffe99d27bc0a60ec90',1,'gymbosat::And::unitClause()'],['../classgymbosat_1_1Or.html#a2538710166c753dec215727198866b66',1,'gymbosat::Or::unitClause()'],['../classgymbosat_1_1Not.html#a4118ba387b374d8e8940a64db34941f9',1,'gymbosat::Not::unitClause()'],['../classgymbosat_1_1Const.html#a32e2e08c72ef3820c5e6cb92cef05d2c',1,'gymbosat::Const::unitClause()']]],
-  ['unitpropagation_207',['unitPropagation',['../sat_8h.html#a900a3e916b5f594baf9598112ff29db9',1,'gymbosat']]]
+  ['satisfiabledpll_247',['satisfiableDPLL',['../sat_8h.html#a1b9fe029a32c35b69482f3d410b5e649',1,'gymbosat']]],
+  ['set_5fconcrete_5fval_248',['set_concrete_val',['../structgymbo_1_1SymState.html#ae8fe5bb8fa776a333997ff5d6df7af4a',1,'gymbo::SymState']]],
+  ['simplify_249',['simplify',['../classgymbosat_1_1Expr.html#a480cdd6cc0f3750b2b801e33b8950628',1,'gymbosat::Expr::simplify()'],['../classgymbosat_1_1Var.html#acf837760d8d850b190c7ad753e4523db',1,'gymbosat::Var::simplify()'],['../classgymbosat_1_1And.html#a6455aa50fd64ad0d9071a3e97955069d',1,'gymbosat::And::simplify()'],['../classgymbosat_1_1Or.html#a5b53d02a2cdb06adc724e709b89dac3f',1,'gymbosat::Or::simplify()'],['../classgymbosat_1_1Not.html#a4f169fc86479de1a37f7866fe5b8a015',1,'gymbosat::Not::simplify()'],['../classgymbosat_1_1Const.html#a06ed122848ceb557bae8fe66783061a0',1,'gymbosat::Const::simplify()']]],
+  ['solve_250',['solve',['../structgymbo_1_1GDOptimizer.html#ab5737f4c5c901f4b0fe8effc4f8808da',1,'gymbo::GDOptimizer']]],
+  ['startswith_251',['startswith',['../tokenizer_8h.html#a086916a92edc60e687a056603995182e',1,'gymbo']]],
+  ['stmt_252',['stmt',['../parser_8h.html#a0269bd238863b0c8e036e5fb7d66fa79',1,'gymbo']]],
+  ['sym2expr_253',['sym2expr',['../sat_8h.html#a03e10dde5ead3c1638a3959f61df655a',1,'gymbosat']]],
+  ['symstate_254',['SymState',['../structgymbo_1_1SymState.html#a8cfdb464cd87ab23ce3f4f4861b7ade2',1,'gymbo::SymState::SymState()'],['../structgymbo_1_1SymState.html#a60eed9cb787c8a7b529391fec6b1ca2b',1,'gymbo::SymState::SymState(int pc, int var_cnt, Mem mem, SMem smem, Linkedlist&lt; Sym &gt; symbolic_stack, std::vector&lt; Sym &gt; path_constraints)']]],
+  ['symstep_255',['symStep',['../symbolic_8h.html#a70694fc6a91234300048503b2fe15a9b',1,'gymbo']]]
 ];

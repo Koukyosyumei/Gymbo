@@ -160,7 +160,7 @@ $(function() {
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                        <span class="keywordflow">if</span> (is_sat) {</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                        }</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                        optimizer.seed += 1;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                        optimizer.<a class="code" href="structgymbo_1_1GDOptimizer.html#ab1631b9a0026ed9c12721df5900eb347">seed</a> += 1;</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                        <a class="code" href="symbolic_8h.html#a50a6f585caaa9c8ca66826268b46dcc9">initialize_params</a>(params, state, ignore_memory);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                    }</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
@@ -193,7 +193,7 @@ $(function() {
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                    <span class="keywordflow">if</span> (is_sat) {</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                    }</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    optimizer.seed += 1;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    optimizer.<a class="code" href="structgymbo_1_1GDOptimizer.html#ab1631b9a0026ed9c12721df5900eb347">seed</a> += 1;</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                    <a class="code" href="symbolic_8h.html#a50a6f585caaa9c8ca66826268b46dcc9">initialize_params</a>(params, state, ignore_memory);</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                }</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            }</div>
@@ -505,7 +505,8 @@ $(function() {
 <div class="ttc" id="agd_8h_html"><div class="ttname"><a href="gd_8h.html">gd.h</a></div><div class="ttdoc">Implementation of gradient descent optimizer.</div></div>
 <div class="ttc" id="asat_8h_html"><div class="ttname"><a href="sat_8h.html">sat.h</a></div><div class="ttdoc">Implementation of SAT solver.</div></div>
 <div class="ttc" id="astructgymbo_1_1GDOptimizer_html"><div class="ttname"><a href="structgymbo_1_1GDOptimizer.html">gymbo::GDOptimizer</a></div><div class="ttdoc">Gradient Descent Optimizer for Symbolic Path Constraints.</div><div class="ttdef"><b>Definition:</b> gd.h:31</div></div>
-<div class="ttc" id="astructgymbo_1_1GDOptimizer_html_ab5737f4c5c901f4b0fe8effc4f8808da"><div class="ttname"><a href="structgymbo_1_1GDOptimizer.html#ab5737f4c5c901f4b0fe8effc4f8808da">gymbo::GDOptimizer::solve</a></div><div class="ttdeci">bool solve(std::vector&lt; Sym &gt; &amp;path_constraints, std::unordered_map&lt; int, float &gt; &amp;params, bool is_init_params_const=true)</div><div class="ttdoc">Solve path constraints using gradient descent optimization.</div><div class="ttdef"><b>Definition:</b> gd.h:101</div></div>
+<div class="ttc" id="astructgymbo_1_1GDOptimizer_html_ab1631b9a0026ed9c12721df5900eb347"><div class="ttname"><a href="structgymbo_1_1GDOptimizer.html#ab1631b9a0026ed9c12721df5900eb347">gymbo::GDOptimizer::seed</a></div><div class="ttdeci">int seed</div><div class="ttdoc">Random seed for initializing parameter values.</div><div class="ttdef"><b>Definition:</b> gd.h:43</div></div>
+<div class="ttc" id="astructgymbo_1_1GDOptimizer_html_ab5737f4c5c901f4b0fe8effc4f8808da"><div class="ttname"><a href="structgymbo_1_1GDOptimizer.html#ab5737f4c5c901f4b0fe8effc4f8808da">gymbo::GDOptimizer::solve</a></div><div class="ttdeci">bool solve(std::vector&lt; Sym &gt; &amp;path_constraints, std::unordered_map&lt; int, float &gt; &amp;params, bool is_init_params_const=true)</div><div class="ttdoc">Solve path constraints using gradient descent optimization.</div><div class="ttdef"><b>Definition:</b> gd.h:111</div></div>
 <div class="ttc" id="astructgymbo_1_1SymState_html"><div class="ttname"><a href="structgymbo_1_1SymState.html">gymbo::SymState</a></div><div class="ttdoc">Struct representing the symbolic state of the symbolic execution.</div><div class="ttdef"><b>Definition:</b> type.h:650</div></div>
 <div class="ttc" id="astructgymbo_1_1SymState_html_a33bd74a7fdeee5aeecc51a750944efcc"><div class="ttname"><a href="structgymbo_1_1SymState.html#a33bd74a7fdeee5aeecc51a750944efcc">gymbo::SymState::path_constraints</a></div><div class="ttdeci">std::vector&lt; Sym &gt; path_constraints</div><div class="ttdef"><b>Definition:</b> type.h:657</div></div>
 <div class="ttc" id="astructgymbo_1_1SymState_html_a4c7ebe9a103e0b7a60633cca1f82b88f"><div class="ttname"><a href="structgymbo_1_1SymState.html#a4c7ebe9a103e0b7a60633cca1f82b88f">gymbo::SymState::var_cnt</a></div><div class="ttdeci">int var_cnt</div><div class="ttdef"><b>Definition:</b> type.h:652</div></div>

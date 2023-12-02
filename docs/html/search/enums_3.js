@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['symtype_236',['SymType',['../type_8h.html#a4524c130985b8982d2787f9bafe27225',1,'gymbo']]]
+  ['polarity_321',['Polarity',['../sat_8h.html#ab93a240afc8d89ec25d1bb528545f6d2',1,'gymbosat']]]
 ];

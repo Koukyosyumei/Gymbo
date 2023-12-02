@@ -133,14 +133,60 @@ Functions</h2></td></tr>
 <tr class="separator:a6d18a50ff10886c6d952dd9781e99a5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae193b98ee15e54838e9a8433aff4c379"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compiler_8h.html#ae193b98ee15e54838e9a8433aff4c379">gymbo::gen</a> (Node *node, Prog &amp;prg)</td></tr>
 <tr class="separator:ae193b98ee15e54838e9a8433aff4c379"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1af6d97f4c122833601a9b054a23009a"><td class="memItemLeft" align="right" valign="top"><a id="a1af6d97f4c122833601a9b054a23009a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gymbo::compile_ast</b> (std::vector&lt; Node * &gt; code, Prog &amp;prg)</td></tr>
+<tr class="memitem:a1af6d97f4c122833601a9b054a23009a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compiler_8h.html#a1af6d97f4c122833601a9b054a23009a">gymbo::compile_ast</a> (std::vector&lt; Node * &gt; code, Prog &amp;prg)</td></tr>
+<tr class="memdesc:a1af6d97f4c122833601a9b054a23009a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile the Abstract Syntax Tree (AST) into a sequence of instructions.  <a href="compiler_8h.html#a1af6d97f4c122833601a9b054a23009a">More...</a><br /></td></tr>
 <tr class="separator:a1af6d97f4c122833601a9b054a23009a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of compiler. </p>
 <dl class="section author"><dt>Author</dt><dd>Hideaki Takahashi </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a1af6d97f4c122833601a9b054a23009a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1af6d97f4c122833601a9b054a23009a">&#9670;&nbsp;</a></span>compile_ast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::compile_ast </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structgymbo_1_1Node.html">Node</a> * &gt;&#160;</td>
+          <td class="paramname"><em>code</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="type_8h.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;&#160;</td>
+          <td class="paramname"><em>prg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compile the Abstract Syntax Tree (AST) into a sequence of instructions. </p>
+<p>This function traverses the provided AST and generates corresponding instructions to be executed in the virtual stack machine.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code</td><td>A vector containing pointers to AST nodes. </td></tr>
+    <tr><td class="paramname">prg</td><td>A reference to the program (sequence of instructions) being generated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae193b98ee15e54838e9a8433aff4c379"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae193b98ee15e54838e9a8433aff4c379">&#9670;&nbsp;</a></span>gen()</h2>
 

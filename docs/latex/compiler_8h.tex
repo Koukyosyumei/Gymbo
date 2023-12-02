@@ -10,16 +10,14 @@ Implementation of compiler.
 {\ttfamily \#include \char`\"{}tokenizer.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}type.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
-Include dependency graph for compiler.\+h\+:
-\nopagebreak
+Include dependency graph for compiler.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{compiler_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -33,9 +31,8 @@ void \mbox{\hyperlink{compiler_8h_a6d18a50ff10886c6d952dd9781e99a5b}{gymbo\+::ge
 \item 
 void \mbox{\hyperlink{compiler_8h_ae193b98ee15e54838e9a8433aff4c379}{gymbo\+::gen}} (Node $\ast$node, Prog \&prg)
 \item 
-\mbox{\Hypertarget{compiler_8h_a1af6d97f4c122833601a9b054a23009a}\label{compiler_8h_a1af6d97f4c122833601a9b054a23009a}} 
-void {\bfseries gymbo\+::compile\+\_\+ast} (std\+::vector$<$ Node $\ast$ $>$ code, Prog \&prg)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{compiler_8h_a1af6d97f4c122833601a9b054a23009a}{gymbo\+::compile\+\_\+ast}} (std\+::vector$<$ Node $\ast$ $>$ code, Prog \&prg)
+\begin{DoxyCompactList}\small\item\em Compile the Abstract Syntax Tree (AST) into a sequence of instructions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -47,6 +44,25 @@ Hideaki Takahashi
 
 
 \doxysubsection{Function Documentation}
+\mbox{\Hypertarget{compiler_8h_a1af6d97f4c122833601a9b054a23009a}\label{compiler_8h_a1af6d97f4c122833601a9b054a23009a}} 
+\index{compiler.h@{compiler.h}!compile\_ast@{compile\_ast}}
+\index{compile\_ast@{compile\_ast}!compiler.h@{compiler.h}}
+\doxysubsubsection{\texorpdfstring{compile\_ast()}{compile\_ast()}}
+{\footnotesize\ttfamily void gymbo\+::compile\+\_\+ast (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ $>$}]{code,  }\item[{\mbox{\hyperlink{type_8h_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compile the Abstract Syntax Tree (AST) into a sequence of instructions. 
+
+This function traverses the provided AST and generates corresponding instructions to be executed in the virtual stack machine.
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & A vector containing pointers to AST nodes. \\
+\hline
+{\em prg} & A reference to the program (sequence of instructions) being generated. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{compiler_8h_ae193b98ee15e54838e9a8433aff4c379}\label{compiler_8h_ae193b98ee15e54838e9a8433aff4c379}} 
 \index{compiler.h@{compiler.h}!gen@{gen}}
 \index{gen@{gen}!compiler.h@{compiler.h}}

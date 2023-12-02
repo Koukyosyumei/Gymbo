@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['relational_190',['relational',['../parser_8h.html#a7782376e331d91dd967f5a7b1c23c1ba',1,'gymbo']]],
-  ['run_5fgymbo_191',['run_gymbo',['../symbolic_8h.html#a8aa21505f18c246fc0adafb360939fe0',1,'gymbo']]]
+  ['or_238',['Or',['../classgymbosat_1_1Or.html#a875c4eee93fbf9b57fa40a19c6f98582',1,'gymbosat::Or']]]
 ];

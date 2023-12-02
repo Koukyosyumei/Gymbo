@@ -100,8 +100,8 @@ Collaboration diagram for gymbosat::Or:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a875c4eee93fbf9b57fa40a19c6f98582"><td class="memItemLeft" align="right" valign="top"><a id="a875c4eee93fbf9b57fa40a19c6f98582"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Or</b> (std::shared_ptr&lt; <a class="el" href="classgymbosat_1_1Expr.html">Expr</a> &gt; left, std::shared_ptr&lt; <a class="el" href="classgymbosat_1_1Expr.html">Expr</a> &gt; right)</td></tr>
+<tr class="memitem:a875c4eee93fbf9b57fa40a19c6f98582"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgymbosat_1_1Or.html#a875c4eee93fbf9b57fa40a19c6f98582">Or</a> (std::shared_ptr&lt; <a class="el" href="classgymbosat_1_1Expr.html">Expr</a> &gt; left, std::shared_ptr&lt; <a class="el" href="classgymbosat_1_1Expr.html">Expr</a> &gt; right)</td></tr>
+<tr class="memdesc:a875c4eee93fbf9b57fa40a19c6f98582"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classgymbosat_1_1Or.html" title="Class representing the logical OR operation.">Or</a> class.  <a href="classgymbosat_1_1Or.html#a875c4eee93fbf9b57fa40a19c6f98582">More...</a><br /></td></tr>
 <tr class="separator:a875c4eee93fbf9b57fa40a19c6f98582"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a257ff6c08e5289ed6bd02b3b5d50ee4c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgymbosat_1_1Or.html#a257ff6c08e5289ed6bd02b3b5d50ee4c">to_string</a> () override</td></tr>
 <tr class="memdesc:a257ff6c08e5289ed6bd02b3b5d50ee4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the logical expression to a string representation.  <a href="classgymbosat_1_1Or.html#a257ff6c08e5289ed6bd02b3b5d50ee4c">More...</a><br /></td></tr>
@@ -161,7 +161,53 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class representing the logical OR operation. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a875c4eee93fbf9b57fa40a19c6f98582"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a875c4eee93fbf9b57fa40a19c6f98582">&#9670;&nbsp;</a></span>Or()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">gymbosat::Or::Or </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classgymbosat_1_1Expr.html">Expr</a> &gt;&#160;</td>
+          <td class="paramname"><em>left</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classgymbosat_1_1Expr.html">Expr</a> &gt;&#160;</td>
+          <td class="paramname"><em>right</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for the <a class="el" href="classgymbosat_1_1Or.html" title="Class representing the logical OR operation.">Or</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">left</td><td>Left child expression. </td></tr>
+    <tr><td class="paramname">right</td><td>Right child expression. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a57c5ad72cfd5375e997287ca5bea83f5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a57c5ad72cfd5375e997287ca5bea83f5">&#9670;&nbsp;</a></span>clauses()</h2>
 
