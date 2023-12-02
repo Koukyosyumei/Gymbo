@@ -4,4 +4,4 @@
 
 ## Neural Networks
 
-- [example/nn/nn_sklearn.py](example/nn/nn_sklearn.py)
+- [/nn/nn_sklearn.py](/nn/nn_sklearn.py)
