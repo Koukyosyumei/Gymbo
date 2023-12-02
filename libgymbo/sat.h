@@ -8,29 +8,121 @@
 
 #include "type.h"
 
+/**
+ * @brief Enum representing different logical operation codes.
+ */
 typedef enum { VAR, AND, OR, NOT, CONST } OpCode;
+
+/**
+ * @brief Enum representing different polarities in logical expressions.
+ */
 typedef enum { Positive, Negative, Mixed } Polarity;
 
+/**
+ * @class Expr
+ * @brief Base class for representing logical expressions.
+ */
 class Expr : public std::enable_shared_from_this<Expr> {
    public:
-    OpCode opcode;
-    std::string name;
+    OpCode opcode;    /**< Operation code for the expression. */
+    std::string name; /**< Name associated with the expression. */
 
+    /**
+     * @brief Destructor for the Expr class.
+     */
     virtual ~Expr() {}
+
+    /**
+     * @brief Convert the logical expression to a string representation.
+     * @return String representation of the logical expression.
+     */
     virtual std::string to_string() = 0;
+
+    /**
+     * @brief Evaluate the logical expression.
+     * @return Result of the logical evaluation.
+     */
     virtual bool evaluate() = 0;
+
+    /**
+     * @brief Check if the logical expression can be simplified by removing
+     * constants.
+     * @return True if the expression can be simplified, false otherwise.
+     */
     virtual bool unConst() = 0;
+
+    /**
+     * @brief Identify and return free variables in the logical expression.
+     * @return Pair indicating if there are free variables and the first free
+     * variable found.
+     */
     virtual std::pair<bool, std::string> freeVar() = 0;
+
+    /**
+     * @brief Make a guess for a variable's value and return the resulting
+     * expression.
+     * @param var Variable name.
+     * @param val Guessed value for the variable.
+     * @return Shared pointer to the resulting logical expression.
+     */
     virtual std::shared_ptr<Expr> guessVar(std::string var, bool val) = 0;
+
+    /**
+     * @brief Simplify the logical expression.
+     * @return Shared pointer to the simplified logical expression.
+     */
     virtual std::shared_ptr<Expr> simplify() = 0;
+
+    /**
+     * @brief Fix negations in the logical expression.
+     * @return Shared pointer to the logical expression with fixed negations.
+     */
     virtual std::shared_ptr<Expr> fixNegations() = 0;
+
+    /**
+     * @brief Distribute operations in the logical expression.
+     * @return Shared pointer to the logical expression with distributed
+     * operations.
+     */
     virtual std::shared_ptr<Expr> distribute() = 0;
+
+    /**
+     * @brief Get the left child expression.
+     * @return Shared pointer to the left child expression.
+     */
     virtual std::shared_ptr<Expr> getLeft() = 0;
+
+    /**
+     * @brief Get the right child expression.
+     * @return Shared pointer to the right child expression.
+     */
     virtual std::shared_ptr<Expr> getRight() = 0;
+
+    /**
+     * @brief Get the literals present in the logical expression.
+     * @return Unordered set of literals.
+     */
     virtual std::unordered_set<std::string> literals() = 0;
+
+    /**
+     * @brief Get the polarities of literals with respect to a specific
+     * variable.
+     * @param var Variable name.
+     * @return Unordered map of literals to their polarities.
+     */
     virtual std::unordered_map<std::string, Polarity> literalPolarity(
         std::string var) = 0;
+
+    /**
+     * @brief Get a unit clause from the logical expression.
+     * @return Pair representing a unit clause: (literal, value).
+     */
     virtual std::pair<std::string, bool> unitClause() = 0;
+
+    /**
+     * @brief Get a vector of clauses present in the logical expression.
+     * @return Vector of shared pointers to clause expressions.
+     */
     virtual std::vector<std::shared_ptr<Expr>> clauses() = 0;
 };
 
@@ -448,6 +540,11 @@ inline std::shared_ptr<Expr> Not::fixNegations() {
     return std::make_shared<Not>(expr->fixNegations());
 }
 
+/**
+ * @brief Convert a logical expression to conjunctive normal form (CNF).
+ * @param expr Shared pointer to the logical expression.
+ * @return Shared pointer to the expression in CNF.
+ */
 inline std::shared_ptr<Expr> cnf(std::shared_ptr<Expr> expr) {
     std::shared_ptr<Expr> new_expr = expr->fixNegations()->distribute();
     if (expr->to_string() == new_expr->to_string()) {
@@ -457,6 +554,12 @@ inline std::shared_ptr<Expr> cnf(std::shared_ptr<Expr> expr) {
     }
 }
 
+/**
+ * @brief Eliminate literals in a logical expression based on assignments.
+ * @param expr Shared pointer to the logical expression.
+ * @param assignments_map Reference to an unordered map of variable assignments.
+ * @return Shared pointer to the modified logical expression.
+ */
 inline std::shared_ptr<Expr> literalElimination(
     std::shared_ptr<Expr> expr,
     std::unordered_map<std::string, bool> &assignments_map) {
@@ -489,6 +592,11 @@ inline std::shared_ptr<Expr> literalElimination(
     return expr;
 }
 
+/**
+ * @brief Extract all unit clauses from a logical expression.
+ * @param expr Shared pointer to the logical expression.
+ * @return Vector of pairs representing unit clauses: (literal, value).
+ */
 inline std::vector<std::pair<std::string, bool>> allUnitClauses(
     std::shared_ptr<Expr> expr) {
     std::vector<std::pair<std::string, bool>> result;
@@ -502,6 +610,12 @@ inline std::vector<std::pair<std::string, bool>> allUnitClauses(
     return result;
 }
 
+/**
+ * @brief Perform unit propagation on a logical expression based on assignments.
+ * @param expr Shared pointer to the logical expression.
+ * @param assignments_map Reference to an unordered map of variable assignments.
+ * @return Shared pointer to the modified logical expression.
+ */
 inline std::shared_ptr<Expr> unitPropagation(
     std::shared_ptr<Expr> expr,
     std::unordered_map<std::string, bool> &assignments_map) {
@@ -521,6 +635,12 @@ inline std::shared_ptr<Expr> unitPropagation(
     return expr;
 }
 
+/**
+ * @brief Check satisfiability of a logical expression using the DPLL algorithm.
+ * @param expr Shared pointer to the logical expression.
+ * @param assignments_map Reference to an unordered map of variable assignments.
+ * @return True if the expression is satisfiable, false otherwise.
+ */
 inline bool satisfiableDPLL(
     std::shared_ptr<Expr> expr,
     std::unordered_map<std::string, bool> &assignments_map) {
@@ -564,6 +684,13 @@ inline bool satisfiableDPLL(
     }
 }
 
+/**
+ * @brief Convert a symbolic expression to a logical expression.
+ * @param sym Pointer to the symbolic expression.
+ * @param unique_sym_map Reference to an unordered map of unique symbolic
+ * expressions.
+ * @return Shared pointer to the corresponding logical expression.
+ */
 inline std::shared_ptr<Expr> sym2expr(
     gymbo::Sym *sym,
     std::unordered_map<std::string, gymbo::Sym *> &unique_sym_map) {
@@ -586,6 +713,14 @@ inline std::shared_ptr<Expr> sym2expr(
     }
 }
 
+/**
+ * @brief Convert a vector of symbolic path constraints to a logical expression.
+ * @param constraints Vector of symbolic path constraints.
+ * @param unique_sym_map Reference to an unordered map of unique symbolic
+ * expressions.
+ * @return Shared pointer to the logical expression representing the path
+ * constraints.
+ */
 inline std::shared_ptr<Expr> pathconstraints2expr(
     std::vector<gymbo::Sym> &constraints,
     std::unordered_map<std::string, gymbo::Sym *> &unique_sym_map) {
