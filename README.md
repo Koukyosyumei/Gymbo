@@ -184,6 +184,16 @@ var_counter, prg = plg.gcompile(mlp_code)
 constraints = plg.gexecute(prg, init_symstate, optimizer, target_pcs, ...)
 ```
 
+## Document
+
+- Manual Build
+
+```
+sudo apt-get install doxygen
+
+doxygen Doxyfile
+```
+
 ## Acknowledgement
 
 Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of `rui314/chibicc [4]`, while the symbolic execution approach is inspired by `beala/symbolic [5]`.

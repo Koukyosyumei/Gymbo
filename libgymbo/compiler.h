@@ -1,3 +1,9 @@
+/**
+ * @file compiler.h
+ * @brief Implementation of compiler
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include "parser.h"
 #include "symbolic.h"
@@ -118,6 +124,15 @@ inline void gen(Node *node, Prog &prg) {
     error(em);
 }
 
+/**
+ * @brief Compile the Abstract Syntax Tree (AST) into a sequence of instructions.
+ *
+ * This function traverses the provided AST and generates corresponding instructions
+ * to be executed in the virtual stack machine.
+ *
+ * @param code A vector containing pointers to AST nodes.
+ * @param prg A reference to the program (sequence of instructions) being generated.
+ */
 inline void compile_ast(std::vector<Node *> code, Prog &prg) {
     for (int i = 0; i < code.size(); i++) {
         if (code[i] != nullptr) {

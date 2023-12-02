@@ -1,3 +1,9 @@
+/**
+ * @file utils.h
+ * @brief Utility funcitons and classes.
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include <bitset>
 #include <cmath>
@@ -76,33 +82,54 @@ inline bool isNegative(uint32_t word) { return (word & 0x80000000) != 0; }
  */
 inline std::string valName(int i) { return "val_" + std::to_string(i); }
 
+/**
+ * @brief Node for a Doubly Linked List
+ *
+ * The `LLNode` class represents a node in a doubly linked list. It contains
+ * data of type `T`, and pointers to the next and previous nodes in the list.
+ *
+ * @tparam T The type of data to store in the node.
+ */
 template <typename T>
 class LLNode {
    public:
-    T data;
-    LLNode *next;
-    LLNode *prev;
+    T data;        ///< The data stored in the node.
+    LLNode *next;  ///< Pointer to the next node in the linked list.
+    LLNode *prev;  ///< Pointer to the previous node in the linked list.
 
-    // Default constructor
+    /**
+     * @brief Default constructor for LLNode.
+     *
+     * @param data The data to store in the node.
+     */
     LLNode(T data) : data(data), next(NULL), prev(NULL) {}
 };
 
 /**
- * A linked list class to implement a linked list.
+ * @brief Doubly Linked List Implementation
+ *
+ * The `Linkedlist` class provides a simple implementation of a doubly linked
+ * list. It supports basic operations such as pushing elements onto the back,
+ * getting the length, accessing the element at the back, and popping the
+ * element at the back.
  *
  * @tparam T The type of data to store in the linked list.
  */
 template <typename T>
 class Linkedlist {
    public:
-    LLNode<T> *ghost;
-    LLNode<T> *head;
-    LLNode<T> *tail;
+    LLNode<T>
+        *ghost;  ///< Ghost node for maintaining previous tails during pops.
+    LLNode<T> *head;  ///< Pointer to the head of the linked list.
+    LLNode<T> *tail;  ///< Pointer to the tail of the linked list.
 
+    /**
+     * @brief Default constructor for Linkedlist.
+     */
     Linkedlist() : ghost(NULL), head(NULL), tail(NULL) {}
 
     /**
-     * Returns the length of the linked list.
+     * @brief Get the length of the linked list.
      *
      * @return The length of the linked list.
      */
@@ -117,7 +144,7 @@ class Linkedlist {
     }
 
     /**
-     * Pushes a new element onto the back of the linked list.
+     * @brief Pushes a new element onto the back of the linked list.
      *
      * @param data The element to push onto the linked list.
      */
@@ -138,7 +165,7 @@ class Linkedlist {
     }
 
     /**
-     * Returns the element at the back of the linked list.
+     * @brief Returns the element at the back of the linked list.
      *
      * @return The element at the back of the linked list.
      */
@@ -150,7 +177,7 @@ class Linkedlist {
     }
 
     /**
-     * Pops the element at the back of the linked list.
+     * @brief Pops the element at the back of the linked list.
      */
     void pop() {
         if (tail == NULL) {

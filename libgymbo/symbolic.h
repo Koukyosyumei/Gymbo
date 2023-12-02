@@ -1,3 +1,9 @@
+/**
+ * @file symbolic.h
+ * @brief Core implementation of gradient-based symbolic execution
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include <cstdint>
 #include <memory>
@@ -102,8 +108,8 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         } else {
             std::unordered_map<std::string, gymbo::Sym *> unique_terms_map;
             std::unordered_map<std::string, bool> assignments_map;
-            std::shared_ptr<Expr> path_constraints_expr =
-                pathconstraints2expr(state.path_constraints, unique_terms_map);
+            std::shared_ptr<gymbosat::Expr> path_constraints_expr =
+                gymbosat::pathconstraints2expr(state.path_constraints, unique_terms_map);
 
             if (use_dpll) {
                 while (
@@ -133,22 +139,22 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                     }
 
                     // add feedback
-                    std::shared_ptr<Expr> learnt_constraints =
-                        std::make_shared<Const>(false);
+                    std::shared_ptr<gymbosat::Expr> learnt_constraints =
+                        std::make_shared<gymbosat::Const>(false);
                     for (auto &ass : assignments_map) {
                         if (ass.second) {
-                            learnt_constraints = std::make_shared<Or>(
+                            learnt_constraints = std::make_shared<gymbosat::Or>(
                                 learnt_constraints,
-                                std::make_shared<Not>(
-                                    std::make_shared<Var>(ass.first)));
+                                std::make_shared<gymbosat::Not>(
+                                    std::make_shared<gymbosat::Var>(ass.first)));
                         } else {
-                            learnt_constraints = std::make_shared<Or>(
+                            learnt_constraints = std::make_shared<gymbosat::Or>(
                                 learnt_constraints,
-                                std::make_shared<Var>(ass.first));
+                                std::make_shared<gymbosat::Var>(ass.first));
                         }
                     }
 
-                    path_constraints_expr = std::make_shared<And>(
+                    path_constraints_expr = std::make_shared<gymbosat::And>(
                         path_constraints_expr, learnt_constraints);
                 }
             } else {

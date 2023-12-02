@@ -1,0 +1,121 @@
+\hypertarget{type_8h}{}\doxysection{libgymbo/type.h File Reference}
+\label{type_8h}\index{libgymbo/type.h@{libgymbo/type.h}}
+
+
+Implementatations of basic alias, types, and classes.  
+
+
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$list$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+Include dependency graph for type.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{type_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{type_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgymbo_1_1Instr}{gymbo\+::\+Instr}}
+\begin{DoxyCompactList}\small\item\em Class representing an instruction. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1Grad}{gymbo\+::\+Grad}}
+\begin{DoxyCompactList}\small\item\em Struct representing the gradient of a symbolic expression. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1Sym}{gymbo\+::\+Sym}}
+\begin{DoxyCompactList}\small\item\em Struct representing a symbolic expression. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1SymState}{gymbo\+::\+Sym\+State}}
+\begin{DoxyCompactList}\small\item\em Struct representing the symbolic state of the symbolic execution. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1Trace}{gymbo\+::\+Trace}}
+\begin{DoxyCompactList}\small\item\em Struct representing a trace in symbolic execution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{type_8h_a5cbc49c07ec788c2da4cda3b41f9364f}\label{type_8h_a5cbc49c07ec788c2da4cda3b41f9364f}} 
+using \mbox{\hyperlink{type_8h_a5cbc49c07ec788c2da4cda3b41f9364f}{gymbo\+::\+Word32}} = uint32\+\_\+t
+\begin{DoxyCompactList}\small\item\em Alias for 32-\/bit unsigned integer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{type_8h_a9b6a88c2be45a5e3fd3f053681f89733}\label{type_8h_a9b6a88c2be45a5e3fd3f053681f89733}} 
+using \mbox{\hyperlink{type_8h_a9b6a88c2be45a5e3fd3f053681f89733}{gymbo\+::\+Prog}} = std\+::vector$<$ Instr $>$
+\begin{DoxyCompactList}\small\item\em Alias for a program, represented as a vector of instructions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{type_8h_a93394c86b71f9947e9d17b61013e600c}\label{type_8h_a93394c86b71f9947e9d17b61013e600c}} 
+using \mbox{\hyperlink{type_8h_a93394c86b71f9947e9d17b61013e600c}{gymbo\+::\+Mem}} = std\+::unordered\+\_\+map$<$ Word32, Word32 $>$
+\begin{DoxyCompactList}\small\item\em Alias for memory, represented as an unordered map of 32-\/bit words. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{type_8h_aea0120f1cdc1417f9b6b8480ac562389}\label{type_8h_aea0120f1cdc1417f9b6b8480ac562389}} 
+using \mbox{\hyperlink{type_8h_aea0120f1cdc1417f9b6b8480ac562389}{gymbo\+::\+Path\+Constraints\+Table}} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ bool, std\+::unordered\+\_\+map$<$ int, float $>$ $>$$>$
+\begin{DoxyCompactList}\small\item\em Alias for a table of path constraints. The key is the string representation of the constraint and the value is the pair of its satifiability and the map whose key is the variable id and the value is the concrete value that makes the constraint true. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{type_8h_ac714ceb538af2de2adce25193f0e5eaf}\label{type_8h_ac714ceb538af2de2adce25193f0e5eaf}} 
+using \mbox{\hyperlink{type_8h_ac714ceb538af2de2adce25193f0e5eaf}{gymbo\+::\+SMem}} = std\+::unordered\+\_\+map$<$ Word32, Sym $>$
+\begin{DoxyCompactList}\small\item\em Alias for symbolic memory, represented as an unordered map of symbolic expressions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{type_8h_a367bfa154f9003b6f35beef881a6bb14}\label{type_8h_a367bfa154f9003b6f35beef881a6bb14}} 
+enum class \mbox{\hyperlink{type_8h_a367bfa154f9003b6f35beef881a6bb14}{gymbo\+::\+Instr\+Type}} \{ \newline
+{\bfseries Add}
+, {\bfseries Sub}
+, {\bfseries Mul}
+, {\bfseries Jmp\+If}
+, \newline
+{\bfseries Jmp}
+, {\bfseries And}
+, {\bfseries Or}
+, {\bfseries Not}
+, \newline
+{\bfseries Lt}
+, {\bfseries Le}
+, {\bfseries Eq}
+, {\bfseries Push}
+, \newline
+{\bfseries Store}
+, {\bfseries Load}
+, {\bfseries Pop}
+, {\bfseries Read}
+, \newline
+{\bfseries Print}
+, {\bfseries Swap}
+, {\bfseries Dup}
+, {\bfseries Over}
+, \newline
+{\bfseries RotL}
+, {\bfseries Done}
+, {\bfseries Nop}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum representing different instruction types. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{type_8h_a4524c130985b8982d2787f9bafe27225}\label{type_8h_a4524c130985b8982d2787f9bafe27225}} 
+enum class \mbox{\hyperlink{type_8h_a4524c130985b8982d2787f9bafe27225}{gymbo\+::\+Sym\+Type}} \{ \newline
+{\bfseries SAdd}
+, {\bfseries SSub}
+, {\bfseries SMul}
+, {\bfseries SEq}
+, \newline
+{\bfseries SNot}
+, {\bfseries SOr}
+, {\bfseries SCon}
+, {\bfseries SAnd}
+, \newline
+{\bfseries SLt}
+, {\bfseries SLe}
+, {\bfseries SAny}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum representing different symbolic expression types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementatations of basic alias, types, and classes. 
+
+\begin{DoxyAuthor}{Author}
+Hideaki Takahashi 
+\end{DoxyAuthor}

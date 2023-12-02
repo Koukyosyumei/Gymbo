@@ -1,0 +1,168 @@
+\hypertarget{utils_8h}{}\doxysection{libgymbo/utils.h File Reference}
+\label{utils_8h}\index{libgymbo/utils.h@{libgymbo/utils.h}}
+
+
+Utility funcitons and classes.  
+
+
+{\ttfamily \#include $<$bitset$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for utils.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classLLNode}{LLNode$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Node for a Doubly Linked List. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classLinkedlist}{Linkedlist$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Doubly Linked List Implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{utils_8h_a3bb64757a158a6a0fda650799b8e32db}\label{utils_8h_a3bb64757a158a6a0fda650799b8e32db}} 
+bool {\bfseries is\+\_\+integer} (float x)
+\item 
+\mbox{\Hypertarget{utils_8h_aff2c12d2d3219524d8f8ed2db2844118}\label{utils_8h_aff2c12d2d3219524d8f8ed2db2844118}} 
+uint32\+\_\+t {\bfseries Float\+To\+Word} (float val)
+\item 
+\mbox{\Hypertarget{utils_8h_af99d4e3b06f181af184d171a6321f0ef}\label{utils_8h_af99d4e3b06f181af184d171a6321f0ef}} 
+float {\bfseries word\+To\+Float} (uint32\+\_\+t word)
+\item 
+\mbox{\Hypertarget{utils_8h_a049d18da1d33ca03e055d24ba1077efc}\label{utils_8h_a049d18da1d33ca03e055d24ba1077efc}} 
+int {\bfseries word\+To\+Int} (uint32\+\_\+t word)
+\item 
+int \mbox{\hyperlink{utils_8h_a4372ea01be056af0da9f922ae9b02bc2}{word\+To\+Signed\+Int}} (uint32\+\_\+t word)
+\item 
+bool \mbox{\hyperlink{utils_8h_a952ce406cfbcf5f21efd088b3b71d428}{word\+To\+Bool}} (uint32\+\_\+t word)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{utils_8h_a343fa84c69adccf188397a1bef3f9d00}{bool\+To\+Word}} (bool value)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{utils_8h_a7ef0b0e21084a70e584c2054b17c791a}{twos\+Complement}} (uint32\+\_\+t i)
+\item 
+bool \mbox{\hyperlink{utils_8h_a1f85e1eb4f4909bbb74e171d0b0074c5}{is\+Negative}} (uint32\+\_\+t word)
+\item 
+std\+::string \mbox{\hyperlink{utils_8h_a86cfc81dc7063dce5ca7451c443e207e}{val\+Name}} (int i)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility funcitons and classes. 
+
+\begin{DoxyAuthor}{Author}
+Hideaki Takahashi 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{utils_8h_a343fa84c69adccf188397a1bef3f9d00}\label{utils_8h_a343fa84c69adccf188397a1bef3f9d00}} 
+\index{utils.h@{utils.h}!boolToWord@{boolToWord}}
+\index{boolToWord@{boolToWord}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{boolToWord()}{boolToWord()}}
+{\footnotesize\ttfamily uint32\+\_\+t bool\+To\+Word (\begin{DoxyParamCaption}\item[{bool}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Converts a bool to a uint32\+\_\+t word.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The bool to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The uint32\+\_\+t word equivalent of the bool. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_a1f85e1eb4f4909bbb74e171d0b0074c5}\label{utils_8h_a1f85e1eb4f4909bbb74e171d0b0074c5}} 
+\index{utils.h@{utils.h}!isNegative@{isNegative}}
+\index{isNegative@{isNegative}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{isNegative()}{isNegative()}}
+{\footnotesize\ttfamily bool is\+Negative (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Checks if a uint32\+\_\+t word is negative.
+
+
+\begin{DoxyParams}{Parameters}
+{\em word} & The uint32\+\_\+t word to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the word is negative, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_a7ef0b0e21084a70e584c2054b17c791a}\label{utils_8h_a7ef0b0e21084a70e584c2054b17c791a}} 
+\index{utils.h@{utils.h}!twosComplement@{twosComplement}}
+\index{twosComplement@{twosComplement}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{twosComplement()}{twosComplement()}}
+{\footnotesize\ttfamily uint32\+\_\+t twos\+Complement (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the twos complement of a uint32\+\_\+t word.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & The uint32\+\_\+t word to get the twos complement of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The twos complement of the word. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_a86cfc81dc7063dce5ca7451c443e207e}\label{utils_8h_a86cfc81dc7063dce5ca7451c443e207e}} 
+\index{utils.h@{utils.h}!valName@{valName}}
+\index{valName@{valName}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{valName()}{valName()}}
+{\footnotesize\ttfamily std\+::string val\+Name (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Generates a name for a variable based on its index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & The index of the variable. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A name for the variable. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_a952ce406cfbcf5f21efd088b3b71d428}\label{utils_8h_a952ce406cfbcf5f21efd088b3b71d428}} 
+\index{utils.h@{utils.h}!wordToBool@{wordToBool}}
+\index{wordToBool@{wordToBool}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{wordToBool()}{wordToBool()}}
+{\footnotesize\ttfamily bool word\+To\+Bool (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Converts a uint32\+\_\+t word to a bool.
+
+
+\begin{DoxyParams}{Parameters}
+{\em word} & The uint32\+\_\+t word to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The bool equivalent of the word. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_a4372ea01be056af0da9f922ae9b02bc2}\label{utils_8h_a4372ea01be056af0da9f922ae9b02bc2}} 
+\index{utils.h@{utils.h}!wordToSignedInt@{wordToSignedInt}}
+\index{wordToSignedInt@{wordToSignedInt}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{wordToSignedInt()}{wordToSignedInt()}}
+{\footnotesize\ttfamily int word\+To\+Signed\+Int (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Converts a uint32\+\_\+t word to a signed int.
+
+
+\begin{DoxyParams}{Parameters}
+{\em word} & The uint32\+\_\+t word to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signed int equivalent of the word. 
+\end{DoxyReturn}

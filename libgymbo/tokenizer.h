@@ -1,3 +1,9 @@
+/**
+ * @file tokenizer.h
+ * @brief Implementation of tokenizer
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include <ctype.h>
 #include <stdarg.h>
@@ -12,13 +18,29 @@
 #include <unordered_map>
 
 namespace gymbo {
+
+/**
+ * @brief Checks if a character is an alphabetical character or underscore.
+ * @param c The character to check.
+ * @return true if the character is an alphabetical character or underscore,
+ * false otherwise.
+ */
 inline bool is_alpha(char c) {
     return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || c == '_';
 }
 
+/**
+ * @brief Checks if a character is an alphanumeric character.
+ * @param c The character to check.
+ * @return true if the character is an alphanumeric character, false otherwise.
+ */
 inline bool is_alnum(char c) { return is_alpha(c) || ('0' <= c && c <= '9'); }
 
-// Reports an error and exit.
+/**
+ * @brief Reports an error and exits the program.
+ * @param fmt The format string for the error message.
+ * @param ... Additional arguments for the format string.
+ */
 inline void error(char *fmt, ...) {
     va_list ap;
     va_start(ap, fmt);
@@ -27,7 +49,13 @@ inline void error(char *fmt, ...) {
     exit(1);
 }
 
-// Reports an error location and exit.
+/**
+ * @brief Reports an error location and exits the program.
+ * @param user_input The input string.
+ * @param loc The location of the error.
+ * @param fmt The format string for the error message.
+ * @param ... Additional arguments for the format string.
+ */
 inline void error_at(char *user_input, char *loc, char *fmt, ...) {
     va_list ap;
     va_start(ap, fmt);
@@ -41,6 +69,9 @@ inline void error_at(char *user_input, char *loc, char *fmt, ...) {
     exit(1);
 }
 
+/**
+ * @brief Enumeration representing different token kinds.
+ */
 typedef enum {
     TOKEN_RESERVED,  // Keywords or punctuators
     TOKEN_RETURN,
@@ -52,7 +83,9 @@ typedef enum {
     TOKEN_EOF,  // End-of-file markers
 } TokenKind;
 
-typedef struct Token Token;
+/**
+ * @brief Structure representing a token.
+ */
 struct Token {
     TokenKind kind;  // Token kind
     Token *next;     // Next token
@@ -60,13 +93,6 @@ struct Token {
     char *str;       // Token string
     int len;         // Token length
     int var_id;      // Var ID
-};
-
-struct LVar {
-    LVar *next;
-    char *name;
-    int len;
-    int offset;
 };
 
 /**
@@ -85,10 +111,10 @@ inline bool consume(Token *&token, char *op) {
 }
 
 /**
- * Consumes the current token if it matches `op`.
+ * Consumes the current token if it matches `tok`.
  *
  * @param token A pointer to the current token.
- * @param op The token to consume.
+ * @param tok The token to consume.
  * @return True if the token was consumed, false otherwise.
  */
 inline bool consume_tok(Token *&token, TokenKind tok) {
@@ -189,6 +215,8 @@ inline bool startswith(char *p, char *q) {
  * Tokenizes a given string and returns a linked list of tokens.
  *
  * @param user_input The string to be tokenized.
+ * @param var_counter The map to store the mapping from variable name to
+ * variable id.
  * @return A linked list of tokens.
  */
 inline Token *tokenize(char *user_input,

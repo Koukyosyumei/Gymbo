@@ -1,3 +1,9 @@
+/**
+ * @file gymbo.cpp
+ * @brief CLT tool for gradient-based symbolic execution
+ * @author Hideaki Takahashi
+ */
+
 #include <unistd.h>
 
 #include <unordered_map>

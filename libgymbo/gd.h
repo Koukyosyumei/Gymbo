@@ -1,3 +1,9 @@
+/**
+ * @file gd.h
+ * @brief Implementation of gradient descent optimizer.
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include <random>
 #include <unordered_map>
@@ -23,17 +29,27 @@ namespace gymbo {
  * constraints are satisfied or a maximum number of epochs is reached.
  */
 struct GDOptimizer {
-    int num_epochs, seed;
-    float lr, eps, param_low, param_high;
-    bool sign_grad, init_param_uniform_int;
-
-    int num_used_itr;
+    int num_epochs;    ///< Maximum number of optimization epochs.
+    float lr;          ///< Learning rate for gradient descent.
+    float eps;         ///< The smallest positive value.
+    float param_low;   ///< Lower bound for parameter initialization.
+    float param_high;  ///< Upper bound for parameter initialization.
+    bool sign_grad;    ///< If true, use sign gradient descent. Otherwise, use
+                       ///< standard gradient descent. (default true).
+    bool init_param_uniform_int;  ///< Flag indicating whether initial parameter
+                                  ///< values are drawn from the uniform int
+                                  ///< distribution or uniform real distribution
+                                  ///< (default true).
+    int seed;          ///< Random seed for initializing parameter values.
+    int num_used_itr;  ///< Number of used iterations during optimization.
 
     /**
      * @brief Constructor for GDOptimizer.
      *
      * @param num_epochs Maximum number of optimization epochs (default: 100).
      * @param lr Learning rate for gradient descent (default: 1).
+     * @param eps The smallest positive value of the target type
+     * (default: 1.0).
      * @param param_low Lower bound for parameter initialization (default: -10).
      * @param param_high Upper bound for parameter initialization (default: 10).
      * @param sign_grad If true, use sign gradient descent. Otherwise, use
