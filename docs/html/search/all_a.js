@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name_30',['name',['../classExpr.html#a085207153a37669b317bdfeccc89375d',1,'Expr']]],
-  ['node_31',['Node',['../structgymbo_1_1Node.html',1,'gymbo']]],
-  ['not_32',['Not',['../classNot.html',1,'']]]
+  ['name_33',['name',['../classgymbosat_1_1Expr.html#ad4a359e63fbd7d3fe3cb598300a1c61e',1,'gymbosat::Expr']]],
+  ['node_34',['Node',['../structgymbo_1_1Node.html',1,'gymbo']]],
+  ['not_35',['Not',['../classgymbosat_1_1Not.html',1,'gymbosat']]]
 ];

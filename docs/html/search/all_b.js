@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['opcode_33',['opcode',['../classExpr.html#aa6f5a8068e0786128f58b3565909d604',1,'Expr']]],
-  ['or_34',['Or',['../classOr.html',1,'']]]
+  ['opcode_36',['opcode',['../classgymbosat_1_1Expr.html#aa84655ea020547722c7433af5c009d27',1,'gymbosat::Expr']]],
+  ['or_37',['Or',['../classgymbosat_1_1Or.html',1,'gymbosat']]]
 ];

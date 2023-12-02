@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gymbo: Main Page</title>
+<title>Gymbo: Gymbo: Gradient-based Symbolic Execution</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,11 +60,153 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Gymbo Documentation</div>  </div>
+<div class="title">Gymbo: Gradient-based Symbolic Execution </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><div class="image">
+<object type="image/svg+xml" data="gymbo.drawio.svg" style="pointer-events: none;"></object>
+</div>
+<p>Gymbo is a Proof of Concept for a Gradient-based Symbolic Execution Engine, implemented from scratch. Building on recent advancements that utilize gradient descent to solve SMT formulas <code>[1, 2]</code>, Gymbo leverages gradient descent to discover input values that fulfill each path constraint during symbolic execution.</p>
+<p>Compared to other prominent symbolic execution tools, Gymbo's implementation is notably simpler and more compact. We hope that this project will assist individuals in grasping the fundamental principles of symbolic execution and SMT problem-solving through gradient descent.</p>
+<p>One practical usage of Gymbo is debugging ML models like neural networks to detect unexpected behaviors. For example, you can generate adversarial examples with Gymbo by converting neural networks to imperative programs.</p>
+<blockquote class="doxtable">
+<p>Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated. </p>
+</blockquote>
+<h1><a class="anchor" id="install_sec"></a>
+Install</h1>
+<div class="fragment"><div class="line">git clone https://github.com/Koukyosyumei/Gymbo.git</div>
+<div class="line">./build.sh</div>
+</div><!-- fragment --><h1><a class="anchor" id="grammar_sec"></a>
+Input Source Code Grammar</h1>
+<p>Gymbo presently supports C-like programs with the following BNF grammar:</p>
+<div class="fragment"><div class="line">program    = stmt*</div>
+<div class="line">stmt       = expr <span class="stringliteral">&quot;;&quot;</span></div>
+<div class="line">         | <span class="stringliteral">&quot;{&quot;</span> stmt* <span class="stringliteral">&quot;}&quot;</span></div>
+<div class="line">         | <span class="stringliteral">&quot;if&quot;</span> <span class="stringliteral">&quot;(&quot;</span> expr <span class="stringliteral">&quot;)&quot;</span> stmt (<span class="stringliteral">&quot;else&quot;</span> stmt)? </div>
+<div class="line">         | <span class="stringliteral">&quot;return&quot;</span> expr <span class="stringliteral">&quot;;&quot;</span></div>
+<div class="line">expr       = assign</div>
+<div class="line">assign     = logical (<span class="stringliteral">&quot;=&quot;</span> assign)?</div>
+<div class="line">logical    = equality (<span class="stringliteral">&quot;&amp;&amp;&quot;</span> equality | <span class="stringliteral">&quot;||&quot;</span> equality)*</div>
+<div class="line">equality   = relational (<span class="stringliteral">&quot;==&quot;</span> relational | <span class="stringliteral">&quot;!=&quot;</span> relational)*</div>
+<div class="line">relational = add (<span class="stringliteral">&quot;&lt;&quot;</span> add | <span class="stringliteral">&quot;&lt;=&quot;</span> add | <span class="stringliteral">&quot;&gt;&quot;</span> add | <span class="stringliteral">&quot;&gt;=&quot;</span> add)*</div>
+<div class="line">add        = mul (<span class="stringliteral">&quot;+&quot;</span> mul | <span class="stringliteral">&quot;-&quot;</span> mul)*</div>
+<div class="line">mul        = unary (<span class="stringliteral">&quot;*&quot;</span> unary | <span class="stringliteral">&quot;/&quot;</span> unary)*</div>
+<div class="line">unary      = (<span class="stringliteral">&quot;+&quot;</span> | <span class="stringliteral">&quot;-&quot;</span>)? primary</div>
+<div class="line">primary    = num | ident | <span class="stringliteral">&quot;(&quot;</span> expr <span class="stringliteral">&quot;)&quot;</span></div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>Please note that Gymbo currently ignores <code>/</code> when solving path constraints. </p>
+</blockquote>
+<h1><a class="anchor" id="algorithm_sec"></a>
+Internal Algorithm</h1>
+<p>Gymbo converts the path constraint into a numerical loss function, which becomes negative only when the path constraint is satisfied. Gymbo uses the following transformation rule:</p>
+<div class="fragment"><div class="line">!(a)     =&gt; -a + eps</div>
+<div class="line">(a &lt; b)  =&gt; a - b + eps</div>
+<div class="line">(a &lt;= b) =&gt; a - b</div>
+<div class="line">(a &gt; b)  =&gt; b - a + eps</div>
+<div class="line">(a &gt;= b) =&gt; b - a</div>
+<div class="line">(a == b) =&gt; abs(a - b)</div>
+<div class="line">(a != b) =&gt; -abs(a - b) + eps</div>
+<div class="line">(a &amp;&amp; b) =&gt; max(0, a) + max(0, b)</div>
+<div class="line">(a || b) =&gt; max(0, a) * max(0, b)</div>
+</div><!-- fragment --><p>Here, <code>eps</code> is the smallest positive value of the type for a and b.</p>
+<p>Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each unique term, sometimes resulting in better scalability.</p>
+<h1><a class="anchor" id="cli_sec"></a>
+CLI Tool</h1>
+<p><code>gymbo</code> command accepts the following command-line options:</p>
+<ul>
+<li><code>-d</code>: Set the maximum depth for symbolic execution (default: 256).</li>
+<li><code>-v</code>: Set the verbosity level (default: 1). Use -1 for minimal output.</li>
+<li><code>-i</code>: Set the number of iterations for gradient descent (default: 100).</li>
+<li><code>-a</code>: Set the step size for gradient descent (default: 1.0).</li>
+<li><code>-e</code>: Set the eps for the differentiable expression (default: 1.0).</li>
+<li><code>-t</code>: Set the maximum number of trials of gradient descent (default: 3)</li>
+<li><code>-l</code>: Set the minimum value of initial parameters (default: -10)</li>
+<li><code>-h</code>: Set the maximum value of initial parameters (default: 10)</li>
+<li><code>-s</code>: Set the random seed (default: 42)</li>
+<li><code>-p</code>: (optional) If set, use DPLL to determine the assignment for each term. Otherwise, solve the loss function directly transformed from the path constraints.</li>
+</ul>
+<div class="fragment"><div class="line">./gymbo &quot;if (a &lt; 3) if (a &gt; 4) return 1;&quot; -v 0</div>
+<div class="line">// ... (Example output from README)</div>
+</div><!-- fragment --><h1><a class="anchor" id="lib_sec"></a>
+libgymbo: Header-only Library</h1>
+<p>Since gymbo consists of the header-only library, you can easily create your own symbolic execution tool.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;libgymbo/compiler.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;libgymbo/gd.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;libgymbo/parser.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;libgymbo/tokenizer.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;libgymbo/type.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">char</span> user_input[] = <span class="stringliteral">&quot;if (a &lt; 3) return 1;&quot;</span></div>
+<div class="line"> </div>
+<div class="line">std::vector&lt;gymbo::Node *&gt; code;</div>
+<div class="line">gymbo::Prog prg;</div>
+<div class="line"><a class="code" href="structgymbo_1_1GDOptimizer.html">gymbo::GDOptimizer</a> optimizer(num_itrs, step_size);</div>
+<div class="line"><a class="code" href="structgymbo_1_1SymState.html">gymbo::SymState</a> init;</div>
+<div class="line">gymbo::PathConstraintsTable cache_constraints;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// ... (Code snippet from README)</span></div>
+<div class="ttc" id="astructgymbo_1_1GDOptimizer_html"><div class="ttname"><a href="structgymbo_1_1GDOptimizer.html">gymbo::GDOptimizer</a></div><div class="ttdoc">Gradient Descent Optimizer for Symbolic Path Constraints.</div><div class="ttdef"><b>Definition:</b> gd.h:25</div></div>
+<div class="ttc" id="astructgymbo_1_1SymState_html"><div class="ttname"><a href="structgymbo_1_1SymState.html">gymbo::SymState</a></div><div class="ttdoc">Struct representing the symbolic state of the symbolic execution.</div><div class="ttdef"><b>Definition:</b> type.h:644</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="python_sec"></a>
+Python API</h1>
+<h2><a class="anchor" id="install_py"></a>
+Install</h2>
+<div class="fragment"><div class="line">pip install git+https:<span class="comment">//github.com/Koukyosyumei/Gymbo</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="pylibgymbo_sec"></a>
+pylibgymbo: Python Wrapper for libgymbo</h2>
+<div class="fragment"><div class="line">import pylibgymbo as plg</div>
+<div class="line"> </div>
+<div class="line">inp = &quot;a = 1; if (a == 1) return 2;&quot;</div>
+<div class="line">var_counter, prg = plg.gcompile(inp)</div>
+<div class="line"> </div>
+<div class="line">optimizer = plg.GDOptimizer(num_itrs, step_size, ...)</div>
+<div class="line">constraints = plg.gexecute(prg, init_symstate, optimizer, ...)</div>
+</div><!-- fragment --><h2><a class="anchor" id="pymlgymbo_sec"></a>
+pymlgymbo: Debugging Machine Learning Models</h2>
+<p>We offer some helper functions within <code>pymlgymbo</code> library to convert the ML models of famous Python library like sklearn and PyTorch to the program that gymbo can process.</p>
+<p>The following code generates the adversarial examples against a neural network, as proposed in [3]</p>
+<div class="fragment"><div class="line">from sklearn.neural_network import MLPClassifier</div>
+<div class="line"> </div>
+<div class="line">import pylibgymbo as plg</div>
+<div class="line">import pymlgymbo as pmg</div>
+<div class="line"> </div>
+<div class="line">clf = MLPClassifier(activation=&quot;relu&quot;)</div>
+<div class="line">clf.fit(X_train, y_train)</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">mlp_code = pmg.dump_sklearn_MLP(clf, feature_names)</div>
+<div class="line">adv_condition = (</div>
+<div class="line">      &quot;(&quot;</div>
+<div class="line">      + &quot; || &quot;.join(</div>
+<div class="line">          [f&quot;(y_{c} &gt; y_{y_pred})&quot; for c in range(len(clf.classes_)) if y_pred != c]</div>
+<div class="line">      )</div>
+<div class="line">      + &quot;)&quot;</div>
+<div class="line">  )</div>
+<div class="line"> </div>
+<div class="line">optimizer = plg.GDOptimizer(num_itrs, step_size, ...)</div>
+<div class="line">var_counter, prg = plg.gcompile(mlp_code)</div>
+<div class="line">constraints = plg.gexecute(prg, init_symstate, optimizer, target_pcs, ...)</div>
+</div><!-- fragment --><h1><a class="anchor" id="document_sec"></a>
+Document</h1>
+<ul>
+<li>Manual Build</li>
+</ul>
+<div class="fragment"><div class="line">sudo apt-get install doxygen</div>
+<div class="line"> </div>
+<div class="line">doxygen Doxyfile</div>
+</div><!-- fragment --><h1><a class="anchor" id="acknowledgement_sec"></a>
+Acknowledgement</h1>
+<p>Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of <code>rui314/chibicc [4]</code>, while the symbolic execution approach is inspired by <code>beala/symbolic [5]</code>.</p>
+<h1><a class="anchor" id="reference_sec"></a>
+Reference</h1>
+<div class="fragment"><div class="line">- [1] Chen, Peng, Jianzhong Liu, and Hao Chen. <span class="stringliteral">&quot;Matryoshka: fuzzing deeply nested branches.&quot;</span> Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security. 2019.</div>
+<div class="line">- [2] Minghao Liu, Kunhang Lv, Pei Huang, Rui Han, Fuqi Jia, Yu Zhang, Feifei Ma, Jian Zhang. <span class="stringliteral">&quot;NRAgo: Solving SMT(NRA) Formulas with Gradient-based Optimization.&quot;</span> IEEE/ACM International Conference on Automated Software Engineering, 2023</div>
+<div class="line">- [3] Gopinath, Divya, et al. <span class="stringliteral">&quot;Symbolic execution for importance analysis and adversarial generation in neural networks.&quot;</span> 2019 IEEE 30th International Symposium on Software Reliability Engineering (ISSRE). IEEE, 2019.</div>
+<div class="line">- [4] https:<span class="comment">//github.com/rui314/chibicc</span></div>
+<div class="line">- [5] https:<span class="comment">//github.com/beala/symbolic</span></div>
+</div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

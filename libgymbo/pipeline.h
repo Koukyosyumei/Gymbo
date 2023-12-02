@@ -1,3 +1,9 @@
+/**
+ * @file pipeline.h
+ * @brief Basic workloads of gradient-based symbolic execution
+ * @author Hideaki Takahashi
+ */
+
 #include <unistd.h>
 
 #include <unordered_map>
@@ -53,13 +59,13 @@ inline std::pair<std::unordered_map<std::string, int>, Prog> gcompile(
  * simultaneously optimizing the path constraints using the provided gradient
  * descent optimizer, `GDOptimizer`.
  *
- * @param prog The program to symbolically execute.
+ * @param prg The program to symbolically execute.
  * @param optimizer The gradient descent optimizer for parameter optimization.
- * @param state The initial symbolic state of the program.
+ * @param init The initial symbolic state of the program.
  * @param target_pcs The set of program counters where gymbo executes
  * path-constraints solving. If this set is empty or contains -1, gymbo solves
  * all path-constraints.
- * @param maxDepth The maximum depth of symbolic exploration.
+ * @param max_depth The maximum depth of symbolic exploration.
  * @param maxSAT The maximum number of SAT constraints to collect.
  * @param maxUNSAT The maximum number of UNSAT constraints to collect.
  * @param max_num_trials The maximum number of trials for each gradient descent.
