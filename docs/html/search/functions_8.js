@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['pop_107',['pop',['../classLinkedlist.html#a0061d3a36b8272baf0adc40ca2ef24e9',1,'Linkedlist']]],
-  ['print_108',['print',['../classgymbo_1_1Instr.html#a900ea47f05d7a7e6e2776f0adf4c91f3',1,'gymbo::Instr::print()'],['../structgymbo_1_1SymState.html#ab9854521bf8defda94837e28fa8654eb',1,'gymbo::SymState::print()'],['../structgymbo_1_1Trace.html#a6e02ab2b2c1c69c918f2824265170afb',1,'gymbo::Trace::print()']]],
-  ['psimplify_109',['psimplify',['../structgymbo_1_1Sym.html#a371b1d8b3fc73a10d4106e09f68c3092',1,'gymbo::Sym']]],
-  ['push_110',['push',['../classLinkedlist.html#af18b0e5bdb5f8536f1073e34eb1a00c0',1,'Linkedlist']]]
+  ['len_179',['len',['../classLinkedlist.html#a33c359b4db358fce4e51490dd4013f92',1,'Linkedlist']]],
+  ['literalelimination_180',['literalElimination',['../sat_8h.html#a39eb2e94bf479cf70e9f4f20ae1b7ed4',1,'gymbosat']]],
+  ['literalpolarity_181',['literalPolarity',['../classgymbosat_1_1Expr.html#adea7d5e5285df79237a4b72a8b82c66d',1,'gymbosat::Expr::literalPolarity()'],['../classgymbosat_1_1Var.html#a4429d6094daba3dd3278166676540a01',1,'gymbosat::Var::literalPolarity()'],['../classgymbosat_1_1And.html#a761328ffc63044ff03ac0f937dce2641',1,'gymbosat::And::literalPolarity()'],['../classgymbosat_1_1Or.html#a69ee05e12c00509993fa9dd687cd01ac',1,'gymbosat::Or::literalPolarity()'],['../classgymbosat_1_1Not.html#a72d8ea4e686aae68caa22145edb196b1',1,'gymbosat::Not::literalPolarity()'],['../classgymbosat_1_1Const.html#ae8fa89dfc3b3a4549be4e4d2b212dbe3',1,'gymbosat::Const::literalPolarity()']]],
+  ['literals_182',['literals',['../classgymbosat_1_1Expr.html#aa7775d2a1555fd55529b1ed699ca84ea',1,'gymbosat::Expr::literals()'],['../classgymbosat_1_1Var.html#a695a80ac8aea702f65bbc5ba0d34ab60',1,'gymbosat::Var::literals()'],['../classgymbosat_1_1And.html#a537ddf4b5192e2747744e7ad2108b11e',1,'gymbosat::And::literals()'],['../classgymbosat_1_1Or.html#aef8f1ea74f0ee165bfa3c52ea9eba111',1,'gymbosat::Or::literals()'],['../classgymbosat_1_1Not.html#a63945cef5d7a9392692fa66d161f8503',1,'gymbosat::Not::literals()'],['../classgymbosat_1_1Const.html#ad62fdd34c799d434b18e25841099e04a',1,'gymbosat::Const::literals()']]],
+  ['logical_183',['logical',['../parser_8h.html#aee43a52e33ae6335a16161d16abd1079',1,'gymbo']]]
 ];

@@ -24,7 +24,7 @@ Collaboration diagram for gymbo\+::Sym\+State\+:\nopagebreak
 \mbox{\Hypertarget{structgymbo_1_1SymState_a8cfdb464cd87ab23ce3f4f4861b7ade2}\label{structgymbo_1_1SymState_a8cfdb464cd87ab23ce3f4f4861b7ade2}} 
 \mbox{\hyperlink{structgymbo_1_1SymState_a8cfdb464cd87ab23ce3f4f4861b7ade2}{Sym\+State}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor for symbolic state. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structgymbo_1_1SymState_a60eed9cb787c8a7b529391fec6b1ca2b}{Sym\+State}} (int \mbox{\hyperlink{structgymbo_1_1SymState_a7dfef12dd646e4644c5931c4e65779ce}{pc}}, int \mbox{\hyperlink{structgymbo_1_1SymState_a4c7ebe9a103e0b7a60633cca1f82b88f}{var\+\_\+cnt}}, Mem \mbox{\hyperlink{structgymbo_1_1SymState_ae2ea8fcc287983a5bc53e81893e5a2ea}{mem}}, SMem \mbox{\hyperlink{structgymbo_1_1SymState_a85b48b53e8e5301b88c53ba7d34f0b3c}{smem}}, \mbox{\hyperlink{classLinkedlist}{Linkedlist}}$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$ \mbox{\hyperlink{structgymbo_1_1SymState_a6aa224acae7f54e2f67a708be6cd0b42}{symbolic\+\_\+stack}}, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$ \mbox{\hyperlink{structgymbo_1_1SymState_a33bd74a7fdeee5aeecc51a750944efcc}{path\+\_\+constraints}})
+\mbox{\hyperlink{structgymbo_1_1SymState_a60eed9cb787c8a7b529391fec6b1ca2b}{Sym\+State}} (int \mbox{\hyperlink{structgymbo_1_1SymState_a7dfef12dd646e4644c5931c4e65779ce}{pc}}, int \mbox{\hyperlink{structgymbo_1_1SymState_a4c7ebe9a103e0b7a60633cca1f82b88f}{var\+\_\+cnt}}, \mbox{\hyperlink{type_8h_a93394c86b71f9947e9d17b61013e600c}{Mem}} \mbox{\hyperlink{structgymbo_1_1SymState_ae2ea8fcc287983a5bc53e81893e5a2ea}{mem}}, \mbox{\hyperlink{type_8h_ac714ceb538af2de2adce25193f0e5eaf}{SMem}} \mbox{\hyperlink{structgymbo_1_1SymState_a85b48b53e8e5301b88c53ba7d34f0b3c}{smem}}, \mbox{\hyperlink{classLinkedlist}{Linkedlist}}$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$ \mbox{\hyperlink{structgymbo_1_1SymState_a6aa224acae7f54e2f67a708be6cd0b42}{symbolic\+\_\+stack}}, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$ \mbox{\hyperlink{structgymbo_1_1SymState_a33bd74a7fdeee5aeecc51a750944efcc}{path\+\_\+constraints}})
 \begin{DoxyCompactList}\small\item\em Constructor for symbolic state with specified values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{structgymbo_1_1SymState_ae8fe5bb8fa776a333997ff5d6df7af4a}{set\+\_\+concrete\+\_\+val}} (int var\+\_\+id, float val)
 \begin{DoxyCompactList}\small\item\em Sets a concrete value for a variable in the symbolic state. \end{DoxyCompactList}\item 
@@ -38,9 +38,9 @@ int \mbox{\hyperlink{structgymbo_1_1SymState_a7dfef12dd646e4644c5931c4e65779ce}{
 \item 
 int \mbox{\hyperlink{structgymbo_1_1SymState_a4c7ebe9a103e0b7a60633cca1f82b88f}{var\+\_\+cnt}}
 \item 
-Mem \mbox{\hyperlink{structgymbo_1_1SymState_ae2ea8fcc287983a5bc53e81893e5a2ea}{mem}}
+\mbox{\hyperlink{type_8h_a93394c86b71f9947e9d17b61013e600c}{Mem}} \mbox{\hyperlink{structgymbo_1_1SymState_ae2ea8fcc287983a5bc53e81893e5a2ea}{mem}}
 \item 
-SMem \mbox{\hyperlink{structgymbo_1_1SymState_a85b48b53e8e5301b88c53ba7d34f0b3c}{smem}}
+\mbox{\hyperlink{type_8h_ac714ceb538af2de2adce25193f0e5eaf}{SMem}} \mbox{\hyperlink{structgymbo_1_1SymState_a85b48b53e8e5301b88c53ba7d34f0b3c}{smem}}
 \item 
 \mbox{\hyperlink{classLinkedlist}{Linkedlist}}$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$ \mbox{\hyperlink{structgymbo_1_1SymState_a6aa224acae7f54e2f67a708be6cd0b42}{symbolic\+\_\+stack}}
 \item 
@@ -56,7 +56,7 @@ Struct representing the symbolic state of the symbolic execution.
 \index{gymbo::SymState@{gymbo::SymState}!SymState@{SymState}}
 \index{SymState@{SymState}!gymbo::SymState@{gymbo::SymState}}
 \doxysubsubsection{\texorpdfstring{SymState()}{SymState()}}
-{\footnotesize\ttfamily gymbo\+::\+Sym\+State\+::\+Sym\+State (\begin{DoxyParamCaption}\item[{int}]{pc,  }\item[{int}]{var\+\_\+cnt,  }\item[{Mem}]{mem,  }\item[{SMem}]{smem,  }\item[{\mbox{\hyperlink{classLinkedlist}{Linkedlist}}$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$}]{symbolic\+\_\+stack,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$}]{path\+\_\+constraints }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily gymbo\+::\+Sym\+State\+::\+Sym\+State (\begin{DoxyParamCaption}\item[{int}]{pc,  }\item[{int}]{var\+\_\+cnt,  }\item[{\mbox{\hyperlink{type_8h_a93394c86b71f9947e9d17b61013e600c}{Mem}}}]{mem,  }\item[{\mbox{\hyperlink{type_8h_ac714ceb538af2de2adce25193f0e5eaf}{SMem}}}]{smem,  }\item[{\mbox{\hyperlink{classLinkedlist}{Linkedlist}}$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$}]{symbolic\+\_\+stack,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$}]{path\+\_\+constraints }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -104,7 +104,7 @@ Sets a concrete value for a variable in the symbolic state.
 \index{gymbo::SymState@{gymbo::SymState}!mem@{mem}}
 \index{mem@{mem}!gymbo::SymState@{gymbo::SymState}}
 \doxysubsubsection{\texorpdfstring{mem}{mem}}
-{\footnotesize\ttfamily Mem gymbo\+::\+Sym\+State\+::mem}
+{\footnotesize\ttfamily \mbox{\hyperlink{type_8h_a93394c86b71f9947e9d17b61013e600c}{Mem}} gymbo\+::\+Sym\+State\+::mem}
 
 Concrete memory. \mbox{\Hypertarget{structgymbo_1_1SymState_a33bd74a7fdeee5aeecc51a750944efcc}\label{structgymbo_1_1SymState_a33bd74a7fdeee5aeecc51a750944efcc}} 
 \index{gymbo::SymState@{gymbo::SymState}!path\_constraints@{path\_constraints}}
@@ -122,7 +122,7 @@ Program counter. \mbox{\Hypertarget{structgymbo_1_1SymState_a85b48b53e8e5301b88c
 \index{gymbo::SymState@{gymbo::SymState}!smem@{smem}}
 \index{smem@{smem}!gymbo::SymState@{gymbo::SymState}}
 \doxysubsubsection{\texorpdfstring{smem}{smem}}
-{\footnotesize\ttfamily SMem gymbo\+::\+Sym\+State\+::smem}
+{\footnotesize\ttfamily \mbox{\hyperlink{type_8h_ac714ceb538af2de2adce25193f0e5eaf}{SMem}} gymbo\+::\+Sym\+State\+::smem}
 
 Symbolic memory. \mbox{\Hypertarget{structgymbo_1_1SymState_a6aa224acae7f54e2f67a708be6cd0b42}\label{structgymbo_1_1SymState_a6aa224acae7f54e2f67a708be6cd0b42}} 
 \index{gymbo::SymState@{gymbo::SymState}!symbolic\_stack@{symbolic\_stack}}
@@ -140,4 +140,4 @@ Variable count.
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-libgymbo/type.\+h\end{DoxyCompactItemize}
+libgymbo/\mbox{\hyperlink{type_8h}{type.\+h}}\end{DoxyCompactItemize}

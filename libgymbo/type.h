@@ -1,3 +1,9 @@
+/**
+ * @file type.h
+ * @brief Implementatations of basic alias, types, and classes.
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include <array>
 #include <cstdint>

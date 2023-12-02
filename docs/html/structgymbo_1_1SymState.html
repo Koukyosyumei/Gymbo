@@ -94,7 +94,7 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a8cfdb464cd87ab23ce3f4f4861b7ade2">SymState</a> ()</td></tr>
 <tr class="memdesc:a8cfdb464cd87ab23ce3f4f4861b7ade2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for symbolic state. <br /></td></tr>
 <tr class="separator:a8cfdb464cd87ab23ce3f4f4861b7ade2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60eed9cb787c8a7b529391fec6b1ca2b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a60eed9cb787c8a7b529391fec6b1ca2b">SymState</a> (int <a class="el" href="structgymbo_1_1SymState.html#a7dfef12dd646e4644c5931c4e65779ce">pc</a>, int <a class="el" href="structgymbo_1_1SymState.html#a4c7ebe9a103e0b7a60633cca1f82b88f">var_cnt</a>, Mem <a class="el" href="structgymbo_1_1SymState.html#ae2ea8fcc287983a5bc53e81893e5a2ea">mem</a>, SMem <a class="el" href="structgymbo_1_1SymState.html#a85b48b53e8e5301b88c53ba7d34f0b3c">smem</a>, <a class="el" href="classLinkedlist.html">Linkedlist</a>&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &gt; <a class="el" href="structgymbo_1_1SymState.html#a6aa224acae7f54e2f67a708be6cd0b42">symbolic_stack</a>, std::vector&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &gt; <a class="el" href="structgymbo_1_1SymState.html#a33bd74a7fdeee5aeecc51a750944efcc">path_constraints</a>)</td></tr>
+<tr class="memitem:a60eed9cb787c8a7b529391fec6b1ca2b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a60eed9cb787c8a7b529391fec6b1ca2b">SymState</a> (int <a class="el" href="structgymbo_1_1SymState.html#a7dfef12dd646e4644c5931c4e65779ce">pc</a>, int <a class="el" href="structgymbo_1_1SymState.html#a4c7ebe9a103e0b7a60633cca1f82b88f">var_cnt</a>, <a class="el" href="type_8h.html#a93394c86b71f9947e9d17b61013e600c">Mem</a> <a class="el" href="structgymbo_1_1SymState.html#ae2ea8fcc287983a5bc53e81893e5a2ea">mem</a>, <a class="el" href="type_8h.html#ac714ceb538af2de2adce25193f0e5eaf">SMem</a> <a class="el" href="structgymbo_1_1SymState.html#a85b48b53e8e5301b88c53ba7d34f0b3c">smem</a>, <a class="el" href="classLinkedlist.html">Linkedlist</a>&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &gt; <a class="el" href="structgymbo_1_1SymState.html#a6aa224acae7f54e2f67a708be6cd0b42">symbolic_stack</a>, std::vector&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &gt; <a class="el" href="structgymbo_1_1SymState.html#a33bd74a7fdeee5aeecc51a750944efcc">path_constraints</a>)</td></tr>
 <tr class="memdesc:a60eed9cb787c8a7b529391fec6b1ca2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for symbolic state with specified values.  <a href="structgymbo_1_1SymState.html#a60eed9cb787c8a7b529391fec6b1ca2b">More...</a><br /></td></tr>
 <tr class="separator:a60eed9cb787c8a7b529391fec6b1ca2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8fe5bb8fa776a333997ff5d6df7af4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#ae8fe5bb8fa776a333997ff5d6df7af4a">set_concrete_val</a> (int var_id, float val)</td></tr>
@@ -111,9 +111,9 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a7dfef12dd646e4644c5931c4e65779ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c7ebe9a103e0b7a60633cca1f82b88f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a4c7ebe9a103e0b7a60633cca1f82b88f">var_cnt</a></td></tr>
 <tr class="separator:a4c7ebe9a103e0b7a60633cca1f82b88f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2ea8fcc287983a5bc53e81893e5a2ea"><td class="memItemLeft" align="right" valign="top">Mem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#ae2ea8fcc287983a5bc53e81893e5a2ea">mem</a></td></tr>
+<tr class="memitem:ae2ea8fcc287983a5bc53e81893e5a2ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="type_8h.html#a93394c86b71f9947e9d17b61013e600c">Mem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#ae2ea8fcc287983a5bc53e81893e5a2ea">mem</a></td></tr>
 <tr class="separator:ae2ea8fcc287983a5bc53e81893e5a2ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85b48b53e8e5301b88c53ba7d34f0b3c"><td class="memItemLeft" align="right" valign="top">SMem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a85b48b53e8e5301b88c53ba7d34f0b3c">smem</a></td></tr>
+<tr class="memitem:a85b48b53e8e5301b88c53ba7d34f0b3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="type_8h.html#ac714ceb538af2de2adce25193f0e5eaf">SMem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a85b48b53e8e5301b88c53ba7d34f0b3c">smem</a></td></tr>
 <tr class="separator:a85b48b53e8e5301b88c53ba7d34f0b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6aa224acae7f54e2f67a708be6cd0b42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLinkedlist.html">Linkedlist</a>&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a6aa224acae7f54e2f67a708be6cd0b42">symbolic_stack</a></td></tr>
 <tr class="separator:a6aa224acae7f54e2f67a708be6cd0b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,13 +147,13 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Mem&#160;</td>
+          <td class="paramtype"><a class="el" href="type_8h.html#a93394c86b71f9947e9d17b61013e600c">Mem</a>&#160;</td>
           <td class="paramname"><em>mem</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">SMem&#160;</td>
+          <td class="paramtype"><a class="el" href="type_8h.html#ac714ceb538af2de2adce25193f0e5eaf">SMem</a>&#160;</td>
           <td class="paramname"><em>smem</em>, </td>
         </tr>
         <tr>
@@ -250,7 +250,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Mem gymbo::SymState::mem</td>
+          <td class="memname"><a class="el" href="type_8h.html#a93394c86b71f9947e9d17b61013e600c">Mem</a> gymbo::SymState::mem</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -295,7 +295,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">SMem gymbo::SymState::smem</td>
+          <td class="memname"><a class="el" href="type_8h.html#ac714ceb538af2de2adce25193f0e5eaf">SMem</a> gymbo::SymState::smem</td>
         </tr>
       </table>
 </div><div class="memdoc">

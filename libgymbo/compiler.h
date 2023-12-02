@@ -1,3 +1,9 @@
+/**
+ * @file compiler.h
+ * @brief Implementation of compiler
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include "parser.h"
 #include "symbolic.h"

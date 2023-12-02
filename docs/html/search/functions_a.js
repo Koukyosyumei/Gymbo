@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['to_5fstring_115',['to_string',['../classgymbosat_1_1Expr.html#a85bcfafb66b9e5fde802840c213fbcec',1,'gymbosat::Expr::to_string()'],['../classgymbosat_1_1Var.html#ab22296034c16195902c0bb01799722e1',1,'gymbosat::Var::to_string()'],['../classgymbosat_1_1And.html#affbe88b38fe18ca450ca074b6cfd135e',1,'gymbosat::And::to_string()'],['../classgymbosat_1_1Or.html#a257ff6c08e5289ed6bd02b3b5d50ee4c',1,'gymbosat::Or::to_string()'],['../classgymbosat_1_1Not.html#a438829c52493f67c99cd4a85e78f03d6',1,'gymbosat::Not::to_string()'],['../classgymbosat_1_1Const.html#acaf729ec5f8cd7ed3b6c81cb23b7f9af',1,'gymbosat::Const::to_string()']]],
-  ['tostring_116',['toString',['../classgymbo_1_1Instr.html#a57bf99afd023bb777d5cd944e0b47282',1,'gymbo::Instr::toString()'],['../structgymbo_1_1Sym.html#a1025fdd5cddad6af8b363f40196d71f9',1,'gymbo::Sym::toString()']]],
-  ['trace_117',['Trace',['../structgymbo_1_1Trace.html#a27b719523e78bb13c5eea72198120c9e',1,'gymbo::Trace']]]
+  ['pathconstraints2expr_185',['pathconstraints2expr',['../sat_8h.html#a6f0b9965254e8e0a97d6ce893d01cd06',1,'gymbosat']]],
+  ['pop_186',['pop',['../classLinkedlist.html#a0061d3a36b8272baf0adc40ca2ef24e9',1,'Linkedlist']]],
+  ['print_187',['print',['../classgymbo_1_1Instr.html#a900ea47f05d7a7e6e2776f0adf4c91f3',1,'gymbo::Instr::print()'],['../structgymbo_1_1SymState.html#ab9854521bf8defda94837e28fa8654eb',1,'gymbo::SymState::print()'],['../structgymbo_1_1Trace.html#a6e02ab2b2c1c69c918f2824265170afb',1,'gymbo::Trace::print()']]],
+  ['psimplify_188',['psimplify',['../structgymbo_1_1Sym.html#a371b1d8b3fc73a10d4106e09f68c3092',1,'gymbo::Sym']]],
+  ['push_189',['push',['../classLinkedlist.html#af18b0e5bdb5f8536f1073e34eb1a00c0',1,'Linkedlist']]]
 ];

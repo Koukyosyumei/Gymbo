@@ -55,7 +55,7 @@ virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgymbosat_1_1Expr}{Expr}}
 \begin{DoxyCompactList}\small\item\em Get the right child expression. \end{DoxyCompactList}\item 
 virtual std\+::unordered\+\_\+set$<$ std\+::string $>$ \mbox{\hyperlink{classgymbosat_1_1Expr_aa7775d2a1555fd55529b1ed699ca84ea}{literals}} ()=0
 \begin{DoxyCompactList}\small\item\em Get the literals present in the logical expression. \end{DoxyCompactList}\item 
-virtual std\+::unordered\+\_\+map$<$ std\+::string, Polarity $>$ \mbox{\hyperlink{classgymbosat_1_1Expr_adea7d5e5285df79237a4b72a8b82c66d}{literal\+Polarity}} (std\+::string var)=0
+virtual std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{sat_8h_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}} $>$ \mbox{\hyperlink{classgymbosat_1_1Expr_adea7d5e5285df79237a4b72a8b82c66d}{literal\+Polarity}} (std\+::string var)=0
 \begin{DoxyCompactList}\small\item\em Get the polarities of literals with respect to a specific variable. \end{DoxyCompactList}\item 
 virtual std\+::pair$<$ std\+::string, bool $>$ \mbox{\hyperlink{classgymbosat_1_1Expr_a766c9fc6f0ac28161a19e7a7184f61b6}{unit\+Clause}} ()=0
 \begin{DoxyCompactList}\small\item\em Get a unit clause from the logical expression. \end{DoxyCompactList}\item 
@@ -64,7 +64,7 @@ virtual std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgymbosa
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Op\+Code \mbox{\hyperlink{classgymbosat_1_1Expr_aa84655ea020547722c7433af5c009d27}{opcode}}
+\mbox{\hyperlink{sat_8h_a6d86d55f55f58425a61afe7f71066024}{Op\+Code}} \mbox{\hyperlink{classgymbosat_1_1Expr_aa84655ea020547722c7433af5c009d27}{opcode}}
 \item 
 std\+::string \mbox{\hyperlink{classgymbosat_1_1Expr_ad4a359e63fbd7d3fe3cb598300a1c61e}{name}}
 \end{DoxyCompactItemize}
@@ -221,7 +221,7 @@ Implemented in \mbox{\hyperlink{classgymbosat_1_1Const_a0ba707c7cdda3b55db862df1
 \index{gymbosat::Expr@{gymbosat::Expr}!literalPolarity@{literalPolarity}}
 \index{literalPolarity@{literalPolarity}!gymbosat::Expr@{gymbosat::Expr}}
 \doxysubsubsection{\texorpdfstring{literalPolarity()}{literalPolarity()}}
-{\footnotesize\ttfamily virtual std\+::unordered\+\_\+map$<$std\+::string, Polarity$>$ gymbosat\+::\+Expr\+::literal\+Polarity (\begin{DoxyParamCaption}\item[{std\+::string}]{var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{sat_8h_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}}$>$ gymbosat\+::\+Expr\+::literal\+Polarity (\begin{DoxyParamCaption}\item[{std\+::string}]{var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -337,10 +337,10 @@ Name associated with the expression. \mbox{\Hypertarget{classgymbosat_1_1Expr_aa
 \index{gymbosat::Expr@{gymbosat::Expr}!opcode@{opcode}}
 \index{opcode@{opcode}!gymbosat::Expr@{gymbosat::Expr}}
 \doxysubsubsection{\texorpdfstring{opcode}{opcode}}
-{\footnotesize\ttfamily Op\+Code gymbosat\+::\+Expr\+::opcode}
+{\footnotesize\ttfamily \mbox{\hyperlink{sat_8h_a6d86d55f55f58425a61afe7f71066024}{Op\+Code}} gymbosat\+::\+Expr\+::opcode}
 
 Operation code for the expression. 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-libgymbo/sat.\+h\end{DoxyCompactItemize}
+libgymbo/\mbox{\hyperlink{sat_8h}{sat.\+h}}\end{DoxyCompactItemize}

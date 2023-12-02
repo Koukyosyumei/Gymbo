@@ -1,3 +1,9 @@
+/**
+ * @file parser.h
+ * @brief Implementation of parser
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include <ctype.h>
 #include <stdarg.h>

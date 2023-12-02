@@ -1,3 +1,9 @@
+/**
+ * @file symbolic.h
+ * @brief Core implementation of gradient-based symbolic execution
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include <cstdint>
 #include <memory>

@@ -1,3 +1,9 @@
+/**
+ * @file tokenizer.h
+ * @brief Implementation of tokenizer
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include <ctype.h>
 #include <stdarg.h>

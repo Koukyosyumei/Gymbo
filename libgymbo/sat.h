@@ -1,3 +1,9 @@
+/**
+ * @file sat.h
+ * @brief Implementation of SAT solver
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include <iostream>
 #include <memory>

@@ -1,3 +1,9 @@
+/**
+ * @file utils.h
+ * @brief Utility funcitons and classes.
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include <bitset>
 #include <cmath>

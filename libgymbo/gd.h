@@ -1,3 +1,9 @@
+/**
+ * @file gd.h
+ * @brief Implementation of gradient descent optimizer.
+ * @author Hideaki Takahashi
+ */
+
 #pragma once
 #include <random>
 #include <unordered_map>
