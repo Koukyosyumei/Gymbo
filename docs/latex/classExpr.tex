@@ -1,0 +1,81 @@
+\hypertarget{classExpr}{}\doxysection{Expr Class Reference}
+\label{classExpr}\index{Expr@{Expr}}
+
+
+Inheritance diagram for Expr\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{classExpr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Expr\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{classExpr__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_a2c170268b82af106cd87642c759b6f1b}\label{classExpr_a2c170268b82af106cd87642c759b6f1b}} 
+virtual std\+::string {\bfseries to\+\_\+string} ()=0
+\item 
+\mbox{\Hypertarget{classExpr_a70c056a048e96a455862a15281893336}\label{classExpr_a70c056a048e96a455862a15281893336}} 
+virtual bool {\bfseries evaluate} ()=0
+\item 
+\mbox{\Hypertarget{classExpr_aeaec5edf588c95c9fe34a824d6e13b30}\label{classExpr_aeaec5edf588c95c9fe34a824d6e13b30}} 
+virtual bool {\bfseries un\+Const} ()=0
+\item 
+\mbox{\Hypertarget{classExpr_aae8d80e61018a50dfbeaa6bbd2cb9ec8}\label{classExpr_aae8d80e61018a50dfbeaa6bbd2cb9ec8}} 
+virtual std\+::pair$<$ bool, std\+::string $>$ {\bfseries free\+Var} ()=0
+\item 
+\mbox{\Hypertarget{classExpr_af06e57ce4c3fe82e389037997073347c}\label{classExpr_af06e57ce4c3fe82e389037997073347c}} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries guess\+Var} (std\+::string var, bool val)=0
+\item 
+\mbox{\Hypertarget{classExpr_aed25693ee1047bebf2f19a5dc96d7e08}\label{classExpr_aed25693ee1047bebf2f19a5dc96d7e08}} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries simplify} ()=0
+\item 
+\mbox{\Hypertarget{classExpr_af8c324462981bacd0f3722af55fbd908}\label{classExpr_af8c324462981bacd0f3722af55fbd908}} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries fix\+Negations} ()=0
+\item 
+\mbox{\Hypertarget{classExpr_a58585c07320ec177f9713694467761bd}\label{classExpr_a58585c07320ec177f9713694467761bd}} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries distribute} ()=0
+\item 
+\mbox{\Hypertarget{classExpr_a1b270e7b2fe2f4f1d98831d36c5a4af7}\label{classExpr_a1b270e7b2fe2f4f1d98831d36c5a4af7}} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries get\+Left} ()=0
+\item 
+\mbox{\Hypertarget{classExpr_a6247038d925b54ab13e8b946fc8da4b3}\label{classExpr_a6247038d925b54ab13e8b946fc8da4b3}} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries get\+Right} ()=0
+\item 
+\mbox{\Hypertarget{classExpr_ae025aa9ac77bd6a8a63d0256ef505cde}\label{classExpr_ae025aa9ac77bd6a8a63d0256ef505cde}} 
+virtual std\+::unordered\+\_\+set$<$ std\+::string $>$ {\bfseries literals} ()=0
+\item 
+\mbox{\Hypertarget{classExpr_a9049567cafd0b4edc04d5a95effb52d7}\label{classExpr_a9049567cafd0b4edc04d5a95effb52d7}} 
+virtual std\+::unordered\+\_\+map$<$ std\+::string, Polarity $>$ {\bfseries literal\+Polarity} (std\+::string var)=0
+\item 
+\mbox{\Hypertarget{classExpr_a36a56674f03062411315a141a522900c}\label{classExpr_a36a56674f03062411315a141a522900c}} 
+virtual std\+::pair$<$ std\+::string, bool $>$ {\bfseries unit\+Clause} ()=0
+\item 
+\mbox{\Hypertarget{classExpr_a91d1f469d5c9c82cae29fe119fb5bea0}\label{classExpr_a91d1f469d5c9c82cae29fe119fb5bea0}} 
+virtual std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ $>$ {\bfseries clauses} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_aa6f5a8068e0786128f58b3565909d604}\label{classExpr_aa6f5a8068e0786128f58b3565909d604}} 
+Op\+Code {\bfseries opcode}
+\item 
+\mbox{\Hypertarget{classExpr_a085207153a37669b317bdfeccc89375d}\label{classExpr_a085207153a37669b317bdfeccc89375d}} 
+std\+::string {\bfseries name}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libgymbo/sat.\+h\end{DoxyCompactItemize}

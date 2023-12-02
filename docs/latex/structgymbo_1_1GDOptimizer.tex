@@ -1,0 +1,146 @@
+\hypertarget{structgymbo_1_1GDOptimizer}{}\doxysection{gymbo\+::GDOptimizer Struct Reference}
+\label{structgymbo_1_1GDOptimizer}\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+
+
+Gradient Descent Optimizer for Symbolic Path Constraints.  
+
+
+
+
+{\ttfamily \#include $<$gd.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structgymbo_1_1GDOptimizer_ac17fe6d6ef5d781ae590c0a8fb6e567b}{GDOptimizer}} (int num\+\_\+epochs=100, float lr=1.\+0, float eps=1.\+0, float param\+\_\+low=-\/10.\+0, float param\+\_\+high=10.\+0, bool sign\+\_\+grad=true, bool init\+\_\+param\+\_\+uniform\+\_\+int=true, int seed=42)
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_aabe2fc9e0528d282c105a1e723d75f02}{eval}} (std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$ \&path\+\_\+constraints, std\+::unordered\+\_\+map$<$ int, float $>$ params)
+\begin{DoxyCompactList}\small\item\em Evaluate if path constraints are satisfied for given parameters. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab5737f4c5c901f4b0fe8effc4f8808da}{solve}} (std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$ \&path\+\_\+constraints, std\+::unordered\+\_\+map$<$ int, float $>$ \&params, bool is\+\_\+init\+\_\+params\+\_\+const=true)
+\begin{DoxyCompactList}\small\item\em Solve path constraints using gradient descent optimization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}\label{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}} 
+int {\bfseries num\+\_\+epochs}
+\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}\label{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}} 
+int {\bfseries seed}
+\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}\label{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}} 
+float {\bfseries lr}
+\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}\label{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}} 
+float {\bfseries eps}
+\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}\label{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}} 
+float {\bfseries param\+\_\+low}
+\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}\label{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}} 
+float {\bfseries param\+\_\+high}
+\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}\label{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}} 
+bool {\bfseries sign\+\_\+grad}
+\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}\label{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}} 
+bool {\bfseries init\+\_\+param\+\_\+uniform\+\_\+int}
+\item 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a3882db1f66c2141d2535cdef17b108f8}\label{structgymbo_1_1GDOptimizer_a3882db1f66c2141d2535cdef17b108f8}} 
+int {\bfseries num\+\_\+used\+\_\+itr}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gradient Descent Optimizer for Symbolic Path Constraints. 
+
+The {\ttfamily \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}} class provides functionality to optimize symbolic path constraints by using gradient descent. It aims to find parameter values that satisfy the given path constraints, making them true or non-\/positive.
+
+\begin{DoxyNote}{Note}
+This class assumes that symbolic expressions are represented by the {\ttfamily \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}}} type, and path constraints are a vector of {\ttfamily \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}}} objects.
+
+The optimization process relies on the gradient information of the path constraints. The optimizer iteratively updates the parameters until the constraints are satisfied or a maximum number of epochs is reached. 
+\end{DoxyNote}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ac17fe6d6ef5d781ae590c0a8fb6e567b}\label{structgymbo_1_1GDOptimizer_ac17fe6d6ef5d781ae590c0a8fb6e567b}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!GDOptimizer@{GDOptimizer}}
+\index{GDOptimizer@{GDOptimizer}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{GDOptimizer()}{GDOptimizer()}}
+{\footnotesize\ttfamily gymbo\+::\+GDOptimizer\+::\+GDOptimizer (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+epochs = {\ttfamily 100},  }\item[{float}]{lr = {\ttfamily 1.0},  }\item[{float}]{eps = {\ttfamily 1.0},  }\item[{float}]{param\+\_\+low = {\ttfamily -\/10.0},  }\item[{float}]{param\+\_\+high = {\ttfamily 10.0},  }\item[{bool}]{sign\+\_\+grad = {\ttfamily true},  }\item[{bool}]{init\+\_\+param\+\_\+uniform\+\_\+int = {\ttfamily true},  }\item[{int}]{seed = {\ttfamily 42} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+epochs} & Maximum number of optimization epochs (default\+: 100). \\
+\hline
+{\em lr} & Learning rate for gradient descent (default\+: 1). \\
+\hline
+{\em param\+\_\+low} & Lower bound for parameter initialization (default\+: -\/10). \\
+\hline
+{\em param\+\_\+high} & Upper bound for parameter initialization (default\+: 10). \\
+\hline
+{\em sign\+\_\+grad} & If true, use sign gradient descent. Otherwise, use standard gradient descent. (default true). \\
+\hline
+{\em init\+\_\+param\+\_\+uniform\+\_\+int} & Flag indicating whether initial parameter values are drawn from the uniform int distribution or uniform real distribution (default true). \\
+\hline
+{\em seed} & Random seed for initializing parameter values (default\+: 42). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_aabe2fc9e0528d282c105a1e723d75f02}\label{structgymbo_1_1GDOptimizer_aabe2fc9e0528d282c105a1e723d75f02}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!eval@{eval}}
+\index{eval@{eval}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+{\footnotesize\ttfamily bool gymbo\+::\+GDOptimizer\+::eval (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$ \&}]{path\+\_\+constraints,  }\item[{std\+::unordered\+\_\+map$<$ int, float $>$}]{params }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate if path constraints are satisfied for given parameters. 
+
+This function checks if the given path constraints are satisfied (non-\/positive) for the provided parameter values.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+\_\+constraints} & Vector of symbolic path constraints. \\
+\hline
+{\em params} & Map of parameter values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if all constraints are satisfied; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ab5737f4c5c901f4b0fe8effc4f8808da}\label{structgymbo_1_1GDOptimizer_ab5737f4c5c901f4b0fe8effc4f8808da}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!solve@{solve}}
+\index{solve@{solve}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily bool gymbo\+::\+GDOptimizer\+::solve (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$ \&}]{path\+\_\+constraints,  }\item[{std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{params,  }\item[{bool}]{is\+\_\+init\+\_\+params\+\_\+const = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Solve path constraints using gradient descent optimization. 
+
+This function attempts to find parameter values that satisfy the given path constraints by using gradient descent optimization. It iteratively updates the parameters until the constraints are satisfied or the maximum number of epochs is reached.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+\_\+constraints} & Vector of symbolic path constraints. \\
+\hline
+{\em params} & Map of parameter values (will be modified during optimization). \\
+\hline
+{\em is\+\_\+init\+\_\+params\+\_\+const} & Flag indicating whether initial parameter values are constant. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the constraints are satisfied after optimization; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libgymbo/gd.\+h\end{DoxyCompactItemize}

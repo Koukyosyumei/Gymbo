@@ -1,0 +1,95 @@
+\hypertarget{classLinkedlist}{}\doxysection{Linkedlist$<$ T $>$ Class Template Reference}
+\label{classLinkedlist}\index{Linkedlist$<$ T $>$@{Linkedlist$<$ T $>$}}
+
+
+{\ttfamily \#include $<$utils.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classLinkedlist_a33c359b4db358fce4e51490dd4013f92}{len}} ()
+\item 
+void \mbox{\hyperlink{classLinkedlist_af18b0e5bdb5f8536f1073e34eb1a00c0}{push}} (T data)
+\item 
+T $\ast$ \mbox{\hyperlink{classLinkedlist_a5201a58dae7f9922eb4a90d6d1aa7b19}{back}} ()
+\item 
+void \mbox{\hyperlink{classLinkedlist_a0061d3a36b8272baf0adc40ca2ef24e9}{pop}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLinkedlist_a26f37b7886a7b3473be9d431a00419d0}\label{classLinkedlist_a26f37b7886a7b3473be9d431a00419d0}} 
+\mbox{\hyperlink{classLLNode}{LLNode}}$<$ T $>$ $\ast$ {\bfseries ghost}
+\item 
+\mbox{\Hypertarget{classLinkedlist_a4af94c58928322ead6365664ac55eb9e}\label{classLinkedlist_a4af94c58928322ead6365664ac55eb9e}} 
+\mbox{\hyperlink{classLLNode}{LLNode}}$<$ T $>$ $\ast$ {\bfseries head}
+\item 
+\mbox{\Hypertarget{classLinkedlist_a9239abc6a88f6f6041f72e7e0a3a0d6e}\label{classLinkedlist_a9239abc6a88f6f6041f72e7e0a3a0d6e}} 
+\mbox{\hyperlink{classLLNode}{LLNode}}$<$ T $>$ $\ast$ {\bfseries tail}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class Linkedlist$<$ T $>$}
+
+A linked list class to implement a linked list.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of data to store in the linked list. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLinkedlist_a5201a58dae7f9922eb4a90d6d1aa7b19}\label{classLinkedlist_a5201a58dae7f9922eb4a90d6d1aa7b19}} 
+\index{Linkedlist$<$ T $>$@{Linkedlist$<$ T $>$}!back@{back}}
+\index{back@{back}!Linkedlist$<$ T $>$@{Linkedlist$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{back()}{back()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T$\ast$ \mbox{\hyperlink{classLinkedlist}{Linkedlist}}$<$ T $>$\+::back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the element at the back of the linked list.
+
+\begin{DoxyReturn}{Returns}
+The element at the back of the linked list. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLinkedlist_a33c359b4db358fce4e51490dd4013f92}\label{classLinkedlist_a33c359b4db358fce4e51490dd4013f92}} 
+\index{Linkedlist$<$ T $>$@{Linkedlist$<$ T $>$}!len@{len}}
+\index{len@{len}!Linkedlist$<$ T $>$@{Linkedlist$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{len()}{len()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+uint32\+\_\+t \mbox{\hyperlink{classLinkedlist}{Linkedlist}}$<$ T $>$\+::len (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the length of the linked list.
+
+\begin{DoxyReturn}{Returns}
+The length of the linked list. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLinkedlist_a0061d3a36b8272baf0adc40ca2ef24e9}\label{classLinkedlist_a0061d3a36b8272baf0adc40ca2ef24e9}} 
+\index{Linkedlist$<$ T $>$@{Linkedlist$<$ T $>$}!pop@{pop}}
+\index{pop@{pop}!Linkedlist$<$ T $>$@{Linkedlist$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classLinkedlist}{Linkedlist}}$<$ T $>$\+::pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Pops the element at the back of the linked list. \mbox{\Hypertarget{classLinkedlist_af18b0e5bdb5f8536f1073e34eb1a00c0}\label{classLinkedlist_af18b0e5bdb5f8536f1073e34eb1a00c0}} 
+\index{Linkedlist$<$ T $>$@{Linkedlist$<$ T $>$}!push@{push}}
+\index{push@{push}!Linkedlist$<$ T $>$@{Linkedlist$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classLinkedlist}{Linkedlist}}$<$ T $>$\+::push (\begin{DoxyParamCaption}\item[{T}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Pushes a new element onto the back of the linked list.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The element to push onto the linked list. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libgymbo/utils.\+h\end{DoxyCompactItemize}

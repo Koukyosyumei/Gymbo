@@ -1,0 +1,76 @@
+\hypertarget{classOr}{}\doxysection{Or Class Reference}
+\label{classOr}\index{Or@{Or}}
+
+
+Inheritance diagram for Or\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{classOr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Or\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{classOr__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classOr_afb5d1be0e4e3824ed726c83e19151bf9}\label{classOr_afb5d1be0e4e3824ed726c83e19151bf9}} 
+{\bfseries Or} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ left, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ right)
+\item 
+\mbox{\Hypertarget{classOr_a6064255484f6904872ed7b9e464a4446}\label{classOr_a6064255484f6904872ed7b9e464a4446}} 
+std\+::string {\bfseries to\+\_\+string} () override
+\item 
+\mbox{\Hypertarget{classOr_ad70d0d0a73101eb3369723f943ccc671}\label{classOr_ad70d0d0a73101eb3369723f943ccc671}} 
+bool {\bfseries evaluate} () override
+\item 
+\mbox{\Hypertarget{classOr_ad4d0f5f3d0e366aa3165e76dddc7610d}\label{classOr_ad4d0f5f3d0e366aa3165e76dddc7610d}} 
+std\+::pair$<$ bool, std\+::string $>$ {\bfseries free\+Var} () override
+\item 
+\mbox{\Hypertarget{classOr_a6fa96f216bcf5a2fb4e34be71cc88dcd}\label{classOr_a6fa96f216bcf5a2fb4e34be71cc88dcd}} 
+bool {\bfseries un\+Const} () override
+\item 
+\mbox{\Hypertarget{classOr_ab506f2d414491c37709688913373b3d0}\label{classOr_ab506f2d414491c37709688913373b3d0}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries fix\+Negations} () override
+\item 
+\mbox{\Hypertarget{classOr_aa3cf12f5cc84a3e1e337986910cf1c83}\label{classOr_aa3cf12f5cc84a3e1e337986910cf1c83}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries distribute} () override
+\item 
+\mbox{\Hypertarget{classOr_a373beae9fc9780959f438668eb92723a}\label{classOr_a373beae9fc9780959f438668eb92723a}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries get\+Left} () override
+\item 
+\mbox{\Hypertarget{classOr_a7bc6b65fab5148569f077eab99e4e1db}\label{classOr_a7bc6b65fab5148569f077eab99e4e1db}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries get\+Right} () override
+\item 
+\mbox{\Hypertarget{classOr_ae639eedafde00f6fbe1675e433bf9acd}\label{classOr_ae639eedafde00f6fbe1675e433bf9acd}} 
+std\+::unordered\+\_\+set$<$ std\+::string $>$ {\bfseries literals} () override
+\item 
+\mbox{\Hypertarget{classOr_a06b197994e00105b36409d4de8909fc5}\label{classOr_a06b197994e00105b36409d4de8909fc5}} 
+std\+::unordered\+\_\+map$<$ std\+::string, Polarity $>$ {\bfseries literal\+Polarity} (std\+::string var) override
+\item 
+\mbox{\Hypertarget{classOr_a06cc6e8421099801846a9f18ab4e78dd}\label{classOr_a06cc6e8421099801846a9f18ab4e78dd}} 
+std\+::pair$<$ std\+::string, bool $>$ {\bfseries unit\+Clause} () override
+\item 
+\mbox{\Hypertarget{classOr_ace0e60e331ab4f9f4dbcbb5629a5b4fe}\label{classOr_ace0e60e331ab4f9f4dbcbb5629a5b4fe}} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ $>$ {\bfseries clauses} () override
+\item 
+\mbox{\Hypertarget{classOr_a71e529ac7fcad3ec5e2df6f7628351d5}\label{classOr_a71e529ac7fcad3ec5e2df6f7628351d5}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries guess\+Var} (std\+::string var, bool val) override
+\item 
+\mbox{\Hypertarget{classOr_a889757285ed0a78f0f2798da48f92acc}\label{classOr_a889757285ed0a78f0f2798da48f92acc}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries simplify} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libgymbo/sat.\+h\end{DoxyCompactItemize}
