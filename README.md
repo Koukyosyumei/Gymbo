@@ -2,7 +2,7 @@
 
 <img src="img/gymbo.drawio.svg">
 
-Gymbo is a Proof of Concept for a Gradient-based Symbolic Execution Engine, implemented from scratch. Building on recent advancements that utilize gradient descent to solve SMT formulas `[1, 2]`, Gymbo leverages gradient descent to discover input values that fulfill each path constraint during symbolic execution.
+Gymbo is a Proof of Concept for a Gradient-based Symbolic Execution Engine implemented from scratch. Building on recent advancements that utilize gradient descent to solve SMT formulas `[1, 2]`, Gymbo leverages gradient descent to discover input values that fulfill each path constraint during symbolic execution. For more information, check our [documentation](https://koukyosyumei.github.io/Gymbo/).
 
 Compared to other prominent symbolic execution tools, Gymbo's implementation is notably simpler and more compact. We hope that this project will assist individuals in grasping the fundamental principles of symbolic execution and SMT problem-solving through gradient descent.
 
