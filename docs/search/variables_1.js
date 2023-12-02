@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['data_275',['data',['../structgymbo_1_1Trace.html#ad9b5444a17855f7ca400c381cf722ce0',1,'gymbo::Trace::data()'],['../classLLNode.html#a8d5ffe762114d463aece9416b7689ca6',1,'LLNode::data()']]]
+  ['children_381',['children',['../structgymbo_1_1Trace.html#ad6bd2092e3b5f010bd89e253c8bdd0aa',1,'gymbo::Trace']]],
+  ['cond_382',['cond',['../structgymbo_1_1Node.html#aa907528edf9b105930f2b7030ab3fb99',1,'gymbo::Node']]]
 ];

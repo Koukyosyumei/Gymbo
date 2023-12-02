@@ -30,7 +30,7 @@ Collaboration diagram for gymbosat\+::Const\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classgymbosat_1_1Const_a71eaafd563bdc70a823bada6e133188d}{Const}} (bool value)
+\mbox{\hyperlink{classgymbosat_1_1Const_a71eaafd563bdc70a823bada6e133188d}{Const}} (bool \mbox{\hyperlink{classgymbosat_1_1Const_a515a340ed6b1a72037c094d331de226c}{value}})
 \begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{classgymbosat_1_1Const}{Const}} class. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classgymbosat_1_1Const_acaf729ec5f8cd7ed3b6c81cb23b7f9af}{to\+\_\+string}} () override
 \begin{DoxyCompactList}\small\item\em Convert the logical expression to a string representation. \end{DoxyCompactList}\item 
@@ -54,12 +54,17 @@ std\+::unordered\+\_\+set$<$ std\+::string $>$ \mbox{\hyperlink{classgymbosat_1_
 \begin{DoxyCompactList}\small\item\em Get the literals present in the logical expression. \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgymbosat_1_1Expr}{Expr}} $>$ \mbox{\hyperlink{classgymbosat_1_1Const_a0ba707c7cdda3b55db862df111ce25ab}{guess\+Var}} (std\+::string var, bool val) override
 \begin{DoxyCompactList}\small\item\em Make a guess for a variable\textquotesingle{}s value and return the resulting expression. \end{DoxyCompactList}\item 
-std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{sat_8h_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}} $>$ \mbox{\hyperlink{classgymbosat_1_1Const_ae8fa89dfc3b3a4549be4e4d2b212dbe3}{literal\+Polarity}} (std\+::string var) override
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{namespacegymbosat_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}} $>$ \mbox{\hyperlink{classgymbosat_1_1Const_ae8fa89dfc3b3a4549be4e4d2b212dbe3}{literal\+Polarity}} (std\+::string var) override
 \begin{DoxyCompactList}\small\item\em Get the polarities of literals with respect to a specific variable. \end{DoxyCompactList}\item 
 std\+::pair$<$ std\+::string, bool $>$ \mbox{\hyperlink{classgymbosat_1_1Const_a32e2e08c72ef3820c5e6cb92cef05d2c}{unit\+Clause}} () override
 \begin{DoxyCompactList}\small\item\em Get a unit clause from the logical expression. \end{DoxyCompactList}\item 
 std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgymbosat_1_1Expr}{Expr}} $>$ $>$ \mbox{\hyperlink{classgymbosat_1_1Const_a5b81da3a3fac35e316a2ab81ee899fb0}{clauses}} () override
 \begin{DoxyCompactList}\small\item\em Get a vector of clauses present in the logical expression. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classgymbosat_1_1Const_a515a340ed6b1a72037c094d331de226c}{value}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
@@ -232,7 +237,7 @@ Implements \mbox{\hyperlink{classgymbosat_1_1Expr_a4d946a615d7d11020d5c9f0ee8fff
 \index{gymbosat::Const@{gymbosat::Const}!literalPolarity@{literalPolarity}}
 \index{literalPolarity@{literalPolarity}!gymbosat::Const@{gymbosat::Const}}
 \doxysubsubsection{\texorpdfstring{literalPolarity()}{literalPolarity()}}
-{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{sat_8h_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}}$>$ gymbosat\+::\+Const\+::literal\+Polarity (\begin{DoxyParamCaption}\item[{std\+::string}]{var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{namespacegymbosat_ab93a240afc8d89ec25d1bb528545f6d2}{Polarity}}$>$ gymbosat\+::\+Const\+::literal\+Polarity (\begin{DoxyParamCaption}\item[{std\+::string}]{var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -334,6 +339,15 @@ Pair representing a unit clause\+: (literal, value).
 
 
 Implements \mbox{\hyperlink{classgymbosat_1_1Expr_a766c9fc6f0ac28161a19e7a7184f61b6}{gymbosat\+::\+Expr}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classgymbosat_1_1Const_a515a340ed6b1a72037c094d331de226c}\label{classgymbosat_1_1Const_a515a340ed6b1a72037c094d331de226c}} 
+\index{gymbosat::Const@{gymbosat::Const}!value@{value}}
+\index{value@{value}!gymbosat::Const@{gymbosat::Const}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily bool gymbosat\+::\+Const\+::value\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

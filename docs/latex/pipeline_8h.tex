@@ -6,14 +6,8 @@ Basic workloads of gradient-\/based symbolic execution.
 
 
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
-{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
-{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
-{\ttfamily \#include $<$utility$>$}\newline
 {\ttfamily \#include \char`\"{}compiler.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}gd.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}tokenizer.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}type.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}symbolic.\+h\char`\"{}}\newline
 Include dependency graph for pipeline.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -21,13 +15,18 @@ Include dependency graph for pipeline.\+h\+:\nopagebreak
 \includegraphics[width=350pt]{pipeline_8h__incl}
 \end{center}
 \end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacegymbo}{gymbo}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::pair$<$ std\+::unordered\+\_\+map$<$ std\+::string, int $>$, Prog $>$ \mbox{\hyperlink{pipeline_8h_a7b970a9d85276e2bd460b29fec762ec3}{gymbo\+::gcompile}} (char $\ast$user\+\_\+input)
-\begin{DoxyCompactList}\small\item\em Compiles user input into a program, returning variable counts and the compiled program. \end{DoxyCompactList}\item 
-Path\+Constraints\+Table \mbox{\hyperlink{pipeline_8h_af40a70afb521e856bda968808b2b492e}{gymbo\+::gexecute}} (Prog \&prg, GDOptimizer \&optimizer, Sym\+State \&init, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, int max\+\_\+depth, int max\+SAT, int max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
-\begin{DoxyCompactList}\small\item\em Symbolically Execute a Program with Gradient Descent Optimization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+std\+::pair$<$ std\+::unordered\+\_\+map$<$ std\+::string, int $>$, Prog $>$ \mbox{\hyperlink{namespacegymbo_a7b970a9d85276e2bd460b29fec762ec3}{gymbo\+::gcompile}} (char $\ast$user\+\_\+input)
+\item 
+Path\+Constraints\+Table \mbox{\hyperlink{namespacegymbo_af40a70afb521e856bda968808b2b492e}{gymbo\+::gexecute}} (Prog \&prg, GDOptimizer \&optimizer, Sym\+State \&init, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, int max\+\_\+depth, int max\+SAT, int max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -36,82 +35,3 @@ Basic workloads of gradient-\/based symbolic execution.
 \begin{DoxyAuthor}{Author}
 Hideaki Takahashi 
 \end{DoxyAuthor}
-
-
-\doxysubsection{Function Documentation}
-\mbox{\Hypertarget{pipeline_8h_a7b970a9d85276e2bd460b29fec762ec3}\label{pipeline_8h_a7b970a9d85276e2bd460b29fec762ec3}} 
-\index{pipeline.h@{pipeline.h}!gcompile@{gcompile}}
-\index{gcompile@{gcompile}!pipeline.h@{pipeline.h}}
-\doxysubsubsection{\texorpdfstring{gcompile()}{gcompile()}}
-{\footnotesize\ttfamily std\+::pair$<$std\+::unordered\+\_\+map$<$std\+::string, int$>$, Prog$>$ gymbo\+::gcompile (\begin{DoxyParamCaption}\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Compiles user input into a program, returning variable counts and the compiled program. 
-
-This function takes a user-\/provided input in the form of a character array and performs the following steps\+:
-\begin{DoxyEnumerate}
-\item Tokenizes the input, counting occurrences of variables using var\+\_\+counter.
-\item Generates an Abstract Syntax Tree (AST) from the tokenized input.
-\item Compiles the AST into a program using \mbox{\hyperlink{structgymbo_1_1Node}{gymbo\+::\+Node}} objects.
-\end{DoxyEnumerate}
-
-
-\begin{DoxyParams}{Parameters}
-{\em user\+\_\+input} & A character array representing the user-\/provided input.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A std\+::pair containing\+:
-\begin{DoxyItemize}
-\item First element\+: An std\+::unordered\+\_\+map$<$std\+::string, int$>$ representing variable counts.
-\item Second element\+: A Prog object representing the compiled program.
-\end{DoxyItemize}
-\end{DoxyReturn}
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{tokenizer_8h_a89c8cb7e3b04d3d02f0cba69ab593981}{tokenize()}} Function used for tokenization. 
-
-\mbox{\hyperlink{parser_8h_a5e7728b7fbac9bf79ae665cf9b94f443}{generate\+\_\+ast()}} Function used for AST generation. 
-
-\mbox{\hyperlink{compiler_8h_a1af6d97f4c122833601a9b054a23009a}{compile\+\_\+ast()}} Function used for compiling the AST into a program. 
-\end{DoxySeeAlso}
-\mbox{\Hypertarget{pipeline_8h_af40a70afb521e856bda968808b2b492e}\label{pipeline_8h_af40a70afb521e856bda968808b2b492e}} 
-\index{pipeline.h@{pipeline.h}!gexecute@{gexecute}}
-\index{gexecute@{gexecute}!pipeline.h@{pipeline.h}}
-\doxysubsubsection{\texorpdfstring{gexecute()}{gexecute()}}
-{\footnotesize\ttfamily Path\+Constraints\+Table gymbo\+::gexecute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prg,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{init,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{int}]{max\+\_\+depth,  }\item[{int}]{max\+SAT,  }\item[{int}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Symbolically Execute a Program with Gradient Descent Optimization. 
-
-This function conducts symbolic execution of a given program while simultaneously optimizing the path constraints using the provided gradient descent optimizer, {\ttfamily GDOptimizer}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em prg} & The program to symbolically execute. \\
-\hline
-{\em optimizer} & The gradient descent optimizer for parameter optimization. \\
-\hline
-{\em init} & The initial symbolic state of the program. \\
-\hline
-{\em target\+\_\+pcs} & The set of program counters where gymbo executes path-\/constraints solving. If this set is empty or contains -\/1, gymbo solves all path-\/constraints. \\
-\hline
-{\em max\+\_\+depth} & The maximum depth of symbolic exploration. \\
-\hline
-{\em max\+SAT} & The maximum number of SAT constraints to collect. \\
-\hline
-{\em max\+UNSAT} & The maximum number of UNSAT constraints to collect. \\
-\hline
-{\em max\+\_\+num\+\_\+trials} & The maximum number of trials for each gradient descent. \\
-\hline
-{\em ignore\+\_\+memory} & If set to true, constraints derived from memory will be ignored. \\
-\hline
-{\em use\+\_\+dpll} & If set to true, use DPLL to decide the initial assignment for each term. \\
-\hline
-{\em verbose\+\_\+level} & The level of verbosity. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A set of extracted path constraints and their satisfiability. 
-\end{DoxyReturn}

@@ -73,26 +73,26 @@ inline void error_at(char *user_input, char *loc, char *fmt, ...) {
  * @brief Enumeration representing different token kinds.
  */
 typedef enum {
-    TOKEN_RESERVED,  // Keywords or punctuators
-    TOKEN_RETURN,
-    TOKEN_IF,
-    TOKEN_ELSE,
-    TOKEN_FOR,
-    TOKEN_IDENT,
-    TOKEN_NUM,  // Integer literals
-    TOKEN_EOF,  // End-of-file markers
+    TOKEN_RESERVED,  ///< Keywords or punctuators
+    TOKEN_RETURN,    ///< Token representing the 'return' keyword
+    TOKEN_IF,        ///< Token representing the 'if' keyword
+    TOKEN_ELSE,      ///< Token representing the 'else' keyword
+    TOKEN_FOR,       ///< Token representing the 'for' keyword
+    TOKEN_IDENT,     ///< Token representing an identifier
+    TOKEN_NUM,       ///< Token representing integer literals
+    TOKEN_EOF,       ///< Token representing end-of-file markers
 } TokenKind;
 
 /**
  * @brief Structure representing a token.
  */
 struct Token {
-    TokenKind kind;  // Token kind
-    Token *next;     // Next token
-    float val;       // If kind is TOKEN_NUM, its value
-    char *str;       // Token string
-    int len;         // Token length
-    int var_id;      // Var ID
+    TokenKind kind;  ///< Token kind
+    Token *next;     ///< Pointer to the next token in the sequence
+    float val;       ///< If kind is TOKEN_NUM, its value
+    char *str;       ///< Token string
+    int len;         ///< Token length
+    int var_id;      ///< Variable ID
 };
 
 /**

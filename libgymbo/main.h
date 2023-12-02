@@ -1,15 +1,31 @@
 /**
+ * @file main.h
+ * @brief Main Header
+ * @author Hideaki Takahashi
+ */
+
+/**
  * @mainpage Gymbo: Gradient-based Symbolic Execution
  *
  * @image html /img/gymbo.drawio.svg
  *
- * Gymbo is a Proof of Concept for a Gradient-based Symbolic Execution Engine, implemented from scratch. Building on recent advancements that utilize gradient descent to solve SMT formulas `[1, 2]`, Gymbo leverages gradient descent to discover input values that fulfill each path constraint during symbolic execution.
+ * Gymbo is a Proof of Concept for a Gradient-based Symbolic Execution Engine,
+ * implemented from scratch. Building on recent advancements that utilize
+ * gradient descent to solve SMT formulas `[1, 2]`, Gymbo leverages gradient
+ * descent to discover input values that fulfill each path constraint during
+ * symbolic execution.
  *
- * Compared to other prominent symbolic execution tools, Gymbo's implementation is notably simpler and more compact. We hope that this project will assist individuals in grasping the fundamental principles of symbolic execution and SMT problem-solving through gradient descent.
+ * Compared to other prominent symbolic execution tools, Gymbo's implementation
+ * is notably simpler and more compact. We hope that this project will assist
+ * individuals in grasping the fundamental principles of symbolic execution and
+ * SMT problem-solving through gradient descent.
  *
- * One practical usage of Gymbo is debugging ML models like neural networks to detect unexpected behaviors. For example, you can generate adversarial examples with Gymbo by converting neural networks to imperative programs.
+ * One practical usage of Gymbo is debugging ML models like neural networks to
+ * detect unexpected behaviors. For example, you can generate adversarial
+ * examples with Gymbo by converting neural networks to imperative programs.
  *
- * > Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated.
+ * > Please note that Gymbo is currently under development and may have bugs.
+ * Your feedback and contributions are always greatly appreciated.
  *
  * @section install_sec Install
  *
@@ -26,7 +42,7 @@
  * program    = stmt*
  * stmt       = expr ";"
  *          | "{" stmt* "}"
- *          | "if" "(" expr ")" stmt ("else" stmt)? 
+ *          | "if" "(" expr ")" stmt ("else" stmt)?
  *          | "return" expr ";"
  * expr       = assign
  * assign     = logical ("=" assign)?
@@ -43,7 +59,9 @@
  *
  * @section algorithm_sec Internal Algorithm
  *
- * Gymbo converts the path constraint into a numerical loss function, which becomes negative only when the path constraint is satisfied. Gymbo uses the following transformation rule:
+ * Gymbo converts the path constraint into a numerical loss function, which
+ * becomes negative only when the path constraint is satisfied. Gymbo uses the
+ * following transformation rule:
  *
  * ```
  * !(a)     => -a + eps
@@ -59,7 +77,8 @@
  *
  * Here, `eps` is the smallest positive value of the type for a and b.
  *
- * Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each unique term, sometimes resulting in better scalability.
+ * Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each
+ * unique term, sometimes resulting in better scalability.
  *
  * @section cli_sec CLI Tool
  *
@@ -70,20 +89,32 @@
  * - `-i`: Set the number of iterations for gradient descent (default: 100).
  * - `-a`: Set the step size for gradient descent (default: 1.0).
  * - `-e`: Set the eps for the differentiable expression (default: 1.0).
- * - `-t`: Set the maximum number of trials of gradient descent (default: 3) 
+ * - `-t`: Set the maximum number of trials of gradient descent (default: 3)
  * - `-l`: Set the minimum value of initial parameters (default: -10)
  * - `-h`: Set the maximum value of initial parameters (default: 10)
  * - `-s`: Set the random seed (default: 42)
- * - `-p`: (optional) If set, use DPLL to determine the assignment for each term. Otherwise, solve the loss function directly transformed from the path constraints.
+ * - `-p`: (optional) If set, use DPLL to determine the assignment for each
+ * term. Otherwise, solve the loss function directly transformed from the path
+ * constraints.
  *
  * ```bash
  * ./gymbo "if (a < 3) if (a > 4) return 1;" -v 0
- * // ... (Example output from README)
+ *
+ * >Compiling the input program...
+ * >Start Symbolic Execution...
+ * >---------------------------
+ * >Result Summary
+ * >#Total Path Constraints: 4
+ * >#SAT: 3
+ * >#UNSAT: 1
+ * >List of UNSAT Path Constraints
+ * ># var_1 < 3 and 4 < var_1 and  1
  * ```
  *
  * @section lib_sec libgymbo: Header-only Library
  *
- * Since gymbo consists of the header-only library, you can easily create your own symbolic execution tool.
+ * Since gymbo consists of the header-only library, you can easily create your
+ * own symbolic execution tool.
  *
  * ```cpp
  * #include "libgymbo/compiler.h"
@@ -100,7 +131,15 @@
  * gymbo::SymState init;
  * gymbo::PathConstraintsTable cache_constraints;
  *
- * // ... (Code snippet from README)
+ * // tokenize the input source code
+ * gymbo::Token *token = gymbo::tokenize(user_input);
+ * // generate AST from the tokens
+ * gymbo::generate_ast(token, user_input, code);
+ * // construct virtual stack machine from AST
+ * gymbo::compile_ast(code, prg);
+ *
+ * // execute gradient-based symbolie execution
+ * gymbo::run_gymbo(prg, optimizer, init, cache_constraints, ...);
  * ```
  *
  * @section python_sec Python API
@@ -125,9 +164,12 @@
  *
  * @subsection pymlgymbo_sec pymlgymbo: Debugging Machine Learning Models
  *
- * We offer some helper functions within `pymlgymbo` library to convert the ML models of famous Python library like sklearn and PyTorch to the program that gymbo can process.
+ * We offer some helper functions within `pymlgymbo` library to convert the ML
+ * models of famous Python library like sklearn and PyTorch to the program that
+ * gymbo can process.
  *
- * The following code generates the adversarial examples against a neural network, as proposed in [3]
+ * The following code generates the adversarial examples against a neural
+ * network, as proposed in [3]
  *
  * ```python
  * from sklearn.neural_network import MLPClassifier
@@ -143,7 +185,8 @@
  * adv_condition = (
  *       "("
  *       + " || ".join(
- *           [f"(y_{c} > y_{y_pred})" for c in range(len(clf.classes_)) if y_pred != c]
+ *           [f"(y_{c} > y_{y_pred})" for c in range(len(clf.classes_)) if
+ * y_pred != c]
  *       )
  *       + ")"
  *   )
@@ -153,26 +196,26 @@
  * constraints = plg.gexecute(prg, init_symstate, optimizer, target_pcs, ...)
  * ```
  *
- * @section document_sec Document
- *
- * - Manual Build
- *
- * ```bash
- * sudo apt-get install doxygen
- *
- * doxygen Doxyfile
- * ```
- *
  * @section acknowledgement_sec Acknowledgement
  *
- * Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of `rui314/chibicc [4]`, while the symbolic execution approach is inspired by `beala/symbolic [5]`.
+ * Gymbo is entirely implemented in C++ and requires only standard libraries.
+ * The process of compiling from source code to stack machines is based on the
+ * implementation of `rui314/chibicc [4]`, while the symbolic execution approach
+ * is inspired by `beala/symbolic [5]`.
  *
  * @section reference_sec Reference
  *
  * ```
- * - [1] Chen, Peng, Jianzhong Liu, and Hao Chen. "Matryoshka: fuzzing deeply nested branches." Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security. 2019.
- * - [2] Minghao Liu, Kunhang Lv, Pei Huang, Rui Han, Fuqi Jia, Yu Zhang, Feifei Ma, Jian Zhang. "NRAgo: Solving SMT(NRA) Formulas with Gradient-based Optimization." IEEE/ACM International Conference on Automated Software Engineering, 2023
- * - [3] Gopinath, Divya, et al. "Symbolic execution for importance analysis and adversarial generation in neural networks." 2019 IEEE 30th International Symposium on Software Reliability Engineering (ISSRE). IEEE, 2019.
+ * - [1] Chen, Peng, Jianzhong Liu, and Hao Chen. "Matryoshka: fuzzing deeply
+ * nested branches." Proceedings of the 2019 ACM SIGSAC Conference on Computer
+ * and Communications Security. 2019.
+ * - [2] Minghao Liu, Kunhang Lv, Pei Huang, Rui Han, Fuqi Jia, Yu Zhang, Feifei
+ * Ma, Jian Zhang. "NRAgo: Solving SMT(NRA) Formulas with Gradient-based
+ * Optimization." IEEE/ACM International Conference on Automated Software
+ * Engineering, 2023
+ * - [3] Gopinath, Divya, et al. "Symbolic execution for importance analysis and
+ * adversarial generation in neural networks." 2019 IEEE 30th International
+ * Symposium on Software Reliability Engineering (ISSRE). IEEE, 2019.
  * - [4] https://github.com/rui314/chibicc
  * - [5] https://github.com/beala/symbolic
  * ```

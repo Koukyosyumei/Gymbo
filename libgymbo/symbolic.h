@@ -5,16 +5,8 @@
  */
 
 #pragma once
-#include <cstdint>
-#include <memory>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-
 #include "gd.h"
 #include "sat.h"
-#include "type.h"
-#include "utils.h"
 
 namespace gymbo {
 Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
@@ -109,7 +101,8 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
             std::unordered_map<std::string, gymbo::Sym *> unique_terms_map;
             std::unordered_map<std::string, bool> assignments_map;
             std::shared_ptr<gymbosat::Expr> path_constraints_expr =
-                gymbosat::pathconstraints2expr(state.path_constraints, unique_terms_map);
+                gymbosat::pathconstraints2expr(state.path_constraints,
+                                               unique_terms_map);
 
             if (use_dpll) {
                 while (
@@ -146,7 +139,8 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                             learnt_constraints = std::make_shared<gymbosat::Or>(
                                 learnt_constraints,
                                 std::make_shared<gymbosat::Not>(
-                                    std::make_shared<gymbosat::Var>(ass.first)));
+                                    std::make_shared<gymbosat::Var>(
+                                        ass.first)));
                         } else {
                             learnt_constraints = std::make_shared<gymbosat::Or>(
                                 learnt_constraints,
@@ -479,7 +473,7 @@ inline void symStep(SymState &state, Instr instr,
             break;
         }
         default:
-            throw std::runtime_error("Unsupported instruction");
+            fprintf(stderr, "Detect unsupported instruction\n");
     }
 }
 }  // namespace gymbo

@@ -6,9 +6,7 @@
 
 #pragma once
 #include <array>
-#include <cstdint>
 #include <list>
-#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
@@ -174,6 +172,12 @@ struct Grad {
      * @param val Map of variable indices to gradient values.
      */
     Grad(std::unordered_map<int, float> val) : val(val) {}
+
+    /**
+     * @brief Overloaded addition operator for adding two gradients.
+     * @param other The gradient to add.
+     * @return The sum of the two gradients.
+     */
     Grad operator+(const Grad &other) {
         std::unordered_map<int, float> result = val;
         for (auto &r : result) {
@@ -188,6 +192,13 @@ struct Grad {
         }
         return Grad(result);
     }
+
+    /**
+     * @brief Overloaded addition operator for adding a constant to the
+     * gradient.
+     * @param w The constant to add.
+     * @return The sum of the gradient and the constant.
+     */
     Grad operator+(float w) {
         std::unordered_map<int, float> result = val;
         for (auto &r : result) {
@@ -195,6 +206,12 @@ struct Grad {
         }
         return Grad(result);
     }
+
+    /**
+     * @brief Overloaded subtraction operator for subtracting two gradients.
+     * @param other The gradient to subtract.
+     * @return The result of subtracting the second gradient from the first.
+     */
     Grad operator-(const Grad &other) {
         std::unordered_map<int, float> result = val;
         for (auto &r : result) {
@@ -209,6 +226,13 @@ struct Grad {
         }
         return Grad(result);
     }
+
+    /**
+     * @brief Overloaded multiplication operator for multiplying the gradient by
+     * a constant.
+     * @param w The constant to multiply by.
+     * @return The result of multiplying the gradient by the constant.
+     */
     Grad operator*(float w) {
         std::unordered_map<int, float> result = val;
         for (auto &r : result) {
@@ -216,6 +240,11 @@ struct Grad {
         }
         return Grad(result);
     }
+
+    /**
+     * @brief Compute the absolute values of the gradient.
+     * @return The gradient with absolute values.
+     */
     Grad abs() {
         std::unordered_map<int, float> result = val;
         for (auto &r : result) {
@@ -252,11 +281,33 @@ struct Sym {
     Word32 word;     /**< Additional data associated with the expression. */
     int var_idx; /**< Index of the variable associated with the expression. */
 
+    /**
+     * @brief Default constructor for Sym.
+     */
     Sym() {}
+
+    /**
+     * @brief Constructor for Sym with a specified type and left child.
+     * @param symtype The type of the symbolic expression.
+     * @param left Pointer to the left child.
+     */
     Sym(SymType symtype, Sym *left) : symtype(symtype), left(left) {}
+
+    /**
+     * @brief Constructor for Sym with a specified type, left child, and right
+     * child.
+     * @param symtype The type of the symbolic expression.
+     * @param left Pointer to the left child.
+     * @param right Pointer to the right child.
+     */
     Sym(SymType symtype, Sym *left, Sym *right)
         : symtype(symtype), left(left), right(right) {}
 
+    /**
+     * @brief Constructor for Sym with a specified type and Word32 value.
+     * @param symtype The type of the symbolic expression.
+     * @param val Word32 value associated with the expression.
+     */
     Sym(SymType symtype, Word32 val) : symtype(symtype) {
         if (symtype == SymType::SAny) {
             var_idx = val;

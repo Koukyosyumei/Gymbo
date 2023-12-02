@@ -9,7 +9,6 @@ Utility funcitons and classes.
 {\ttfamily \#include $<$cmath$>$}\newline
 {\ttfamily \#include $<$cstdint$>$}\newline
 {\ttfamily \#include $<$cstring$>$}\newline
-{\ttfamily \#include $<$iostream$>$}\newline
 {\ttfamily \#include $<$string$>$}\newline
 Include dependency graph for utils.\+h\+:\nopagebreak
 \begin{figure}[H]
@@ -35,18 +34,14 @@ class \mbox{\hyperlink{classLinkedlist}{Linkedlist$<$ T $>$}}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{utils_8h_a3bb64757a158a6a0fda650799b8e32db}\label{utils_8h_a3bb64757a158a6a0fda650799b8e32db}} 
-bool {\bfseries is\+\_\+integer} (float x)
-\item 
-\mbox{\Hypertarget{utils_8h_aff2c12d2d3219524d8f8ed2db2844118}\label{utils_8h_aff2c12d2d3219524d8f8ed2db2844118}} 
-uint32\+\_\+t {\bfseries Float\+To\+Word} (float val)
-\item 
-\mbox{\Hypertarget{utils_8h_af99d4e3b06f181af184d171a6321f0ef}\label{utils_8h_af99d4e3b06f181af184d171a6321f0ef}} 
-float {\bfseries word\+To\+Float} (uint32\+\_\+t word)
-\item 
-\mbox{\Hypertarget{utils_8h_a049d18da1d33ca03e055d24ba1077efc}\label{utils_8h_a049d18da1d33ca03e055d24ba1077efc}} 
-int {\bfseries word\+To\+Int} (uint32\+\_\+t word)
-\item 
+bool \mbox{\hyperlink{utils_8h_a3bb64757a158a6a0fda650799b8e32db}{is\+\_\+integer}} (float x)
+\begin{DoxyCompactList}\small\item\em Checks if a float is an integer. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{utils_8h_aff2c12d2d3219524d8f8ed2db2844118}{Float\+To\+Word}} (float val)
+\begin{DoxyCompactList}\small\item\em Converts a float value to a 32-\/bit word representation. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{utils_8h_af99d4e3b06f181af184d171a6321f0ef}{word\+To\+Float}} (uint32\+\_\+t word)
+\begin{DoxyCompactList}\small\item\em Converts a 32-\/bit word representation to a float value. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{utils_8h_a049d18da1d33ca03e055d24ba1077efc}{word\+To\+Int}} (uint32\+\_\+t word)
+\begin{DoxyCompactList}\small\item\em Converts a 32-\/bit word representation to an integer value. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{utils_8h_a4372ea01be056af0da9f922ae9b02bc2}{word\+To\+Signed\+Int}} (uint32\+\_\+t word)
 \item 
 bool \mbox{\hyperlink{utils_8h_a952ce406cfbcf5f21efd088b3b71d428}{word\+To\+Bool}} (uint32\+\_\+t word)
@@ -85,6 +80,46 @@ Converts a bool to a uint32\+\_\+t word.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 The uint32\+\_\+t word equivalent of the bool. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_aff2c12d2d3219524d8f8ed2db2844118}\label{utils_8h_aff2c12d2d3219524d8f8ed2db2844118}} 
+\index{utils.h@{utils.h}!FloatToWord@{FloatToWord}}
+\index{FloatToWord@{FloatToWord}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{FloatToWord()}{FloatToWord()}}
+{\footnotesize\ttfamily uint32\+\_\+t Float\+To\+Word (\begin{DoxyParamCaption}\item[{float}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts a float value to a 32-\/bit word representation. 
+
+The {\ttfamily Float\+To\+Word} function converts a float value to its 32-\/bit word representation using memcpy.
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The float value to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 32-\/bit word representation of the float. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_a3bb64757a158a6a0fda650799b8e32db}\label{utils_8h_a3bb64757a158a6a0fda650799b8e32db}} 
+\index{utils.h@{utils.h}!is\_integer@{is\_integer}}
+\index{is\_integer@{is\_integer}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{is\_integer()}{is\_integer()}}
+{\footnotesize\ttfamily bool is\+\_\+integer (\begin{DoxyParamCaption}\item[{float}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a float is an integer. 
+
+The {\ttfamily is\+\_\+integer} function checks if a given float value is an integer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The float value to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the float is an integer, otherwise {\ttfamily false}. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{utils_8h_a1f85e1eb4f4909bbb74e171d0b0074c5}\label{utils_8h_a1f85e1eb4f4909bbb74e171d0b0074c5}} 
 \index{utils.h@{utils.h}!isNegative@{isNegative}}
@@ -149,6 +184,46 @@ Converts a uint32\+\_\+t word to a bool.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 The bool equivalent of the word. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_af99d4e3b06f181af184d171a6321f0ef}\label{utils_8h_af99d4e3b06f181af184d171a6321f0ef}} 
+\index{utils.h@{utils.h}!wordToFloat@{wordToFloat}}
+\index{wordToFloat@{wordToFloat}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{wordToFloat()}{wordToFloat()}}
+{\footnotesize\ttfamily float word\+To\+Float (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts a 32-\/bit word representation to a float value. 
+
+The {\ttfamily word\+To\+Float} function converts a 32-\/bit word representation to its corresponding float value using memcpy.
+
+
+\begin{DoxyParams}{Parameters}
+{\em word} & The 32-\/bit word representation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The float value. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_a049d18da1d33ca03e055d24ba1077efc}\label{utils_8h_a049d18da1d33ca03e055d24ba1077efc}} 
+\index{utils.h@{utils.h}!wordToInt@{wordToInt}}
+\index{wordToInt@{wordToInt}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{wordToInt()}{wordToInt()}}
+{\footnotesize\ttfamily int word\+To\+Int (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts a 32-\/bit word representation to an integer value. 
+
+The {\ttfamily word\+To\+Int} function converts a 32-\/bit word representation to its corresponding integer value using static\+\_\+cast.
+
+
+\begin{DoxyParams}{Parameters}
+{\em word} & The 32-\/bit word representation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The integer value. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{utils_8h_a4372ea01be056af0da9f922ae9b02bc2}\label{utils_8h_a4372ea01be056af0da9f922ae9b02bc2}} 
 \index{utils.h@{utils.h}!wordToSignedInt@{wordToSignedInt}}

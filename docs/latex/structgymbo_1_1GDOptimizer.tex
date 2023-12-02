@@ -21,29 +21,22 @@ bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab5737f4c5c901f4b0fe8effc4f8808
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}\label{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}} 
 int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}{num\+\_\+epochs}}
 \begin{DoxyCompactList}\small\item\em Maximum number of optimization epochs. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}\label{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}} 
 float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}{lr}}
 \begin{DoxyCompactList}\small\item\em Learning rate for gradient descent. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}\label{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}} 
 float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}{eps}}
 \begin{DoxyCompactList}\small\item\em The smallest positive value. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}\label{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}} 
 float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}{param\+\_\+low}}
 \begin{DoxyCompactList}\small\item\em Lower bound for parameter initialization. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}\label{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}} 
 float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}{param\+\_\+high}}
 \begin{DoxyCompactList}\small\item\em Upper bound for parameter initialization. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}{sign\+\_\+grad}}
 \item 
 bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}{init\+\_\+param\+\_\+uniform\+\_\+int}}
 \item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}\label{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}} 
 int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}{seed}}
 \begin{DoxyCompactList}\small\item\em Random seed for initializing parameter values. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a3882db1f66c2141d2535cdef17b108f8}\label{structgymbo_1_1GDOptimizer_a3882db1f66c2141d2535cdef17b108f8}} 
 int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a3882db1f66c2141d2535cdef17b108f8}{num\+\_\+used\+\_\+itr}}
 \begin{DoxyCompactList}\small\item\em Number of used iterations during optimization. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -142,13 +135,83 @@ This function attempts to find parameter values that satisfy the given path cons
 
 
 \doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}\label{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!eps@{eps}}
+\index{eps@{eps}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{eps}{eps}}
+{\footnotesize\ttfamily float gymbo\+::\+GDOptimizer\+::eps}
+
+
+
+The smallest positive value. 
+
 \mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}\label{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}} 
 \index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!init\_param\_uniform\_int@{init\_param\_uniform\_int}}
 \index{init\_param\_uniform\_int@{init\_param\_uniform\_int}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
 \doxysubsubsection{\texorpdfstring{init\_param\_uniform\_int}{init\_param\_uniform\_int}}
 {\footnotesize\ttfamily bool gymbo\+::\+GDOptimizer\+::init\+\_\+param\+\_\+uniform\+\_\+int}
 
-Flag indicating whether initial parameter values are drawn from the uniform int distribution or uniform real distribution (default true). \mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}\label{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}} 
+Flag indicating whether initial parameter values are drawn from the uniform int distribution or uniform real distribution (default true). \mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}\label{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!lr@{lr}}
+\index{lr@{lr}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{lr}{lr}}
+{\footnotesize\ttfamily float gymbo\+::\+GDOptimizer\+::lr}
+
+
+
+Learning rate for gradient descent. 
+
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}\label{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!num\_epochs@{num\_epochs}}
+\index{num\_epochs@{num\_epochs}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{num\_epochs}{num\_epochs}}
+{\footnotesize\ttfamily int gymbo\+::\+GDOptimizer\+::num\+\_\+epochs}
+
+
+
+Maximum number of optimization epochs. 
+
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a3882db1f66c2141d2535cdef17b108f8}\label{structgymbo_1_1GDOptimizer_a3882db1f66c2141d2535cdef17b108f8}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!num\_used\_itr@{num\_used\_itr}}
+\index{num\_used\_itr@{num\_used\_itr}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{num\_used\_itr}{num\_used\_itr}}
+{\footnotesize\ttfamily int gymbo\+::\+GDOptimizer\+::num\+\_\+used\+\_\+itr}
+
+
+
+Number of used iterations during optimization. 
+
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}\label{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!param\_high@{param\_high}}
+\index{param\_high@{param\_high}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{param\_high}{param\_high}}
+{\footnotesize\ttfamily float gymbo\+::\+GDOptimizer\+::param\+\_\+high}
+
+
+
+Upper bound for parameter initialization. 
+
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}\label{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!param\_low@{param\_low}}
+\index{param\_low@{param\_low}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{param\_low}{param\_low}}
+{\footnotesize\ttfamily float gymbo\+::\+GDOptimizer\+::param\+\_\+low}
+
+
+
+Lower bound for parameter initialization. 
+
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}\label{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}} 
+\index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!seed@{seed}}
+\index{seed@{seed}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
+\doxysubsubsection{\texorpdfstring{seed}{seed}}
+{\footnotesize\ttfamily int gymbo\+::\+GDOptimizer\+::seed}
+
+
+
+Random seed for initializing parameter values. 
+
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}\label{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}} 
 \index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!sign\_grad@{sign\_grad}}
 \index{sign\_grad@{sign\_grad}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
 \doxysubsubsection{\texorpdfstring{sign\_grad}{sign\_grad}}

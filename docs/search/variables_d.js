@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tail_318',['tail',['../classLinkedlist.html#a9239abc6a88f6f6041f72e7e0a3a0d6e',1,'Linkedlist']]]
+  ['rhs_427',['rhs',['../structgymbo_1_1Node.html#ac9961bda97c405a45d15503a3e688d69',1,'gymbo::Node']]],
+  ['right_428',['right',['../classgymbosat_1_1And.html#a751c47c6f6de6bd1b5808460daaa6980',1,'gymbosat::And::right()'],['../classgymbosat_1_1Or.html#a543681613377a3a4a01b097088dbba9d',1,'gymbosat::Or::right()'],['../structgymbo_1_1Sym.html#a319da51ac1f1686fa448cc3739b0acea',1,'gymbo::Sym::right()']]]
 ];

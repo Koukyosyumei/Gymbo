@@ -9,11 +9,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "libgymbo/symbolic.h"
 #include "libgymbo/compiler.h"
-#include "libgymbo/gd.h"
-#include "libgymbo/parser.h"
-#include "libgymbo/tokenizer.h"
-#include "libgymbo/type.h"
 
 char *user_input;
 int max_depth = 65536;

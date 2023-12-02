@@ -26,7 +26,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=272pt]{tokenizer_8h__dep__incl}
+\includegraphics[width=199pt]{tokenizer_8h__dep__incl}
 \end{center}
 \end{figure}
 \doxysubsection*{Classes}
@@ -34,50 +34,54 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \item 
 struct \mbox{\hyperlink{structgymbo_1_1Token}{gymbo\+::\+Token}}
 \begin{DoxyCompactList}\small\item\em Structure representing a token. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacegymbo}{gymbo}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{tokenizer_8h_a886e58c66782cda4ff74ad10b5a6b646}\label{tokenizer_8h_a886e58c66782cda4ff74ad10b5a6b646}} 
-enum \mbox{\hyperlink{tokenizer_8h_a886e58c66782cda4ff74ad10b5a6b646}{gymbo\+::\+Token\+Kind}} \{ \newline
-{\bfseries TOKEN\+\_\+\+RESERVED}
-, {\bfseries TOKEN\+\_\+\+RETURN}
-, {\bfseries TOKEN\+\_\+\+IF}
-, {\bfseries TOKEN\+\_\+\+ELSE}
+enum \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}{gymbo\+::\+Token\+Kind}} \{ \newline
+\mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac7e847d9a71b84b9d707022ede462c26}{gymbo\+::\+TOKEN\+\_\+\+RESERVED}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a8170c440f4a465a9d4a8d69c6934b7b2}{gymbo\+::\+TOKEN\+\_\+\+RETURN}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac53e34e4445f94b1c47dd34d9676b209}{gymbo\+::\+TOKEN\+\_\+\+IF}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a352b101ce5bfbf86b28d9a18ef217a61}{gymbo\+::\+TOKEN\+\_\+\+ELSE}}
 , \newline
-{\bfseries TOKEN\+\_\+\+FOR}
-, {\bfseries TOKEN\+\_\+\+IDENT}
-, {\bfseries TOKEN\+\_\+\+NUM}
-, {\bfseries TOKEN\+\_\+\+EOF}
+\mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ad616d279f986a51a6774fa10d77aa415}{gymbo\+::\+TOKEN\+\_\+\+FOR}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac453ec427086ba98563ee6fb8582f042}{gymbo\+::\+TOKEN\+\_\+\+IDENT}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a041d42319df0f64d0688bd8398a5f6f2}{gymbo\+::\+TOKEN\+\_\+\+NUM}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a87451f2ad23351cb715502a4890397bf}{gymbo\+::\+TOKEN\+\_\+\+EOF}}
  \}
 \begin{DoxyCompactList}\small\item\em Enumeration representing different token kinds. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{tokenizer_8h_aab49b70724bec7c8b7ee2a6a2fd31771}{gymbo\+::is\+\_\+alpha}} (char c)
+bool \mbox{\hyperlink{namespacegymbo_aab49b70724bec7c8b7ee2a6a2fd31771}{gymbo\+::is\+\_\+alpha}} (char c)
 \begin{DoxyCompactList}\small\item\em Checks if a character is an alphabetical character or underscore. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{tokenizer_8h_a9f75e72416f1f4de36d005b6935c0136}{gymbo\+::is\+\_\+alnum}} (char c)
+bool \mbox{\hyperlink{namespacegymbo_a9f75e72416f1f4de36d005b6935c0136}{gymbo\+::is\+\_\+alnum}} (char c)
 \begin{DoxyCompactList}\small\item\em Checks if a character is an alphanumeric character. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{tokenizer_8h_afd45221e5385a56b69288384e8e393aa}{gymbo\+::error}} (char $\ast$fmt,...)
+void \mbox{\hyperlink{namespacegymbo_afd45221e5385a56b69288384e8e393aa}{gymbo\+::error}} (char $\ast$fmt,...)
 \begin{DoxyCompactList}\small\item\em Reports an error and exits the program. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{tokenizer_8h_a74bef918aba1493fe3b0f94b0c34a92e}{gymbo\+::error\+\_\+at}} (char $\ast$user\+\_\+input, char $\ast$loc, char $\ast$fmt,...)
+void \mbox{\hyperlink{namespacegymbo_a74bef918aba1493fe3b0f94b0c34a92e}{gymbo\+::error\+\_\+at}} (char $\ast$user\+\_\+input, char $\ast$loc, char $\ast$fmt,...)
 \begin{DoxyCompactList}\small\item\em Reports an error location and exits the program. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{tokenizer_8h_a351aaa8f55935e9d65f1c33b143ffdc1}{gymbo\+::consume}} (Token $\ast$\&token, char $\ast$op)
+bool \mbox{\hyperlink{namespacegymbo_a351aaa8f55935e9d65f1c33b143ffdc1}{gymbo\+::consume}} (Token $\ast$\&token, char $\ast$op)
 \item 
-bool \mbox{\hyperlink{tokenizer_8h_a05bc470a265b7b40aaddd5a073c5a1d7}{gymbo\+::consume\+\_\+tok}} (Token $\ast$\&token, Token\+Kind tok)
+bool \mbox{\hyperlink{namespacegymbo_a05bc470a265b7b40aaddd5a073c5a1d7}{gymbo\+::consume\+\_\+tok}} (Token $\ast$\&token, Token\+Kind tok)
 \item 
-Token $\ast$ \mbox{\hyperlink{tokenizer_8h_aea8e842b4ef04a10618bf3f95b2de229}{gymbo\+::consume\+\_\+ident}} (Token $\ast$\&token)
+Token $\ast$ \mbox{\hyperlink{namespacegymbo_aea8e842b4ef04a10618bf3f95b2de229}{gymbo\+::consume\+\_\+ident}} (Token $\ast$\&token)
 \item 
-void \mbox{\hyperlink{tokenizer_8h_acdabc32fe6aa65db48889984321294b4}{gymbo\+::expect}} (Token $\ast$\&token, char $\ast$user\+\_\+input, char $\ast$op)
+void \mbox{\hyperlink{namespacegymbo_acdabc32fe6aa65db48889984321294b4}{gymbo\+::expect}} (Token $\ast$\&token, char $\ast$user\+\_\+input, char $\ast$op)
 \item 
-float \mbox{\hyperlink{tokenizer_8h_a82e491fd1648ba276b4c2873e7c8b4b1}{gymbo\+::expect\+\_\+number}} (Token $\ast$\&token, char $\ast$user\+\_\+input)
+float \mbox{\hyperlink{namespacegymbo_a82e491fd1648ba276b4c2873e7c8b4b1}{gymbo\+::expect\+\_\+number}} (Token $\ast$\&token, char $\ast$user\+\_\+input)
 \item 
-bool \mbox{\hyperlink{tokenizer_8h_a573f6b3a170a995133014dec63f330dc}{gymbo\+::at\+\_\+eof}} (Token $\ast$token)
+bool \mbox{\hyperlink{namespacegymbo_a573f6b3a170a995133014dec63f330dc}{gymbo\+::at\+\_\+eof}} (Token $\ast$token)
 \item 
-Token $\ast$ \mbox{\hyperlink{tokenizer_8h_a09b17fb4e9dfe3e5c6e03ad57bcfecf4}{gymbo\+::new\+\_\+token}} (Token\+Kind kind, Token $\ast$cur, char $\ast$str, int len)
+Token $\ast$ \mbox{\hyperlink{namespacegymbo_a09b17fb4e9dfe3e5c6e03ad57bcfecf4}{gymbo\+::new\+\_\+token}} (Token\+Kind kind, Token $\ast$cur, char $\ast$str, int len)
 \item 
-bool \mbox{\hyperlink{tokenizer_8h_a086916a92edc60e687a056603995182e}{gymbo\+::startswith}} (char $\ast$p, char $\ast$q)
+bool \mbox{\hyperlink{namespacegymbo_a086916a92edc60e687a056603995182e}{gymbo\+::startswith}} (char $\ast$p, char $\ast$q)
 \item 
-Token $\ast$ \mbox{\hyperlink{tokenizer_8h_a89c8cb7e3b04d3d02f0cba69ab593981}{gymbo\+::tokenize}} (char $\ast$user\+\_\+input, std\+::unordered\+\_\+map$<$ std\+::string, int $>$ \&var\+\_\+counter)
+Token $\ast$ \mbox{\hyperlink{namespacegymbo_a89c8cb7e3b04d3d02f0cba69ab593981}{gymbo\+::tokenize}} (char $\ast$user\+\_\+input, std\+::unordered\+\_\+map$<$ std\+::string, int $>$ \&var\+\_\+counter)
 \end{DoxyCompactItemize}
 
 
@@ -87,248 +91,3 @@ Implementation of tokenizer.
 \begin{DoxyAuthor}{Author}
 Hideaki Takahashi 
 \end{DoxyAuthor}
-
-
-\doxysubsection{Function Documentation}
-\mbox{\Hypertarget{tokenizer_8h_a573f6b3a170a995133014dec63f330dc}\label{tokenizer_8h_a573f6b3a170a995133014dec63f330dc}} 
-\index{tokenizer.h@{tokenizer.h}!at\_eof@{at\_eof}}
-\index{at\_eof@{at\_eof}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{at\_eof()}{at\_eof()}}
-{\footnotesize\ttfamily bool gymbo\+::at\+\_\+eof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$}]{token }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Checks if the current token is at the end of the program.
-
-
-\begin{DoxyParams}{Parameters}
-{\em token} & A pointer to the current token. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if the current token is at the end of the program, false otherwise. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{tokenizer_8h_a351aaa8f55935e9d65f1c33b143ffdc1}\label{tokenizer_8h_a351aaa8f55935e9d65f1c33b143ffdc1}} 
-\index{tokenizer.h@{tokenizer.h}!consume@{consume}}
-\index{consume@{consume}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{consume()}{consume()}}
-{\footnotesize\ttfamily bool gymbo\+::consume (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Consumes the current token if it matches {\ttfamily op}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em token} & A pointer to the current token. \\
-\hline
-{\em op} & The token to consume. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if the token was consumed, false otherwise. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{tokenizer_8h_aea8e842b4ef04a10618bf3f95b2de229}\label{tokenizer_8h_aea8e842b4ef04a10618bf3f95b2de229}} 
-\index{tokenizer.h@{tokenizer.h}!consume\_ident@{consume\_ident}}
-\index{consume\_ident@{consume\_ident}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{consume\_ident()}{consume\_ident()}}
-{\footnotesize\ttfamily Token$\ast$ gymbo\+::consume\+\_\+ident (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Consumes the current token if it is an identifier.
-
-
-\begin{DoxyParams}{Parameters}
-{\em token} & A pointer to the current token. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A pointer to the consumed identifier token, or NULL if the current token is not an identifier. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{tokenizer_8h_a05bc470a265b7b40aaddd5a073c5a1d7}\label{tokenizer_8h_a05bc470a265b7b40aaddd5a073c5a1d7}} 
-\index{tokenizer.h@{tokenizer.h}!consume\_tok@{consume\_tok}}
-\index{consume\_tok@{consume\_tok}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{consume\_tok()}{consume\_tok()}}
-{\footnotesize\ttfamily bool gymbo\+::consume\+\_\+tok (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{\mbox{\hyperlink{tokenizer_8h_a886e58c66782cda4ff74ad10b5a6b646}{Token\+Kind}}}]{tok }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Consumes the current token if it matches {\ttfamily tok}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em token} & A pointer to the current token. \\
-\hline
-{\em tok} & The token to consume. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if the token was consumed, false otherwise. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{tokenizer_8h_afd45221e5385a56b69288384e8e393aa}\label{tokenizer_8h_afd45221e5385a56b69288384e8e393aa}} 
-\index{tokenizer.h@{tokenizer.h}!error@{error}}
-\index{error@{error}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{error()}{error()}}
-{\footnotesize\ttfamily void gymbo\+::error (\begin{DoxyParamCaption}\item[{char $\ast$}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Reports an error and exits the program. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em fmt} & The format string for the error message. \\
-\hline
-{\em ...} & Additional arguments for the format string. \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{tokenizer_8h_a74bef918aba1493fe3b0f94b0c34a92e}\label{tokenizer_8h_a74bef918aba1493fe3b0f94b0c34a92e}} 
-\index{tokenizer.h@{tokenizer.h}!error\_at@{error\_at}}
-\index{error\_at@{error\_at}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{error\_at()}{error\_at()}}
-{\footnotesize\ttfamily void gymbo\+::error\+\_\+at (\begin{DoxyParamCaption}\item[{char $\ast$}]{user\+\_\+input,  }\item[{char $\ast$}]{loc,  }\item[{char $\ast$}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Reports an error location and exits the program. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em user\+\_\+input} & The input string. \\
-\hline
-{\em loc} & The location of the error. \\
-\hline
-{\em fmt} & The format string for the error message. \\
-\hline
-{\em ...} & Additional arguments for the format string. \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{tokenizer_8h_acdabc32fe6aa65db48889984321294b4}\label{tokenizer_8h_acdabc32fe6aa65db48889984321294b4}} 
-\index{tokenizer.h@{tokenizer.h}!expect@{expect}}
-\index{expect@{expect}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{expect()}{expect()}}
-{\footnotesize\ttfamily void gymbo\+::expect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input,  }\item[{char $\ast$}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Ensures that the current token matches {\ttfamily op}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em token} & A pointer to the current token. \\
-\hline
-{\em user\+\_\+input} & The source code of the program. \\
-\hline
-{\em op} & The token to expect. \\
-\hline
-\end{DoxyParams}
-
-\begin{DoxyExceptions}{Exceptions}
-{\em An} & error if the current token does not match {\ttfamily op}. \\
-\hline
-\end{DoxyExceptions}
-\mbox{\Hypertarget{tokenizer_8h_a82e491fd1648ba276b4c2873e7c8b4b1}\label{tokenizer_8h_a82e491fd1648ba276b4c2873e7c8b4b1}} 
-\index{tokenizer.h@{tokenizer.h}!expect\_number@{expect\_number}}
-\index{expect\_number@{expect\_number}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{expect\_number()}{expect\_number()}}
-{\footnotesize\ttfamily float gymbo\+::expect\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Ensures that the current token is a number.
-
-
-\begin{DoxyParams}{Parameters}
-{\em token} & A pointer to the current token. \\
-\hline
-{\em user\+\_\+input} & The source code of the program. \\
-\hline
-\end{DoxyParams}
-
-\begin{DoxyExceptions}{Exceptions}
-{\em An} & error if the current token is not a number. \\
-\hline
-\end{DoxyExceptions}
-\mbox{\Hypertarget{tokenizer_8h_a9f75e72416f1f4de36d005b6935c0136}\label{tokenizer_8h_a9f75e72416f1f4de36d005b6935c0136}} 
-\index{tokenizer.h@{tokenizer.h}!is\_alnum@{is\_alnum}}
-\index{is\_alnum@{is\_alnum}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{is\_alnum()}{is\_alnum()}}
-{\footnotesize\ttfamily bool gymbo\+::is\+\_\+alnum (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Checks if a character is an alphanumeric character. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em c} & The character to check. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true if the character is an alphanumeric character, false otherwise. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{tokenizer_8h_aab49b70724bec7c8b7ee2a6a2fd31771}\label{tokenizer_8h_aab49b70724bec7c8b7ee2a6a2fd31771}} 
-\index{tokenizer.h@{tokenizer.h}!is\_alpha@{is\_alpha}}
-\index{is\_alpha@{is\_alpha}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{is\_alpha()}{is\_alpha()}}
-{\footnotesize\ttfamily bool gymbo\+::is\+\_\+alpha (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Checks if a character is an alphabetical character or underscore. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em c} & The character to check. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true if the character is an alphabetical character or underscore, false otherwise. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{tokenizer_8h_a09b17fb4e9dfe3e5c6e03ad57bcfecf4}\label{tokenizer_8h_a09b17fb4e9dfe3e5c6e03ad57bcfecf4}} 
-\index{tokenizer.h@{tokenizer.h}!new\_token@{new\_token}}
-\index{new\_token@{new\_token}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{new\_token()}{new\_token()}}
-{\footnotesize\ttfamily Token$\ast$ gymbo\+::new\+\_\+token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{tokenizer_8h_a886e58c66782cda4ff74ad10b5a6b646}{Token\+Kind}}}]{kind,  }\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$}]{cur,  }\item[{char $\ast$}]{str,  }\item[{int}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Creates a new token and adds it as the next token of {\ttfamily cur}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em kind} & The kind of token to create. \\
-\hline
-{\em cur} & A pointer to the current token. \\
-\hline
-{\em str} & The string of the token to create. \\
-\hline
-{\em len} & The length of the token to create. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A pointer to the newly created token. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{tokenizer_8h_a086916a92edc60e687a056603995182e}\label{tokenizer_8h_a086916a92edc60e687a056603995182e}} 
-\index{tokenizer.h@{tokenizer.h}!startswith@{startswith}}
-\index{startswith@{startswith}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{startswith()}{startswith()}}
-{\footnotesize\ttfamily bool gymbo\+::startswith (\begin{DoxyParamCaption}\item[{char $\ast$}]{p,  }\item[{char $\ast$}]{q }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Checks if the string {\ttfamily p} starts with the string {\ttfamily q}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em p} & A pointer to the string to check. \\
-\hline
-{\em q} & A pointer to the string to check against. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if {\ttfamily p} starts with {\ttfamily q}, false otherwise. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{tokenizer_8h_a89c8cb7e3b04d3d02f0cba69ab593981}\label{tokenizer_8h_a89c8cb7e3b04d3d02f0cba69ab593981}} 
-\index{tokenizer.h@{tokenizer.h}!tokenize@{tokenize}}
-\index{tokenize@{tokenize}!tokenizer.h@{tokenizer.h}}
-\doxysubsubsection{\texorpdfstring{tokenize()}{tokenize()}}
-{\footnotesize\ttfamily Token$\ast$ gymbo\+::tokenize (\begin{DoxyParamCaption}\item[{char $\ast$}]{user\+\_\+input,  }\item[{std\+::unordered\+\_\+map$<$ std\+::string, int $>$ \&}]{var\+\_\+counter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Tokenizes a given string and returns a linked list of tokens.
-
-
-\begin{DoxyParams}{Parameters}
-{\em user\+\_\+input} & The string to be tokenized. \\
-\hline
-{\em var\+\_\+counter} & The map to store the mapping from variable name to variable id. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A linked list of tokens. 
-\end{DoxyReturn}

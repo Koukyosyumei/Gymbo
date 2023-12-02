@@ -1,0 +1,1271 @@
+\hypertarget{namespacegymbo}{}\doxysection{gymbo Namespace Reference}
+\label{namespacegymbo}\index{gymbo@{gymbo}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}
+\begin{DoxyCompactList}\small\item\em Gradient Descent Optimizer for Symbolic Path Constraints. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1Node}{Node}}
+\begin{DoxyCompactList}\small\item\em Structure representing a node in the Abstract Syntax Tree (AST). \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1Token}{Token}}
+\begin{DoxyCompactList}\small\item\em Structure representing a token. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgymbo_1_1Instr}{Instr}}
+\begin{DoxyCompactList}\small\item\em Class representing an instruction. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1Grad}{Grad}}
+\begin{DoxyCompactList}\small\item\em Struct representing the gradient of a symbolic expression. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}}
+\begin{DoxyCompactList}\small\item\em Struct representing a symbolic expression. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}}
+\begin{DoxyCompactList}\small\item\em Struct representing the symbolic state of the symbolic execution. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}}
+\begin{DoxyCompactList}\small\item\em Struct representing a trace in symbolic execution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}{Word32}} = uint32\+\_\+t
+\begin{DoxyCompactList}\small\item\em Alias for 32-\/bit unsigned integer. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} = std\+::vector$<$ \mbox{\hyperlink{classgymbo_1_1Instr}{Instr}} $>$
+\begin{DoxyCompactList}\small\item\em Alias for a program, represented as a vector of instructions. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacegymbo_a93394c86b71f9947e9d17b61013e600c}{Mem}} = std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}{Word32}}, \mbox{\hyperlink{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}{Word32}} $>$
+\begin{DoxyCompactList}\small\item\em Alias for memory, represented as an unordered map of 32-\/bit words. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ bool, std\+::unordered\+\_\+map$<$ int, float $>$ $>$$>$
+\begin{DoxyCompactList}\small\item\em Alias for a table of path constraints. The key is the string representation of the constraint and the value is the pair of its satifiability and the map whose key is the variable id and the value is the concrete value that makes the constraint true. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacegymbo_ac714ceb538af2de2adce25193f0e5eaf}{SMem}} = std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}{Word32}}, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$
+\begin{DoxyCompactList}\small\item\em Alias for symbolic memory, represented as an unordered map of symbolic expressions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376d}{Node\+Kind}} \{ \newline
+\mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376daa18a430adcdeb6e0c9639a99e7124c9d}{ND\+\_\+\+ADD}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da31298d570c34b26e5496fa273128b9d3}{ND\+\_\+\+SUB}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da076e1d8970775410e112b5a6abf22279}{ND\+\_\+\+MUL}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da11060321f20ace47777daae4dcd6ad0e}{ND\+\_\+\+DIV}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dad7f7ef7789a85eb9bf13f9520510cc89}{ND\+\_\+\+AND}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dab9ec59bf77e75f69d2cea43cd2b33601}{ND\+\_\+\+OR}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dafa7ec730e8d9697721858d065b471d1c}{ND\+\_\+\+NOT}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da837a7c4fc314fc2776d97d732a3fd64b}{ND\+\_\+\+EQ}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da874e91c45fa30cf0f7b442d72b360d1c}{ND\+\_\+\+NE}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376daa82f6b2234757d546909326517d37fd7}{ND\+\_\+\+LT}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dad1f785096fd6b43db91372b5534f7efc}{ND\+\_\+\+LE}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da4ba3baee39d8ff1507b1b107d635ef87}{ND\+\_\+\+ASSIGN}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da5f155e46887e5042d861fb79fa91429f}{ND\+\_\+\+LVAR}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da20441de66f229336235cedd427137d06}{ND\+\_\+\+NUM}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da6fd11fd2d39908558555f46c01a305d1}{ND\+\_\+\+RETURN}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dad451b86e21d6ee00a81d0e2dd46caec9}{ND\+\_\+\+IF}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376daf7fe8378cf5b146e1aebed89eb7d830d}{ND\+\_\+\+FOR}}
+, \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da00b1bc8aa00d3d1d99bd7da09bf45f78}{ND\+\_\+\+BLOCK}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration representing different node kinds in the Abstract Syntax Tree (AST). \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}{Token\+Kind}} \{ \newline
+\mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac7e847d9a71b84b9d707022ede462c26}{TOKEN\+\_\+\+RESERVED}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a8170c440f4a465a9d4a8d69c6934b7b2}{TOKEN\+\_\+\+RETURN}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac53e34e4445f94b1c47dd34d9676b209}{TOKEN\+\_\+\+IF}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a352b101ce5bfbf86b28d9a18ef217a61}{TOKEN\+\_\+\+ELSE}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ad616d279f986a51a6774fa10d77aa415}{TOKEN\+\_\+\+FOR}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac453ec427086ba98563ee6fb8582f042}{TOKEN\+\_\+\+IDENT}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a041d42319df0f64d0688bd8398a5f6f2}{TOKEN\+\_\+\+NUM}}
+, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a87451f2ad23351cb715502a4890397bf}{TOKEN\+\_\+\+EOF}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration representing different token kinds. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14}{Instr\+Type}} \{ \newline
+\mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14aec211f7c20af43e742bf2570c3cb84f9}{Add}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14ae80155eceb940c89e2de63ad05868db2}{Sub}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a62b6d55816cf737bfc6f42e60df1a3f2}{Mul}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a51a0569eddc8af78b9f7dd509605ccd1}{Jmp\+If}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a6cff4b2c006c869ef3c73f7fbd6e2711}{Jmp}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14ac33315685a0cba3ce53be378b3c7874b}{And}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a3a2d5fe857d8f9541136a124c2edec6c}{Or}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14aa74c05d080620f087c4e523977230666}{Not}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a50033c15af7795cd6617f117b29d6922}{Lt}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14abccd5ec3ec8fd3a4471e71e9b407c60c}{Le}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a3718b5ecf60aa0dba49e150e96cb1fc3}{Eq}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a9c6a9d9f033001a9b3104984d319563b}{Push}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14afdb0c388de01d545017cdf9ccf00eb72}{Store}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14af19dbf2edb3a0bd74b0524d960ff21eb}{Load}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a0ae61bd0474e04c9f1195d4baa0213a0}{Pop}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a7a1a5f3e79fdc91edf2f5ead9d66abb4}{Read}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a13dba24862cf9128167a59100e154c8d}{Print}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a8778f5cc5ee1685fb97ad92e33e63225}{Swap}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a120be0bc58aa2e541a3be4d16b19d828}{Dup}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14aef087651eb482bae4624478696f4ad4f}{Over}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14abbbe5f56234982223c943e66e75d0f8e}{RotL}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14af92965e2c8a7afb3c1b9a5c09a263636}{Done}}
+, \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14ab7e7f2b46723f5b08d763041108f8fed}{Nop}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum representing different instruction types. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225}{Sym\+Type}} \{ \newline
+\mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a68a532004a63c408aa8587e5c0b19f32}{SAdd}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a8da2905886bedd12c82662380dd2f797}{SSub}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225ac3aa42a4033c097f132de2e645772726}{SMul}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a32f44ca65beff335be6e9d884d9ff187}{SEq}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225abb67bd7c54875002b5a8214f04ba0c39}{SNot}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a8e6bcd5685e5221b7133c03e692f4a92}{SOr}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225ae04506053d891434c87bcb7c9ee7a492}{SCon}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a086ea780e08007dce53b3c400c2a7ef3}{SAnd}}
+, \newline
+\mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225ad2c3d0433b9da329df4c66b885706dd4}{SLt}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a46b6c8e7c51af424839e28ad6f8ecbe8}{SLe}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225adae537bd250f746297c0cfad0128c24d}{SAny}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum representing different symbolic expression types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacegymbo_a6d18a50ff10886c6d952dd9781e99a5b}{gen\+\_\+lval}} (\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$node, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prg)
+\item 
+void \mbox{\hyperlink{namespacegymbo_ae193b98ee15e54838e9a8433aff4c379}{gen}} (\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$node, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prg)
+\item 
+void \mbox{\hyperlink{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}{compile\+\_\+ast}} (std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ $>$ code, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prg)
+\begin{DoxyCompactList}\small\item\em Compile the Abstract Syntax Tree (AST) into a sequence of instructions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a47b7251f53d2ee3e14494fb9f7a2bc72}{assign}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
+\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
+\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a93198308f32bb09209f19ea243dfbd7e}{equality}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
+\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a7782376e331d91dd967f5a7b1c23c1ba}{relational}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
+\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_aee43a52e33ae6335a16161d16abd1079}{logical}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
+\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a7b0b70c62f575e191b45877710aecc9c}{add}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
+\begin{DoxyCompactList}\small\item\em Parse and construct an AST node representing addition or subtraction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a586e5510f2ba9c76f7bcb78a3dafd69a}{mul}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
+\begin{DoxyCompactList}\small\item\em Parse and construct an AST node representing multiplication or division. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_ac29372113d1f5d63e50aec27aa2bab58}{unary}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
+\begin{DoxyCompactList}\small\item\em Parse and construct an AST node representing unary operations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_aab835796afd998bcd50e272c9eb29d00}{primary}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
+\begin{DoxyCompactList}\small\item\em Parse and construct an AST node representing primary expressions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a0269bd238863b0c8e036e5fb7d66fa79}{stmt}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
+\begin{DoxyCompactList}\small\item\em Parse and construct an AST node representing a statement. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a2c94ae142cca941fe8aae12f6b8061b8}{new\+\_\+node}} (\mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376d}{Node\+Kind}} kind)
+\begin{DoxyCompactList}\small\item\em Create a new AST node with the given kind. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a217eb40fcc9434dae5deb3213d57e116}{new\+\_\+binary}} (\mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376d}{Node\+Kind}} kind, \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$lhs, \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$rhs)
+\begin{DoxyCompactList}\small\item\em Create a new binary AST node with the given kind, left-\/hand side, and right-\/hand side. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_acbc9e13994df75da5b689099ad3c32ce}{new\+\_\+num}} (float val)
+\begin{DoxyCompactList}\small\item\em Create a new AST node representing a numeric value with the given value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a5e7728b7fbac9bf79ae665cf9b94f443}{generate\+\_\+ast}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ $>$ \&code)
+\item 
+std\+::pair$<$ std\+::unordered\+\_\+map$<$ std\+::string, int $>$, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} $>$ \mbox{\hyperlink{namespacegymbo_a7b970a9d85276e2bd460b29fec762ec3}{gcompile}} (char $\ast$user\+\_\+input)
+\item 
+\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \mbox{\hyperlink{namespacegymbo_af40a70afb521e856bda968808b2b492e}{gexecute}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prg, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&init, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, int max\+\_\+depth, int max\+SAT, int max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
+\item 
+\mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{namespacegymbo_a8aa21505f18c246fc0adafb360939fe0}{run\+\_\+gymbo}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
+\begin{DoxyCompactList}\small\item\em Symbolically Execute a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a70694fc6a91234300048503b2fe15a9b}{sym\+Step}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{classgymbo_1_1Instr}{Instr}} instr, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Symbolically Execute a Single Instruction of a Program. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}{initialize\+\_\+params}} (std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, bool ignore\+\_\+memory)
+\begin{DoxyCompactList}\small\item\em Initialize Parameter Values from Memory. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacegymbo_aab49b70724bec7c8b7ee2a6a2fd31771}{is\+\_\+alpha}} (char c)
+\begin{DoxyCompactList}\small\item\em Checks if a character is an alphabetical character or underscore. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacegymbo_a9f75e72416f1f4de36d005b6935c0136}{is\+\_\+alnum}} (char c)
+\begin{DoxyCompactList}\small\item\em Checks if a character is an alphanumeric character. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_afd45221e5385a56b69288384e8e393aa}{error}} (char $\ast$fmt,...)
+\begin{DoxyCompactList}\small\item\em Reports an error and exits the program. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a74bef918aba1493fe3b0f94b0c34a92e}{error\+\_\+at}} (char $\ast$user\+\_\+input, char $\ast$loc, char $\ast$fmt,...)
+\begin{DoxyCompactList}\small\item\em Reports an error location and exits the program. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacegymbo_a351aaa8f55935e9d65f1c33b143ffdc1}{consume}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$op)
+\item 
+bool \mbox{\hyperlink{namespacegymbo_a05bc470a265b7b40aaddd5a073c5a1d7}{consume\+\_\+tok}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}{Token\+Kind}} tok)
+\item 
+\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$ \mbox{\hyperlink{namespacegymbo_aea8e842b4ef04a10618bf3f95b2de229}{consume\+\_\+ident}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token)
+\item 
+void \mbox{\hyperlink{namespacegymbo_acdabc32fe6aa65db48889984321294b4}{expect}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input, char $\ast$op)
+\item 
+float \mbox{\hyperlink{namespacegymbo_a82e491fd1648ba276b4c2873e7c8b4b1}{expect\+\_\+number}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
+\item 
+bool \mbox{\hyperlink{namespacegymbo_a573f6b3a170a995133014dec63f330dc}{at\+\_\+eof}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$token)
+\item 
+\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$ \mbox{\hyperlink{namespacegymbo_a09b17fb4e9dfe3e5c6e03ad57bcfecf4}{new\+\_\+token}} (\mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}{Token\+Kind}} kind, \mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$cur, char $\ast$str, int len)
+\item 
+bool \mbox{\hyperlink{namespacegymbo_a086916a92edc60e687a056603995182e}{startswith}} (char $\ast$p, char $\ast$q)
+\item 
+\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$ \mbox{\hyperlink{namespacegymbo_a89c8cb7e3b04d3d02f0cba69ab593981}{tokenize}} (char $\ast$user\+\_\+input, std\+::unordered\+\_\+map$<$ std\+::string, int $>$ \&var\+\_\+counter)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespacegymbo_a93394c86b71f9947e9d17b61013e600c}\label{namespacegymbo_a93394c86b71f9947e9d17b61013e600c}} 
+\index{gymbo@{gymbo}!Mem@{Mem}}
+\index{Mem@{Mem}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{Mem}{Mem}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacegymbo_a93394c86b71f9947e9d17b61013e600c}{gymbo\+::\+Mem}} = typedef std\+::unordered\+\_\+map$<$\mbox{\hyperlink{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}{Word32}}, \mbox{\hyperlink{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}{Word32}}$>$}
+
+
+
+Alias for memory, represented as an unordered map of 32-\/bit words. 
+
+\mbox{\Hypertarget{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}\label{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}} 
+\index{gymbo@{gymbo}!PathConstraintsTable@{PathConstraintsTable}}
+\index{PathConstraintsTable@{PathConstraintsTable}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{PathConstraintsTable}{PathConstraintsTable}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{gymbo\+::\+Path\+Constraints\+Table}} = typedef std\+::unordered\+\_\+map$<$std\+::string, std\+::pair$<$bool, std\+::unordered\+\_\+map$<$int, float$>$ $>$$>$}
+
+
+
+Alias for a table of path constraints. The key is the string representation of the constraint and the value is the pair of its satifiability and the map whose key is the variable id and the value is the concrete value that makes the constraint true. 
+
+\mbox{\Hypertarget{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}\label{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}} 
+\index{gymbo@{gymbo}!Prog@{Prog}}
+\index{Prog@{Prog}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{Prog}{Prog}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{gymbo\+::\+Prog}} = typedef std\+::vector$<$\mbox{\hyperlink{classgymbo_1_1Instr}{Instr}}$>$}
+
+
+
+Alias for a program, represented as a vector of instructions. 
+
+\mbox{\Hypertarget{namespacegymbo_ac714ceb538af2de2adce25193f0e5eaf}\label{namespacegymbo_ac714ceb538af2de2adce25193f0e5eaf}} 
+\index{gymbo@{gymbo}!SMem@{SMem}}
+\index{SMem@{SMem}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{SMem}{SMem}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacegymbo_ac714ceb538af2de2adce25193f0e5eaf}{gymbo\+::\+SMem}} = typedef std\+::unordered\+\_\+map$<$\mbox{\hyperlink{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}{Word32}}, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}}$>$}
+
+
+
+Alias for symbolic memory, represented as an unordered map of symbolic expressions. 
+
+\mbox{\Hypertarget{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}\label{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}} 
+\index{gymbo@{gymbo}!Word32@{Word32}}
+\index{Word32@{Word32}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{Word32}{Word32}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}{gymbo\+::\+Word32}} = typedef uint32\+\_\+t}
+
+
+
+Alias for 32-\/bit unsigned integer. 
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14}} 
+\index{gymbo@{gymbo}!InstrType@{InstrType}}
+\index{InstrType@{InstrType}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{InstrType}{InstrType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14}{gymbo\+::\+Instr\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enum representing different instruction types. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Add@{Add}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Add@{Add}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14aec211f7c20af43e742bf2570c3cb84f9}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14aec211f7c20af43e742bf2570c3cb84f9}} 
+Add&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Sub@{Sub}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Sub@{Sub}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14ae80155eceb940c89e2de63ad05868db2}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14ae80155eceb940c89e2de63ad05868db2}} 
+Sub&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mul@{Mul}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Mul@{Mul}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a62b6d55816cf737bfc6f42e60df1a3f2}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a62b6d55816cf737bfc6f42e60df1a3f2}} 
+Mul&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JmpIf@{JmpIf}!gymbo@{gymbo}}\index{gymbo@{gymbo}!JmpIf@{JmpIf}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a51a0569eddc8af78b9f7dd509605ccd1}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a51a0569eddc8af78b9f7dd509605ccd1}} 
+Jmp\+If&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Jmp@{Jmp}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Jmp@{Jmp}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a6cff4b2c006c869ef3c73f7fbd6e2711}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a6cff4b2c006c869ef3c73f7fbd6e2711}} 
+Jmp&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{And@{And}!gymbo@{gymbo}}\index{gymbo@{gymbo}!And@{And}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14ac33315685a0cba3ce53be378b3c7874b}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14ac33315685a0cba3ce53be378b3c7874b}} 
+And&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Or@{Or}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Or@{Or}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a3a2d5fe857d8f9541136a124c2edec6c}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a3a2d5fe857d8f9541136a124c2edec6c}} 
+Or&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Not@{Not}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Not@{Not}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14aa74c05d080620f087c4e523977230666}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14aa74c05d080620f087c4e523977230666}} 
+Not&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lt@{Lt}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Lt@{Lt}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a50033c15af7795cd6617f117b29d6922}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a50033c15af7795cd6617f117b29d6922}} 
+Lt&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Le@{Le}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Le@{Le}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14abccd5ec3ec8fd3a4471e71e9b407c60c}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14abccd5ec3ec8fd3a4471e71e9b407c60c}} 
+Le&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Eq@{Eq}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Eq@{Eq}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a3718b5ecf60aa0dba49e150e96cb1fc3}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a3718b5ecf60aa0dba49e150e96cb1fc3}} 
+Eq&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Push@{Push}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Push@{Push}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a9c6a9d9f033001a9b3104984d319563b}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a9c6a9d9f033001a9b3104984d319563b}} 
+Push&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Store@{Store}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Store@{Store}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14afdb0c388de01d545017cdf9ccf00eb72}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14afdb0c388de01d545017cdf9ccf00eb72}} 
+Store&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Load@{Load}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Load@{Load}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14af19dbf2edb3a0bd74b0524d960ff21eb}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14af19dbf2edb3a0bd74b0524d960ff21eb}} 
+Load&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Pop@{Pop}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Pop@{Pop}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a0ae61bd0474e04c9f1195d4baa0213a0}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a0ae61bd0474e04c9f1195d4baa0213a0}} 
+Pop&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Read@{Read}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Read@{Read}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a7a1a5f3e79fdc91edf2f5ead9d66abb4}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a7a1a5f3e79fdc91edf2f5ead9d66abb4}} 
+Read&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Print@{Print}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Print@{Print}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a13dba24862cf9128167a59100e154c8d}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a13dba24862cf9128167a59100e154c8d}} 
+Print&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Swap@{Swap}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Swap@{Swap}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a8778f5cc5ee1685fb97ad92e33e63225}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a8778f5cc5ee1685fb97ad92e33e63225}} 
+Swap&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Dup@{Dup}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Dup@{Dup}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a120be0bc58aa2e541a3be4d16b19d828}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14a120be0bc58aa2e541a3be4d16b19d828}} 
+Dup&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Over@{Over}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Over@{Over}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14aef087651eb482bae4624478696f4ad4f}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14aef087651eb482bae4624478696f4ad4f}} 
+Over&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RotL@{RotL}!gymbo@{gymbo}}\index{gymbo@{gymbo}!RotL@{RotL}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14abbbe5f56234982223c943e66e75d0f8e}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14abbbe5f56234982223c943e66e75d0f8e}} 
+RotL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Done@{Done}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Done@{Done}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14af92965e2c8a7afb3c1b9a5c09a263636}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14af92965e2c8a7afb3c1b9a5c09a263636}} 
+Done&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Nop@{Nop}!gymbo@{gymbo}}\index{gymbo@{gymbo}!Nop@{Nop}}}\mbox{\Hypertarget{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14ab7e7f2b46723f5b08d763041108f8fed}\label{namespacegymbo_a367bfa154f9003b6f35beef881a6bb14ab7e7f2b46723f5b08d763041108f8fed}} 
+Nop&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376d}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376d}} 
+\index{gymbo@{gymbo}!NodeKind@{NodeKind}}
+\index{NodeKind@{NodeKind}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{NodeKind}{NodeKind}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376d}{gymbo\+::\+Node\+Kind}}}
+
+
+
+Enumeration representing different node kinds in the Abstract Syntax Tree (AST). 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_ADD@{ND\_ADD}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_ADD@{ND\_ADD}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376daa18a430adcdeb6e0c9639a99e7124c9d}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376daa18a430adcdeb6e0c9639a99e7124c9d}} 
+ND\+\_\+\+ADD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_SUB@{ND\_SUB}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_SUB@{ND\_SUB}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da31298d570c34b26e5496fa273128b9d3}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da31298d570c34b26e5496fa273128b9d3}} 
+ND\+\_\+\+SUB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_MUL@{ND\_MUL}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_MUL@{ND\_MUL}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da076e1d8970775410e112b5a6abf22279}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da076e1d8970775410e112b5a6abf22279}} 
+ND\+\_\+\+MUL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_DIV@{ND\_DIV}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_DIV@{ND\_DIV}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da11060321f20ace47777daae4dcd6ad0e}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da11060321f20ace47777daae4dcd6ad0e}} 
+ND\+\_\+\+DIV&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_AND@{ND\_AND}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_AND@{ND\_AND}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dad7f7ef7789a85eb9bf13f9520510cc89}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dad7f7ef7789a85eb9bf13f9520510cc89}} 
+ND\+\_\+\+AND&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_OR@{ND\_OR}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_OR@{ND\_OR}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dab9ec59bf77e75f69d2cea43cd2b33601}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dab9ec59bf77e75f69d2cea43cd2b33601}} 
+ND\+\_\+\+OR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_NOT@{ND\_NOT}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_NOT@{ND\_NOT}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dafa7ec730e8d9697721858d065b471d1c}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dafa7ec730e8d9697721858d065b471d1c}} 
+ND\+\_\+\+NOT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_EQ@{ND\_EQ}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_EQ@{ND\_EQ}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da837a7c4fc314fc2776d97d732a3fd64b}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da837a7c4fc314fc2776d97d732a3fd64b}} 
+ND\+\_\+\+EQ&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_NE@{ND\_NE}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_NE@{ND\_NE}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da874e91c45fa30cf0f7b442d72b360d1c}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da874e91c45fa30cf0f7b442d72b360d1c}} 
+ND\+\_\+\+NE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_LT@{ND\_LT}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_LT@{ND\_LT}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376daa82f6b2234757d546909326517d37fd7}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376daa82f6b2234757d546909326517d37fd7}} 
+ND\+\_\+\+LT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_LE@{ND\_LE}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_LE@{ND\_LE}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dad1f785096fd6b43db91372b5534f7efc}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dad1f785096fd6b43db91372b5534f7efc}} 
+ND\+\_\+\+LE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_ASSIGN@{ND\_ASSIGN}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_ASSIGN@{ND\_ASSIGN}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da4ba3baee39d8ff1507b1b107d635ef87}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da4ba3baee39d8ff1507b1b107d635ef87}} 
+ND\+\_\+\+ASSIGN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_LVAR@{ND\_LVAR}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_LVAR@{ND\_LVAR}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da5f155e46887e5042d861fb79fa91429f}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da5f155e46887e5042d861fb79fa91429f}} 
+ND\+\_\+\+LVAR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_NUM@{ND\_NUM}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_NUM@{ND\_NUM}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da20441de66f229336235cedd427137d06}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da20441de66f229336235cedd427137d06}} 
+ND\+\_\+\+NUM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_RETURN@{ND\_RETURN}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_RETURN@{ND\_RETURN}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da6fd11fd2d39908558555f46c01a305d1}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da6fd11fd2d39908558555f46c01a305d1}} 
+ND\+\_\+\+RETURN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_IF@{ND\_IF}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_IF@{ND\_IF}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dad451b86e21d6ee00a81d0e2dd46caec9}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376dad451b86e21d6ee00a81d0e2dd46caec9}} 
+ND\+\_\+\+IF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_FOR@{ND\_FOR}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_FOR@{ND\_FOR}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376daf7fe8378cf5b146e1aebed89eb7d830d}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376daf7fe8378cf5b146e1aebed89eb7d830d}} 
+ND\+\_\+\+FOR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ND\_BLOCK@{ND\_BLOCK}!gymbo@{gymbo}}\index{gymbo@{gymbo}!ND\_BLOCK@{ND\_BLOCK}}}\mbox{\Hypertarget{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da00b1bc8aa00d3d1d99bd7da09bf45f78}\label{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376da00b1bc8aa00d3d1d99bd7da09bf45f78}} 
+ND\+\_\+\+BLOCK&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225}} 
+\index{gymbo@{gymbo}!SymType@{SymType}}
+\index{SymType@{SymType}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{SymType}{SymType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225}{gymbo\+::\+Sym\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enum representing different symbolic expression types. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SAdd@{SAdd}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SAdd@{SAdd}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225a68a532004a63c408aa8587e5c0b19f32}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225a68a532004a63c408aa8587e5c0b19f32}} 
+SAdd&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SSub@{SSub}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SSub@{SSub}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225a8da2905886bedd12c82662380dd2f797}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225a8da2905886bedd12c82662380dd2f797}} 
+SSub&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SMul@{SMul}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SMul@{SMul}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225ac3aa42a4033c097f132de2e645772726}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225ac3aa42a4033c097f132de2e645772726}} 
+SMul&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SEq@{SEq}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SEq@{SEq}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225a32f44ca65beff335be6e9d884d9ff187}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225a32f44ca65beff335be6e9d884d9ff187}} 
+SEq&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SNot@{SNot}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SNot@{SNot}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225abb67bd7c54875002b5a8214f04ba0c39}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225abb67bd7c54875002b5a8214f04ba0c39}} 
+SNot&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SOr@{SOr}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SOr@{SOr}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225a8e6bcd5685e5221b7133c03e692f4a92}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225a8e6bcd5685e5221b7133c03e692f4a92}} 
+SOr&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SCon@{SCon}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SCon@{SCon}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225ae04506053d891434c87bcb7c9ee7a492}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225ae04506053d891434c87bcb7c9ee7a492}} 
+SCon&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SAnd@{SAnd}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SAnd@{SAnd}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225a086ea780e08007dce53b3c400c2a7ef3}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225a086ea780e08007dce53b3c400c2a7ef3}} 
+SAnd&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLt@{SLt}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SLt@{SLt}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225ad2c3d0433b9da329df4c66b885706dd4}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225ad2c3d0433b9da329df4c66b885706dd4}} 
+SLt&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLe@{SLe}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SLe@{SLe}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225a46b6c8e7c51af424839e28ad6f8ecbe8}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225a46b6c8e7c51af424839e28ad6f8ecbe8}} 
+SLe&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SAny@{SAny}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SAny@{SAny}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225adae537bd250f746297c0cfad0128c24d}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225adae537bd250f746297c0cfad0128c24d}} 
+SAny&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}\label{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}} 
+\index{gymbo@{gymbo}!TokenKind@{TokenKind}}
+\index{TokenKind@{TokenKind}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{TokenKind}{TokenKind}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}{gymbo\+::\+Token\+Kind}}}
+
+
+
+Enumeration representing different token kinds. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TOKEN\_RESERVED@{TOKEN\_RESERVED}!gymbo@{gymbo}}\index{gymbo@{gymbo}!TOKEN\_RESERVED@{TOKEN\_RESERVED}}}\mbox{\Hypertarget{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac7e847d9a71b84b9d707022ede462c26}\label{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac7e847d9a71b84b9d707022ede462c26}} 
+TOKEN\+\_\+\+RESERVED&Keywords or punctuators. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TOKEN\_RETURN@{TOKEN\_RETURN}!gymbo@{gymbo}}\index{gymbo@{gymbo}!TOKEN\_RETURN@{TOKEN\_RETURN}}}\mbox{\Hypertarget{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a8170c440f4a465a9d4a8d69c6934b7b2}\label{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a8170c440f4a465a9d4a8d69c6934b7b2}} 
+TOKEN\+\_\+\+RETURN&\mbox{\hyperlink{structgymbo_1_1Token}{Token}} representing the \textquotesingle{}return\textquotesingle{} keyword. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TOKEN\_IF@{TOKEN\_IF}!gymbo@{gymbo}}\index{gymbo@{gymbo}!TOKEN\_IF@{TOKEN\_IF}}}\mbox{\Hypertarget{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac53e34e4445f94b1c47dd34d9676b209}\label{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac53e34e4445f94b1c47dd34d9676b209}} 
+TOKEN\+\_\+\+IF&\mbox{\hyperlink{structgymbo_1_1Token}{Token}} representing the \textquotesingle{}if\textquotesingle{} keyword. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TOKEN\_ELSE@{TOKEN\_ELSE}!gymbo@{gymbo}}\index{gymbo@{gymbo}!TOKEN\_ELSE@{TOKEN\_ELSE}}}\mbox{\Hypertarget{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a352b101ce5bfbf86b28d9a18ef217a61}\label{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a352b101ce5bfbf86b28d9a18ef217a61}} 
+TOKEN\+\_\+\+ELSE&\mbox{\hyperlink{structgymbo_1_1Token}{Token}} representing the \textquotesingle{}else\textquotesingle{} keyword. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TOKEN\_FOR@{TOKEN\_FOR}!gymbo@{gymbo}}\index{gymbo@{gymbo}!TOKEN\_FOR@{TOKEN\_FOR}}}\mbox{\Hypertarget{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ad616d279f986a51a6774fa10d77aa415}\label{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ad616d279f986a51a6774fa10d77aa415}} 
+TOKEN\+\_\+\+FOR&\mbox{\hyperlink{structgymbo_1_1Token}{Token}} representing the \textquotesingle{}for\textquotesingle{} keyword. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TOKEN\_IDENT@{TOKEN\_IDENT}!gymbo@{gymbo}}\index{gymbo@{gymbo}!TOKEN\_IDENT@{TOKEN\_IDENT}}}\mbox{\Hypertarget{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac453ec427086ba98563ee6fb8582f042}\label{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646ac453ec427086ba98563ee6fb8582f042}} 
+TOKEN\+\_\+\+IDENT&\mbox{\hyperlink{structgymbo_1_1Token}{Token}} representing an identifier. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TOKEN\_NUM@{TOKEN\_NUM}!gymbo@{gymbo}}\index{gymbo@{gymbo}!TOKEN\_NUM@{TOKEN\_NUM}}}\mbox{\Hypertarget{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a041d42319df0f64d0688bd8398a5f6f2}\label{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a041d42319df0f64d0688bd8398a5f6f2}} 
+TOKEN\+\_\+\+NUM&\mbox{\hyperlink{structgymbo_1_1Token}{Token}} representing integer literals. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TOKEN\_EOF@{TOKEN\_EOF}!gymbo@{gymbo}}\index{gymbo@{gymbo}!TOKEN\_EOF@{TOKEN\_EOF}}}\mbox{\Hypertarget{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a87451f2ad23351cb715502a4890397bf}\label{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646a87451f2ad23351cb715502a4890397bf}} 
+TOKEN\+\_\+\+EOF&\mbox{\hyperlink{structgymbo_1_1Token}{Token}} representing end-\/of-\/file markers. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacegymbo_a7b0b70c62f575e191b45877710aecc9c}\label{namespacegymbo_a7b0b70c62f575e191b45877710aecc9c}} 
+\index{gymbo@{gymbo}!add@{add}}
+\index{add@{add}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parse and construct an AST node representing addition or subtraction. 
+
+add = mul (\char`\"{}+\char`\"{} mul $\vert$ \char`\"{}-\/\char`\"{} mul)$\ast$
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & A reference to the current token. \\
+\hline
+{\em user\+\_\+input} & The user input string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the constructed AST node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a47b7251f53d2ee3e14494fb9f7a2bc72}\label{namespacegymbo_a47b7251f53d2ee3e14494fb9f7a2bc72}} 
+\index{gymbo@{gymbo}!assign@{assign}}
+\index{assign@{assign}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{assign()}{assign()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::assign (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})}
+
+Parses an assignment statement from a C-\/like language program.
+
+assign = logical (\char`\"{}=\char`\"{} assign)?
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The first token in the assignment statement. \\
+\hline
+{\em user\+\_\+input} & The source code of the program. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An AST node representing the assignment statement. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a573f6b3a170a995133014dec63f330dc}\label{namespacegymbo_a573f6b3a170a995133014dec63f330dc}} 
+\index{gymbo@{gymbo}!at\_eof@{at\_eof}}
+\index{at\_eof@{at\_eof}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{at\_eof()}{at\_eof()}}
+{\footnotesize\ttfamily bool gymbo\+::at\+\_\+eof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$}]{token }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Checks if the current token is at the end of the program.
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & A pointer to the current token. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the current token is at the end of the program, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}\label{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}} 
+\index{gymbo@{gymbo}!compile\_ast@{compile\_ast}}
+\index{compile\_ast@{compile\_ast}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{compile\_ast()}{compile\_ast()}}
+{\footnotesize\ttfamily void gymbo\+::compile\+\_\+ast (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ $>$}]{code,  }\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compile the Abstract Syntax Tree (AST) into a sequence of instructions. 
+
+This function traverses the provided AST and generates corresponding instructions to be executed in the virtual stack machine.
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & A vector containing pointers to AST nodes. \\
+\hline
+{\em prg} & A reference to the program (sequence of instructions) being generated. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_a351aaa8f55935e9d65f1c33b143ffdc1}\label{namespacegymbo_a351aaa8f55935e9d65f1c33b143ffdc1}} 
+\index{gymbo@{gymbo}!consume@{consume}}
+\index{consume@{consume}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{consume()}{consume()}}
+{\footnotesize\ttfamily bool gymbo\+::consume (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Consumes the current token if it matches {\ttfamily op}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & A pointer to the current token. \\
+\hline
+{\em op} & The token to consume. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the token was consumed, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_aea8e842b4ef04a10618bf3f95b2de229}\label{namespacegymbo_aea8e842b4ef04a10618bf3f95b2de229}} 
+\index{gymbo@{gymbo}!consume\_ident@{consume\_ident}}
+\index{consume\_ident@{consume\_ident}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{consume\_ident()}{consume\_ident()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Token}{Token}}$\ast$ gymbo\+::consume\+\_\+ident (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Consumes the current token if it is an identifier.
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & A pointer to the current token. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the consumed identifier token, or NULL if the current token is not an identifier. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a05bc470a265b7b40aaddd5a073c5a1d7}\label{namespacegymbo_a05bc470a265b7b40aaddd5a073c5a1d7}} 
+\index{gymbo@{gymbo}!consume\_tok@{consume\_tok}}
+\index{consume\_tok@{consume\_tok}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{consume\_tok()}{consume\_tok()}}
+{\footnotesize\ttfamily bool gymbo\+::consume\+\_\+tok (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{\mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}{Token\+Kind}}}]{tok }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Consumes the current token if it matches {\ttfamily tok}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & A pointer to the current token. \\
+\hline
+{\em tok} & The token to consume. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the token was consumed, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a93198308f32bb09209f19ea243dfbd7e}\label{namespacegymbo_a93198308f32bb09209f19ea243dfbd7e}} 
+\index{gymbo@{gymbo}!equality@{equality}}
+\index{equality@{equality}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{equality()}{equality()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::equality (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})}
+
+Parses an equality expression from a C-\/like language program.
+
+equality = relational (\char`\"{}==\char`\"{} relational $\vert$ \char`\"{}!=\char`\"{} relational)$\ast$
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The first token in the equality expression. \\
+\hline
+{\em user\+\_\+input} & The source code of the program. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An AST node representing the equality expression. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_afd45221e5385a56b69288384e8e393aa}\label{namespacegymbo_afd45221e5385a56b69288384e8e393aa}} 
+\index{gymbo@{gymbo}!error@{error}}
+\index{error@{error}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{error()}{error()}}
+{\footnotesize\ttfamily void gymbo\+::error (\begin{DoxyParamCaption}\item[{char $\ast$}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reports an error and exits the program. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fmt} & The format string for the error message. \\
+\hline
+{\em ...} & Additional arguments for the format string. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_a74bef918aba1493fe3b0f94b0c34a92e}\label{namespacegymbo_a74bef918aba1493fe3b0f94b0c34a92e}} 
+\index{gymbo@{gymbo}!error\_at@{error\_at}}
+\index{error\_at@{error\_at}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{error\_at()}{error\_at()}}
+{\footnotesize\ttfamily void gymbo\+::error\+\_\+at (\begin{DoxyParamCaption}\item[{char $\ast$}]{user\+\_\+input,  }\item[{char $\ast$}]{loc,  }\item[{char $\ast$}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reports an error location and exits the program. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+input} & The input string. \\
+\hline
+{\em loc} & The location of the error. \\
+\hline
+{\em fmt} & The format string for the error message. \\
+\hline
+{\em ...} & Additional arguments for the format string. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_acdabc32fe6aa65db48889984321294b4}\label{namespacegymbo_acdabc32fe6aa65db48889984321294b4}} 
+\index{gymbo@{gymbo}!expect@{expect}}
+\index{expect@{expect}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{expect()}{expect()}}
+{\footnotesize\ttfamily void gymbo\+::expect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input,  }\item[{char $\ast$}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Ensures that the current token matches {\ttfamily op}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & A pointer to the current token. \\
+\hline
+{\em user\+\_\+input} & The source code of the program. \\
+\hline
+{\em op} & The token to expect. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em An} & error if the current token does not match {\ttfamily op}. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{namespacegymbo_a82e491fd1648ba276b4c2873e7c8b4b1}\label{namespacegymbo_a82e491fd1648ba276b4c2873e7c8b4b1}} 
+\index{gymbo@{gymbo}!expect\_number@{expect\_number}}
+\index{expect\_number@{expect\_number}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{expect\_number()}{expect\_number()}}
+{\footnotesize\ttfamily float gymbo\+::expect\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Ensures that the current token is a number.
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & A pointer to the current token. \\
+\hline
+{\em user\+\_\+input} & The source code of the program. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em An} & error if the current token is not a number. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}\label{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}} 
+\index{gymbo@{gymbo}!expr@{expr}}
+\index{expr@{expr}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{expr()}{expr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})}
+
+Parses an expression from a C-\/like language program.
+
+expr = assign
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The first token in the expression. \\
+\hline
+{\em user\+\_\+input} & The source code of the program. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An AST node representing the expression. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a7b970a9d85276e2bd460b29fec762ec3}\label{namespacegymbo_a7b970a9d85276e2bd460b29fec762ec3}} 
+\index{gymbo@{gymbo}!gcompile@{gcompile}}
+\index{gcompile@{gcompile}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{gcompile()}{gcompile()}}
+{\footnotesize\ttfamily std\+::pair$<$std\+::unordered\+\_\+map$<$std\+::string, int$>$, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}}$>$ gymbo\+::gcompile (\begin{DoxyParamCaption}\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Compiles user input into a program, returning variable counts and the compiled program.
+
+This function takes a user-\/provided input in the form of a character array and performs the following steps\+:
+\begin{DoxyEnumerate}
+\item Tokenizes the input, counting occurrences of variables using var\+\_\+counter.
+\item Generates an Abstract Syntax Tree (AST) from the tokenized input.
+\item Compiles the AST into a program using \mbox{\hyperlink{structgymbo_1_1Node}{gymbo\+::\+Node}} objects.
+\end{DoxyEnumerate}
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+input} & A character array representing the user-\/provided input.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A std\+::pair containing\+:
+\begin{DoxyItemize}
+\item First element\+: An std\+::unordered\+\_\+map$<$std\+::string, int$>$ representing variable counts.
+\item Second element\+: A Prog object representing the compiled program.
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespacegymbo_a89c8cb7e3b04d3d02f0cba69ab593981}{tokenize()}} Function used for tokenization. 
+
+\mbox{\hyperlink{namespacegymbo_a5e7728b7fbac9bf79ae665cf9b94f443}{generate\+\_\+ast()}} Function used for AST generation. 
+
+\mbox{\hyperlink{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}{compile\+\_\+ast()}} Function used for compiling the AST into a program. 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{namespacegymbo_ae193b98ee15e54838e9a8433aff4c379}\label{namespacegymbo_ae193b98ee15e54838e9a8433aff4c379}} 
+\index{gymbo@{gymbo}!gen@{gen}}
+\index{gen@{gen}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{gen()}{gen()}}
+{\footnotesize\ttfamily void gymbo\+::gen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$}]{node,  }\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Generates virtual instructions for a given AST node.
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The AST node to generate LLVM instructions for. \\
+\hline
+{\em prg} & The virtual program to append the generated instructions to. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_a6d18a50ff10886c6d952dd9781e99a5b}\label{namespacegymbo_a6d18a50ff10886c6d952dd9781e99a5b}} 
+\index{gymbo@{gymbo}!gen\_lval@{gen\_lval}}
+\index{gen\_lval@{gen\_lval}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{gen\_lval()}{gen\_lval()}}
+{\footnotesize\ttfamily void gymbo\+::gen\+\_\+lval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$}]{node,  }\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Generates virtual instructions for a given AST node, representing the left-\/hand side of a variable assignment expression.
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The AST node representing the left-\/hand side of a variable assignment expression. \\
+\hline
+{\em prg} & The virtual program to append the generated instructions to. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_a5e7728b7fbac9bf79ae665cf9b94f443}\label{namespacegymbo_a5e7728b7fbac9bf79ae665cf9b94f443}} 
+\index{gymbo@{gymbo}!generate\_ast@{generate\_ast}}
+\index{generate\_ast@{generate\_ast}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{generate\_ast()}{generate\_ast()}}
+{\footnotesize\ttfamily void gymbo\+::generate\+\_\+ast (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ $>$ \&}]{code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Parses a C-\/like language program into an AST.
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The first token in the program. \\
+\hline
+{\em user\+\_\+input} & The source code of the program. \\
+\hline
+{\em code} & The vector to store Ast nodes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_af40a70afb521e856bda968808b2b492e}\label{namespacegymbo_af40a70afb521e856bda968808b2b492e}} 
+\index{gymbo@{gymbo}!gexecute@{gexecute}}
+\index{gexecute@{gexecute}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{gexecute()}{gexecute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} gymbo\+::gexecute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prg,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{init,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{int}]{max\+\_\+depth,  }\item[{int}]{max\+SAT,  }\item[{int}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Symbolically Executes a Program with Gradient Descent Optimization.
+
+This function conducts symbolic execution of a given program while simultaneously optimizing the path constraints using the provided gradient descent optimizer, {\ttfamily \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em prg} & The program to symbolically execute. \\
+\hline
+{\em optimizer} & The gradient descent optimizer for parameter optimization. \\
+\hline
+{\em init} & The initial symbolic state of the program. \\
+\hline
+{\em target\+\_\+pcs} & The set of program counters where gymbo executes path-\/constraints solving. If this set is empty or contains -\/1, gymbo solves all path-\/constraints. \\
+\hline
+{\em max\+\_\+depth} & The maximum depth of symbolic exploration. \\
+\hline
+{\em max\+SAT} & The maximum number of SAT constraints to collect. \\
+\hline
+{\em max\+UNSAT} & The maximum number of UNSAT constraints to collect. \\
+\hline
+{\em max\+\_\+num\+\_\+trials} & The maximum number of trials for each gradient descent. \\
+\hline
+{\em ignore\+\_\+memory} & If set to true, constraints derived from memory will be ignored. \\
+\hline
+{\em use\+\_\+dpll} & If set to true, use DPLL to decide the initial assignment for each term. \\
+\hline
+{\em verbose\+\_\+level} & The level of verbosity. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A set of extracted path constraints and their satisfiability. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}\label{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}} 
+\index{gymbo@{gymbo}!initialize\_params@{initialize\_params}}
+\index{initialize\_params@{initialize\_params}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{initialize\_params()}{initialize\_params()}}
+{\footnotesize\ttfamily void gymbo\+::initialize\+\_\+params (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{params,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{bool}]{ignore\+\_\+memory }\end{DoxyParamCaption})}
+
+
+
+Initialize Parameter Values from Memory. 
+
+This function initializes parameter values from memory, provided that {\ttfamily ignore\+\_\+memory} is set to false.
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & A map to store parameter values. \\
+\hline
+{\em state} & The symbolic state of the program. \\
+\hline
+{\em ignore\+\_\+memory} & A flag indicating whether memory constraints should be ignored. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_a9f75e72416f1f4de36d005b6935c0136}\label{namespacegymbo_a9f75e72416f1f4de36d005b6935c0136}} 
+\index{gymbo@{gymbo}!is\_alnum@{is\_alnum}}
+\index{is\_alnum@{is\_alnum}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{is\_alnum()}{is\_alnum()}}
+{\footnotesize\ttfamily bool gymbo\+::is\+\_\+alnum (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a character is an alphanumeric character. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & The character to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the character is an alphanumeric character, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_aab49b70724bec7c8b7ee2a6a2fd31771}\label{namespacegymbo_aab49b70724bec7c8b7ee2a6a2fd31771}} 
+\index{gymbo@{gymbo}!is\_alpha@{is\_alpha}}
+\index{is\_alpha@{is\_alpha}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{is\_alpha()}{is\_alpha()}}
+{\footnotesize\ttfamily bool gymbo\+::is\+\_\+alpha (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a character is an alphabetical character or underscore. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & The character to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the character is an alphabetical character or underscore, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_aee43a52e33ae6335a16161d16abd1079}\label{namespacegymbo_aee43a52e33ae6335a16161d16abd1079}} 
+\index{gymbo@{gymbo}!logical@{logical}}
+\index{logical@{logical}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{logical()}{logical()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::logical (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})}
+
+Parses a logical expression from a C-\/like language program.
+
+logical = equality (\char`\"{}\&\&\char`\"{} equality $\vert$ \char`\"{}$\vert$$\vert$\char`\"{} equality)$\ast$
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The first token in the logical expression. \\
+\hline
+{\em user\+\_\+input} & The source code of the program. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An AST node representing the logical expression. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a586e5510f2ba9c76f7bcb78a3dafd69a}\label{namespacegymbo_a586e5510f2ba9c76f7bcb78a3dafd69a}} 
+\index{gymbo@{gymbo}!mul@{mul}}
+\index{mul@{mul}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{mul()}{mul()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::mul (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parse and construct an AST node representing multiplication or division. 
+
+mul = unary (\char`\"{}$\ast$\char`\"{} unary $\vert$ \char`\"{}/\char`\"{} unary)$\ast$
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & A reference to the current token. \\
+\hline
+{\em user\+\_\+input} & The user input string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the constructed AST node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a217eb40fcc9434dae5deb3213d57e116}\label{namespacegymbo_a217eb40fcc9434dae5deb3213d57e116}} 
+\index{gymbo@{gymbo}!new\_binary@{new\_binary}}
+\index{new\_binary@{new\_binary}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{new\_binary()}{new\_binary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}}$\ast$ gymbo\+::new\+\_\+binary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376d}{Node\+Kind}}}]{kind,  }\item[{\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$}]{lhs,  }\item[{\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Create a new binary AST node with the given kind, left-\/hand side, and right-\/hand side. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kind} & The kind of the node. \\
+\hline
+{\em lhs} & The left-\/hand side of the binary operation. \\
+\hline
+{\em rhs} & The right-\/hand side of the binary operation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the newly created binary node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a2c94ae142cca941fe8aae12f6b8061b8}\label{namespacegymbo_a2c94ae142cca941fe8aae12f6b8061b8}} 
+\index{gymbo@{gymbo}!new\_node@{new\_node}}
+\index{new\_node@{new\_node}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{new\_node()}{new\_node()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}}$\ast$ gymbo\+::new\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376d}{Node\+Kind}}}]{kind }\end{DoxyParamCaption})}
+
+
+
+Create a new AST node with the given kind. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kind} & The kind of the node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the newly created node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_acbc9e13994df75da5b689099ad3c32ce}\label{namespacegymbo_acbc9e13994df75da5b689099ad3c32ce}} 
+\index{gymbo@{gymbo}!new\_num@{new\_num}}
+\index{new\_num@{new\_num}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{new\_num()}{new\_num()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}}$\ast$ gymbo\+::new\+\_\+num (\begin{DoxyParamCaption}\item[{float}]{val }\end{DoxyParamCaption})}
+
+
+
+Create a new AST node representing a numeric value with the given value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The numeric value of the node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the newly created numeric node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a09b17fb4e9dfe3e5c6e03ad57bcfecf4}\label{namespacegymbo_a09b17fb4e9dfe3e5c6e03ad57bcfecf4}} 
+\index{gymbo@{gymbo}!new\_token@{new\_token}}
+\index{new\_token@{new\_token}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{new\_token()}{new\_token()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Token}{Token}}$\ast$ gymbo\+::new\+\_\+token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}{Token\+Kind}}}]{kind,  }\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$}]{cur,  }\item[{char $\ast$}]{str,  }\item[{int}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates a new token and adds it as the next token of {\ttfamily cur}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em kind} & The kind of token to create. \\
+\hline
+{\em cur} & A pointer to the current token. \\
+\hline
+{\em str} & The string of the token to create. \\
+\hline
+{\em len} & The length of the token to create. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the newly created token. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_aab835796afd998bcd50e272c9eb29d00}\label{namespacegymbo_aab835796afd998bcd50e272c9eb29d00}} 
+\index{gymbo@{gymbo}!primary@{primary}}
+\index{primary@{primary}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{primary()}{primary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::primary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parse and construct an AST node representing primary expressions. 
+
+primary = \char`\"{}(\char`\"{} expr \char`\"{})\char`\"{} $\vert$ num $\vert$ ident
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & A reference to the current token. \\
+\hline
+{\em user\+\_\+input} & The user input string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the constructed AST node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a7782376e331d91dd967f5a7b1c23c1ba}\label{namespacegymbo_a7782376e331d91dd967f5a7b1c23c1ba}} 
+\index{gymbo@{gymbo}!relational@{relational}}
+\index{relational@{relational}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{relational()}{relational()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::relational (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})}
+
+Parses a relational expression from a C-\/like language program.
+
+relational = add (\char`\"{}$<$\char`\"{} add $\vert$ \char`\"{}$<$=\char`\"{} add $\vert$ \char`\"{}$>$\char`\"{} add $\vert$ \char`\"{}$>$=\char`\"{} add)$\ast$
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The first token in the relational expression. \\
+\hline
+{\em user\+\_\+input} & The source code of the program. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An AST node representing the relational expression. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a8aa21505f18c246fc0adafb360939fe0}\label{namespacegymbo_a8aa21505f18c246fc0adafb360939fe0}} 
+\index{gymbo@{gymbo}!run\_gymbo@{run\_gymbo}}
+\index{run\_gymbo@{run\_gymbo}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{run\_gymbo()}{run\_gymbo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} gymbo\+::run\+\_\+gymbo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{int}]{max\+Depth,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Symbolically Execute a Program with Gradient Descent Optimization. 
+
+This function conducts symbolic execution of a given program while simultaneously optimizing the path constraints using the provided gradient descent optimizer, {\ttfamily \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em prog} & The program to symbolically execute. \\
+\hline
+{\em optimizer} & The gradient descent optimizer for parameter optimization. \\
+\hline
+{\em state} & The initial symbolic state of the program. \\
+\hline
+{\em target\+\_\+pcs} & The set of pc where gymbo executes path-\/constraints solving. If this set is empty or contains -\/1, gymbo solves all path-\/constraints. \\
+\hline
+{\em constraints\+\_\+cache} & A cache for previously found path constraints. \\
+\hline
+{\em max\+Depth} & The maximum depth of symbolic exploration. \\
+\hline
+{\em max\+SAT} & The maximum number of SAT constraints to collect. \\
+\hline
+{\em max\+UNSAT} & The maximum number of UNSAT constraints to collect. \\
+\hline
+{\em max\+\_\+num\+\_\+trials} & The maximum number of trials for each gradient descent. \\
+\hline
+{\em ignore\+\_\+memory} & If set to true, constraints derived from memory will be ignored. \\
+\hline
+{\em use\+\_\+dpll} & If set to true, use DPLL to decide the initial assignment for each term. \\
+\hline
+{\em verbose\+\_\+level} & The level of verbosity. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A trace of the symbolic execution. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a086916a92edc60e687a056603995182e}\label{namespacegymbo_a086916a92edc60e687a056603995182e}} 
+\index{gymbo@{gymbo}!startswith@{startswith}}
+\index{startswith@{startswith}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{startswith()}{startswith()}}
+{\footnotesize\ttfamily bool gymbo\+::startswith (\begin{DoxyParamCaption}\item[{char $\ast$}]{p,  }\item[{char $\ast$}]{q }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Checks if the string {\ttfamily p} starts with the string {\ttfamily q}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & A pointer to the string to check. \\
+\hline
+{\em q} & A pointer to the string to check against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if {\ttfamily p} starts with {\ttfamily q}, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a0269bd238863b0c8e036e5fb7d66fa79}\label{namespacegymbo_a0269bd238863b0c8e036e5fb7d66fa79}} 
+\index{gymbo@{gymbo}!stmt@{stmt}}
+\index{stmt@{stmt}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{stmt()}{stmt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::stmt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parse and construct an AST node representing a statement. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & A reference to the current token. \\
+\hline
+{\em user\+\_\+input} & The user input string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the constructed AST node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a70694fc6a91234300048503b2fe15a9b}\label{namespacegymbo_a70694fc6a91234300048503b2fe15a9b}} 
+\index{gymbo@{gymbo}!symStep@{symStep}}
+\index{symStep@{symStep}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{symStep()}{symStep()}}
+{\footnotesize\ttfamily void gymbo\+::sym\+Step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{\mbox{\hyperlink{classgymbo_1_1Instr}{Instr}}}]{instr,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Symbolically Execute a Single Instruction of a Program. 
+
+This function symbolically executes a single instruction of a program and generates new symbolic states, representing possible outcomes of the instruction\textquotesingle{}s execution.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The state of the program before the instruction is executed. \\
+\hline
+{\em instr} & The instruction to be executed. \\
+\hline
+{\em result} & A list of new symbolic states, each representing a possible outcome. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_a89c8cb7e3b04d3d02f0cba69ab593981}\label{namespacegymbo_a89c8cb7e3b04d3d02f0cba69ab593981}} 
+\index{gymbo@{gymbo}!tokenize@{tokenize}}
+\index{tokenize@{tokenize}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{tokenize()}{tokenize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Token}{Token}}$\ast$ gymbo\+::tokenize (\begin{DoxyParamCaption}\item[{char $\ast$}]{user\+\_\+input,  }\item[{std\+::unordered\+\_\+map$<$ std\+::string, int $>$ \&}]{var\+\_\+counter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Tokenizes a given string and returns a linked list of tokens.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+input} & The string to be tokenized. \\
+\hline
+{\em var\+\_\+counter} & The map to store the mapping from variable name to variable id. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A linked list of tokens. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_ac29372113d1f5d63e50aec27aa2bab58}\label{namespacegymbo_ac29372113d1f5d63e50aec27aa2bab58}} 
+\index{gymbo@{gymbo}!unary@{unary}}
+\index{unary@{unary}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{unary()}{unary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::unary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parse and construct an AST node representing unary operations. 
+
+unary = (\char`\"{}+\char`\"{} $\vert$ \char`\"{}-\/\char`\"{})? unary $\vert$ primary
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & A reference to the current token. \\
+\hline
+{\em user\+\_\+input} & The user input string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the constructed AST node. 
+\end{DoxyReturn}
