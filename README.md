@@ -6,9 +6,12 @@ Gymbo is a Proof of Concept for a Gradient-based Symbolic Execution Engine, impl
 
 Compared to other prominent symbolic execution tools, Gymbo's implementation is notably simpler and more compact. We hope that this project will assist individuals in grasping the fundamental principles of symbolic execution and SMT problem-solving through gradient descent.
 
-> Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated.
+
+One practical usage of Gymbo is debugging ML models like neural networks to detect unexpected behaviors. For example, you can generate adversarial examples with Gymbo by converting neural networks to imperative programs.
 
 <img src="img/symbolic_nn.drawio.svg">
+
+> Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated.
 
 ## Install
 
@@ -152,7 +155,6 @@ constraints = plg.gexecute(prg, init_symstate, optimizer, ...)
 
 ### `pymlgymbo`: Debugging Machine Learning Models
 
-One practical usage of Gymbo is debugging ML models like neural networks to detect unexpected behaviors.
 
 We offer some helper functions within `pymlgymbo` library to convert the ML models of famous Python library like sklearn and PyTorch to the program that gymbo can process.
 
