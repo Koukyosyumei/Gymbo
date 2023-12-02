@@ -3,9 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-class CustomMLP(nn.Module):
+class TorchMLP(nn.Module):
     def __init__(self, input_size, hidden_sizes, output_size, activation="relu"):
-        super(CustomMLP, self).__init__()
+        super(TorchMLP, self).__init__()
 
         self.hidden_layers = nn.ModuleList()
         self.activation = activation
