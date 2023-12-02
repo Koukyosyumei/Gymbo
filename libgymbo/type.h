@@ -162,15 +162,6 @@ using PathConstraintsTable =
     std::unordered_map<std::string,
                        std::pair<bool, std::unordered_map<int, float>>>;
 
-struct State {
-    int pc;
-    Mem mem;
-    std::vector<Word32> stack;
-
-    State(int pc, Mem mem, std::vector<Word32> stack)
-        : pc(pc), mem(mem), stack(stack) {}
-};
-
 /**
  * @brief Struct representing the gradient of a symbolic expression.
  */

@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['word_312',['word',['../structgymbo_1_1Sym.html#aeff55d00e3d722940440f610a43db2f4',1,'gymbo::Sym']]]
+  ['seed_313',['seed',['../structgymbo_1_1GDOptimizer.html#ab1631b9a0026ed9c12721df5900eb347',1,'gymbo::GDOptimizer']]],
+  ['sign_5fgrad_314',['sign_grad',['../structgymbo_1_1GDOptimizer.html#a1dab2d9895b58c4dda052a00cf8058ee',1,'gymbo::GDOptimizer']]],
+  ['smem_315',['smem',['../structgymbo_1_1SymState.html#a85b48b53e8e5301b88c53ba7d34f0b3c',1,'gymbo::SymState']]],
+  ['symbolic_5fstack_316',['symbolic_stack',['../structgymbo_1_1SymState.html#a6aa224acae7f54e2f67a708be6cd0b42',1,'gymbo::SymState']]],
+  ['symtype_317',['symtype',['../structgymbo_1_1Sym.html#a79563bd2b1629b555b2229e7070c7446',1,'gymbo::Sym']]]
 ];

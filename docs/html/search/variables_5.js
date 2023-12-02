@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mem_294',['mem',['../structgymbo_1_1SymState.html#ae2ea8fcc287983a5bc53e81893e5a2ea',1,'gymbo::SymState']]]
+  ['init_5fparam_5funiform_5fint_279',['init_param_uniform_int',['../structgymbo_1_1GDOptimizer.html#a2a35f800649f9c57bc1f7d23f9f6110b',1,'gymbo::GDOptimizer']]]
 ];

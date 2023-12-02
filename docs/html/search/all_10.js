@@ -1,8 +1,13 @@
 var searchData=
 [
-  ['unary_143',['unary',['../parser_8h.html#ac29372113d1f5d63e50aec27aa2bab58',1,'gymbo']]],
-  ['unconst_144',['unConst',['../classgymbosat_1_1Expr.html#a462170452606863e487f0807be83a96a',1,'gymbosat::Expr::unConst()'],['../classgymbosat_1_1Var.html#a48452af858f886d121455123176cbb63',1,'gymbosat::Var::unConst()'],['../classgymbosat_1_1And.html#a6d4e1f0b5d1d9379e90ed5d80e0fcf3a',1,'gymbosat::And::unConst()'],['../classgymbosat_1_1Or.html#a84aa719f774ffd20a78a4cfa4a931c7a',1,'gymbosat::Or::unConst()'],['../classgymbosat_1_1Not.html#a5d09bc42cae0a9bf522c5375d7ba8f70',1,'gymbosat::Not::unConst()'],['../classgymbosat_1_1Const.html#a3b3a3ef47d754c53d913ec0cebf6ec36',1,'gymbosat::Const::unConst()']]],
-  ['unitclause_145',['unitClause',['../classgymbosat_1_1Expr.html#a766c9fc6f0ac28161a19e7a7184f61b6',1,'gymbosat::Expr::unitClause()'],['../classgymbosat_1_1Var.html#aa59b38a82e6b503c295635c0dc68adef',1,'gymbosat::Var::unitClause()'],['../classgymbosat_1_1And.html#afffae51480f5b0ffe99d27bc0a60ec90',1,'gymbosat::And::unitClause()'],['../classgymbosat_1_1Or.html#a2538710166c753dec215727198866b66',1,'gymbosat::Or::unitClause()'],['../classgymbosat_1_1Not.html#a4118ba387b374d8e8940a64db34941f9',1,'gymbosat::Not::unitClause()'],['../classgymbosat_1_1Const.html#a32e2e08c72ef3820c5e6cb92cef05d2c',1,'gymbosat::Const::unitClause()']]],
-  ['unitpropagation_146',['unitPropagation',['../sat_8h.html#a900a3e916b5f594baf9598112ff29db9',1,'gymbosat']]],
-  ['utils_2eh_147',['utils.h',['../utils_8h.html',1,'']]]
+  ['tail_137',['tail',['../classLinkedlist.html#a9239abc6a88f6f6041f72e7e0a3a0d6e',1,'Linkedlist']]],
+  ['to_5fstring_138',['to_string',['../classgymbosat_1_1Expr.html#a85bcfafb66b9e5fde802840c213fbcec',1,'gymbosat::Expr::to_string()'],['../classgymbosat_1_1Var.html#ab22296034c16195902c0bb01799722e1',1,'gymbosat::Var::to_string()'],['../classgymbosat_1_1And.html#affbe88b38fe18ca450ca074b6cfd135e',1,'gymbosat::And::to_string()'],['../classgymbosat_1_1Or.html#a257ff6c08e5289ed6bd02b3b5d50ee4c',1,'gymbosat::Or::to_string()'],['../classgymbosat_1_1Not.html#a438829c52493f67c99cd4a85e78f03d6',1,'gymbosat::Not::to_string()'],['../classgymbosat_1_1Const.html#acaf729ec5f8cd7ed3b6c81cb23b7f9af',1,'gymbosat::Const::to_string()']]],
+  ['token_139',['Token',['../structgymbo_1_1Token.html',1,'gymbo']]],
+  ['tokenize_140',['tokenize',['../tokenizer_8h.html#a89c8cb7e3b04d3d02f0cba69ab593981',1,'gymbo']]],
+  ['tokenizer_2eh_141',['tokenizer.h',['../tokenizer_8h.html',1,'']]],
+  ['tokenkind_142',['TokenKind',['../tokenizer_8h.html#a886e58c66782cda4ff74ad10b5a6b646',1,'gymbo']]],
+  ['tostring_143',['toString',['../classgymbo_1_1Instr.html#a57bf99afd023bb777d5cd944e0b47282',1,'gymbo::Instr::toString()'],['../structgymbo_1_1Sym.html#a1025fdd5cddad6af8b363f40196d71f9',1,'gymbo::Sym::toString()']]],
+  ['trace_144',['Trace',['../structgymbo_1_1Trace.html',1,'gymbo::Trace'],['../structgymbo_1_1Trace.html#a27b719523e78bb13c5eea72198120c9e',1,'gymbo::Trace::Trace()']]],
+  ['twoscomplement_145',['twosComplement',['../utils_8h.html#a7ef0b0e21084a70e584c2054b17c791a',1,'utils.h']]],
+  ['type_2eh_146',['type.h',['../type_8h.html',1,'']]]
 ];

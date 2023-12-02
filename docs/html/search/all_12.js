@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['word_153',['word',['../structgymbo_1_1Sym.html#aeff55d00e3d722940440f610a43db2f4',1,'gymbo::Sym']]],
-  ['word32_154',['Word32',['../type_8h.html#a5cbc49c07ec788c2da4cda3b41f9364f',1,'gymbo']]],
-  ['wordtobool_155',['wordToBool',['../utils_8h.html#a952ce406cfbcf5f21efd088b3b71d428',1,'utils.h']]],
-  ['wordtosignedint_156',['wordToSignedInt',['../utils_8h.html#a4372ea01be056af0da9f922ae9b02bc2',1,'utils.h']]]
+  ['val_152',['val',['../structgymbo_1_1Grad.html#a630feb208125b40d88176890f31d2b50',1,'gymbo::Grad']]],
+  ['valname_153',['valName',['../utils_8h.html#a86cfc81dc7063dce5ca7451c443e207e',1,'utils.h']]],
+  ['var_154',['Var',['../classgymbosat_1_1Var.html',1,'gymbosat']]],
+  ['var_5fcnt_155',['var_cnt',['../structgymbo_1_1SymState.html#a4c7ebe9a103e0b7a60633cca1f82b88f',1,'gymbo::SymState']]],
+  ['var_5fidx_156',['var_idx',['../structgymbo_1_1Sym.html#aef609bbed728ec7c46ac45a2f4832221',1,'gymbo::Sym']]]
 ];
