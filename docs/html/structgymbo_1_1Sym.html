@@ -73,60 +73,335 @@ $(function() {
 <div class="title">gymbo::Sym Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Struct representing a symbolic expression.  
+ <a href="structgymbo_1_1Sym.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="type_8h_source.html">type.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for gymbo::Sym:</div>
 <div class="dyncontent">
 <div class="center"><img src="structgymbo_1_1Sym__coll__graph.png" border="0" usemap="#agymbo_1_1Sym_coll__map" alt="Collaboration graph"/></div>
 <map name="agymbo_1_1Sym_coll__map" id="agymbo_1_1Sym_coll__map">
-<area shape="rect" title=" " alt="" coords="5,7,109,33"/>
+<area shape="rect" title="Struct representing a symbolic expression." alt="" coords="5,7,109,33"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0c34d36593fb6e46865fd7059483cce3"><td class="memItemLeft" align="right" valign="top"><a id="a0c34d36593fb6e46865fd7059483cce3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Sym</b> (SymType symtype, <a class="el" href="structgymbo_1_1Sym.html">Sym</a> *left)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Sym</b> (SymType <a class="el" href="structgymbo_1_1Sym.html#a79563bd2b1629b555b2229e7070c7446">symtype</a>, <a class="el" href="structgymbo_1_1Sym.html">Sym</a> *<a class="el" href="structgymbo_1_1Sym.html#a879f98bf362c14f4cbdd09cc41fb9b97">left</a>)</td></tr>
 <tr class="separator:a0c34d36593fb6e46865fd7059483cce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8788816347c9199724d3eb5809cac81"><td class="memItemLeft" align="right" valign="top"><a id="ae8788816347c9199724d3eb5809cac81"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Sym</b> (SymType symtype, <a class="el" href="structgymbo_1_1Sym.html">Sym</a> *left, <a class="el" href="structgymbo_1_1Sym.html">Sym</a> *right)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Sym</b> (SymType <a class="el" href="structgymbo_1_1Sym.html#a79563bd2b1629b555b2229e7070c7446">symtype</a>, <a class="el" href="structgymbo_1_1Sym.html">Sym</a> *<a class="el" href="structgymbo_1_1Sym.html#a879f98bf362c14f4cbdd09cc41fb9b97">left</a>, <a class="el" href="structgymbo_1_1Sym.html">Sym</a> *<a class="el" href="structgymbo_1_1Sym.html#a319da51ac1f1686fa448cc3739b0acea">right</a>)</td></tr>
 <tr class="separator:ae8788816347c9199724d3eb5809cac81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7345ab5bd49026430f5730121205a3df"><td class="memItemLeft" align="right" valign="top"><a id="a7345ab5bd49026430f5730121205a3df"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Sym</b> (SymType symtype, Word32 val)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Sym</b> (SymType <a class="el" href="structgymbo_1_1Sym.html#a79563bd2b1629b555b2229e7070c7446">symtype</a>, Word32 val)</td></tr>
 <tr class="separator:a7345ab5bd49026430f5730121205a3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a702a9e7ca0673f3eac0754d76d1a11bb"><td class="memItemLeft" align="right" valign="top"><a id="a702a9e7ca0673f3eac0754d76d1a11bb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_var_ids</b> (std::unordered_set&lt; int &gt; &amp;result)</td></tr>
+<tr class="memitem:a702a9e7ca0673f3eac0754d76d1a11bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#a702a9e7ca0673f3eac0754d76d1a11bb">gather_var_ids</a> (std::unordered_set&lt; int &gt; &amp;result)</td></tr>
+<tr class="memdesc:a702a9e7ca0673f3eac0754d76d1a11bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gathers variable indices from the symbolic expression.  <a href="structgymbo_1_1Sym.html#a702a9e7ca0673f3eac0754d76d1a11bb">More...</a><br /></td></tr>
 <tr class="separator:a702a9e7ca0673f3eac0754d76d1a11bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a371b1d8b3fc73a10d4106e09f68c3092"><td class="memItemLeft" align="right" valign="top"><a id="a371b1d8b3fc73a10d4106e09f68c3092"></a>
-<a class="el" href="structgymbo_1_1Sym.html">Sym</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>psimplify</b> (const Mem &amp;cvals)</td></tr>
+<tr class="memitem:a371b1d8b3fc73a10d4106e09f68c3092"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Sym.html">Sym</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#a371b1d8b3fc73a10d4106e09f68c3092">psimplify</a> (const Mem &amp;cvals)</td></tr>
+<tr class="memdesc:a371b1d8b3fc73a10d4106e09f68c3092"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simplifies the symbolic expression by evaluating constant subexpressions.  <a href="structgymbo_1_1Sym.html#a371b1d8b3fc73a10d4106e09f68c3092">More...</a><br /></td></tr>
 <tr class="separator:a371b1d8b3fc73a10d4106e09f68c3092"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab594a15d28e041bc1aa6add44c6e028c"><td class="memItemLeft" align="right" valign="top"><a id="ab594a15d28e041bc1aa6add44c6e028c"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>eval</b> (const std::unordered_map&lt; int, float &gt; &amp;cvals, float eps)</td></tr>
+<tr class="memitem:ab594a15d28e041bc1aa6add44c6e028c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#ab594a15d28e041bc1aa6add44c6e028c">eval</a> (const std::unordered_map&lt; int, float &gt; &amp;cvals, float eps)</td></tr>
+<tr class="memdesc:ab594a15d28e041bc1aa6add44c6e028c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the symbolic expression given concrete variable values.  <a href="structgymbo_1_1Sym.html#ab594a15d28e041bc1aa6add44c6e028c">More...</a><br /></td></tr>
 <tr class="separator:ab594a15d28e041bc1aa6add44c6e028c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2f52fcc10d32ef070fd55e4a66f9a44"><td class="memItemLeft" align="right" valign="top"><a id="ac2f52fcc10d32ef070fd55e4a66f9a44"></a>
-<a class="el" href="structgymbo_1_1Grad.html">Grad</a>&#160;</td><td class="memItemRight" valign="bottom"><b>grad</b> (const std::unordered_map&lt; int, float &gt; &amp;cvals, float eps)</td></tr>
+<tr class="memitem:ac2f52fcc10d32ef070fd55e4a66f9a44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Grad.html">Grad</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#ac2f52fcc10d32ef070fd55e4a66f9a44">grad</a> (const std::unordered_map&lt; int, float &gt; &amp;cvals, float eps)</td></tr>
+<tr class="memdesc:ac2f52fcc10d32ef070fd55e4a66f9a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the gradient of the symbolic expression given concrete variable values.  <a href="structgymbo_1_1Sym.html#ac2f52fcc10d32ef070fd55e4a66f9a44">More...</a><br /></td></tr>
 <tr class="separator:ac2f52fcc10d32ef070fd55e4a66f9a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1025fdd5cddad6af8b363f40196d71f9"><td class="memItemLeft" align="right" valign="top"><a id="a1025fdd5cddad6af8b363f40196d71f9"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>toString</b> (bool convert_to_num)</td></tr>
+<tr class="memitem:a1025fdd5cddad6af8b363f40196d71f9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#a1025fdd5cddad6af8b363f40196d71f9">toString</a> (bool convert_to_num)</td></tr>
+<tr class="memdesc:a1025fdd5cddad6af8b363f40196d71f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the symbolic expression to a string representation.  <a href="structgymbo_1_1Sym.html#a1025fdd5cddad6af8b363f40196d71f9">More...</a><br /></td></tr>
 <tr class="separator:a1025fdd5cddad6af8b363f40196d71f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a79563bd2b1629b555b2229e7070c7446"><td class="memItemLeft" align="right" valign="top"><a id="a79563bd2b1629b555b2229e7070c7446"></a>
-SymType&#160;</td><td class="memItemRight" valign="bottom"><b>symtype</b></td></tr>
+<tr class="memitem:a79563bd2b1629b555b2229e7070c7446"><td class="memItemLeft" align="right" valign="top">SymType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#a79563bd2b1629b555b2229e7070c7446">symtype</a></td></tr>
 <tr class="separator:a79563bd2b1629b555b2229e7070c7446"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a879f98bf362c14f4cbdd09cc41fb9b97"><td class="memItemLeft" align="right" valign="top"><a id="a879f98bf362c14f4cbdd09cc41fb9b97"></a>
-<a class="el" href="structgymbo_1_1Sym.html">Sym</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>left</b></td></tr>
+<tr class="memitem:a879f98bf362c14f4cbdd09cc41fb9b97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Sym.html">Sym</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#a879f98bf362c14f4cbdd09cc41fb9b97">left</a></td></tr>
 <tr class="separator:a879f98bf362c14f4cbdd09cc41fb9b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a319da51ac1f1686fa448cc3739b0acea"><td class="memItemLeft" align="right" valign="top"><a id="a319da51ac1f1686fa448cc3739b0acea"></a>
-<a class="el" href="structgymbo_1_1Sym.html">Sym</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>right</b></td></tr>
+<tr class="memitem:a319da51ac1f1686fa448cc3739b0acea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Sym.html">Sym</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#a319da51ac1f1686fa448cc3739b0acea">right</a></td></tr>
 <tr class="separator:a319da51ac1f1686fa448cc3739b0acea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeff55d00e3d722940440f610a43db2f4"><td class="memItemLeft" align="right" valign="top"><a id="aeff55d00e3d722940440f610a43db2f4"></a>
-Word32&#160;</td><td class="memItemRight" valign="bottom"><b>word</b></td></tr>
+<tr class="memitem:aeff55d00e3d722940440f610a43db2f4"><td class="memItemLeft" align="right" valign="top">Word32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#aeff55d00e3d722940440f610a43db2f4">word</a></td></tr>
 <tr class="separator:aeff55d00e3d722940440f610a43db2f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef609bbed728ec7c46ac45a2f4832221"><td class="memItemLeft" align="right" valign="top"><a id="aef609bbed728ec7c46ac45a2f4832221"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>var_idx</b></td></tr>
+<tr class="memitem:aef609bbed728ec7c46ac45a2f4832221"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#aef609bbed728ec7c46ac45a2f4832221">var_idx</a></td></tr>
 <tr class="separator:aef609bbed728ec7c46ac45a2f4832221"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Struct representing a symbolic expression. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab594a15d28e041bc1aa6add44c6e028c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab594a15d28e041bc1aa6add44c6e028c">&#9670;&nbsp;</a></span>eval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float gymbo::Sym::eval </td>
+          <td>(</td>
+          <td class="paramtype">const std::unordered_map&lt; int, float &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cvals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>eps</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evaluates the symbolic expression given concrete variable values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cvals</td><td>Map of variable indices to concrete values. </td></tr>
+    <tr><td class="paramname">eps</td><td>The smallest positive value of the target type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of the symbolic expression evaluation. </dd></dl>
+
+</div>
+</div>
+<a id="a702a9e7ca0673f3eac0754d76d1a11bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a702a9e7ca0673f3eac0754d76d1a11bb">&#9670;&nbsp;</a></span>gather_var_ids()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::Sym::gather_var_ids </td>
+          <td>(</td>
+          <td class="paramtype">std::unordered_set&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>result</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gathers variable indices from the symbolic expression. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">result</td><td>Set to store gathered variable indices. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac2f52fcc10d32ef070fd55e4a66f9a44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2f52fcc10d32ef070fd55e4a66f9a44">&#9670;&nbsp;</a></span>grad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structgymbo_1_1Grad.html">Grad</a> gymbo::Sym::grad </td>
+          <td>(</td>
+          <td class="paramtype">const std::unordered_map&lt; int, float &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cvals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>eps</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Computes the gradient of the symbolic expression given concrete variable values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cvals</td><td>Map of variable indices to concrete values. </td></tr>
+    <tr><td class="paramname">eps</td><td>Small value to handle numerical instability. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Gradient of the symbolic expression. </dd></dl>
+
+</div>
+</div>
+<a id="a371b1d8b3fc73a10d4106e09f68c3092"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a371b1d8b3fc73a10d4106e09f68c3092">&#9670;&nbsp;</a></span>psimplify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structgymbo_1_1Sym.html">Sym</a>* gymbo::Sym::psimplify </td>
+          <td>(</td>
+          <td class="paramtype">const Mem &amp;&#160;</td>
+          <td class="paramname"><em>cvals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Simplifies the symbolic expression by evaluating constant subexpressions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cvals</td><td>Map of variable indices to constant values. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Simplified symbolic expression. </dd></dl>
+
+</div>
+</div>
+<a id="a1025fdd5cddad6af8b363f40196d71f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1025fdd5cddad6af8b363f40196d71f9">&#9670;&nbsp;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string gymbo::Sym::toString </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>convert_to_num</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts the symbolic expression to a string representation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">convert_to_num</td><td>Whether to convert constants to numeric representations. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>String representation of the symbolic expression. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a879f98bf362c14f4cbdd09cc41fb9b97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a879f98bf362c14f4cbdd09cc41fb9b97">&#9670;&nbsp;</a></span>left</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structgymbo_1_1Sym.html">Sym</a>* gymbo::Sym::left</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to the left child of the expression. </p>
+
+</div>
+</div>
+<a id="a319da51ac1f1686fa448cc3739b0acea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a319da51ac1f1686fa448cc3739b0acea">&#9670;&nbsp;</a></span>right</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structgymbo_1_1Sym.html">Sym</a>* gymbo::Sym::right</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to the right child of the expression. </p>
+
+</div>
+</div>
+<a id="a79563bd2b1629b555b2229e7070c7446"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79563bd2b1629b555b2229e7070c7446">&#9670;&nbsp;</a></span>symtype</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SymType gymbo::Sym::symtype</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The type of the symbolic expression. </p>
+
+</div>
+</div>
+<a id="aef609bbed728ec7c46ac45a2f4832221"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef609bbed728ec7c46ac45a2f4832221">&#9670;&nbsp;</a></span>var_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int gymbo::Sym::var_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Index of the variable associated with the expression. </p>
+
+</div>
+</div>
+<a id="aeff55d00e3d722940440f610a43db2f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeff55d00e3d722940440f610a43db2f4">&#9670;&nbsp;</a></span>word</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Word32 gymbo::Sym::word</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Additional data associated with the expression. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>libgymbo/<a class="el" href="type_8h_source.html">type.h</a></li>
 </ul>

@@ -1,20 +1,26 @@
 \hypertarget{classgymbo_1_1Instr}{}\doxysection{gymbo\+::Instr Class Reference}
 \label{classgymbo_1_1Instr}\index{gymbo::Instr@{gymbo::Instr}}
+
+
+Class representing an instruction.  
+
+
+
+
+{\ttfamily \#include $<$type.\+h$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classgymbo_1_1Instr_a3223dad8872d38b84219901aad936c7d}\label{classgymbo_1_1Instr_a3223dad8872d38b84219901aad936c7d}} 
-{\bfseries Instr} (Instr\+Type instr)
-\item 
-\mbox{\Hypertarget{classgymbo_1_1Instr_ae92440f40b5774ddfeec0cbd2416437a}\label{classgymbo_1_1Instr_ae92440f40b5774ddfeec0cbd2416437a}} 
-{\bfseries Instr} (Instr\+Type instr, Word32 word)
-\item 
+\mbox{\hyperlink{classgymbo_1_1Instr_a3223dad8872d38b84219901aad936c7d}{Instr}} (Instr\+Type instr)
+\begin{DoxyCompactList}\small\item\em Constructor for an instruction without additional data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgymbo_1_1Instr_ae92440f40b5774ddfeec0cbd2416437a}{Instr}} (Instr\+Type instr, Word32 word)
+\begin{DoxyCompactList}\small\item\em Constructor for an instruction with additional data. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgymbo_1_1Instr_a900ea47f05d7a7e6e2776f0adf4c91f3}\label{classgymbo_1_1Instr_a900ea47f05d7a7e6e2776f0adf4c91f3}} 
-void {\bfseries print} ()
-\item 
-\mbox{\Hypertarget{classgymbo_1_1Instr_a57bf99afd023bb777d5cd944e0b47282}\label{classgymbo_1_1Instr_a57bf99afd023bb777d5cd944e0b47282}} 
-std\+::string {\bfseries to\+String} ()
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classgymbo_1_1Instr_a900ea47f05d7a7e6e2776f0adf4c91f3}{print}} ()
+\begin{DoxyCompactList}\small\item\em Prints a human-\/readable representation of the instruction. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classgymbo_1_1Instr_a57bf99afd023bb777d5cd944e0b47282}{to\+String}} ()
+\begin{DoxyCompactList}\small\item\em Converts the instruction to a string representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -24,6 +30,60 @@ Instr\+Type {\bfseries instr}
 \mbox{\Hypertarget{classgymbo_1_1Instr_a955a484347502cf5145c62ce33d67b1c}\label{classgymbo_1_1Instr_a955a484347502cf5145c62ce33d67b1c}} 
 Word32 {\bfseries word}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class representing an instruction. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgymbo_1_1Instr_a3223dad8872d38b84219901aad936c7d}\label{classgymbo_1_1Instr_a3223dad8872d38b84219901aad936c7d}} 
+\index{gymbo::Instr@{gymbo::Instr}!Instr@{Instr}}
+\index{Instr@{Instr}!gymbo::Instr@{gymbo::Instr}}
+\doxysubsubsection{\texorpdfstring{Instr()}{Instr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily gymbo\+::\+Instr\+::\+Instr (\begin{DoxyParamCaption}\item[{Instr\+Type}]{instr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for an instruction without additional data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em instr} & The type of the instruction. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgymbo_1_1Instr_ae92440f40b5774ddfeec0cbd2416437a}\label{classgymbo_1_1Instr_ae92440f40b5774ddfeec0cbd2416437a}} 
+\index{gymbo::Instr@{gymbo::Instr}!Instr@{Instr}}
+\index{Instr@{Instr}!gymbo::Instr@{gymbo::Instr}}
+\doxysubsubsection{\texorpdfstring{Instr()}{Instr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily gymbo\+::\+Instr\+::\+Instr (\begin{DoxyParamCaption}\item[{Instr\+Type}]{instr,  }\item[{Word32}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for an instruction with additional data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em instr} & The type of the instruction. \\
+\hline
+{\em word} & Additional data associated with the instruction. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgymbo_1_1Instr_a57bf99afd023bb777d5cd944e0b47282}\label{classgymbo_1_1Instr_a57bf99afd023bb777d5cd944e0b47282}} 
+\index{gymbo::Instr@{gymbo::Instr}!toString@{toString}}
+\index{toString@{toString}!gymbo::Instr@{gymbo::Instr}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string gymbo\+::\+Instr\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the instruction to a string representation. 
+
+\begin{DoxyReturn}{Returns}
+A string representation of the instruction. 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['solve_18',['solve',['../structgymbo_1_1GDOptimizer.html#ab5737f4c5c901f4b0fe8effc4f8808da',1,'gymbo::GDOptimizer']]],
-  ['state_19',['State',['../structgymbo_1_1State.html',1,'gymbo']]],
-  ['sym_20',['Sym',['../structgymbo_1_1Sym.html',1,'gymbo']]],
-  ['symstate_21',['SymState',['../structgymbo_1_1SymState.html',1,'gymbo']]]
+  ['name_30',['name',['../classExpr.html#a085207153a37669b317bdfeccc89375d',1,'Expr']]],
+  ['node_31',['Node',['../structgymbo_1_1Node.html',1,'gymbo']]],
+  ['not_32',['Not',['../classNot.html',1,'']]]
 ];

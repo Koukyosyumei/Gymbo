@@ -74,7 +74,7 @@ Inheritance diagram for Or:</div>
 <div class="center"><img src="classOr__inherit__graph.png" border="0" usemap="#aOr_inherit__map" alt="Inheritance graph"/></div>
 <map name="aOr_inherit__map" id="aOr_inherit__map">
 <area shape="rect" title=" " alt="" coords="61,169,100,196"/>
-<area shape="rect" href="classExpr.html" title=" " alt="" coords="55,95,106,121"/>
+<area shape="rect" href="classExpr.html" title="Base class for representing logical expressions." alt="" coords="55,95,106,121"/>
 <area shape="rect" title=" " alt="" coords="5,5,156,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -84,7 +84,7 @@ Collaboration diagram for Or:</div>
 <div class="center"><img src="classOr__coll__graph.png" border="0" usemap="#aOr_coll__map" alt="Collaboration graph"/></div>
 <map name="aOr_coll__map" id="aOr_coll__map">
 <area shape="rect" title=" " alt="" coords="61,169,100,196"/>
-<area shape="rect" href="classExpr.html" title=" " alt="" coords="55,95,106,121"/>
+<area shape="rect" href="classExpr.html" title="Base class for representing logical expressions." alt="" coords="55,95,106,121"/>
 <area shape="rect" title=" " alt="" coords="5,5,156,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -94,59 +94,508 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afb5d1be0e4e3824ed726c83e19151bf9"><td class="memItemLeft" align="right" valign="top"><a id="afb5d1be0e4e3824ed726c83e19151bf9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Or</b> (std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt; left, std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt; right)</td></tr>
 <tr class="separator:afb5d1be0e4e3824ed726c83e19151bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6064255484f6904872ed7b9e464a4446"><td class="memItemLeft" align="right" valign="top"><a id="a6064255484f6904872ed7b9e464a4446"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>to_string</b> () override</td></tr>
+<tr class="memitem:a6064255484f6904872ed7b9e464a4446"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#a6064255484f6904872ed7b9e464a4446">to_string</a> () override</td></tr>
+<tr class="memdesc:a6064255484f6904872ed7b9e464a4446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the logical expression to a string representation.  <a href="classOr.html#a6064255484f6904872ed7b9e464a4446">More...</a><br /></td></tr>
 <tr class="separator:a6064255484f6904872ed7b9e464a4446"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad70d0d0a73101eb3369723f943ccc671"><td class="memItemLeft" align="right" valign="top"><a id="ad70d0d0a73101eb3369723f943ccc671"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>evaluate</b> () override</td></tr>
+<tr class="memitem:ad70d0d0a73101eb3369723f943ccc671"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#ad70d0d0a73101eb3369723f943ccc671">evaluate</a> () override</td></tr>
+<tr class="memdesc:ad70d0d0a73101eb3369723f943ccc671"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the logical expression.  <a href="classOr.html#ad70d0d0a73101eb3369723f943ccc671">More...</a><br /></td></tr>
 <tr class="separator:ad70d0d0a73101eb3369723f943ccc671"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4d0f5f3d0e366aa3165e76dddc7610d"><td class="memItemLeft" align="right" valign="top"><a id="ad4d0f5f3d0e366aa3165e76dddc7610d"></a>
-std::pair&lt; bool, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>freeVar</b> () override</td></tr>
+<tr class="memitem:ad4d0f5f3d0e366aa3165e76dddc7610d"><td class="memItemLeft" align="right" valign="top">std::pair&lt; bool, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#ad4d0f5f3d0e366aa3165e76dddc7610d">freeVar</a> () override</td></tr>
+<tr class="memdesc:ad4d0f5f3d0e366aa3165e76dddc7610d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identify and return free variables in the logical expression.  <a href="classOr.html#ad4d0f5f3d0e366aa3165e76dddc7610d">More...</a><br /></td></tr>
 <tr class="separator:ad4d0f5f3d0e366aa3165e76dddc7610d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fa96f216bcf5a2fb4e34be71cc88dcd"><td class="memItemLeft" align="right" valign="top"><a id="a6fa96f216bcf5a2fb4e34be71cc88dcd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>unConst</b> () override</td></tr>
+<tr class="memitem:a6fa96f216bcf5a2fb4e34be71cc88dcd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#a6fa96f216bcf5a2fb4e34be71cc88dcd">unConst</a> () override</td></tr>
+<tr class="memdesc:a6fa96f216bcf5a2fb4e34be71cc88dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the logical expression can be simplified by removing constants.  <a href="classOr.html#a6fa96f216bcf5a2fb4e34be71cc88dcd">More...</a><br /></td></tr>
 <tr class="separator:a6fa96f216bcf5a2fb4e34be71cc88dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab506f2d414491c37709688913373b3d0"><td class="memItemLeft" align="right" valign="top"><a id="ab506f2d414491c37709688913373b3d0"></a>
-std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>fixNegations</b> () override</td></tr>
+<tr class="memitem:ab506f2d414491c37709688913373b3d0"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#ab506f2d414491c37709688913373b3d0">fixNegations</a> () override</td></tr>
+<tr class="memdesc:ab506f2d414491c37709688913373b3d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fix negations in the logical expression.  <a href="classOr.html#ab506f2d414491c37709688913373b3d0">More...</a><br /></td></tr>
 <tr class="separator:ab506f2d414491c37709688913373b3d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3cf12f5cc84a3e1e337986910cf1c83"><td class="memItemLeft" align="right" valign="top"><a id="aa3cf12f5cc84a3e1e337986910cf1c83"></a>
-std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>distribute</b> () override</td></tr>
+<tr class="memitem:aa3cf12f5cc84a3e1e337986910cf1c83"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#aa3cf12f5cc84a3e1e337986910cf1c83">distribute</a> () override</td></tr>
+<tr class="memdesc:aa3cf12f5cc84a3e1e337986910cf1c83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute operations in the logical expression.  <a href="classOr.html#aa3cf12f5cc84a3e1e337986910cf1c83">More...</a><br /></td></tr>
 <tr class="separator:aa3cf12f5cc84a3e1e337986910cf1c83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a373beae9fc9780959f438668eb92723a"><td class="memItemLeft" align="right" valign="top"><a id="a373beae9fc9780959f438668eb92723a"></a>
-std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getLeft</b> () override</td></tr>
+<tr class="memitem:a373beae9fc9780959f438668eb92723a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#a373beae9fc9780959f438668eb92723a">getLeft</a> () override</td></tr>
+<tr class="memdesc:a373beae9fc9780959f438668eb92723a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the left child expression.  <a href="classOr.html#a373beae9fc9780959f438668eb92723a">More...</a><br /></td></tr>
 <tr class="separator:a373beae9fc9780959f438668eb92723a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bc6b65fab5148569f077eab99e4e1db"><td class="memItemLeft" align="right" valign="top"><a id="a7bc6b65fab5148569f077eab99e4e1db"></a>
-std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getRight</b> () override</td></tr>
+<tr class="memitem:a7bc6b65fab5148569f077eab99e4e1db"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#a7bc6b65fab5148569f077eab99e4e1db">getRight</a> () override</td></tr>
+<tr class="memdesc:a7bc6b65fab5148569f077eab99e4e1db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the right child expression.  <a href="classOr.html#a7bc6b65fab5148569f077eab99e4e1db">More...</a><br /></td></tr>
 <tr class="separator:a7bc6b65fab5148569f077eab99e4e1db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae639eedafde00f6fbe1675e433bf9acd"><td class="memItemLeft" align="right" valign="top"><a id="ae639eedafde00f6fbe1675e433bf9acd"></a>
-std::unordered_set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>literals</b> () override</td></tr>
+<tr class="memitem:ae639eedafde00f6fbe1675e433bf9acd"><td class="memItemLeft" align="right" valign="top">std::unordered_set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#ae639eedafde00f6fbe1675e433bf9acd">literals</a> () override</td></tr>
+<tr class="memdesc:ae639eedafde00f6fbe1675e433bf9acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the literals present in the logical expression.  <a href="classOr.html#ae639eedafde00f6fbe1675e433bf9acd">More...</a><br /></td></tr>
 <tr class="separator:ae639eedafde00f6fbe1675e433bf9acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06b197994e00105b36409d4de8909fc5"><td class="memItemLeft" align="right" valign="top"><a id="a06b197994e00105b36409d4de8909fc5"></a>
-std::unordered_map&lt; std::string, Polarity &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>literalPolarity</b> (std::string var) override</td></tr>
+<tr class="memitem:a06b197994e00105b36409d4de8909fc5"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, Polarity &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#a06b197994e00105b36409d4de8909fc5">literalPolarity</a> (std::string var) override</td></tr>
+<tr class="memdesc:a06b197994e00105b36409d4de8909fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the polarities of literals with respect to a specific variable.  <a href="classOr.html#a06b197994e00105b36409d4de8909fc5">More...</a><br /></td></tr>
 <tr class="separator:a06b197994e00105b36409d4de8909fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06cc6e8421099801846a9f18ab4e78dd"><td class="memItemLeft" align="right" valign="top"><a id="a06cc6e8421099801846a9f18ab4e78dd"></a>
-std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>unitClause</b> () override</td></tr>
+<tr class="memitem:a06cc6e8421099801846a9f18ab4e78dd"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#a06cc6e8421099801846a9f18ab4e78dd">unitClause</a> () override</td></tr>
+<tr class="memdesc:a06cc6e8421099801846a9f18ab4e78dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a unit clause from the logical expression.  <a href="classOr.html#a06cc6e8421099801846a9f18ab4e78dd">More...</a><br /></td></tr>
 <tr class="separator:a06cc6e8421099801846a9f18ab4e78dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace0e60e331ab4f9f4dbcbb5629a5b4fe"><td class="memItemLeft" align="right" valign="top"><a id="ace0e60e331ab4f9f4dbcbb5629a5b4fe"></a>
-std::vector&lt; std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>clauses</b> () override</td></tr>
+<tr class="memitem:ace0e60e331ab4f9f4dbcbb5629a5b4fe"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#ace0e60e331ab4f9f4dbcbb5629a5b4fe">clauses</a> () override</td></tr>
+<tr class="memdesc:ace0e60e331ab4f9f4dbcbb5629a5b4fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a vector of clauses present in the logical expression.  <a href="classOr.html#ace0e60e331ab4f9f4dbcbb5629a5b4fe">More...</a><br /></td></tr>
 <tr class="separator:ace0e60e331ab4f9f4dbcbb5629a5b4fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71e529ac7fcad3ec5e2df6f7628351d5"><td class="memItemLeft" align="right" valign="top"><a id="a71e529ac7fcad3ec5e2df6f7628351d5"></a>
-std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>guessVar</b> (std::string var, bool val) override</td></tr>
+<tr class="memitem:a71e529ac7fcad3ec5e2df6f7628351d5"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#a71e529ac7fcad3ec5e2df6f7628351d5">guessVar</a> (std::string var, bool val) override</td></tr>
+<tr class="memdesc:a71e529ac7fcad3ec5e2df6f7628351d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a guess for a variable's value and return the resulting expression.  <a href="classOr.html#a71e529ac7fcad3ec5e2df6f7628351d5">More...</a><br /></td></tr>
 <tr class="separator:a71e529ac7fcad3ec5e2df6f7628351d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a889757285ed0a78f0f2798da48f92acc"><td class="memItemLeft" align="right" valign="top"><a id="a889757285ed0a78f0f2798da48f92acc"></a>
-std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>simplify</b> () override</td></tr>
+<tr class="memitem:a889757285ed0a78f0f2798da48f92acc"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOr.html#a889757285ed0a78f0f2798da48f92acc">simplify</a> () override</td></tr>
+<tr class="memdesc:a889757285ed0a78f0f2798da48f92acc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simplify the logical expression.  <a href="classOr.html#a889757285ed0a78f0f2798da48f92acc">More...</a><br /></td></tr>
 <tr class="separator:a889757285ed0a78f0f2798da48f92acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classExpr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classExpr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classExpr.html">Expr</a></td></tr>
+<tr class="memitem:a1fdcd9b6ed58ec698536118030481b11 inherit pub_methods_classExpr"><td class="memItemLeft" align="right" valign="top"><a id="a1fdcd9b6ed58ec698536118030481b11"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExpr.html#a1fdcd9b6ed58ec698536118030481b11">~Expr</a> ()</td></tr>
+<tr class="memdesc:a1fdcd9b6ed58ec698536118030481b11 inherit pub_methods_classExpr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for the <a class="el" href="classExpr.html" title="Base class for representing logical expressions.">Expr</a> class. <br /></td></tr>
+<tr class="separator:a1fdcd9b6ed58ec698536118030481b11 inherit pub_methods_classExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_attribs_classExpr"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classExpr')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classExpr.html">Expr</a></td></tr>
-<tr class="memitem:aa6f5a8068e0786128f58b3565909d604 inherit pub_attribs_classExpr"><td class="memItemLeft" align="right" valign="top"><a id="aa6f5a8068e0786128f58b3565909d604"></a>
-OpCode&#160;</td><td class="memItemRight" valign="bottom"><b>opcode</b></td></tr>
+<tr class="memitem:aa6f5a8068e0786128f58b3565909d604 inherit pub_attribs_classExpr"><td class="memItemLeft" align="right" valign="top">OpCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExpr.html#aa6f5a8068e0786128f58b3565909d604">opcode</a></td></tr>
 <tr class="separator:aa6f5a8068e0786128f58b3565909d604 inherit pub_attribs_classExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a085207153a37669b317bdfeccc89375d inherit pub_attribs_classExpr"><td class="memItemLeft" align="right" valign="top"><a id="a085207153a37669b317bdfeccc89375d"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
+<tr class="memitem:a085207153a37669b317bdfeccc89375d inherit pub_attribs_classExpr"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExpr.html#a085207153a37669b317bdfeccc89375d">name</a></td></tr>
 <tr class="separator:a085207153a37669b317bdfeccc89375d inherit pub_attribs_classExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ace0e60e331ab4f9f4dbcbb5629a5b4fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace0e60e331ab4f9f4dbcbb5629a5b4fe">&#9670;&nbsp;</a></span>clauses()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classExpr.html">Expr</a>&gt; &gt; Or::clauses </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a vector of clauses present in the logical expression. </p>
+<dl class="section return"><dt>Returns</dt><dd>Vector of shared pointers to clause expressions. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#a91d1f469d5c9c82cae29fe119fb5bea0">Expr</a>.</p>
+
+</div>
+</div>
+<a id="aa3cf12f5cc84a3e1e337986910cf1c83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3cf12f5cc84a3e1e337986910cf1c83">&#9670;&nbsp;</a></span>distribute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classExpr.html">Expr</a>&gt; Or::distribute </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Distribute operations in the logical expression. </p>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the logical expression with distributed operations. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#a58585c07320ec177f9713694467761bd">Expr</a>.</p>
+
+</div>
+</div>
+<a id="ad70d0d0a73101eb3369723f943ccc671"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad70d0d0a73101eb3369723f943ccc671">&#9670;&nbsp;</a></span>evaluate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Or::evaluate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evaluate the logical expression. </p>
+<dl class="section return"><dt>Returns</dt><dd>Result of the logical evaluation. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#a70c056a048e96a455862a15281893336">Expr</a>.</p>
+
+</div>
+</div>
+<a id="ab506f2d414491c37709688913373b3d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab506f2d414491c37709688913373b3d0">&#9670;&nbsp;</a></span>fixNegations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classExpr.html">Expr</a>&gt; Or::fixNegations </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fix negations in the logical expression. </p>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the logical expression with fixed negations. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#af8c324462981bacd0f3722af55fbd908">Expr</a>.</p>
+
+</div>
+</div>
+<a id="ad4d0f5f3d0e366aa3165e76dddc7610d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4d0f5f3d0e366aa3165e76dddc7610d">&#9670;&nbsp;</a></span>freeVar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;bool, std::string&gt; Or::freeVar </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Identify and return free variables in the logical expression. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pair indicating if there are free variables and the first free variable found. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#aae8d80e61018a50dfbeaa6bbd2cb9ec8">Expr</a>.</p>
+
+</div>
+</div>
+<a id="a373beae9fc9780959f438668eb92723a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a373beae9fc9780959f438668eb92723a">&#9670;&nbsp;</a></span>getLeft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classExpr.html">Expr</a>&gt; Or::getLeft </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the left child expression. </p>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the left child expression. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#a1b270e7b2fe2f4f1d98831d36c5a4af7">Expr</a>.</p>
+
+</div>
+</div>
+<a id="a7bc6b65fab5148569f077eab99e4e1db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bc6b65fab5148569f077eab99e4e1db">&#9670;&nbsp;</a></span>getRight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classExpr.html">Expr</a>&gt; Or::getRight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the right child expression. </p>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the right child expression. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#a6247038d925b54ab13e8b946fc8da4b3">Expr</a>.</p>
+
+</div>
+</div>
+<a id="a71e529ac7fcad3ec5e2df6f7628351d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71e529ac7fcad3ec5e2df6f7628351d5">&#9670;&nbsp;</a></span>guessVar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt; Or::guessVar </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>var</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Make a guess for a variable's value and return the resulting expression. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">var</td><td>Variable name. </td></tr>
+    <tr><td class="paramname">val</td><td>Guessed value for the variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the resulting logical expression. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#af06e57ce4c3fe82e389037997073347c">Expr</a>.</p>
+
+</div>
+</div>
+<a id="a06b197994e00105b36409d4de8909fc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06b197994e00105b36409d4de8909fc5">&#9670;&nbsp;</a></span>literalPolarity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;std::string, Polarity&gt; Or::literalPolarity </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>var</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the polarities of literals with respect to a specific variable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">var</td><td>Variable name. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Unordered map of literals to their polarities. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#a9049567cafd0b4edc04d5a95effb52d7">Expr</a>.</p>
+
+</div>
+</div>
+<a id="ae639eedafde00f6fbe1675e433bf9acd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae639eedafde00f6fbe1675e433bf9acd">&#9670;&nbsp;</a></span>literals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_set&lt;std::string&gt; Or::literals </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the literals present in the logical expression. </p>
+<dl class="section return"><dt>Returns</dt><dd>Unordered set of literals. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#ae025aa9ac77bd6a8a63d0256ef505cde">Expr</a>.</p>
+
+</div>
+</div>
+<a id="a889757285ed0a78f0f2798da48f92acc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a889757285ed0a78f0f2798da48f92acc">&#9670;&nbsp;</a></span>simplify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt; Or::simplify </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Simplify the logical expression. </p>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the simplified logical expression. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#aed25693ee1047bebf2f19a5dc96d7e08">Expr</a>.</p>
+
+</div>
+</div>
+<a id="a6064255484f6904872ed7b9e464a4446"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6064255484f6904872ed7b9e464a4446">&#9670;&nbsp;</a></span>to_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Or::to_string </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert the logical expression to a string representation. </p>
+<dl class="section return"><dt>Returns</dt><dd>String representation of the logical expression. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#a2c170268b82af106cd87642c759b6f1b">Expr</a>.</p>
+
+</div>
+</div>
+<a id="a6fa96f216bcf5a2fb4e34be71cc88dcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fa96f216bcf5a2fb4e34be71cc88dcd">&#9670;&nbsp;</a></span>unConst()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Or::unConst </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the logical expression can be simplified by removing constants. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the expression can be simplified, false otherwise. </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#aeaec5edf588c95c9fe34a824d6e13b30">Expr</a>.</p>
+
+</div>
+</div>
+<a id="a06cc6e8421099801846a9f18ab4e78dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06cc6e8421099801846a9f18ab4e78dd">&#9670;&nbsp;</a></span>unitClause()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;std::string, bool&gt; Or::unitClause </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a unit clause from the logical expression. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pair representing a unit clause: (literal, value). </dd></dl>
+
+<p>Implements <a class="el" href="classExpr.html#a36a56674f03062411315a141a522900c">Expr</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>libgymbo/<a class="el" href="sat_8h_source.html">sat.h</a></li>
 </ul>

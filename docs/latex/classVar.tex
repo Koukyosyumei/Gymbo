@@ -26,49 +26,288 @@ Collaboration diagram for Var\+:
 \mbox{\Hypertarget{classVar_a3877eef2e9fcd8413fa5127f1ab6d861}\label{classVar_a3877eef2e9fcd8413fa5127f1ab6d861}} 
 {\bfseries Var} (std\+::string name)
 \item 
-\mbox{\Hypertarget{classVar_a92ea48bf8414c3cdffce30a24b1a694e}\label{classVar_a92ea48bf8414c3cdffce30a24b1a694e}} 
-std\+::string {\bfseries to\+\_\+string} () override
-\item 
-\mbox{\Hypertarget{classVar_ad77882e8e13d0af155bb27289d13f9dd}\label{classVar_ad77882e8e13d0af155bb27289d13f9dd}} 
-std\+::pair$<$ bool, std\+::string $>$ {\bfseries free\+Var} () override
-\item 
-\mbox{\Hypertarget{classVar_a1e01e4eb02c79b88b7d91c09941778b8}\label{classVar_a1e01e4eb02c79b88b7d91c09941778b8}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries simplify} () override
-\item 
-\mbox{\Hypertarget{classVar_aee3da28585195c5f6001586ba48cf206}\label{classVar_aee3da28585195c5f6001586ba48cf206}} 
-bool {\bfseries evaluate} () override
-\item 
-\mbox{\Hypertarget{classVar_ae35784ab770de47eff56de98b04b6f9a}\label{classVar_ae35784ab770de47eff56de98b04b6f9a}} 
-bool {\bfseries un\+Const} () override
-\item 
-\mbox{\Hypertarget{classVar_a6f125a98e052d04c21514ee5edb54c32}\label{classVar_a6f125a98e052d04c21514ee5edb54c32}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries guess\+Var} (std\+::string var, bool val) override
-\item 
-\mbox{\Hypertarget{classVar_ae6ee454d9ef350509d267561176f551f}\label{classVar_ae6ee454d9ef350509d267561176f551f}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries fix\+Negations} () override
-\item 
-\mbox{\Hypertarget{classVar_affd5c25c24e01493f1525ee17ebd82eb}\label{classVar_affd5c25c24e01493f1525ee17ebd82eb}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries distribute} () override
-\item 
-\mbox{\Hypertarget{classVar_aad28f402b42c498623fc325695bd70f4}\label{classVar_aad28f402b42c498623fc325695bd70f4}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries get\+Left} () override
-\item 
-\mbox{\Hypertarget{classVar_a3e618cc84ac049e1cbdd332c3140db13}\label{classVar_a3e618cc84ac049e1cbdd332c3140db13}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries get\+Right} () override
-\item 
-\mbox{\Hypertarget{classVar_a517a4236fe4f36f7c06fbb9a1212f16a}\label{classVar_a517a4236fe4f36f7c06fbb9a1212f16a}} 
-std\+::unordered\+\_\+set$<$ std\+::string $>$ {\bfseries literals} () override
-\item 
-\mbox{\Hypertarget{classVar_a9e033a1b7def48fac62947778c231493}\label{classVar_a9e033a1b7def48fac62947778c231493}} 
-std\+::unordered\+\_\+map$<$ std\+::string, Polarity $>$ {\bfseries literal\+Polarity} (std\+::string var) override
-\item 
-\mbox{\Hypertarget{classVar_a2ca8840e7b2938a5593472c559663740}\label{classVar_a2ca8840e7b2938a5593472c559663740}} 
-std\+::pair$<$ std\+::string, bool $>$ {\bfseries unit\+Clause} () override
-\item 
-\mbox{\Hypertarget{classVar_a1bc9e202c395ab62025b3a3c3dce0a69}\label{classVar_a1bc9e202c395ab62025b3a3c3dce0a69}} 
-std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ $>$ {\bfseries clauses} () override
-\end{DoxyCompactItemize}
+std\+::string \mbox{\hyperlink{classVar_a92ea48bf8414c3cdffce30a24b1a694e}{to\+\_\+string}} () override
+\begin{DoxyCompactList}\small\item\em Convert the logical expression to a string representation. \end{DoxyCompactList}\item 
+std\+::pair$<$ bool, std\+::string $>$ \mbox{\hyperlink{classVar_ad77882e8e13d0af155bb27289d13f9dd}{free\+Var}} () override
+\begin{DoxyCompactList}\small\item\em Identify and return free variables in the logical expression. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classVar_a1e01e4eb02c79b88b7d91c09941778b8}{simplify}} () override
+\begin{DoxyCompactList}\small\item\em Simplify the logical expression. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classVar_aee3da28585195c5f6001586ba48cf206}{evaluate}} () override
+\begin{DoxyCompactList}\small\item\em Evaluate the logical expression. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classVar_ae35784ab770de47eff56de98b04b6f9a}{un\+Const}} () override
+\begin{DoxyCompactList}\small\item\em Check if the logical expression can be simplified by removing constants. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classVar_a6f125a98e052d04c21514ee5edb54c32}{guess\+Var}} (std\+::string var, bool val) override
+\begin{DoxyCompactList}\small\item\em Make a guess for a variable\textquotesingle{}s value and return the resulting expression. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classVar_ae6ee454d9ef350509d267561176f551f}{fix\+Negations}} () override
+\begin{DoxyCompactList}\small\item\em Fix negations in the logical expression. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classVar_affd5c25c24e01493f1525ee17ebd82eb}{distribute}} () override
+\begin{DoxyCompactList}\small\item\em Distribute operations in the logical expression. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classVar_aad28f402b42c498623fc325695bd70f4}{get\+Left}} () override
+\begin{DoxyCompactList}\small\item\em Get the left child expression. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classVar_a3e618cc84ac049e1cbdd332c3140db13}{get\+Right}} () override
+\begin{DoxyCompactList}\small\item\em Get the right child expression. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ std\+::string $>$ \mbox{\hyperlink{classVar_a517a4236fe4f36f7c06fbb9a1212f16a}{literals}} () override
+\begin{DoxyCompactList}\small\item\em Get the literals present in the logical expression. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ std\+::string, Polarity $>$ \mbox{\hyperlink{classVar_a9e033a1b7def48fac62947778c231493}{literal\+Polarity}} (std\+::string var) override
+\begin{DoxyCompactList}\small\item\em Get the polarities of literals with respect to a specific variable. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::string, bool $>$ \mbox{\hyperlink{classVar_a2ca8840e7b2938a5593472c559663740}{unit\+Clause}} () override
+\begin{DoxyCompactList}\small\item\em Get a unit clause from the logical expression. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ $>$ \mbox{\hyperlink{classVar_a1bc9e202c395ab62025b3a3c3dce0a69}{clauses}} () override
+\begin{DoxyCompactList}\small\item\em Get a vector of clauses present in the logical expression. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classVar_a1bc9e202c395ab62025b3a3c3dce0a69}\label{classVar_a1bc9e202c395ab62025b3a3c3dce0a69}} 
+\index{Var@{Var}!clauses@{clauses}}
+\index{clauses@{clauses}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{clauses()}{clauses()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classExpr}{Expr}}$>$ $>$ Var\+::clauses (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get a vector of clauses present in the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Vector of shared pointers to clause expressions. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a91d1f469d5c9c82cae29fe119fb5bea0}{Expr}}.
+
+\mbox{\Hypertarget{classVar_affd5c25c24e01493f1525ee17ebd82eb}\label{classVar_affd5c25c24e01493f1525ee17ebd82eb}} 
+\index{Var@{Var}!distribute@{distribute}}
+\index{distribute@{distribute}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{distribute()}{distribute()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classExpr}{Expr}}$>$ Var\+::distribute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Distribute operations in the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the logical expression with distributed operations. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a58585c07320ec177f9713694467761bd}{Expr}}.
+
+\mbox{\Hypertarget{classVar_aee3da28585195c5f6001586ba48cf206}\label{classVar_aee3da28585195c5f6001586ba48cf206}} 
+\index{Var@{Var}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{evaluate()}{evaluate()}}
+{\footnotesize\ttfamily bool Var\+::evaluate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Evaluate the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Result of the logical evaluation. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a70c056a048e96a455862a15281893336}{Expr}}.
+
+\mbox{\Hypertarget{classVar_ae6ee454d9ef350509d267561176f551f}\label{classVar_ae6ee454d9ef350509d267561176f551f}} 
+\index{Var@{Var}!fixNegations@{fixNegations}}
+\index{fixNegations@{fixNegations}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{fixNegations()}{fixNegations()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classExpr}{Expr}}$>$ Var\+::fix\+Negations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Fix negations in the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the logical expression with fixed negations. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_af8c324462981bacd0f3722af55fbd908}{Expr}}.
+
+\mbox{\Hypertarget{classVar_ad77882e8e13d0af155bb27289d13f9dd}\label{classVar_ad77882e8e13d0af155bb27289d13f9dd}} 
+\index{Var@{Var}!freeVar@{freeVar}}
+\index{freeVar@{freeVar}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{freeVar()}{freeVar()}}
+{\footnotesize\ttfamily std\+::pair$<$bool, std\+::string$>$ Var\+::free\+Var (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Identify and return free variables in the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Pair indicating if there are free variables and the first free variable found. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_aae8d80e61018a50dfbeaa6bbd2cb9ec8}{Expr}}.
+
+\mbox{\Hypertarget{classVar_aad28f402b42c498623fc325695bd70f4}\label{classVar_aad28f402b42c498623fc325695bd70f4}} 
+\index{Var@{Var}!getLeft@{getLeft}}
+\index{getLeft@{getLeft}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{getLeft()}{getLeft()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classExpr}{Expr}}$>$ Var\+::get\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the left child expression. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the left child expression. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a1b270e7b2fe2f4f1d98831d36c5a4af7}{Expr}}.
+
+\mbox{\Hypertarget{classVar_a3e618cc84ac049e1cbdd332c3140db13}\label{classVar_a3e618cc84ac049e1cbdd332c3140db13}} 
+\index{Var@{Var}!getRight@{getRight}}
+\index{getRight@{getRight}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{getRight()}{getRight()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classExpr}{Expr}}$>$ Var\+::get\+Right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the right child expression. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the right child expression. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a6247038d925b54ab13e8b946fc8da4b3}{Expr}}.
+
+\mbox{\Hypertarget{classVar_a6f125a98e052d04c21514ee5edb54c32}\label{classVar_a6f125a98e052d04c21514ee5edb54c32}} 
+\index{Var@{Var}!guessVar@{guessVar}}
+\index{guessVar@{guessVar}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{guessVar()}{guessVar()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ Var\+::guess\+Var (\begin{DoxyParamCaption}\item[{std\+::string}]{var,  }\item[{bool}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Make a guess for a variable\textquotesingle{}s value and return the resulting expression. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em var} & Variable name. \\
+\hline
+{\em val} & Guessed value for the variable. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to the resulting logical expression. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_af06e57ce4c3fe82e389037997073347c}{Expr}}.
+
+\mbox{\Hypertarget{classVar_a9e033a1b7def48fac62947778c231493}\label{classVar_a9e033a1b7def48fac62947778c231493}} 
+\index{Var@{Var}!literalPolarity@{literalPolarity}}
+\index{literalPolarity@{literalPolarity}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{literalPolarity()}{literalPolarity()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, Polarity$>$ Var\+::literal\+Polarity (\begin{DoxyParamCaption}\item[{std\+::string}]{var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the polarities of literals with respect to a specific variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em var} & Variable name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Unordered map of literals to their polarities. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a9049567cafd0b4edc04d5a95effb52d7}{Expr}}.
+
+\mbox{\Hypertarget{classVar_a517a4236fe4f36f7c06fbb9a1212f16a}\label{classVar_a517a4236fe4f36f7c06fbb9a1212f16a}} 
+\index{Var@{Var}!literals@{literals}}
+\index{literals@{literals}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{literals()}{literals()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$std\+::string$>$ Var\+::literals (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the literals present in the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Unordered set of literals. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_ae025aa9ac77bd6a8a63d0256ef505cde}{Expr}}.
+
+\mbox{\Hypertarget{classVar_a1e01e4eb02c79b88b7d91c09941778b8}\label{classVar_a1e01e4eb02c79b88b7d91c09941778b8}} 
+\index{Var@{Var}!simplify@{simplify}}
+\index{simplify@{simplify}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{simplify()}{simplify()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classExpr}{Expr}}$>$ Var\+::simplify (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Simplify the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the simplified logical expression. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_aed25693ee1047bebf2f19a5dc96d7e08}{Expr}}.
+
+\mbox{\Hypertarget{classVar_a92ea48bf8414c3cdffce30a24b1a694e}\label{classVar_a92ea48bf8414c3cdffce30a24b1a694e}} 
+\index{Var@{Var}!to\_string@{to\_string}}
+\index{to\_string@{to\_string}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{to\_string()}{to\_string()}}
+{\footnotesize\ttfamily std\+::string Var\+::to\+\_\+string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Convert the logical expression to a string representation. 
+
+\begin{DoxyReturn}{Returns}
+String representation of the logical expression. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a2c170268b82af106cd87642c759b6f1b}{Expr}}.
+
+\mbox{\Hypertarget{classVar_ae35784ab770de47eff56de98b04b6f9a}\label{classVar_ae35784ab770de47eff56de98b04b6f9a}} 
+\index{Var@{Var}!unConst@{unConst}}
+\index{unConst@{unConst}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{unConst()}{unConst()}}
+{\footnotesize\ttfamily bool Var\+::un\+Const (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Check if the logical expression can be simplified by removing constants. 
+
+\begin{DoxyReturn}{Returns}
+True if the expression can be simplified, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_aeaec5edf588c95c9fe34a824d6e13b30}{Expr}}.
+
+\mbox{\Hypertarget{classVar_a2ca8840e7b2938a5593472c559663740}\label{classVar_a2ca8840e7b2938a5593472c559663740}} 
+\index{Var@{Var}!unitClause@{unitClause}}
+\index{unitClause@{unitClause}!Var@{Var}}
+\doxysubsubsection{\texorpdfstring{unitClause()}{unitClause()}}
+{\footnotesize\ttfamily std\+::pair$<$std\+::string, bool$>$ Var\+::unit\+Clause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get a unit clause from the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Pair representing a unit clause\+: (literal, value). 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a36a56674f03062411315a141a522900c}{Expr}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

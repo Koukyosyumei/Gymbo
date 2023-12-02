@@ -2,6 +2,15 @@
 \label{structgymbo_1_1Sym}\index{gymbo::Sym@{gymbo::Sym}}
 
 
+Struct representing a symbolic expression.  
+
+
+
+
+{\ttfamily \#include $<$type.\+h$>$}
+
+
+
 Collaboration diagram for gymbo\+::Sym\+:
 \nopagebreak
 \begin{figure}[H]
@@ -14,48 +23,168 @@ Collaboration diagram for gymbo\+::Sym\+:
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structgymbo_1_1Sym_a0c34d36593fb6e46865fd7059483cce3}\label{structgymbo_1_1Sym_a0c34d36593fb6e46865fd7059483cce3}} 
-{\bfseries Sym} (Sym\+Type symtype, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$left)
+{\bfseries Sym} (Sym\+Type \mbox{\hyperlink{structgymbo_1_1Sym_a79563bd2b1629b555b2229e7070c7446}{symtype}}, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$\mbox{\hyperlink{structgymbo_1_1Sym_a879f98bf362c14f4cbdd09cc41fb9b97}{left}})
 \item 
 \mbox{\Hypertarget{structgymbo_1_1Sym_ae8788816347c9199724d3eb5809cac81}\label{structgymbo_1_1Sym_ae8788816347c9199724d3eb5809cac81}} 
-{\bfseries Sym} (Sym\+Type symtype, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$left, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$right)
+{\bfseries Sym} (Sym\+Type \mbox{\hyperlink{structgymbo_1_1Sym_a79563bd2b1629b555b2229e7070c7446}{symtype}}, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$\mbox{\hyperlink{structgymbo_1_1Sym_a879f98bf362c14f4cbdd09cc41fb9b97}{left}}, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$\mbox{\hyperlink{structgymbo_1_1Sym_a319da51ac1f1686fa448cc3739b0acea}{right}})
 \item 
 \mbox{\Hypertarget{structgymbo_1_1Sym_a7345ab5bd49026430f5730121205a3df}\label{structgymbo_1_1Sym_a7345ab5bd49026430f5730121205a3df}} 
-{\bfseries Sym} (Sym\+Type symtype, Word32 val)
+{\bfseries Sym} (Sym\+Type \mbox{\hyperlink{structgymbo_1_1Sym_a79563bd2b1629b555b2229e7070c7446}{symtype}}, Word32 val)
 \item 
-\mbox{\Hypertarget{structgymbo_1_1Sym_a702a9e7ca0673f3eac0754d76d1a11bb}\label{structgymbo_1_1Sym_a702a9e7ca0673f3eac0754d76d1a11bb}} 
-void {\bfseries gather\+\_\+var\+\_\+ids} (std\+::unordered\+\_\+set$<$ int $>$ \&result)
-\item 
-\mbox{\Hypertarget{structgymbo_1_1Sym_a371b1d8b3fc73a10d4106e09f68c3092}\label{structgymbo_1_1Sym_a371b1d8b3fc73a10d4106e09f68c3092}} 
-\mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$ {\bfseries psimplify} (const Mem \&cvals)
-\item 
-\mbox{\Hypertarget{structgymbo_1_1Sym_ab594a15d28e041bc1aa6add44c6e028c}\label{structgymbo_1_1Sym_ab594a15d28e041bc1aa6add44c6e028c}} 
-float {\bfseries eval} (const std\+::unordered\+\_\+map$<$ int, float $>$ \&cvals, float eps)
-\item 
-\mbox{\Hypertarget{structgymbo_1_1Sym_ac2f52fcc10d32ef070fd55e4a66f9a44}\label{structgymbo_1_1Sym_ac2f52fcc10d32ef070fd55e4a66f9a44}} 
-\mbox{\hyperlink{structgymbo_1_1Grad}{Grad}} {\bfseries grad} (const std\+::unordered\+\_\+map$<$ int, float $>$ \&cvals, float eps)
-\item 
-\mbox{\Hypertarget{structgymbo_1_1Sym_a1025fdd5cddad6af8b363f40196d71f9}\label{structgymbo_1_1Sym_a1025fdd5cddad6af8b363f40196d71f9}} 
-std\+::string {\bfseries to\+String} (bool convert\+\_\+to\+\_\+num)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{structgymbo_1_1Sym_a702a9e7ca0673f3eac0754d76d1a11bb}{gather\+\_\+var\+\_\+ids}} (std\+::unordered\+\_\+set$<$ int $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Gathers variable indices from the symbolic expression. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$ \mbox{\hyperlink{structgymbo_1_1Sym_a371b1d8b3fc73a10d4106e09f68c3092}{psimplify}} (const Mem \&cvals)
+\begin{DoxyCompactList}\small\item\em Simplifies the symbolic expression by evaluating constant subexpressions. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{structgymbo_1_1Sym_ab594a15d28e041bc1aa6add44c6e028c}{eval}} (const std\+::unordered\+\_\+map$<$ int, float $>$ \&cvals, float eps)
+\begin{DoxyCompactList}\small\item\em Evaluates the symbolic expression given concrete variable values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Grad}{Grad}} \mbox{\hyperlink{structgymbo_1_1Sym_ac2f52fcc10d32ef070fd55e4a66f9a44}{grad}} (const std\+::unordered\+\_\+map$<$ int, float $>$ \&cvals, float eps)
+\begin{DoxyCompactList}\small\item\em Computes the gradient of the symbolic expression given concrete variable values. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structgymbo_1_1Sym_a1025fdd5cddad6af8b363f40196d71f9}{to\+String}} (bool convert\+\_\+to\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Converts the symbolic expression to a string representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structgymbo_1_1Sym_a79563bd2b1629b555b2229e7070c7446}\label{structgymbo_1_1Sym_a79563bd2b1629b555b2229e7070c7446}} 
-Sym\+Type {\bfseries symtype}
+Sym\+Type \mbox{\hyperlink{structgymbo_1_1Sym_a79563bd2b1629b555b2229e7070c7446}{symtype}}
 \item 
-\mbox{\Hypertarget{structgymbo_1_1Sym_a879f98bf362c14f4cbdd09cc41fb9b97}\label{structgymbo_1_1Sym_a879f98bf362c14f4cbdd09cc41fb9b97}} 
-\mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$ {\bfseries left}
+\mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$ \mbox{\hyperlink{structgymbo_1_1Sym_a879f98bf362c14f4cbdd09cc41fb9b97}{left}}
 \item 
-\mbox{\Hypertarget{structgymbo_1_1Sym_a319da51ac1f1686fa448cc3739b0acea}\label{structgymbo_1_1Sym_a319da51ac1f1686fa448cc3739b0acea}} 
-\mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$ {\bfseries right}
+\mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$ \mbox{\hyperlink{structgymbo_1_1Sym_a319da51ac1f1686fa448cc3739b0acea}{right}}
 \item 
-\mbox{\Hypertarget{structgymbo_1_1Sym_aeff55d00e3d722940440f610a43db2f4}\label{structgymbo_1_1Sym_aeff55d00e3d722940440f610a43db2f4}} 
-Word32 {\bfseries word}
+Word32 \mbox{\hyperlink{structgymbo_1_1Sym_aeff55d00e3d722940440f610a43db2f4}{word}}
 \item 
-\mbox{\Hypertarget{structgymbo_1_1Sym_aef609bbed728ec7c46ac45a2f4832221}\label{structgymbo_1_1Sym_aef609bbed728ec7c46ac45a2f4832221}} 
-int {\bfseries var\+\_\+idx}
+int \mbox{\hyperlink{structgymbo_1_1Sym_aef609bbed728ec7c46ac45a2f4832221}{var\+\_\+idx}}
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Struct representing a symbolic expression. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structgymbo_1_1Sym_ab594a15d28e041bc1aa6add44c6e028c}\label{structgymbo_1_1Sym_ab594a15d28e041bc1aa6add44c6e028c}} 
+\index{gymbo::Sym@{gymbo::Sym}!eval@{eval}}
+\index{eval@{eval}!gymbo::Sym@{gymbo::Sym}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+{\footnotesize\ttfamily float gymbo\+::\+Sym\+::eval (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{cvals,  }\item[{float}]{eps }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluates the symbolic expression given concrete variable values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cvals} & Map of variable indices to concrete values. \\
+\hline
+{\em eps} & The smallest positive value of the target type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result of the symbolic expression evaluation. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgymbo_1_1Sym_a702a9e7ca0673f3eac0754d76d1a11bb}\label{structgymbo_1_1Sym_a702a9e7ca0673f3eac0754d76d1a11bb}} 
+\index{gymbo::Sym@{gymbo::Sym}!gather\_var\_ids@{gather\_var\_ids}}
+\index{gather\_var\_ids@{gather\_var\_ids}!gymbo::Sym@{gymbo::Sym}}
+\doxysubsubsection{\texorpdfstring{gather\_var\_ids()}{gather\_var\_ids()}}
+{\footnotesize\ttfamily void gymbo\+::\+Sym\+::gather\+\_\+var\+\_\+ids (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gathers variable indices from the symbolic expression. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & Set to store gathered variable indices. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structgymbo_1_1Sym_ac2f52fcc10d32ef070fd55e4a66f9a44}\label{structgymbo_1_1Sym_ac2f52fcc10d32ef070fd55e4a66f9a44}} 
+\index{gymbo::Sym@{gymbo::Sym}!grad@{grad}}
+\index{grad@{grad}!gymbo::Sym@{gymbo::Sym}}
+\doxysubsubsection{\texorpdfstring{grad()}{grad()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Grad}{Grad}} gymbo\+::\+Sym\+::grad (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{cvals,  }\item[{float}]{eps }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Computes the gradient of the symbolic expression given concrete variable values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cvals} & Map of variable indices to concrete values. \\
+\hline
+{\em eps} & Small value to handle numerical instability. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Gradient of the symbolic expression. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgymbo_1_1Sym_a371b1d8b3fc73a10d4106e09f68c3092}\label{structgymbo_1_1Sym_a371b1d8b3fc73a10d4106e09f68c3092}} 
+\index{gymbo::Sym@{gymbo::Sym}!psimplify@{psimplify}}
+\index{psimplify@{psimplify}!gymbo::Sym@{gymbo::Sym}}
+\doxysubsubsection{\texorpdfstring{psimplify()}{psimplify()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}}$\ast$ gymbo\+::\+Sym\+::psimplify (\begin{DoxyParamCaption}\item[{const Mem \&}]{cvals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Simplifies the symbolic expression by evaluating constant subexpressions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cvals} & Map of variable indices to constant values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Simplified symbolic expression. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgymbo_1_1Sym_a1025fdd5cddad6af8b363f40196d71f9}\label{structgymbo_1_1Sym_a1025fdd5cddad6af8b363f40196d71f9}} 
+\index{gymbo::Sym@{gymbo::Sym}!toString@{toString}}
+\index{toString@{toString}!gymbo::Sym@{gymbo::Sym}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string gymbo\+::\+Sym\+::to\+String (\begin{DoxyParamCaption}\item[{bool}]{convert\+\_\+to\+\_\+num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the symbolic expression to a string representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em convert\+\_\+to\+\_\+num} & Whether to convert constants to numeric representations. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String representation of the symbolic expression. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structgymbo_1_1Sym_a879f98bf362c14f4cbdd09cc41fb9b97}\label{structgymbo_1_1Sym_a879f98bf362c14f4cbdd09cc41fb9b97}} 
+\index{gymbo::Sym@{gymbo::Sym}!left@{left}}
+\index{left@{left}!gymbo::Sym@{gymbo::Sym}}
+\doxysubsubsection{\texorpdfstring{left}{left}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}}$\ast$ gymbo\+::\+Sym\+::left}
+
+Pointer to the left child of the expression. \mbox{\Hypertarget{structgymbo_1_1Sym_a319da51ac1f1686fa448cc3739b0acea}\label{structgymbo_1_1Sym_a319da51ac1f1686fa448cc3739b0acea}} 
+\index{gymbo::Sym@{gymbo::Sym}!right@{right}}
+\index{right@{right}!gymbo::Sym@{gymbo::Sym}}
+\doxysubsubsection{\texorpdfstring{right}{right}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}}$\ast$ gymbo\+::\+Sym\+::right}
+
+Pointer to the right child of the expression. \mbox{\Hypertarget{structgymbo_1_1Sym_a79563bd2b1629b555b2229e7070c7446}\label{structgymbo_1_1Sym_a79563bd2b1629b555b2229e7070c7446}} 
+\index{gymbo::Sym@{gymbo::Sym}!symtype@{symtype}}
+\index{symtype@{symtype}!gymbo::Sym@{gymbo::Sym}}
+\doxysubsubsection{\texorpdfstring{symtype}{symtype}}
+{\footnotesize\ttfamily Sym\+Type gymbo\+::\+Sym\+::symtype}
+
+The type of the symbolic expression. \mbox{\Hypertarget{structgymbo_1_1Sym_aef609bbed728ec7c46ac45a2f4832221}\label{structgymbo_1_1Sym_aef609bbed728ec7c46ac45a2f4832221}} 
+\index{gymbo::Sym@{gymbo::Sym}!var\_idx@{var\_idx}}
+\index{var\_idx@{var\_idx}!gymbo::Sym@{gymbo::Sym}}
+\doxysubsubsection{\texorpdfstring{var\_idx}{var\_idx}}
+{\footnotesize\ttfamily int gymbo\+::\+Sym\+::var\+\_\+idx}
+
+Index of the variable associated with the expression. \mbox{\Hypertarget{structgymbo_1_1Sym_aeff55d00e3d722940440f610a43db2f4}\label{structgymbo_1_1Sym_aeff55d00e3d722940440f610a43db2f4}} 
+\index{gymbo::Sym@{gymbo::Sym}!word@{word}}
+\index{word@{word}!gymbo::Sym@{gymbo::Sym}}
+\doxysubsubsection{\texorpdfstring{word}{word}}
+{\footnotesize\ttfamily Word32 gymbo\+::\+Sym\+::word}
+
+Additional data associated with the expression. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

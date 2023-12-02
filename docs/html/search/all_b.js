@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['token_22',['Token',['../structgymbo_1_1Token.html',1,'gymbo']]],
-  ['trace_23',['Trace',['../structgymbo_1_1Trace.html',1,'gymbo']]]
+  ['opcode_33',['opcode',['../classExpr.html#aa6f5a8068e0786128f58b3565909d604',1,'Expr']]],
+  ['or_34',['Or',['../classOr.html',1,'']]]
 ];

@@ -73,11 +73,16 @@ $(function() {
 <div class="title">gymbo::Grad Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Struct representing the gradient of a symbolic expression.  
+ <a href="structgymbo_1_1Grad.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="type_8h_source.html">type.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a987813a5c6bc104b120ad2541639af1f"><td class="memItemLeft" align="right" valign="top"><a id="a987813a5c6bc104b120ad2541639af1f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Grad</b> (std::unordered_map&lt; int, float &gt; val)</td></tr>
+<tr class="memitem:a987813a5c6bc104b120ad2541639af1f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Grad.html#a987813a5c6bc104b120ad2541639af1f">Grad</a> (std::unordered_map&lt; int, float &gt; <a class="el" href="structgymbo_1_1Grad.html#a630feb208125b40d88176890f31d2b50">val</a>)</td></tr>
+<tr class="memdesc:a987813a5c6bc104b120ad2541639af1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the gradient.  <a href="structgymbo_1_1Grad.html#a987813a5c6bc104b120ad2541639af1f">More...</a><br /></td></tr>
 <tr class="separator:a987813a5c6bc104b120ad2541639af1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae29038cc1a276a7b3b4d3343216092f2"><td class="memItemLeft" align="right" valign="top"><a id="ae29038cc1a276a7b3b4d3343216092f2"></a>
 <a class="el" href="structgymbo_1_1Grad.html">Grad</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator+</b> (const <a class="el" href="structgymbo_1_1Grad.html">Grad</a> &amp;other)</td></tr>
@@ -97,10 +102,62 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a630feb208125b40d88176890f31d2b50"><td class="memItemLeft" align="right" valign="top"><a id="a630feb208125b40d88176890f31d2b50"></a>
-std::unordered_map&lt; int, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>val</b></td></tr>
+<tr class="memitem:a630feb208125b40d88176890f31d2b50"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; int, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Grad.html#a630feb208125b40d88176890f31d2b50">val</a></td></tr>
 <tr class="separator:a630feb208125b40d88176890f31d2b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Struct representing the gradient of a symbolic expression. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a987813a5c6bc104b120ad2541639af1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a987813a5c6bc104b120ad2541639af1f">&#9670;&nbsp;</a></span>Grad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">gymbo::Grad::Grad </td>
+          <td>(</td>
+          <td class="paramtype">std::unordered_map&lt; int, float &gt;&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for the gradient. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>Map of variable indices to gradient values. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a630feb208125b40d88176890f31d2b50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a630feb208125b40d88176890f31d2b50">&#9670;&nbsp;</a></span>val</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;int, float&gt; gymbo::Grad::val</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Map of variable indices to gradient values. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>libgymbo/<a class="el" href="type_8h_source.html">type.h</a></li>
 </ul>

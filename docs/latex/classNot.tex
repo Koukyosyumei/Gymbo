@@ -26,49 +26,288 @@ Collaboration diagram for Not\+:
 \mbox{\Hypertarget{classNot_a3748d8ad1933507520e40d39d655326e}\label{classNot_a3748d8ad1933507520e40d39d655326e}} 
 {\bfseries Not} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ expr)
 \item 
-\mbox{\Hypertarget{classNot_a5184f52e97f3d6933b8677cf5d455f8d}\label{classNot_a5184f52e97f3d6933b8677cf5d455f8d}} 
-std\+::string {\bfseries to\+\_\+string} () override
-\item 
-\mbox{\Hypertarget{classNot_a94d976ef14f10a1e55f596094e6ccb00}\label{classNot_a94d976ef14f10a1e55f596094e6ccb00}} 
-bool {\bfseries evaluate} () override
-\item 
-\mbox{\Hypertarget{classNot_afc460b97b27a248b4b682972501400d0}\label{classNot_afc460b97b27a248b4b682972501400d0}} 
-std\+::pair$<$ bool, std\+::string $>$ {\bfseries free\+Var} () override
-\item 
-\mbox{\Hypertarget{classNot_ad392ef4e53095e3563ef676f88ac7f38}\label{classNot_ad392ef4e53095e3563ef676f88ac7f38}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries distribute} () override
-\item 
-\mbox{\Hypertarget{classNot_aa2c22567d5cd1c4243a9d853e46a16ac}\label{classNot_aa2c22567d5cd1c4243a9d853e46a16ac}} 
-bool {\bfseries un\+Const} () override
-\item 
-\mbox{\Hypertarget{classNot_a58213c6b6f3f5cb4b338c3170a3ba1fb}\label{classNot_a58213c6b6f3f5cb4b338c3170a3ba1fb}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries get\+Left} () override
-\item 
-\mbox{\Hypertarget{classNot_ae7495ea0b5d9cb8e79954315b6afba59}\label{classNot_ae7495ea0b5d9cb8e79954315b6afba59}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries get\+Right} () override
-\item 
-\mbox{\Hypertarget{classNot_ac02355f41ffa38fa3ae7bbc1668c9987}\label{classNot_ac02355f41ffa38fa3ae7bbc1668c9987}} 
-std\+::unordered\+\_\+set$<$ std\+::string $>$ {\bfseries literals} () override
-\item 
-\mbox{\Hypertarget{classNot_a95237297919065ad84301e7d36f2bb35}\label{classNot_a95237297919065ad84301e7d36f2bb35}} 
-std\+::unordered\+\_\+map$<$ std\+::string, Polarity $>$ {\bfseries literal\+Polarity} (std\+::string var) override
-\item 
-\mbox{\Hypertarget{classNot_aa7dd69824459fccba1f6b11a6606f1b9}\label{classNot_aa7dd69824459fccba1f6b11a6606f1b9}} 
-std\+::pair$<$ std\+::string, bool $>$ {\bfseries unit\+Clause} () override
-\item 
-\mbox{\Hypertarget{classNot_a100a02ccf4814880547e8e66e82c0d36}\label{classNot_a100a02ccf4814880547e8e66e82c0d36}} 
-std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ $>$ {\bfseries clauses} () override
-\item 
-\mbox{\Hypertarget{classNot_a8bc83205059d8d741b4c4fb53b25d69c}\label{classNot_a8bc83205059d8d741b4c4fb53b25d69c}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries fix\+Negations} () override
-\item 
-\mbox{\Hypertarget{classNot_aeee54c2c80cdcfdd5c0b5dbf5b168850}\label{classNot_aeee54c2c80cdcfdd5c0b5dbf5b168850}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries guess\+Var} (std\+::string var, bool val) override
-\item 
-\mbox{\Hypertarget{classNot_aee4b24207fb7a592b86e837dee3f8b8d}\label{classNot_aee4b24207fb7a592b86e837dee3f8b8d}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ {\bfseries simplify} () override
-\end{DoxyCompactItemize}
+std\+::string \mbox{\hyperlink{classNot_a5184f52e97f3d6933b8677cf5d455f8d}{to\+\_\+string}} () override
+\begin{DoxyCompactList}\small\item\em Convert the logical expression to a string representation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNot_a94d976ef14f10a1e55f596094e6ccb00}{evaluate}} () override
+\begin{DoxyCompactList}\small\item\em Evaluate the logical expression. \end{DoxyCompactList}\item 
+std\+::pair$<$ bool, std\+::string $>$ \mbox{\hyperlink{classNot_afc460b97b27a248b4b682972501400d0}{free\+Var}} () override
+\begin{DoxyCompactList}\small\item\em Identify and return free variables in the logical expression. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classNot_ad392ef4e53095e3563ef676f88ac7f38}{distribute}} () override
+\begin{DoxyCompactList}\small\item\em Distribute operations in the logical expression. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNot_aa2c22567d5cd1c4243a9d853e46a16ac}{un\+Const}} () override
+\begin{DoxyCompactList}\small\item\em Check if the logical expression can be simplified by removing constants. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classNot_a58213c6b6f3f5cb4b338c3170a3ba1fb}{get\+Left}} () override
+\begin{DoxyCompactList}\small\item\em Get the left child expression. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classNot_ae7495ea0b5d9cb8e79954315b6afba59}{get\+Right}} () override
+\begin{DoxyCompactList}\small\item\em Get the right child expression. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ std\+::string $>$ \mbox{\hyperlink{classNot_ac02355f41ffa38fa3ae7bbc1668c9987}{literals}} () override
+\begin{DoxyCompactList}\small\item\em Get the literals present in the logical expression. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ std\+::string, Polarity $>$ \mbox{\hyperlink{classNot_a95237297919065ad84301e7d36f2bb35}{literal\+Polarity}} (std\+::string var) override
+\begin{DoxyCompactList}\small\item\em Get the polarities of literals with respect to a specific variable. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::string, bool $>$ \mbox{\hyperlink{classNot_aa7dd69824459fccba1f6b11a6606f1b9}{unit\+Clause}} () override
+\begin{DoxyCompactList}\small\item\em Get a unit clause from the logical expression. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ $>$ \mbox{\hyperlink{classNot_a100a02ccf4814880547e8e66e82c0d36}{clauses}} () override
+\begin{DoxyCompactList}\small\item\em Get a vector of clauses present in the logical expression. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classNot_a8bc83205059d8d741b4c4fb53b25d69c}{fix\+Negations}} () override
+\begin{DoxyCompactList}\small\item\em Fix negations in the logical expression. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classNot_aeee54c2c80cdcfdd5c0b5dbf5b168850}{guess\+Var}} (std\+::string var, bool val) override
+\begin{DoxyCompactList}\small\item\em Make a guess for a variable\textquotesingle{}s value and return the resulting expression. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ \mbox{\hyperlink{classNot_aee4b24207fb7a592b86e837dee3f8b8d}{simplify}} () override
+\begin{DoxyCompactList}\small\item\em Simplify the logical expression. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classNot_a100a02ccf4814880547e8e66e82c0d36}\label{classNot_a100a02ccf4814880547e8e66e82c0d36}} 
+\index{Not@{Not}!clauses@{clauses}}
+\index{clauses@{clauses}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{clauses()}{clauses()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classExpr}{Expr}}$>$ $>$ Not\+::clauses (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get a vector of clauses present in the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Vector of shared pointers to clause expressions. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a91d1f469d5c9c82cae29fe119fb5bea0}{Expr}}.
+
+\mbox{\Hypertarget{classNot_ad392ef4e53095e3563ef676f88ac7f38}\label{classNot_ad392ef4e53095e3563ef676f88ac7f38}} 
+\index{Not@{Not}!distribute@{distribute}}
+\index{distribute@{distribute}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{distribute()}{distribute()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classExpr}{Expr}}$>$ Not\+::distribute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Distribute operations in the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the logical expression with distributed operations. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a58585c07320ec177f9713694467761bd}{Expr}}.
+
+\mbox{\Hypertarget{classNot_a94d976ef14f10a1e55f596094e6ccb00}\label{classNot_a94d976ef14f10a1e55f596094e6ccb00}} 
+\index{Not@{Not}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{evaluate()}{evaluate()}}
+{\footnotesize\ttfamily bool Not\+::evaluate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Evaluate the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Result of the logical evaluation. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a70c056a048e96a455862a15281893336}{Expr}}.
+
+\mbox{\Hypertarget{classNot_a8bc83205059d8d741b4c4fb53b25d69c}\label{classNot_a8bc83205059d8d741b4c4fb53b25d69c}} 
+\index{Not@{Not}!fixNegations@{fixNegations}}
+\index{fixNegations@{fixNegations}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{fixNegations()}{fixNegations()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ Not\+::fix\+Negations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Fix negations in the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the logical expression with fixed negations. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_af8c324462981bacd0f3722af55fbd908}{Expr}}.
+
+\mbox{\Hypertarget{classNot_afc460b97b27a248b4b682972501400d0}\label{classNot_afc460b97b27a248b4b682972501400d0}} 
+\index{Not@{Not}!freeVar@{freeVar}}
+\index{freeVar@{freeVar}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{freeVar()}{freeVar()}}
+{\footnotesize\ttfamily std\+::pair$<$bool, std\+::string$>$ Not\+::free\+Var (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Identify and return free variables in the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Pair indicating if there are free variables and the first free variable found. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_aae8d80e61018a50dfbeaa6bbd2cb9ec8}{Expr}}.
+
+\mbox{\Hypertarget{classNot_a58213c6b6f3f5cb4b338c3170a3ba1fb}\label{classNot_a58213c6b6f3f5cb4b338c3170a3ba1fb}} 
+\index{Not@{Not}!getLeft@{getLeft}}
+\index{getLeft@{getLeft}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{getLeft()}{getLeft()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classExpr}{Expr}}$>$ Not\+::get\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the left child expression. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the left child expression. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a1b270e7b2fe2f4f1d98831d36c5a4af7}{Expr}}.
+
+\mbox{\Hypertarget{classNot_ae7495ea0b5d9cb8e79954315b6afba59}\label{classNot_ae7495ea0b5d9cb8e79954315b6afba59}} 
+\index{Not@{Not}!getRight@{getRight}}
+\index{getRight@{getRight}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{getRight()}{getRight()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classExpr}{Expr}}$>$ Not\+::get\+Right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the right child expression. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the right child expression. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a6247038d925b54ab13e8b946fc8da4b3}{Expr}}.
+
+\mbox{\Hypertarget{classNot_aeee54c2c80cdcfdd5c0b5dbf5b168850}\label{classNot_aeee54c2c80cdcfdd5c0b5dbf5b168850}} 
+\index{Not@{Not}!guessVar@{guessVar}}
+\index{guessVar@{guessVar}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{guessVar()}{guessVar()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ Not\+::guess\+Var (\begin{DoxyParamCaption}\item[{std\+::string}]{var,  }\item[{bool}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Make a guess for a variable\textquotesingle{}s value and return the resulting expression. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em var} & Variable name. \\
+\hline
+{\em val} & Guessed value for the variable. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to the resulting logical expression. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_af06e57ce4c3fe82e389037997073347c}{Expr}}.
+
+\mbox{\Hypertarget{classNot_a95237297919065ad84301e7d36f2bb35}\label{classNot_a95237297919065ad84301e7d36f2bb35}} 
+\index{Not@{Not}!literalPolarity@{literalPolarity}}
+\index{literalPolarity@{literalPolarity}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{literalPolarity()}{literalPolarity()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, Polarity$>$ Not\+::literal\+Polarity (\begin{DoxyParamCaption}\item[{std\+::string}]{var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the polarities of literals with respect to a specific variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em var} & Variable name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Unordered map of literals to their polarities. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a9049567cafd0b4edc04d5a95effb52d7}{Expr}}.
+
+\mbox{\Hypertarget{classNot_ac02355f41ffa38fa3ae7bbc1668c9987}\label{classNot_ac02355f41ffa38fa3ae7bbc1668c9987}} 
+\index{Not@{Not}!literals@{literals}}
+\index{literals@{literals}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{literals()}{literals()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$std\+::string$>$ Not\+::literals (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the literals present in the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Unordered set of literals. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_ae025aa9ac77bd6a8a63d0256ef505cde}{Expr}}.
+
+\mbox{\Hypertarget{classNot_aee4b24207fb7a592b86e837dee3f8b8d}\label{classNot_aee4b24207fb7a592b86e837dee3f8b8d}} 
+\index{Not@{Not}!simplify@{simplify}}
+\index{simplify@{simplify}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{simplify()}{simplify()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classExpr}{Expr}} $>$ Not\+::simplify (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Simplify the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the simplified logical expression. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_aed25693ee1047bebf2f19a5dc96d7e08}{Expr}}.
+
+\mbox{\Hypertarget{classNot_a5184f52e97f3d6933b8677cf5d455f8d}\label{classNot_a5184f52e97f3d6933b8677cf5d455f8d}} 
+\index{Not@{Not}!to\_string@{to\_string}}
+\index{to\_string@{to\_string}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{to\_string()}{to\_string()}}
+{\footnotesize\ttfamily std\+::string Not\+::to\+\_\+string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Convert the logical expression to a string representation. 
+
+\begin{DoxyReturn}{Returns}
+String representation of the logical expression. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a2c170268b82af106cd87642c759b6f1b}{Expr}}.
+
+\mbox{\Hypertarget{classNot_aa2c22567d5cd1c4243a9d853e46a16ac}\label{classNot_aa2c22567d5cd1c4243a9d853e46a16ac}} 
+\index{Not@{Not}!unConst@{unConst}}
+\index{unConst@{unConst}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{unConst()}{unConst()}}
+{\footnotesize\ttfamily bool Not\+::un\+Const (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Check if the logical expression can be simplified by removing constants. 
+
+\begin{DoxyReturn}{Returns}
+True if the expression can be simplified, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_aeaec5edf588c95c9fe34a824d6e13b30}{Expr}}.
+
+\mbox{\Hypertarget{classNot_aa7dd69824459fccba1f6b11a6606f1b9}\label{classNot_aa7dd69824459fccba1f6b11a6606f1b9}} 
+\index{Not@{Not}!unitClause@{unitClause}}
+\index{unitClause@{unitClause}!Not@{Not}}
+\doxysubsubsection{\texorpdfstring{unitClause()}{unitClause()}}
+{\footnotesize\ttfamily std\+::pair$<$std\+::string, bool$>$ Not\+::unit\+Clause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get a unit clause from the logical expression. 
+
+\begin{DoxyReturn}{Returns}
+Pair representing a unit clause\+: (literal, value). 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExpr_a36a56674f03062411315a141a522900c}{Expr}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

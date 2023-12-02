@@ -1,11 +1,19 @@
 \hypertarget{structgymbo_1_1Grad}{}\doxysection{gymbo\+::Grad Struct Reference}
 \label{structgymbo_1_1Grad}\index{gymbo::Grad@{gymbo::Grad}}
+
+
+Struct representing the gradient of a symbolic expression.  
+
+
+
+
+{\ttfamily \#include $<$type.\+h$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structgymbo_1_1Grad_a987813a5c6bc104b120ad2541639af1f}\label{structgymbo_1_1Grad_a987813a5c6bc104b120ad2541639af1f}} 
-{\bfseries Grad} (std\+::unordered\+\_\+map$<$ int, float $>$ val)
-\item 
+\mbox{\hyperlink{structgymbo_1_1Grad_a987813a5c6bc104b120ad2541639af1f}{Grad}} (std\+::unordered\+\_\+map$<$ int, float $>$ \mbox{\hyperlink{structgymbo_1_1Grad_a630feb208125b40d88176890f31d2b50}{val}})
+\begin{DoxyCompactList}\small\item\em Constructor for the gradient. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structgymbo_1_1Grad_ae29038cc1a276a7b3b4d3343216092f2}\label{structgymbo_1_1Grad_ae29038cc1a276a7b3b4d3343216092f2}} 
 \mbox{\hyperlink{structgymbo_1_1Grad}{Grad}} {\bfseries operator+} (const \mbox{\hyperlink{structgymbo_1_1Grad}{Grad}} \&other)
 \item 
@@ -24,10 +32,39 @@
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structgymbo_1_1Grad_a630feb208125b40d88176890f31d2b50}\label{structgymbo_1_1Grad_a630feb208125b40d88176890f31d2b50}} 
-std\+::unordered\+\_\+map$<$ int, float $>$ {\bfseries val}
+std\+::unordered\+\_\+map$<$ int, float $>$ \mbox{\hyperlink{structgymbo_1_1Grad_a630feb208125b40d88176890f31d2b50}{val}}
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Struct representing the gradient of a symbolic expression. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structgymbo_1_1Grad_a987813a5c6bc104b120ad2541639af1f}\label{structgymbo_1_1Grad_a987813a5c6bc104b120ad2541639af1f}} 
+\index{gymbo::Grad@{gymbo::Grad}!Grad@{Grad}}
+\index{Grad@{Grad}!gymbo::Grad@{gymbo::Grad}}
+\doxysubsubsection{\texorpdfstring{Grad()}{Grad()}}
+{\footnotesize\ttfamily gymbo\+::\+Grad\+::\+Grad (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+map$<$ int, float $>$}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the gradient. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & Map of variable indices to gradient values. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structgymbo_1_1Grad_a630feb208125b40d88176890f31d2b50}\label{structgymbo_1_1Grad_a630feb208125b40d88176890f31d2b50}} 
+\index{gymbo::Grad@{gymbo::Grad}!val@{val}}
+\index{val@{val}!gymbo::Grad@{gymbo::Grad}}
+\doxysubsubsection{\texorpdfstring{val}{val}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$int, float$>$ gymbo\+::\+Grad\+::val}
+
+Map of variable indices to gradient values. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

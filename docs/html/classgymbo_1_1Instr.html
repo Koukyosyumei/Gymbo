@@ -73,20 +73,26 @@ $(function() {
 <div class="title">gymbo::Instr Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class representing an instruction.  
+ <a href="classgymbo_1_1Instr.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="type_8h_source.html">type.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3223dad8872d38b84219901aad936c7d"><td class="memItemLeft" align="right" valign="top"><a id="a3223dad8872d38b84219901aad936c7d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Instr</b> (InstrType instr)</td></tr>
+<tr class="memitem:a3223dad8872d38b84219901aad936c7d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgymbo_1_1Instr.html#a3223dad8872d38b84219901aad936c7d">Instr</a> (InstrType instr)</td></tr>
+<tr class="memdesc:a3223dad8872d38b84219901aad936c7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for an instruction without additional data.  <a href="classgymbo_1_1Instr.html#a3223dad8872d38b84219901aad936c7d">More...</a><br /></td></tr>
 <tr class="separator:a3223dad8872d38b84219901aad936c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae92440f40b5774ddfeec0cbd2416437a"><td class="memItemLeft" align="right" valign="top"><a id="ae92440f40b5774ddfeec0cbd2416437a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Instr</b> (InstrType instr, Word32 word)</td></tr>
+<tr class="memitem:ae92440f40b5774ddfeec0cbd2416437a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgymbo_1_1Instr.html#ae92440f40b5774ddfeec0cbd2416437a">Instr</a> (InstrType instr, Word32 word)</td></tr>
+<tr class="memdesc:ae92440f40b5774ddfeec0cbd2416437a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for an instruction with additional data.  <a href="classgymbo_1_1Instr.html#ae92440f40b5774ddfeec0cbd2416437a">More...</a><br /></td></tr>
 <tr class="separator:ae92440f40b5774ddfeec0cbd2416437a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a900ea47f05d7a7e6e2776f0adf4c91f3"><td class="memItemLeft" align="right" valign="top"><a id="a900ea47f05d7a7e6e2776f0adf4c91f3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgymbo_1_1Instr.html#a900ea47f05d7a7e6e2776f0adf4c91f3">print</a> ()</td></tr>
+<tr class="memdesc:a900ea47f05d7a7e6e2776f0adf4c91f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a human-readable representation of the instruction. <br /></td></tr>
 <tr class="separator:a900ea47f05d7a7e6e2776f0adf4c91f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57bf99afd023bb777d5cd944e0b47282"><td class="memItemLeft" align="right" valign="top"><a id="a57bf99afd023bb777d5cd944e0b47282"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>toString</b> ()</td></tr>
+<tr class="memitem:a57bf99afd023bb777d5cd944e0b47282"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgymbo_1_1Instr.html#a57bf99afd023bb777d5cd944e0b47282">toString</a> ()</td></tr>
+<tr class="memdesc:a57bf99afd023bb777d5cd944e0b47282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the instruction to a string representation.  <a href="classgymbo_1_1Instr.html#a57bf99afd023bb777d5cd944e0b47282">More...</a><br /></td></tr>
 <tr class="separator:a57bf99afd023bb777d5cd944e0b47282"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -98,6 +104,117 @@ InstrType&#160;</td><td class="memItemRight" valign="bottom"><b>instr</b></td></
 Word32&#160;</td><td class="memItemRight" valign="bottom"><b>word</b></td></tr>
 <tr class="separator:a955a484347502cf5145c62ce33d67b1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class representing an instruction. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3223dad8872d38b84219901aad936c7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3223dad8872d38b84219901aad936c7d">&#9670;&nbsp;</a></span>Instr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">gymbo::Instr::Instr </td>
+          <td>(</td>
+          <td class="paramtype">InstrType&#160;</td>
+          <td class="paramname"><em>instr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for an instruction without additional data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">instr</td><td>The type of the instruction. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae92440f40b5774ddfeec0cbd2416437a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae92440f40b5774ddfeec0cbd2416437a">&#9670;&nbsp;</a></span>Instr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">gymbo::Instr::Instr </td>
+          <td>(</td>
+          <td class="paramtype">InstrType&#160;</td>
+          <td class="paramname"><em>instr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Word32&#160;</td>
+          <td class="paramname"><em>word</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for an instruction with additional data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">instr</td><td>The type of the instruction. </td></tr>
+    <tr><td class="paramname">word</td><td>Additional data associated with the instruction. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a57bf99afd023bb777d5cd944e0b47282"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57bf99afd023bb777d5cd944e0b47282">&#9670;&nbsp;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string gymbo::Instr::toString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts the instruction to a string representation. </p>
+<dl class="section return"><dt>Returns</dt><dd>A string representation of the instruction. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>libgymbo/<a class="el" href="type_8h_source.html">type.h</a></li>
 </ul>
