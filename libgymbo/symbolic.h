@@ -202,15 +202,6 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         printf("---\n");
     }
 
-    if (verbose_level >= -1 && verbose_level < 2) {
-        // Since the standard output of C++ and Python use different buffers,
-        // mixing them can result in various errors. I found that putting the
-        // white break in each iteration can sometimes mitigate this problem.
-        // Note: This is not the appropriate solution and should be replaced
-        // with a more proper solution.
-        printf("");
-    }
-
     if (prog[pc].instr == InstrType::Done) {
         return Trace(state, {});
     } else if (maxDepth > 0 && maxSAT > 0 && maxUNSAT > 0) {

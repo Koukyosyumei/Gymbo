@@ -24,6 +24,8 @@
  * detect unexpected behaviors. For example, you can generate adversarial
  * examples with Gymbo by converting neural networks to imperative programs.
  *
+ * @image html /img/symbolic_nn.drawio.svg
+ *
  * > Please note that Gymbo is currently under development and may have bugs.
  * Your feedback and contributions are always greatly appreciated.
  *
