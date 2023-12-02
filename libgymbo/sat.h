@@ -8,6 +8,8 @@
 
 #include "type.h"
 
+namespace gymbosat {
+
 /**
  * @brief Enum representing different logical operation codes.
  */
@@ -126,6 +128,10 @@ class Expr : public std::enable_shared_from_this<Expr> {
     virtual std::vector<std::shared_ptr<Expr>> clauses() = 0;
 };
 
+/**
+ * @class Var
+ * @brief Class representing a variable in a logical expression.
+ */
 class Var : public Expr {
     std::string name;
 
@@ -161,6 +167,10 @@ class Var : public Expr {
     }
 };
 
+/**
+ * @class And
+ * @brief Class representing the logical AND operation.
+ */
 class And : public Expr {
    public:
     And(std::shared_ptr<Expr> left, std::shared_ptr<Expr> right)
@@ -245,6 +255,10 @@ class And : public Expr {
     std::shared_ptr<Expr> left, right;
 };
 
+/**
+ * @class Or
+ * @brief Class representing the logical OR operation.
+ */
 class Or : public Expr {
    public:
     Or(std::shared_ptr<Expr> left, std::shared_ptr<Expr> right)
@@ -339,6 +353,10 @@ class Or : public Expr {
     std::shared_ptr<Expr> left, right;
 };
 
+/**
+ * @class Not
+ * @brief Class representing the logical NOT operation.
+ */
 class Not : public Expr {
    public:
     Not(std::shared_ptr<Expr> expr) : expr(expr) {
@@ -397,6 +415,10 @@ class Not : public Expr {
     std::shared_ptr<Expr> expr;
 };
 
+/**
+ * @class Const
+ * @brief Class representing a boolean constant in a logical expression.
+ */
 class Const : public Expr {
    public:
     Const(bool value) : value(value) {
@@ -735,3 +757,4 @@ inline std::shared_ptr<Expr> pathconstraints2expr(
         return res;
     }
 }
+}  // namespace gymbosat
