@@ -11,7 +11,7 @@
 namespace gymbo {
 
 /**
- * Compiles user input into a program, returning variable counts and the
+ * @brief Compiles user input into a program, returning variable counts and the
  * compiled program.
  *
  * This function takes a user-provided input in the form of a character array
@@ -45,7 +45,7 @@ inline std::pair<std::unordered_map<std::string, int>, Prog> gcompile(
 }
 
 /**
- * Symbolically Executes a Program with Gradient Descent Optimization.
+ * @brief Symbolically Executes a Program with Gradient Descent Optimization.
  *
  * This function conducts symbolic execution of a given program while
  * simultaneously optimizing the path constraints using the provided gradient

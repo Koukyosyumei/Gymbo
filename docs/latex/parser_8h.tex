@@ -7,8 +7,7 @@ Implementation of parser.
 
 {\ttfamily \#include $<$vector$>$}\newline
 {\ttfamily \#include \char`\"{}tokenizer.\+h\char`\"{}}\newline
-Include dependency graph for parser.\+h\+:
-\nopagebreak
+Include dependency graph for parser.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -64,15 +63,15 @@ enum \mbox{\hyperlink{namespacegymbo_a115152d6d2a0bf1309bd8d3a2d48376d}{gymbo\+:
 \begin{DoxyCompactItemize}
 \item 
 Node $\ast$ \mbox{\hyperlink{namespacegymbo_a47b7251f53d2ee3e14494fb9f7a2bc72}{gymbo\+::assign}} (Token $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Parses an assignment statement from a C-\/like language program. \end{DoxyCompactList}\item 
 Node $\ast$ \mbox{\hyperlink{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}{gymbo\+::expr}} (Token $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Parses an expression from a C-\/like language program. \end{DoxyCompactList}\item 
 Node $\ast$ \mbox{\hyperlink{namespacegymbo_a93198308f32bb09209f19ea243dfbd7e}{gymbo\+::equality}} (Token $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Parses an equality expression from a C-\/like language program. \end{DoxyCompactList}\item 
 Node $\ast$ \mbox{\hyperlink{namespacegymbo_a7782376e331d91dd967f5a7b1c23c1ba}{gymbo\+::relational}} (Token $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Parses a relational expression from a C-\/like language program. \end{DoxyCompactList}\item 
 Node $\ast$ \mbox{\hyperlink{namespacegymbo_aee43a52e33ae6335a16161d16abd1079}{gymbo\+::logical}} (Token $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Parses a logical expression from a C-\/like language program. \end{DoxyCompactList}\item 
 Node $\ast$ \mbox{\hyperlink{namespacegymbo_a7b0b70c62f575e191b45877710aecc9c}{gymbo\+::add}} (Token $\ast$\&token, char $\ast$user\+\_\+input)
 \begin{DoxyCompactList}\small\item\em Parse and construct an AST node representing addition or subtraction. \end{DoxyCompactList}\item 
 Node $\ast$ \mbox{\hyperlink{namespacegymbo_a586e5510f2ba9c76f7bcb78a3dafd69a}{gymbo\+::mul}} (Token $\ast$\&token, char $\ast$user\+\_\+input)
@@ -90,7 +89,7 @@ Node $\ast$ \mbox{\hyperlink{namespacegymbo_a217eb40fcc9434dae5deb3213d57e116}{g
 Node $\ast$ \mbox{\hyperlink{namespacegymbo_acbc9e13994df75da5b689099ad3c32ce}{gymbo\+::new\+\_\+num}} (float val)
 \begin{DoxyCompactList}\small\item\em Create a new AST node representing a numeric value with the given value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a5e7728b7fbac9bf79ae665cf9b94f443}{gymbo\+::generate\+\_\+ast}} (Token $\ast$\&token, char $\ast$user\+\_\+input, std\+::vector$<$ Node $\ast$ $>$ \&code)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Parses a C-\/like language program into an AST. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 

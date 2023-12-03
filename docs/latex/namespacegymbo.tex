@@ -123,21 +123,21 @@ enum class \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225}{Sy
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{namespacegymbo_a6d18a50ff10886c6d952dd9781e99a5b}{gen\+\_\+lval}} (\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$node, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prg)
-\item 
+\begin{DoxyCompactList}\small\item\em Generates virtual instructions for a given AST node, representing the left-\/hand side of a variable assignment expression. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_ae193b98ee15e54838e9a8433aff4c379}{gen}} (\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$node, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prg)
-\item 
+\begin{DoxyCompactList}\small\item\em Generates virtual instructions for a given AST node. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}{compile\+\_\+ast}} (std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ $>$ code, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prg)
 \begin{DoxyCompactList}\small\item\em Compile the Abstract Syntax Tree (AST) into a sequence of instructions. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a47b7251f53d2ee3e14494fb9f7a2bc72}{assign}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Parses an assignment statement from a C-\/like language program. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}{expr}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Parses an expression from a C-\/like language program. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a93198308f32bb09209f19ea243dfbd7e}{equality}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Parses an equality expression from a C-\/like language program. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a7782376e331d91dd967f5a7b1c23c1ba}{relational}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Parses a relational expression from a C-\/like language program. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_aee43a52e33ae6335a16161d16abd1079}{logical}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Parses a logical expression from a C-\/like language program. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a7b0b70c62f575e191b45877710aecc9c}{add}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
 \begin{DoxyCompactList}\small\item\em Parse and construct an AST node representing addition or subtraction. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_a586e5510f2ba9c76f7bcb78a3dafd69a}{mul}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
@@ -155,11 +155,11 @@ void \mbox{\hyperlink{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}{compile\
 \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{namespacegymbo_acbc9e13994df75da5b689099ad3c32ce}{new\+\_\+num}} (float val)
 \begin{DoxyCompactList}\small\item\em Create a new AST node representing a numeric value with the given value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a5e7728b7fbac9bf79ae665cf9b94f443}{generate\+\_\+ast}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ $>$ \&code)
-\item 
+\begin{DoxyCompactList}\small\item\em Parses a C-\/like language program into an AST. \end{DoxyCompactList}\item 
 std\+::pair$<$ std\+::unordered\+\_\+map$<$ std\+::string, int $>$, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} $>$ \mbox{\hyperlink{namespacegymbo_a7b970a9d85276e2bd460b29fec762ec3}{gcompile}} (char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Compiles user input into a program, returning variable counts and the compiled program. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \mbox{\hyperlink{namespacegymbo_af40a70afb521e856bda968808b2b492e}{gexecute}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prg, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&init, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, int max\+\_\+depth, int max\+SAT, int max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
-\item 
+\begin{DoxyCompactList}\small\item\em Symbolically Executes a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{namespacegymbo_a8aa21505f18c246fc0adafb360939fe0}{run\+\_\+gymbo}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
 \begin{DoxyCompactList}\small\item\em Symbolically Execute a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a70694fc6a91234300048503b2fe15a9b}{sym\+Step}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{classgymbo_1_1Instr}{Instr}} instr, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $>$ \&result)
@@ -175,23 +175,23 @@ void \mbox{\hyperlink{namespacegymbo_afd45221e5385a56b69288384e8e393aa}{error}} 
 void \mbox{\hyperlink{namespacegymbo_a74bef918aba1493fe3b0f94b0c34a92e}{error\+\_\+at}} (char $\ast$user\+\_\+input, char $\ast$loc, char $\ast$fmt,...)
 \begin{DoxyCompactList}\small\item\em Reports an error location and exits the program. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a351aaa8f55935e9d65f1c33b143ffdc1}{consume}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$op)
-\item 
+\begin{DoxyCompactList}\small\item\em Consumes the current token if it matches {\ttfamily op}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a05bc470a265b7b40aaddd5a073c5a1d7}{consume\+\_\+tok}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, \mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}{Token\+Kind}} tok)
-\item 
+\begin{DoxyCompactList}\small\item\em Consumes the current token if it matches {\ttfamily tok}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$ \mbox{\hyperlink{namespacegymbo_aea8e842b4ef04a10618bf3f95b2de229}{consume\+\_\+ident}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token)
-\item 
+\begin{DoxyCompactList}\small\item\em Consumes the current token if it is an identifier. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_acdabc32fe6aa65db48889984321294b4}{expect}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input, char $\ast$op)
-\item 
+\begin{DoxyCompactList}\small\item\em Ensures that the current token matches {\ttfamily op}. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{namespacegymbo_a82e491fd1648ba276b4c2873e7c8b4b1}{expect\+\_\+number}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Ensures that the current token is a number. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a573f6b3a170a995133014dec63f330dc}{at\+\_\+eof}} (\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$token)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if the current token is at the end of the program. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$ \mbox{\hyperlink{namespacegymbo_a09b17fb4e9dfe3e5c6e03ad57bcfecf4}{new\+\_\+token}} (\mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}{Token\+Kind}} kind, \mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$cur, char $\ast$str, int len)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a new token and adds it as the next token of {\ttfamily cur}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a086916a92edc60e687a056603995182e}{startswith}} (char $\ast$p, char $\ast$q)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if the string {\ttfamily p} starts with the string {\ttfamily q}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$ \mbox{\hyperlink{namespacegymbo_a89c8cb7e3b04d3d02f0cba69ab593981}{tokenize}} (char $\ast$user\+\_\+input, std\+::unordered\+\_\+map$<$ std\+::string, int $>$ \&var\+\_\+counter)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Tokenizes a given string and returns a linked list of tokens. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Typedef Documentation}
@@ -567,7 +567,9 @@ A pointer to the constructed AST node.
 \doxysubsubsection{\texorpdfstring{assign()}{assign()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::assign (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})}
 
-Parses an assignment statement from a C-\/like language program.
+
+
+Parses an assignment statement from a C-\/like language program. 
 
 assign = logical (\char`\"{}=\char`\"{} assign)?
 
@@ -587,7 +589,9 @@ An AST node representing the assignment statement.
 \doxysubsubsection{\texorpdfstring{at\_eof()}{at\_eof()}}
 {\footnotesize\ttfamily bool gymbo\+::at\+\_\+eof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$}]{token }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Checks if the current token is at the end of the program.
+
+
+Checks if the current token is at the end of the program. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -622,7 +626,9 @@ This function traverses the provided AST and generates corresponding instruction
 \doxysubsubsection{\texorpdfstring{consume()}{consume()}}
 {\footnotesize\ttfamily bool gymbo\+::consume (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Consumes the current token if it matches {\ttfamily op}.
+
+
+Consumes the current token if it matches {\ttfamily op}. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -640,7 +646,9 @@ True if the token was consumed, false otherwise.
 \doxysubsubsection{\texorpdfstring{consume\_ident()}{consume\_ident()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Token}{Token}}$\ast$ gymbo\+::consume\+\_\+ident (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Consumes the current token if it is an identifier.
+
+
+Consumes the current token if it is an identifier. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -656,7 +664,9 @@ A pointer to the consumed identifier token, or NULL if the current token is not 
 \doxysubsubsection{\texorpdfstring{consume\_tok()}{consume\_tok()}}
 {\footnotesize\ttfamily bool gymbo\+::consume\+\_\+tok (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{\mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}{Token\+Kind}}}]{tok }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Consumes the current token if it matches {\ttfamily tok}.
+
+
+Consumes the current token if it matches {\ttfamily tok}. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -674,7 +684,9 @@ True if the token was consumed, false otherwise.
 \doxysubsubsection{\texorpdfstring{equality()}{equality()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::equality (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})}
 
-Parses an equality expression from a C-\/like language program.
+
+
+Parses an equality expression from a C-\/like language program. 
 
 equality = relational (\char`\"{}==\char`\"{} relational $\vert$ \char`\"{}!=\char`\"{} relational)$\ast$
 
@@ -732,7 +744,9 @@ Reports an error location and exits the program.
 \doxysubsubsection{\texorpdfstring{expect()}{expect()}}
 {\footnotesize\ttfamily void gymbo\+::expect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input,  }\item[{char $\ast$}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Ensures that the current token matches {\ttfamily op}.
+
+
+Ensures that the current token matches {\ttfamily op}. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -754,7 +768,9 @@ Ensures that the current token matches {\ttfamily op}.
 \doxysubsubsection{\texorpdfstring{expect\_number()}{expect\_number()}}
 {\footnotesize\ttfamily float gymbo\+::expect\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Ensures that the current token is a number.
+
+
+Ensures that the current token is a number. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -774,7 +790,9 @@ Ensures that the current token is a number.
 \doxysubsubsection{\texorpdfstring{expr()}{expr()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})}
 
-Parses an expression from a C-\/like language program.
+
+
+Parses an expression from a C-\/like language program. 
 
 expr = assign
 
@@ -794,7 +812,9 @@ An AST node representing the expression.
 \doxysubsubsection{\texorpdfstring{gcompile()}{gcompile()}}
 {\footnotesize\ttfamily std\+::pair$<$std\+::unordered\+\_\+map$<$std\+::string, int$>$, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}}$>$ gymbo\+::gcompile (\begin{DoxyParamCaption}\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Compiles user input into a program, returning variable counts and the compiled program.
+
+
+Compiles user input into a program, returning variable counts and the compiled program. 
 
 This function takes a user-\/provided input in the form of a character array and performs the following steps\+:
 \begin{DoxyEnumerate}
@@ -828,7 +848,9 @@ A std\+::pair containing\+:
 \doxysubsubsection{\texorpdfstring{gen()}{gen()}}
 {\footnotesize\ttfamily void gymbo\+::gen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$}]{node,  }\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Generates virtual instructions for a given AST node.
+
+
+Generates virtual instructions for a given AST node. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -843,7 +865,9 @@ Generates virtual instructions for a given AST node.
 \doxysubsubsection{\texorpdfstring{gen\_lval()}{gen\_lval()}}
 {\footnotesize\ttfamily void gymbo\+::gen\+\_\+lval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$}]{node,  }\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Generates virtual instructions for a given AST node, representing the left-\/hand side of a variable assignment expression.
+
+
+Generates virtual instructions for a given AST node, representing the left-\/hand side of a variable assignment expression. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -858,7 +882,9 @@ Generates virtual instructions for a given AST node, representing the left-\/han
 \doxysubsubsection{\texorpdfstring{generate\_ast()}{generate\_ast()}}
 {\footnotesize\ttfamily void gymbo\+::generate\+\_\+ast (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ $>$ \&}]{code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Parses a C-\/like language program into an AST.
+
+
+Parses a C-\/like language program into an AST. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -875,7 +901,9 @@ Parses a C-\/like language program into an AST.
 \doxysubsubsection{\texorpdfstring{gexecute()}{gexecute()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} gymbo\+::gexecute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prg,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{init,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{int}]{max\+\_\+depth,  }\item[{int}]{max\+SAT,  }\item[{int}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Symbolically Executes a Program with Gradient Descent Optimization.
+
+
+Symbolically Executes a Program with Gradient Descent Optimization. 
 
 This function conducts symbolic execution of a given program while simultaneously optimizing the path constraints using the provided gradient descent optimizer, {\ttfamily \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}}.
 
@@ -970,7 +998,9 @@ true if the character is an alphabetical character or underscore, false otherwis
 \doxysubsubsection{\texorpdfstring{logical()}{logical()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::logical (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})}
 
-Parses a logical expression from a C-\/like language program.
+
+
+Parses a logical expression from a C-\/like language program. 
 
 logical = equality (\char`\"{}\&\&\char`\"{} equality $\vert$ \char`\"{}$\vert$$\vert$\char`\"{} equality)$\ast$
 
@@ -1070,7 +1100,9 @@ A pointer to the newly created numeric node.
 \doxysubsubsection{\texorpdfstring{new\_token()}{new\_token()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Token}{Token}}$\ast$ gymbo\+::new\+\_\+token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a886e58c66782cda4ff74ad10b5a6b646}{Token\+Kind}}}]{kind,  }\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$}]{cur,  }\item[{char $\ast$}]{str,  }\item[{int}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Creates a new token and adds it as the next token of {\ttfamily cur}.
+
+
+Creates a new token and adds it as the next token of {\ttfamily cur}. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -1114,7 +1146,9 @@ A pointer to the constructed AST node.
 \doxysubsubsection{\texorpdfstring{relational()}{relational()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Node}{Node}} $\ast$ gymbo\+::relational (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$\&}]{token,  }\item[{char $\ast$}]{user\+\_\+input }\end{DoxyParamCaption})}
 
-Parses a relational expression from a C-\/like language program.
+
+
+Parses a relational expression from a C-\/like language program. 
 
 relational = add (\char`\"{}$<$\char`\"{} add $\vert$ \char`\"{}$<$=\char`\"{} add $\vert$ \char`\"{}$>$\char`\"{} add $\vert$ \char`\"{}$>$=\char`\"{} add)$\ast$
 
@@ -1176,7 +1210,9 @@ A trace of the symbolic execution.
 \doxysubsubsection{\texorpdfstring{startswith()}{startswith()}}
 {\footnotesize\ttfamily bool gymbo\+::startswith (\begin{DoxyParamCaption}\item[{char $\ast$}]{p,  }\item[{char $\ast$}]{q }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Checks if the string {\ttfamily p} starts with the string {\ttfamily q}.
+
+
+Checks if the string {\ttfamily p} starts with the string {\ttfamily q}. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -1235,7 +1271,9 @@ This function symbolically executes a single instruction of a program and genera
 \doxysubsubsection{\texorpdfstring{tokenize()}{tokenize()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Token}{Token}}$\ast$ gymbo\+::tokenize (\begin{DoxyParamCaption}\item[{char $\ast$}]{user\+\_\+input,  }\item[{std\+::unordered\+\_\+map$<$ std\+::string, int $>$ \&}]{var\+\_\+counter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Tokenizes a given string and returns a linked list of tokens.
+
+
+Tokenizes a given string and returns a linked list of tokens. 
 
 
 \begin{DoxyParams}{Parameters}

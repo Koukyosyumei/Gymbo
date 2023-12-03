@@ -7,8 +7,7 @@ Basic workloads of gradient-\/based symbolic execution.
 
 {\ttfamily \#include \char`\"{}compiler.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}symbolic.\+h\char`\"{}}\newline
-Include dependency graph for pipeline.\+h\+:
-\nopagebreak
+Include dependency graph for pipeline.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -24,9 +23,9 @@ Include dependency graph for pipeline.\+h\+:
 \begin{DoxyCompactItemize}
 \item 
 std\+::pair$<$ std\+::unordered\+\_\+map$<$ std\+::string, int $>$, Prog $>$ \mbox{\hyperlink{namespacegymbo_a7b970a9d85276e2bd460b29fec762ec3}{gymbo\+::gcompile}} (char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Compiles user input into a program, returning variable counts and the compiled program. \end{DoxyCompactList}\item 
 Path\+Constraints\+Table \mbox{\hyperlink{namespacegymbo_af40a70afb521e856bda968808b2b492e}{gymbo\+::gexecute}} (Prog \&prg, GDOptimizer \&optimizer, Sym\+State \&init, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, int max\+\_\+depth, int max\+SAT, int max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Symbolically Executes a Program with Gradient Descent Optimization. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}

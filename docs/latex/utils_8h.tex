@@ -43,17 +43,17 @@ float \mbox{\hyperlink{utils_8h_af99d4e3b06f181af184d171a6321f0ef}{word\+To\+Flo
 int \mbox{\hyperlink{utils_8h_a049d18da1d33ca03e055d24ba1077efc}{word\+To\+Int}} (uint32\+\_\+t word)
 \begin{DoxyCompactList}\small\item\em Converts a 32-\/bit word representation to an integer value. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{utils_8h_a4372ea01be056af0da9f922ae9b02bc2}{word\+To\+Signed\+Int}} (uint32\+\_\+t word)
-\item 
+\begin{DoxyCompactList}\small\item\em Converts a uint32\+\_\+t word to a signed int. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{utils_8h_a952ce406cfbcf5f21efd088b3b71d428}{word\+To\+Bool}} (uint32\+\_\+t word)
-\item 
+\begin{DoxyCompactList}\small\item\em Converts a uint32\+\_\+t word to a bool. \end{DoxyCompactList}\item 
 uint32\+\_\+t \mbox{\hyperlink{utils_8h_a343fa84c69adccf188397a1bef3f9d00}{bool\+To\+Word}} (bool value)
-\item 
+\begin{DoxyCompactList}\small\item\em Converts a bool to a uint32\+\_\+t word. \end{DoxyCompactList}\item 
 uint32\+\_\+t \mbox{\hyperlink{utils_8h_a7ef0b0e21084a70e584c2054b17c791a}{twos\+Complement}} (uint32\+\_\+t i)
-\item 
+\begin{DoxyCompactList}\small\item\em Returns the twos complement of a uint32\+\_\+t word. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{utils_8h_a1f85e1eb4f4909bbb74e171d0b0074c5}{is\+Negative}} (uint32\+\_\+t word)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if a uint32\+\_\+t word is negative. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{utils_8h_a86cfc81dc7063dce5ca7451c443e207e}{val\+Name}} (int i)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Generates a name for a variable based on its index. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -71,7 +71,9 @@ Hideaki Takahashi
 \doxysubsubsection{\texorpdfstring{boolToWord()}{boolToWord()}}
 {\footnotesize\ttfamily uint32\+\_\+t bool\+To\+Word (\begin{DoxyParamCaption}\item[{bool}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Converts a bool to a uint32\+\_\+t word.
+
+
+Converts a bool to a uint32\+\_\+t word. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -127,7 +129,9 @@ The {\ttfamily is\+\_\+integer} function checks if a given float value is an int
 \doxysubsubsection{\texorpdfstring{isNegative()}{isNegative()}}
 {\footnotesize\ttfamily bool is\+Negative (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Checks if a uint32\+\_\+t word is negative.
+
+
+Checks if a uint32\+\_\+t word is negative. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -143,7 +147,9 @@ True if the word is negative, false otherwise.
 \doxysubsubsection{\texorpdfstring{twosComplement()}{twosComplement()}}
 {\footnotesize\ttfamily uint32\+\_\+t twos\+Complement (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Returns the twos complement of a uint32\+\_\+t word.
+
+
+Returns the twos complement of a uint32\+\_\+t word. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -159,7 +165,9 @@ The twos complement of the word.
 \doxysubsubsection{\texorpdfstring{valName()}{valName()}}
 {\footnotesize\ttfamily std\+::string val\+Name (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Generates a name for a variable based on its index.
+
+
+Generates a name for a variable based on its index. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -175,7 +183,9 @@ A name for the variable.
 \doxysubsubsection{\texorpdfstring{wordToBool()}{wordToBool()}}
 {\footnotesize\ttfamily bool word\+To\+Bool (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Converts a uint32\+\_\+t word to a bool.
+
+
+Converts a uint32\+\_\+t word to a bool. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -231,7 +241,9 @@ The integer value.
 \doxysubsubsection{\texorpdfstring{wordToSignedInt()}{wordToSignedInt()}}
 {\footnotesize\ttfamily int word\+To\+Signed\+Int (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Converts a uint32\+\_\+t word to a signed int.
+
+
+Converts a uint32\+\_\+t word to a signed int. 
 
 
 \begin{DoxyParams}{Parameters}
