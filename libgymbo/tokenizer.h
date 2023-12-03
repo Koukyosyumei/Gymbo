@@ -96,7 +96,7 @@ struct Token {
 };
 
 /**
- * Consumes the current token if it matches `op`.
+ * @brief Consumes the current token if it matches `op`.
  *
  * @param token A pointer to the current token.
  * @param op The token to consume.
@@ -111,7 +111,7 @@ inline bool consume(Token *&token, char *op) {
 }
 
 /**
- * Consumes the current token if it matches `tok`.
+ * @brief Consumes the current token if it matches `tok`.
  *
  * @param token A pointer to the current token.
  * @param tok The token to consume.
@@ -126,7 +126,7 @@ inline bool consume_tok(Token *&token, TokenKind tok) {
 }
 
 /**
- * Consumes the current token if it is an identifier.
+ * @brief Consumes the current token if it is an identifier.
  *
  * @param token A pointer to the current token.
  * @return A pointer to the consumed identifier token, or NULL if the current
@@ -140,7 +140,7 @@ inline Token *consume_ident(Token *&token) {
 }
 
 /**
- * Ensures that the current token matches `op`.
+ * @brief Ensures that the current token matches `op`.
  *
  * @param token A pointer to the current token.
  * @param user_input The source code of the program.
@@ -157,7 +157,7 @@ inline void expect(Token *&token, char *user_input, char *op) {
 }
 
 /**
- * Ensures that the current token is a number.
+ * @brief Ensures that the current token is a number.
  *
  * @param token A pointer to the current token.
  * @param user_input The source code of the program.
@@ -174,7 +174,7 @@ inline float expect_number(Token *&token, char *user_input) {
 }
 
 /**
- * Checks if the current token is at the end of the program.
+ * @brief Checks if the current token is at the end of the program.
  *
  * @param token A pointer to the current token.
  * @return True if the current token is at the end of the program, false
@@ -183,7 +183,7 @@ inline float expect_number(Token *&token, char *user_input) {
 inline bool at_eof(Token *token) { return token->kind == TOKEN_EOF; }
 
 /**
- * Creates a new token and adds it as the next token of `cur`.
+ * @brief Creates a new token and adds it as the next token of `cur`.
  *
  * @param kind The kind of token to create.
  * @param cur A pointer to the current token.
@@ -201,7 +201,7 @@ inline Token *new_token(TokenKind kind, Token *cur, char *str, int len) {
 }
 
 /**
- * Checks if the string `p` starts with the string `q`.
+ * @brief Checks if the string `p` starts with the string `q`.
  *
  * @param p A pointer to the string to check.
  * @param q A pointer to the string to check against.
@@ -212,7 +212,7 @@ inline bool startswith(char *p, char *q) {
 }
 
 /**
- * Tokenizes a given string and returns a linked list of tokens.
+ * @brief Tokenizes a given string and returns a linked list of tokens.
  *
  * @param user_input The string to be tokenized.
  * @param var_counter The map to store the mapping from variable name to

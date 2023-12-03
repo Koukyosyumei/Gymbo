@@ -11,7 +11,7 @@
 namespace gymbo {
 
 /**
- * Generates virtual instructions for a given AST node, representing the
+ * @brief Generates virtual instructions for a given AST node, representing the
  * left-hand side of a variable assignment expression.
  *
  * @param node The AST node representing the left-hand side of a variable
@@ -27,7 +27,7 @@ inline void gen_lval(Node *node, Prog &prg) {
 }
 
 /**
- * Generates virtual instructions for a given AST node.
+ * @brief Generates virtual instructions for a given AST node.
  *
  * @param node The AST node to generate LLVM instructions for.
  * @param prg The virtual program to append the generated instructions to.

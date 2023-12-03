@@ -15,8 +15,7 @@ Implementation of tokenizer.
 {\ttfamily \#include $<$cstring$>$}\newline
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
-Include dependency graph for tokenizer.\+h\+:
-\nopagebreak
+Include dependency graph for tokenizer.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -67,23 +66,23 @@ void \mbox{\hyperlink{namespacegymbo_afd45221e5385a56b69288384e8e393aa}{gymbo\+:
 void \mbox{\hyperlink{namespacegymbo_a74bef918aba1493fe3b0f94b0c34a92e}{gymbo\+::error\+\_\+at}} (char $\ast$user\+\_\+input, char $\ast$loc, char $\ast$fmt,...)
 \begin{DoxyCompactList}\small\item\em Reports an error location and exits the program. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a351aaa8f55935e9d65f1c33b143ffdc1}{gymbo\+::consume}} (Token $\ast$\&token, char $\ast$op)
-\item 
+\begin{DoxyCompactList}\small\item\em Consumes the current token if it matches {\ttfamily op}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a05bc470a265b7b40aaddd5a073c5a1d7}{gymbo\+::consume\+\_\+tok}} (Token $\ast$\&token, Token\+Kind tok)
-\item 
+\begin{DoxyCompactList}\small\item\em Consumes the current token if it matches {\ttfamily tok}. \end{DoxyCompactList}\item 
 Token $\ast$ \mbox{\hyperlink{namespacegymbo_aea8e842b4ef04a10618bf3f95b2de229}{gymbo\+::consume\+\_\+ident}} (Token $\ast$\&token)
-\item 
+\begin{DoxyCompactList}\small\item\em Consumes the current token if it is an identifier. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_acdabc32fe6aa65db48889984321294b4}{gymbo\+::expect}} (Token $\ast$\&token, char $\ast$user\+\_\+input, char $\ast$op)
-\item 
+\begin{DoxyCompactList}\small\item\em Ensures that the current token matches {\ttfamily op}. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{namespacegymbo_a82e491fd1648ba276b4c2873e7c8b4b1}{gymbo\+::expect\+\_\+number}} (Token $\ast$\&token, char $\ast$user\+\_\+input)
-\item 
+\begin{DoxyCompactList}\small\item\em Ensures that the current token is a number. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a573f6b3a170a995133014dec63f330dc}{gymbo\+::at\+\_\+eof}} (Token $\ast$token)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if the current token is at the end of the program. \end{DoxyCompactList}\item 
 Token $\ast$ \mbox{\hyperlink{namespacegymbo_a09b17fb4e9dfe3e5c6e03ad57bcfecf4}{gymbo\+::new\+\_\+token}} (Token\+Kind kind, Token $\ast$cur, char $\ast$str, int len)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a new token and adds it as the next token of {\ttfamily cur}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a086916a92edc60e687a056603995182e}{gymbo\+::startswith}} (char $\ast$p, char $\ast$q)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if the string {\ttfamily p} starts with the string {\ttfamily q}. \end{DoxyCompactList}\item 
 Token $\ast$ \mbox{\hyperlink{namespacegymbo_a89c8cb7e3b04d3d02f0cba69ab593981}{gymbo\+::tokenize}} (char $\ast$user\+\_\+input, std\+::unordered\+\_\+map$<$ std\+::string, int $>$ \&var\+\_\+counter)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Tokenizes a given string and returns a linked list of tokens. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}

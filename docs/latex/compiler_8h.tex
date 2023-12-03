@@ -7,8 +7,7 @@ Implementation of compiler.
 
 {\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}type.\+h\char`\"{}}\newline
-Include dependency graph for compiler.\+h\+:
-\nopagebreak
+Include dependency graph for compiler.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,9 +30,9 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{namespacegymbo_a6d18a50ff10886c6d952dd9781e99a5b}{gymbo\+::gen\+\_\+lval}} (Node $\ast$node, Prog \&prg)
-\item 
+\begin{DoxyCompactList}\small\item\em Generates virtual instructions for a given AST node, representing the left-\/hand side of a variable assignment expression. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_ae193b98ee15e54838e9a8433aff4c379}{gymbo\+::gen}} (Node $\ast$node, Prog \&prg)
-\item 
+\begin{DoxyCompactList}\small\item\em Generates virtual instructions for a given AST node. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}{gymbo\+::compile\+\_\+ast}} (std\+::vector$<$ Node $\ast$ $>$ code, Prog \&prg)
 \begin{DoxyCompactList}\small\item\em Compile the Abstract Syntax Tree (AST) into a sequence of instructions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 

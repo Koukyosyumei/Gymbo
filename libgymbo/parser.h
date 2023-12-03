@@ -199,7 +199,7 @@ Node *new_num(float val) {
 }
 
 /**
- * Parses an expression from a C-like language program.
+ * @brief Parses an expression from a C-like language program.
  *
  * expr = assign
  *
@@ -212,7 +212,7 @@ Node *expr(Token *&token, char *user_input) {
 }
 
 /**
- * Parses an assignment statement from a C-like language program.
+ * @brief Parses an assignment statement from a C-like language program.
  *
  * assign = logical ("=" assign)?
  *
@@ -229,7 +229,7 @@ Node *assign(Token *&token, char *user_input) {
 }
 
 /**
- * Parses a logical expression from a C-like language program.
+ * @brief Parses a logical expression from a C-like language program.
  *
  * logical = equality ("&&" equality | "||" equality)*
  *
@@ -251,7 +251,7 @@ Node *logical(Token *&token, char *user_input) {
 }
 
 /**
- * Parses an equality expression from a C-like language program.
+ * @brief Parses an equality expression from a C-like language program.
  *
  * equality = relational ("==" relational | "!=" relational)*
  *
@@ -273,7 +273,7 @@ Node *equality(Token *&token, char *user_input) {
 }
 
 /**
- * Parses a relational expression from a C-like language program.
+ * @brief Parses a relational expression from a C-like language program.
  *
  * relational = add ("<" add | "<=" add | ">" add | ">=" add)*
  *
@@ -430,7 +430,7 @@ inline Node *stmt(Token *&token, char *user_input) {
 }
 
 /**
- * Parses a C-like language program into an AST.
+ * @brief Parses a C-like language program into an AST.
  *
  * @param token The first token in the program.
  * @param user_input The source code of the program.

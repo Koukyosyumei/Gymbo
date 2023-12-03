@@ -63,7 +63,7 @@ inline float wordToFloat(uint32_t word) {
 inline int wordToInt(uint32_t word) { return static_cast<int>(word); }
 
 /**
- * Converts a uint32_t word to a signed int.
+ * @brief Converts a uint32_t word to a signed int.
  *
  * @param word The uint32_t word to convert.
  * @return The signed int equivalent of the word.
@@ -77,7 +77,7 @@ inline int wordToSignedInt(uint32_t word) {
 }
 
 /**
- * Converts a uint32_t word to a bool.
+ * @brief Converts a uint32_t word to a bool.
  *
  * @param word The uint32_t word to convert.
  * @return The bool equivalent of the word.
@@ -85,7 +85,7 @@ inline int wordToSignedInt(uint32_t word) {
 inline bool wordToBool(uint32_t word) { return word != 0; }
 
 /**
- * Converts a bool to a uint32_t word.
+ * @brief Converts a bool to a uint32_t word.
  *
  * @param value The bool to convert.
  * @return The uint32_t word equivalent of the bool.
@@ -93,7 +93,7 @@ inline bool wordToBool(uint32_t word) { return word != 0; }
 inline uint32_t boolToWord(bool value) { return value ? 1 : 0; }
 
 /**
- * Returns the twos complement of a uint32_t word.
+ * @brief Returns the twos complement of a uint32_t word.
  *
  * @param i The uint32_t word to get the twos complement of.
  * @return The twos complement of the word.
@@ -101,7 +101,7 @@ inline uint32_t boolToWord(bool value) { return value ? 1 : 0; }
 inline uint32_t twosComplement(uint32_t i) { return 1 + ~i; }
 
 /**
- * Checks if a uint32_t word is negative.
+ * @brief Checks if a uint32_t word is negative.
  *
  * @param word The uint32_t word to check.
  * @return True if the word is negative, false otherwise.
@@ -109,7 +109,7 @@ inline uint32_t twosComplement(uint32_t i) { return 1 + ~i; }
 inline bool isNegative(uint32_t word) { return (word & 0x80000000) != 0; }
 
 /**
- * Generates a name for a variable based on its index.
+ * @brief Generates a name for a variable based on its index.
  *
  * @param i The index of the variable.
  * @return A name for the variable.
