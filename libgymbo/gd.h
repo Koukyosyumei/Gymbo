@@ -11,6 +11,16 @@
 
 namespace gymbo {
 
+struct Optimizer {
+    Optimizer(){};
+
+    virtual bool eval(std::vector<Sym> &path_constraints,
+                      std::unordered_map<int, float> params) = 0;
+    virtual bool solve(std::vector<Sym> &path_constraints,
+                       std::unordered_map<int, float> &params,
+                       bool is_init_params_const = true) = 0;
+};
+
 /**
  * @brief Gradient Descent Optimizer for Symbolic Path Constraints
  *
@@ -25,7 +35,7 @@ namespace gymbo {
  * constraints. The optimizer iteratively updates the parameters until the
  * constraints are satisfied or a maximum number of epochs is reached.
  */
-struct GDOptimizer {
+struct GDOptimizer : public Optimizer {
     int num_epochs;    ///< Maximum number of optimization epochs.
     float lr;          ///< Learning rate for gradient descent.
     float eps;         ///< The smallest positive value.

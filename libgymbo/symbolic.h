@@ -9,7 +9,7 @@
 #include "sat.h"
 
 namespace gymbo {
-Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
+Trace run_gymbo(Prog &prog, Optimizer &optimizer, SymState &state,
                 std::unordered_set<int> &taregt_pcs,
                 PathConstraintsTable &constraints_cache, int maxDepth,
                 int &maxSAT, int &maxUNSAT, int max_num_trials,
@@ -62,7 +62,7 @@ void initialize_params(std::unordered_map<int, float> &params, SymState &state,
  * @param verbose_level The level of verbosity.
  * @return A trace of the symbolic execution.
  */
-inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
+inline Trace run_gymbo(Prog &prog, Optimizer &optimizer, SymState &state,
                        std::unordered_set<int> &target_pcs,
                        PathConstraintsTable &constraints_cache, int maxDepth,
                        int &maxSAT, int &maxUNSAT, int max_num_trials,
