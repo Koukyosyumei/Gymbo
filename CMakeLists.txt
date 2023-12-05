@@ -11,6 +11,8 @@ set(TEST_DIR  "test")
 
 include(GNUInstallDirs)
 
+enable_language(CUDA)
+
 add_subdirectory(${SOURCE_DIR})
 add_subdirectory(${CUDA_SOURCE_DIR})
 
