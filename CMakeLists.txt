@@ -3,28 +3,22 @@ project("libgymbo" LANGUAGES C CXX)
 
 # find_package(Threads REQUIRED)
 
-cmake_policy(SET CMP0146 NEW)
-cmake_policy(SET CMP0135 NEW)
-cmake_policy(SET CMP0104 NEW)
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -mtune=native -march=native")
 
 set(SOURCE_DIR  "libgymbo")
-set(CUDA_SOURCE_DIR "libcugymbo")
+set(CUDA_SOURCE_DIR, "libcugymbo")
 set(TEST_DIR  "test")
 
 include(GNUInstallDirs)
-
-enable_language(CUDA)
 
 add_subdirectory(${SOURCE_DIR})
 add_subdirectory(${CUDA_SOURCE_DIR})
 
 add_executable(gymbo gymbo.cpp)
-add_executable(cugymbo cugymbo.cu)
+add_executable(cugymbo cugymbo.cpp)
 
 target_link_libraries(gymbo libgymbo)
-target_link_libraries(cugymbo libgymbo libcugymbo)
+target_link_libraries(cugymbo libcugymbo)
 
 enable_testing()
 add_subdirectory(${TEST_DIR})
