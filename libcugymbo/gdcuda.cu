@@ -1,5 +1,5 @@
 #include "cuda_runtime.h"
-#include "CudaVecDouble.h"
+#include "gdcuda.h"
 
 __global__ void kernel_vecDouble(int *in, int *out, const int n)
 {
