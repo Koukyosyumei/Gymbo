@@ -45,6 +45,7 @@ bool GDOptimizerCUDA::solve(std::vector<Sym> &path_constraints,
                             std::unordered_map<int, float> &params,
                             bool is_init_params_const) {
     // ...
+    bool is_sat = false;
 
     // Allocate GPU memory for path constraints
     float *d_path_constraints;
@@ -58,7 +59,7 @@ bool GDOptimizerCUDA::solve(std::vector<Sym> &path_constraints,
                    cudaMemcpyHostToDevice);
     }
 
-    num_params = params.size();
+    int num_params = params.size();
     std::vector<float> h_params;
     for (auto &p : params) {
         h_params.emplace_back(p.second);
@@ -69,7 +70,7 @@ bool GDOptimizerCUDA::solve(std::vector<Sym> &path_constraints,
     cudaMalloc((void **)&d_params, num_params * sizeof(float));
 
     // Copy parameter values from CPU to GPU
-    cudaMemcpy(d_params, h_params, num_params * sizeof(float),
+    cudaMemcpy(d_params, h_params.data(), num_params * sizeof(float),
                cudaMemcpyHostToDevice);
 
     // Launch the CUDA kernel
@@ -81,7 +82,7 @@ bool GDOptimizerCUDA::solve(std::vector<Sym> &path_constraints,
     cudaDeviceSynchronize();  // Wait for the kernel to finish
 
     // Copy the results back from GPU to CPU
-    cudaMemcpy(h_params, d_params, num_params * sizeof(float),
+    cudaMemcpy(h_params.data(), d_params, num_params * sizeof(float),
                cudaMemcpyDeviceToHost);
 
     // Free GPU memory
