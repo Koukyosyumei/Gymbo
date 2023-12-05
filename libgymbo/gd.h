@@ -12,7 +12,49 @@
 namespace gymbo {
 
 struct Optimizer {
-    Optimizer(){};
+    int num_epochs;    ///< Maximum number of optimization epochs.
+    float lr;          ///< Learning rate for gradient descent.
+    float eps;         ///< The smallest positive value.
+    float param_low;   ///< Lower bound for parameter initialization.
+    float param_high;  ///< Upper bound for parameter initialization.
+    bool sign_grad;    ///< If true, use sign gradient descent. Otherwise, use
+                       ///< standard gradient descent. (default true).
+    bool init_param_uniform_int;  ///< Flag indicating whether initial parameter
+                                  ///< values are drawn from the uniform int
+                                  ///< distribution or uniform real distribution
+                                  ///< (default true).
+    int seed;          ///< Random seed for initializing parameter values.
+    int num_used_itr;  ///< Number of used iterations during optimization.
+
+    /**
+     * @brief Constructor for Optimizer.
+     *
+     * @param num_epochs Maximum number of optimization epochs (default: 100).
+     * @param lr Learning rate for gradient descent (default: 1).
+     * @param eps The smallest positive value of the target type
+     * (default: 1.0).
+     * @param param_low Lower bound for parameter initialization (default: -10).
+     * @param param_high Upper bound for parameter initialization (default: 10).
+     * @param sign_grad If true, use sign gradient descent. Otherwise, use
+     * standard gradient descent. (default true).
+     * @param init_param_uniform_int Flag indicating whether initial parameter
+     * values are drawn from the uniform int distribution or uniform real
+     * distribution (default true).
+     * @param seed Random seed for initializing parameter values (default: 42).
+     */
+    Optimizer(int num_epochs = 100, float lr = 1.0, float eps = 1.0,
+              float param_low = -10.0, float param_high = 10.0,
+              bool sign_grad = true, bool init_param_uniform_int = true,
+              int seed = 42)
+        : num_epochs(num_epochs),
+          lr(lr),
+          eps(eps),
+          param_low(param_low),
+          param_high(param_high),
+          sign_grad(sign_grad),
+          init_param_uniform_int(init_param_uniform_int),
+          seed(seed),
+          num_used_itr(0) {}
 
     virtual bool eval(std::vector<Sym> &path_constraints,
                       std::unordered_map<int, float> params) = 0;
@@ -36,49 +78,7 @@ struct Optimizer {
  * constraints are satisfied or a maximum number of epochs is reached.
  */
 struct GDOptimizer : public Optimizer {
-    int num_epochs;    ///< Maximum number of optimization epochs.
-    float lr;          ///< Learning rate for gradient descent.
-    float eps;         ///< The smallest positive value.
-    float param_low;   ///< Lower bound for parameter initialization.
-    float param_high;  ///< Upper bound for parameter initialization.
-    bool sign_grad;    ///< If true, use sign gradient descent. Otherwise, use
-                       ///< standard gradient descent. (default true).
-    bool init_param_uniform_int;  ///< Flag indicating whether initial parameter
-                                  ///< values are drawn from the uniform int
-                                  ///< distribution or uniform real distribution
-                                  ///< (default true).
-    int seed;          ///< Random seed for initializing parameter values.
-    int num_used_itr;  ///< Number of used iterations during optimization.
-
-    /**
-     * @brief Constructor for GDOptimizer.
-     *
-     * @param num_epochs Maximum number of optimization epochs (default: 100).
-     * @param lr Learning rate for gradient descent (default: 1).
-     * @param eps The smallest positive value of the target type
-     * (default: 1.0).
-     * @param param_low Lower bound for parameter initialization (default: -10).
-     * @param param_high Upper bound for parameter initialization (default: 10).
-     * @param sign_grad If true, use sign gradient descent. Otherwise, use
-     * standard gradient descent. (default true).
-     * @param init_param_uniform_int Flag indicating whether initial parameter
-     * values are drawn from the uniform int distribution or uniform real
-     * distribution (default true).
-     * @param seed Random seed for initializing parameter values (default: 42).
-     */
-    GDOptimizer(int num_epochs = 100, float lr = 1.0, float eps = 1.0,
-                float param_low = -10.0, float param_high = 10.0,
-                bool sign_grad = true, bool init_param_uniform_int = true,
-                int seed = 42)
-        : num_epochs(num_epochs),
-          lr(lr),
-          eps(eps),
-          param_low(param_low),
-          param_high(param_high),
-          sign_grad(sign_grad),
-          init_param_uniform_int(init_param_uniform_int),
-          seed(seed),
-          num_used_itr(0) {}
+    using Optimizer::Optimizer;
 
     /**
      * @brief Evaluate if path constraints are satisfied for given parameters.
