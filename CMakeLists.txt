@@ -6,7 +6,7 @@ project("libgymbo" LANGUAGES C CXX)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -mtune=native -march=native")
 
 set(SOURCE_DIR  "libgymbo")
-set(CUDA_SOURCE_DIR, "libcugymbo")
+set(CUDA_SOURCE_DIR "libcugymbo")
 set(TEST_DIR  "test")
 
 include(GNUInstallDirs)
