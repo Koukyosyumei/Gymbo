@@ -3,6 +3,10 @@ project("libgymbo" LANGUAGES C CXX)
 
 # find_package(Threads REQUIRED)
 
+cmake_policy(SET CMP0146 NEW)
+cmake_policy(SET CMP0135 NEW)
+cmake_policy(SET CMP0104 NEW)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -mtune=native -march=native")
 
 set(SOURCE_DIR  "libgymbo")
