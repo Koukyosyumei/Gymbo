@@ -1,3 +1,4 @@
+import time
 import random
 
 from sklearn.neural_network import MLPClassifier
@@ -47,7 +48,7 @@ if __name__ == "__main__":
     param_low = X.min()
     param_high = X.max()
 
-    num_symbolic_vars = 1
+    num_symbolic_vars = 5
     symbolic_vars_id = random.sample(list(range(X_train.shape[1])), num_symbolic_vars)
 
     idx = 0
@@ -105,6 +106,7 @@ if __name__ == "__main__":
     )
 
     # Execute attack
+    start = time.time()
     target_pcs = {target_pc}
     constraints = plg.gexecute(
         prg,
@@ -119,6 +121,9 @@ if __name__ == "__main__":
         use_dpll,
         verbose_level,
     )
+    end = time.time()
+
+    print(end - start)
 
     # Check the performance of generated adversarial examples
     print("Result")
