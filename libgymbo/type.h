@@ -721,6 +721,13 @@ struct SymState {
           path_constraints(path_constraints) {}
 
     /**
+     * @brief Create a copy object.
+     */
+    SymState * copy() {
+        return new SymState(pc, var_cnt, mem, smem, symbolic_stack, path_constraints);
+    }
+
+    /**
      * @brief Sets a concrete value for a variable in the symbolic state.
      * @param var_id Index of the variable.
      * @param val Concrete value to set.
