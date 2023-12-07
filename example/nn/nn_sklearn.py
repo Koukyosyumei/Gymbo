@@ -1,3 +1,4 @@
+import time
 import random
 
 from sklearn.neural_network import MLPClassifier
@@ -105,6 +106,7 @@ if __name__ == "__main__":
     )
 
     # Execute attack
+    start = time.time()
     target_pcs = {target_pc}
     constraints = plg.gexecute(
         prg,
@@ -119,6 +121,9 @@ if __name__ == "__main__":
         use_dpll,
         verbose_level,
     )
+    end = time.time()
+
+    print(f"Execution Time [s]: {end - start}")
 
     # Check the performance of generated adversarial examples
     print("Result")

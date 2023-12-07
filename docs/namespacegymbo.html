@@ -270,9 +270,9 @@ Functions</h2></td></tr>
 <tr class="memitem:af40a70afb521e856bda968808b2b492e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#af40a70afb521e856bda968808b2b492e">gexecute</a> (<a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;prg, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;init, std::unordered_set&lt; int &gt; &amp;target_pcs, int max_depth, int maxSAT, int maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
 <tr class="memdesc:af40a70afb521e856bda968808b2b492e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Executes a Program with Gradient Descent Optimization.  <a href="namespacegymbo.html#af40a70afb521e856bda968808b2b492e">More...</a><br /></td></tr>
 <tr class="separator:af40a70afb521e856bda968808b2b492e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8aa21505f18c246fc0adafb360939fe0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Trace.html">Trace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a8aa21505f18c246fc0adafb360939fe0">run_gymbo</a> (<a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;prog, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, std::unordered_set&lt; int &gt; &amp;target_pcs, <a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;constraints_cache, int maxDepth, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
-<tr class="memdesc:a8aa21505f18c246fc0adafb360939fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Program with Gradient Descent Optimization.  <a href="namespacegymbo.html#a8aa21505f18c246fc0adafb360939fe0">More...</a><br /></td></tr>
-<tr class="separator:a8aa21505f18c246fc0adafb360939fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa13abbc332896d34bc320950bdacfdf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Trace.html">Trace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#aa13abbc332896d34bc320950bdacfdf9">run_gymbo</a> (<a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;prog, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, std::unordered_set&lt; int &gt; &amp;target_pcs, <a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;constraints_cache, int maxDepth, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level, bool return_trace=false)</td></tr>
+<tr class="memdesc:aa13abbc332896d34bc320950bdacfdf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Program with Gradient Descent Optimization.  <a href="namespacegymbo.html#aa13abbc332896d34bc320950bdacfdf9">More...</a><br /></td></tr>
+<tr class="separator:aa13abbc332896d34bc320950bdacfdf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70694fc6a91234300048503b2fe15a9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a70694fc6a91234300048503b2fe15a9b">symStep</a> (<a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, <a class="el" href="classgymbo_1_1Instr.html">Instr</a> instr, std::vector&lt; <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &gt; &amp;result)</td></tr>
 <tr class="memdesc:a70694fc6a91234300048503b2fe15a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Single Instruction of a Program.  <a href="namespacegymbo.html#a70694fc6a91234300048503b2fe15a9b">More...</a><br /></td></tr>
 <tr class="separator:a70694fc6a91234300048503b2fe15a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1890,8 +1890,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8aa21505f18c246fc0adafb360939fe0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8aa21505f18c246fc0adafb360939fe0">&#9670;&nbsp;</a></span>run_gymbo()</h2>
+<a id="aa13abbc332896d34bc320950bdacfdf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa13abbc332896d34bc320950bdacfdf9">&#9670;&nbsp;</a></span>run_gymbo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1969,7 +1969,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>verbose_level</em>&#160;</td>
+          <td class="paramname"><em>verbose_level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>return_trace</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2000,6 +2006,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">ignore_memory</td><td>If set to true, constraints derived from memory will be ignored. </td></tr>
     <tr><td class="paramname">use_dpll</td><td>If set to true, use DPLL to decide the initial assignment for each term. </td></tr>
     <tr><td class="paramname">verbose_level</td><td>The level of verbosity. </td></tr>
+    <tr><td class="paramname">return_trace</td><td>If set to true, save the trace at each pc and return them (default false). </td></tr>
   </table>
   </dd>
 </dl>
