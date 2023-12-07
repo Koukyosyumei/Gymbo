@@ -6,11 +6,12 @@
 
 #include <unistd.h>
 
+#include <chrono>
 #include <unordered_map>
 #include <unordered_set>
 
-#include "libgymbo/symbolic.h"
 #include "libgymbo/compiler.h"
+#include "libgymbo/symbolic.h"
 
 char *user_input;
 int max_depth = 65536;
@@ -93,6 +94,9 @@ void parse_args(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
     parse_args(argc, argv);
 
+    std::chrono::system_clock::time_point start, end;
+    start = std::chrono::system_clock::now();
+
     std::unordered_map<std::string, int> var_counter;
     std::vector<gymbo::Node *> code;
     // std::unordered_map<int, std::string> id2varname;
@@ -131,6 +135,12 @@ int main(int argc, char *argv[]) {
                      use_dpll, verbose_level);
     printf("---------------------------\n");
 
+    end = std::chrono::system_clock::now();
+    float elapsed =
+        std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+            .count();
+    printf("Search time is complete %f [ms] \n", elapsed);
+    
     printf("Result Summary\n");
     printf("#Loops Spent for Gradient Descent: %d\n", optimizer.num_used_itr);
     int num_unique_path_constraints = cache_constraints.size();
@@ -144,7 +154,7 @@ int main(int argc, char *argv[]) {
         }
     }
     if (num_unique_path_constraints == 0) {
-        printf("No Path Constraints Found");
+        printf("No Path Constraints Found\n");
     } else {
         printf("#Total Path Constraints: %d\n", num_unique_path_constraints);
         printf("#SAT: %d\n", num_sat);
@@ -179,4 +189,5 @@ int main(int argc, char *argv[]) {
             }
         }
     }
+
 }

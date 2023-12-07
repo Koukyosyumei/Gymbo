@@ -14,7 +14,7 @@ Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                 PathConstraintsTable &constraints_cache, int maxDepth,
                 int &maxSAT, int &maxUNSAT, int max_num_trials,
                 bool ignore_memory, bool use_dpll, int verbose_level);
-void symStep(SymState &state, Instr instr, std::vector<SymState> &);
+void symStep(SymState &state, Instr &instr, std::vector<SymState> &);
 
 /**
  * @brief Initialize Parameter Values from Memory.
@@ -209,7 +209,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         std::vector<SymState> newStates;
         symStep(state, instr, newStates);
         std::vector<Trace> children;
-        for (SymState newState : newStates) {
+        for (SymState &newState : newStates) {
             Trace child = run_gymbo(prog, optimizer, newState, target_pcs,
                                     constraints_cache, maxDepth - 1, maxSAT,
                                     maxUNSAT, max_num_trials, ignore_memory,
@@ -234,7 +234,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
  * @param result A list of new symbolic states, each representing a possible
  * outcome.
  */
-inline void symStep(SymState &state, Instr instr,
+inline void symStep(SymState &state, Instr &instr,
                     std::vector<SymState> &result) {
     SymState new_state = state;
 
