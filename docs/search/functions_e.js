@@ -8,6 +8,6 @@ var searchData=
   ['stmt_359',['stmt',['../namespacegymbo.html#a0269bd238863b0c8e036e5fb7d66fa79',1,'gymbo']]],
   ['sym_360',['Sym',['../structgymbo_1_1Sym.html#a0c34d36593fb6e46865fd7059483cce3',1,'gymbo::Sym::Sym(SymType symtype, Sym *left)'],['../structgymbo_1_1Sym.html#a7345ab5bd49026430f5730121205a3df',1,'gymbo::Sym::Sym(SymType symtype, Word32 val)'],['../structgymbo_1_1Sym.html#ae8788816347c9199724d3eb5809cac81',1,'gymbo::Sym::Sym(SymType symtype, Sym *left, Sym *right)'],['../structgymbo_1_1Sym.html#ade0810a1af9d390d536ad41c6f6253ab',1,'gymbo::Sym::Sym()']]],
   ['sym2expr_361',['sym2expr',['../namespacegymbosat.html#a03e10dde5ead3c1638a3959f61df655a',1,'gymbosat']]],
-  ['symstate_362',['SymState',['../structgymbo_1_1SymState.html#a8cfdb464cd87ab23ce3f4f4861b7ade2',1,'gymbo::SymState::SymState()'],['../structgymbo_1_1SymState.html#a60eed9cb787c8a7b529391fec6b1ca2b',1,'gymbo::SymState::SymState(int pc, int var_cnt, Mem mem, SMem smem, Linkedlist&lt; Sym &gt; symbolic_stack, std::vector&lt; Sym &gt; path_constraints)']]],
-  ['symstep_363',['symStep',['../namespacegymbo.html#a70694fc6a91234300048503b2fe15a9b',1,'gymbo']]]
+  ['symstate_362',['SymState',['../structgymbo_1_1SymState.html#a8cfdb464cd87ab23ce3f4f4861b7ade2',1,'gymbo::SymState::SymState()'],['../structgymbo_1_1SymState.html#a7658bdf9fa79166f800f7607684a581c',1,'gymbo::SymState::SymState(int pc, int var_cnt, Mem &amp;mem, SMem &amp;smem, Linkedlist&lt; Sym &gt; &amp;symbolic_stack, std::vector&lt; Sym &gt; &amp;path_constraints)']]],
+  ['symstep_363',['symStep',['../namespacegymbo.html#a8de7e0823e44be83e0579851777fc0a1',1,'gymbo']]]
 ];

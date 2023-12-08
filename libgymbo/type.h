@@ -710,14 +710,22 @@ struct SymState {
      * @param symbolic_stack Symbolic stack.
      * @param path_constraints Vector of symbolic path constraints.
      */
-    SymState(int pc, int var_cnt, Mem mem, SMem smem,
-             Linkedlist<Sym> symbolic_stack, std::vector<Sym> path_constraints)
+    SymState(int pc, int var_cnt, Mem &mem, SMem &smem,
+             Linkedlist<Sym> &symbolic_stack,
+             std::vector<Sym> &path_constraints)
         : pc(pc),
           var_cnt(var_cnt),
           mem(mem),
           smem(smem),
           symbolic_stack(symbolic_stack),
           path_constraints(path_constraints) {}
+
+    /**
+     * @brief Create a copy object.
+     */
+    SymState * copy() {
+        return new SymState(pc, var_cnt, mem, smem, symbolic_stack, path_constraints);
+    }
 
     /**
      * @brief Sets a concrete value for a variable in the symbolic state.

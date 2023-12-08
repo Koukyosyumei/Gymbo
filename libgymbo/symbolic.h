@@ -15,7 +15,7 @@ Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                 int &maxSAT, int &maxUNSAT, int max_num_trials,
                 bool ignore_memory, bool use_dpll, int verbose_level,
                 bool return_trace);
-void symStep(SymState &state, Instr instr, std::vector<SymState> &);
+void symStep(SymState *state, Instr &instr, std::vector<SymState *> &);
 
 /**
  * @brief Initialize Parameter Values from Memory.
@@ -72,10 +72,12 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        bool ignore_memory, bool use_dpll, int verbose_level,
                        bool return_trace = false) {
     int pc = state.pc;
-    if (verbose_level >= 2) {
+    if (verbose_level >= -1) {
         printf("pc: %d, ", pc);
         prog[pc].print();
-        state.print();
+        if (verbose_level >= 2) {
+            state.print();
+        }
     }
 
     bool is_target = ((target_pcs.size() == 0) ||
@@ -210,11 +212,11 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         return Trace(state, {});
     } else if (maxDepth > 0 && maxSAT > 0 && maxUNSAT > 0) {
         Instr instr = prog[pc];
-        std::vector<SymState> newStates;
-        symStep(state, instr, newStates);
+        std::vector<SymState *> newStates;
+        symStep(&state, instr, newStates);
         std::vector<Trace> children;
-        for (SymState newState : newStates) {
-            Trace child = run_gymbo(prog, optimizer, newState, target_pcs,
+        for (SymState *newState : newStates) {
+            Trace child = run_gymbo(prog, optimizer, *newState, target_pcs,
                                     constraints_cache, maxDepth - 1, maxSAT,
                                     maxUNSAT, max_num_trials, ignore_memory,
                                     use_dpll, verbose_level, return_trace);
@@ -240,214 +242,209 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
  * @param result A list of new symbolic states, each representing a possible
  * outcome.
  */
-inline void symStep(SymState &state, Instr instr,
-                    std::vector<SymState> &result) {
-    SymState new_state = state;
+inline void symStep(SymState *state, Instr &instr,
+                    std::vector<SymState *> &result) {
+    // SymState state = state;
 
     switch (instr.instr) {
         case InstrType::Not: {
-            Sym *w = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            new_state.symbolic_stack.push(Sym(SymType::SNot, w));
-            result.emplace_back(new_state);
+            Sym *w = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc++;
+            state->symbolic_stack.push(Sym(SymType::SNot, w));
+            result.emplace_back(state);
             break;
         }
         case InstrType::Add: {
-            Sym *r = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            Sym *l = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            new_state.symbolic_stack.push(Sym(SymType::SAdd, l, r));
-            result.emplace_back(new_state);
+            Sym *r = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            Sym *l = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc++;
+            state->symbolic_stack.push(Sym(SymType::SAdd, l, r));
+            result.emplace_back(state);
             break;
         }
         case InstrType::Sub: {
-            Sym *r = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            Sym *l = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            new_state.symbolic_stack.push(Sym(SymType::SSub, l, r));
-            result.emplace_back(new_state);
+            Sym *r = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            Sym *l = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc++;
+            state->symbolic_stack.push(Sym(SymType::SSub, l, r));
+            result.emplace_back(state);
             break;
         }
         case InstrType::Mul: {
-            Sym *r = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            Sym *l = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            new_state.symbolic_stack.push(Sym(SymType::SMul, l, r));
-            result.emplace_back(new_state);
+            Sym *r = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            Sym *l = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc++;
+            state->symbolic_stack.push(Sym(SymType::SMul, l, r));
+            result.emplace_back(state);
             break;
         }
         case InstrType::And: {
-            Sym *r = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            Sym *l = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            new_state.symbolic_stack.push(Sym(SymType::SAnd, l, r));
-            result.emplace_back(new_state);
+            Sym *r = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            Sym *l = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc++;
+            state->symbolic_stack.push(Sym(SymType::SAnd, l, r));
+            result.emplace_back(state);
             break;
         }
         case InstrType::Or: {
-            Sym *r = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            Sym *l = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            new_state.symbolic_stack.push(Sym(SymType::SOr, l, r));
-            result.emplace_back(new_state);
+            Sym *r = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            Sym *l = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc++;
+            state->symbolic_stack.push(Sym(SymType::SOr, l, r));
+            result.emplace_back(state);
             break;
         }
         case InstrType::Lt: {
-            Sym *r = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            Sym *l = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            new_state.symbolic_stack.push(Sym(SymType::SLt, l, r));
-            result.emplace_back(new_state);
+            Sym *r = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            Sym *l = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc++;
+            state->symbolic_stack.push(Sym(SymType::SLt, l, r));
+            result.emplace_back(state);
             break;
         }
         case InstrType::Le: {
-            Sym *r = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            Sym *l = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            new_state.symbolic_stack.push(Sym(SymType::SLe, l, r));
-            result.emplace_back(new_state);
+            Sym *r = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            Sym *l = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc++;
+            state->symbolic_stack.push(Sym(SymType::SLe, l, r));
+            result.emplace_back(state);
             break;
         }
         case InstrType::Eq: {
-            Sym *r = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            Sym *l = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            new_state.symbolic_stack.push(Sym(SymType::SEq, l, r));
-            result.emplace_back(new_state);
+            Sym *r = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            Sym *l = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc++;
+            state->symbolic_stack.push(Sym(SymType::SEq, l, r));
+            result.emplace_back(state);
             break;
         }
         case InstrType::Swap: {
-            Sym *x = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            Sym *y = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            new_state.symbolic_stack.push(*x);
-            new_state.symbolic_stack.push(*y);
-            result.emplace_back(new_state);
+            Sym *x = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            Sym *y = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc++;
+            state->symbolic_stack.push(*x);
+            state->symbolic_stack.push(*y);
+            result.emplace_back(state);
             break;
         }
         case InstrType::Store: {
-            Sym *addr = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            Sym *w = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
+            Sym *addr = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            Sym *w = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
             if (w->symtype == SymType::SCon) {
-                if (new_state.mem.find(wordToInt(addr->var_idx)) ==
-                    new_state.mem.end()) {
-                    new_state.mem.emplace(wordToInt(addr->var_idx), w->word);
+                if (state->mem.find(wordToInt(addr->var_idx)) ==
+                    state->mem.end()) {
+                    state->mem.emplace(wordToInt(addr->var_idx), w->word);
                 } else {
-                    new_state.mem.at(wordToInt(addr->var_idx)) = w->word;
+                    state->mem.at(wordToInt(addr->var_idx)) = w->word;
                 }
             } else if ((w->symtype == SymType::SAny) &&
-                       (new_state.mem.find(wordToInt(w->var_idx)) !=
-                        new_state.mem.end())) {
-                if (new_state.mem.find(wordToInt(addr->var_idx)) ==
-                    new_state.mem.end()) {
-                    new_state.mem.emplace(wordToInt(addr->var_idx),
-                                          new_state.mem[wordToInt(w->var_idx)]);
+                       (state->mem.find(wordToInt(w->var_idx)) !=
+                        state->mem.end())) {
+                if (state->mem.find(wordToInt(addr->var_idx)) ==
+                    state->mem.end()) {
+                    state->mem.emplace(wordToInt(addr->var_idx),
+                                       state->mem[wordToInt(w->var_idx)]);
                 } else {
-                    new_state.mem.at(wordToInt(addr->var_idx)) =
-                        new_state.mem[wordToInt(w->var_idx)];
+                    state->mem.at(wordToInt(addr->var_idx)) =
+                        state->mem[wordToInt(w->var_idx)];
                 }
             } else {
-                if (new_state.smem.find(wordToInt(addr->var_idx)) ==
-                    new_state.smem.end()) {
-                    if (new_state.smem.find(wordToInt(w->var_idx)) ==
-                        new_state.smem.end()) {
-                        new_state.smem.emplace(wordToInt(addr->var_idx), *w);
+                if (state->smem.find(wordToInt(addr->var_idx)) ==
+                    state->smem.end()) {
+                    if (state->smem.find(wordToInt(w->var_idx)) ==
+                        state->smem.end()) {
+                        state->smem.emplace(wordToInt(addr->var_idx), *w);
                     } else {
-                        new_state.smem.emplace(
-                            wordToInt(addr->var_idx),
-                            new_state.smem[wordToInt(w->var_idx)]);
+                        state->smem.emplace(wordToInt(addr->var_idx),
+                                            state->smem[wordToInt(w->var_idx)]);
                     }
                 } else {
-                    if (new_state.smem.find(wordToInt(w->var_idx)) ==
-                        new_state.smem.end()) {
-                        new_state.smem.at(wordToInt(addr->var_idx)) = *w;
+                    if (state->smem.find(wordToInt(w->var_idx)) ==
+                        state->smem.end()) {
+                        state->smem.at(wordToInt(addr->var_idx)) = *w;
                     } else {
-                        new_state.smem.at(wordToInt(addr->var_idx)) =
-                            new_state.smem[wordToInt(w->var_idx)];
+                        state->smem.at(wordToInt(addr->var_idx)) =
+                            state->smem[wordToInt(w->var_idx)];
                     }
                 }
             }
-            new_state.pc++;
-            result.emplace_back(new_state);
+            state->pc++;
+            result.emplace_back(state);
             break;
         }
         case InstrType::Load: {
-            Sym *addr = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            if (new_state.smem.find(wordToInt(addr->word)) !=
-                new_state.smem.end()) {
-                new_state.symbolic_stack.push(
-                    new_state.smem[wordToInt(addr->word)]);
+            Sym *addr = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            if (state->smem.find(wordToInt(addr->word)) != state->smem.end()) {
+                state->symbolic_stack.push(state->smem[wordToInt(addr->word)]);
             } else {
-                new_state.symbolic_stack.push(Sym(SymType::SAny, addr->word));
+                state->symbolic_stack.push(Sym(SymType::SAny, addr->word));
             }
-            new_state.pc++;
-            result.emplace_back(new_state);
+            state->pc++;
+            result.emplace_back(state);
             break;
         }
         case InstrType::Read: {
-            new_state.symbolic_stack.push(
-                Sym(SymType::SAny, new_state.var_cnt));
-            new_state.pc++;
-            new_state.var_cnt++;
-            result.emplace_back(new_state);
+            state->symbolic_stack.push(Sym(SymType::SAny, state->var_cnt));
+            state->pc++;
+            state->var_cnt++;
+            result.emplace_back(state);
             break;
         }
         case InstrType::Push: {
-            new_state.symbolic_stack.push(Sym(SymType::SCon, instr.word));
-            new_state.pc++;
-            result.emplace_back(new_state);
+            state->symbolic_stack.push(Sym(SymType::SCon, instr.word));
+            state->pc++;
+            result.emplace_back(state);
             break;
         }
         case InstrType::Dup: {
-            Sym *w = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            new_state.symbolic_stack.push(*w);
-            new_state.symbolic_stack.push(*w);
-            result.emplace_back(new_state);
+            Sym *w = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc++;
+            state->symbolic_stack.push(*w);
+            state->symbolic_stack.push(*w);
+            result.emplace_back(state);
             break;
         }
         case InstrType::Pop: {
-            new_state.symbolic_stack.pop();
-            new_state.pc++;
-            result.emplace_back(new_state);
+            state->symbolic_stack.pop();
+            state->pc++;
+            result.emplace_back(state);
             break;
         }
         case InstrType::JmpIf: {
-            Sym *cond =
-                new_state.symbolic_stack.back()->psimplify(new_state.mem);
-            new_state.symbolic_stack.pop();
-            Sym *addr = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
+            Sym *cond = state->symbolic_stack.back()->psimplify(state->mem);
+            state->symbolic_stack.pop();
+            Sym *addr = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
             if (addr->symtype == SymType::SCon) {
-                SymState true_state = new_state;
-                SymState false_state = new_state;
-                true_state.pc += wordToInt(addr->word - 2);
-                true_state.path_constraints.emplace_back(*cond);
-                false_state.pc++;
-                false_state.path_constraints.emplace_back(
+                SymState *true_state = state->copy();
+                SymState *false_state = state->copy();
+                true_state->pc += wordToInt(addr->word - 2);
+                true_state->path_constraints.emplace_back(*cond);
+                false_state->pc++;
+                false_state->path_constraints.emplace_back(
                     Sym(SymType::SNot, cond));
                 result.emplace_back(true_state);
                 result.emplace_back(false_state);
@@ -455,15 +452,15 @@ inline void symStep(SymState &state, Instr instr,
             break;
         }
         case InstrType::Jmp: {
-            Sym *addr = new_state.symbolic_stack.back();
-            new_state.symbolic_stack.pop();
-            new_state.pc += wordToInt(addr->word);
-            result.emplace_back(new_state);
+            Sym *addr = state->symbolic_stack.back();
+            state->symbolic_stack.pop();
+            state->pc += wordToInt(addr->word);
+            result.emplace_back(state);
             break;
         }
         case InstrType::Nop: {
-            new_state.pc++;
-            result.emplace_back(new_state);
+            state->pc++;
+            result.emplace_back(state);
             break;
         }
         case InstrType::Done: {

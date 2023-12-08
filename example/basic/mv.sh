@@ -1,2 +1,2 @@
-prg=$(cat < example/mv.gym)
+prg=$(cat < example/basic/mv.gym)
 ./gymbo "${prg}" -v 2

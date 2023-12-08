@@ -1,3 +1,3 @@
-prg=$(cat < example/multi.gym)
+prg=$(cat < example/basic/multi.gym)
 ./gymbo "${prg}" -v 2
 

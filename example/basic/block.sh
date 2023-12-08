@@ -1,2 +1,2 @@
-prg=$(cat < example/block.gym)
-./gymbo "${prg}" -v 2
+prg=$(cat < example/basic/block.gym)
+./gymbo "${prg}" -v -1

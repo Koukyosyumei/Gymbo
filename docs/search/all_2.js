@@ -11,5 +11,6 @@ var searchData=
   ['const_20',['Const',['../classgymbosat_1_1Const.html',1,'gymbosat']]],
   ['consume_21',['consume',['../namespacegymbo.html#a351aaa8f55935e9d65f1c33b143ffdc1',1,'gymbo']]],
   ['consume_5fident_22',['consume_ident',['../namespacegymbo.html#aea8e842b4ef04a10618bf3f95b2de229',1,'gymbo']]],
-  ['consume_5ftok_23',['consume_tok',['../namespacegymbo.html#a05bc470a265b7b40aaddd5a073c5a1d7',1,'gymbo']]]
+  ['consume_5ftok_23',['consume_tok',['../namespacegymbo.html#a05bc470a265b7b40aaddd5a073c5a1d7',1,'gymbo']]],
+  ['copy_24',['copy',['../structgymbo_1_1SymState.html#a5184bb760ff61b03f6573d59824fd9c3',1,'gymbo::SymState']]]
 ];
