@@ -123,7 +123,7 @@ if __name__ == "__main__":
     )
     end = time.time()
 
-    print(end - start)
+    print(f"Execution Time [s]: {end - start}")
 
     # Check the performance of generated adversarial examples
     print("Result")

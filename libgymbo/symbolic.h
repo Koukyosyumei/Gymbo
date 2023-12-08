@@ -13,7 +13,8 @@ Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                 std::unordered_set<int> &taregt_pcs,
                 PathConstraintsTable &constraints_cache, int maxDepth,
                 int &maxSAT, int &maxUNSAT, int max_num_trials,
-                bool ignore_memory, bool use_dpll, int verbose_level);
+                bool ignore_memory, bool use_dpll, int verbose_level,
+                bool return_trace);
 void symStep(SymState *state, Instr &instr, std::vector<SymState *> &);
 
 /**
@@ -60,13 +61,16 @@ void initialize_params(std::unordered_map<int, float> &params, SymState &state,
  * @param use_dpll If set to true, use DPLL to decide the initial assignment for
  * each term.
  * @param verbose_level The level of verbosity.
+ * @param return_trace If set to true, save the trace at each pc and return them
+ * (default false).
  * @return A trace of the symbolic execution.
  */
 inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        std::unordered_set<int> &target_pcs,
                        PathConstraintsTable &constraints_cache, int maxDepth,
                        int &maxSAT, int &maxUNSAT, int max_num_trials,
-                       bool ignore_memory, bool use_dpll, int verbose_level) {
+                       bool ignore_memory, bool use_dpll, int verbose_level,
+                       bool return_trace = false) {
     int pc = state.pc;
     if (verbose_level >= -1) {
         printf("pc: %d, ", pc);
@@ -210,14 +214,16 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         Instr instr = prog[pc];
         std::vector<SymState *> newStates;
         symStep(&state, instr, newStates);
-        // std::vector<Trace> children;
+        std::vector<Trace> children;
         for (SymState *newState : newStates) {
             run_gymbo(prog, optimizer, *newState, target_pcs, constraints_cache,
                       maxDepth - 1, maxSAT, maxUNSAT, max_num_trials,
                       ignore_memory, use_dpll, verbose_level);
-            // children.push_back(child);
+            if (return_trace) {
+                children.push_back(child);
+            }
         }
-        return Trace(state, {});
+        return Trace(state, children);
     } else {
         return Trace(state, {});
     }
