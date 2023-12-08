@@ -695,11 +695,13 @@ struct SymState {
     Linkedlist<Sym> symbolic_stack; /**< Symbolic stack. */
     std::vector<Sym>
         path_constraints; /**< Vector of symbolic path constraints. */
+    int num_sat_comb; /**< Total number of value combinations for probabilistic
+                         variables*/
 
     /**
      * @brief Default constructor for symbolic state.
      */
-    SymState() : pc(0), var_cnt(0){};
+    SymState() : pc(0), var_cnt(0), num_sat_comb(0){};
 
     /**
      * @brief Constructor for symbolic state with specified values.
@@ -718,13 +720,15 @@ struct SymState {
           mem(mem),
           smem(smem),
           symbolic_stack(symbolic_stack),
-          path_constraints(path_constraints) {}
+          path_constraints(path_constraints),
+          num_sat_comb(1) {}
 
     /**
      * @brief Create a copy object.
      */
-    SymState * copy() {
-        return new SymState(pc, var_cnt, mem, smem, symbolic_stack, path_constraints);
+    SymState *copy() {
+        return new SymState(pc, var_cnt, mem, smem, symbolic_stack,
+                            path_constraints);
     }
 
     /**
@@ -802,4 +806,19 @@ struct Trace {
         }
     }
 };
+
+struct DiscreteDist {
+    std::vector<int> vals;
+    DiscreteDist() {}
+};
+
+struct DiscreteUniformDist : public DiscreteDist {
+    int low, high;
+    DiscreteUniformDist(int low, int high) : low(low), high(high) {
+        for (int i = low; i <= high; i++) {
+            vals.emplace_back(i);
+        }
+    }
+};
+
 }  // namespace gymbo
