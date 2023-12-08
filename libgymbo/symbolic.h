@@ -216,9 +216,10 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         symStep(&state, instr, newStates);
         std::vector<Trace> children;
         for (SymState *newState : newStates) {
-            run_gymbo(prog, optimizer, *newState, target_pcs, constraints_cache,
-                      maxDepth - 1, maxSAT, maxUNSAT, max_num_trials,
-                      ignore_memory, use_dpll, verbose_level);
+            Trace child = run_gymbo(prog, optimizer, *newState, target_pcs,
+                                    constraints_cache, maxDepth - 1, maxSAT,
+                                    maxUNSAT, max_num_trials, ignore_memory,
+                                    use_dpll, verbose_level, return_trace);
             if (return_trace) {
                 children.push_back(child);
             }
