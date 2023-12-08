@@ -162,7 +162,7 @@ std\+::pair$<$ std\+::unordered\+\_\+map$<$ std\+::string, int $>$, \mbox{\hyper
 \begin{DoxyCompactList}\small\item\em Symbolically Executes a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{namespacegymbo_aa13abbc332896d34bc320950bdacfdf9}{run\+\_\+gymbo}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level, bool return\+\_\+trace=false)
 \begin{DoxyCompactList}\small\item\em Symbolically Execute a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespacegymbo_a70694fc6a91234300048503b2fe15a9b}{sym\+Step}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{classgymbo_1_1Instr}{Instr}} instr, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $>$ \&result)
+void \mbox{\hyperlink{namespacegymbo_a8de7e0823e44be83e0579851777fc0a1}{sym\+Step}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$state, \mbox{\hyperlink{classgymbo_1_1Instr}{Instr}} \&instr, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$ $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Symbolically Execute a Single Instruction of a Program. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}{initialize\+\_\+params}} (std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, bool ignore\+\_\+memory)
 \begin{DoxyCompactList}\small\item\em Initialize Parameter Values from Memory. \end{DoxyCompactList}\item 
@@ -1246,11 +1246,11 @@ Parse and construct an AST node representing a statement.
 \begin{DoxyReturn}{Returns}
 A pointer to the constructed AST node. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegymbo_a70694fc6a91234300048503b2fe15a9b}\label{namespacegymbo_a70694fc6a91234300048503b2fe15a9b}} 
+\mbox{\Hypertarget{namespacegymbo_a8de7e0823e44be83e0579851777fc0a1}\label{namespacegymbo_a8de7e0823e44be83e0579851777fc0a1}} 
 \index{gymbo@{gymbo}!symStep@{symStep}}
 \index{symStep@{symStep}!gymbo@{gymbo}}
 \doxysubsubsection{\texorpdfstring{symStep()}{symStep()}}
-{\footnotesize\ttfamily void gymbo\+::sym\+Step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{\mbox{\hyperlink{classgymbo_1_1Instr}{Instr}}}]{instr,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void gymbo\+::sym\+Step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$}]{state,  }\item[{\mbox{\hyperlink{classgymbo_1_1Instr}{Instr}} \&}]{instr,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$ $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
