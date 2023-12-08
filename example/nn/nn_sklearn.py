@@ -48,7 +48,7 @@ if __name__ == "__main__":
     param_low = X.min()
     param_high = X.max()
 
-    num_symbolic_vars = 5
+    num_symbolic_vars = 1
     symbolic_vars_id = random.sample(list(range(X_train.shape[1])), num_symbolic_vars)
 
     idx = 0

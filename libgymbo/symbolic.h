@@ -68,10 +68,12 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        int &maxSAT, int &maxUNSAT, int max_num_trials,
                        bool ignore_memory, bool use_dpll, int verbose_level) {
     int pc = state.pc;
-    if (verbose_level >= 2) {
+    if (verbose_level >= -1) {
         printf("pc: %d, ", pc);
         prog[pc].print();
-        state.print();
+        if (verbose_level >= 2) {
+            state.print();
+        }
     }
 
     bool is_target = ((target_pcs.size() == 0) ||
@@ -210,10 +212,9 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         symStep(&state, instr, newStates);
         // std::vector<Trace> children;
         for (SymState *newState : newStates) {
-            run_gymbo(prog, optimizer, *newState, target_pcs,
-                                    constraints_cache, maxDepth - 1, maxSAT,
-                                    maxUNSAT, max_num_trials, ignore_memory,
-                                    use_dpll, verbose_level);
+            run_gymbo(prog, optimizer, *newState, target_pcs, constraints_cache,
+                      maxDepth - 1, maxSAT, maxUNSAT, max_num_trials,
+                      ignore_memory, use_dpll, verbose_level);
             // children.push_back(child);
         }
         return Trace(state, {});
