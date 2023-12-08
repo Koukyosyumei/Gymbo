@@ -33,7 +33,7 @@
  *
  * ```bash
  * git clone https://github.com/Koukyosyumei/Gymbo.git
- * ./build.sh
+ * ./script/build.sh
  * ```
  *
  * @section grammar_sec Input Source Code Grammar

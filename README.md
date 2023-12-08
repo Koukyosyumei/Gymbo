@@ -17,7 +17,7 @@ One practical usage of Gymbo is debugging ML models like neural networks to dete
 
 ```bash
 git clone https://github.com/Koukyosyumei/Gymbo.git
-./build.sh
+./script/build.sh
 ```
 
 ## Input Source Code Grammar
@@ -182,16 +182,6 @@ adv_condition = (
 optimizer = plg.GDOptimizer(num_itrs, step_size, ...)
 var_counter, prg = plg.gcompile(mlp_code)
 constraints = plg.gexecute(prg, init_symstate, optimizer, target_pcs, ...)
-```
-
-## Document
-
-- Manual Build
-
-```
-sudo apt-get install doxygen
-
-doxygen Doxyfile
 ```
 
 ## Acknowledgement
