@@ -72,13 +72,13 @@ class Instr {
     /**
      * @brief Prints a human-readable representation of the instruction.
      */
-    void print() { printf("%s\n", toString().c_str()); }
+    void print() const { printf("%s\n", toString().c_str()); }
 
     /**
      * @brief Converts the instruction to a string representation.
      * @return A string representation of the instruction.
      */
-    std::string toString() {
+    std::string toString() const {
         switch (instr) {
             case (InstrType::Add): {
                 return "add";
@@ -318,7 +318,7 @@ struct Sym {
      * @brief Gathers variable indices from the symbolic expression.
      * @param result Set to store gathered variable indices.
      */
-    void gather_var_ids(std::unordered_set<int> &result) {
+    void gather_var_ids(std::unordered_set<int> &result) const {
         switch (symtype) {
             case (SymType::SAdd): {
                 left->gather_var_ids(result);
@@ -482,7 +482,7 @@ struct Sym {
      * @param eps The smallest positive value of the target type.
      * @return Result of the symbolic expression evaluation.
      */
-    float eval(const std::unordered_map<int, float> &cvals, float eps) {
+    float eval(const std::unordered_map<int, float> &cvals, float eps) const {
         switch (symtype) {
             case (SymType::SAdd): {
                 return left->eval(cvals, eps) + right->eval(cvals, eps);
@@ -533,7 +533,7 @@ struct Sym {
      * @param eps Small value to handle numerical instability.
      * @return Gradient of the symbolic expression.
      */
-    Grad grad(const std::unordered_map<int, float> &cvals, float eps) {
+    Grad grad(const std::unordered_map<int, float> &cvals, float eps) const {
         switch (symtype) {
             case (SymType::SAdd): {
                 return left->grad(cvals, eps) + right->grad(cvals, eps);
@@ -607,7 +607,7 @@ struct Sym {
      * representations.
      * @return String representation of the symbolic expression.
      */
-    std::string toString(bool convert_to_num) {
+    std::string toString (bool convert_to_num) const {
         std::string result = "";
         float tmp_word;
 
@@ -766,41 +766,51 @@ struct SymState {
     }
 
     /**
-     * @brief Prints a human-readable representation of the symbolic state.
+     * @brief Returns the human-redable string representation.
      */
-    void print() {
-        printf("Stack: [");
+    std::string toString() const {
+        std::string expr = "Stack: [";
         LLNode<Sym> *tmp = symbolic_stack.head;
         while (tmp != NULL) {
-            printf("%s, ", tmp->data.toString(false).c_str());
+            expr += (tmp->data.toString(false) + ", ");
             tmp = tmp->next;
         }
-        printf("]\n");
+        expr += "]\n";
 
-        printf("Concrete Memory: {");
+        expr += "Concrete Memory: {";
         float tmp_word;
-        for (auto t : mem) {
+        for (auto &t : mem) {
             tmp_word = wordToFloat(t.second);
             if (is_integer(tmp_word)) {
-                printf("var_%d: %d, ", (int)t.first, (int)tmp_word);
+                expr += ("var_" + std::to_string(((int)t.first)) + ": " +
+                         std::to_string((int)tmp_word)) + ", ";
             } else {
-                printf("var_%d: %f, ", (int)t.first, tmp_word);
+                expr += ("var_" + std::to_string(((int)t.first)) + ": " +
+                         std::to_string(tmp_word)) + ", ";
             }
         }
-        printf("}\n");
+        expr += "}\n";
 
-        printf("Symbolic Memory: {");
-        for (auto t : smem) {
-            printf("var_%d: %s, ", (int)t.first,
-                   t.second.toString(true).c_str());
+        expr += "Symbolic Memory: {";
+        for (auto &t : smem) {
+            expr += "var_" + std::to_string((int)t.first) + ": " + t.second.toString(true) + ", ";
         }
-        printf("}\n");
+        expr += "}\n";
 
-        printf("Path Constraints: ");
-        for (Sym &sym : path_constraints) {
-            printf("(%s) && ", sym.toString(true).c_str());
+        expr += "Path Constraints: ";
+        for (const Sym &sym : path_constraints) {
+            expr += "(" + sym.toString(true) + ") && ";
         }
-        printf(" 1\n");
+        expr += " 1\n";
+
+        return expr;
+    }
+
+    /**
+     * @brief Prints a human-readable representation of the symbolic state.
+     */
+    void print() const {
+        printf("%s", toString().c_str());
     }
 };
 
@@ -823,10 +833,10 @@ struct Trace {
      * @brief Prints a human-readable representation of the trace.
      * @param indent_cnt Number of spaces to indent the output.
      */
-    void print(int indent_cnt = 0) {
+    void print(int indent_cnt = 0) const {
         printf("PC: %d\n", data.pc);
         data.print();
-        for (Trace &trace : children) {
+        for (const Trace &trace : children) {
             trace.print();
         }
     }
