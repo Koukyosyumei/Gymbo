@@ -64,7 +64,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
     bool is_sat = true;
 
     if (state.path_constraints.size() != 0 && is_target) {
-        std::string constraints_str = state.toString();
+        std::string constraints_str = state.toString(false);
 
         std::unordered_map<int, float> params = {};
         initialize_params(params, state, ignore_memory);

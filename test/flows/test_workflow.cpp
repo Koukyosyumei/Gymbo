@@ -66,6 +66,6 @@ TEST(GymboWorlflowTest, Block) {
         }
     }
 
-    ASSERT_EQ(num_sat, 9);
+    ASSERT_EQ(num_sat, 7);
     ASSERT_EQ(num_unsat, 3);
 }

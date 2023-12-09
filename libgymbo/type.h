@@ -791,32 +791,37 @@ struct SymState {
     /**
      * @brief Returns the human-redable string representation of concrete
      * memory, symbolic memory and path constraints.
+     *
+     * @param include_memory If set to true, add the concrete and symbolic
+     * memories (default true).
      */
-    std::string toString() const {
+    std::string toString(bool include_memory = true) const {
         std::string expr = "";
 
-        expr += "Concrete Memory: {";
-        float tmp_word;
-        for (auto &t : mem) {
-            tmp_word = wordToFloat(t.second);
-            if (is_integer(tmp_word)) {
-                expr += ("var_" + std::to_string(((int)t.first)) + ": " +
-                         std::to_string((int)tmp_word)) +
-                        ", ";
-            } else {
-                expr += ("var_" + std::to_string(((int)t.first)) + ": " +
-                         std::to_string(tmp_word)) +
-                        ", ";
+        if (include_memory) {
+            expr += "Concrete Memory: {";
+            float tmp_word;
+            for (auto &t : mem) {
+                tmp_word = wordToFloat(t.second);
+                if (is_integer(tmp_word)) {
+                    expr += ("var_" + std::to_string(((int)t.first)) + ": " +
+                             std::to_string((int)tmp_word)) +
+                            ", ";
+                } else {
+                    expr += ("var_" + std::to_string(((int)t.first)) + ": " +
+                             std::to_string(tmp_word)) +
+                            ", ";
+                }
             }
-        }
-        expr += "}\n";
+            expr += "}\n";
 
-        expr += "Symbolic Memory: {";
-        for (auto &t : smem) {
-            expr += "var_" + std::to_string((int)t.first) + ": " +
-                    t.second.toString(true) + ", ";
+            expr += "Symbolic Memory: {";
+            for (auto &t : smem) {
+                expr += "var_" + std::to_string((int)t.first) + ": " +
+                        t.second.toString(true) + ", ";
+            }
+            expr += "}\n";
         }
-        expr += "}\n";
 
         expr += "Path Constraints: ";
         for (const Sym &sym : path_constraints) {
