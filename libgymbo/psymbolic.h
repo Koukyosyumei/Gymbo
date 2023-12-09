@@ -15,6 +15,17 @@
 
 namespace gymbo {
 
+/**
+ * @brief Compute the Cartesian product of a vector of vectors of integers.
+ *
+ * This function takes a vector of vectors of integers and computes their
+ * Cartesian product. The result is a vector of vectors, where each inner vector
+ * represents a combination of elements from the input vectors.
+ *
+ * @param vectors A vector of vectors of integers for which the Cartesian
+ * product is computed.
+ * @return The Cartesian product as a vector of vectors of integers.
+ */
 inline std::vector<std::vector<int>> cartesianProduct(
     const std::vector<std::vector<int>> &vectors) {
     std::vector<std::vector<int>> result;
@@ -43,6 +54,27 @@ inline std::vector<std::vector<int>> cartesianProduct(
     return result;
 }
 
+/**
+ * @brief Perform probabilistic branching based on symbolic execution.
+ *
+ * Given a set of variable distributions, symbolic state, and path constraints,
+ * this function performs probabilistic branching. It computes the number of
+ * satisfying combinations for probabilistic variables and updates the symbolic
+ * state accordingly.
+ *
+ * @param var2dist A map of variable IDs to their discrete distributions.
+ * @param D A vector of vectors representing the all possible combinations of
+ * probabilistic variables.
+ * @param state The symbolic state for the current execution.
+ * @param optimizer The optimizer used for guided symbolic execution.
+ * @param max_num_trials The maximum number of trials for satisfiability
+ * checking.
+ * @param use_dpll Flag indicating whether to use the DPLL solver for
+ * satisfiability.
+ * @param params Initial parameters for symbolic execution.
+ * @param unique_var_ids Set of unique variable IDs for probabilistic branching.
+ * @return The number of satisfying combinations after probabilistic branching.
+ */
 inline int pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
                    std::vector<std::vector<int>> &D, SymState state,
                    GDOptimizer &optimizer, int max_num_trials, bool use_dpll,
@@ -83,6 +115,32 @@ inline int pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
     return num_sat;
 }
 
+/**
+ * @brief Run probabilistic symbolic execution on a program.
+ *
+ * This function performs probabilistic symbolic execution on a given program, considering
+ * variable distributions, symbolic states, and path constraints. It explores different
+ * execution paths and updates the constraints and probabilities accordingly.
+ *
+ * @param prog The program to be executed symbolically.
+ * @param var2dist Map of variable IDs to their discrete distributions.
+ * @param D A vector of vectors representing the all possible combinations of
+ * probabilistic variables.
+ * @param optimizer The optimizer used for guided symbolic execution.
+ * @param state The initial symbolic state for execution.
+ * @param target_pcs Set of target program counters for analysis.
+ * @param constraints_cache Cache for storing and reusing path constraints.
+ * @param prob_constraints_table Table for storing probabilistic path constraints.
+ * @param maxDepth Maximum exploration depth during symbolic execution.
+ * @param maxSAT Maximum number of satisfiable paths to explore.
+ * @param maxUNSAT Maximum number of unsatisfiable paths to explore.
+ * @param max_num_trials Maximum number of trials for satisfiability checking.
+ * @param ignore_memory Flag to ignore memory updates during symbolic execution.
+ * @param use_dpll Flag indicating whether to use the DPLL solver for satisfiability.
+ * @param verbose_level Verbosity level for printing debug information.
+ * @param return_trace Flag to indicate whether to return the symbolic execution trace.
+ * @return The symbolic execution trace containing states and child traces.
+ */
 inline Trace run_pgymbo(Prog &prog,
                         std::unordered_map<int, DiscreteDist> &var2dist,
                         std::vector<std::vector<int>> &D,

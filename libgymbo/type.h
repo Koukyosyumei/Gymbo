@@ -849,23 +849,33 @@ struct SymState {
 };
 
 /**
- * @brief Alias for a table of path constraints. The key is the string
- * representation of the constraint and the value is the pair of its
- * satifiability and the map whose key is the variable id and the value is the
- * concrete value that makes the constraint true
- * ({str_of_constraints: {is_sat: {var_id: var_val}}}).
+ * @brief Alias for a table of path constraints.
+ *
+ * This table uses the string representation of the constraint as the key.
+ * The corresponding value is a pair consisting of:
+ *  - The satisfiability of the constraint.
+ *  - A map where the key is the variable ID, and the value is the concrete
+ * value that makes the constraint true.
+ *
+ * The overall structure of the table is as follows:
+ *   {str_of_constraints: {is_sat: {var_id: var_val}}}
  */
 using PathConstraintsTable =
     std::unordered_map<std::string,
                        std::pair<bool, std::unordered_map<int, float>>>;
 
 /**
- * @brief Alias for a table of probabilistic path constraints. The key is the
- * program counter, and the values is the vector of tuples whose first element
- * is the path constraint, the second element is the concrete memory, the thrid
- * element is the probability of rechability under the satisfying universal
- * variables
- * ({pc: {(constraints, memory, probability)}}).
+ * @brief Alias for a table of probabilistic path constraints.
+ *
+ * This table uses the program counter as the key, and the corresponding values
+ * are vectors of tuples. Each tuple contains three elements:
+ *  - The first element is the path constraint.
+ *  - The second element is the concrete memory.
+ *  - The third element is the probability of reachability under satisfying
+ * universal variables.
+ *
+ * The overall structure of the table is as follows:
+ *   {pc: {(constraints, memory, probability)}}
  */
 using ProbPathConstraintsTable =
     std::unordered_map<int, std::vector<std::tuple<Sym, Mem, float>>>;
