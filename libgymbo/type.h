@@ -607,7 +607,7 @@ struct Sym {
      * representations.
      * @return String representation of the symbolic expression.
      */
-    std::string toString (bool convert_to_num) const {
+    std::string toString(bool convert_to_num) const {
         std::string result = "";
         float tmp_word;
 
@@ -766,16 +766,11 @@ struct SymState {
     }
 
     /**
-     * @brief Returns the human-redable string representation.
+     * @brief Returns the human-redable string representation of concrete
+     * memory, symbolic memory and path constraints.
      */
     std::string toString() const {
-        std::string expr = "Stack: [";
-        LLNode<Sym> *tmp = symbolic_stack.head;
-        while (tmp != NULL) {
-            expr += (tmp->data.toString(false) + ", ");
-            tmp = tmp->next;
-        }
-        expr += "]\n";
+        std::string expr = "";
 
         expr += "Concrete Memory: {";
         float tmp_word;
@@ -783,17 +778,20 @@ struct SymState {
             tmp_word = wordToFloat(t.second);
             if (is_integer(tmp_word)) {
                 expr += ("var_" + std::to_string(((int)t.first)) + ": " +
-                         std::to_string((int)tmp_word)) + ", ";
+                         std::to_string((int)tmp_word)) +
+                        ", ";
             } else {
                 expr += ("var_" + std::to_string(((int)t.first)) + ": " +
-                         std::to_string(tmp_word)) + ", ";
+                         std::to_string(tmp_word)) +
+                        ", ";
             }
         }
         expr += "}\n";
 
         expr += "Symbolic Memory: {";
         for (auto &t : smem) {
-            expr += "var_" + std::to_string((int)t.first) + ": " + t.second.toString(true) + ", ";
+            expr += "var_" + std::to_string((int)t.first) + ": " +
+                    t.second.toString(true) + ", ";
         }
         expr += "}\n";
 
@@ -810,6 +808,14 @@ struct SymState {
      * @brief Prints a human-readable representation of the symbolic state.
      */
     void print() const {
+        printf("Stack: [");
+        LLNode<Sym> *tmp = symbolic_stack.head;
+        while (tmp != NULL) {
+            printf("%s, ", tmp->data.toString(false).c_str());
+            tmp = tmp->next;
+        }
+        printf("]\n");
+
         printf("%s", toString().c_str());
     }
 };

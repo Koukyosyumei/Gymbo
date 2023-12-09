@@ -108,12 +108,7 @@ inline Trace run_pgymbo(Prog &prog,
                       (target_pcs.find(pc) != target_pcs.end()));
 
     if (state.path_constraints.size() != 0 && is_target) {
-        std::string constraints_str = "";
-        for (int i = 0; i < state.path_constraints.size(); i++) {
-            constraints_str +=
-                "(" + state.path_constraints[i].toString(true) + ") && ";
-        }
-        constraints_str += " 1";
+        std::string constraints_str = state.toString();
 
         std::unordered_map<int, float> params = {};
         initialize_params(params, state, ignore_memory);

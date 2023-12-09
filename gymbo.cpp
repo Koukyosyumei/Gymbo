@@ -140,7 +140,7 @@ int main(int argc, char *argv[]) {
         std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
             .count();
     printf("Search time is complete %f [ms] \n", elapsed);
-    
+
     printf("Result Summary\n");
     printf("#Loops Spent for Gradient Descent: %d\n", optimizer.num_used_itr);
     int num_unique_path_constraints = cache_constraints.size();
@@ -165,11 +165,11 @@ int main(int argc, char *argv[]) {
             //    id2varname.emplace(vc.second, vc.first);
             // }
 
-            printf("List of SAT Path Constraints\n");
+            printf("List of SAT Path Constraints\n----\n");
             for (auto &cc : cache_constraints) {
                 if (cc.second.first) {
-                    printf("# %s\n", cc.first.c_str());
-                    printf("   {");
+                    printf("%s", cc.first.c_str());
+                    printf("SAT Params: {");
                     for (auto p : cc.second.second) {
                         if (is_integer(p.second)) {
                             printf("var_%d:%d, ", p.first, (int)p.second);
@@ -178,16 +178,17 @@ int main(int argc, char *argv[]) {
                         }
                     }
                     printf("}\n");
+                    printf("----\n");
                 }
             }
 
-            printf("List of UNSAT Path Constraints\n");
+            printf("\nList of UNSAT Path Constraints\n");
             for (auto &cc : cache_constraints) {
                 if (!cc.second.first) {
-                    printf("# %s\n", cc.first.c_str());
+                    printf("%s", cc.first.c_str());
+                    printf("----\n");
                 }
             }
         }
     }
-
 }
