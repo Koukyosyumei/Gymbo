@@ -44,18 +44,14 @@ inline std::vector<std::vector<int>> cartesianProduct(
 }
 
 inline int pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
-                   SymState state, GDOptimizer &optimizer, int max_num_trials,
-                   bool use_dpll, std::unordered_map<int, float> params,
+                   std::vector<std::vector<int>> &D, SymState state,
+                   GDOptimizer &optimizer, int max_num_trials, bool use_dpll,
+                   std::unordered_map<int, float> params,
                    std::unordered_set<int> &unique_var_ids) {
-    int i = 1;
-    std::vector<std::vector<int>> val_candidates;
     for (auto &vd : var2dist) {
         state.mem.emplace(vd.first, FloatToWord(0));
-        val_candidates.emplace_back(vd.second.vals);
-        i++;
     }
 
-    std::vector<std::vector<int>> D = cartesianProduct(val_candidates);
     int total_num_pvar_combinations = D.size();
 
     bool ignore_memory = false;
@@ -91,6 +87,7 @@ inline int pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
 
 inline Trace run_pgymbo(Prog &prog,
                         std::unordered_map<int, DiscreteDist> &var2dist,
+                        std::vector<std::vector<int>> &D,
                         GDOptimizer &optimizer, SymState &state,
                         std::unordered_set<int> &target_pcs,
                         PathConstraintsTable &constraints_cache, int maxDepth,
@@ -145,9 +142,16 @@ inline Trace run_pgymbo(Prog &prog,
             if (is_contain_prob_var) {
                 // call probabilistic branch algorithm
                 int total_num_sat_comb =
-                    pbranch(var2dist, state, optimizer, max_num_trials,
+                    pbranch(var2dist, D, state, optimizer, max_num_trials,
                             use_dpll, params, unique_var_ids);
-                printf("ttna - %d\n", total_num_sat_comb);
+                if (state.num_sat_comb == 0) {
+                    state.p = (float)total_num_sat_comb / (float)(D.size());
+                } else {
+                    state.p =
+                        (float)total_num_sat_comb / (float)state.num_sat_comb;
+                }
+                state.num_sat_comb = total_num_sat_comb;
+                printf("ttna - %d %f\n", total_num_sat_comb, state.p);
                 if (total_num_sat_comb > 0) {
                     is_sat = true;
                 }
@@ -212,7 +216,7 @@ inline Trace run_pgymbo(Prog &prog,
         std::vector<Trace> children;
         for (SymState *newState : newStates) {
             Trace child =
-                run_pgymbo(prog, var2dist, optimizer, *newState, target_pcs,
+                run_pgymbo(prog, var2dist, D, optimizer, *newState, target_pcs,
                            constraints_cache, maxDepth - 1, maxSAT, maxUNSAT,
                            max_num_trials, ignore_memory, use_dpll,
                            verbose_level, return_trace);

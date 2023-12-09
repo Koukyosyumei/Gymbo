@@ -49,8 +49,14 @@ int main(int argc, char *argv[]) {
         {0, gymbo::DiscreteUniformDist(1, 3)},
         {1, gymbo::DiscreteUniformDist(1, 3)}};
 
+    std::vector<std::vector<int>> val_candidates;
+    for (auto &vd : var2dist) {
+        val_candidates.emplace_back(vd.second.vals);
+    }
+    std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
+
     printf("Start Symbolic Execution...\n");
-    gymbo::run_pgymbo(prg, var2dist, optimizer, init, target_pcs, cache_constraints,
+    gymbo::run_pgymbo(prg, var2dist, D, optimizer, init, target_pcs, cache_constraints,
                      max_depth, maxSAT, maxUNSAT, max_num_trials, ignore_memory,
                      use_dpll, verbose_level);
     printf("---------------------------\n");
