@@ -20,6 +20,25 @@ bool ignore_memory = false;
 bool use_dpll = false;
 bool init_param_uniform_int = true;
 
+std::string mem2string(const gymbo::Mem &mem) {
+    std::string expr = "Concrete Memory: {";
+    float tmp_word;
+    for (auto &t : mem) {
+        tmp_word = wordToFloat(t.second);
+        if (is_integer(tmp_word)) {
+            expr += ("var_" + std::to_string(((int)t.first)) + ": " +
+                     std::to_string((int)tmp_word)) +
+                    ", ";
+        } else {
+            expr += ("var_" + std::to_string(((int)t.first)) + ": " +
+                     std::to_string(tmp_word)) +
+                    ", ";
+        }
+    }
+    expr += "}";
+    return expr;
+}
+
 int main(int argc, char *argv[]) {
     user_input = argv[1];
 
@@ -47,8 +66,8 @@ int main(int argc, char *argv[]) {
     printf("---\n");
 
     std::unordered_map<int, gymbo::DiscreteDist> var2dist = {
-        {0, gymbo::DiscreteUniformDist(1, 3)},
-        {1, gymbo::DiscreteUniformDist(1, 3)}};
+        {1, gymbo::DiscreteUniformDist(1, 3)},
+        {2, gymbo::DiscreteUniformDist(1, 3)}};
 
     std::vector<std::vector<int>> val_candidates;
     for (auto &vd : var2dist) {
@@ -65,34 +84,24 @@ int main(int argc, char *argv[]) {
 
     printf("Result Summary\n");
     printf("#Loops Spent for Gradient Descent: %d\n", optimizer.num_used_itr);
+
     int num_unique_path_constraints = cache_constraints.size();
-    int num_sat = 0;
-    int num_unsat = 0;
-    for (auto &cc : cache_constraints) {
-        if (cc.second.first) {
-            num_sat++;
-        } else {
-            num_unsat++;
-        }
-    }
+    int num_unique_final_states = probabilistic_constraints.size();
+
     if (num_unique_path_constraints == 0) {
         printf("No Path Constraints Found\n");
     } else {
-        printf("#Total Path Constraints: %d\n", num_unique_path_constraints);
-        printf("#SAT: %d\n", num_sat);
-        printf("#UNSAT: %d\n", num_unsat);
-
+        printf("#Total Final States: %d\n", num_unique_final_states);
         if (verbose_level >= 0) {
-            printf("List of Path Constraints\n");
+            printf("List of Final States\n");
             for (auto &cc : probabilistic_constraints) {
                 for (auto &ccv : cc.second) {
-                    printf("pc=%d: %s, prob=%f\n", cc.first,
-                           std::get<0>(ccv).toString(true).c_str(),
-                           std::get<2>(ccv));
+                    printf("pc=%d: prob=%f, %s, constraints=%s\n", cc.first,
+                           std::get<2>(ccv),
+                           mem2string(std::get<1>(ccv)).c_str(),
+                           std::get<0>(ccv).toString(true).c_str());
                 }
             }
         }
     }
-
-    printf("Done\n");
 }

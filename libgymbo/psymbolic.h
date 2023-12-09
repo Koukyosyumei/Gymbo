@@ -133,11 +133,6 @@ inline Trace run_pgymbo(Prog &prog,
                 }
             }
 
-            Sym cc = Sym(SymType::SCon, FloatToWord(1.0f));
-            for (Sym &s : state.path_constraints) {
-                cc = Sym(SymType::SAnd, cc.copy(), &s);
-            }
-
             if (is_contain_prob_var) {
                 // call probabilistic branch algorithm
                 int total_num_sat_comb =
@@ -173,15 +168,6 @@ inline Trace run_pgymbo(Prog &prog,
                 maxSAT--;
             } else {
                 maxUNSAT--;
-            }
-
-            if (prob_constrains_table.find(pc) == prob_constrains_table.end()) {
-                std::vector<std::tuple<Sym, Mem, float>> tmp = {
-                    std::make_tuple(cc, state.mem, state.p)};
-                prob_constrains_table.emplace(pc, tmp);
-            } else {
-                prob_constrains_table[pc].emplace_back(
-                    std::make_tuple(cc, state.mem, state.p));
             }
 
             constraints_cache.emplace(constraints_str,
