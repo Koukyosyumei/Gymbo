@@ -145,10 +145,10 @@ inline Trace run_pgymbo(Prog &prog,
                             use_dpll, params, unique_var_ids);
 
                 if (state.num_sat_comb == 0) {
-                    state.p = (float)total_num_sat_comb / (float)(D.size());
+                    state.p *= (float)total_num_sat_comb / (float)(D.size());
                 } else {
-                    state.p =
-                        (float)total_num_sat_comb / (float)state.num_sat_comb;
+                    state.p *= (float)total_num_sat_comb /
+                              (float)state.num_sat_comb;
                 }
 
                 state.num_sat_comb = total_num_sat_comb;
@@ -166,7 +166,7 @@ inline Trace run_pgymbo(Prog &prog,
                                      max_num_trials, ignore_memory);
                 }
 
-                state.p = (float)is_sat;
+                state.p *= (float)is_sat;
             }
 
             if (is_sat) {
