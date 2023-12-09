@@ -51,7 +51,12 @@ inline void smt_union_solver(bool &is_sat, SymState &state,
             break;
         }
         optimizer.seed += 1;
+        int total_num_params = params.size();
         initialize_params(params, state, ignore_memory);
+        int total_num_consts = params.size();
+        if (total_num_consts == total_num_params) {
+            break;
+        }
     }
 }
 

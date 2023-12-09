@@ -11,37 +11,68 @@
 #include "gd.h"
 #include "symbolic.h"
 #include "type.h"
+#include "utils.h"
 
 namespace gymbo {
 
-inline int pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
-                   SymState &state, GDOptimizer &optimizer, int max_num_trials,
-                   bool use_dpll, std::unordered_map<int, float> params,
-                   std::unordered_set<int> &unique_var_ids) {
-    std::vector<int> pvar_ids;
-    for (int i : unique_var_ids) {
-        if (var2dist.find(i) != var2dist.end()) {
-            pvar_ids.emplace_back(i);
-        }
+inline std::vector<std::vector<int>> cartesianProduct(
+    const std::vector<std::vector<int>> &vectors) {
+    std::vector<std::vector<int>> result;
+
+    if (vectors.size() == 0) {
+        return result;
     }
 
-    // int num_pvar_combinations = 1;
-    std::vector<int> num_pvar_combinations(pvar_ids.size() + 1, 1);
-    for (int i = 0; i < pvar_ids.size(); i++) {
-        num_pvar_combinations[i + 1] *= var2dist[pvar_ids[i]].vals.size();
+    for (int v : vectors[0]) {
+        std::vector<int> tmp = {v};
+        result.emplace_back(tmp);
     }
-    int total_num_pvar_combinations =
-        num_pvar_combinations[num_pvar_combinations.size() - 1];
+
+    for (int i = 1; i < vectors.size(); ++i) {
+        std::vector<std::vector<int>> tempResult;
+        for (const auto &element1 : result) {
+            for (const auto &element2 : vectors[i]) {
+                std::vector<int> tempElement = element1;
+                tempElement.push_back(element2);
+                tempResult.push_back(tempElement);
+            }
+        }
+        result = tempResult;
+    }
+
+    return result;
+}
+
+inline int pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
+                   SymState state, GDOptimizer &optimizer, int max_num_trials,
+                   bool use_dpll, std::unordered_map<int, float> params,
+                   std::unordered_set<int> &unique_var_ids) {
+    int i = 1;
+    std::vector<std::vector<int>> val_candidates;
+    for (auto &vd : var2dist) {
+        state.mem.emplace(vd.first, FloatToWord(0));
+        val_candidates.emplace_back(vd.second.vals);
+        i++;
+    }
+
+    std::vector<std::vector<int>> D = cartesianProduct(val_candidates);
+    int total_num_pvar_combinations = D.size();
 
     bool ignore_memory = false;
     int num_sat = 0;
 
+    printf("total_num_pvac %d\n", total_num_pvar_combinations);
+
     for (int i = 0; i < total_num_pvar_combinations; i++) {
         bool is_sat = false;
-        for (int j = 0; j < pvar_ids.size(); j++) {
-            params[pvar_ids[j]] =
-                var2dist[pvar_ids[j]].vals[i % num_pvar_combinations[i + 1]];
+        int j = 0;
+        for (auto &vd : var2dist) {
+            state.mem[vd.first] = FloatToWord(D[i][j]);
+            j++;
         }
+
+        initialize_params(params, state, ignore_memory);
+
         if (use_dpll) {
             smt_dpll_solver(is_sat, state, params, optimizer, max_num_trials,
                             ignore_memory);
@@ -116,6 +147,7 @@ inline Trace run_pgymbo(Prog &prog,
                 int total_num_sat_comb =
                     pbranch(var2dist, state, optimizer, max_num_trials,
                             use_dpll, params, unique_var_ids);
+                printf("ttna - %d\n", total_num_sat_comb);
                 if (total_num_sat_comb > 0) {
                     is_sat = true;
                 }
