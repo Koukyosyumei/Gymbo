@@ -57,8 +57,6 @@ inline int pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
     bool ignore_memory = false;
     int num_sat = 0;
 
-    printf("total_num_pvac %d\n", total_num_pvar_combinations);
-
     for (int i = 0; i < total_num_pvar_combinations; i++) {
         bool is_sat = false;
         int j = 0;
@@ -90,10 +88,11 @@ inline Trace run_pgymbo(Prog &prog,
                         std::vector<std::vector<int>> &D,
                         GDOptimizer &optimizer, SymState &state,
                         std::unordered_set<int> &target_pcs,
-                        PathConstraintsTable &constraints_cache, int maxDepth,
-                        int &maxSAT, int &maxUNSAT, int max_num_trials,
-                        bool ignore_memory, bool use_dpll, int verbose_level,
-                        bool return_trace = false) {
+                        PathConstraintsTable &constraints_cache,
+                        ProbPathConstraintsTable &prob_constrains_table,
+                        int maxDepth, int &maxSAT, int &maxUNSAT,
+                        int max_num_trials, bool ignore_memory, bool use_dpll,
+                        int verbose_level, bool return_trace = false) {
     int pc = state.pc;
     if (verbose_level >= -1) {
         printf("pc: %d, ", pc);
@@ -134,19 +133,26 @@ inline Trace run_pgymbo(Prog &prog,
                 }
             }
 
+            Sym cc = Sym(SymType::SCon, FloatToWord(1.0f));
+            for (Sym &s : state.path_constraints) {
+                cc = Sym(SymType::SAnd, cc.copy(), &s);
+            }
+
             if (is_contain_prob_var) {
                 // call probabilistic branch algorithm
                 int total_num_sat_comb =
                     pbranch(var2dist, D, state, optimizer, max_num_trials,
                             use_dpll, params, unique_var_ids);
+
                 if (state.num_sat_comb == 0) {
                     state.p = (float)total_num_sat_comb / (float)(D.size());
                 } else {
                     state.p =
                         (float)total_num_sat_comb / (float)state.num_sat_comb;
                 }
+
                 state.num_sat_comb = total_num_sat_comb;
-                printf("ttna - %d %f\n", total_num_sat_comb, state.p);
+
                 if (total_num_sat_comb > 0) {
                     is_sat = true;
                 }
@@ -159,6 +165,8 @@ inline Trace run_pgymbo(Prog &prog,
                     smt_union_solver(is_sat, state, params, optimizer,
                                      max_num_trials, ignore_memory);
                 }
+
+                state.p = (float)is_sat;
             }
 
             if (is_sat) {
@@ -166,6 +174,16 @@ inline Trace run_pgymbo(Prog &prog,
             } else {
                 maxUNSAT--;
             }
+
+            if (prob_constrains_table.find(pc) == prob_constrains_table.end()) {
+                std::vector<std::pair<Sym, float>> tmp = {
+                    std::make_pair(cc, state.p)};
+                prob_constrains_table.emplace(pc, tmp);
+            } else {
+                prob_constrains_table[pc].emplace_back(
+                    std::make_pair(cc, state.p));
+            }
+
             constraints_cache.emplace(constraints_str,
                                       std::make_pair(is_sat, params));
         }
@@ -179,8 +197,9 @@ inline Trace run_pgymbo(Prog &prog,
                 } else {
                     printf("\x1b[32m");
                 }
-                printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc, is_sat,
-                       constraints_str.c_str());
+                printf(
+                    "pc=%d, IS_SAT - %d\x1b[39m, Pr.REACH - %f, %s, params = {",
+                    pc, is_sat, state.p, constraints_str.c_str());
                 for (auto &p : params) {
                     // ignore concrete variables
                     if (state.mem.find(p.first) != state.mem.end()) {
@@ -210,11 +229,11 @@ inline Trace run_pgymbo(Prog &prog,
         symStep(&state, instr, newStates);
         std::vector<Trace> children;
         for (SymState *newState : newStates) {
-            Trace child =
-                run_pgymbo(prog, var2dist, D, optimizer, *newState, target_pcs,
-                           constraints_cache, maxDepth - 1, maxSAT, maxUNSAT,
-                           max_num_trials, ignore_memory, use_dpll,
-                           verbose_level, return_trace);
+            Trace child = run_pgymbo(
+                prog, var2dist, D, optimizer, *newState, target_pcs,
+                constraints_cache, prob_constrains_table, maxDepth - 1, maxSAT,
+                maxUNSAT, max_num_trials, ignore_memory, use_dpll,
+                verbose_level, return_trace);
             if (return_trace) {
                 children.push_back(child);
             }

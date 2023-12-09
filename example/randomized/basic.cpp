@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
                                  seed);
     gymbo::SymState init;
     gymbo::PathConstraintsTable cache_constraints;
+    gymbo::ProbPathConstraintsTable probabilistic_constraints;
     std::unordered_set<int> target_pcs;
 
     printf("Compiling the input program...\n");
@@ -56,9 +57,10 @@ int main(int argc, char *argv[]) {
     std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
 
     printf("Start Symbolic Execution...\n");
-    gymbo::run_pgymbo(prg, var2dist, D, optimizer, init, target_pcs, cache_constraints,
-                     max_depth, maxSAT, maxUNSAT, max_num_trials, ignore_memory,
-                     use_dpll, verbose_level);
+    gymbo::run_pgymbo(prg, var2dist, D, optimizer, init, target_pcs,
+                      cache_constraints, probabilistic_constraints, max_depth,
+                      maxSAT, maxUNSAT, max_num_trials, ignore_memory, use_dpll,
+                      verbose_level);
     printf("---------------------------\n");
 
     printf("Result Summary\n");
@@ -81,30 +83,11 @@ int main(int argc, char *argv[]) {
         printf("#UNSAT: %d\n", num_unsat);
 
         if (verbose_level >= 0) {
-            // for (auto vc : var_counter) {
-            //    id2varname.emplace(vc.second, vc.first);
-            // }
-
-            printf("List of SAT Path Constraints\n");
-            for (auto &cc : cache_constraints) {
-                if (cc.second.first) {
-                    printf("# %s\n", cc.first.c_str());
-                    printf("   {");
-                    for (auto p : cc.second.second) {
-                        if (is_integer(p.second)) {
-                            printf("var_%d:%d, ", p.first, (int)p.second);
-                        } else {
-                            printf("var_%d:%f, ", p.first, p.second);
-                        }
-                    }
-                    printf("}\n");
-                }
-            }
-
-            printf("List of UNSAT Path Constraints\n");
-            for (auto &cc : cache_constraints) {
-                if (!cc.second.first) {
-                    printf("# %s\n", cc.first.c_str());
+            printf("List of Path Constraints\n");
+            for (auto &cc : probabilistic_constraints) {
+                for (auto &ccv : cc.second) {
+                    printf("pc=%d: %s, prob=%f\n", cc.first,
+                           ccv.first.toString(true).c_str(), ccv.second);
                 }
             }
         }

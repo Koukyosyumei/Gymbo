@@ -149,16 +149,6 @@ using Prog = std::vector<Instr>;
 using Mem = std::unordered_map<Word32, Word32>;
 
 /**
- * @brief Alias for a table of path constraints. The key is the string
- * representation of the constraint and the value is the pair of its
- * satifiability and the map whose key is the variable id and the value is the
- * concrete value that makes the constraint true.
- */
-using PathConstraintsTable =
-    std::unordered_map<std::string,
-                       std::pair<bool, std::unordered_map<int, float>>>;
-
-/**
  * @brief Struct representing the gradient of a symbolic expression.
  */
 struct Grad {
@@ -313,6 +303,15 @@ struct Sym {
             word = val;
         }
     }
+
+    Sym(SymType symtype, Sym *left, Sym *right, Word32 word, int var_idx)
+        : symtype(symtype),
+          left(left),
+          right(right),
+          word(word),
+          var_idx(var_idx) {}
+
+    Sym *copy() { return new Sym(symtype, left, right, word, var_idx); }
 
     /**
      * @brief Gathers variable indices from the symbolic expression.
@@ -697,7 +696,8 @@ struct SymState {
         path_constraints; /**< Vector of symbolic path constraints. */
     int num_sat_comb; /**< Total number of value combinations for probabilistic
                          variables*/
-    float p;          /**< Probability of the state being reached */
+    float p; /**< Probability of the state being reached under some satisfying
+                universal variables*/
 
     /**
      * @brief Default constructor for symbolic state.
@@ -819,6 +819,27 @@ struct SymState {
         printf("%s", toString().c_str());
     }
 };
+
+/**
+ * @brief Alias for a table of path constraints. The key is the string
+ * representation of the constraint and the value is the pair of its
+ * satifiability and the map whose key is the variable id and the value is the
+ * concrete value that makes the constraint true
+ * ({str_of_constraints: {is_sat: {var_id: var_val}}}).
+ */
+using PathConstraintsTable =
+    std::unordered_map<std::string,
+                       std::pair<bool, std::unordered_map<int, float>>>;
+
+/**
+ * @brief Alias for a table of probabilistic path constraints. The key is the
+ * program counter, and the values is the vector of pairs whose first element is
+ * the path constraint and the second element is the probability of rechability
+ * under the satisfying universal variables
+ * ({pc: {(constraints, probability)}}).
+ */
+using ProbPathConstraintsTable =
+    std::unordered_map<int, std::vector<std::pair<Sym, float>>>;
 
 /**
  * @brief Struct representing a trace in symbolic execution.
