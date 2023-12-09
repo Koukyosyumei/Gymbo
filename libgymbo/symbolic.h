@@ -61,6 +61,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
     bool is_target = ((target_pcs.size() == 0) ||
                       (target_pcs.find(-1) != target_pcs.end()) ||
                       (target_pcs.find(pc) != target_pcs.end()));
+    bool is_sat = true;
 
     if (state.path_constraints.size() != 0 && is_target) {
         std::string constraints_str = state.toString();
@@ -68,7 +69,6 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         std::unordered_map<int, float> params = {};
         initialize_params(params, state, ignore_memory);
 
-        bool is_sat = false;
         bool is_unknown_path_constraint = true;
 
         if (constraints_cache.find(constraints_str) !=
@@ -125,7 +125,7 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         printf("---\n");
     }
 
-    if (prog[pc].instr == InstrType::Done) {
+    if ((prog[pc].instr == InstrType::Done) || (!is_sat)) {
         return Trace(state, {});
     } else if (maxDepth > 0 && maxSAT > 0 && maxUNSAT > 0) {
         Instr instr = prog[pc];
