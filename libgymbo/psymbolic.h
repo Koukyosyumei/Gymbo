@@ -147,8 +147,8 @@ inline Trace run_pgymbo(Prog &prog,
                 if (state.num_sat_comb == 0) {
                     state.p *= (float)total_num_sat_comb / (float)(D.size());
                 } else {
-                    state.p *= (float)total_num_sat_comb /
-                              (float)state.num_sat_comb;
+                    state.p *=
+                        (float)total_num_sat_comb / (float)state.num_sat_comb;
                 }
 
                 state.num_sat_comb = total_num_sat_comb;
@@ -176,12 +176,12 @@ inline Trace run_pgymbo(Prog &prog,
             }
 
             if (prob_constrains_table.find(pc) == prob_constrains_table.end()) {
-                std::vector<std::pair<Sym, float>> tmp = {
-                    std::make_pair(cc, state.p)};
+                std::vector<std::tuple<Sym, Mem, float>> tmp = {
+                    std::make_tuple(cc, state.mem, state.p)};
                 prob_constrains_table.emplace(pc, tmp);
             } else {
                 prob_constrains_table[pc].emplace_back(
-                    std::make_pair(cc, state.p));
+                    std::make_tuple(cc, state.mem, state.p));
             }
 
             constraints_cache.emplace(constraints_str,
@@ -219,6 +219,21 @@ inline Trace run_pgymbo(Prog &prog,
 
     if (verbose_level >= 2) {
         printf("---\n");
+    }
+
+    if (prog[pc].instr == InstrType::Done) {
+        Sym cc = Sym(SymType::SCon, FloatToWord(1.0f));
+        for (Sym &s : state.path_constraints) {
+            cc = Sym(SymType::SAnd, cc.copy(), &s);
+        }
+        if (prob_constrains_table.find(pc) == prob_constrains_table.end()) {
+            std::vector<std::tuple<Sym, Mem, float>> tmp = {
+                std::make_tuple(cc, state.mem, state.p)};
+            prob_constrains_table.emplace(pc, tmp);
+        } else {
+            prob_constrains_table[pc].emplace_back(
+                std::make_tuple(cc, state.mem, state.p));
+        }
     }
 
     if ((prog[pc].instr == InstrType::Done) || (!is_sat)) {

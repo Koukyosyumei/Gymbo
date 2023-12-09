@@ -87,7 +87,8 @@ int main(int argc, char *argv[]) {
             for (auto &cc : probabilistic_constraints) {
                 for (auto &ccv : cc.second) {
                     printf("pc=%d: %s, prob=%f\n", cc.first,
-                           ccv.first.toString(true).c_str(), ccv.second);
+                           std::get<0>(ccv).toString(true).c_str(),
+                           std::get<2>(ccv));
                 }
             }
         }

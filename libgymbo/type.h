@@ -861,13 +861,14 @@ using PathConstraintsTable =
 
 /**
  * @brief Alias for a table of probabilistic path constraints. The key is the
- * program counter, and the values is the vector of pairs whose first element is
- * the path constraint and the second element is the probability of rechability
- * under the satisfying universal variables
- * ({pc: {(constraints, probability)}}).
+ * program counter, and the values is the vector of tuples whose first element
+ * is the path constraint, the second element is the concrete memory, the thrid
+ * element is the probability of rechability under the satisfying universal
+ * variables
+ * ({pc: {(constraints, memory, probability)}}).
  */
 using ProbPathConstraintsTable =
-    std::unordered_map<int, std::vector<std::pair<Sym, float>>>;
+    std::unordered_map<int, std::vector<std::tuple<Sym, Mem, float>>>;
 
 /**
  * @brief Struct representing a trace in symbolic execution.
