@@ -269,7 +269,8 @@ struct Sym {
     Sym *right;      /**< Pointer to the right child of the expression. */
     Word32 word;     /**< Additional data associated with the expression. */
     int var_idx; /**< Index of the variable associated with the expression. */
-    std::unordered_map<int, float> assign;  /** Map from var IDs to their assigned values */
+    std::unordered_map<int, float>
+        assign; /** Map from var IDs to their assigned values */
 
     /**
      * @brief Default constructor for Sym.
@@ -904,11 +905,12 @@ struct SymState {
     std::vector<Sym>
         path_constraints; /**< Vector of symbolic path constraints. */
     SymProb p;            /**< Symbolic probability of the state being reached*/
+    bool has_observed_p_cond;
 
     /**
      * @brief Default constructor for symbolic state.
      */
-    SymState() : pc(0), var_cnt(0), p(SymProb()){};
+    SymState() : pc(0), var_cnt(0), p(SymProb()), has_observed_p_cond(false){};
 
     /**
      * @brief Constructor for symbolic state with specified values.
@@ -921,41 +923,23 @@ struct SymState {
      */
     SymState(int pc, int var_cnt, Mem &mem, SMem &smem,
              Linkedlist<Sym> &symbolic_stack,
-             std::vector<Sym> &path_constraints)
+             std::vector<Sym> &path_constraints, SymProb &p,
+             bool has_observed_p_cond)
         : pc(pc),
           var_cnt(var_cnt),
           mem(mem),
           smem(smem),
           symbolic_stack(symbolic_stack),
           path_constraints(path_constraints),
-          p(SymProb()) {}
-
-    /**
-     * @brief Constructor for symbolic state with specified values.
-     * @param pc Program counter.
-     * @param var_cnt Variable count.
-     * @param mem Concrete memory.
-     * @param smem Symbolic memory.
-     * @param symbolic_stack Symbolic stack.
-     * @param path_constraints Vector of symbolic path constraints.
-     */
-    SymState(int pc, int var_cnt, Mem &mem, SMem &smem,
-             Linkedlist<Sym> &symbolic_stack,
-             std::vector<Sym> &path_constraints, SymProb &p)
-        : pc(pc),
-          var_cnt(var_cnt),
-          mem(mem),
-          smem(smem),
-          symbolic_stack(symbolic_stack),
-          path_constraints(path_constraints),
-          p(p) {}
+          p(p),
+          has_observed_p_cond(has_observed_p_cond) {}
 
     /**
      * @brief Create a copy object.
      */
     SymState *copy() {
         return new SymState(pc, var_cnt, mem, smem, symbolic_stack,
-                            path_constraints);
+                            path_constraints, p, has_observed_p_cond);
     }
 
     /**
