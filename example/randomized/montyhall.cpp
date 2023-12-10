@@ -78,8 +78,7 @@ int main(int argc, char *argv[]) {
 
     std::unordered_map<int, gymbo::DiscreteDist> var2dist = {
         {0, gymbo::DiscreteUniformDist(1, 3)},
-        {1, gymbo::DiscreteUniformDist(1, 3)}
-    };
+        {1, gymbo::DiscreteUniformDist(1, 3)}};
 
     std::vector<std::vector<int>> val_candidates;
     for (auto &vd : var2dist) {
@@ -88,8 +87,8 @@ int main(int argc, char *argv[]) {
     std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
 
     printf("Start Symbolic Execution...\n");
-    init.set_concrete_val(1, 1);
-    init.set_concrete_val(3, 1);
+    init.set_concrete_val(var_counter["door_switch"], 0);
+    // init.set_concrete_val(var_counter["choice"], 1);
     gymbo::run_pgymbo(prg, var2dist, D, optimizer, init, target_pcs,
                       cache_constraints, probabilistic_constraints, max_depth,
                       maxSAT, maxUNSAT, max_num_trials, ignore_memory, use_dpll,
@@ -105,7 +104,7 @@ int main(int argc, char *argv[]) {
     if (num_unique_path_constraints == 0) {
         printf("No Path Constraints Found\n");
     } else {
-        printf("#Total Final States: %d\n", num_unique_final_states);
+        printf("\n#Total Final States: %d\n", num_unique_final_states);
         if (verbose_level >= 0) {
             printf("List of Final States\n");
             for (auto &cc : probabilistic_constraints) {

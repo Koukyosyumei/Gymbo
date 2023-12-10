@@ -1,5 +1,9 @@
 if (car_door == choice) {
-    result = 1 - door_switch;
+    if (door_switch == 1) {
+        result = 0;
+    } else {
+        result = 1;
+    }
     return result;
 }
 
@@ -35,6 +39,8 @@ if (door_switch == 1) {
             }
         }
     }
+} else {
+    choice_updated = choice;
 }
 
 if (choice_updated == car_door) {
