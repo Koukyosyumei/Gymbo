@@ -28,7 +28,7 @@ void symStep(SymState *state, Instr &instr, std::vector<SymState *> &);
  * @param ignore_memory A flag indicating whether memory constraints should be
  * ignored.
  */
-void initialize_params(std::unordered_map<int, float> &params, SymState &state,
+inline void initialize_params(std::unordered_map<int, float> &params, SymState &state,
                        bool ignore_memory) {
     params = {};
     if (!ignore_memory) {

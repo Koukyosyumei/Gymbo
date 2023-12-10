@@ -263,6 +263,7 @@ enum class SymType {
     SNot,
     SOr,
     SCon,
+    SCnt,
     SAnd,
     SLt,
     SLe,
@@ -345,6 +346,10 @@ struct Sym {
                 return;
             }
             case (SymType::SNot): {
+                left->gather_var_ids(result);
+                return;
+            }
+            case (SymType::SCnt): {
                 left->gather_var_ids(result);
                 return;
             }
@@ -470,6 +475,9 @@ struct Sym {
             case (SymType::SNot): {
                 return new Sym(SymType::SNot, left->psimplify(cvals));
             }
+            case (SymType::SCnt): {
+                return new Sym(SymType::SCnt, left->psimplify(cvals));
+            }
             default: {
                 return this;
             }
@@ -495,6 +503,35 @@ struct Sym {
             }
             case (SymType::SCon): {
                 return wordToFloat(word);
+            }
+            case (SymType::SCnt): {
+                switch (left->symtype) {
+                    case (SymType::SAdd): {
+                        return 1;
+                    }
+                    case (SymType::SSub): {
+                        return 1;
+                    }
+                    case (SymType::SMul): {
+                        return 1;
+                    }
+                    case (SymType::SCon): {
+                        return 1;
+                    }
+                    case (SymType::SCnt): {
+                        return 1;
+                    }
+                    case (SymType::SAny): {
+                        return 1;
+                    }
+                    default: {
+                        if (left->eval(cvals, eps) <= 0.0f) {
+                            return 1.0f;
+                        } else {
+                            return 0.0;
+                        }
+                    }
+                }
             }
             case (SymType::SAny): {
                 return cvals.at(var_idx);
@@ -547,6 +584,35 @@ struct Sym {
             }
             case (SymType::SCon): {
                 return Grad({});
+            }
+            case (SymType::SCnt): {
+                switch (left->symtype) {
+                    case (SymType::SAdd): {
+                        return Grad({});
+                    }
+                    case (SymType::SSub): {
+                        return Grad({});
+                    }
+                    case (SymType::SMul): {
+                        return Grad({});
+                    }
+                    case (SymType::SCon): {
+                        return Grad({});
+                    }
+                    case (SymType::SCnt): {
+                        return Grad({});
+                    }
+                    case (SymType::SAny): {
+                        return Grad({});
+                    }
+                    default: {
+                        if (left->eval(cvals, eps) <= 0.0f) {
+                            return left->grad(cvals, eps);
+                        } else {
+                            return left->grad(cvals, eps) * -1;
+                        }
+                    }
+                }
             }
             case (SymType::SAny): {
                 std::unordered_map<int, float> tmp = {{var_idx, 1.0f}};
@@ -640,6 +706,10 @@ struct Sym {
                 }
                 break;
             }
+            case (SymType::SCnt): {
+                result = "[" + left->toString(convert_to_num) + "]";
+                return result;
+            }
             case (SymType::SAny): {
                 result += "var_" + std::to_string(var_idx);
                 break;
@@ -723,8 +793,9 @@ struct SymState {
     /**
      * @brief Create a copy object.
      */
-    SymState * copy() {
-        return new SymState(pc, var_cnt, mem, smem, symbolic_stack, path_constraints);
+    SymState *copy() {
+        return new SymState(pc, var_cnt, mem, smem, symbolic_stack,
+                            path_constraints);
     }
 
     /**
