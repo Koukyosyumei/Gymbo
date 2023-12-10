@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
     for (auto &vd : var2dist) {
         val_candidates.emplace_back(vd.second.vals);
     }
-    std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
+    std::vector<std::vector<int>> D = cartesianProduct(val_candidates);
 
     std::vector<int> doow_switch_candidates = {0, 1};
 
@@ -98,6 +98,8 @@ int main(int argc, char *argv[]) {
         int num_unique_path_constraints = cache_constraints.size();
         int num_unique_final_states = probabilistic_constraints.size();
 
+        std::unordered_map<int, float> params;
+
         printf("\nResult Summary\n");
         if (num_unique_path_constraints == 0) {
             printf("No Path Constraints Found\n");
@@ -106,10 +108,10 @@ int main(int argc, char *argv[]) {
             printf("List of Final States\n");
             for (auto &cc : probabilistic_constraints) {
                 for (auto &ccv : cc.second) {
-                    if (std::get<2>(ccv) > 0.0f) {
+                    float p = std::get<2>(ccv).eval(params, eps, var2dist, D);
+                    if (p > 0.0f) {
                         printf("pc=%d: prob=%f, %s, constraints=%s\n", cc.first,
-                               std::get<2>(ccv),
-                               mem2string(std::get<1>(ccv)).c_str(),
+                               p, mem2string(std::get<1>(ccv)).c_str(),
                                std::get<0>(ccv).toString(true).c_str());
                     }
                 }
