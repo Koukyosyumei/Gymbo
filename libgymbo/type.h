@@ -269,8 +269,7 @@ struct Sym {
     Sym *right;      /**< Pointer to the right child of the expression. */
     Word32 word;     /**< Additional data associated with the expression. */
     int var_idx; /**< Index of the variable associated with the expression. */
-    std::unordered_map<int, float>
-        assign; /** Map from var IDs to their assigned values */
+    std::unordered_map<int, float> assign;  /** Map from var IDs to their assigned values */
 
     /**
      * @brief Default constructor for Sym.
@@ -726,8 +725,13 @@ struct Sym {
                 if (assign.size() != 0) {
                     result += "{";
                     for (const auto &a : assign) {
-                        result += std::to_string(a.first) + "->" +
-                                  std::to_string(a.second) + ", ";
+                        result += std::to_string(a.first) + "->";
+                        float tmp = a.second;
+                        if (is_integer(tmp)) {
+                            result += std::to_string((int)tmp) + ", ";
+                        } else {
+                            result += std::to_string(tmp) + ", ";
+                        }
                     }
                     result += "}";
                 }
@@ -835,24 +839,54 @@ struct SymProb {
         }
     }
 
-    Sym query(SymType &symtype, Sym &other,
-               std::unordered_map<int, DiscreteDist> &var2dist,
-               std::vector<std::vector<int>> &D) {
+    std::pair<Sym *, Sym *> marginalize(
+        std::unordered_map<int, DiscreteDist> &var2dist,
+        std::vector<std::vector<int>> &D) {
         int total_num_pvar_combinations = D.size();
-
-        Sym *q_left = new Sym(SymType::SCon, FloatToWord(0.0f)); 
-        Sym *q_right = new Sym(SymType::SCon, FloatToWord(0.0f)); 
+        Sym *q_numerator = new Sym(SymType::SCon, FloatToWord(0.0f));
+        Sym *q_denominator = new Sym(SymType::SCon, FloatToWord(0.0f));
 
         for (int i = 0; i < total_num_pvar_combinations; i++) {
             int j = 0;
             std::unordered_map<int, float> tmp_assign;
             for (auto &vd : var2dist) {
-                tmp_assign.emplace(j, FloatToWord(D[i][j]));
+                tmp_assign.emplace(j, D[i][j]);
                 j++;
             }
-            q_left = new Sym(SymType::SAdd, q_left, new Sym(SymType::SCnt, &numerator, tmp_assign));
-            q_right = new Sym(SymType::SAdd, q_right, new Sym(SymType::SCnt, &denominator, tmp_assign));
+            q_numerator =
+                new Sym(SymType::SAdd, q_numerator,
+                        new Sym(SymType::SCnt, &numerator, tmp_assign));
+            q_denominator =
+                new Sym(SymType::SAdd, q_denominator,
+                        new Sym(SymType::SCnt, &denominator, tmp_assign));
         }
+
+        return std::make_pair(q_numerator, q_denominator);
+    }
+
+    float eval(std::unordered_map<int, float> &params, float eps,
+               std::unordered_map<int, DiscreteDist> &var2dist,
+               std::vector<std::vector<int>> &D) {
+        std::pair<Sym *, Sym *> mq = marginalize(var2dist, D);
+        Sym *q_n = mq.first;
+        Sym *q_d = mq.second;
+
+        float v_n = q_n->eval(params, eps);
+        float v_d = q_d->eval(params, eps);
+
+        if (v_d == 0.0f) {
+            return 0.0f;
+        } else {
+            return v_n / v_d;
+        }
+    }
+
+    Sym query(SymType &symtype, Sym &other,
+              std::unordered_map<int, DiscreteDist> &var2dist,
+              std::vector<std::vector<int>> &D) {
+        std::pair<Sym *, Sym *> mq = marginalize(var2dist, D);
+        Sym *q_left = mq.first;
+        Sym *q_right = mq.second;
         q_right = new Sym(SymType::SMul, q_right, &other);
         return Sym(symtype, q_left, q_right);
     }
