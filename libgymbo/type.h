@@ -729,9 +729,9 @@ struct Sym {
                         result += std::to_string(a.first) + "->";
                         float tmp = a.second;
                         if (is_integer(tmp)) {
-                            result += std::to_string((int)tmp) + ", ";
+                            result += std::to_string((int)tmp) + ",";
                         } else {
-                            result += std::to_string(tmp) + ", ";
+                            result += std::to_string(tmp) + ",";
                         }
                     }
                     result += "}";
@@ -744,32 +744,32 @@ struct Sym {
                 break;
             }
             case (SymType::SEq): {
-                result += left->toString(convert_to_num) +
-                          " == " + right->toString(convert_to_num);
+                result += "(" + left->toString(convert_to_num) +
+                          "==" + right->toString(convert_to_num) + ")";
                 break;
             }
             case (SymType::SNot): {
-                result += "!(" + left->toString(convert_to_num) + ")";
+                result += "!" + left->toString(convert_to_num) + "";
                 break;
             }
             case (SymType::SAnd): {
-                result += left->toString(convert_to_num) + " && " +
-                          right->toString(convert_to_num);
+                result += "(" + left->toString(convert_to_num) + "&&" +
+                          right->toString(convert_to_num) + ")";
                 break;
             }
             case (SymType::SOr): {
-                result += left->toString(convert_to_num) + " || " +
-                          right->toString(convert_to_num);
+                result += "(" + left->toString(convert_to_num) + "||" +
+                          right->toString(convert_to_num) + ")";
                 break;
             }
             case (SymType::SLt): {
-                result += left->toString(convert_to_num) + " < " +
-                          right->toString(convert_to_num);
+                result += "(" + left->toString(convert_to_num) + "<" +
+                          right->toString(convert_to_num) + ")";
                 break;
             }
             case (SymType::SLe): {
-                result += left->toString(convert_to_num) +
-                          " <= " + right->toString(convert_to_num);
+                result += "(" + left->toString(convert_to_num) +
+                          "<=" + right->toString(convert_to_num) + ")";
                 break;
             }
         }
@@ -820,23 +820,31 @@ struct DiscreteUniformDist : public DiscreteDist {
 using SMem = std::unordered_map<Word32, Sym>;
 
 struct SymProb {
-    Sym numerator;
-    Sym denominator;
+    Sym *numerator;
+    Sym *denominator;
 
     SymProb()
-        : numerator(Sym(SymType::SCon, FloatToWord(1.0f))),
-          denominator(Sym(SymType::SCon, FloatToWord(1.0f))) {}
+        : numerator(new Sym(SymType::SCon, FloatToWord(1.0f))),
+          denominator(new Sym(SymType::SCon, FloatToWord(1.0f))) {}
 
-    SymProb(Sym numerator, Sym denominator)
+    SymProb(Sym *numerator, Sym *denominator)
         : numerator(numerator), denominator(denominator) {}
 
-    SymProb operator*(SymProb &other) {
-        if (denominator.toString(false) == other.numerator.toString(false)) {
+    std::string toString() {
+        return "(" + numerator->toString(true) + ")/(" +
+               numerator->toString(true) + ")";
+    }
+
+    SymProb operator*(SymProb other) {
+        if (denominator->toString(true) == other.numerator->toString(true)) {
             return SymProb(numerator, other.denominator);
+        } else if (numerator->toString(true) ==
+                   other.denominator->toString(true)) {
+            return SymProb(other.numerator, denominator);
         } else {
             return SymProb(
-                Sym(SymType::SMul, &numerator, &(other.numerator)),
-                Sym(SymType::SMul, &denominator, &(other.denominator)));
+                new Sym(SymType::SMul, numerator, (other.numerator)),
+                new Sym(SymType::SMul, denominator, (other.denominator)));
         }
     }
 
@@ -851,15 +859,15 @@ struct SymProb {
             int j = 0;
             std::unordered_map<int, float> tmp_assign;
             for (auto &vd : var2dist) {
-                tmp_assign.emplace(j, D[i][j]);
+                tmp_assign.emplace(vd.first, D[i][j]);
                 j++;
             }
             q_numerator =
                 new Sym(SymType::SAdd, q_numerator,
-                        new Sym(SymType::SCnt, &numerator, tmp_assign));
+                        new Sym(SymType::SCnt, numerator, tmp_assign));
             q_denominator =
                 new Sym(SymType::SAdd, q_denominator,
-                        new Sym(SymType::SCnt, &denominator, tmp_assign));
+                        new Sym(SymType::SCnt, denominator, tmp_assign));
         }
 
         return std::make_pair(q_numerator, q_denominator);
@@ -987,10 +995,13 @@ struct SymState {
         }
 
         expr += "Path Constraints: ";
-        for (const Sym &sym : path_constraints) {
-            expr += "(" + sym.toString(true) + ") && ";
+        if (path_constraints.size() > 0) {
+            expr += path_constraints[0].toString(true) ;
         }
-        expr += " 1\n";
+        for (int i = 1; i < path_constraints.size(); i++) {
+            expr += "&&" + path_constraints[i].toString(true);
+        }
+        expr += "\n";
 
         return expr;
     }
@@ -1041,7 +1052,7 @@ using PathConstraintsTable =
  *   {pc: {(constraints, memory, probability)}}
  */
 using ProbPathConstraintsTable =
-    std::unordered_map<int, std::vector<std::tuple<Sym, Mem, float>>>;
+    std::unordered_map<int, std::vector<std::tuple<Sym, Mem, SymProb>>>;
 
 /**
  * @brief Struct representing a trace in symbolic execution.

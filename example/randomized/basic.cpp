@@ -7,7 +7,7 @@ char *user_input;
 int max_depth = 65536;
 int maxSAT = 65536;
 int maxUNSAT = 65536;
-int verbose_level = 1;
+int verbose_level = 2;
 int num_itrs = 100;
 float step_size = 1.0f;
 float eps = 1.0f;
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
     for (auto &vd : var2dist) {
         val_candidates.emplace_back(vd.second.vals);
     }
-    std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
+    std::vector<std::vector<int>> D = cartesianProduct(val_candidates);
 
     printf("Start Symbolic Execution...\n");
     gymbo::run_pgymbo(prg, var2dist, D, optimizer, init, target_pcs,
@@ -88,6 +88,8 @@ int main(int argc, char *argv[]) {
     int num_unique_path_constraints = cache_constraints.size();
     int num_unique_final_states = probabilistic_constraints.size();
 
+    std::unordered_map<int, float> params;
+
     if (num_unique_path_constraints == 0) {
         printf("No Path Constraints Found\n");
     } else {
@@ -97,7 +99,7 @@ int main(int argc, char *argv[]) {
             for (auto &cc : probabilistic_constraints) {
                 for (auto &ccv : cc.second) {
                     printf("pc=%d: prob=%f, %s, constraints=%s\n", cc.first,
-                           std::get<2>(ccv),
+                           std::get<2>(ccv).eval(params, eps, var2dist, D),
                            mem2string(std::get<1>(ccv)).c_str(),
                            std::get<0>(ccv).toString(true).c_str());
                 }

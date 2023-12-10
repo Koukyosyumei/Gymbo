@@ -19,61 +19,37 @@ namespace gymbo {
  * @brief Perform probabilistic branching based on symbolic execution.
  *
  * Given a set of variable distributions, symbolic state, and path constraints,
- * this function performs probabilistic branching. It computes the number of
- * satisfying combinations for probabilistic variables and updates the symbolic
- * state accordingly.
+ * this function performs probabilistic branching. It computes the symbolic
+ * probability of the state being reached and updates the symbolic state
+ * accordingly.
  *
  * @param var2dist A map of variable IDs to their discrete distributions.
  * @param D A vector of vectors representing the all possible combinations of
  * probabilistic variables.
  * @param state The symbolic state for the current execution.
- * @param optimizer The optimizer used for guided symbolic execution.
- * @param max_num_trials The maximum number of trials for satisfiability
- * checking.
- * @param use_dpll Flag indicating whether to use the DPLL solver for
- * satisfiability.
- * @param params Initial parameters for symbolic execution.
- * @param unique_var_ids Set of unique variable IDs for probabilistic branching.
- * @return The number of satisfying combinations after probabilistic branching.
  */
-inline int pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
-                   std::vector<std::vector<int>> &D, SymState state,
-                   GDOptimizer &optimizer, int max_num_trials, bool use_dpll,
-                   std::unordered_map<int, float> params,
-                   std::unordered_set<int> &unique_var_ids) {
-    for (auto &vd : var2dist) {
-        state.mem.emplace(vd.first, FloatToWord(0));
+inline void pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
+                    std::vector<std::vector<int>> &D, SymState &state) {
+    int n_path_constraints = state.path_constraints.size();
+    if (state.has_observed_p_cond) {
+        Sym *n_cond = new Sym(SymType::SCon, FloatToWord(0.0f));
+        Sym *d_cond = new Sym(SymType::SCon, FloatToWord(0.0f));
+        for (int i = 0; i < n_path_constraints - 1; i++) {
+            n_cond = new Sym(SymType::SAnd, n_cond, &state.path_constraints[i]);
+            d_cond = new Sym(SymType::SAnd, d_cond, &state.path_constraints[i]);
+        }
+        n_cond = new Sym(SymType::SAnd, n_cond,
+                         &state.path_constraints[n_path_constraints - 1]);
+        state.p = state.p * SymProb(n_cond, d_cond);
+    } else {
+        Sym *n_cond = new Sym(SymType::SCon, FloatToWord(0.0f));
+        for (int i = 0; i < n_path_constraints; i++) {
+            n_cond = new Sym(SymType::SAnd, n_cond, &state.path_constraints[i]);
+        }
+        Sym *d_cond = new Sym(SymType::SCon, FloatToWord((float)D.size()));
+        state.p = SymProb(n_cond, d_cond);
+        state.has_observed_p_cond = true;
     }
-
-    int total_num_pvar_combinations = D.size();
-
-    bool ignore_memory = false;
-    int num_sat = 0;
-
-    for (int i = 0; i < total_num_pvar_combinations; i++) {
-        bool is_sat = false;
-        int j = 0;
-        for (auto &vd : var2dist) {
-            state.mem[vd.first] = FloatToWord(D[i][j]);
-            j++;
-        }
-
-        initialize_params(params, state, ignore_memory);
-
-        if (use_dpll) {
-            smt_dpll_solver(is_sat, state, params, optimizer, max_num_trials,
-                            ignore_memory);
-        } else {
-            smt_union_solver(is_sat, state, params, optimizer, max_num_trials,
-                             ignore_memory);
-        }
-
-        if (is_sat) {
-            num_sat++;
-        }
-    }
-
-    return num_sat;
 }
 
 /**
@@ -158,22 +134,8 @@ inline Trace run_pgymbo(Prog &prog,
 
             if (is_contain_prob_var) {
                 // call probabilistic branch algorithm
-                int total_num_sat_comb =
-                    pbranch(var2dist, D, state, optimizer, max_num_trials,
-                            use_dpll, params, unique_var_ids);
-
-                if (state.num_sat_comb == 0) {
-                    state.p *= (float)total_num_sat_comb / (float)(D.size());
-                } else {
-                    state.p *=
-                        (float)total_num_sat_comb / (float)state.num_sat_comb;
-                }
-
-                state.num_sat_comb = total_num_sat_comb;
-
-                if (total_num_sat_comb == 0) {
-                    is_sat = false;
-                }
+                pbranch(var2dist, D, state);
+                is_sat = true;
             } else {
                 // solve deterministic path constraints
                 if (use_dpll) {
@@ -183,8 +145,6 @@ inline Trace run_pgymbo(Prog &prog,
                     smt_union_solver(is_sat, state, params, optimizer,
                                      max_num_trials, ignore_memory);
                 }
-
-                state.p *= (float)is_sat;
             }
 
             if (is_sat) {
@@ -207,8 +167,9 @@ inline Trace run_pgymbo(Prog &prog,
                     printf("\x1b[32m");
                 }
                 printf(
-                    "pc=%d, IS_SAT - %d\x1b[39m, Pr.REACH - %f, %s, params = {",
-                    pc, is_sat, state.p, constraints_str.c_str());
+                    "pc=%d, IS_SAT - %d\x1b[39m, Pr.REACH - %s, %s, params = {",
+                    pc, is_sat, state.p.toString().c_str(),
+                    constraints_str.c_str());
                 for (auto &p : params) {
                     // ignore concrete variables
                     if (state.mem.find(p.first) != state.mem.end()) {
@@ -236,7 +197,7 @@ inline Trace run_pgymbo(Prog &prog,
             cc = Sym(SymType::SAnd, cc.copy(), &s);
         }
         if (prob_constrains_table.find(pc) == prob_constrains_table.end()) {
-            std::vector<std::tuple<Sym, Mem, float>> tmp = {
+            std::vector<std::tuple<Sym, Mem, SymProb>> tmp = {
                 std::make_tuple(cc, state.mem, state.p)};
             prob_constrains_table.emplace(pc, tmp);
         } else {

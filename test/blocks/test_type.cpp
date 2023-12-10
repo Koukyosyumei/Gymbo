@@ -28,16 +28,17 @@ TEST(GymboTypeTest, SymProbSimple) {
     }
     std::vector<std::vector<int>> D = cartesianProduct(val_candidates);
 
-    gymbo::SymProb prob(n_cond, d_cond);
+    gymbo::SymProb prob(&n_cond, &d_cond);
     gymbo::SymType symtype = gymbo::SymType::SLe;
     gymbo::Sym query = prob.query(symtype, q_right, var2dist, D);
 
     std::string true_q_str =
-        "((((0+[var_1 == 2 && var_0 == 1{1->1, 0->1, }])+[var_1 == 2 && var_0 "
-        "== 1{1->2, 0->1, }])+[var_1 == 2 && var_0 == 1{1->1, 0->2, }])+[var_1 "
-        "== 2 && var_0 == 1{1->2, 0->2, }]) <= (((((0+[var_0 == 1{1->1, 0->1, "
-        "}])+[var_0 == 1{1->2, 0->1, }])+[var_0 == 1{1->1, 0->2, }])+[var_0 == "
-        "1{1->2, 0->2, }])*1)";
+        "(((((0+[((var_1==2)&&(var_0==1)){0->1,1->1,}])+[((var_1"
+        "==2)&&(var_0==1)){0->2,1->1,}])+[((var_1==2)&&(var_0=="
+        "1)){0->1,1->2,}])+[((var_1==2)&&(var_0==1)){0->2,1->2,}])"
+        "<=(((((0+[(var_0==1){0->1,1->1,}])+[(var_0==1){0->2,1->1,"
+        "}])+[(var_0==1){0->1,1->2,}])+[(var_0==1){0->2,1->2,}])*1))";
+
     ASSERT_EQ(true_q_str, query.toString(true));
 
     std::unordered_map<int, float> params = {};
