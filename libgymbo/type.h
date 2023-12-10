@@ -683,6 +683,33 @@ struct Sym {
  */
 using SMem = std::unordered_map<Word32, Sym>;
 
+struct SymProb {
+    Sym numerator;
+    Sym denominator;
+
+    SymProb()
+        : numerator(Sym(SymType::SCon, FloatToWord(1.0f))),
+          denominator(Sym(SymType::SCon, FloatToWord(1.0f))) {}
+
+    SymProb(Sym numerator, Sym denominator)
+        : numerator(numerator), denominator(denominator) {}
+
+    SymProb operator*(SymProb &other) {
+        if (denominator.toString(false) == other.numerator.toString(false)) {
+            return SymProb(numerator, other.denominator);
+        } else {
+            return SymProb(
+                Sym(SymType::SMul, &numerator, &(other.numerator)),
+                Sym(SymType::SMul, &denominator, &(other.denominator)));
+        }
+    }
+
+    Sym query(SymType &symtype, Sym &other) {
+        return Sym(symtype, &numerator,
+                   new Sym(SymType::SMul, &denominator, &other));
+    }
+};
+
 /**
  * @brief Struct representing the symbolic state of the symbolic execution.
  */
@@ -694,15 +721,12 @@ struct SymState {
     Linkedlist<Sym> symbolic_stack; /**< Symbolic stack. */
     std::vector<Sym>
         path_constraints; /**< Vector of symbolic path constraints. */
-    int num_sat_comb; /**< Total number of value combinations for probabilistic
-                         variables*/
-    float p; /**< Probability of the state being reached under some satisfying
-                universal variables*/
+    SymProb p;            /**< Symbolic probability of the state being reached*/
 
     /**
      * @brief Default constructor for symbolic state.
      */
-    SymState() : pc(0), var_cnt(0), num_sat_comb(0), p(1){};
+    SymState() : pc(0), var_cnt(0), p(SymProb()){};
 
     /**
      * @brief Constructor for symbolic state with specified values.
@@ -722,8 +746,8 @@ struct SymState {
           smem(smem),
           symbolic_stack(symbolic_stack),
           path_constraints(path_constraints),
-          num_sat_comb(0),
-          p(1) {}
+          p(SymProb()) {}
+
 
     /**
      * @brief Constructor for symbolic state with specified values.
@@ -733,42 +757,16 @@ struct SymState {
      * @param smem Symbolic memory.
      * @param symbolic_stack Symbolic stack.
      * @param path_constraints Vector of symbolic path constraints.
-     * @param num_sat_comb **< Total number of value combinations for
-     probabilistic variables
      */
     SymState(int pc, int var_cnt, Mem &mem, SMem &smem,
              Linkedlist<Sym> &symbolic_stack,
-             std::vector<Sym> &path_constraints, int num_sat_comb)
+             std::vector<Sym> &path_constraints, SymProb &p)
         : pc(pc),
           var_cnt(var_cnt),
           mem(mem),
           smem(smem),
           symbolic_stack(symbolic_stack),
           path_constraints(path_constraints),
-          num_sat_comb(num_sat_comb),
-          p(1) {}
-
-    /**
-     * @brief Constructor for symbolic state with specified values.
-     * @param pc Program counter.
-     * @param var_cnt Variable count.
-     * @param mem Concrete memory.
-     * @param smem Symbolic memory.
-     * @param symbolic_stack Symbolic stack.
-     * @param path_constraints Vector of symbolic path constraints.
-     * @param num_sat_comb **< Total number of value combinations for
-     probabilistic variables
-     */
-    SymState(int pc, int var_cnt, Mem &mem, SMem &smem,
-             Linkedlist<Sym> &symbolic_stack,
-             std::vector<Sym> &path_constraints, int num_sat_comb, float p)
-        : pc(pc),
-          var_cnt(var_cnt),
-          mem(mem),
-          smem(smem),
-          symbolic_stack(symbolic_stack),
-          path_constraints(path_constraints),
-          num_sat_comb(num_sat_comb),
           p(p) {}
 
     /**
@@ -776,7 +774,7 @@ struct SymState {
      */
     SymState *copy() {
         return new SymState(pc, var_cnt, mem, smem, symbolic_stack,
-                            path_constraints, num_sat_comb, p);
+                            path_constraints, p);
     }
 
     /**

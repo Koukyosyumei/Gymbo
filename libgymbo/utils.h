@@ -10,6 +10,8 @@
 #include <cstdint>
 #include <cstring>
 #include <string>
+#include <vector>
+
 
 /**
  * @brief Checks if a float is an integer.
@@ -238,3 +240,42 @@ class Linkedlist {
         }
     }
 };
+
+/**
+ * @brief Compute the Cartesian product of a vector of vectors of integers.
+ *
+ * This function takes a vector of vectors of integers and computes their
+ * Cartesian product. The result is a vector of vectors, where each inner vector
+ * represents a combination of elements from the input vectors.
+ *
+ * @param vectors A vector of vectors of integers for which the Cartesian
+ * product is computed.
+ * @return The Cartesian product as a vector of vectors of integers.
+ */
+inline std::vector<std::vector<int>> cartesianProduct(
+    const std::vector<std::vector<int>> &vectors) {
+    std::vector<std::vector<int>> result;
+
+    if (vectors.size() == 0) {
+        return result;
+    }
+
+    for (int v : vectors[0]) {
+        std::vector<int> tmp = {v};
+        result.emplace_back(tmp);
+    }
+
+    for (int i = 1; i < vectors.size(); ++i) {
+        std::vector<std::vector<int>> tempResult;
+        for (const auto &element1 : result) {
+            for (const auto &element2 : vectors[i]) {
+                std::vector<int> tempElement = element1;
+                tempElement.push_back(element2);
+                tempResult.push_back(tempElement);
+            }
+        }
+        result = tempResult;
+    }
+
+    return result;
+}

@@ -16,45 +16,6 @@
 namespace gymbo {
 
 /**
- * @brief Compute the Cartesian product of a vector of vectors of integers.
- *
- * This function takes a vector of vectors of integers and computes their
- * Cartesian product. The result is a vector of vectors, where each inner vector
- * represents a combination of elements from the input vectors.
- *
- * @param vectors A vector of vectors of integers for which the Cartesian
- * product is computed.
- * @return The Cartesian product as a vector of vectors of integers.
- */
-inline std::vector<std::vector<int>> cartesianProduct(
-    const std::vector<std::vector<int>> &vectors) {
-    std::vector<std::vector<int>> result;
-
-    if (vectors.size() == 0) {
-        return result;
-    }
-
-    for (int v : vectors[0]) {
-        std::vector<int> tmp = {v};
-        result.emplace_back(tmp);
-    }
-
-    for (int i = 1; i < vectors.size(); ++i) {
-        std::vector<std::vector<int>> tempResult;
-        for (const auto &element1 : result) {
-            for (const auto &element2 : vectors[i]) {
-                std::vector<int> tempElement = element1;
-                tempElement.push_back(element2);
-                tempResult.push_back(tempElement);
-            }
-        }
-        result = tempResult;
-    }
-
-    return result;
-}
-
-/**
  * @brief Perform probabilistic branching based on symbolic execution.
  *
  * Given a set of variable distributions, symbolic state, and path constraints,
@@ -118,9 +79,10 @@ inline int pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
 /**
  * @brief Run probabilistic symbolic execution on a program.
  *
- * This function performs probabilistic symbolic execution on a given program, considering
- * variable distributions, symbolic states, and path constraints. It explores different
- * execution paths and updates the constraints and probabilities accordingly.
+ * This function performs probabilistic symbolic execution on a given program,
+ * considering variable distributions, symbolic states, and path constraints. It
+ * explores different execution paths and updates the constraints and
+ * probabilities accordingly.
  *
  * @param prog The program to be executed symbolically.
  * @param var2dist Map of variable IDs to their discrete distributions.
@@ -130,15 +92,18 @@ inline int pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
  * @param state The initial symbolic state for execution.
  * @param target_pcs Set of target program counters for analysis.
  * @param constraints_cache Cache for storing and reusing path constraints.
- * @param prob_constraints_table Table for storing probabilistic path constraints.
+ * @param prob_constraints_table Table for storing probabilistic path
+ * constraints.
  * @param maxDepth Maximum exploration depth during symbolic execution.
  * @param maxSAT Maximum number of satisfiable paths to explore.
  * @param maxUNSAT Maximum number of unsatisfiable paths to explore.
  * @param max_num_trials Maximum number of trials for satisfiability checking.
  * @param ignore_memory Flag to ignore memory updates during symbolic execution.
- * @param use_dpll Flag indicating whether to use the DPLL solver for satisfiability.
+ * @param use_dpll Flag indicating whether to use the DPLL solver for
+ * satisfiability.
  * @param verbose_level Verbosity level for printing debug information.
- * @param return_trace Flag to indicate whether to return the symbolic execution trace.
+ * @param return_trace Flag to indicate whether to return the symbolic execution
+ * trace.
  * @return The symbolic execution trace containing states and child traces.
  */
 inline Trace run_pgymbo(Prog &prog,
