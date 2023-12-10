@@ -206,8 +206,8 @@ inline Trace run_pgymbo(Prog &prog,
 
                 state.num_sat_comb = total_num_sat_comb;
 
-                if (total_num_sat_comb > 0) {
-                    is_sat = true;
+                if (total_num_sat_comb == 0) {
+                    is_sat = false;
                 }
             } else {
                 // solve deterministic path constraints
