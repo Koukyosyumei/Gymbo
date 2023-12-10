@@ -8,7 +8,7 @@ char *user_input;
 int max_depth = 65536;
 int maxSAT = 65536;
 int maxUNSAT = 65536;
-int verbose_level = 1;
+int verbose_level = -2;
 int num_itrs = 100;
 float step_size = 1.0f;
 float eps = 1.0f;
@@ -61,9 +61,6 @@ int main(int argc, char *argv[]) {
     gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low,
                                  param_high, sign_grad, init_param_uniform_int,
                                  seed);
-    gymbo::SymState init;
-    gymbo::PathConstraintsTable cache_constraints;
-    gymbo::ProbPathConstraintsTable probabilistic_constraints;
     std::unordered_set<int> target_pcs;
 
     printf("Compiling the input program...\n");
@@ -86,26 +83,26 @@ int main(int argc, char *argv[]) {
     }
     std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
 
-    printf("Start Symbolic Execution...\n");
-    init.set_concrete_val(var_counter["door_switch"], 0);
-    // init.set_concrete_val(var_counter["choice"], 1);
-    gymbo::run_pgymbo(prg, var2dist, D, optimizer, init, target_pcs,
-                      cache_constraints, probabilistic_constraints, max_depth,
-                      maxSAT, maxUNSAT, max_num_trials, ignore_memory, use_dpll,
-                      verbose_level);
-    printf("---------------------------\n");
+    std::vector<int> doow_switch_candidates = {0, 1};
 
-    printf("Result Summary\n");
-    printf("#Loops Spent for Gradient Descent: %d\n", optimizer.num_used_itr);
+    for (int door_switch : doow_switch_candidates) {
+        gymbo::SymState init;
+        gymbo::PathConstraintsTable cache_constraints;
+        gymbo::ProbPathConstraintsTable probabilistic_constraints;
+        init.set_concrete_val(var_counter["door_switch"], door_switch);
+        gymbo::run_pgymbo(prg, var2dist, D, optimizer, init, target_pcs,
+                          cache_constraints, probabilistic_constraints,
+                          max_depth, maxSAT, maxUNSAT, max_num_trials,
+                          ignore_memory, use_dpll, verbose_level);
 
-    int num_unique_path_constraints = cache_constraints.size();
-    int num_unique_final_states = probabilistic_constraints.size();
+        int num_unique_path_constraints = cache_constraints.size();
+        int num_unique_final_states = probabilistic_constraints.size();
 
-    if (num_unique_path_constraints == 0) {
-        printf("No Path Constraints Found\n");
-    } else {
-        printf("\n#Total Final States: %d\n", num_unique_final_states);
-        if (verbose_level >= 0) {
+        printf("\nResult Summary\n");
+        if (num_unique_path_constraints == 0) {
+            printf("No Path Constraints Found\n");
+        } else {
+            printf("\n#Total Final States: %d\n", num_unique_final_states);
             printf("List of Final States\n");
             for (auto &cc : probabilistic_constraints) {
                 for (auto &ccv : cc.second) {

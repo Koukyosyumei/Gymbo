@@ -908,13 +908,35 @@ struct Trace {
     }
 };
 
+/**
+ * @struct DiscreteDist
+ * @brief Represents a discrete probability distribution.
+ */
 struct DiscreteDist {
-    std::vector<int> vals;
+    std::vector<int> vals; /**< Vector to store possible discrete values. */
+
+    /**
+     * @brief Default constructor for DiscreteDist.
+     */
     DiscreteDist() {}
 };
 
+/**
+ * @struct DiscreteUniformDist
+ * @brief Represents a discrete uniform probability distribution derived from
+ * DiscreteDist.
+ */
 struct DiscreteUniformDist : public DiscreteDist {
-    int low, high;
+    int low;  /**< The lower bound of the uniform distribution. */
+    int high; /**< The upper bound of the uniform distribution. */
+
+    /**
+     * @brief Constructor for DiscreteUniformDist.
+     * @param low The lower bound of the uniform distribution.
+     * @param high The upper bound of the uniform distribution.
+     * @details Initializes the distribution by populating vals with values from
+     * low to high (inclusive).
+     */
     DiscreteUniformDist(int low, int high) : low(low), high(high) {
         for (int i = low; i <= high; i++) {
             vals.emplace_back(i);
