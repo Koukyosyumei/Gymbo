@@ -1,4 +1,4 @@
-#include "../libgymbo/gd.h"
+#include "../../libgymbo/gd.h"
 #include "gtest/gtest.h"
 
 int num_itrs = 100;

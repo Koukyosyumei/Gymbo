@@ -269,6 +269,8 @@ struct Sym {
     Sym *right;      /**< Pointer to the right child of the expression. */
     Word32 word;     /**< Additional data associated with the expression. */
     int var_idx; /**< Index of the variable associated with the expression. */
+    std::unordered_map<int, float>
+        assign; /** Map from var IDs to their assigned values */
 
     /**
      * @brief Default constructor for Sym.
@@ -281,6 +283,9 @@ struct Sym {
      * @param left Pointer to the left child.
      */
     Sym(SymType symtype, Sym *left) : symtype(symtype), left(left) {}
+
+    Sym(SymType symtype, Sym *left, std::unordered_map<int, float> &assign)
+        : symtype(symtype), left(left), assign(assign) {}
 
     /**
      * @brief Constructor for Sym with a specified type, left child, and right
@@ -350,6 +355,9 @@ struct Sym {
             }
             case (SymType::SCnt): {
                 left->gather_var_ids(result);
+                for (auto &a : assign) {
+                    result.erase(a.first);
+                }
                 return;
             }
             case (SymType::SAnd): {
@@ -489,7 +497,11 @@ struct Sym {
      * @param eps The smallest positive value of the target type.
      * @return Result of the symbolic expression evaluation.
      */
-    float eval(const std::unordered_map<int, float> &cvals, float eps) const {
+    float eval(std::unordered_map<int, float> cvals, float eps) const {
+        for (const auto &a : assign) {
+            cvals.emplace(a.first, a.second);
+        }
+
         switch (symtype) {
             case (SymType::SAdd): {
                 return left->eval(cvals, eps) + right->eval(cvals, eps);
@@ -569,7 +581,11 @@ struct Sym {
      * @param eps Small value to handle numerical instability.
      * @return Gradient of the symbolic expression.
      */
-    Grad grad(const std::unordered_map<int, float> &cvals, float eps) const {
+    Grad grad(std::unordered_map<int, float> cvals, float eps) const {
+        for (const auto &a : assign) {
+            cvals.emplace(a.first, a.second);
+        }
+
         switch (symtype) {
             case (SymType::SAdd): {
                 return left->grad(cvals, eps) + right->grad(cvals, eps);
@@ -706,7 +722,16 @@ struct Sym {
                 break;
             }
             case (SymType::SCnt): {
-                result = "[" + left->toString(convert_to_num) + "]";
+                result = "[" + left->toString(convert_to_num);
+                if (assign.size() != 0) {
+                    result += "{";
+                    for (const auto &a : assign) {
+                        result += std::to_string(a.first) + "->" +
+                                  std::to_string(a.second) + ", ";
+                    }
+                    result += "}";
+                }
+                result += "]";
                 return result;
             }
             case (SymType::SAny): {
@@ -748,6 +773,42 @@ struct Sym {
 };
 
 /**
+ * @struct DiscreteDist
+ * @brief Represents a discrete probability distribution.
+ */
+struct DiscreteDist {
+    std::vector<int> vals; /**< Vector to store possible discrete values. */
+
+    /**
+     * @brief Default constructor for DiscreteDist.
+     */
+    DiscreteDist() {}
+};
+
+/**
+ * @struct DiscreteUniformDist
+ * @brief Represents a discrete uniform probability distribution derived from
+ * DiscreteDist.
+ */
+struct DiscreteUniformDist : public DiscreteDist {
+    int low;  /**< The lower bound of the uniform distribution. */
+    int high; /**< The upper bound of the uniform distribution. */
+
+    /**
+     * @brief Constructor for DiscreteUniformDist.
+     * @param low The lower bound of the uniform distribution.
+     * @param high The upper bound of the uniform distribution.
+     * @details Initializes the distribution by populating vals with values from
+     * low to high (inclusive).
+     */
+    DiscreteUniformDist(int low, int high) : low(low), high(high) {
+        for (int i = low; i <= high; i++) {
+            vals.emplace_back(i);
+        }
+    }
+};
+
+/**
  * @brief Alias for symbolic memory, represented as an unordered map of symbolic
  * expressions.
  */
@@ -774,9 +835,26 @@ struct SymProb {
         }
     }
 
-    Sym query(SymType &symtype, Sym &other) {
-        return Sym(symtype, &numerator,
-                   new Sym(SymType::SMul, &denominator, &other));
+    Sym query(SymType &symtype, Sym &other,
+               std::unordered_map<int, DiscreteDist> &var2dist,
+               std::vector<std::vector<int>> &D) {
+        int total_num_pvar_combinations = D.size();
+
+        Sym *q_left = new Sym(SymType::SCon, FloatToWord(0.0f)); 
+        Sym *q_right = new Sym(SymType::SCon, FloatToWord(0.0f)); 
+
+        for (int i = 0; i < total_num_pvar_combinations; i++) {
+            int j = 0;
+            std::unordered_map<int, float> tmp_assign;
+            for (auto &vd : var2dist) {
+                tmp_assign.emplace(j, FloatToWord(D[i][j]));
+                j++;
+            }
+            q_left = new Sym(SymType::SAdd, q_left, new Sym(SymType::SCnt, &numerator, tmp_assign));
+            q_right = new Sym(SymType::SAdd, q_right, new Sym(SymType::SCnt, &denominator, tmp_assign));
+        }
+        q_right = new Sym(SymType::SMul, q_right, &other);
+        return Sym(symtype, q_left, q_right);
     }
 };
 
@@ -817,7 +895,6 @@ struct SymState {
           symbolic_stack(symbolic_stack),
           path_constraints(path_constraints),
           p(SymProb()) {}
-
 
     /**
      * @brief Constructor for symbolic state with specified values.
@@ -972,42 +1049,6 @@ struct Trace {
         data.print();
         for (const Trace &trace : children) {
             trace.print();
-        }
-    }
-};
-
-/**
- * @struct DiscreteDist
- * @brief Represents a discrete probability distribution.
- */
-struct DiscreteDist {
-    std::vector<int> vals; /**< Vector to store possible discrete values. */
-
-    /**
-     * @brief Default constructor for DiscreteDist.
-     */
-    DiscreteDist() {}
-};
-
-/**
- * @struct DiscreteUniformDist
- * @brief Represents a discrete uniform probability distribution derived from
- * DiscreteDist.
- */
-struct DiscreteUniformDist : public DiscreteDist {
-    int low;  /**< The lower bound of the uniform distribution. */
-    int high; /**< The upper bound of the uniform distribution. */
-
-    /**
-     * @brief Constructor for DiscreteUniformDist.
-     * @param low The lower bound of the uniform distribution.
-     * @param high The upper bound of the uniform distribution.
-     * @details Initializes the distribution by populating vals with values from
-     * low to high (inclusive).
-     */
-    DiscreteUniformDist(int low, int high) : low(low), high(high) {
-        for (int i = low; i <= high; i++) {
-            vals.emplace_back(i);
         }
     }
 };
