@@ -164,7 +164,7 @@ int main(int argc, char *argv[]) {
                     printf("%s", cc.first.c_str());
                     printf("SAT Params: {");
                     for (auto p : cc.second.second) {
-                        if (is_integer(p.second)) {
+                        if (gymbo::is_integer(p.second)) {
                             printf("var_%d:%d, ", p.first, (int)p.second);
                         } else {
                             printf("var_%d:%f, ", p.first, p.second);

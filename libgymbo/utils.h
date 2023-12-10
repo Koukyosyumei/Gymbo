@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 
+namespace gymbo {
 
 /**
  * @brief Checks if a float is an integer.
@@ -279,3 +280,4 @@ inline std::vector<std::vector<int>> cartesianProduct(
 
     return result;
 }
+};  // namespace gymbo

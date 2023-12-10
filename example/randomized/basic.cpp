@@ -24,8 +24,8 @@ std::string mem2string(const gymbo::Mem &mem) {
     std::string expr = "Concrete Memory: {";
     float tmp_word;
     for (auto &t : mem) {
-        tmp_word = wordToFloat(t.second);
-        if (is_integer(tmp_word)) {
+        tmp_word = gymbo::wordToFloat(t.second);
+        if (gymbo::is_integer(tmp_word)) {
             expr += ("var_" + std::to_string(((int)t.first)) + ": " +
                      std::to_string((int)tmp_word)) +
                     ", ";
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
     for (auto &vd : var2dist) {
         val_candidates.emplace_back(vd.second.vals);
     }
-    std::vector<std::vector<int>> D = cartesianProduct(val_candidates);
+    std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
 
     printf("Start Symbolic Execution...\n");
     gymbo::run_pgymbo(prg, var2dist, D, optimizer, init, target_pcs,

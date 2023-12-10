@@ -9,15 +9,15 @@ TEST(GymboTypeTest, SymProbSimple) {
 
     gymbo::Sym d_cond(gymbo::SymType::SEq,
                       new gymbo::Sym(gymbo::SymType::SAny, var_id_0),
-                      new gymbo::Sym(gymbo::SymType::SCon, FloatToWord(1.0)));
+                      new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(1.0)));
     gymbo::Sym n_cond(
         gymbo::SymType::SAnd,
         new gymbo::Sym(gymbo::SymType::SEq,
                        new gymbo::Sym(gymbo::SymType::SAny, var_id_1),
-                       new gymbo::Sym(gymbo::SymType::SCon, FloatToWord(2.0))),
+                       new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(2.0))),
         &d_cond);
 
-    gymbo::Sym q_right(gymbo::SymType::SCon, FloatToWord(1.0f));
+    gymbo::Sym q_right(gymbo::SymType::SCon, gymbo::FloatToWord(1.0f));
 
     std::unordered_map<int, gymbo::DiscreteDist> var2dist = {
         {0, gymbo::DiscreteUniformDist(1, 2)},
@@ -26,7 +26,7 @@ TEST(GymboTypeTest, SymProbSimple) {
     for (auto &vd : var2dist) {
         val_candidates.emplace_back(vd.second.vals);
     }
-    std::vector<std::vector<int>> D = cartesianProduct(val_candidates);
+    std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
 
     gymbo::SymProb prob(&n_cond, &d_cond);
     gymbo::SymType symtype = gymbo::SymType::SLe;
