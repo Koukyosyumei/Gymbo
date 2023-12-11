@@ -26,9 +26,9 @@ inline void pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
                     std::vector<std::vector<int>> &D, SymState &state) {
     int n_path_constraints = state.path_constraints.size();
     if (state.has_observed_p_cond) {
-        Sym *n_cond = new Sym(SymType::SCon, FloatToWord(0.0f));
-        Sym *d_cond = new Sym(SymType::SCon, FloatToWord(0.0f));
-        for (int i = 0; i < n_path_constraints - 1; i++) {
+        Sym *n_cond = &state.path_constraints[0];
+        Sym *d_cond = &state.path_constraints[0];
+        for (int i = 1; i < n_path_constraints - 1; i++) {
             n_cond = new Sym(SymType::SAnd, n_cond, &state.path_constraints[i]);
             d_cond = new Sym(SymType::SAnd, d_cond, &state.path_constraints[i]);
         }
@@ -36,8 +36,13 @@ inline void pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
                          &state.path_constraints[n_path_constraints - 1]);
         state.p = state.p * SymProb(n_cond, d_cond);
     } else {
-        Sym *n_cond = new Sym(SymType::SCon, FloatToWord(0.0f));
-        for (int i = 0; i < n_path_constraints; i++) {
+        Sym *n_cond;
+        if (n_path_constraints == 0) {
+            n_cond = new Sym(SymType::SCon, FloatToWord(0.0f));
+        } else {
+            n_cond = &state.path_constraints[0];
+        }
+        for (int i = 1; i < n_path_constraints; i++) {
             n_cond = new Sym(SymType::SAnd, n_cond, &state.path_constraints[i]);
         }
         Sym *d_cond = new Sym(SymType::SCon, FloatToWord((float)D.size()));
@@ -185,10 +190,13 @@ inline Trace run_pgymbo(Prog &prog,
         printf("---\n");
     }
 
-    if (prog[pc].instr == InstrType::Done) {
-        Sym cc = Sym(SymType::SCon, FloatToWord(1.0f));
-        for (Sym &s : state.path_constraints) {
-            cc = Sym(SymType::SAnd, cc.copy(), &s);
+    if (prog[pc].instr == InstrType::Done &&
+        state.path_constraints.size() > 0) {
+        Sym cc =
+            state
+                .path_constraints[0];  // Sym(SymType::SCon, FloatToWord(1.0f));
+        for (int i = 1; i < state.path_constraints.size(); i++) {
+            cc = Sym(SymType::SAnd, cc.copy(), &state.path_constraints[i]);
         }
         if (prob_constraints_table.find(pc) == prob_constraints_table.end()) {
             std::vector<std::tuple<Sym, Mem, SymProb>> tmp = {

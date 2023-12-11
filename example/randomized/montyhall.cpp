@@ -113,7 +113,7 @@ int main(int argc, char *argv[]) {
                     expected_value += p * gymbo::wordToFloat(std::get<1>(
                                               ccv)[var_counter["result"]]);
                     if (p > 0.0f) {
-                        printf("pc=%d: prob=%f, %s, constraints=%s\n", cc.first,
+                        printf("pc=%d: Prob=%f, %s, Constraints=%s\n", cc.first,
                                p, mem2string(std::get<1>(ccv)).c_str(),
                                std::get<0>(ccv).toString(true).c_str());
                     }

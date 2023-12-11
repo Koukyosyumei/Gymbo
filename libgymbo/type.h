@@ -1043,7 +1043,7 @@ struct SymProb {
      */
     std::string toString() {
         return "(" + numerator->toString(true) + ")/(" +
-               numerator->toString(true) + ")";
+               denominator->toString(true) + ")";
     }
 
     /**
