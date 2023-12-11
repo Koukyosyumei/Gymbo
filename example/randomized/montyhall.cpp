@@ -100,15 +100,18 @@ int main(int argc, char *argv[]) {
 
         std::unordered_map<int, float> params;
 
-        printf("\nResult Summary\n");
+        printf("\nResult Summary: door_switch=%d\n", (int)door_switch);
         if (num_unique_path_constraints == 0) {
             printf("No Path Constraints Found\n");
         } else {
             printf("\n#Total Final States: %d\n", num_unique_final_states);
             printf("List of Final States\n");
+            float expected_value = 0.0f;
             for (auto &cc : probabilistic_constraints) {
                 for (auto &ccv : cc.second) {
                     float p = std::get<2>(ccv).eval(params, eps, var2dist, D);
+                    expected_value += p * gymbo::wordToFloat(std::get<1>(
+                                              ccv)[var_counter["result"]]);
                     if (p > 0.0f) {
                         printf("pc=%d: prob=%f, %s, constraints=%s\n", cc.first,
                                p, mem2string(std::get<1>(ccv)).c_str(),
@@ -116,6 +119,7 @@ int main(int argc, char *argv[]) {
                     }
                 }
             }
+            printf("E[result] = %f\n", expected_value);
         }
     }
 }
