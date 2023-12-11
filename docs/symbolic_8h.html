@@ -75,29 +75,29 @@ $(function() {
 
 <p>Core implementation of gradient-based symbolic execution.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="gd_8h_source.html">gd.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="sat_8h_source.html">sat.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="smt_8h_source.html">smt.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for symbolic.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="symbolic_8h__incl.png" border="0" usemap="#alibgymbo_2symbolic_8h" alt=""/></div>
 <map name="alibgymbo_2symbolic_8h" id="alibgymbo_2symbolic_8h">
 <area shape="rect" title="Core implementation of gradient&#45;based symbolic execution." alt="" coords="244,5,403,32"/>
-<area shape="rect" href="gd_8h.html" title="Implementation of gradient descent optimizer." alt="" coords="259,80,310,107"/>
-<area shape="rect" href="sat_8h.html" title="Implementation of SAT solver." alt="" coords="335,80,389,107"/>
-<area shape="rect" title=" " alt="" coords="195,155,267,181"/>
-<area shape="rect" href="type_8h.html" title="Implementatations of basic alias, types, and classes." alt="" coords="292,155,355,181"/>
-<area shape="rect" title=" " alt="" coords="5,229,129,256"/>
-<area shape="rect" title=" " alt="" coords="154,229,269,256"/>
-<area shape="rect" title=" " alt="" coords="293,229,353,256"/>
-<area shape="rect" title=" " alt="" coords="377,229,440,256"/>
-<area shape="rect" href="utils_8h.html" title="Utility funcitons and classes." alt="" coords="464,229,527,256"/>
-<area shape="rect" title=" " alt="" coords="291,304,350,331"/>
-<area shape="rect" title=" " alt="" coords="375,304,437,331"/>
-<area shape="rect" title=" " alt="" coords="462,304,529,331"/>
-<area shape="rect" title=" " alt="" coords="553,304,619,331"/>
-<area shape="rect" title=" " alt="" coords="643,304,702,331"/>
-<area shape="rect" title=" " alt="" coords="379,155,457,181"/>
+<area shape="rect" href="smt_8h.html" title="Core implementation of gradient&#45;based smt solver." alt="" coords="294,80,353,107"/>
+<area shape="rect" href="gd_8h.html" title="Implementation of gradient descent optimizer." alt="" coords="259,155,310,181"/>
+<area shape="rect" href="sat_8h.html" title="Implementation of SAT solver." alt="" coords="335,155,389,181"/>
+<area shape="rect" title=" " alt="" coords="195,229,267,256"/>
+<area shape="rect" href="type_8h.html" title="Implementatations of basic alias, types, and classes." alt="" coords="292,229,355,256"/>
+<area shape="rect" title=" " alt="" coords="5,304,129,331"/>
+<area shape="rect" title=" " alt="" coords="154,304,269,331"/>
+<area shape="rect" title=" " alt="" coords="293,304,353,331"/>
+<area shape="rect" title=" " alt="" coords="309,379,372,405"/>
+<area shape="rect" href="utils_8h.html" title="Utility funcitons and classes." alt="" coords="480,304,543,331"/>
+<area shape="rect" title=" " alt="" coords="397,379,455,405"/>
+<area shape="rect" title=" " alt="" coords="480,379,543,405"/>
+<area shape="rect" title=" " alt="" coords="567,379,634,405"/>
+<area shape="rect" title=" " alt="" coords="658,379,725,405"/>
+<area shape="rect" title=" " alt="" coords="749,379,807,405"/>
+<area shape="rect" title=" " alt="" coords="379,229,457,256"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -105,8 +105,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="symbolic_8h__dep__incl.png" border="0" usemap="#alibgymbo_2symbolic_8hdep" alt=""/></div>
 <map name="alibgymbo_2symbolic_8hdep" id="alibgymbo_2symbolic_8hdep">
-<area shape="rect" title="Core implementation of gradient&#45;based symbolic execution." alt="" coords="5,5,164,32"/>
-<area shape="rect" href="pipeline_8h.html" title="Basic workloads of gradient&#45;based symbolic execution." alt="" coords="9,80,160,107"/>
+<area shape="rect" title="Core implementation of gradient&#45;based symbolic execution." alt="" coords="92,5,251,32"/>
+<area shape="rect" href="pipeline_8h.html" title="Basic workloads of gradient&#45;based symbolic execution." alt="" coords="5,80,156,107"/>
+<area shape="rect" href="psymbolic_8h.html" title="Implementation of symbolic execution for randomized programs." alt="" coords="180,80,347,107"/>
 </map>
 </div>
 </div>
@@ -125,9 +126,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a8de7e0823e44be83e0579851777fc0a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a8de7e0823e44be83e0579851777fc0a1">gymbo::symStep</a> (SymState *state, Instr &amp;instr, std::vector&lt; SymState * &gt; &amp;result)</td></tr>
 <tr class="memdesc:a8de7e0823e44be83e0579851777fc0a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Single Instruction of a Program.  <a href="namespacegymbo.html#a8de7e0823e44be83e0579851777fc0a1">More...</a><br /></td></tr>
 <tr class="separator:a8de7e0823e44be83e0579851777fc0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50a6f585caaa9c8ca66826268b46dcc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a50a6f585caaa9c8ca66826268b46dcc9">gymbo::initialize_params</a> (std::unordered_map&lt; int, float &gt; &amp;params, SymState &amp;state, bool ignore_memory)</td></tr>
-<tr class="memdesc:a50a6f585caaa9c8ca66826268b46dcc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Parameter Values from Memory.  <a href="namespacegymbo.html#a50a6f585caaa9c8ca66826268b46dcc9">More...</a><br /></td></tr>
-<tr class="separator:a50a6f585caaa9c8ca66826268b46dcc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Core implementation of gradient-based symbolic execution. </p>

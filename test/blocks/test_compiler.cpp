@@ -1,4 +1,4 @@
-#include "../libgymbo/compiler.h"
+#include "../../libgymbo/compiler.h"
 #include "gtest/gtest.h"
 
 TEST(GymboCompilerTest, Pipeline) {

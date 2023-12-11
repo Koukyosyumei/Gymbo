@@ -83,9 +83,11 @@ Collaboration diagram for gymbo::Trace:</div>
 <div class="dyncontent">
 <div class="center"><img src="structgymbo_1_1Trace__coll__graph.png" border="0" usemap="#agymbo_1_1Trace_coll__map" alt="Collaboration graph"/></div>
 <map name="agymbo_1_1Trace_coll__map" id="agymbo_1_1Trace_coll__map">
-<area shape="rect" title="Struct representing a trace in symbolic execution." alt="" coords="27,199,136,225"/>
-<area shape="rect" href="structgymbo_1_1SymState.html" title="Struct representing the symbolic state of the symbolic execution." alt="" coords="12,109,151,136"/>
-<area shape="rect" href="classLinkedlist.html" title=" " alt="" coords="5,5,157,47"/>
+<area shape="rect" title="Struct representing a trace in symbolic execution." alt="" coords="100,305,209,332"/>
+<area shape="rect" href="structgymbo_1_1SymState.html" title="Struct representing the symbolic state of the symbolic execution." alt="" coords="85,216,224,243"/>
+<area shape="rect" href="structgymbo_1_1SymProb.html" title="Represents a symbolic probability with a numerator and denominator." alt="" coords="5,119,139,146"/>
+<area shape="rect" href="structgymbo_1_1Sym.html" title="Struct representing a symbolic expression." alt="" coords="20,7,124,33"/>
+<area shape="rect" href="classgymbo_1_1Linkedlist.html" title=" " alt="" coords="163,112,311,153"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -94,9 +96,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a27b719523e78bb13c5eea72198120c9e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Trace.html#a27b719523e78bb13c5eea72198120c9e">Trace</a> (<a class="el" href="structgymbo_1_1SymState.html">SymState</a> <a class="el" href="structgymbo_1_1Trace.html#ad9b5444a17855f7ca400c381cf722ce0">data</a>, std::vector&lt; <a class="el" href="structgymbo_1_1Trace.html">Trace</a> &gt; <a class="el" href="structgymbo_1_1Trace.html#ad6bd2092e3b5f010bd89e253c8bdd0aa">children</a>)</td></tr>
 <tr class="memdesc:a27b719523e78bb13c5eea72198120c9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for a trace.  <a href="structgymbo_1_1Trace.html#a27b719523e78bb13c5eea72198120c9e">More...</a><br /></td></tr>
 <tr class="separator:a27b719523e78bb13c5eea72198120c9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e02ab2b2c1c69c918f2824265170afb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Trace.html#a6e02ab2b2c1c69c918f2824265170afb">print</a> (int indent_cnt=0)</td></tr>
-<tr class="memdesc:a6e02ab2b2c1c69c918f2824265170afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a human-readable representation of the trace.  <a href="structgymbo_1_1Trace.html#a6e02ab2b2c1c69c918f2824265170afb">More...</a><br /></td></tr>
-<tr class="separator:a6e02ab2b2c1c69c918f2824265170afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfab1f15a01a93695d94770cdd36c14f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Trace.html#abfab1f15a01a93695d94770cdd36c14f">print</a> (int indent_cnt=0) const</td></tr>
+<tr class="memdesc:abfab1f15a01a93695d94770cdd36c14f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a human-readable representation of the trace.  <a href="structgymbo_1_1Trace.html#abfab1f15a01a93695d94770cdd36c14f">More...</a><br /></td></tr>
+<tr class="separator:abfab1f15a01a93695d94770cdd36c14f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -154,8 +156,8 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6e02ab2b2c1c69c918f2824265170afb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e02ab2b2c1c69c918f2824265170afb">&#9670;&nbsp;</a></span>print()</h2>
+<a id="abfab1f15a01a93695d94770cdd36c14f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfab1f15a01a93695d94770cdd36c14f">&#9670;&nbsp;</a></span>print()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,7 +170,7 @@ Public Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>indent_cnt</em> = <code>0</code></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>

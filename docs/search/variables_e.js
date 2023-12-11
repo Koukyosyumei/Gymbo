@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['seed_429',['seed',['../structgymbo_1_1GDOptimizer.html#ab1631b9a0026ed9c12721df5900eb347',1,'gymbo::GDOptimizer']]],
-  ['sign_5fgrad_430',['sign_grad',['../structgymbo_1_1GDOptimizer.html#a1dab2d9895b58c4dda052a00cf8058ee',1,'gymbo::GDOptimizer']]],
-  ['smem_431',['smem',['../structgymbo_1_1SymState.html#a85b48b53e8e5301b88c53ba7d34f0b3c',1,'gymbo::SymState']]],
-  ['str_432',['str',['../structgymbo_1_1Token.html#a673e7e48886d3fe1f801b516d2b7291b',1,'gymbo::Token']]],
-  ['symbolic_5fstack_433',['symbolic_stack',['../structgymbo_1_1SymState.html#a6aa224acae7f54e2f67a708be6cd0b42',1,'gymbo::SymState']]],
-  ['symtype_434',['symtype',['../structgymbo_1_1Sym.html#a79563bd2b1629b555b2229e7070c7446',1,'gymbo::Sym']]]
+  ['rhs_479',['rhs',['../structgymbo_1_1Node.html#ac9961bda97c405a45d15503a3e688d69',1,'gymbo::Node']]],
+  ['right_480',['right',['../classgymbosat_1_1And.html#a751c47c6f6de6bd1b5808460daaa6980',1,'gymbosat::And::right()'],['../classgymbosat_1_1Or.html#a543681613377a3a4a01b097088dbba9d',1,'gymbosat::Or::right()'],['../structgymbo_1_1Sym.html#a319da51ac1f1686fa448cc3739b0acea',1,'gymbo::Sym::right()']]]
 ];

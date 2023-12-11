@@ -36,7 +36,7 @@ PYBIND11_MODULE(pylibgymbo, m) {
     m.def("gexecute", &gymbo::gexecute, R"pbdoc(gexecute)pbdoc");
 
     py::class_<gymbo::GDOptimizer>(m, "GDOptimizer")
-        .def(py::init<int, float, float, float, float, bool, bool, int>());
+        .def(py::init<int, float, float, float, float, bool, bool, bool, int>());
 
 
 

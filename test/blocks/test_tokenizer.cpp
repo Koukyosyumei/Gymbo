@@ -1,6 +1,6 @@
 #include <string>
 
-#include "../libgymbo/tokenizer.h"
+#include "../../libgymbo/tokenizer.h"
 #include "gtest/gtest.h"
 
 // Example test fixture

@@ -15,10 +15,20 @@ struct \mbox{\hyperlink{structgymbo_1_1Grad}{Grad}}
 \begin{DoxyCompactList}\small\item\em Struct representing the gradient of a symbolic expression. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}}
 \begin{DoxyCompactList}\small\item\em Struct representing a symbolic expression. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}}
+\begin{DoxyCompactList}\small\item\em Represents a discrete probability distribution. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1DiscreteUniformDist}{Discrete\+Uniform\+Dist}}
+\begin{DoxyCompactList}\small\item\em Represents a discrete uniform probability distribution derived from \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}}
+\begin{DoxyCompactList}\small\item\em Represents a symbolic probability with a numerator and denominator. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}}
 \begin{DoxyCompactList}\small\item\em Struct representing the symbolic state of the symbolic execution. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}}
-\begin{DoxyCompactList}\small\item\em Struct representing a trace in symbolic execution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Struct representing a trace in symbolic execution. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgymbo_1_1LLNode}{LLNode}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structgymbo_1_1Node}{Node}} for a Doubly Linked List. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgymbo_1_1Linkedlist}{Linkedlist}}
+\begin{DoxyCompactList}\small\item\em Doubly Linked List Implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -28,10 +38,12 @@ using \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} 
 \begin{DoxyCompactList}\small\item\em Alias for a program, represented as a vector of instructions. \end{DoxyCompactList}\item 
 using \mbox{\hyperlink{namespacegymbo_a93394c86b71f9947e9d17b61013e600c}{Mem}} = std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}{Word32}}, \mbox{\hyperlink{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}{Word32}} $>$
 \begin{DoxyCompactList}\small\item\em Alias for memory, represented as an unordered map of 32-\/bit words. \end{DoxyCompactList}\item 
-using \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ bool, std\+::unordered\+\_\+map$<$ int, float $>$ $>$$>$
-\begin{DoxyCompactList}\small\item\em Alias for a table of path constraints. The key is the string representation of the constraint and the value is the pair of its satifiability and the map whose key is the variable id and the value is the concrete value that makes the constraint true. \end{DoxyCompactList}\item 
 using \mbox{\hyperlink{namespacegymbo_ac714ceb538af2de2adce25193f0e5eaf}{SMem}} = std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespacegymbo_a5cbc49c07ec788c2da4cda3b41f9364f}{Word32}}, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$
-\begin{DoxyCompactList}\small\item\em Alias for symbolic memory, represented as an unordered map of symbolic expressions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Alias for symbolic memory, represented as an unordered map of symbolic expressions. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ bool, std\+::unordered\+\_\+map$<$ int, float $>$ $>$$>$
+\begin{DoxyCompactList}\small\item\em Alias for a table of path constraints. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} = std\+::unordered\+\_\+map$<$ int, std\+::vector$<$ std\+::tuple$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}}, \mbox{\hyperlink{namespacegymbo_a93394c86b71f9947e9d17b61013e600c}{Mem}}, \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} $>$ $>$$>$
+\begin{DoxyCompactList}\small\item\em Alias for a table of probabilistic path constraints. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -112,9 +124,10 @@ enum class \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225}{Sy
 \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225abb67bd7c54875002b5a8214f04ba0c39}{SNot}}
 , \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a8e6bcd5685e5221b7133c03e692f4a92}{SOr}}
 , \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225ae04506053d891434c87bcb7c9ee7a492}{SCon}}
-, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a086ea780e08007dce53b3c400c2a7ef3}{SAnd}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a93deba25f847dbb4b3ae0711aad67318}{SCnt}}
 , \newline
-\mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225ad2c3d0433b9da329df4c66b885706dd4}{SLt}}
+\mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a086ea780e08007dce53b3c400c2a7ef3}{SAnd}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225ad2c3d0433b9da329df4c66b885706dd4}{SLt}}
 , \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a46b6c8e7c51af424839e28ad6f8ecbe8}{SLe}}
 , \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225adae537bd250f746297c0cfad0128c24d}{SAny}}
  \}
@@ -160,12 +173,20 @@ std\+::pair$<$ std\+::unordered\+\_\+map$<$ std\+::string, int $>$, \mbox{\hyper
 \begin{DoxyCompactList}\small\item\em Compiles user input into a program, returning variable counts and the compiled program. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \mbox{\hyperlink{namespacegymbo_af40a70afb521e856bda968808b2b492e}{gexecute}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prg, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&init, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, int max\+\_\+depth, int max\+SAT, int max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
 \begin{DoxyCompactList}\small\item\em Symbolically Executes a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_aed8257f2dd65fda6917c46d75b3d24ec}{pbranch}} (std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state)
+\begin{DoxyCompactList}\small\item\em Perform probabilistic branching based on symbolic execution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{namespacegymbo_af14aa75beebbdc447f479657e715104a}{run\+\_\+pgymbo}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, \mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&prob\+\_\+constraints\+\_\+table, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level, bool return\+\_\+trace=false)
+\begin{DoxyCompactList}\small\item\em Run probabilistic symbolic execution on a program. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}{initialize\+\_\+params}} (std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, bool ignore\+\_\+memory)
+\begin{DoxyCompactList}\small\item\em Initialize Parameter Values from Memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a63b32e7da04b65b80a7eafb27af0714a}{smt\+\_\+union\+\_\+solver}} (bool \&is\+\_\+sat, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory)
+\begin{DoxyCompactList}\small\item\em SMT Solver with Unified Loss Function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_acbe8003da6e623ec5435c2b7c92c092a}{smt\+\_\+dpll\+\_\+solver}} (bool \&is\+\_\+sat, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory)
+\begin{DoxyCompactList}\small\item\em SMT Solver using DPLL as its backend. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{namespacegymbo_aa13abbc332896d34bc320950bdacfdf9}{run\+\_\+gymbo}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level, bool return\+\_\+trace=false)
 \begin{DoxyCompactList}\small\item\em Symbolically Execute a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a8de7e0823e44be83e0579851777fc0a1}{sym\+Step}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$state, \mbox{\hyperlink{classgymbo_1_1Instr}{Instr}} \&instr, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$ $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Symbolically Execute a Single Instruction of a Program. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}{initialize\+\_\+params}} (std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, bool ignore\+\_\+memory)
-\begin{DoxyCompactList}\small\item\em Initialize Parameter Values from Memory. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_aab49b70724bec7c8b7ee2a6a2fd31771}{is\+\_\+alpha}} (char c)
 \begin{DoxyCompactList}\small\item\em Checks if a character is an alphabetical character or underscore. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a9f75e72416f1f4de36d005b6935c0136}{is\+\_\+alnum}} (char c)
@@ -191,7 +212,29 @@ bool \mbox{\hyperlink{namespacegymbo_a573f6b3a170a995133014dec63f330dc}{at\+\_\+
 bool \mbox{\hyperlink{namespacegymbo_a086916a92edc60e687a056603995182e}{startswith}} (char $\ast$p, char $\ast$q)
 \begin{DoxyCompactList}\small\item\em Checks if the string {\ttfamily p} starts with the string {\ttfamily q}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1Token}{Token}} $\ast$ \mbox{\hyperlink{namespacegymbo_a89c8cb7e3b04d3d02f0cba69ab593981}{tokenize}} (char $\ast$user\+\_\+input, std\+::unordered\+\_\+map$<$ std\+::string, int $>$ \&var\+\_\+counter)
-\begin{DoxyCompactList}\small\item\em Tokenizes a given string and returns a linked list of tokens. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Tokenizes a given string and returns a linked list of tokens. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacegymbo_a3b85fc6f161fd1e6fc41113713affb0c}{is\+\_\+integer}} (float x)
+\begin{DoxyCompactList}\small\item\em Checks if a float is an integer. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{namespacegymbo_a859d05bd2582d5596d13b8325bfd5fdd}{Float\+To\+Word}} (float val)
+\begin{DoxyCompactList}\small\item\em Converts a float value to a 32-\/bit word representation. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{namespacegymbo_a01f446a0ae49bb8ce2810309280c6668}{word\+To\+Float}} (uint32\+\_\+t word)
+\begin{DoxyCompactList}\small\item\em Converts a 32-\/bit word representation to a float value. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacegymbo_a15891cbacb5598d7ca263500a1a5bee2}{word\+To\+Int}} (uint32\+\_\+t word)
+\begin{DoxyCompactList}\small\item\em Converts a 32-\/bit word representation to an integer value. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacegymbo_a1c2d4305c63eaa26ee3a6f3cdcf3fa21}{word\+To\+Signed\+Int}} (uint32\+\_\+t word)
+\begin{DoxyCompactList}\small\item\em Converts a uint32\+\_\+t word to a signed int. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacegymbo_ac8f3ff2f068b0209a7a57c2e8ff4c00f}{word\+To\+Bool}} (uint32\+\_\+t word)
+\begin{DoxyCompactList}\small\item\em Converts a uint32\+\_\+t word to a bool. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{namespacegymbo_aed223e0d69fdaa204dcac13aabd24c81}{bool\+To\+Word}} (bool value)
+\begin{DoxyCompactList}\small\item\em Converts a bool to a uint32\+\_\+t word. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{namespacegymbo_a36310e690be4b96736144967016a8a0b}{twos\+Complement}} (uint32\+\_\+t i)
+\begin{DoxyCompactList}\small\item\em Returns the twos complement of a uint32\+\_\+t word. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacegymbo_a522f696c976f87e3ab2647520f58192e}{is\+Negative}} (uint32\+\_\+t word)
+\begin{DoxyCompactList}\small\item\em Checks if a uint32\+\_\+t word is negative. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespacegymbo_a08e7c1f5fbe133aac3555ce9490af0dc}{val\+Name}} (int i)
+\begin{DoxyCompactList}\small\item\em Generates a name for a variable based on its index. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \mbox{\hyperlink{namespacegymbo_a9a616478635557c4e334a5c7016938e6}{cartesian\+Product}} (const std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&vectors)
+\begin{DoxyCompactList}\small\item\em Compute the Cartesian product of a vector of vectors of integers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Typedef Documentation}
@@ -213,9 +256,32 @@ Alias for memory, represented as an unordered map of 32-\/bit words.
 
 
 
-Alias for a table of path constraints. The key is the string representation of the constraint and the value is the pair of its satifiability and the map whose key is the variable id and the value is the concrete value that makes the constraint true. 
+Alias for a table of path constraints. 
 
-\mbox{\Hypertarget{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}\label{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}} 
+This table uses the string representation of the constraint as the key. The corresponding value is a pair consisting of\+:
+\begin{DoxyItemize}
+\item The satisfiability of the constraint.
+\item A map where the key is the variable ID, and the value is the concrete value that makes the constraint true.
+\end{DoxyItemize}
+
+The overall structure of the table is as follows\+: \{str\+\_\+of\+\_\+constraints\+: \{is\+\_\+sat\+: \{var\+\_\+id\+: var\+\_\+val\}\}\} \mbox{\Hypertarget{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}\label{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}} 
+\index{gymbo@{gymbo}!ProbPathConstraintsTable@{ProbPathConstraintsTable}}
+\index{ProbPathConstraintsTable@{ProbPathConstraintsTable}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{ProbPathConstraintsTable}{ProbPathConstraintsTable}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{gymbo\+::\+Prob\+Path\+Constraints\+Table}} = typedef std\+::unordered\+\_\+map$<$int, std\+::vector$<$std\+::tuple$<$\mbox{\hyperlink{structgymbo_1_1Sym}{Sym}}, \mbox{\hyperlink{namespacegymbo_a93394c86b71f9947e9d17b61013e600c}{Mem}}, \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}}$>$ $>$$>$}
+
+
+
+Alias for a table of probabilistic path constraints. 
+
+This table uses the program counter as the key, and the corresponding values are vectors of tuples. Each tuple contains three elements\+:
+\begin{DoxyItemize}
+\item The first element is the path constraint.
+\item The second element is the concrete memory.
+\item The third element is the probability of reachability under satisfying universal variables.
+\end{DoxyItemize}
+
+The overall structure of the table is as follows\+: \{pc\+: \{(constraints, memory, probability)\}\} \mbox{\Hypertarget{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}\label{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}} 
 \index{gymbo@{gymbo}!Prog@{Prog}}
 \index{Prog@{Prog}!gymbo@{gymbo}}
 \doxysubsubsection{\texorpdfstring{Prog}{Prog}}
@@ -475,6 +541,10 @@ SOr&\\
 SCon&\\
 \hline
 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SCnt@{SCnt}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SCnt@{SCnt}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225a93deba25f847dbb4b3ae0711aad67318}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225a93deba25f847dbb4b3ae0711aad67318}} 
+SCnt&\\
+\hline
+
 \raisebox{\heightof{T}}[0pt][0pt]{\index{SAnd@{SAnd}!gymbo@{gymbo}}\index{gymbo@{gymbo}!SAnd@{SAnd}}}\mbox{\Hypertarget{namespacegymbo_a4524c130985b8982d2787f9bafe27225a086ea780e08007dce53b3c400c2a7ef3}\label{namespacegymbo_a4524c130985b8982d2787f9bafe27225a086ea780e08007dce53b3c400c2a7ef3}} 
 SAnd&\\
 \hline
@@ -600,6 +670,44 @@ Checks if the current token is at the end of the program.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 True if the current token is at the end of the program, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_aed223e0d69fdaa204dcac13aabd24c81}\label{namespacegymbo_aed223e0d69fdaa204dcac13aabd24c81}} 
+\index{gymbo@{gymbo}!boolToWord@{boolToWord}}
+\index{boolToWord@{boolToWord}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{boolToWord()}{boolToWord()}}
+{\footnotesize\ttfamily uint32\+\_\+t gymbo\+::bool\+To\+Word (\begin{DoxyParamCaption}\item[{bool}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts a bool to a uint32\+\_\+t word. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The bool to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The uint32\+\_\+t word equivalent of the bool. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a9a616478635557c4e334a5c7016938e6}\label{namespacegymbo_a9a616478635557c4e334a5c7016938e6}} 
+\index{gymbo@{gymbo}!cartesianProduct@{cartesianProduct}}
+\index{cartesianProduct@{cartesianProduct}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{cartesianProduct()}{cartesianProduct()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::vector$<$int$>$ $>$ gymbo\+::cartesian\+Product (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&}]{vectors }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the Cartesian product of a vector of vectors of integers. 
+
+This function takes a vector of vectors of integers and computes their Cartesian product. The result is a vector of vectors, where each inner vector represents a combination of elements from the input vectors.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vectors} & A vector of vectors of integers for which the Cartesian product is computed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Cartesian product as a vector of vectors of integers. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}\label{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}} 
 \index{gymbo@{gymbo}!compile\_ast@{compile\_ast}}
@@ -806,6 +914,26 @@ expr = assign
 \begin{DoxyReturn}{Returns}
 An AST node representing the expression. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a859d05bd2582d5596d13b8325bfd5fdd}\label{namespacegymbo_a859d05bd2582d5596d13b8325bfd5fdd}} 
+\index{gymbo@{gymbo}!FloatToWord@{FloatToWord}}
+\index{FloatToWord@{FloatToWord}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{FloatToWord()}{FloatToWord()}}
+{\footnotesize\ttfamily uint32\+\_\+t gymbo\+::\+Float\+To\+Word (\begin{DoxyParamCaption}\item[{float}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts a float value to a 32-\/bit word representation. 
+
+The {\ttfamily Float\+To\+Word} function converts a float value to its 32-\/bit word representation using memcpy.
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The float value to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 32-\/bit word representation of the float. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{namespacegymbo_a7b970a9d85276e2bd460b29fec762ec3}\label{namespacegymbo_a7b970a9d85276e2bd460b29fec762ec3}} 
 \index{gymbo@{gymbo}!gcompile@{gcompile}}
 \index{gcompile@{gcompile}!gymbo@{gymbo}}
@@ -939,7 +1067,7 @@ A set of extracted path constraints and their satisfiability.
 \index{gymbo@{gymbo}!initialize\_params@{initialize\_params}}
 \index{initialize\_params@{initialize\_params}!gymbo@{gymbo}}
 \doxysubsubsection{\texorpdfstring{initialize\_params()}{initialize\_params()}}
-{\footnotesize\ttfamily void gymbo\+::initialize\+\_\+params (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{params,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{bool}]{ignore\+\_\+memory }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void gymbo\+::initialize\+\_\+params (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{params,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{bool}]{ignore\+\_\+memory }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -991,6 +1119,44 @@ Checks if a character is an alphabetical character or underscore.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 true if the character is an alphabetical character or underscore, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a3b85fc6f161fd1e6fc41113713affb0c}\label{namespacegymbo_a3b85fc6f161fd1e6fc41113713affb0c}} 
+\index{gymbo@{gymbo}!is\_integer@{is\_integer}}
+\index{is\_integer@{is\_integer}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{is\_integer()}{is\_integer()}}
+{\footnotesize\ttfamily bool gymbo\+::is\+\_\+integer (\begin{DoxyParamCaption}\item[{float}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a float is an integer. 
+
+The {\ttfamily is\+\_\+integer} function checks if a given float value is an integer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The float value to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the float is an integer, otherwise {\ttfamily false}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a522f696c976f87e3ab2647520f58192e}\label{namespacegymbo_a522f696c976f87e3ab2647520f58192e}} 
+\index{gymbo@{gymbo}!isNegative@{isNegative}}
+\index{isNegative@{isNegative}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{isNegative()}{isNegative()}}
+{\footnotesize\ttfamily bool gymbo\+::is\+Negative (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a uint32\+\_\+t word is negative. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em word} & The uint32\+\_\+t word to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the word is negative, false otherwise. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{namespacegymbo_aee43a52e33ae6335a16161d16abd1079}\label{namespacegymbo_aee43a52e33ae6335a16161d16abd1079}} 
 \index{gymbo@{gymbo}!logical@{logical}}
@@ -1118,6 +1284,27 @@ Creates a new token and adds it as the next token of {\ttfamily cur}.
 \begin{DoxyReturn}{Returns}
 A pointer to the newly created token. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_aed8257f2dd65fda6917c46d75b3d24ec}\label{namespacegymbo_aed8257f2dd65fda6917c46d75b3d24ec}} 
+\index{gymbo@{gymbo}!pbranch@{pbranch}}
+\index{pbranch@{pbranch}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{pbranch()}{pbranch()}}
+{\footnotesize\ttfamily void gymbo\+::pbranch (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&}]{var2dist,  }\item[{std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&}]{D,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Perform probabilistic branching based on symbolic execution. 
+
+Given a set of variable distributions, symbolic state, and path constraints, this function performs probabilistic branching. It computes the symbolic probability of the state being reached and updates the symbolic state accordingly.
+
+
+\begin{DoxyParams}{Parameters}
+{\em var2dist} & A map of variable IDs to their discrete distributions. \\
+\hline
+{\em D} & A vector of vectors representing the all possible combinations of probabilistic variables. \\
+\hline
+{\em state} & The symbolic state for the current execution. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{namespacegymbo_aab835796afd998bcd50e272c9eb29d00}\label{namespacegymbo_aab835796afd998bcd50e272c9eb29d00}} 
 \index{gymbo@{gymbo}!primary@{primary}}
 \index{primary@{primary}!gymbo@{gymbo}}
@@ -1206,6 +1393,106 @@ This function conducts symbolic execution of a given program while simultaneousl
 \begin{DoxyReturn}{Returns}
 A trace of the symbolic execution. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_af14aa75beebbdc447f479657e715104a}\label{namespacegymbo_af14aa75beebbdc447f479657e715104a}} 
+\index{gymbo@{gymbo}!run\_pgymbo@{run\_pgymbo}}
+\index{run\_pgymbo@{run\_pgymbo}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{run\_pgymbo()}{run\_pgymbo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} gymbo\+::run\+\_\+pgymbo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&}]{var2dist,  }\item[{std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&}]{D,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{\mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&}]{prob\+\_\+constraints\+\_\+table,  }\item[{int}]{max\+Depth,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level,  }\item[{bool}]{return\+\_\+trace = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Run probabilistic symbolic execution on a program. 
+
+This function performs probabilistic symbolic execution on a given program, considering variable distributions, symbolic states, and path constraints. It explores different execution paths and updates the constraints and probabilities accordingly.
+
+
+\begin{DoxyParams}{Parameters}
+{\em prog} & The program to be executed symbolically. \\
+\hline
+{\em var2dist} & Map of variable IDs to their discrete distributions. \\
+\hline
+{\em D} & A vector of vectors representing the all possible combinations of probabilistic variables. \\
+\hline
+{\em optimizer} & The optimizer used for guided symbolic execution. \\
+\hline
+{\em state} & The initial symbolic state for execution. \\
+\hline
+{\em target\+\_\+pcs} & Set of target program counters for analysis. \\
+\hline
+{\em constraints\+\_\+cache} & Cache for storing and reusing path constraints. \\
+\hline
+{\em prob\+\_\+constraints\+\_\+table} & Table for storing probabilistic path constraints. \\
+\hline
+{\em max\+Depth} & Maximum exploration depth during symbolic execution. \\
+\hline
+{\em max\+SAT} & Maximum number of satisfiable paths to explore. \\
+\hline
+{\em max\+UNSAT} & Maximum number of unsatisfiable paths to explore. \\
+\hline
+{\em max\+\_\+num\+\_\+trials} & Maximum number of trials for satisfiability checking. \\
+\hline
+{\em ignore\+\_\+memory} & Flag to ignore memory updates during symbolic execution. \\
+\hline
+{\em use\+\_\+dpll} & Flag indicating whether to use the DPLL solver for satisfiability. \\
+\hline
+{\em verbose\+\_\+level} & Verbosity level for printing debug information. \\
+\hline
+{\em return\+\_\+trace} & Flag to indicate whether to return the symbolic execution trace. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The symbolic execution trace containing states and child traces. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_acbe8003da6e623ec5435c2b7c92c092a}\label{namespacegymbo_acbe8003da6e623ec5435c2b7c92c092a}} 
+\index{gymbo@{gymbo}!smt\_dpll\_solver@{smt\_dpll\_solver}}
+\index{smt\_dpll\_solver@{smt\_dpll\_solver}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{smt\_dpll\_solver()}{smt\_dpll\_solver()}}
+{\footnotesize\ttfamily void gymbo\+::smt\+\_\+dpll\+\_\+solver (\begin{DoxyParamCaption}\item[{bool \&}]{is\+\_\+sat,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{params,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+SMT Solver using DPLL as its backend. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+\_\+sat} & Flag to store the result of satisfiability. \\
+\hline
+{\em state} & The current symbolic state. \\
+\hline
+{\em params} & The map from the variable IDs to the concrete values. \\
+\hline
+{\em optimizer} & The gradient descent optimizer for parameter optimization. \\
+\hline
+{\em max\+\_\+num\+\_\+trials} & The maximum number of trials for each gradient descent. \\
+\hline
+{\em ignore\+\_\+memory} & If set to true, constraints derived from memory will be ignored. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_a63b32e7da04b65b80a7eafb27af0714a}\label{namespacegymbo_a63b32e7da04b65b80a7eafb27af0714a}} 
+\index{gymbo@{gymbo}!smt\_union\_solver@{smt\_union\_solver}}
+\index{smt\_union\_solver@{smt\_union\_solver}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{smt\_union\_solver()}{smt\_union\_solver()}}
+{\footnotesize\ttfamily void gymbo\+::smt\+\_\+union\+\_\+solver (\begin{DoxyParamCaption}\item[{bool \&}]{is\+\_\+sat,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{params,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+SMT Solver with Unified Loss Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+\_\+sat} & Flag to store the result of satisfiability. \\
+\hline
+{\em state} & The current symbolic state. \\
+\hline
+{\em params} & The map from the variable IDs to the concrete values. \\
+\hline
+{\em optimizer} & The gradient descent optimizer for parameter optimization. \\
+\hline
+{\em max\+\_\+num\+\_\+trials} & The maximum number of trials for each gradient descent. \\
+\hline
+{\em ignore\+\_\+memory} & If set to true, constraints derived from memory will be ignored. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{namespacegymbo_a086916a92edc60e687a056603995182e}\label{namespacegymbo_a086916a92edc60e687a056603995182e}} 
 \index{gymbo@{gymbo}!startswith@{startswith}}
 \index{startswith@{startswith}!gymbo@{gymbo}}
@@ -1287,6 +1574,24 @@ Tokenizes a given string and returns a linked list of tokens.
 \begin{DoxyReturn}{Returns}
 A linked list of tokens. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a36310e690be4b96736144967016a8a0b}\label{namespacegymbo_a36310e690be4b96736144967016a8a0b}} 
+\index{gymbo@{gymbo}!twosComplement@{twosComplement}}
+\index{twosComplement@{twosComplement}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{twosComplement()}{twosComplement()}}
+{\footnotesize\ttfamily uint32\+\_\+t gymbo\+::twos\+Complement (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the twos complement of a uint32\+\_\+t word. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & The uint32\+\_\+t word to get the twos complement of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The twos complement of the word. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{namespacegymbo_ac29372113d1f5d63e50aec27aa2bab58}\label{namespacegymbo_ac29372113d1f5d63e50aec27aa2bab58}} 
 \index{gymbo@{gymbo}!unary@{unary}}
 \index{unary@{unary}!gymbo@{gymbo}}
@@ -1308,4 +1613,98 @@ unary = (\char`\"{}+\char`\"{} $\vert$ \char`\"{}-\/\char`\"{})? unary $\vert$ p
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 A pointer to the constructed AST node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a08e7c1f5fbe133aac3555ce9490af0dc}\label{namespacegymbo_a08e7c1f5fbe133aac3555ce9490af0dc}} 
+\index{gymbo@{gymbo}!valName@{valName}}
+\index{valName@{valName}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{valName()}{valName()}}
+{\footnotesize\ttfamily std\+::string gymbo\+::val\+Name (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Generates a name for a variable based on its index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & The index of the variable. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A name for the variable. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_ac8f3ff2f068b0209a7a57c2e8ff4c00f}\label{namespacegymbo_ac8f3ff2f068b0209a7a57c2e8ff4c00f}} 
+\index{gymbo@{gymbo}!wordToBool@{wordToBool}}
+\index{wordToBool@{wordToBool}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{wordToBool()}{wordToBool()}}
+{\footnotesize\ttfamily bool gymbo\+::word\+To\+Bool (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts a uint32\+\_\+t word to a bool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em word} & The uint32\+\_\+t word to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The bool equivalent of the word. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a01f446a0ae49bb8ce2810309280c6668}\label{namespacegymbo_a01f446a0ae49bb8ce2810309280c6668}} 
+\index{gymbo@{gymbo}!wordToFloat@{wordToFloat}}
+\index{wordToFloat@{wordToFloat}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{wordToFloat()}{wordToFloat()}}
+{\footnotesize\ttfamily float gymbo\+::word\+To\+Float (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts a 32-\/bit word representation to a float value. 
+
+The {\ttfamily word\+To\+Float} function converts a 32-\/bit word representation to its corresponding float value using memcpy.
+
+
+\begin{DoxyParams}{Parameters}
+{\em word} & The 32-\/bit word representation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The float value. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a15891cbacb5598d7ca263500a1a5bee2}\label{namespacegymbo_a15891cbacb5598d7ca263500a1a5bee2}} 
+\index{gymbo@{gymbo}!wordToInt@{wordToInt}}
+\index{wordToInt@{wordToInt}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{wordToInt()}{wordToInt()}}
+{\footnotesize\ttfamily int gymbo\+::word\+To\+Int (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts a 32-\/bit word representation to an integer value. 
+
+The {\ttfamily word\+To\+Int} function converts a 32-\/bit word representation to its corresponding integer value using static\+\_\+cast.
+
+
+\begin{DoxyParams}{Parameters}
+{\em word} & The 32-\/bit word representation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The integer value. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a1c2d4305c63eaa26ee3a6f3cdcf3fa21}\label{namespacegymbo_a1c2d4305c63eaa26ee3a6f3cdcf3fa21}} 
+\index{gymbo@{gymbo}!wordToSignedInt@{wordToSignedInt}}
+\index{wordToSignedInt@{wordToSignedInt}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{wordToSignedInt()}{wordToSignedInt()}}
+{\footnotesize\ttfamily int gymbo\+::word\+To\+Signed\+Int (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts a uint32\+\_\+t word to a signed int. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em word} & The uint32\+\_\+t word to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signed int equivalent of the word. 
 \end{DoxyReturn}

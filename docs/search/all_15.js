@@ -1,9 +1,12 @@
 var searchData=
 [
-  ['word_247',['word',['../classgymbo_1_1Instr.html#a955a484347502cf5145c62ce33d67b1c',1,'gymbo::Instr::word()'],['../structgymbo_1_1Sym.html#aeff55d00e3d722940440f610a43db2f4',1,'gymbo::Sym::word()']]],
-  ['word32_248',['Word32',['../namespacegymbo.html#a5cbc49c07ec788c2da4cda3b41f9364f',1,'gymbo']]],
-  ['wordtobool_249',['wordToBool',['../utils_8h.html#a952ce406cfbcf5f21efd088b3b71d428',1,'utils.h']]],
-  ['wordtofloat_250',['wordToFloat',['../utils_8h.html#af99d4e3b06f181af184d171a6321f0ef',1,'utils.h']]],
-  ['wordtoint_251',['wordToInt',['../utils_8h.html#a049d18da1d33ca03e055d24ba1077efc',1,'utils.h']]],
-  ['wordtosignedint_252',['wordToSignedInt',['../utils_8h.html#a4372ea01be056af0da9f922ae9b02bc2',1,'utils.h']]]
+  ['val_265',['val',['../structgymbo_1_1Node.html#ac4eeacc3b9c8a2b4ac7f8021e0752b64',1,'gymbo::Node::val()'],['../structgymbo_1_1Token.html#afbbc1fd98c24c3f14e5971cbce93d95a',1,'gymbo::Token::val()'],['../structgymbo_1_1Grad.html#a630feb208125b40d88176890f31d2b50',1,'gymbo::Grad::val()']]],
+  ['valname_266',['valName',['../namespacegymbo.html#a08e7c1f5fbe133aac3555ce9490af0dc',1,'gymbo']]],
+  ['vals_267',['vals',['../structgymbo_1_1DiscreteDist.html#a0dba8c3a7ec505a53cd1bdfc0854b01a',1,'gymbo::DiscreteDist']]],
+  ['value_268',['value',['../classgymbosat_1_1Const.html#a515a340ed6b1a72037c094d331de226c',1,'gymbosat::Const']]],
+  ['var_269',['Var',['../classgymbosat_1_1Var.html',1,'gymbosat::Var'],['../classgymbosat_1_1Var.html#a1edb862e80c7ba3865da7f929f9ce48c',1,'gymbosat::Var::Var()']]],
+  ['var_270',['VAR',['../namespacegymbosat.html#a6d86d55f55f58425a61afe7f71066024a783aa8811c0d97c103452691317996a5',1,'gymbosat']]],
+  ['var_5fcnt_271',['var_cnt',['../structgymbo_1_1SymState.html#a4c7ebe9a103e0b7a60633cca1f82b88f',1,'gymbo::SymState']]],
+  ['var_5fid_272',['var_id',['../structgymbo_1_1Token.html#a3be48631ff1bf0b56692bd10f9d0f3eb',1,'gymbo::Token']]],
+  ['var_5fidx_273',['var_idx',['../structgymbo_1_1Sym.html#aef609bbed728ec7c46ac45a2f4832221',1,'gymbo::Sym']]]
 ];

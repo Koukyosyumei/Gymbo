@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['expr_256',['Expr',['../classgymbosat_1_1Expr.html',1,'gymbosat']]]
+  ['discretedist_283',['DiscreteDist',['../structgymbo_1_1DiscreteDist.html',1,'gymbo']]],
+  ['discreteuniformdist_284',['DiscreteUniformDist',['../structgymbo_1_1DiscreteUniformDist.html',1,'gymbo']]]
 ];

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['els_384',['els',['../structgymbo_1_1Node.html#ae6bef39e81145618d49c1f0a36865b43',1,'gymbo::Node']]],
-  ['eps_385',['eps',['../structgymbo_1_1GDOptimizer.html#a8f024c3699cac041ced908ddf6ba8877',1,'gymbo::GDOptimizer']]],
-  ['expr_386',['expr',['../classgymbosat_1_1Not.html#aaf311f53a236e2cd79793dcff6f1858a',1,'gymbosat::Not']]]
+  ['data_429',['data',['../structgymbo_1_1Trace.html#ad9b5444a17855f7ca400c381cf722ce0',1,'gymbo::Trace::data()'],['../classgymbo_1_1LLNode.html#ac4268c508ef916e3dd5a0b336f35dd8d',1,'gymbo::LLNode::data()']]],
+  ['denominator_430',['denominator',['../structgymbo_1_1SymProb.html#aa103d656a1c912733a5b26b9cbf494b2',1,'gymbo::SymProb']]]
 ];

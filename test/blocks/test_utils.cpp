@@ -1,9 +1,9 @@
-#include "../libgymbo/utils.h"  // Replace with the actual header file name
+#include "../../libgymbo/utils.h"  // Replace with the actual header file name
 #include "gtest/gtest.h"
 
 // Test Linkedlist push function
 TEST(LinkedlistTest, Push) {
-    Linkedlist<int> list;
+    gymbo::Linkedlist<int> list;
     list.push(1);
     list.push(2);
     list.push(3);
@@ -17,7 +17,7 @@ TEST(LinkedlistTest, Push) {
 
 // Test Linkedlist pop function
 TEST(LinkedlistTest, Pop) {
-    Linkedlist<int> list;
+    gymbo::Linkedlist<int> list;
     list.push(1);
     list.push(2);
     list.push(3);
@@ -37,7 +37,7 @@ TEST(LinkedlistTest, Pop) {
 
 // Test Linkedlist back function
 TEST(LinkedlistTest, Back) {
-    Linkedlist<int> list;
+    gymbo::Linkedlist<int> list;
     list.push(1);
     list.push(2);
     list.push(3);
@@ -48,7 +48,7 @@ TEST(LinkedlistTest, Back) {
 
 // Test Linkedlist len function
 TEST(LinkedlistTest, Len) {
-    Linkedlist<int> list;
+    gymbo::Linkedlist<int> list;
     list.push(1);
     list.push(2);
     list.push(3);

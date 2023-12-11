@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['wordtobool_375',['wordToBool',['../utils_8h.html#a952ce406cfbcf5f21efd088b3b71d428',1,'utils.h']]],
-  ['wordtofloat_376',['wordToFloat',['../utils_8h.html#af99d4e3b06f181af184d171a6321f0ef',1,'utils.h']]],
-  ['wordtoint_377',['wordToInt',['../utils_8h.html#a049d18da1d33ca03e055d24ba1077efc',1,'utils.h']]],
-  ['wordtosignedint_378',['wordToSignedInt',['../utils_8h.html#a4372ea01be056af0da9f922ae9b02bc2',1,'utils.h']]]
+  ['valname_417',['valName',['../namespacegymbo.html#a08e7c1f5fbe133aac3555ce9490af0dc',1,'gymbo']]],
+  ['var_418',['Var',['../classgymbosat_1_1Var.html#a1edb862e80c7ba3865da7f929f9ce48c',1,'gymbosat::Var']]]
 ];

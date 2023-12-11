@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['val_239',['val',['../structgymbo_1_1Node.html#ac4eeacc3b9c8a2b4ac7f8021e0752b64',1,'gymbo::Node::val()'],['../structgymbo_1_1Token.html#afbbc1fd98c24c3f14e5971cbce93d95a',1,'gymbo::Token::val()'],['../structgymbo_1_1Grad.html#a630feb208125b40d88176890f31d2b50',1,'gymbo::Grad::val()']]],
-  ['valname_240',['valName',['../utils_8h.html#a86cfc81dc7063dce5ca7451c443e207e',1,'utils.h']]],
-  ['value_241',['value',['../classgymbosat_1_1Const.html#a515a340ed6b1a72037c094d331de226c',1,'gymbosat::Const']]],
-  ['var_242',['Var',['../classgymbosat_1_1Var.html',1,'gymbosat::Var'],['../classgymbosat_1_1Var.html#a1edb862e80c7ba3865da7f929f9ce48c',1,'gymbosat::Var::Var()']]],
-  ['var_243',['VAR',['../namespacegymbosat.html#a6d86d55f55f58425a61afe7f71066024a783aa8811c0d97c103452691317996a5',1,'gymbosat']]],
-  ['var_5fcnt_244',['var_cnt',['../structgymbo_1_1SymState.html#a4c7ebe9a103e0b7a60633cca1f82b88f',1,'gymbo::SymState']]],
-  ['var_5fid_245',['var_id',['../structgymbo_1_1Token.html#a3be48631ff1bf0b56692bd10f9d0f3eb',1,'gymbo::Token']]],
-  ['var_5fidx_246',['var_idx',['../structgymbo_1_1Sym.html#aef609bbed728ec7c46ac45a2f4832221',1,'gymbo::Sym']]]
+  ['unary_260',['unary',['../namespacegymbo.html#ac29372113d1f5d63e50aec27aa2bab58',1,'gymbo']]],
+  ['unconst_261',['unConst',['../classgymbosat_1_1Expr.html#a462170452606863e487f0807be83a96a',1,'gymbosat::Expr::unConst()'],['../classgymbosat_1_1Var.html#a48452af858f886d121455123176cbb63',1,'gymbosat::Var::unConst()'],['../classgymbosat_1_1And.html#a6d4e1f0b5d1d9379e90ed5d80e0fcf3a',1,'gymbosat::And::unConst()'],['../classgymbosat_1_1Or.html#a84aa719f774ffd20a78a4cfa4a931c7a',1,'gymbosat::Or::unConst()'],['../classgymbosat_1_1Not.html#a5d09bc42cae0a9bf522c5375d7ba8f70',1,'gymbosat::Not::unConst()'],['../classgymbosat_1_1Const.html#a3b3a3ef47d754c53d913ec0cebf6ec36',1,'gymbosat::Const::unConst()']]],
+  ['unitclause_262',['unitClause',['../classgymbosat_1_1Expr.html#a766c9fc6f0ac28161a19e7a7184f61b6',1,'gymbosat::Expr::unitClause()'],['../classgymbosat_1_1Var.html#aa59b38a82e6b503c295635c0dc68adef',1,'gymbosat::Var::unitClause()'],['../classgymbosat_1_1And.html#afffae51480f5b0ffe99d27bc0a60ec90',1,'gymbosat::And::unitClause()'],['../classgymbosat_1_1Or.html#a2538710166c753dec215727198866b66',1,'gymbosat::Or::unitClause()'],['../classgymbosat_1_1Not.html#a4118ba387b374d8e8940a64db34941f9',1,'gymbosat::Not::unitClause()'],['../classgymbosat_1_1Const.html#a32e2e08c72ef3820c5e6cb92cef05d2c',1,'gymbosat::Const::unitClause()']]],
+  ['unitpropagation_263',['unitPropagation',['../namespacegymbosat.html#a900a3e916b5f594baf9598112ff29db9',1,'gymbosat']]],
+  ['utils_2eh_264',['utils.h',['../utils_8h.html',1,'']]]
 ];
