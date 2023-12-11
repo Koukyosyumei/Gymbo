@@ -548,19 +548,18 @@ struct Sym {
                 return cvals.at(var_idx);
             }
             case (SymType::SEq): {
-                return std::abs(left->aeval(cvals, eps) -
-                                right->aeval(cvals, eps));
+                return std::abs(left->aeval(cvals, eps) - right->aeval(cvals, eps));
             }
             case (SymType::SNot): {
                 return left->aeval(cvals, eps) * (-1.0f) + eps;
             }
             case (SymType::SAnd): {
-                return std::max(0.0f, left->aeval(cvals, eps)) +
-                       std::max(0.0f, right->aeval(cvals, eps));
+                return std::max(left->aeval(cvals, eps),
+                                right->aeval(cvals, eps));
             }
             case (SymType::SOr): {
-                return std::max(0.0f, left->aeval(cvals, eps)) *
-                       std::max(0.0f, right->aeval(cvals, eps));
+                return std::min(left->aeval(cvals, eps),
+                                right->aeval(cvals, eps));
             }
             case (SymType::SLt): {
                 return left->aeval(cvals, eps) - right->aeval(cvals, eps) + eps;
@@ -580,7 +579,8 @@ struct Sym {
      * @param eps The smallest positive value of the target type.
      * @return Result of the symbolic expression evaluation.
      */
-    float eval(std::unordered_map<int, float> &cvals, float eps) const {
+    float eval(const std::unordered_map<int, float> &cvals,
+               const float eps) const {
         switch (symtype) {
             case (SymType::SAdd): {
                 return left->eval(cvals, eps) + right->eval(cvals, eps);
@@ -627,19 +627,18 @@ struct Sym {
                 return cvals.at(var_idx);
             }
             case (SymType::SEq): {
-                return std::abs(left->eval(cvals, eps) -
-                                right->eval(cvals, eps));
+                return std::abs(left->eval(cvals, eps) - right->eval(cvals, eps));
             }
             case (SymType::SNot): {
                 return left->eval(cvals, eps) * (-1.0f) + eps;
             }
             case (SymType::SAnd): {
-                return std::max(0.0f, left->eval(cvals, eps)) +
-                       std::max(0.0f, right->eval(cvals, eps));
+                return std::max(left->eval(cvals, eps),
+                                right->eval(cvals, eps));
             }
             case (SymType::SOr): {
-                return std::max(0.0f, left->eval(cvals, eps)) *
-                       std::max(0.0f, right->eval(cvals, eps));
+                return std::min(left->eval(cvals, eps),
+                                right->eval(cvals, eps));
             }
             case (SymType::SLt): {
                 return left->eval(cvals, eps) - right->eval(cvals, eps) + eps;
@@ -729,25 +728,18 @@ struct Sym {
                 return left->agrad(cvals, eps) * (-1.0f);
             }
             case (SymType::SAnd): {
-                float lv = left->aeval(cvals, eps);
-                float rv = right->aeval(cvals, eps);
-                Grad res({});
-                if (lv > 0.0f) {
-                    res = res + left->agrad(cvals, eps);
+                if (left->aeval(cvals, eps) < right->aeval(cvals, eps)) {
+                    return right->agrad(cvals, eps);
+                } else {
+                    return left->agrad(cvals, eps);
                 }
-                if (rv > 0.0f) {
-                    res = res + right->agrad(cvals, eps);
-                }
-                return res;
             }
             case (SymType::SOr): {
-                float lv = left->aeval(cvals, eps);
-                float rv = right->aeval(cvals, eps);
-                if (lv > 0.0f && rv > 0.0f) {
-                    return left->agrad(cvals, eps) * rv +
-                           right->agrad(cvals, eps) * lv;
+                if (left->aeval(cvals, eps) > right->aeval(cvals, eps)) {
+                    return right->agrad(cvals, eps);
+                } else {
+                    return left->agrad(cvals, eps);
                 }
-                return Grad({});
             }
             case (SymType::SLt): {
                 return left->agrad(cvals, eps) - right->agrad(cvals, eps);
@@ -768,7 +760,8 @@ struct Sym {
      * @param eps Small value to handle numerical instability.
      * @return Gradient of the symbolic expression.
      */
-    Grad grad(std::unordered_map<int, float> &cvals, float eps) const {
+    Grad grad(const std::unordered_map<int, float> &cvals,
+              const float eps) const {
         switch (symtype) {
             case (SymType::SAdd): {
                 return left->grad(cvals, eps) + right->grad(cvals, eps);
@@ -833,25 +826,18 @@ struct Sym {
                 return left->grad(cvals, eps) * (-1.0f);
             }
             case (SymType::SAnd): {
-                float lv = left->eval(cvals, eps);
-                float rv = right->eval(cvals, eps);
-                Grad res({});
-                if (lv > 0.0f) {
-                    res = res + left->grad(cvals, eps);
+                if (left->eval(cvals, eps) < right->eval(cvals, eps)) {
+                    return right->grad(cvals, eps);
+                } else {
+                    return left->grad(cvals, eps);
                 }
-                if (rv > 0.0f) {
-                    res = res + right->grad(cvals, eps);
-                }
-                return res;
             }
             case (SymType::SOr): {
-                float lv = left->eval(cvals, eps);
-                float rv = right->eval(cvals, eps);
-                if (lv > 0.0f && rv > 0.0f) {
-                    return left->grad(cvals, eps) * rv +
-                           right->grad(cvals, eps) * lv;
+                if (left->eval(cvals, eps) > right->eval(cvals, eps)) {
+                    return right->grad(cvals, eps);
+                } else {
+                    return left->grad(cvals, eps);
                 }
-                return Grad({});
             }
             case (SymType::SLt): {
                 return left->grad(cvals, eps) - right->grad(cvals, eps);

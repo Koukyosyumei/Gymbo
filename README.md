@@ -65,15 +65,15 @@ Gymbo converts the path constraint into a numerical loss function, which becomes
 (a >= b) => b - a
 (a == b) => abs(a - b)
 (a != b) => -abs(a - b) + eps
-(a && b) => max(0, a) + max(0, b)
-(a || b) => max(0, a) * max(0, b)
+(a && b) => max(a, b)
+(a || b) => min(a, b)
 ```
 
 Here, `eps` is the smallest positive value of the type for a and b.
 
-For example, when `a` and `b` are integers (`eps = 1`),  `(a < 3) && (!(a < 3) || (b == 5))` becomes `(a - 2) + (max(0, (3 - a)) * max(0, abs(b - 5)))`.
+For example, when `a` and `b` are integers (`eps = 1`),  `(a < 3) && (!(a < 3) || (b == 5))` becomes `max(a - 2, min(3 - a, abs(b - 5)))`.
 
-Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each unique term, sometimes resulting in better scalability. For example, applying DPLL to the above example leads to `(a < 3)` being true and `(b == 5)` being true. Gymbo then converts this assignment into a loss function to be solved: `(a - 2) + max(0, abs(b - 5))`.
+Optionally, Gymbo can use DPLL (SAT solver) to decide the assignment for each unique term, sometimes resulting in better scalability. For example, applying DPLL to the above example leads to `(a < 3)` being true and `(b == 5)` being true. Gymbo then converts this assignment into a loss function to be solved: `max(a - 2, abs(b - 5))`.
 
 ## CLI Tool
 
