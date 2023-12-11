@@ -22,6 +22,16 @@ git clone https://github.com/Koukyosyumei/Gymbo.git
 ./script/build.sh
 ```
 
+## Quick Starts
+
+You can find some examples in [example](example).
+
+For example ...
+
+- [simple program](example/basics/simple.sh)
+- [searching adversarial examples agaisnt neural networks](example/nn/nn_sklearn.py)
+- [solving Monty Hall problem](example/randomized/montyhall.sh)
+
 ## Input Source Code Grammar
 
 Gymbo presently supports C-like programs with the following BNF grammar:
