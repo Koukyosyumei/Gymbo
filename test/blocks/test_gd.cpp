@@ -16,7 +16,8 @@ void initialize_params(std::unordered_map<int, float> &params,
     params = {};
     if (!ignore_memory) {
         for (auto &p : state.mem) {
-            params.emplace(std::make_pair(p.first, gymbo::wordToFloat(p.second)));
+            params.emplace(
+                std::make_pair(p.first, gymbo::wordToFloat(p.second)));
         }
     }
 }
@@ -27,34 +28,34 @@ TEST(GymboGDTest, Count) {
 
     gymbo::Sym *cond_0 = new gymbo::Sym(
         gymbo::SymType::SCnt,
-        new gymbo::Sym(gymbo::SymType::SEq,
-                       new gymbo::Sym(gymbo::SymType::SAny, var_id_0),
-                       new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(3.0))));
+        new gymbo::Sym(
+            gymbo::SymType::SEq, new gymbo::Sym(gymbo::SymType::SAny, var_id_0),
+            new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(3.0))));
 
     gymbo::Sym *cond_1 = new gymbo::Sym(
         gymbo::SymType::SCnt,
-        new gymbo::Sym(gymbo::SymType::SEq,
-                       new gymbo::Sym(gymbo::SymType::SAny, var_id_1),
-                       new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(7.0))));
+        new gymbo::Sym(
+            gymbo::SymType::SEq, new gymbo::Sym(gymbo::SymType::SAny, var_id_1),
+            new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(7.0))));
 
-    gymbo::Sym cond_a =
-        gymbo::Sym(gymbo::SymType::SEq,
-                   new gymbo::Sym(gymbo::SymType::SAdd, cond_0, cond_1),
-                   new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(0.0)));
+    gymbo::Sym cond_a = gymbo::Sym(
+        gymbo::SymType::SEq,
+        new gymbo::Sym(gymbo::SymType::SAdd, cond_0, cond_1),
+        new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(0.0)));
 
-    gymbo::Sym cond_b =
-        gymbo::Sym(gymbo::SymType::SEq,
-                   new gymbo::Sym(gymbo::SymType::SAdd, cond_0, cond_1),
-                   new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(1.0)));
+    gymbo::Sym cond_b = gymbo::Sym(
+        gymbo::SymType::SEq,
+        new gymbo::Sym(gymbo::SymType::SAdd, cond_0, cond_1),
+        new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(1.0)));
 
-    gymbo::Sym cond_c =
-        gymbo::Sym(gymbo::SymType::SEq,
-                   new gymbo::Sym(gymbo::SymType::SAdd, cond_0, cond_1),
-                   new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(2.0)));
+    gymbo::Sym cond_c = gymbo::Sym(
+        gymbo::SymType::SEq,
+        new gymbo::Sym(gymbo::SymType::SAdd, cond_0, cond_1),
+        new gymbo::Sym(gymbo::SymType::SCon, gymbo::FloatToWord(2.0)));
 
     gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low,
                                  param_high, sign_grad, init_param_uniform_int,
-                                 seed);
+                                 false, seed);
 
     bool is_sat = false;
     gymbo::SymState state;

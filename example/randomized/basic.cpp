@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     gymbo::Prog prg;
     gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low,
                                  param_high, sign_grad, init_param_uniform_int,
-                                 seed);
+                                 true, seed);
     gymbo::SymState init;
     gymbo::PathConstraintsTable cache_constraints;
     gymbo::ProbPathConstraintsTable probabilistic_constraints;

@@ -102,6 +102,7 @@ if __name__ == "__main__":
         param_high,
         sign_grad,
         init_param_uniform_int,
+        False,
         seed,
     )
 

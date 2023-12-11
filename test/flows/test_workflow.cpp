@@ -43,7 +43,7 @@ TEST(GymboWorlflowTest, Block) {
     gymbo::Prog prg;
     gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low,
                                  param_high, sign_grad, init_param_uniform_int,
-                                 seed);
+                                 false, seed);
     gymbo::SymState init;
     gymbo::PathConstraintsTable cache_constraints;
     std::unordered_set<int> target_pcs;

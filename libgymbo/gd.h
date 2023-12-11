@@ -37,6 +37,8 @@ struct GDOptimizer {
                                   ///< values are drawn from the uniform int
                                   ///< distribution or uniform real distribution
                                   ///< (default true).
+    bool contain_randomized_vars;  ///< If true, use aeval and agrad. Otherwise,
+                                   ///< use eval and grad.
     int seed;          ///< Random seed for initializing parameter values.
     int num_used_itr;  ///< Number of used iterations during optimization.
 
@@ -54,12 +56,14 @@ struct GDOptimizer {
      * @param init_param_uniform_int Flag indicating whether initial parameter
      * values are drawn from the uniform int distribution or uniform real
      * distribution (default true).
+     * @param contain_randomized_vars If true, use aeval and agrad. Otherwise,
+     * use eval and grad.
      * @param seed Random seed for initializing parameter values (default: 42).
      */
     GDOptimizer(int num_epochs = 100, float lr = 1.0, float eps = 1.0,
                 float param_low = -10.0, float param_high = 10.0,
                 bool sign_grad = true, bool init_param_uniform_int = true,
-                int seed = 42)
+                bool contain_randomized_vars = false, int seed = 42)
         : num_epochs(num_epochs),
           lr(lr),
           eps(eps),
@@ -67,6 +71,7 @@ struct GDOptimizer {
           param_high(param_high),
           sign_grad(sign_grad),
           init_param_uniform_int(init_param_uniform_int),
+          contain_randomized_vars(contain_randomized_vars),
           seed(seed),
           num_used_itr(0) {}
 
@@ -84,7 +89,13 @@ struct GDOptimizer {
               std::unordered_map<int, float> params) {
         bool result = true;
         for (int i = 0; i < path_constraints.size(); i++) {
-            result = result && (path_constraints[i].eval(params, eps) <= 0.0f);
+            if (contain_randomized_vars) {
+                result =
+                    result && (path_constraints[i].aeval(params, eps) <= 0.0f);
+            } else {
+                result =
+                    result && (path_constraints[i].eval(params, eps) <= 0.0f);
+            }
         }
         return result;
     }
@@ -144,7 +155,11 @@ struct GDOptimizer {
             Grad grads = Grad({});
             for (int i = 0; i < path_constraints.size(); i++) {
                 if (path_constraints[i].eval(params, eps) > 0.0f) {
-                    grads = grads + path_constraints[i].grad(params, eps);
+                    if (contain_randomized_vars) {
+                        grads = grads + path_constraints[i].agrad(params, eps);
+                    } else {
+                        grads = grads + path_constraints[i].grad(params, eps);
+                    }
                 }
             }
             is_converge = true;

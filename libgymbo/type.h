@@ -497,11 +497,90 @@ struct Sym {
      * @param eps The smallest positive value of the target type.
      * @return Result of the symbolic expression evaluation.
      */
-    float eval(std::unordered_map<int, float> cvals, float eps) const {
+    float aeval(std::unordered_map<int, float> cvals, float eps) const {
         for (const auto &a : assign) {
             cvals.emplace(a.first, a.second);
         }
 
+        switch (symtype) {
+            case (SymType::SAdd): {
+                return left->aeval(cvals, eps) + right->aeval(cvals, eps);
+            }
+            case (SymType::SSub): {
+                return left->aeval(cvals, eps) - right->aeval(cvals, eps);
+            }
+            case (SymType::SMul): {
+                return left->aeval(cvals, eps) * right->aeval(cvals, eps);
+            }
+            case (SymType::SCon): {
+                return wordToFloat(word);
+            }
+            case (SymType::SCnt): {
+                switch (left->symtype) {
+                    case (SymType::SAdd): {
+                        return 1;
+                    }
+                    case (SymType::SSub): {
+                        return 1;
+                    }
+                    case (SymType::SMul): {
+                        return 1;
+                    }
+                    case (SymType::SCon): {
+                        return 1;
+                    }
+                    case (SymType::SCnt): {
+                        return 1;
+                    }
+                    case (SymType::SAny): {
+                        return 1;
+                    }
+                    default: {
+                        if (left->aeval(cvals, eps) <= 0.0f) {
+                            return 1.0f;
+                        } else {
+                            return 0.0;
+                        }
+                    }
+                }
+            }
+            case (SymType::SAny): {
+                return cvals.at(var_idx);
+            }
+            case (SymType::SEq): {
+                return std::abs(left->aeval(cvals, eps) -
+                                right->aeval(cvals, eps));
+            }
+            case (SymType::SNot): {
+                return left->aeval(cvals, eps) * (-1.0f) + eps;
+            }
+            case (SymType::SAnd): {
+                return std::max(0.0f, left->aeval(cvals, eps)) +
+                       std::max(0.0f, right->aeval(cvals, eps));
+            }
+            case (SymType::SOr): {
+                return std::max(0.0f, left->aeval(cvals, eps)) *
+                       std::max(0.0f, right->aeval(cvals, eps));
+            }
+            case (SymType::SLt): {
+                return left->aeval(cvals, eps) - right->aeval(cvals, eps) + eps;
+            }
+            case (SymType::SLe): {
+                return left->aeval(cvals, eps) - right->aeval(cvals, eps);
+            }
+            default: {
+                return 0.0f;
+            }
+        }
+    }
+
+    /**
+     * @brief Evaluates the symbolic expression given concrete variable values.
+     * @param cvals Map of variable indices to concrete values.
+     * @param eps The smallest positive value of the target type.
+     * @return Result of the symbolic expression evaluation.
+     */
+    float eval(std::unordered_map<int, float> &cvals, float eps) const {
         switch (symtype) {
             case (SymType::SAdd): {
                 return left->eval(cvals, eps) + right->eval(cvals, eps);
@@ -581,11 +660,115 @@ struct Sym {
      * @param eps Small value to handle numerical instability.
      * @return Gradient of the symbolic expression.
      */
-    Grad grad(std::unordered_map<int, float> cvals, float eps) const {
+    Grad agrad(std::unordered_map<int, float> cvals, float eps) const {
         for (const auto &a : assign) {
             cvals.emplace(a.first, a.second);
         }
 
+        switch (symtype) {
+            case (SymType::SAdd): {
+                return left->agrad(cvals, eps) + right->agrad(cvals, eps);
+            }
+            case (SymType::SSub): {
+                return left->agrad(cvals, eps) - right->agrad(cvals, eps);
+            }
+            case (SymType::SMul): {
+                return left->agrad(cvals, eps) * right->aeval(cvals, eps) +
+                       right->agrad(cvals, eps) * left->aeval(cvals, eps);
+            }
+            case (SymType::SCon): {
+                return Grad({});
+            }
+            case (SymType::SCnt): {
+                switch (left->symtype) {
+                    case (SymType::SAdd): {
+                        return Grad({});
+                    }
+                    case (SymType::SSub): {
+                        return Grad({});
+                    }
+                    case (SymType::SMul): {
+                        return Grad({});
+                    }
+                    case (SymType::SCon): {
+                        return Grad({});
+                    }
+                    case (SymType::SCnt): {
+                        return Grad({});
+                    }
+                    case (SymType::SAny): {
+                        return Grad({});
+                    }
+                    default: {
+                        if (left->aeval(cvals, eps) <= 0.0f) {
+                            return left->agrad(cvals, eps);
+                        } else {
+                            return left->agrad(cvals, eps) * -1;
+                        }
+                    }
+                }
+            }
+            case (SymType::SAny): {
+                std::unordered_map<int, float> tmp = {{var_idx, 1.0f}};
+                return Grad(tmp);
+            }
+            case (SymType::SEq): {
+                float lv = left->aeval(cvals, eps);
+                float rv = right->aeval(cvals, eps);
+                Grad lg = left->agrad(cvals, eps);
+                Grad rg = right->agrad(cvals, eps);
+                if (lv == rv) {
+                    return Grad({});
+                } else if (lv > rv) {
+                    return lg - rg;
+                } else {
+                    return rg - lg;
+                }
+            }
+            case (SymType::SNot): {
+                return left->agrad(cvals, eps) * (-1.0f);
+            }
+            case (SymType::SAnd): {
+                float lv = left->aeval(cvals, eps);
+                float rv = right->aeval(cvals, eps);
+                Grad res({});
+                if (lv > 0.0f) {
+                    res = res + left->agrad(cvals, eps);
+                }
+                if (rv > 0.0f) {
+                    res = res + right->agrad(cvals, eps);
+                }
+                return res;
+            }
+            case (SymType::SOr): {
+                float lv = left->aeval(cvals, eps);
+                float rv = right->aeval(cvals, eps);
+                if (lv > 0.0f && rv > 0.0f) {
+                    return left->agrad(cvals, eps) * rv +
+                           right->agrad(cvals, eps) * lv;
+                }
+                return Grad({});
+            }
+            case (SymType::SLt): {
+                return left->agrad(cvals, eps) - right->agrad(cvals, eps);
+            }
+            case (SymType::SLe): {
+                return left->agrad(cvals, eps) - right->agrad(cvals, eps);
+            }
+            default: {
+                return Grad({});
+            }
+        }
+    }
+
+    /**
+     * @brief Computes the gradient of the symbolic expression given concrete
+     * variable values.
+     * @param cvals Map of variable indices to concrete values.
+     * @param eps Small value to handle numerical instability.
+     * @return Gradient of the symbolic expression.
+     */
+    Grad grad(std::unordered_map<int, float> &cvals, float eps) const {
         switch (symtype) {
             case (SymType::SAdd): {
                 return left->grad(cvals, eps) + right->grad(cvals, eps);
@@ -880,8 +1063,8 @@ struct SymProb {
         Sym *q_n = mq.first;
         Sym *q_d = mq.second;
 
-        float v_n = q_n->eval(params, eps);
-        float v_d = q_d->eval(params, eps);
+        float v_n = q_n->aeval(params, eps);
+        float v_d = q_d->aeval(params, eps);
 
         if (v_d == 0.0f) {
             return 0.0f;
