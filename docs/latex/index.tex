@@ -54,8 +54,8 @@ Gymbo converts the path constraint into a numerical loss function, which becomes
 \DoxyCodeLine{(a >= b) => b -\/ a}
 \DoxyCodeLine{(a == b) => abs(a -\/ b)}
 \DoxyCodeLine{(a != b) => -\/abs(a -\/ b) + eps}
-\DoxyCodeLine{(a \&\& b) => max(0, a) + max(0, b)}
-\DoxyCodeLine{(a || b) => max(0, a) * max(0, b)}
+\DoxyCodeLine{(a \&\& b) => max(a, b)}
+\DoxyCodeLine{(a || b) => min(a, b)}
 
 \end{DoxyCode}
 

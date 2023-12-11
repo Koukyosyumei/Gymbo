@@ -12,7 +12,7 @@ var searchData=
   ['gexecute_62',['gexecute',['../namespacegymbo.html#af40a70afb521e856bda968808b2b492e',1,'gymbo']]],
   ['ghost_63',['ghost',['../classgymbo_1_1Linkedlist.html#a6ee52305433ed55928d68c287a300e40',1,'gymbo::Linkedlist']]],
   ['grad_64',['Grad',['../structgymbo_1_1Grad.html#a987813a5c6bc104b120ad2541639af1f',1,'gymbo::Grad']]],
-  ['grad_65',['grad',['../structgymbo_1_1Sym.html#a33e1e9e8407592702b528a331a2e4ad2',1,'gymbo::Sym']]],
+  ['grad_65',['grad',['../structgymbo_1_1Sym.html#a268c0d5364dfe4b680612a43d8a947d9',1,'gymbo::Sym']]],
   ['grad_66',['Grad',['../structgymbo_1_1Grad.html',1,'gymbo']]],
   ['guessvar_67',['guessVar',['../classgymbosat_1_1Or.html#a77f3492efad433a53d29c273683a2bcd',1,'gymbosat::Or::guessVar()'],['../classgymbosat_1_1Not.html#a4b17bfb2c1ff0c48922a9366dd124f84',1,'gymbosat::Not::guessVar()'],['../classgymbosat_1_1Const.html#a0ba707c7cdda3b55db862df111ce25ab',1,'gymbosat::Const::guessVar()'],['../classgymbosat_1_1And.html#ac7dc6c2a220f0474cb1e6b11f4775d2a',1,'gymbosat::And::guessVar()'],['../classgymbosat_1_1Var.html#a3c80f5b944b13a7300fd1369a38575bc',1,'gymbosat::Var::guessVar()'],['../classgymbosat_1_1Expr.html#a4d946a615d7d11020d5c9f0ee8fff135',1,'gymbosat::Expr::guessVar()']]],
   ['gymbo_68',['gymbo',['../namespacegymbo.html',1,'']]],
