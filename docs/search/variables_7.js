@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['kind_391',['kind',['../structgymbo_1_1Node.html#a8f6003cb4736dad4e8170a78c5da7359',1,'gymbo::Node::kind()'],['../structgymbo_1_1Token.html#a2ea5a998c540f1aec221921dc5c55d10',1,'gymbo::Token::kind()']]]
+  ['init_5fparam_5funiform_5fint_438',['init_param_uniform_int',['../structgymbo_1_1GDOptimizer.html#a2a35f800649f9c57bc1f7d23f9f6110b',1,'gymbo::GDOptimizer']]],
+  ['instr_439',['instr',['../classgymbo_1_1Instr.html#aa3ce018ca1de01e675d789b90357e21e',1,'gymbo::Instr']]]
 ];

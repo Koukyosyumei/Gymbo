@@ -5,13 +5,7 @@
  */
 
 #pragma once
-#include <unordered_map>
-#include <unordered_set>
-
-#include "gd.h"
 #include "symbolic.h"
-#include "type.h"
-#include "utils.h"
 
 namespace gymbo {
 
@@ -88,7 +82,7 @@ inline Trace run_pgymbo(Prog &prog,
                         GDOptimizer &optimizer, SymState &state,
                         std::unordered_set<int> &target_pcs,
                         PathConstraintsTable &constraints_cache,
-                        ProbPathConstraintsTable &prob_constrains_table,
+                        ProbPathConstraintsTable &prob_constraints_table,
                         int maxDepth, int &maxSAT, int &maxUNSAT,
                         int max_num_trials, bool ignore_memory, bool use_dpll,
                         int verbose_level, bool return_trace = false) {
@@ -196,12 +190,12 @@ inline Trace run_pgymbo(Prog &prog,
         for (Sym &s : state.path_constraints) {
             cc = Sym(SymType::SAnd, cc.copy(), &s);
         }
-        if (prob_constrains_table.find(pc) == prob_constrains_table.end()) {
+        if (prob_constraints_table.find(pc) == prob_constraints_table.end()) {
             std::vector<std::tuple<Sym, Mem, SymProb>> tmp = {
                 std::make_tuple(cc, state.mem, state.p)};
-            prob_constrains_table.emplace(pc, tmp);
+            prob_constraints_table.emplace(pc, tmp);
         } else {
-            prob_constrains_table[pc].emplace_back(
+            prob_constraints_table[pc].emplace_back(
                 std::make_tuple(cc, state.mem, state.p));
         }
     }
@@ -216,7 +210,7 @@ inline Trace run_pgymbo(Prog &prog,
         for (SymState *newState : newStates) {
             Trace child = run_pgymbo(
                 prog, var2dist, D, optimizer, *newState, target_pcs,
-                constraints_cache, prob_constrains_table, maxDepth - 1, maxSAT,
+                constraints_cache, prob_constraints_table, maxDepth - 1, maxSAT,
                 maxUNSAT, max_num_trials, ignore_memory, use_dpll,
                 verbose_level, return_trace);
             if (return_trace) {

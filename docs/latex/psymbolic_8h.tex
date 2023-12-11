@@ -1,0 +1,35 @@
+\hypertarget{psymbolic_8h}{}\doxysection{libgymbo/psymbolic.h File Reference}
+\label{psymbolic_8h}\index{libgymbo/psymbolic.h@{libgymbo/psymbolic.h}}
+
+
+Implementation of symbolic execution for randomized programs.  
+
+
+{\ttfamily \#include \char`\"{}symbolic.\+h\char`\"{}}\newline
+Include dependency graph for psymbolic.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{psymbolic_8h__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacegymbo}{gymbo}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacegymbo_aed8257f2dd65fda6917c46d75b3d24ec}{gymbo\+::pbranch}} (std\+::unordered\+\_\+map$<$ int, Discrete\+Dist $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D, Sym\+State \&state)
+\begin{DoxyCompactList}\small\item\em Perform probabilistic branching based on symbolic execution. \end{DoxyCompactList}\item 
+Trace \mbox{\hyperlink{namespacegymbo_af14aa75beebbdc447f479657e715104a}{gymbo\+::run\+\_\+pgymbo}} (Prog \&prog, std\+::unordered\+\_\+map$<$ int, Discrete\+Dist $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D, GDOptimizer \&optimizer, Sym\+State \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, Path\+Constraints\+Table \&constraints\+\_\+cache, Prob\+Path\+Constraints\+Table \&prob\+\_\+constraints\+\_\+table, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level, bool return\+\_\+trace=false)
+\begin{DoxyCompactList}\small\item\em Run probabilistic symbolic execution on a program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of symbolic execution for randomized programs. 
+
+\begin{DoxyAuthor}{Author}
+Hideaki Takahashi 
+\end{DoxyAuthor}

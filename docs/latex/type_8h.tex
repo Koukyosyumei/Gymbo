@@ -33,6 +33,12 @@ struct \mbox{\hyperlink{structgymbo_1_1Grad}{gymbo\+::\+Grad}}
 \begin{DoxyCompactList}\small\item\em Struct representing the gradient of a symbolic expression. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgymbo_1_1Sym}{gymbo\+::\+Sym}}
 \begin{DoxyCompactList}\small\item\em Struct representing a symbolic expression. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{gymbo\+::\+Discrete\+Dist}}
+\begin{DoxyCompactList}\small\item\em Represents a discrete probability distribution. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1DiscreteUniformDist}{gymbo\+::\+Discrete\+Uniform\+Dist}}
+\begin{DoxyCompactList}\small\item\em Represents a discrete uniform probability distribution derived from \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1SymProb}{gymbo\+::\+Sym\+Prob}}
+\begin{DoxyCompactList}\small\item\em Represents a symbolic probability with a numerator and denominator. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgymbo_1_1SymState}{gymbo\+::\+Sym\+State}}
 \begin{DoxyCompactList}\small\item\em Struct representing the symbolic state of the symbolic execution. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgymbo_1_1Trace}{gymbo\+::\+Trace}}
@@ -51,10 +57,12 @@ using \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{gymbo\+
 \begin{DoxyCompactList}\small\item\em Alias for a program, represented as a vector of instructions. \end{DoxyCompactList}\item 
 using \mbox{\hyperlink{namespacegymbo_a93394c86b71f9947e9d17b61013e600c}{gymbo\+::\+Mem}} = std\+::unordered\+\_\+map$<$ Word32, Word32 $>$
 \begin{DoxyCompactList}\small\item\em Alias for memory, represented as an unordered map of 32-\/bit words. \end{DoxyCompactList}\item 
-using \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{gymbo\+::\+Path\+Constraints\+Table}} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ bool, std\+::unordered\+\_\+map$<$ int, float $>$ $>$$>$
-\begin{DoxyCompactList}\small\item\em Alias for a table of path constraints. The key is the string representation of the constraint and the value is the pair of its satifiability and the map whose key is the variable id and the value is the concrete value that makes the constraint true. \end{DoxyCompactList}\item 
 using \mbox{\hyperlink{namespacegymbo_ac714ceb538af2de2adce25193f0e5eaf}{gymbo\+::\+SMem}} = std\+::unordered\+\_\+map$<$ Word32, Sym $>$
-\begin{DoxyCompactList}\small\item\em Alias for symbolic memory, represented as an unordered map of symbolic expressions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Alias for symbolic memory, represented as an unordered map of symbolic expressions. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{gymbo\+::\+Path\+Constraints\+Table}} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ bool, std\+::unordered\+\_\+map$<$ int, float $>$ $>$$>$
+\begin{DoxyCompactList}\small\item\em Alias for a table of path constraints. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{gymbo\+::\+Prob\+Path\+Constraints\+Table}} = std\+::unordered\+\_\+map$<$ int, std\+::vector$<$ std\+::tuple$<$ Sym, Mem, Sym\+Prob $>$ $>$$>$
+\begin{DoxyCompactList}\small\item\em Alias for a table of probabilistic path constraints. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -98,9 +106,10 @@ enum class \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225}{gy
 \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225abb67bd7c54875002b5a8214f04ba0c39}{gymbo\+::\+SNot}}
 , \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a8e6bcd5685e5221b7133c03e692f4a92}{gymbo\+::\+SOr}}
 , \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225ae04506053d891434c87bcb7c9ee7a492}{gymbo\+::\+SCon}}
-, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a086ea780e08007dce53b3c400c2a7ef3}{gymbo\+::\+SAnd}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a93deba25f847dbb4b3ae0711aad67318}{gymbo\+::\+SCnt}}
 , \newline
-\mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225ad2c3d0433b9da329df4c66b885706dd4}{gymbo\+::\+SLt}}
+\mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a086ea780e08007dce53b3c400c2a7ef3}{gymbo\+::\+SAnd}}
+, \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225ad2c3d0433b9da329df4c66b885706dd4}{gymbo\+::\+SLt}}
 , \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225a46b6c8e7c51af424839e28ad6f8ecbe8}{gymbo\+::\+SLe}}
 , \mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225adae537bd250f746297c0cfad0128c24d}{gymbo\+::\+SAny}}
  \}

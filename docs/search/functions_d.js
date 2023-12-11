@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['relational_352',['relational',['../namespacegymbo.html#a7782376e331d91dd967f5a7b1c23c1ba',1,'gymbo']]],
-  ['run_5fgymbo_353',['run_gymbo',['../namespacegymbo.html#aa13abbc332896d34bc320950bdacfdf9',1,'gymbo']]]
+  ['query_391',['query',['../structgymbo_1_1SymProb.html#af10f52f18a417e4cb920872769f090d8',1,'gymbo::SymProb']]]
 ];

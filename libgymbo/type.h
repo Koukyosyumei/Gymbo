@@ -1158,7 +1158,9 @@ struct SymState {
     std::vector<Sym>
         path_constraints; /**< Vector of symbolic path constraints. */
     SymProb p;            /**< Symbolic probability of the state being reached*/
-    bool has_observed_p_cond;
+    bool has_observed_p_cond /**< Flag indicating whether path_constraints
+                                contains probabilistic path conditions. */
+        ;
 
     /**
      * @brief Default constructor for symbolic state.
@@ -1173,6 +1175,9 @@ struct SymState {
      * @param smem Symbolic memory.
      * @param symbolic_stack Symbolic stack.
      * @param path_constraints Vector of symbolic path constraints.
+     * @param p Symbolic probability of the state being reached.
+     * @param has_observed_p_cond Flag indicating whether path_constraints
+     * contains probabilistic path conditions.
      */
     SymState(int pc, int var_cnt, Mem &mem, SMem &smem,
              Linkedlist<Sym> &symbolic_stack,

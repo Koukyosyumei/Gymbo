@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['head_388',['head',['../classLinkedlist.html#a4af94c58928322ead6365664ac55eb9e',1,'Linkedlist']]]
+  ['ghost_434',['ghost',['../classgymbo_1_1Linkedlist.html#a6ee52305433ed55928d68c287a300e40',1,'gymbo::Linkedlist']]]
 ];
