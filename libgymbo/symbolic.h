@@ -5,7 +5,11 @@
  */
 
 #pragma once
+#include <unordered_map>
+#include <unordered_set>
+
 #include "smt.h"
+#include "type.h"
 
 namespace gymbo {
 Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
@@ -15,6 +19,75 @@ Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                 bool ignore_memory, bool use_dpll, int verbose_level,
                 bool return_trace);
 void symStep(SymState *state, Instr &instr, std::vector<SymState *> &);
+
+inline bool is_target_pc(const std::unordered_set<int> &target_pcs, int pc) {
+    return ((target_pcs.size() == 0) ||
+            (target_pcs.find(-1) != target_pcs.end()) ||
+            (target_pcs.find(pc) != target_pcs.end()));
+}
+
+inline bool explore_further(int maxDepth, int maxSAT, int maxUNSAT) {
+    return maxDepth > 0 && maxSAT > 0 && maxUNSAT > 0;
+}
+
+inline void solve_constraints(bool &is_sat, SymState &state,
+                              std::unordered_map<int, float> &params,
+                              GDOptimizer &optimizer, int max_num_trials,
+                              bool ignore_memory, bool use_dpll) {
+    if (use_dpll) {
+        smt_dpll_solver(is_sat, state, params, optimizer, max_num_trials,
+                        ignore_memory);
+    } else {
+        smt_union_solver(is_sat, state, params, optimizer, max_num_trials,
+                         ignore_memory);
+    }
+}
+
+inline void verbose_step(int verbose_level, bool is_unknown_path_constraint,
+                         bool is_target, bool is_sat, int pc,
+                         std::string constraints_str, const SymState &state,
+                         const std::unordered_map<int, float> &params) {
+    if ((verbose_level >= 1 && is_unknown_path_constraint && is_target) ||
+        (verbose_level >= 2)) {
+        if (!is_sat) {
+            printf("\x1b[31m");
+        } else {
+            printf("\x1b[32m");
+        }
+        printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc, is_sat,
+               constraints_str.c_str());
+        for (auto &p : params) {
+            // ignore concrete variables
+            if (state.mem.find(p.first) != state.mem.end()) {
+                continue;
+            }
+            // only show symbolic variables
+            if (is_integer(p.second)) {
+                printf("%d: %d, ", p.first, (int)p.second);
+            } else {
+                printf("%d: %f, ", p.first, p.second);
+            }
+        }
+        printf("}\n");
+    }
+}
+
+inline void verbose_pre(int verbose_level, int pc, Prog &prog,
+                        SymState &state) {
+    if (verbose_level > -1) {
+        printf("pc: %d, ", pc);
+        prog[pc].print();
+        if (verbose_level >= 2) {
+            state.print();
+        }
+    }
+}
+
+inline void verbose_post(int verbose_level) {
+    if (verbose_level >= 2) {
+        printf("---\n");
+    }
+}
 
 /**
  * @brief Symbolically Execute a Program with Gradient Descent Optimization.
@@ -50,18 +123,9 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        bool ignore_memory, bool use_dpll, int verbose_level,
                        bool return_trace = false) {
     int pc = state.pc;
-    if (verbose_level >= -1) {
-        printf("pc: %d, ", pc);
-        prog[pc].print();
-        if (verbose_level >= 2) {
-            state.print();
-        }
-    }
-
-    bool is_target = ((target_pcs.size() == 0) ||
-                      (target_pcs.find(-1) != target_pcs.end()) ||
-                      (target_pcs.find(pc) != target_pcs.end()));
+    bool is_target = is_target_pc(target_pcs, pc);
     bool is_sat = true;
+    verbose_pre(verbose_level, pc, prog, state);
 
     if (state.path_constraints.size() != 0 && is_target) {
         std::string constraints_str = state.toString(false);
@@ -77,13 +141,8 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
             params = constraints_cache[constraints_str].second;
             is_unknown_path_constraint = false;
         } else {
-            if (use_dpll) {
-                smt_dpll_solver(is_sat, state, params, optimizer,
-                                max_num_trials, ignore_memory);
-            } else {
-                smt_union_solver(is_sat, state, params, optimizer,
-                                 max_num_trials, ignore_memory);
-            }
+            solve_constraints(is_sat, state, params, optimizer, max_num_trials,
+                              ignore_memory, use_dpll);
             if (is_sat) {
                 maxSAT--;
             } else {
@@ -94,40 +153,16 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
         }
 
         if (verbose_level >= 1) {
-            if ((verbose_level >= 1 && is_unknown_path_constraint &&
-                 is_target) ||
-                (verbose_level >= 2)) {
-                if (!is_sat) {
-                    printf("\x1b[31m");
-                } else {
-                    printf("\x1b[32m");
-                }
-                printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc, is_sat,
-                       constraints_str.c_str());
-                for (auto &p : params) {
-                    // ignore concrete variables
-                    if (state.mem.find(p.first) != state.mem.end()) {
-                        continue;
-                    }
-                    // only show symbolic variables
-                    if (is_integer(p.second)) {
-                        printf("%d: %d, ", p.first, (int)p.second);
-                    } else {
-                        printf("%d: %f, ", p.first, p.second);
-                    }
-                }
-                printf("}\n");
-            }
+            verbose_step(verbose_level, is_unknown_path_constraint, is_target,
+                         is_sat, pc, constraints_str, state, params);
         }
     }
 
-    if (verbose_level >= 2) {
-        printf("---\n");
-    }
+    verbose_post(verbose_level);
 
     if ((prog[pc].instr == InstrType::Done) || (!is_sat)) {
         return Trace(state, {});
-    } else if (maxDepth > 0 && maxSAT > 0 && maxUNSAT > 0) {
+    } else if (explore_further(maxDepth, maxSAT, maxUNSAT)) {
         Instr instr = prog[pc];
         std::vector<SymState *> newStates;
         symStep(&state, instr, newStates);
