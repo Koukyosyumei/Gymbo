@@ -73,8 +73,8 @@
  * (a >= b) => b - a
  * (a == b) => abs(a - b)
  * (a != b) => -abs(a - b) + eps
- * (a && b) => max(0, a) + max(0, b)
- * (a || b) => max(0, a) * max(0, b)
+ * (a && b) => max(a, b)
+ * (a || b) => min(a, b)
  * ```
  *
  * Here, `eps` is the smallest positive value of the type for a and b.
