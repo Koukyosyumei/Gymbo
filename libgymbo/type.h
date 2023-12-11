@@ -492,7 +492,8 @@ struct Sym {
     }
 
     /**
-     * @brief Evaluates the symbolic expression given concrete variable values.
+     * @brief Evaluates the symbolic expression given concrete variable values
+     * while emplacing the `assign` to input cvals.
      * @param cvals Map of variable indices to concrete values.
      * @param eps The smallest positive value of the target type.
      * @return Result of the symbolic expression evaluation.
@@ -655,7 +656,7 @@ struct Sym {
 
     /**
      * @brief Computes the gradient of the symbolic expression given concrete
-     * variable values.
+     * variable values while emplacing the `assign` to input cvals.
      * @param cvals Map of variable indices to concrete values.
      * @param eps Small value to handle numerical instability.
      * @return Gradient of the symbolic expression.
@@ -1002,22 +1003,55 @@ struct DiscreteUniformDist : public DiscreteDist {
  */
 using SMem = std::unordered_map<Word32, Sym>;
 
+/**
+ * @brief Represents a symbolic probability with a numerator and denominator.
+ *
+ * The SymProb struct is designed to handle symbolic probabilities using
+ * symbolic expressions.
+ */
 struct SymProb {
-    Sym *numerator;
-    Sym *denominator;
+    Sym *numerator;   /**< Pointer to the symbolic expression representing the
+                         numerator. */
+    Sym *denominator; /**< Pointer to the symbolic expression representing the
+                         denominator. */
 
+    /**
+     * @brief Default constructor for SymProb.
+     *
+     * Initializes the numerator and denominator with constant symbolic
+     * expressions representing 1.0.
+     */
     SymProb()
         : numerator(new Sym(SymType::SCon, FloatToWord(1.0f))),
           denominator(new Sym(SymType::SCon, FloatToWord(1.0f))) {}
 
+    /**
+     * @brief Parameterized constructor for SymProb.
+     *
+     * @param numerator Pointer to the symbolic expression representing the
+     * numerator.
+     * @param denominator Pointer to the symbolic expression representing the
+     * denominator.
+     */
     SymProb(Sym *numerator, Sym *denominator)
         : numerator(numerator), denominator(denominator) {}
 
+    /**
+     * @brief Converts SymProb to a string.
+     *
+     * @return A string representation of the SymProb.
+     */
     std::string toString() {
         return "(" + numerator->toString(true) + ")/(" +
                numerator->toString(true) + ")";
     }
 
+    /**
+     * @brief Multiplies two SymProb instances.
+     *
+     * @param other The SymProb to multiply with.
+     * @return Result of the multiplication operation as a new SymProb instance.
+     */
     SymProb operator*(SymProb other) {
         if (denominator->toString(true) == other.numerator->toString(true)) {
             return SymProb(numerator, other.denominator);
@@ -1031,6 +1065,14 @@ struct SymProb {
         }
     }
 
+    /**
+     * @brief Marginalizes the SymProb over given variable assignments.
+     *
+     * @param var2dist Map of variable index to DiscreteDist.
+     * @param D Vector of variable assignments.
+     * @return Pair of Sym pointers representing the marginalized numerator and
+     * denominator.
+     */
     std::pair<Sym *, Sym *> marginalize(
         std::unordered_map<int, DiscreteDist> &var2dist,
         std::vector<std::vector<int>> &D) {
@@ -1056,6 +1098,16 @@ struct SymProb {
         return std::make_pair(q_numerator, q_denominator);
     }
 
+    /**
+     * @brief Evaluates the SymProb for given parameters, epsilon, variable
+     * assignments, and distributions.
+     *
+     * @param params Map of variable index to parameter values.
+     * @param eps Epsilon value for numerical stability.
+     * @param var2dist Map of variable index to DiscreteDist.
+     * @param D Vector of variable assignments.
+     * @return The evaluated probability as a float.
+     */
     float eval(std::unordered_map<int, float> &params, float eps,
                std::unordered_map<int, DiscreteDist> &var2dist,
                std::vector<std::vector<int>> &D) {
@@ -1073,6 +1125,16 @@ struct SymProb {
         }
     }
 
+    /**
+     * @brief Queries the SymProb with a given symbolic type, another symbolic
+     * expression, and variable assignments.
+     *
+     * @param symtype Symbolic type for the resulting Sym.
+     * @param other Another symbolic expression.
+     * @param var2dist Map of variable index to DiscreteDist.
+     * @param D Vector of variable assignments.
+     * @return Resulting Sym based on the query.
+     */
     Sym query(SymType &symtype, Sym &other,
               std::unordered_map<int, DiscreteDist> &var2dist,
               std::vector<std::vector<int>> &D) {
@@ -1179,7 +1241,7 @@ struct SymState {
 
         expr += "Path Constraints: ";
         if (path_constraints.size() > 0) {
-            expr += path_constraints[0].toString(true) ;
+            expr += path_constraints[0].toString(true);
         }
         for (int i = 1; i < path_constraints.size(); i++) {
             expr += "&&" + path_constraints[i].toString(true);
