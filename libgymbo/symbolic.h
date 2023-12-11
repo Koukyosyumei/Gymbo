@@ -30,10 +30,10 @@ inline bool explore_further(int maxDepth, int maxSAT, int maxUNSAT) {
     return maxDepth > 0 && maxSAT > 0 && maxUNSAT > 0;
 }
 
-inline void solve_constraints(bool &is_sat, SymState &state,
-                              std::unordered_map<int, float> &params,
-                              GDOptimizer &optimizer, int max_num_trials,
-                              bool ignore_memory, bool use_dpll) {
+inline void call_smt_solver(bool &is_sat, SymState &state,
+                            std::unordered_map<int, float> &params,
+                            GDOptimizer &optimizer, int max_num_trials,
+                            bool ignore_memory, bool use_dpll) {
     if (use_dpll) {
         smt_dpll_solver(is_sat, state, params, optimizer, max_num_trials,
                         ignore_memory);
@@ -89,6 +89,41 @@ inline void verbose_post(int verbose_level) {
     }
 }
 
+inline void solve_constraints(bool &is_sat, bool is_target, int pc,
+                              GDOptimizer &optimizer, SymState &state,
+                              PathConstraintsTable &constraints_cache,
+                              int &maxSAT, int &maxUNSAT, int max_num_trials,
+                              bool ignore_memory, bool use_dpll,
+                              int verbose_level) {
+    std::string constraints_str = state.toString(false);
+
+    std::unordered_map<int, float> params = {};
+    initialize_params(params, state, ignore_memory);
+
+    bool is_unknown_path_constraint = true;
+
+    if (constraints_cache.find(constraints_str) != constraints_cache.end()) {
+        is_sat = constraints_cache[constraints_str].first;
+        params = constraints_cache[constraints_str].second;
+        is_unknown_path_constraint = false;
+    } else {
+        call_smt_solver(is_sat, state, params, optimizer, max_num_trials,
+                        ignore_memory, use_dpll);
+        if (is_sat) {
+            maxSAT--;
+        } else {
+            maxUNSAT--;
+        }
+        constraints_cache.emplace(constraints_str,
+                                  std::make_pair(is_sat, params));
+    }
+
+    if (verbose_level >= 1) {
+        verbose_step(verbose_level, is_unknown_path_constraint, is_target,
+                     is_sat, pc, constraints_str, state, params);
+    }
+}
+
 /**
  * @brief Symbolically Execute a Program with Gradient Descent Optimization.
  *
@@ -125,39 +160,13 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
     int pc = state.pc;
     bool is_target = is_target_pc(target_pcs, pc);
     bool is_sat = true;
+
     verbose_pre(verbose_level, pc, prog, state);
-
     if (state.path_constraints.size() != 0 && is_target) {
-        std::string constraints_str = state.toString(false);
-
-        std::unordered_map<int, float> params = {};
-        initialize_params(params, state, ignore_memory);
-
-        bool is_unknown_path_constraint = true;
-
-        if (constraints_cache.find(constraints_str) !=
-            constraints_cache.end()) {
-            is_sat = constraints_cache[constraints_str].first;
-            params = constraints_cache[constraints_str].second;
-            is_unknown_path_constraint = false;
-        } else {
-            solve_constraints(is_sat, state, params, optimizer, max_num_trials,
-                              ignore_memory, use_dpll);
-            if (is_sat) {
-                maxSAT--;
-            } else {
-                maxUNSAT--;
-            }
-            constraints_cache.emplace(constraints_str,
-                                      std::make_pair(is_sat, params));
-        }
-
-        if (verbose_level >= 1) {
-            verbose_step(verbose_level, is_unknown_path_constraint, is_target,
-                         is_sat, pc, constraints_str, state, params);
-        }
+        solve_constraints(is_sat, is_target, pc, optimizer, state,
+                          constraints_cache, maxSAT, maxUNSAT, max_num_trials,
+                          ignore_memory, use_dpll, verbose_level);
     }
-
     verbose_post(verbose_level);
 
     if ((prog[pc].instr == InstrType::Done) || (!is_sat)) {
