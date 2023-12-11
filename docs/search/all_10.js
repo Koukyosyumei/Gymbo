@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['query_194',['query',['../structgymbo_1_1SymProb.html#af10f52f18a417e4cb920872769f090d8',1,'gymbo::SymProb']]]
+  ['query_197',['query',['../structgymbo_1_1SymProb.html#af10f52f18a417e4cb920872769f090d8',1,'gymbo::SymProb']]]
 ];

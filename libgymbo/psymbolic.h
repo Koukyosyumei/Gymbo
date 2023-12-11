@@ -51,6 +51,113 @@ inline void pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
     }
 }
 
+inline void verbose_pconstraints(int verbose_level,
+                                 bool is_unknown_path_constraint,
+                                 bool is_target, bool is_sat, int pc,
+                                 std::string constraints_str, SymState &state,
+                                 const std::unordered_map<int, float> &params) {
+    if (verbose_level >= 1) {
+        if ((verbose_level >= 1 && is_unknown_path_constraint && is_target) ||
+            (verbose_level >= 2)) {
+            if (!is_sat) {
+                printf("\x1b[31m");
+            } else {
+                printf("\x1b[32m");
+            }
+            printf("pc=%d, IS_SAT - %d\x1b[39m, Pr.REACH - %s, %s, params = {",
+                   pc, is_sat, state.p.toString().c_str(),
+                   constraints_str.c_str());
+            for (auto &p : params) {
+                // ignore concrete variables
+                if (state.mem.find(p.first) != state.mem.end()) {
+                    continue;
+                }
+                // only show symbolic variables
+                if (is_integer(p.second)) {
+                    printf("%d: %d, ", p.first, (int)p.second);
+                } else {
+                    printf("%d: %f, ", p.first, p.second);
+                }
+            }
+            printf("}\n");
+        }
+    }
+}
+
+inline void solve_pconstraints(bool &is_sat, bool is_target, int pc,
+                               std::unordered_map<int, DiscreteDist> &var2dist,
+                               std::vector<std::vector<int>> &D,
+                               GDOptimizer &optimizer, SymState &state,
+                               PathConstraintsTable &constraints_cache,
+                               int &maxSAT, int &maxUNSAT, int max_num_trials,
+                               bool ignore_memory, bool use_dpll,
+                               int verbose_level) {
+    std::string constraints_str = state.toString(false);
+
+    std::unordered_map<int, float> params = {};
+    initialize_params(params, state, ignore_memory);
+
+    bool is_unknown_path_constraint = true;
+
+    if (constraints_cache.find(constraints_str) != constraints_cache.end()) {
+        is_sat = constraints_cache[constraints_str].first;
+        params = constraints_cache[constraints_str].second;
+        is_unknown_path_constraint = false;
+    } else {
+        bool is_contain_prob_var = false;
+        std::unordered_set<int> unique_var_ids;
+        for (int i = 0; i < state.path_constraints.size(); i++) {
+            state.path_constraints[i].gather_var_ids(unique_var_ids);
+        }
+        for (int i : unique_var_ids) {
+            if (var2dist.find(i) != var2dist.end()) {
+                is_contain_prob_var = true;
+                break;
+            }
+        }
+
+        if (is_contain_prob_var) {
+            // call probabilistic branch algorithm
+            pbranch(var2dist, D, state);
+            is_sat = true;
+        } else {
+            // solve deterministic path constraints
+            call_smt_solver(is_sat, state, params, optimizer, max_num_trials,
+                            ignore_memory, use_dpll);
+            if (is_sat) {
+                maxSAT--;
+            } else {
+                maxUNSAT--;
+            }
+        }
+
+        constraints_cache.emplace(constraints_str,
+                                  std::make_pair(is_sat, params));
+    }
+
+    if (verbose_level >= 1) {
+        verbose_pconstraints(verbose_level, is_unknown_path_constraint,
+                             is_target, is_sat, pc, constraints_str, state,
+                             params);
+    }
+}
+
+inline void update_prob_constraints_table(
+    int pc, SymState &state, ProbPathConstraintsTable &prob_constraints_table) {
+    Sym cc = state.path_constraints[0];
+    for (int i = 1; i < state.path_constraints.size(); i++) {
+        cc = Sym(SymType::SAnd, cc.copy(), &state.path_constraints[i]);
+    }
+    if (prob_constraints_table.find(pc) == prob_constraints_table.end()) {
+        std::vector<std::tuple<Sym, Mem, SymProb>> tmp = {
+            std::make_tuple(cc, state.mem, state.p)};
+        prob_constraints_table.emplace(pc, tmp);
+    } else {
+        prob_constraints_table[pc].emplace_back(
+            std::make_tuple(cc, state.mem, state.p));
+    }
+}
+
 /**
  * @brief Run probabilistic symbolic execution on a program.
  *
@@ -92,125 +199,25 @@ inline Trace run_pgymbo(Prog &prog,
                         int max_num_trials, bool ignore_memory, bool use_dpll,
                         int verbose_level, bool return_trace = false) {
     int pc = state.pc;
-    if (verbose_level >= -1) {
-        printf("pc: %d, ", pc);
-        prog[pc].print();
-        if (verbose_level >= 2) {
-            state.print();
-        }
-    }
-
-    bool is_target = ((target_pcs.size() == 0) ||
-                      (target_pcs.find(-1) != target_pcs.end()) ||
-                      (target_pcs.find(pc) != target_pcs.end()));
+    bool is_target = is_target_pc(target_pcs, pc);
     bool is_sat = true;
 
+    verbose_pre(verbose_level, pc, prog, state);
     if (state.path_constraints.size() != 0 && is_target) {
-        std::string constraints_str = state.toString(false);
-
-        std::unordered_map<int, float> params = {};
-        initialize_params(params, state, ignore_memory);
-
-        bool is_unknown_path_constraint = true;
-
-        if (constraints_cache.find(constraints_str) !=
-            constraints_cache.end()) {
-            is_sat = constraints_cache[constraints_str].first;
-            params = constraints_cache[constraints_str].second;
-            is_unknown_path_constraint = false;
-        } else {
-            bool is_contain_prob_var = false;
-            std::unordered_set<int> unique_var_ids;
-            for (int i = 0; i < state.path_constraints.size(); i++) {
-                state.path_constraints[i].gather_var_ids(unique_var_ids);
-            }
-            for (int i : unique_var_ids) {
-                if (var2dist.find(i) != var2dist.end()) {
-                    is_contain_prob_var = true;
-                    break;
-                }
-            }
-
-            if (is_contain_prob_var) {
-                // call probabilistic branch algorithm
-                pbranch(var2dist, D, state);
-                is_sat = true;
-            } else {
-                // solve deterministic path constraints
-                if (use_dpll) {
-                    smt_dpll_solver(is_sat, state, params, optimizer,
-                                    max_num_trials, ignore_memory);
-                } else {
-                    smt_union_solver(is_sat, state, params, optimizer,
-                                     max_num_trials, ignore_memory);
-                }
-            }
-
-            if (is_sat) {
-                maxSAT--;
-            } else {
-                maxUNSAT--;
-            }
-
-            constraints_cache.emplace(constraints_str,
-                                      std::make_pair(is_sat, params));
-        }
-
-        if (verbose_level >= 1) {
-            if ((verbose_level >= 1 && is_unknown_path_constraint &&
-                 is_target) ||
-                (verbose_level >= 2)) {
-                if (!is_sat) {
-                    printf("\x1b[31m");
-                } else {
-                    printf("\x1b[32m");
-                }
-                printf(
-                    "pc=%d, IS_SAT - %d\x1b[39m, Pr.REACH - %s, %s, params = {",
-                    pc, is_sat, state.p.toString().c_str(),
-                    constraints_str.c_str());
-                for (auto &p : params) {
-                    // ignore concrete variables
-                    if (state.mem.find(p.first) != state.mem.end()) {
-                        continue;
-                    }
-                    // only show symbolic variables
-                    if (is_integer(p.second)) {
-                        printf("%d: %d, ", p.first, (int)p.second);
-                    } else {
-                        printf("%d: %f, ", p.first, p.second);
-                    }
-                }
-                printf("}\n");
-            }
-        }
+        solve_pconstraints(is_sat, is_target, pc, var2dist, D, optimizer, state,
+                           constraints_cache, maxSAT, maxUNSAT, max_num_trials,
+                           ignore_memory, use_dpll, verbose_level);
     }
-
-    if (verbose_level >= 2) {
-        printf("---\n");
-    }
+    verbose_post(verbose_level);
 
     if (prog[pc].instr == InstrType::Done &&
         state.path_constraints.size() > 0) {
-        Sym cc =
-            state
-                .path_constraints[0];  // Sym(SymType::SCon, FloatToWord(1.0f));
-        for (int i = 1; i < state.path_constraints.size(); i++) {
-            cc = Sym(SymType::SAnd, cc.copy(), &state.path_constraints[i]);
-        }
-        if (prob_constraints_table.find(pc) == prob_constraints_table.end()) {
-            std::vector<std::tuple<Sym, Mem, SymProb>> tmp = {
-                std::make_tuple(cc, state.mem, state.p)};
-            prob_constraints_table.emplace(pc, tmp);
-        } else {
-            prob_constraints_table[pc].emplace_back(
-                std::make_tuple(cc, state.mem, state.p));
-        }
+        update_prob_constraints_table(pc, state, prob_constraints_table);
     }
 
     if ((prog[pc].instr == InstrType::Done) || (!is_sat)) {
         return Trace(state, {});
-    } else if (maxDepth > 0 && maxSAT > 0 && maxUNSAT > 0) {
+    } else if (explore_further(maxDepth, maxSAT, maxUNSAT)) {
         Instr instr = prog[pc];
         std::vector<SymState *> newStates;
         symStep(&state, instr, newStates);

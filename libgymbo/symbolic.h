@@ -17,6 +17,201 @@ Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
 void symStep(SymState *state, Instr &instr, std::vector<SymState *> &);
 
 /**
+ * @brief Checks if the given program counter (pc) is a target program counter.
+ *
+ * This function checks whether the provided program counter (pc) is part of the
+ * set of target program counters.
+ *
+ * @param target_pcs The set of target program counters.
+ * @param pc The program counter to be checked.
+ * @return True if the pc is a target program counter, false otherwise.
+ */
+inline bool is_target_pc(const std::unordered_set<int> &target_pcs, int pc) {
+    return ((target_pcs.size() == 0) ||
+            (target_pcs.find(-1) != target_pcs.end()) ||
+            (target_pcs.find(pc) != target_pcs.end()));
+}
+
+/**
+ * @brief Checks if further exploration is allowed based on maximum depth and
+ * satisfiability conditions.
+ *
+ * This function determines whether further exploration is allowed based on the
+ * specified maximum depth and satisfiability conditions.
+ *
+ * @param maxDepth The maximum depth for exploration.
+ * @param maxSAT The maximum satisfiability limit.
+ * @param maxUNSAT The maximum unsatisfiability limit.
+ * @return True if further exploration is allowed, false otherwise.
+ */
+inline bool explore_further(int maxDepth, int maxSAT, int maxUNSAT) {
+    return maxDepth > 0 && maxSAT > 0 && maxUNSAT > 0;
+}
+
+/**
+ * @brief Calls the SMT solver based on the specified options.
+ *
+ * This function calls the SMT solver, either DPLL solver or union solver, based
+ * on the specified options.
+ *
+ * @param is_sat Reference to a boolean indicating satisfiability.
+ * @param state Reference to the symbolic state.
+ * @param params Reference to a map containing parameters.
+ * @param optimizer Reference to the optimizer.
+ * @param max_num_trials Maximum number of solver trials.
+ * @param ignore_memory Flag indicating whether to ignore memory.
+ * @param use_dpll Flag indicating whether to use the DPLL solver.
+ */
+inline void call_smt_solver(bool &is_sat, SymState &state,
+                            std::unordered_map<int, float> &params,
+                            GDOptimizer &optimizer, int max_num_trials,
+                            bool ignore_memory, bool use_dpll) {
+    if (use_dpll) {
+        smt_dpll_solver(is_sat, state, params, optimizer, max_num_trials,
+                        ignore_memory);
+    } else {
+        smt_union_solver(is_sat, state, params, optimizer, max_num_trials,
+                         ignore_memory);
+    }
+}
+
+/**
+ * @brief Prints a verbose for conflicts solving if conditions are met.
+ *
+ * This function prints a verbose for conflicts solving if the specified
+ * conditions are met.
+ *
+ * @param verbose_level The verbosity level.
+ * @param is_unknown_path_constraint Flag indicating whether the path constraint
+ * is unknown.
+ * @param is_target Flag indicating whether the program counter is a target.
+ * @param is_sat Flag indicating satisfiability.
+ * @param pc The program counter.
+ * @param constraints_str String representation of path constraints.
+ * @param state Reference to the symbolic state.
+ * @param params Reference to the map containing parameters.
+ */
+inline void verbose_constraints(int verbose_level,
+                                bool is_unknown_path_constraint, bool is_target,
+                                bool is_sat, int pc,
+                                std::string constraints_str,
+                                const SymState &state,
+                                const std::unordered_map<int, float> &params) {
+    if ((verbose_level >= 1 && is_unknown_path_constraint && is_target) ||
+        (verbose_level >= 2)) {
+        if (!is_sat) {
+            printf("\x1b[31m");
+        } else {
+            printf("\x1b[32m");
+        }
+        printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc, is_sat,
+               constraints_str.c_str());
+        for (auto &p : params) {
+            // ignore concrete variables
+            if (state.mem.find(p.first) != state.mem.end()) {
+                continue;
+            }
+            // only show symbolic variables
+            if (is_integer(p.second)) {
+                printf("%d: %d, ", p.first, (int)p.second);
+            } else {
+                printf("%d: %f, ", p.first, p.second);
+            }
+        }
+        printf("}\n");
+    }
+}
+
+/**
+ * @brief Prints a verbose representation before solving constraints.
+ *
+ * This function prints a verbose representation before solving constraints.
+ *
+ * @param verbose_level The verbosity level.
+ * @param pc The program counter.
+ * @param prog Reference to the program.
+ * @param state Reference to the symbolic state.
+ */
+inline void verbose_pre(int verbose_level, int pc, Prog &prog,
+                        SymState &state) {
+    if (verbose_level > -1) {
+        printf("pc: %d, ", pc);
+        prog[pc].print();
+        if (verbose_level >= 2) {
+            state.print();
+        }
+    }
+}
+
+/**
+ * @brief Prints a verbose representation after solving constraints.
+ *
+ * This function prints a verbose representation after solving constraints.
+ *
+ * @param verbose_level The verbosity level.
+ */
+inline void verbose_post(int verbose_level) {
+    if (verbose_level >= 2) {
+        printf("---\n");
+    }
+}
+
+/**
+ * @brief Solves path constraints and updates the cache.
+ *
+ * This function solves path constraints, updates the cache, and prints verbose
+ * information if conditions are met.
+ *
+ * @param is_sat Reference to a boolean indicating satisfiability.
+ * @param is_target Flag indicating whether the program counter is a target.
+ * @param pc The program counter.
+ * @param optimizer Reference to the optimizer.
+ * @param state Reference to the symbolic state.
+ * @param constraints_cache Reference to the path constraints cache.
+ * @param maxSAT Reference to the maximum satisfiability limit.
+ * @param maxUNSAT Reference to the maximum unsatisfiability limit.
+ * @param max_num_trials Maximum number of solver trials.
+ * @param ignore_memory Flag indicating whether to ignore memory.
+ * @param use_dpll Flag indicating whether to use the DPLL solver.
+ * @param verbose_level The verbosity level.
+ */
+inline void solve_constraints(bool &is_sat, bool is_target, int pc,
+                              GDOptimizer &optimizer, SymState &state,
+                              PathConstraintsTable &constraints_cache,
+                              int &maxSAT, int &maxUNSAT, int max_num_trials,
+                              bool ignore_memory, bool use_dpll,
+                              int verbose_level) {
+    std::string constraints_str = state.toString(false);
+
+    std::unordered_map<int, float> params = {};
+    initialize_params(params, state, ignore_memory);
+
+    bool is_unknown_path_constraint = true;
+
+    if (constraints_cache.find(constraints_str) != constraints_cache.end()) {
+        is_sat = constraints_cache[constraints_str].first;
+        params = constraints_cache[constraints_str].second;
+        is_unknown_path_constraint = false;
+    } else {
+        call_smt_solver(is_sat, state, params, optimizer, max_num_trials,
+                        ignore_memory, use_dpll);
+        if (is_sat) {
+            maxSAT--;
+        } else {
+            maxUNSAT--;
+        }
+        constraints_cache.emplace(constraints_str,
+                                  std::make_pair(is_sat, params));
+    }
+
+    if (verbose_level >= 1) {
+        verbose_constraints(verbose_level, is_unknown_path_constraint,
+                            is_target, is_sat, pc, constraints_str, state,
+                            params);
+    }
+}
+
+/**
  * @brief Symbolically Execute a Program with Gradient Descent Optimization.
  *
  * This function conducts symbolic execution of a given program while
@@ -50,84 +245,20 @@ inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
                        bool ignore_memory, bool use_dpll, int verbose_level,
                        bool return_trace = false) {
     int pc = state.pc;
-    if (verbose_level >= -1) {
-        printf("pc: %d, ", pc);
-        prog[pc].print();
-        if (verbose_level >= 2) {
-            state.print();
-        }
-    }
-
-    bool is_target = ((target_pcs.size() == 0) ||
-                      (target_pcs.find(-1) != target_pcs.end()) ||
-                      (target_pcs.find(pc) != target_pcs.end()));
+    bool is_target = is_target_pc(target_pcs, pc);
     bool is_sat = true;
 
+    verbose_pre(verbose_level, pc, prog, state);
     if (state.path_constraints.size() != 0 && is_target) {
-        std::string constraints_str = state.toString(false);
-
-        std::unordered_map<int, float> params = {};
-        initialize_params(params, state, ignore_memory);
-
-        bool is_unknown_path_constraint = true;
-
-        if (constraints_cache.find(constraints_str) !=
-            constraints_cache.end()) {
-            is_sat = constraints_cache[constraints_str].first;
-            params = constraints_cache[constraints_str].second;
-            is_unknown_path_constraint = false;
-        } else {
-            if (use_dpll) {
-                smt_dpll_solver(is_sat, state, params, optimizer,
-                                max_num_trials, ignore_memory);
-            } else {
-                smt_union_solver(is_sat, state, params, optimizer,
-                                 max_num_trials, ignore_memory);
-            }
-            if (is_sat) {
-                maxSAT--;
-            } else {
-                maxUNSAT--;
-            }
-            constraints_cache.emplace(constraints_str,
-                                      std::make_pair(is_sat, params));
-        }
-
-        if (verbose_level >= 1) {
-            if ((verbose_level >= 1 && is_unknown_path_constraint &&
-                 is_target) ||
-                (verbose_level >= 2)) {
-                if (!is_sat) {
-                    printf("\x1b[31m");
-                } else {
-                    printf("\x1b[32m");
-                }
-                printf("pc=%d, IS_SAT - %d\x1b[39m, %s, params = {", pc, is_sat,
-                       constraints_str.c_str());
-                for (auto &p : params) {
-                    // ignore concrete variables
-                    if (state.mem.find(p.first) != state.mem.end()) {
-                        continue;
-                    }
-                    // only show symbolic variables
-                    if (is_integer(p.second)) {
-                        printf("%d: %d, ", p.first, (int)p.second);
-                    } else {
-                        printf("%d: %f, ", p.first, p.second);
-                    }
-                }
-                printf("}\n");
-            }
-        }
+        solve_constraints(is_sat, is_target, pc, optimizer, state,
+                          constraints_cache, maxSAT, maxUNSAT, max_num_trials,
+                          ignore_memory, use_dpll, verbose_level);
     }
-
-    if (verbose_level >= 2) {
-        printf("---\n");
-    }
+    verbose_post(verbose_level);
 
     if ((prog[pc].instr == InstrType::Done) || (!is_sat)) {
         return Trace(state, {});
-    } else if (maxDepth > 0 && maxSAT > 0 && maxUNSAT > 0) {
+    } else if (explore_further(maxDepth, maxSAT, maxUNSAT)) {
         Instr instr = prog[pc];
         std::vector<SymState *> newStates;
         symStep(&state, instr, newStates);

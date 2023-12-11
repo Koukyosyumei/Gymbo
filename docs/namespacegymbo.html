@@ -292,6 +292,12 @@ Functions</h2></td></tr>
 <tr class="memitem:aed8257f2dd65fda6917c46d75b3d24ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#aed8257f2dd65fda6917c46d75b3d24ec">pbranch</a> (std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;var2dist, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;D, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state)</td></tr>
 <tr class="memdesc:aed8257f2dd65fda6917c46d75b3d24ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform probabilistic branching based on symbolic execution.  <a href="namespacegymbo.html#aed8257f2dd65fda6917c46d75b3d24ec">More...</a><br /></td></tr>
 <tr class="separator:aed8257f2dd65fda6917c46d75b3d24ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac945fcc71ddc6b734f8444f51d21f219"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#ac945fcc71ddc6b734f8444f51d21f219">verbose_pconstraints</a> (int verbose_level, bool is_unknown_path_constraint, bool is_target, bool is_sat, int pc, std::string constraints_str, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, const std::unordered_map&lt; int, float &gt; &amp;params)</td></tr>
+<tr class="separator:ac945fcc71ddc6b734f8444f51d21f219"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41efd89d5f5866be466734a6b0d5ea5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a41efd89d5f5866be466734a6b0d5ea5d">solve_pconstraints</a> (bool &amp;is_sat, bool is_target, int pc, std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;var2dist, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;D, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, <a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;constraints_cache, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
+<tr class="separator:a41efd89d5f5866be466734a6b0d5ea5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f454957ed3d5dc4ac39c4624c90c14a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a9f454957ed3d5dc4ac39c4624c90c14a">update_prob_constraints_table</a> (int pc, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, <a class="el" href="namespacegymbo.html#a035e6fe34f819db35a5662ae0cf427d3">ProbPathConstraintsTable</a> &amp;prob_constraints_table)</td></tr>
+<tr class="separator:a9f454957ed3d5dc4ac39c4624c90c14a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af14aa75beebbdc447f479657e715104a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Trace.html">Trace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#af14aa75beebbdc447f479657e715104a">run_pgymbo</a> (<a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;prog, std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;var2dist, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;D, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, std::unordered_set&lt; int &gt; &amp;target_pcs, <a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;constraints_cache, <a class="el" href="namespacegymbo.html#a035e6fe34f819db35a5662ae0cf427d3">ProbPathConstraintsTable</a> &amp;prob_constraints_table, int maxDepth, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level, bool return_trace=false)</td></tr>
 <tr class="memdesc:af14aa75beebbdc447f479657e715104a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run probabilistic symbolic execution on a program.  <a href="namespacegymbo.html#af14aa75beebbdc447f479657e715104a">More...</a><br /></td></tr>
 <tr class="separator:af14aa75beebbdc447f479657e715104a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -310,6 +316,27 @@ Functions</h2></td></tr>
 <tr class="memitem:a8de7e0823e44be83e0579851777fc0a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a8de7e0823e44be83e0579851777fc0a1">symStep</a> (<a class="el" href="structgymbo_1_1SymState.html">SymState</a> *state, <a class="el" href="classgymbo_1_1Instr.html">Instr</a> &amp;instr, std::vector&lt; <a class="el" href="structgymbo_1_1SymState.html">SymState</a> * &gt; &amp;result)</td></tr>
 <tr class="memdesc:a8de7e0823e44be83e0579851777fc0a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Single Instruction of a Program.  <a href="namespacegymbo.html#a8de7e0823e44be83e0579851777fc0a1">More...</a><br /></td></tr>
 <tr class="separator:a8de7e0823e44be83e0579851777fc0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66355dbaf96e028b8ab57ca1568fab0d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a66355dbaf96e028b8ab57ca1568fab0d">is_target_pc</a> (const std::unordered_set&lt; int &gt; &amp;target_pcs, int pc)</td></tr>
+<tr class="memdesc:a66355dbaf96e028b8ab57ca1568fab0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given program counter (pc) is a target program counter.  <a href="namespacegymbo.html#a66355dbaf96e028b8ab57ca1568fab0d">More...</a><br /></td></tr>
+<tr class="separator:a66355dbaf96e028b8ab57ca1568fab0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a115388f029bdc666672c0f0d5133f6da"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a115388f029bdc666672c0f0d5133f6da">explore_further</a> (int maxDepth, int maxSAT, int maxUNSAT)</td></tr>
+<tr class="memdesc:a115388f029bdc666672c0f0d5133f6da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if further exploration is allowed based on maximum depth and satisfiability conditions.  <a href="namespacegymbo.html#a115388f029bdc666672c0f0d5133f6da">More...</a><br /></td></tr>
+<tr class="separator:a115388f029bdc666672c0f0d5133f6da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f503059e1234fc190b0c60152b793f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a1f503059e1234fc190b0c60152b793f2">call_smt_solver</a> (bool &amp;is_sat, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, std::unordered_map&lt; int, float &gt; &amp;params, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, int max_num_trials, bool ignore_memory, bool use_dpll)</td></tr>
+<tr class="memdesc:a1f503059e1234fc190b0c60152b793f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the SMT solver based on the specified options.  <a href="namespacegymbo.html#a1f503059e1234fc190b0c60152b793f2">More...</a><br /></td></tr>
+<tr class="separator:a1f503059e1234fc190b0c60152b793f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d81217ce1fcef0855445fb90bee5caf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a3d81217ce1fcef0855445fb90bee5caf">verbose_constraints</a> (int verbose_level, bool is_unknown_path_constraint, bool is_target, bool is_sat, int pc, std::string constraints_str, const <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, const std::unordered_map&lt; int, float &gt; &amp;params)</td></tr>
+<tr class="memdesc:a3d81217ce1fcef0855445fb90bee5caf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a verbose for conflicts solving if conditions are met.  <a href="namespacegymbo.html#a3d81217ce1fcef0855445fb90bee5caf">More...</a><br /></td></tr>
+<tr class="separator:a3d81217ce1fcef0855445fb90bee5caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a685c67ee7cb00b108285989f3216d60c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a685c67ee7cb00b108285989f3216d60c">verbose_pre</a> (int verbose_level, int pc, <a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;prog, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state)</td></tr>
+<tr class="memdesc:a685c67ee7cb00b108285989f3216d60c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a verbose representation before solving constraints.  <a href="namespacegymbo.html#a685c67ee7cb00b108285989f3216d60c">More...</a><br /></td></tr>
+<tr class="separator:a685c67ee7cb00b108285989f3216d60c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6c27c7bcfbbb14bda7b07bd976a47bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#ab6c27c7bcfbbb14bda7b07bd976a47bd">verbose_post</a> (int verbose_level)</td></tr>
+<tr class="memdesc:ab6c27c7bcfbbb14bda7b07bd976a47bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a verbose representation after solving constraints.  <a href="namespacegymbo.html#ab6c27c7bcfbbb14bda7b07bd976a47bd">More...</a><br /></td></tr>
+<tr class="separator:ab6c27c7bcfbbb14bda7b07bd976a47bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae191cbcb7e0123a98305d1a640cb8b95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#ae191cbcb7e0123a98305d1a640cb8b95">solve_constraints</a> (bool &amp;is_sat, bool is_target, int pc, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, <a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;constraints_cache, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
+<tr class="memdesc:ae191cbcb7e0123a98305d1a640cb8b95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves path constraints and updates the cache.  <a href="namespacegymbo.html#ae191cbcb7e0123a98305d1a640cb8b95">More...</a><br /></td></tr>
+<tr class="separator:ae191cbcb7e0123a98305d1a640cb8b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab49b70724bec7c8b7ee2a6a2fd31771"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#aab49b70724bec7c8b7ee2a6a2fd31771">is_alpha</a> (char c)</td></tr>
 <tr class="memdesc:aab49b70724bec7c8b7ee2a6a2fd31771"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a character is an alphabetical character or underscore.  <a href="namespacegymbo.html#aab49b70724bec7c8b7ee2a6a2fd31771">More...</a><br /></td></tr>
 <tr class="separator:aab49b70724bec7c8b7ee2a6a2fd31771"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -806,6 +833,87 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a1f503059e1234fc190b0c60152b793f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f503059e1234fc190b0c60152b793f2">&#9670;&nbsp;</a></span>call_smt_solver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::call_smt_solver </td>
+          <td>(</td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>is_sat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unordered_map&lt; int, float &gt; &amp;&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;&#160;</td>
+          <td class="paramname"><em>optimizer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>max_num_trials</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>ignore_memory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>use_dpll</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calls the SMT solver based on the specified options. </p>
+<p>This function calls the SMT solver, either DPLL solver or union solver, based on the specified options.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is_sat</td><td>Reference to a boolean indicating satisfiability. </td></tr>
+    <tr><td class="paramname">state</td><td>Reference to the symbolic state. </td></tr>
+    <tr><td class="paramname">params</td><td>Reference to a map containing parameters. </td></tr>
+    <tr><td class="paramname">optimizer</td><td>Reference to the optimizer. </td></tr>
+    <tr><td class="paramname">max_num_trials</td><td>Maximum number of solver trials. </td></tr>
+    <tr><td class="paramname">ignore_memory</td><td>Flag indicating whether to ignore memory. </td></tr>
+    <tr><td class="paramname">use_dpll</td><td>Flag indicating whether to use the DPLL solver. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a9a616478635557c4e334a5c7016938e6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9a616478635557c4e334a5c7016938e6">&#9670;&nbsp;</a></span>cartesianProduct()</h2>
 
@@ -1264,6 +1372,60 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a115388f029bdc666672c0f0d5133f6da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a115388f029bdc666672c0f0d5133f6da">&#9670;&nbsp;</a></span>explore_further()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gymbo::explore_further </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxDepth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxSAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxUNSAT</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if further exploration is allowed based on maximum depth and satisfiability conditions. </p>
+<p>This function determines whether further exploration is allowed based on the specified maximum depth and satisfiability conditions.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxDepth</td><td>The maximum depth for exploration. </td></tr>
+    <tr><td class="paramname">maxSAT</td><td>The maximum satisfiability limit. </td></tr>
+    <tr><td class="paramname">maxUNSAT</td><td>The maximum unsatisfiability limit. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if further exploration is allowed, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -1799,6 +1961,53 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if the float is an integer, otherwise <code>false</code>. </dd></dl>
+
+</div>
+</div>
+<a id="a66355dbaf96e028b8ab57ca1568fab0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66355dbaf96e028b8ab57ca1568fab0d">&#9670;&nbsp;</a></span>is_target_pc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gymbo::is_target_pc </td>
+          <td>(</td>
+          <td class="paramtype">const std::unordered_set&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target_pcs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the given program counter (pc) is a target program counter. </p>
+<p>This function checks whether the provided program counter (pc) is part of the set of target program counters.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target_pcs</td><td>The set of target program counters. </td></tr>
+    <tr><td class="paramname">pc</td><td>The program counter to be checked. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the pc is a target program counter, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -2636,6 +2845,230 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ae191cbcb7e0123a98305d1a640cb8b95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae191cbcb7e0123a98305d1a640cb8b95">&#9670;&nbsp;</a></span>solve_constraints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::solve_constraints </td>
+          <td>(</td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>is_sat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;&#160;</td>
+          <td class="paramname"><em>optimizer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;&#160;</td>
+          <td class="paramname"><em>constraints_cache</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>maxSAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>maxUNSAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>max_num_trials</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>ignore_memory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>use_dpll</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>verbose_level</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solves path constraints and updates the cache. </p>
+<p>This function solves path constraints, updates the cache, and prints verbose information if conditions are met.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is_sat</td><td>Reference to a boolean indicating satisfiability. </td></tr>
+    <tr><td class="paramname">is_target</td><td>Flag indicating whether the program counter is a target. </td></tr>
+    <tr><td class="paramname">pc</td><td>The program counter. </td></tr>
+    <tr><td class="paramname">optimizer</td><td>Reference to the optimizer. </td></tr>
+    <tr><td class="paramname">state</td><td>Reference to the symbolic state. </td></tr>
+    <tr><td class="paramname">constraints_cache</td><td>Reference to the path constraints cache. </td></tr>
+    <tr><td class="paramname">maxSAT</td><td>Reference to the maximum satisfiability limit. </td></tr>
+    <tr><td class="paramname">maxUNSAT</td><td>Reference to the maximum unsatisfiability limit. </td></tr>
+    <tr><td class="paramname">max_num_trials</td><td>Maximum number of solver trials. </td></tr>
+    <tr><td class="paramname">ignore_memory</td><td>Flag indicating whether to ignore memory. </td></tr>
+    <tr><td class="paramname">use_dpll</td><td>Flag indicating whether to use the DPLL solver. </td></tr>
+    <tr><td class="paramname">verbose_level</td><td>The verbosity level. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a41efd89d5f5866be466734a6b0d5ea5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41efd89d5f5866be466734a6b0d5ea5d">&#9670;&nbsp;</a></span>solve_pconstraints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::solve_pconstraints </td>
+          <td>(</td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>is_sat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>var2dist</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::vector&lt; int &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>D</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;&#160;</td>
+          <td class="paramname"><em>optimizer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;&#160;</td>
+          <td class="paramname"><em>constraints_cache</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>maxSAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>maxUNSAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>max_num_trials</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>ignore_memory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>use_dpll</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>verbose_level</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a086916a92edc60e687a056603995182e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a086916a92edc60e687a056603995182e">&#9670;&nbsp;</a></span>startswith()</h2>
 
@@ -2909,6 +3342,48 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a9f454957ed3d5dc4ac39c4624c90c14a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f454957ed3d5dc4ac39c4624c90c14a">&#9670;&nbsp;</a></span>update_prob_constraints_table()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::update_prob_constraints_table </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacegymbo.html#a035e6fe34f819db35a5662ae0cf427d3">ProbPathConstraintsTable</a> &amp;&#160;</td>
+          <td class="paramname"><em>prob_constraints_table</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a08e7c1f5fbe133aac3555ce9490af0dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a08e7c1f5fbe133aac3555ce9490af0dc">&#9670;&nbsp;</a></span>valName()</h2>
 
@@ -2941,6 +3416,261 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A name for the variable. </dd></dl>
+
+</div>
+</div>
+<a id="a3d81217ce1fcef0855445fb90bee5caf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d81217ce1fcef0855445fb90bee5caf">&#9670;&nbsp;</a></span>verbose_constraints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::verbose_constraints </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>verbose_level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_unknown_path_constraint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_sat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>constraints_str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::unordered_map&lt; int, float &gt; &amp;&#160;</td>
+          <td class="paramname"><em>params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prints a verbose for conflicts solving if conditions are met. </p>
+<p>This function prints a verbose for conflicts solving if the specified conditions are met.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">verbose_level</td><td>The verbosity level. </td></tr>
+    <tr><td class="paramname">is_unknown_path_constraint</td><td>Flag indicating whether the path constraint is unknown. </td></tr>
+    <tr><td class="paramname">is_target</td><td>Flag indicating whether the program counter is a target. </td></tr>
+    <tr><td class="paramname">is_sat</td><td>Flag indicating satisfiability. </td></tr>
+    <tr><td class="paramname">pc</td><td>The program counter. </td></tr>
+    <tr><td class="paramname">constraints_str</td><td>String representation of path constraints. </td></tr>
+    <tr><td class="paramname">state</td><td>Reference to the symbolic state. </td></tr>
+    <tr><td class="paramname">params</td><td>Reference to the map containing parameters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac945fcc71ddc6b734f8444f51d21f219"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac945fcc71ddc6b734f8444f51d21f219">&#9670;&nbsp;</a></span>verbose_pconstraints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::verbose_pconstraints </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>verbose_level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_unknown_path_constraint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_sat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>constraints_str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::unordered_map&lt; int, float &gt; &amp;&#160;</td>
+          <td class="paramname"><em>params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab6c27c7bcfbbb14bda7b07bd976a47bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6c27c7bcfbbb14bda7b07bd976a47bd">&#9670;&nbsp;</a></span>verbose_post()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::verbose_post </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>verbose_level</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prints a verbose representation after solving constraints. </p>
+<p>This function prints a verbose representation after solving constraints.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">verbose_level</td><td>The verbosity level. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a685c67ee7cb00b108285989f3216d60c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a685c67ee7cb00b108285989f3216d60c">&#9670;&nbsp;</a></span>verbose_pre()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::verbose_pre </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>verbose_level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;&#160;</td>
+          <td class="paramname"><em>prog</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
+          <td class="paramname"><em>state</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prints a verbose representation before solving constraints. </p>
+<p>This function prints a verbose representation before solving constraints.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">verbose_level</td><td>The verbosity level. </td></tr>
+    <tr><td class="paramname">pc</td><td>The program counter. </td></tr>
+    <tr><td class="paramname">prog</td><td>Reference to the program. </td></tr>
+    <tr><td class="paramname">state</td><td>Reference to the symbolic state. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
