@@ -1,4 +1,4 @@
-# Gymbo: Gradient-based Symbolic Execution 
+#Gymbo : Gradient - based Symbolic Execution
 
 <img src="img/gymbo.drawio.svg">
 
@@ -12,6 +12,8 @@ One practical usage of Gymbo is debugging ML models like neural networks to dete
 <img src="img/symbolic_nn.drawio.svg">
 
 > Please note that Gymbo is currently under development and may have bugs. Your feedback and contributions are always greatly appreciated.
+
+Another unique feature of Gymbo is that it can track the probabilistic symbolic variables. We adopt the PBRANCH algorithm proposed in `[3]` and currently support the discrete uniform distributions.
 
 ## Install
 
@@ -158,7 +160,7 @@ constraints = plg.gexecute(prg, init_symstate, optimizer, ...)
 
 We offer some helper functions within `pymlgymbo` library to convert the ML models of famous Python library like sklearn and PyTorch to the program that gymbo can process.
 
-The following code generates the adversarial examples against a neural network, as proposed in [3]
+The following code generates the adversarial examples against a neural network, as proposed in `[4]`.
 
 ```python
 from sklearn.neural_network import MLPClassifier
@@ -186,14 +188,15 @@ constraints = plg.gexecute(prg, init_symstate, optimizer, target_pcs, ...)
 
 ## Acknowledgement
 
-Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of `rui314/chibicc [4]`, while the symbolic execution approach is inspired by `beala/symbolic [5]`.
+Gymbo is entirely implemented in C++ and requires only standard libraries. The process of compiling from source code to stack machines is based on the implementation of `rui314/chibicc [5]`, while the symbolic execution approach is inspired by `beala/symbolic [6]`.
 
 ## Reference
 
 ```
 - [1] Chen, Peng, Jianzhong Liu, and Hao Chen. "Matryoshka: fuzzing deeply nested branches." Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security. 2019.
 - [2] Minghao Liu, Kunhang Lv, Pei Huang, Rui Han, Fuqi Jia, Yu Zhang, Feifei Ma, Jian Zhang. "NRAgo: Solving SMT(NRA) Formulas with Gradient-based Optimization." IEEE/ACM International Conference on Automated Software Engineering, 2023
-- [3] Gopinath, Divya, et al. "Symbolic execution for importance analysis and adversarial generation in neural networks." 2019 IEEE 30th International Symposium on Software Reliability Engineering (ISSRE). IEEE, 2019.
-- [4] https://github.com/rui314/chibicc
-- [5] https://github.com/beala/symbolic
+- [3] Susag, Zachary, et al. "Symbolic execution for randomized programs." Proceedings of the ACM on Programming Languages 6.OOPSLA2 (2022): 1583-1612.
+- [4] Gopinath, Divya, et al. "Symbolic execution for importance analysis and adversarial generation in neural networks." 2019 IEEE 30th International Symposium on Software Reliability Engineering (ISSRE). IEEE, 2019.
+- [5] https://github.com/rui314/chibicc
+- [6] https://github.com/beala/symbolic
 ```
