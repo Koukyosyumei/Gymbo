@@ -175,6 +175,12 @@ std\+::pair$<$ std\+::unordered\+\_\+map$<$ std\+::string, int $>$, \mbox{\hyper
 \begin{DoxyCompactList}\small\item\em Symbolically Executes a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_aed8257f2dd65fda6917c46d75b3d24ec}{pbranch}} (std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state)
 \begin{DoxyCompactList}\small\item\em Perform probabilistic branching based on symbolic execution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_ac945fcc71ddc6b734f8444f51d21f219}{verbose\+\_\+pconstraints}} (int verbose\+\_\+level, bool is\+\_\+unknown\+\_\+path\+\_\+constraint, bool is\+\_\+target, bool is\+\_\+sat, int pc, std\+::string constraints\+\_\+str, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, const std\+::unordered\+\_\+map$<$ int, float $>$ \&params)
+\item 
+void \mbox{\hyperlink{namespacegymbo_a41efd89d5f5866be466734a6b0d5ea5d}{solve\+\_\+pconstraints}} (bool \&is\+\_\+sat, bool is\+\_\+target, int pc, std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
+\item 
+void \mbox{\hyperlink{namespacegymbo_a9f454957ed3d5dc4ac39c4624c90c14a}{update\+\_\+prob\+\_\+constraints\+\_\+table}} (int pc, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&prob\+\_\+constraints\+\_\+table)
+\item 
 \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{namespacegymbo_af14aa75beebbdc447f479657e715104a}{run\+\_\+pgymbo}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, \mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&prob\+\_\+constraints\+\_\+table, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level, bool return\+\_\+trace=false)
 \begin{DoxyCompactList}\small\item\em Run probabilistic symbolic execution on a program. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}{initialize\+\_\+params}} (std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, bool ignore\+\_\+memory)
@@ -187,6 +193,20 @@ void \mbox{\hyperlink{namespacegymbo_acbe8003da6e623ec5435c2b7c92c092a}{smt\+\_\
 \begin{DoxyCompactList}\small\item\em Symbolically Execute a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a8de7e0823e44be83e0579851777fc0a1}{sym\+Step}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$state, \mbox{\hyperlink{classgymbo_1_1Instr}{Instr}} \&instr, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$ $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Symbolically Execute a Single Instruction of a Program. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacegymbo_a66355dbaf96e028b8ab57ca1568fab0d}{is\+\_\+target\+\_\+pc}} (const std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, int pc)
+\begin{DoxyCompactList}\small\item\em Checks if the given program counter (pc) is a target program counter. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacegymbo_a115388f029bdc666672c0f0d5133f6da}{explore\+\_\+further}} (int max\+Depth, int max\+SAT, int max\+UNSAT)
+\begin{DoxyCompactList}\small\item\em Checks if further exploration is allowed based on maximum depth and satisfiability conditions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a1f503059e1234fc190b0c60152b793f2}{call\+\_\+smt\+\_\+solver}} (bool \&is\+\_\+sat, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll)
+\begin{DoxyCompactList}\small\item\em Calls the SMT solver based on the specified options. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a3d81217ce1fcef0855445fb90bee5caf}{verbose\+\_\+constraints}} (int verbose\+\_\+level, bool is\+\_\+unknown\+\_\+path\+\_\+constraint, bool is\+\_\+target, bool is\+\_\+sat, int pc, std\+::string constraints\+\_\+str, const \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, const std\+::unordered\+\_\+map$<$ int, float $>$ \&params)
+\begin{DoxyCompactList}\small\item\em Prints a verbose for conflicts solving if conditions are met. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a685c67ee7cb00b108285989f3216d60c}{verbose\+\_\+pre}} (int verbose\+\_\+level, int pc, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state)
+\begin{DoxyCompactList}\small\item\em Prints a verbose representation before solving constraints. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_ab6c27c7bcfbbb14bda7b07bd976a47bd}{verbose\+\_\+post}} (int verbose\+\_\+level)
+\begin{DoxyCompactList}\small\item\em Prints a verbose representation after solving constraints. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_ae191cbcb7e0123a98305d1a640cb8b95}{solve\+\_\+constraints}} (bool \&is\+\_\+sat, bool is\+\_\+target, int pc, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
+\begin{DoxyCompactList}\small\item\em Solves path constraints and updates the cache. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_aab49b70724bec7c8b7ee2a6a2fd31771}{is\+\_\+alpha}} (char c)
 \begin{DoxyCompactList}\small\item\em Checks if a character is an alphabetical character or underscore. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a9f75e72416f1f4de36d005b6935c0136}{is\+\_\+alnum}} (char c)
@@ -689,6 +709,35 @@ Converts a bool to a uint32\+\_\+t word.
 \begin{DoxyReturn}{Returns}
 The uint32\+\_\+t word equivalent of the bool. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a1f503059e1234fc190b0c60152b793f2}\label{namespacegymbo_a1f503059e1234fc190b0c60152b793f2}} 
+\index{gymbo@{gymbo}!call\_smt\_solver@{call\_smt\_solver}}
+\index{call\_smt\_solver@{call\_smt\_solver}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{call\_smt\_solver()}{call\_smt\_solver()}}
+{\footnotesize\ttfamily void gymbo\+::call\+\_\+smt\+\_\+solver (\begin{DoxyParamCaption}\item[{bool \&}]{is\+\_\+sat,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{params,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calls the SMT solver based on the specified options. 
+
+This function calls the SMT solver, either DPLL solver or union solver, based on the specified options.
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+\_\+sat} & Reference to a boolean indicating satisfiability. \\
+\hline
+{\em state} & Reference to the symbolic state. \\
+\hline
+{\em params} & Reference to a map containing parameters. \\
+\hline
+{\em optimizer} & Reference to the optimizer. \\
+\hline
+{\em max\+\_\+num\+\_\+trials} & Maximum number of solver trials. \\
+\hline
+{\em ignore\+\_\+memory} & Flag indicating whether to ignore memory. \\
+\hline
+{\em use\+\_\+dpll} & Flag indicating whether to use the DPLL solver. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{namespacegymbo_a9a616478635557c4e334a5c7016938e6}\label{namespacegymbo_a9a616478635557c4e334a5c7016938e6}} 
 \index{gymbo@{gymbo}!cartesianProduct@{cartesianProduct}}
 \index{cartesianProduct@{cartesianProduct}!gymbo@{gymbo}}
@@ -892,6 +941,30 @@ Ensures that the current token is a number.
 {\em An} & error if the current token is not a number. \\
 \hline
 \end{DoxyExceptions}
+\mbox{\Hypertarget{namespacegymbo_a115388f029bdc666672c0f0d5133f6da}\label{namespacegymbo_a115388f029bdc666672c0f0d5133f6da}} 
+\index{gymbo@{gymbo}!explore\_further@{explore\_further}}
+\index{explore\_further@{explore\_further}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{explore\_further()}{explore\_further()}}
+{\footnotesize\ttfamily bool gymbo\+::explore\+\_\+further (\begin{DoxyParamCaption}\item[{int}]{max\+Depth,  }\item[{int}]{max\+SAT,  }\item[{int}]{max\+UNSAT }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if further exploration is allowed based on maximum depth and satisfiability conditions. 
+
+This function determines whether further exploration is allowed based on the specified maximum depth and satisfiability conditions.
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Depth} & The maximum depth for exploration. \\
+\hline
+{\em max\+SAT} & The maximum satisfiability limit. \\
+\hline
+{\em max\+UNSAT} & The maximum unsatisfiability limit. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if further exploration is allowed, false otherwise. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}\label{namespacegymbo_a9e2a8633fd8ee1ed723406efc5a82b06}} 
 \index{gymbo@{gymbo}!expr@{expr}}
 \index{expr@{expr}!gymbo@{gymbo}}
@@ -1139,6 +1212,28 @@ The {\ttfamily is\+\_\+integer} function checks if a given float value is an int
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 {\ttfamily true} if the float is an integer, otherwise {\ttfamily false}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a66355dbaf96e028b8ab57ca1568fab0d}\label{namespacegymbo_a66355dbaf96e028b8ab57ca1568fab0d}} 
+\index{gymbo@{gymbo}!is\_target\_pc@{is\_target\_pc}}
+\index{is\_target\_pc@{is\_target\_pc}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{is\_target\_pc()}{is\_target\_pc()}}
+{\footnotesize\ttfamily bool gymbo\+::is\+\_\+target\+\_\+pc (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{int}]{pc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if the given program counter (pc) is a target program counter. 
+
+This function checks whether the provided program counter (pc) is part of the set of target program counters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+\_\+pcs} & The set of target program counters. \\
+\hline
+{\em pc} & The program counter to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the pc is a target program counter, false otherwise. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{namespacegymbo_a522f696c976f87e3ab2647520f58192e}\label{namespacegymbo_a522f696c976f87e3ab2647520f58192e}} 
 \index{gymbo@{gymbo}!isNegative@{isNegative}}
@@ -1493,6 +1588,51 @@ SMT Solver with Unified Loss Function.
 {\em ignore\+\_\+memory} & If set to true, constraints derived from memory will be ignored. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_ae191cbcb7e0123a98305d1a640cb8b95}\label{namespacegymbo_ae191cbcb7e0123a98305d1a640cb8b95}} 
+\index{gymbo@{gymbo}!solve\_constraints@{solve\_constraints}}
+\index{solve\_constraints@{solve\_constraints}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{solve\_constraints()}{solve\_constraints()}}
+{\footnotesize\ttfamily void gymbo\+::solve\+\_\+constraints (\begin{DoxyParamCaption}\item[{bool \&}]{is\+\_\+sat,  }\item[{bool}]{is\+\_\+target,  }\item[{int}]{pc,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Solves path constraints and updates the cache. 
+
+This function solves path constraints, updates the cache, and prints verbose information if conditions are met.
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+\_\+sat} & Reference to a boolean indicating satisfiability. \\
+\hline
+{\em is\+\_\+target} & Flag indicating whether the program counter is a target. \\
+\hline
+{\em pc} & The program counter. \\
+\hline
+{\em optimizer} & Reference to the optimizer. \\
+\hline
+{\em state} & Reference to the symbolic state. \\
+\hline
+{\em constraints\+\_\+cache} & Reference to the path constraints cache. \\
+\hline
+{\em max\+SAT} & Reference to the maximum satisfiability limit. \\
+\hline
+{\em max\+UNSAT} & Reference to the maximum unsatisfiability limit. \\
+\hline
+{\em max\+\_\+num\+\_\+trials} & Maximum number of solver trials. \\
+\hline
+{\em ignore\+\_\+memory} & Flag indicating whether to ignore memory. \\
+\hline
+{\em use\+\_\+dpll} & Flag indicating whether to use the DPLL solver. \\
+\hline
+{\em verbose\+\_\+level} & The verbosity level. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_a41efd89d5f5866be466734a6b0d5ea5d}\label{namespacegymbo_a41efd89d5f5866be466734a6b0d5ea5d}} 
+\index{gymbo@{gymbo}!solve\_pconstraints@{solve\_pconstraints}}
+\index{solve\_pconstraints@{solve\_pconstraints}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{solve\_pconstraints()}{solve\_pconstraints()}}
+{\footnotesize\ttfamily void gymbo\+::solve\+\_\+pconstraints (\begin{DoxyParamCaption}\item[{bool \&}]{is\+\_\+sat,  }\item[{bool}]{is\+\_\+target,  }\item[{int}]{pc,  }\item[{std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&}]{var2dist,  }\item[{std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&}]{D,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\Hypertarget{namespacegymbo_a086916a92edc60e687a056603995182e}\label{namespacegymbo_a086916a92edc60e687a056603995182e}} 
 \index{gymbo@{gymbo}!startswith@{startswith}}
 \index{startswith@{startswith}!gymbo@{gymbo}}
@@ -1614,6 +1754,12 @@ unary = (\char`\"{}+\char`\"{} $\vert$ \char`\"{}-\/\char`\"{})? unary $\vert$ p
 \begin{DoxyReturn}{Returns}
 A pointer to the constructed AST node. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a9f454957ed3d5dc4ac39c4624c90c14a}\label{namespacegymbo_a9f454957ed3d5dc4ac39c4624c90c14a}} 
+\index{gymbo@{gymbo}!update\_prob\_constraints\_table@{update\_prob\_constraints\_table}}
+\index{update\_prob\_constraints\_table@{update\_prob\_constraints\_table}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{update\_prob\_constraints\_table()}{update\_prob\_constraints\_table()}}
+{\footnotesize\ttfamily void gymbo\+::update\+\_\+prob\+\_\+constraints\+\_\+table (\begin{DoxyParamCaption}\item[{int}]{pc,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{\mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&}]{prob\+\_\+constraints\+\_\+table }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\Hypertarget{namespacegymbo_a08e7c1f5fbe133aac3555ce9490af0dc}\label{namespacegymbo_a08e7c1f5fbe133aac3555ce9490af0dc}} 
 \index{gymbo@{gymbo}!valName@{valName}}
 \index{valName@{valName}!gymbo@{gymbo}}
@@ -1632,6 +1778,83 @@ Generates a name for a variable based on its index.
 \begin{DoxyReturn}{Returns}
 A name for the variable. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacegymbo_a3d81217ce1fcef0855445fb90bee5caf}\label{namespacegymbo_a3d81217ce1fcef0855445fb90bee5caf}} 
+\index{gymbo@{gymbo}!verbose\_constraints@{verbose\_constraints}}
+\index{verbose\_constraints@{verbose\_constraints}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{verbose\_constraints()}{verbose\_constraints()}}
+{\footnotesize\ttfamily void gymbo\+::verbose\+\_\+constraints (\begin{DoxyParamCaption}\item[{int}]{verbose\+\_\+level,  }\item[{bool}]{is\+\_\+unknown\+\_\+path\+\_\+constraint,  }\item[{bool}]{is\+\_\+target,  }\item[{bool}]{is\+\_\+sat,  }\item[{int}]{pc,  }\item[{std\+::string}]{constraints\+\_\+str,  }\item[{const \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{const std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{params }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints a verbose for conflicts solving if conditions are met. 
+
+This function prints a verbose for conflicts solving if the specified conditions are met.
+
+
+\begin{DoxyParams}{Parameters}
+{\em verbose\+\_\+level} & The verbosity level. \\
+\hline
+{\em is\+\_\+unknown\+\_\+path\+\_\+constraint} & Flag indicating whether the path constraint is unknown. \\
+\hline
+{\em is\+\_\+target} & Flag indicating whether the program counter is a target. \\
+\hline
+{\em is\+\_\+sat} & Flag indicating satisfiability. \\
+\hline
+{\em pc} & The program counter. \\
+\hline
+{\em constraints\+\_\+str} & String representation of path constraints. \\
+\hline
+{\em state} & Reference to the symbolic state. \\
+\hline
+{\em params} & Reference to the map containing parameters. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_ac945fcc71ddc6b734f8444f51d21f219}\label{namespacegymbo_ac945fcc71ddc6b734f8444f51d21f219}} 
+\index{gymbo@{gymbo}!verbose\_pconstraints@{verbose\_pconstraints}}
+\index{verbose\_pconstraints@{verbose\_pconstraints}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{verbose\_pconstraints()}{verbose\_pconstraints()}}
+{\footnotesize\ttfamily void gymbo\+::verbose\+\_\+pconstraints (\begin{DoxyParamCaption}\item[{int}]{verbose\+\_\+level,  }\item[{bool}]{is\+\_\+unknown\+\_\+path\+\_\+constraint,  }\item[{bool}]{is\+\_\+target,  }\item[{bool}]{is\+\_\+sat,  }\item[{int}]{pc,  }\item[{std\+::string}]{constraints\+\_\+str,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{const std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{params }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacegymbo_ab6c27c7bcfbbb14bda7b07bd976a47bd}\label{namespacegymbo_ab6c27c7bcfbbb14bda7b07bd976a47bd}} 
+\index{gymbo@{gymbo}!verbose\_post@{verbose\_post}}
+\index{verbose\_post@{verbose\_post}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{verbose\_post()}{verbose\_post()}}
+{\footnotesize\ttfamily void gymbo\+::verbose\+\_\+post (\begin{DoxyParamCaption}\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints a verbose representation after solving constraints. 
+
+This function prints a verbose representation after solving constraints.
+
+
+\begin{DoxyParams}{Parameters}
+{\em verbose\+\_\+level} & The verbosity level. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegymbo_a685c67ee7cb00b108285989f3216d60c}\label{namespacegymbo_a685c67ee7cb00b108285989f3216d60c}} 
+\index{gymbo@{gymbo}!verbose\_pre@{verbose\_pre}}
+\index{verbose\_pre@{verbose\_pre}!gymbo@{gymbo}}
+\doxysubsubsection{\texorpdfstring{verbose\_pre()}{verbose\_pre()}}
+{\footnotesize\ttfamily void gymbo\+::verbose\+\_\+pre (\begin{DoxyParamCaption}\item[{int}]{verbose\+\_\+level,  }\item[{int}]{pc,  }\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints a verbose representation before solving constraints. 
+
+This function prints a verbose representation before solving constraints.
+
+
+\begin{DoxyParams}{Parameters}
+{\em verbose\+\_\+level} & The verbosity level. \\
+\hline
+{\em pc} & The program counter. \\
+\hline
+{\em prog} & Reference to the program. \\
+\hline
+{\em state} & Reference to the symbolic state. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{namespacegymbo_ac8f3ff2f068b0209a7a57c2e8ff4c00f}\label{namespacegymbo_ac8f3ff2f068b0209a7a57c2e8ff4c00f}} 
 \index{gymbo@{gymbo}!wordToBool@{wordToBool}}
 \index{wordToBool@{wordToBool}!gymbo@{gymbo}}

@@ -24,11 +24,9 @@ git clone https://github.com/Koukyosyumei/Gymbo.git
 
 ## Quick Starts
 
-You can find some examples in [example](example).
+Check out some examples in the [example](example) directory:
 
-For example ...
-
-- [simple program](example/basics/simple.sh)
+- [simple program](example/basic/simple.sh)
 - [searching adversarial examples agaisnt neural networks](example/nn/nn_sklearn.py)
 - [solving Monty Hall problem](example/randomized/montyhall.sh)
 

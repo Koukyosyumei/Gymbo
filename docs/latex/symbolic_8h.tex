@@ -6,7 +6,8 @@ Core implementation of gradient-\/based symbolic execution.
 
 
 {\ttfamily \#include \char`\"{}smt.\+h\char`\"{}}\newline
-Include dependency graph for symbolic.\+h\+:\nopagebreak
+Include dependency graph for symbolic.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,7 +32,21 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 Trace \mbox{\hyperlink{namespacegymbo_aa13abbc332896d34bc320950bdacfdf9}{gymbo\+::run\+\_\+gymbo}} (Prog \&prog, GDOptimizer \&optimizer, Sym\+State \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, Path\+Constraints\+Table \&constraints\+\_\+cache, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level, bool return\+\_\+trace=false)
 \begin{DoxyCompactList}\small\item\em Symbolically Execute a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a8de7e0823e44be83e0579851777fc0a1}{gymbo\+::sym\+Step}} (Sym\+State $\ast$state, Instr \&instr, std\+::vector$<$ Sym\+State $\ast$ $>$ \&result)
-\begin{DoxyCompactList}\small\item\em Symbolically Execute a Single Instruction of a Program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Symbolically Execute a Single Instruction of a Program. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacegymbo_a66355dbaf96e028b8ab57ca1568fab0d}{gymbo\+::is\+\_\+target\+\_\+pc}} (const std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, int pc)
+\begin{DoxyCompactList}\small\item\em Checks if the given program counter (pc) is a target program counter. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacegymbo_a115388f029bdc666672c0f0d5133f6da}{gymbo\+::explore\+\_\+further}} (int max\+Depth, int max\+SAT, int max\+UNSAT)
+\begin{DoxyCompactList}\small\item\em Checks if further exploration is allowed based on maximum depth and satisfiability conditions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a1f503059e1234fc190b0c60152b793f2}{gymbo\+::call\+\_\+smt\+\_\+solver}} (bool \&is\+\_\+sat, Sym\+State \&state, std\+::unordered\+\_\+map$<$ int, float $>$ \&params, GDOptimizer \&optimizer, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll)
+\begin{DoxyCompactList}\small\item\em Calls the SMT solver based on the specified options. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a3d81217ce1fcef0855445fb90bee5caf}{gymbo\+::verbose\+\_\+constraints}} (int verbose\+\_\+level, bool is\+\_\+unknown\+\_\+path\+\_\+constraint, bool is\+\_\+target, bool is\+\_\+sat, int pc, std\+::string constraints\+\_\+str, const Sym\+State \&state, const std\+::unordered\+\_\+map$<$ int, float $>$ \&params)
+\begin{DoxyCompactList}\small\item\em Prints a verbose for conflicts solving if conditions are met. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a685c67ee7cb00b108285989f3216d60c}{gymbo\+::verbose\+\_\+pre}} (int verbose\+\_\+level, int pc, Prog \&prog, Sym\+State \&state)
+\begin{DoxyCompactList}\small\item\em Prints a verbose representation before solving constraints. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_ab6c27c7bcfbbb14bda7b07bd976a47bd}{gymbo\+::verbose\+\_\+post}} (int verbose\+\_\+level)
+\begin{DoxyCompactList}\small\item\em Prints a verbose representation after solving constraints. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_ae191cbcb7e0123a98305d1a640cb8b95}{gymbo\+::solve\+\_\+constraints}} (bool \&is\+\_\+sat, bool is\+\_\+target, int pc, GDOptimizer \&optimizer, Sym\+State \&state, Path\+Constraints\+Table \&constraints\+\_\+cache, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
+\begin{DoxyCompactList}\small\item\em Solves path constraints and updates the cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}

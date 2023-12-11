@@ -5,11 +5,7 @@
  */
 
 #pragma once
-#include <unordered_map>
-#include <unordered_set>
-
 #include "smt.h"
-#include "type.h"
 
 namespace gymbo {
 Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
