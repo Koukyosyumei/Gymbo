@@ -1,4 +1,4 @@
-#Gymbo : Gradient - based Symbolic Execution
+# Gymbo : Gradient - based Symbolic Execution
 
 <img src="img/gymbo.drawio.svg">
 
