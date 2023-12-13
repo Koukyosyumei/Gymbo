@@ -549,9 +549,11 @@ struct Sym {
                     return cvals[var_idx];
                 } else {
                     fprintf(stderr,
-                            "var_%d should be specified to evaluate this "
-                            "symbolic expression\n",
+                            "\x1b[33m Warning!! var_%d should be specified to "
+                            "correctly evaluate this "
+                            "symbolic expression\x1b[39m\n",
                             var_idx);
+                    return 0;
                 }
             }
             case (SymType::SEq): {
@@ -636,9 +638,11 @@ struct Sym {
                     return cvals.at(var_idx);
                 } else {
                     fprintf(stderr,
-                            "var_%d should be specified to evaluate this "
-                            "symbolic expression\n",
+                            "\x1b[33m Warning!! var_%d should be specified to "
+                            "correctly evaluate this "
+                            "symbolic expression\x1b[39m\n",
                             var_idx);
+                    return 0;
                 }
             }
             case (SymType::SEq): {
