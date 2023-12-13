@@ -84,7 +84,7 @@ inline void verbose_pconstraints(int verbose_level,
 }
 
 inline void solve_pconstraints(bool &is_sat, bool is_target, int pc,
-                               std::unordered_map<int, DiscreteDist> &var2dist,
+                               std::unordered_set<int> &random_vars,
                                GDOptimizer &optimizer, SymState &state,
                                PathConstraintsTable &constraints_cache,
                                int &maxSAT, int &maxUNSAT, int max_num_trials,
@@ -108,7 +108,7 @@ inline void solve_pconstraints(bool &is_sat, bool is_target, int pc,
             state.path_constraints[i].gather_var_ids(unique_var_ids);
         }
         for (int i : unique_var_ids) {
-            if (var2dist.find(i) != var2dist.end()) {
+            if (random_vars.find(i) != random_vars.end()) {
                 is_contain_prob_var = true;
                 break;
             }
@@ -172,7 +172,7 @@ inline void update_prob_constraints_table(
  * probabilities accordingly.
  *
  * @param prog The program to be executed symbolically.
- * @param var2dist Map of variable IDs to their discrete distributions.
+ * @param random_vars The set of random variables'IDs.
  * @param optimizer The optimizer used for guided symbolic execution.
  * @param state The initial symbolic state for execution.
  * @param target_pcs Set of target program counters for analysis.
@@ -192,7 +192,7 @@ inline void update_prob_constraints_table(
  * @return The symbolic execution trace containing states and child traces.
  */
 inline Trace run_pgymbo(Prog &prog,
-                        std::unordered_map<int, DiscreteDist> &var2dist,
+                        std::unordered_set<int> &random_vars,
                         GDOptimizer &optimizer, SymState &state,
                         std::unordered_set<int> &target_pcs,
                         PathConstraintsTable &constraints_cache,
@@ -206,7 +206,7 @@ inline Trace run_pgymbo(Prog &prog,
 
     verbose_pre(verbose_level, pc, prog, state);
     if (state.path_constraints.size() != 0 && is_target) {
-        solve_pconstraints(is_sat, is_target, pc, var2dist, optimizer, state,
+        solve_pconstraints(is_sat, is_target, pc, random_vars, optimizer, state,
                            constraints_cache, maxSAT, maxUNSAT, max_num_trials,
                            ignore_memory, use_dpll, verbose_level);
     }
@@ -226,7 +226,7 @@ inline Trace run_pgymbo(Prog &prog,
         std::vector<Trace> children;
         for (SymState *newState : newStates) {
             Trace child = run_pgymbo(
-                prog, var2dist, optimizer, *newState, target_pcs,
+                prog, random_vars, optimizer, *newState, target_pcs,
                 constraints_cache, prob_constraints_table, maxDepth - 1, maxSAT,
                 maxUNSAT, max_num_trials, ignore_memory, use_dpll,
                 verbose_level, return_trace);

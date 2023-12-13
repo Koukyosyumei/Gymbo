@@ -987,6 +987,15 @@ struct DiscreteUniformDist : public DiscreteDist {
     }
 };
 
+struct BernoulliDist : public DiscreteDist {
+    float p;
+
+    BernoulliDist(float p) : p(p) {
+        vals = {0, 1};
+        probs = {1 - p, p};
+    }
+}; 
+
 /**
  * @brief Alias for symbolic memory, represented as an unordered map of symbolic
  * expressions.

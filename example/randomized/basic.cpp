@@ -1,4 +1,5 @@
 #include <unordered_map>
+#include <unordered_set>
 
 #include "../../libgymbo/compiler.h"
 #include "../../libgymbo/psymbolic.h"
@@ -65,6 +66,7 @@ int main(int argc, char *argv[]) {
     }
     printf("---\n");
 
+    std::unordered_set<int> random_vars = {1, 2};
     std::unordered_map<int, gymbo::DiscreteDist> var2dist = {
         {1, gymbo::DiscreteUniformDist(1, 3)},
         {2, gymbo::DiscreteUniformDist(1, 3)}};
@@ -76,7 +78,7 @@ int main(int argc, char *argv[]) {
     std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
 
     printf("Start Symbolic Execution...\n");
-    gymbo::run_pgymbo(prg, var2dist, optimizer, init, target_pcs,
+    gymbo::run_pgymbo(prg, random_vars, optimizer, init, target_pcs,
                       cache_constraints, probabilistic_constraints, max_depth,
                       maxSAT, maxUNSAT, max_num_trials, ignore_memory, use_dpll,
                       verbose_level);
