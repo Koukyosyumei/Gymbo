@@ -50,6 +50,22 @@ inline void pbranch(SymState &state) {
     }
 }
 
+/**
+ * @brief Prints verbose information about probabilistic path constraints.
+ *
+ * This function prints the path constraints, whether they are satisfiable,
+ * the probability of reaching the current state, and other relevant
+ * information.
+ *
+ * @param verbose_level The level of verbosity.
+ * @param is_unknown_path_constraint Whether the path constraint is unknown.
+ * @param is_target Whether the program counter is a target.
+ * @param is_sat Whether the path constraint is satisfiable.
+ * @param pc The program counter.
+ * @param constraints_str String representation of the path constraints.
+ * @param state The symbolic state.
+ * @param params Dictionary of symbolic variable values.
+ */
 inline void verbose_pconstraints(int verbose_level,
                                  bool is_unknown_path_constraint,
                                  bool is_target, bool is_sat, int pc,
@@ -83,6 +99,28 @@ inline void verbose_pconstraints(int verbose_level,
     }
 }
 
+/**
+ * @brief Solves path constraints and updates the symbolic state.
+ *
+ * This function checks the satisfiability of the path constraints using an SMT
+ * solver or a probabilistic branching algorithm. It updates the symbolic state
+ * based on the result and stores the solution in a cache for future use.
+ *
+ * @param is_sat Whether the path constraints are satisfiable.
+ * @param is_target Whether the program counter is a target.
+ * @param pc The program counter.
+ * @param random_vars The set of random variable IDs.
+ * @param optimizer The optimizer used for guided symbolic execution.
+ * @param state The symbolic state.
+ * @param constraints_cache Cache for storing and reusing path constraints.
+ * @param maxSAT Maximum number of satisfiable paths to explore.
+ * @param maxUNSAT Maximum number of unsatisfiable paths to explore.
+ * @param max_num_trials Maximum number of trials for satisfiability checking.
+ * @param ignore_memory Flag to ignore memory updates during symbolic execution.
+ * @param use_dpll Flag indicating whether to use the DPLL solver for
+ * satisfiability.
+ * @param verbose_level Verbosity level for printing debug information.
+ */
 inline void solve_pconstraints(bool &is_sat, bool is_target, int pc,
                                std::unordered_set<int> &random_vars,
                                GDOptimizer &optimizer, SymState &state,
@@ -147,6 +185,17 @@ inline void solve_pconstraints(bool &is_sat, bool is_target, int pc,
     }
 }
 
+/**
+ * @brief Updates the table of probabilistic path constraints.
+ *
+ * This function stores the path constraints and the corresponding probability
+ * of reaching the current state in a table for future reference.
+ *
+ * @param pc The program counter.
+ * @param state The symbolic state.
+ * @param prob_constraints_table Table for storing probabilistic path
+ * constraints.
+ */
 inline void update_prob_constraints_table(
     int pc, SymState &state, ProbPathConstraintsTable &prob_constraints_table) {
     Sym cc = state.path_constraints[0];
@@ -191,8 +240,7 @@ inline void update_prob_constraints_table(
  * trace.
  * @return The symbolic execution trace containing states and child traces.
  */
-inline Trace run_pgymbo(Prog &prog,
-                        std::unordered_set<int> &random_vars,
+inline Trace run_pgymbo(Prog &prog, std::unordered_set<int> &random_vars,
                         GDOptimizer &optimizer, SymState &state,
                         std::unordered_set<int> &target_pcs,
                         PathConstraintsTable &constraints_cache,
