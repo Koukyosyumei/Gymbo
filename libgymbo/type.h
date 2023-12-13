@@ -545,7 +545,14 @@ struct Sym {
                 }
             }
             case (SymType::SAny): {
-                return cvals.at(var_idx);
+                if (cvals.find(var_idx) != cvals.end()) {
+                    return cvals[var_idx];
+                } else {
+                    fprintf(stderr,
+                            "var_%d should be specified to evaluate this "
+                            "symbolic expression\n",
+                            var_idx);
+                }
             }
             case (SymType::SEq): {
                 return std::abs(left->aeval(cvals, eps) -
@@ -625,7 +632,14 @@ struct Sym {
                 }
             }
             case (SymType::SAny): {
-                return cvals.at(var_idx);
+                if (cvals.find(var_idx) != cvals.end()) {
+                    return cvals.at(var_idx);
+                } else {
+                    fprintf(stderr,
+                            "var_%d should be specified to evaluate this "
+                            "symbolic expression\n",
+                            var_idx);
+                }
             }
             case (SymType::SEq): {
                 return std::abs(left->eval(cvals, eps) -
