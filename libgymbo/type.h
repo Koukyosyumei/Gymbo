@@ -1211,7 +1211,7 @@ struct SymProb {
      * @param D Vector of variable assignments.
      * @return Resulting Sym based on the query.
      */
-    Sym query(SymType &symtype, Sym &other,
+    Sym query(SymType symtype, Sym &other,
               std::unordered_map<int, DiscreteDist> &var2dist,
               std::vector<std::vector<int>> &D) {
         std::pair<Sym *, Sym *> mq = marginalize(var2dist, D);
