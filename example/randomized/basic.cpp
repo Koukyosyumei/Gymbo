@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
     std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
 
     printf("Start Symbolic Execution...\n");
-    gymbo::run_pgymbo(prg, var2dist, D, optimizer, init, target_pcs,
+    gymbo::run_pgymbo(prg, var2dist, optimizer, init, target_pcs,
                       cache_constraints, probabilistic_constraints, max_depth,
                       maxSAT, maxUNSAT, max_num_trials, ignore_memory, use_dpll,
                       verbose_level);

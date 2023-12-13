@@ -12,18 +12,13 @@ namespace gymbo {
 /**
  * @brief Perform probabilistic branching based on symbolic execution.
  *
- * Given a set of variable distributions, symbolic state, and path constraints,
- * this function performs probabilistic branching. It computes the symbolic
- * probability of the state being reached and updates the symbolic state
- * accordingly.
+ * Given the symbolic state, this function performs probabilistic branching. It
+ * computes the symbolic probability of the state being reached and updates the
+ * symbolic state accordingly.
  *
- * @param var2dist A map of variable IDs to their discrete distributions.
- * @param D A vector of vectors representing the all possible combinations of
- * probabilistic variables.
  * @param state The symbolic state for the current execution.
  */
-inline void pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
-                    std::vector<std::vector<int>> &D, SymState &state) {
+inline void pbranch(SymState &state) {
     int n_path_constraints = state.path_constraints.size();
     if (state.has_observed_p_cond) {
         Sym *n_cond = &state.path_constraints[0];
@@ -45,7 +40,7 @@ inline void pbranch(std::unordered_map<int, DiscreteDist> &var2dist,
         for (int i = 1; i < n_path_constraints; i++) {
             n_cond = new Sym(SymType::SAnd, n_cond, &state.path_constraints[i]);
         }
-        Sym *d_cond = new Sym(SymType::SCon, FloatToWord((float)D.size()));
+        Sym *d_cond = new Sym(SymType::SCon, FloatToWord(1.0f));
         state.p = SymProb(n_cond, d_cond);
         state.has_observed_p_cond = true;
     }
@@ -86,7 +81,6 @@ inline void verbose_pconstraints(int verbose_level,
 
 inline void solve_pconstraints(bool &is_sat, bool is_target, int pc,
                                std::unordered_map<int, DiscreteDist> &var2dist,
-                               std::vector<std::vector<int>> &D,
                                GDOptimizer &optimizer, SymState &state,
                                PathConstraintsTable &constraints_cache,
                                int &maxSAT, int &maxUNSAT, int max_num_trials,
@@ -118,7 +112,7 @@ inline void solve_pconstraints(bool &is_sat, bool is_target, int pc,
 
         if (is_contain_prob_var) {
             // call probabilistic branch algorithm
-            pbranch(var2dist, D, state);
+            pbranch(state);
             is_sat = true;
         } else {
             // solve deterministic path constraints
@@ -168,8 +162,6 @@ inline void update_prob_constraints_table(
  *
  * @param prog The program to be executed symbolically.
  * @param var2dist Map of variable IDs to their discrete distributions.
- * @param D A vector of vectors representing the all possible combinations of
- * probabilistic variables.
  * @param optimizer The optimizer used for guided symbolic execution.
  * @param state The initial symbolic state for execution.
  * @param target_pcs Set of target program counters for analysis.
@@ -190,7 +182,6 @@ inline void update_prob_constraints_table(
  */
 inline Trace run_pgymbo(Prog &prog,
                         std::unordered_map<int, DiscreteDist> &var2dist,
-                        std::vector<std::vector<int>> &D,
                         GDOptimizer &optimizer, SymState &state,
                         std::unordered_set<int> &target_pcs,
                         PathConstraintsTable &constraints_cache,
@@ -204,7 +195,7 @@ inline Trace run_pgymbo(Prog &prog,
 
     verbose_pre(verbose_level, pc, prog, state);
     if (state.path_constraints.size() != 0 && is_target) {
-        solve_pconstraints(is_sat, is_target, pc, var2dist, D, optimizer, state,
+        solve_pconstraints(is_sat, is_target, pc, var2dist, optimizer, state,
                            constraints_cache, maxSAT, maxUNSAT, max_num_trials,
                            ignore_memory, use_dpll, verbose_level);
     }
@@ -224,7 +215,7 @@ inline Trace run_pgymbo(Prog &prog,
         std::vector<Trace> children;
         for (SymState *newState : newStates) {
             Trace child = run_pgymbo(
-                prog, var2dist, D, optimizer, *newState, target_pcs,
+                prog, var2dist, optimizer, *newState, target_pcs,
                 constraints_cache, prob_constraints_table, maxDepth - 1, maxSAT,
                 maxUNSAT, max_num_trials, ignore_memory, use_dpll,
                 verbose_level, return_trace);

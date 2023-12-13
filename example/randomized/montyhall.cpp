@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
         gymbo::PathConstraintsTable cache_constraints;
         gymbo::ProbPathConstraintsTable probabilistic_constraints;
         init.set_concrete_val(var_counter["door_switch"], door_switch);
-        gymbo::run_pgymbo(prg, var2dist, D, optimizer, init, target_pcs,
+        gymbo::run_pgymbo(prg, var2dist, optimizer, init, target_pcs,
                           cache_constraints, probabilistic_constraints,
                           max_depth, maxSAT, maxUNSAT, max_num_trials,
                           ignore_memory, use_dpll, verbose_level);

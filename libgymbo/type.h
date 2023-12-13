@@ -548,7 +548,8 @@ struct Sym {
                 return cvals.at(var_idx);
             }
             case (SymType::SEq): {
-                return std::abs(left->aeval(cvals, eps) - right->aeval(cvals, eps));
+                return std::abs(left->aeval(cvals, eps) -
+                                right->aeval(cvals, eps));
             }
             case (SymType::SNot): {
                 return left->aeval(cvals, eps) * (-1.0f) + eps;
@@ -627,7 +628,8 @@ struct Sym {
                 return cvals.at(var_idx);
             }
             case (SymType::SEq): {
-                return std::abs(left->eval(cvals, eps) - right->eval(cvals, eps));
+                return std::abs(left->eval(cvals, eps) -
+                                right->eval(cvals, eps));
             }
             case (SymType::SNot): {
                 return left->eval(cvals, eps) * (-1.0f) + eps;
@@ -951,7 +953,8 @@ struct Sym {
  * @brief Represents a discrete probability distribution.
  */
 struct DiscreteDist {
-    std::vector<int> vals; /**< Vector to store possible discrete values. */
+    std::vector<int> vals;    /**< Vector to store possible discrete values. */
+    std::vector<float> probs; /** Probability of each value */
 
     /**
      * @brief Default constructor for DiscreteDist.
@@ -976,8 +979,10 @@ struct DiscreteUniformDist : public DiscreteDist {
      * low to high (inclusive).
      */
     DiscreteUniformDist(int low, int high) : low(low), high(high) {
+        float p = 1.0f / (1.0f + (float)high - (float)low);
         for (int i = low; i <= high; i++) {
             vals.emplace_back(i);
+            probs.emplace_back(p);
         }
     }
 };
@@ -1067,17 +1072,22 @@ struct SymProb {
 
         for (int i = 0; i < total_num_pvar_combinations; i++) {
             int j = 0;
+            float tmp_p = 1.0f;
             std::unordered_map<int, float> tmp_assign;
             for (auto &vd : var2dist) {
                 tmp_assign.emplace(vd.first, D[i][j]);
+                tmp_p *= vd.second.probs[j];
                 j++;
             }
+            Sym *weight = new Sym(SymType::SCon, FloatToWord(tmp_p));
             q_numerator =
                 new Sym(SymType::SAdd, q_numerator,
-                        new Sym(SymType::SCnt, numerator, tmp_assign));
-            q_denominator =
-                new Sym(SymType::SAdd, q_denominator,
-                        new Sym(SymType::SCnt, denominator, tmp_assign));
+                        new Sym(SymType::SMul, weight,
+                                new Sym(SymType::SCnt, numerator, tmp_assign)));
+            q_denominator = new Sym(
+                SymType::SAdd, q_denominator,
+                new Sym(SymType::SMul, weight,
+                        new Sym(SymType::SCnt, denominator, tmp_assign)));
         }
 
         return std::make_pair(q_numerator, q_denominator);
