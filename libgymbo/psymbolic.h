@@ -6,6 +6,8 @@
 
 #pragma once
 #include "symbolic.h"
+#include "type.h"
+#include "utils.h"
 
 namespace gymbo {
 
@@ -29,7 +31,8 @@ inline void pbranch(SymState &state) {
         }
         n_cond = new Sym(SymType::SAnd, n_cond,
                          &state.path_constraints[n_path_constraints - 1]);
-        state.p = state.p * SymProb(n_cond, d_cond);
+        state.cond_p = new SymProb(n_cond, d_cond);
+        state.p = state.p->pmul(state.cond_p);
     } else {
         Sym *n_cond;
         if (n_path_constraints == 0) {
@@ -41,7 +44,8 @@ inline void pbranch(SymState &state) {
             n_cond = new Sym(SymType::SAnd, n_cond, &state.path_constraints[i]);
         }
         Sym *d_cond = new Sym(SymType::SCon, FloatToWord(1.0f));
-        state.p = SymProb(n_cond, d_cond);
+        state.p = new SymProb(n_cond, d_cond);
+        state.cond_p = state.p;
         state.has_observed_p_cond = true;
     }
 }
@@ -60,7 +64,7 @@ inline void verbose_pconstraints(int verbose_level,
                 printf("\x1b[32m");
             }
             printf("pc=%d, IS_SAT - %d\x1b[39m, Pr.REACH - %s, %s, params = {",
-                   pc, is_sat, state.p.toString().c_str(),
+                   pc, is_sat, state.cond_p->toString().c_str(),
                    constraints_str.c_str());
             for (auto &p : params) {
                 // ignore concrete variables
@@ -123,6 +127,13 @@ inline void solve_pconstraints(bool &is_sat, bool is_target, int pc,
             } else {
                 maxUNSAT--;
             }
+
+            if (is_sat) {
+                state.p =
+                    new SymProb(new Sym(SymType::SCon, FloatToWord(0.0f)),
+                                new Sym(SymType::SCon, FloatToWord(0.0f)));
+                state.cond_p = state.p;
+            }
         }
 
         constraints_cache.emplace(constraints_str,
@@ -144,11 +155,11 @@ inline void update_prob_constraints_table(
     }
     if (prob_constraints_table.find(pc) == prob_constraints_table.end()) {
         std::vector<std::tuple<Sym, Mem, SymProb>> tmp = {
-            std::make_tuple(cc, state.mem, state.p)};
+            std::make_tuple(cc, state.mem, *state.p)};
         prob_constraints_table.emplace(pc, tmp);
     } else {
         prob_constraints_table[pc].emplace_back(
-            std::make_tuple(cc, state.mem, state.p));
+            std::make_tuple(cc, state.mem, *state.p));
     }
 }
 

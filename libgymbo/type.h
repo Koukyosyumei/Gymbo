@@ -1056,6 +1056,25 @@ struct SymProb {
     }
 
     /**
+     * @brief Multiplies two SymProb instances.
+     *
+     * @param other The SymProb to multiply with.
+     * @return Result of the multiplication operation as a new SymProb instance.
+     */
+    SymProb *pmul(SymProb *other) {
+        if (denominator->toString(true) == other->numerator->toString(true)) {
+            return new SymProb(numerator, other->denominator);
+        } else if (numerator->toString(true) ==
+                   other->denominator->toString(true)) {
+            return new SymProb(other->numerator, denominator);
+        } else {
+            return new SymProb(
+                new Sym(SymType::SMul, numerator, (other->numerator)),
+                new Sym(SymType::SMul, denominator, (other->denominator)));
+        }
+    }
+
+    /**
      * @brief Marginalizes the SymProb over given variable assignments.
      *
      * @param var2dist Map of variable index to DiscreteDist.
@@ -1152,7 +1171,9 @@ struct SymState {
     Linkedlist<Sym> symbolic_stack; /**< Symbolic stack. */
     std::vector<Sym>
         path_constraints; /**< Vector of symbolic path constraints. */
-    SymProb p;            /**< Symbolic probability of the state being reached*/
+    SymProb *p;           /**< Symbolic probability of the state being reached*/
+    SymProb *cond_p; /**< Symbolic conditional probability of the state being
+                       reached*/
     bool has_observed_p_cond /**< Flag indicating whether path_constraints
                                 contains probabilistic path conditions. */
         ;
@@ -1160,7 +1181,12 @@ struct SymState {
     /**
      * @brief Default constructor for symbolic state.
      */
-    SymState() : pc(0), var_cnt(0), p(SymProb()), has_observed_p_cond(false){};
+    SymState()
+        : pc(0),
+          var_cnt(0),
+          p(new SymProb()),
+          cond_p(new SymProb()),
+          has_observed_p_cond(false){};
 
     /**
      * @brief Constructor for symbolic state with specified values.
@@ -1171,12 +1197,14 @@ struct SymState {
      * @param symbolic_stack Symbolic stack.
      * @param path_constraints Vector of symbolic path constraints.
      * @param p Symbolic probability of the state being reached.
+     * @paarm cond_p Symbolic conditional probability of the state being
+     * reached.
      * @param has_observed_p_cond Flag indicating whether path_constraints
      * contains probabilistic path conditions.
      */
     SymState(int pc, int var_cnt, Mem &mem, SMem &smem,
              Linkedlist<Sym> &symbolic_stack,
-             std::vector<Sym> &path_constraints, SymProb &p,
+             std::vector<Sym> &path_constraints, SymProb *p, SymProb *cond_p,
              bool has_observed_p_cond)
         : pc(pc),
           var_cnt(var_cnt),
@@ -1185,6 +1213,7 @@ struct SymState {
           symbolic_stack(symbolic_stack),
           path_constraints(path_constraints),
           p(p),
+          cond_p(cond_p),
           has_observed_p_cond(has_observed_p_cond) {}
 
     /**
@@ -1192,7 +1221,7 @@ struct SymState {
      */
     SymState *copy() {
         return new SymState(pc, var_cnt, mem, smem, symbolic_stack,
-                            path_constraints, p, has_observed_p_cond);
+                            path_constraints, p, cond_p, has_observed_p_cond);
     }
 
     /**
