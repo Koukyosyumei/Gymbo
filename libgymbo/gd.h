@@ -91,7 +91,7 @@ struct GDOptimizer {
         for (int i = 0; i < path_constraints.size(); i++) {
             if (contain_randomized_vars) {
                 result =
-                    result && (path_constraints[i].aeval(params, eps) <= 0.0f);
+                    result && (path_constraints[i].eval(params, eps) <= 0.0f);
             } else {
                 result =
                     result && (path_constraints[i].eval(params, eps) <= 0.0f);
@@ -156,7 +156,7 @@ struct GDOptimizer {
             for (int i = 0; i < path_constraints.size(); i++) {
                 if (path_constraints[i].eval(params, eps) > 0.0f) {
                     if (contain_randomized_vars) {
-                        grads = grads + path_constraints[i].agrad(params, eps);
+                        grads = grads + path_constraints[i].grad(params, eps);
                     } else {
                         grads = grads + path_constraints[i].grad(params, eps);
                     }
