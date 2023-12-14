@@ -12,7 +12,7 @@ Gradient Descent Optimizer for Symbolic Path Constraints.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structgymbo_1_1GDOptimizer_a892b038044ed58200d20ff4ce7a62e2d}{GDOptimizer}} (int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}{num\+\_\+epochs}}=100, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}{lr}}=1.\+0, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}{eps}}=1.\+0, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}{param\+\_\+low}}=-\/10.\+0, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}{param\+\_\+high}}=10.\+0, bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}{sign\+\_\+grad}}=true, bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}{init\+\_\+param\+\_\+uniform\+\_\+int}}=true, bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a76e7c59fa495bf56f25f26a84faf7112}{contain\+\_\+randomized\+\_\+vars}}=false, int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}{seed}}=42)
+\mbox{\hyperlink{structgymbo_1_1GDOptimizer_ac17fe6d6ef5d781ae590c0a8fb6e567b}{GDOptimizer}} (int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a7d5521480b4f536710d5a06897fa65bd}{num\+\_\+epochs}}=100, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a69430f01307c0007f0db762fd437abfa}{lr}}=1.\+0, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a8f024c3699cac041ced908ddf6ba8877}{eps}}=1.\+0, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a7a81435ec290f50a98eaff343ab61d63}{param\+\_\+low}}=-\/10.\+0, float \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab14c4f9993f80b8e023a4c456c6e0b5f}{param\+\_\+high}}=10.\+0, bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a1dab2d9895b58c4dda052a00cf8058ee}{sign\+\_\+grad}}=true, bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_a2a35f800649f9c57bc1f7d23f9f6110b}{init\+\_\+param\+\_\+uniform\+\_\+int}}=true, int \mbox{\hyperlink{structgymbo_1_1GDOptimizer_ab1631b9a0026ed9c12721df5900eb347}{seed}}=42)
 \begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{structgymbo_1_1GDOptimizer_aabe2fc9e0528d282c105a1e723d75f02}{eval}} (std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $>$ \&path\+\_\+constraints, std\+::unordered\+\_\+map$<$ int, float $>$ params)
 \begin{DoxyCompactList}\small\item\em Evaluate if path constraints are satisfied for given parameters. \end{DoxyCompactList}\item 
@@ -56,11 +56,11 @@ The optimization process relies on the gradient information of the path constrai
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_a892b038044ed58200d20ff4ce7a62e2d}\label{structgymbo_1_1GDOptimizer_a892b038044ed58200d20ff4ce7a62e2d}} 
+\mbox{\Hypertarget{structgymbo_1_1GDOptimizer_ac17fe6d6ef5d781ae590c0a8fb6e567b}\label{structgymbo_1_1GDOptimizer_ac17fe6d6ef5d781ae590c0a8fb6e567b}} 
 \index{gymbo::GDOptimizer@{gymbo::GDOptimizer}!GDOptimizer@{GDOptimizer}}
 \index{GDOptimizer@{GDOptimizer}!gymbo::GDOptimizer@{gymbo::GDOptimizer}}
 \doxysubsubsection{\texorpdfstring{GDOptimizer()}{GDOptimizer()}}
-{\footnotesize\ttfamily gymbo\+::\+GDOptimizer\+::\+GDOptimizer (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+epochs = {\ttfamily 100},  }\item[{float}]{lr = {\ttfamily 1.0},  }\item[{float}]{eps = {\ttfamily 1.0},  }\item[{float}]{param\+\_\+low = {\ttfamily -\/10.0},  }\item[{float}]{param\+\_\+high = {\ttfamily 10.0},  }\item[{bool}]{sign\+\_\+grad = {\ttfamily true},  }\item[{bool}]{init\+\_\+param\+\_\+uniform\+\_\+int = {\ttfamily true},  }\item[{bool}]{contain\+\_\+randomized\+\_\+vars = {\ttfamily false},  }\item[{int}]{seed = {\ttfamily 42} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily gymbo\+::\+GDOptimizer\+::\+GDOptimizer (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+epochs = {\ttfamily 100},  }\item[{float}]{lr = {\ttfamily 1.0},  }\item[{float}]{eps = {\ttfamily 1.0},  }\item[{float}]{param\+\_\+low = {\ttfamily -\/10.0},  }\item[{float}]{param\+\_\+high = {\ttfamily 10.0},  }\item[{bool}]{sign\+\_\+grad = {\ttfamily true},  }\item[{bool}]{init\+\_\+param\+\_\+uniform\+\_\+int = {\ttfamily true},  }\item[{int}]{seed = {\ttfamily 42} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -81,8 +81,6 @@ Constructor for \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}.
 {\em sign\+\_\+grad} & If true, use sign gradient descent. Otherwise, use standard gradient descent. (default true). \\
 \hline
 {\em init\+\_\+param\+\_\+uniform\+\_\+int} & Flag indicating whether initial parameter values are drawn from the uniform int distribution or uniform real distribution (default true). \\
-\hline
-{\em contain\+\_\+randomized\+\_\+vars} & If true, use aeval and agrad. Otherwise, use eval and grad. \\
 \hline
 {\em seed} & Random seed for initializing parameter values (default\+: 42). \\
 \hline

@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
     gymbo::Prog prg;
     gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low,
                                  param_high, sign_grad, init_param_uniform_int,
-                                 false, seed);
+                                 seed);
     gymbo::SymState init;
     std::unordered_set<int> target_pcs;
 

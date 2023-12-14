@@ -43,7 +43,7 @@ TEST(GymboWorlflowTest, Block) {
     gymbo::Prog prg;
     gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low,
                                  param_high, sign_grad, init_param_uniform_int,
-                                 false, seed);
+                                 seed);
     gymbo::SymState init;
     std::unordered_set<int> target_pcs;
 
@@ -52,7 +52,8 @@ TEST(GymboWorlflowTest, Block) {
     gymbo::compile_ast(code, prg);
 
     gymbo::SExecutor executor(prg, optimizer, target_pcs, maxSAT, maxUNSAT,
-                     max_num_trials, ignore_memory, use_dpll, verbose_level);
+                              max_num_trials, ignore_memory, use_dpll,
+                              verbose_level);
     executor.run(init, max_depth);
 
     int num_sat = 0;

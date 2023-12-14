@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
     gymbo::Prog prg;
     gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low,
                                  param_high, sign_grad, init_param_uniform_int,
-                                 true, seed);
+                                 seed);
     std::unordered_set<int> target_pcs;
 
     printf("Compiling the input program...\n");
@@ -91,9 +91,9 @@ int main(int argc, char *argv[]) {
         gymbo::SymState init;
         init.set_concrete_val(var_counter["door_switch"], door_switch);
 
-        gymbo::PSExecutor executor(prg, optimizer, random_vars, target_pcs, maxSAT,
-                          maxUNSAT, max_num_trials, ignore_memory, use_dpll,
-                          verbose_level);
+        gymbo::PSExecutor executor(prg, optimizer, random_vars, target_pcs,
+                                   maxSAT, maxUNSAT, max_num_trials,
+                                   ignore_memory, use_dpll, verbose_level);
         executor.run(init, max_depth);
 
         int num_unique_path_constraints = executor.constraints_cache.size();

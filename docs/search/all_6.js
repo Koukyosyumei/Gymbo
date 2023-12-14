@@ -3,7 +3,7 @@ var searchData=
   ['gather_5fvar_5fids_55',['gather_var_ids',['../structgymbo_1_1Sym.html#a473475b3f2f9e5179b2f3ff3c87a6312',1,'gymbo::Sym']]],
   ['gcompile_56',['gcompile',['../namespacegymbo.html#a7b970a9d85276e2bd460b29fec762ec3',1,'gymbo']]],
   ['gd_2eh_57',['gd.h',['../gd_8h.html',1,'']]],
-  ['gdoptimizer_58',['GDOptimizer',['../structgymbo_1_1GDOptimizer.html#a892b038044ed58200d20ff4ce7a62e2d',1,'gymbo::GDOptimizer::GDOptimizer()'],['../structgymbo_1_1GDOptimizer.html',1,'gymbo::GDOptimizer']]],
+  ['gdoptimizer_58',['GDOptimizer',['../structgymbo_1_1GDOptimizer.html#ac17fe6d6ef5d781ae590c0a8fb6e567b',1,'gymbo::GDOptimizer::GDOptimizer()'],['../structgymbo_1_1GDOptimizer.html',1,'gymbo::GDOptimizer']]],
   ['gen_59',['gen',['../namespacegymbo.html#ae193b98ee15e54838e9a8433aff4c379',1,'gymbo']]],
   ['gen_5flval_60',['gen_lval',['../namespacegymbo.html#a6d18a50ff10886c6d952dd9781e99a5b',1,'gymbo']]],
   ['generate_5fast_61',['generate_ast',['../namespacegymbo.html#a5e7728b7fbac9bf79ae665cf9b94f443',1,'gymbo']]],
