@@ -45,20 +45,19 @@ TEST(GymboWorlflowTest, Block) {
                                  param_high, sign_grad, init_param_uniform_int,
                                  false, seed);
     gymbo::SymState init;
-    gymbo::PathConstraintsTable cache_constraints;
     std::unordered_set<int> target_pcs;
 
     gymbo::Token *token = gymbo::tokenize(user_input, var_counter);
     gymbo::generate_ast(token, user_input, code);
     gymbo::compile_ast(code, prg);
 
-    gymbo::run_gymbo(prg, optimizer, init, target_pcs, cache_constraints,
-                     max_depth, maxSAT, maxUNSAT, max_num_trials, ignore_memory,
-                     use_dpll, verbose_level);
+    gymbo::SExecutor executor(prg, optimizer, target_pcs, maxSAT, maxUNSAT,
+                     max_num_trials, ignore_memory, use_dpll, verbose_level);
+    executor.run(init, max_depth);
 
     int num_sat = 0;
     int num_unsat = 0;
-    for (auto &cc : cache_constraints) {
+    for (auto &cc : executor.constraints_cache) {
         if (cc.second.first) {
             num_sat++;
         } else {

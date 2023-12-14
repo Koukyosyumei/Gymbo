@@ -5,16 +5,12 @@
  */
 
 #pragma once
+#include <unordered_set>
+
+#include "gd.h"
 #include "smt.h"
 
 namespace gymbo {
-Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
-                std::unordered_set<int> &taregt_pcs,
-                PathConstraintsTable &constraints_cache, int maxDepth,
-                int &maxSAT, int &maxUNSAT, int max_num_trials,
-                bool ignore_memory, bool use_dpll, int verbose_level,
-                bool return_trace);
-void symStep(SymState *state, Instr &instr, std::vector<SymState *> &);
 
 /**
  * @brief Checks if the given program counter (pc) is a target program counter.
@@ -153,128 +149,6 @@ inline void verbose_pre(int verbose_level, int pc, Prog &prog,
 inline void verbose_post(int verbose_level) {
     if (verbose_level >= 2) {
         printf("---\n");
-    }
-}
-
-/**
- * @brief Solves path constraints and updates the cache.
- *
- * This function solves path constraints, updates the cache, and prints verbose
- * information if conditions are met.
- *
- * @param is_sat Reference to a boolean indicating satisfiability.
- * @param is_target Flag indicating whether the program counter is a target.
- * @param pc The program counter.
- * @param optimizer Reference to the optimizer.
- * @param state Reference to the symbolic state.
- * @param constraints_cache Reference to the path constraints cache.
- * @param maxSAT Reference to the maximum satisfiability limit.
- * @param maxUNSAT Reference to the maximum unsatisfiability limit.
- * @param max_num_trials Maximum number of solver trials.
- * @param ignore_memory Flag indicating whether to ignore memory.
- * @param use_dpll Flag indicating whether to use the DPLL solver.
- * @param verbose_level The verbosity level.
- */
-inline void solve_constraints(bool &is_sat, bool is_target, int pc,
-                              GDOptimizer &optimizer, SymState &state,
-                              PathConstraintsTable &constraints_cache,
-                              int &maxSAT, int &maxUNSAT, int max_num_trials,
-                              bool ignore_memory, bool use_dpll,
-                              int verbose_level) {
-    std::string constraints_str = state.toString(false);
-
-    std::unordered_map<int, float> params = {};
-    initialize_params(params, state, ignore_memory);
-
-    bool is_unknown_path_constraint = true;
-
-    if (constraints_cache.find(constraints_str) != constraints_cache.end()) {
-        is_sat = constraints_cache[constraints_str].first;
-        params = constraints_cache[constraints_str].second;
-        is_unknown_path_constraint = false;
-    } else {
-        call_smt_solver(is_sat, state, params, optimizer, max_num_trials,
-                        ignore_memory, use_dpll);
-        if (is_sat) {
-            maxSAT--;
-        } else {
-            maxUNSAT--;
-        }
-        constraints_cache.emplace(constraints_str,
-                                  std::make_pair(is_sat, params));
-    }
-
-    if (verbose_level >= 1) {
-        verbose_constraints(verbose_level, is_unknown_path_constraint,
-                            is_target, is_sat, pc, constraints_str, state,
-                            params);
-    }
-}
-
-/**
- * @brief Symbolically Execute a Program with Gradient Descent Optimization.
- *
- * This function conducts symbolic execution of a given program while
- * simultaneously optimizing the path constraints using the provided gradient
- * descent optimizer, `GDOptimizer`.
- *
- * @param prog The program to symbolically execute.
- * @param optimizer The gradient descent optimizer for parameter optimization.
- * @param state The initial symbolic state of the program.
- * @param target_pcs The set of pc where gymbo executes path-constraints
- * solving. If this set is empty or contains -1, gymbo solves all
- * path-constraints.
- * @param constraints_cache A cache for previously found path constraints.
- * @param maxDepth The maximum depth of symbolic exploration.
- * @param maxSAT The maximum number of SAT constraints to collect.
- * @param maxUNSAT The maximum number of UNSAT constraints to collect.
- * @param max_num_trials The maximum number of trials for each gradient descent.
- * @param ignore_memory If set to true, constraints derived from memory will be
- * ignored.
- * @param use_dpll If set to true, use DPLL to decide the initial assignment for
- * each term.
- * @param verbose_level The level of verbosity.
- * @param return_trace If set to true, save the trace at each pc and return them
- * (default false).
- * @return A trace of the symbolic execution.
- */
-inline Trace run_gymbo(Prog &prog, GDOptimizer &optimizer, SymState &state,
-                       std::unordered_set<int> &target_pcs,
-                       PathConstraintsTable &constraints_cache, int maxDepth,
-                       int &maxSAT, int &maxUNSAT, int max_num_trials,
-                       bool ignore_memory, bool use_dpll, int verbose_level,
-                       bool return_trace = false) {
-    int pc = state.pc;
-    bool is_target = is_target_pc(target_pcs, pc);
-    bool is_sat = true;
-
-    verbose_pre(verbose_level, pc, prog, state);
-    if (state.path_constraints.size() != 0 && is_target) {
-        solve_constraints(is_sat, is_target, pc, optimizer, state,
-                          constraints_cache, maxSAT, maxUNSAT, max_num_trials,
-                          ignore_memory, use_dpll, verbose_level);
-    }
-    verbose_post(verbose_level);
-
-    if ((prog[pc].instr == InstrType::Done) || (!is_sat)) {
-        return Trace(state, {});
-    } else if (explore_further(maxDepth, maxSAT, maxUNSAT)) {
-        Instr instr = prog[pc];
-        std::vector<SymState *> newStates;
-        symStep(&state, instr, newStates);
-        std::vector<Trace> children;
-        for (SymState *newState : newStates) {
-            Trace child = run_gymbo(prog, optimizer, *newState, target_pcs,
-                                    constraints_cache, maxDepth - 1, maxSAT,
-                                    maxUNSAT, max_num_trials, ignore_memory,
-                                    use_dpll, verbose_level, return_trace);
-            if (return_trace) {
-                children.push_back(child);
-            }
-        }
-        return Trace(state, children);
-    } else {
-        return Trace(state, {});
     }
 }
 
@@ -518,4 +392,109 @@ inline void symStep(SymState *state, Instr &instr,
             fprintf(stderr, "Detect unsupported instruction\n");
     }
 }
+
+struct BaseExecutor {
+    Prog &prog;
+    GDOptimizer &optimizer;
+    int maxSAT, maxUNSAT, max_num_trials, verbose_level;
+    bool ignore_memory, use_dpll, return_trace;
+
+    BaseExecutor(Prog &prog, GDOptimizer &optimizer, int maxSAT = 256,
+                 int maxUNSAT = 256, int max_num_trials = 10,
+                 bool ignore_memory = false, bool use_dpll = false,
+                 int verbose_level = 0, bool return_trace = false)
+        : prog(prog),
+          optimizer(optimizer),
+          maxSAT(maxSAT),
+          maxUNSAT(maxUNSAT),
+          max_num_trials(max_num_trials),
+          ignore_memory(ignore_memory),
+          use_dpll(use_dpll),
+          verbose_level(verbose_level),
+          return_trace(return_trace){};
+
+    virtual bool solve(bool is_target, int pc, SymState &state) = 0;
+    virtual Trace run(SymState &state, int maxDepth) = 0;
+};
+
+struct SExecutor : public BaseExecutor {
+    const std::unordered_set<int> &target_pcs;
+    PathConstraintsTable constraints_cache;
+
+    SExecutor(Prog &prog, GDOptimizer &optimizer,
+              const std::unordered_set<int> &target_pcs, int maxSAT = 256,
+              int maxUNSAT = 256, int max_num_trials = 10,
+              bool ignore_memory = false, bool use_dpll = false,
+              int verbose_level = 0, bool return_trace = false)
+        : BaseExecutor(prog, optimizer, maxSAT, maxUNSAT, max_num_trials,
+                       ignore_memory, use_dpll, verbose_level, return_trace),
+          target_pcs(target_pcs) {}
+
+    bool solve(bool is_target, int pc, SymState &state) {
+        bool is_sat = true;
+        std::string constraints_str = state.toString(false);
+
+        std::unordered_map<int, float> params = {};
+        initialize_params(params, state, ignore_memory);
+
+        bool is_unknown_path_constraint = true;
+
+        if (constraints_cache.find(constraints_str) !=
+            constraints_cache.end()) {
+            is_sat = constraints_cache[constraints_str].first;
+            params = constraints_cache[constraints_str].second;
+            is_unknown_path_constraint = false;
+        } else {
+            call_smt_solver(is_sat, state, params, optimizer, max_num_trials,
+                            ignore_memory, use_dpll);
+            if (is_sat) {
+                maxSAT--;
+            } else {
+                maxUNSAT--;
+            }
+            constraints_cache.emplace(constraints_str,
+                                      std::make_pair(is_sat, params));
+        }
+
+        if (verbose_level >= 1) {
+            verbose_constraints(verbose_level, is_unknown_path_constraint,
+                                is_target, is_sat, pc, constraints_str, state,
+                                params);
+        }
+
+        return is_sat;
+    }
+
+    Trace run(SymState &state, int maxDepth = 256) {
+        int pc = state.pc;
+        bool is_target = is_target_pc(target_pcs, pc);
+        bool is_sat = true;
+
+        verbose_pre(verbose_level, pc, prog, state);
+
+        if (state.path_constraints.size() != 0 && is_target) {
+            is_sat = solve(is_target, pc, state);
+        }
+        verbose_post(verbose_level);
+
+        if ((prog[pc].instr == InstrType::Done) || (!is_sat)) {
+            return Trace(state, {});
+        } else if (explore_further(maxDepth, maxSAT, maxUNSAT)) {
+            Instr instr = prog[pc];
+            std::vector<SymState *> newStates;
+            symStep(&state, instr, newStates);
+            std::vector<Trace> children;
+            for (SymState *newState : newStates) {
+                Trace child = run(*newState, maxDepth - 1);
+                if (return_trace) {
+                    children.push_back(child);
+                }
+            }
+            return Trace(state, children);
+        } else {
+            return Trace(state, {});
+        }
+    }
+};
+
 }  // namespace gymbo

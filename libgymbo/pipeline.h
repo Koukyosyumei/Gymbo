@@ -74,13 +74,10 @@ inline PathConstraintsTable gexecute(Prog &prg, GDOptimizer &optimizer,
                                      int max_depth, int maxSAT, int maxUNSAT,
                                      int max_num_trials, bool ignore_memory,
                                      bool use_dpll, int verbose_level) {
-    PathConstraintsTable cache_constraints;
+    SExecutor executor(prg, optimizer, target_pcs, maxSAT, maxUNSAT, max_num_trials, ignore_memory, use_dpll, verbose_level);
+    executor.run(init, max_depth);
 
-    run_gymbo(prg, optimizer, init, target_pcs, cache_constraints, max_depth,
-              maxSAT, maxUNSAT, max_num_trials, ignore_memory, use_dpll,
-              verbose_level);
-
-    return cache_constraints;
+    return executor.constraints_cache;
 }
 
 }  // namespace gymbo
