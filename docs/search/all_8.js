@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['ignore_5fmemory_76',['ignore_memory',['../structgymbo_1_1BaseExecutor.html#a4be9366c810f0d7cc89a53f2763c5eff',1,'gymbo::BaseExecutor']]],
   ['init_5fparam_5funiform_5fint_77',['init_param_uniform_int',['../structgymbo_1_1GDOptimizer.html#a2a35f800649f9c57bc1f7d23f9f6110b',1,'gymbo::GDOptimizer']]],
   ['initialize_5fparams_78',['initialize_params',['../namespacegymbo.html#a50a6f585caaa9c8ca66826268b46dcc9',1,'gymbo']]],
   ['instr_79',['Instr',['../classgymbo_1_1Instr.html',1,'gymbo::Instr'],['../classgymbo_1_1Instr.html#a3223dad8872d38b84219901aad936c7d',1,'gymbo::Instr::Instr(InstrType instr)'],['../classgymbo_1_1Instr.html#ae92440f40b5774ddfeec0cbd2416437a',1,'gymbo::Instr::Instr(InstrType instr, Word32 word)']]],

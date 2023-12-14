@@ -5,11 +5,8 @@
  */
 
 #pragma once
-#include <unordered_set>
 
 #include "symbolic.h"
-#include "type.h"
-#include "utils.h"
 
 namespace gymbo {
 
@@ -128,12 +125,44 @@ inline void update_prob_constraints_table(
     }
 }
 
+/**
+ * @struct PSExecutor
+ * @brief Represents a derived class for symbolic execution engine for
+ * probabilistic programs.
+ */
 struct PSExecutor : public BaseExecutor {
-    const std::unordered_set<int> &random_vars;
-    const std::unordered_set<int> &target_pcs;
-    PathConstraintsTable constraints_cache;
-    ProbPathConstraintsTable prob_constraints_table;
+    const std::unordered_set<int>
+        &random_vars;  ///< Set of random variables'IDs.
+    const std::unordered_set<int>
+        &target_pcs;  ///< Set of target program counters for analysis.
+    PathConstraintsTable
+        constraints_cache;  ///< Cache for storing and reusing path constraints.
+    ProbPathConstraintsTable
+        prob_constraints_table;  ///< Table for storing probabilistic path
+                                 ///< constraints.
 
+    /**
+     * @brief Constructor for PSExecutor.
+     *
+     * @param prog The program to symbolically execute.
+     * @param optimizer The gradient descent optimizer for parameter
+     * optimization.
+     * @param random_vars Set of random variables'IDs.
+     * @param target_pcs Set of pc where gymbo executes path-constraints
+     * solving. If this set is empty or contains -1, gymbo solves all
+     * path-constraints.
+     * @param maxSAT The maximum number of SAT constraints to collect.
+     * @param maxUNSAT The maximum number of UNSAT constraints to collect.
+     * @param max_num_trials The maximum number of trials for each gradient
+     * descent.
+     * @param ignore_memory If set to true, constraints derived from memory will
+     * be ignored.
+     * @param use_dpll If set to true, use DPLL to decide the initial assignment
+     * for each term.
+     * @param verbose_level The level of verbosity.
+     * @param return_trace If set to true, save the trace at each pc and return
+     * them (default false).
+     */
     PSExecutor(Prog &prog, GDOptimizer &optimizer,
                const std::unordered_set<int> &random_vars,
                const std::unordered_set<int> &target_pcs, int maxSAT = 256,
@@ -145,6 +174,19 @@ struct PSExecutor : public BaseExecutor {
           random_vars(random_vars),
           target_pcs(target_pcs) {}
 
+    /**
+     * @brief Solves path constraints and updates the symbolic state.
+     *
+     * This function checks the satisfiability of the path constraints using an
+     * SMT solver or a probabilistic branching algorithm. It updates the
+     * symbolic state based on the result and stores the solution in a cache for
+     * future use.
+     *
+     * @param is_target Whether the program counter is a target.
+     * @param pc The program counter.
+     * @param state The symbolic state.
+     * @return Flag indicating satisfifiability.
+     */
     bool solve(bool is_target, int pc, SymState &state) {
         std::string constraints_str = state.toString(false);
 
@@ -207,6 +249,18 @@ struct PSExecutor : public BaseExecutor {
         return is_sat;
     }
 
+    /**
+     * @brief Run probabilistic symbolic execution on a program.
+     *
+     * This function performs probabilistic symbolic execution on a given
+     * program, considering variable distributions, symbolic states, and path
+     * constraints. It explores different execution paths and updates the
+     * constraints and probabilities accordingly.
+     *
+     * @param state The initial symbolic state for execution.
+     * @param maxDepth Maximum exploration depth during symbolic execution.
+     * @return The symbolic execution trace containing states and child traces.
+     */
     Trace run(SymState &state, int maxDepth = 256) {
         int pc = state.pc;
         bool is_target = is_target_pc(target_pcs, pc);

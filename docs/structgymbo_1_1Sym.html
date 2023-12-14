@@ -113,15 +113,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a371b1d8b3fc73a10d4106e09f68c3092"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Sym.html">Sym</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#a371b1d8b3fc73a10d4106e09f68c3092">psimplify</a> (const <a class="el" href="namespacegymbo.html#a93394c86b71f9947e9d17b61013e600c">Mem</a> &amp;cvals)</td></tr>
 <tr class="memdesc:a371b1d8b3fc73a10d4106e09f68c3092"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simplifies the symbolic expression by evaluating constant subexpressions.  <a href="structgymbo_1_1Sym.html#a371b1d8b3fc73a10d4106e09f68c3092">More...</a><br /></td></tr>
 <tr class="separator:a371b1d8b3fc73a10d4106e09f68c3092"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a480fdd5cbef1198b1bcc293a0e31fd41"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#a480fdd5cbef1198b1bcc293a0e31fd41">aeval</a> (std::unordered_map&lt; int, float &gt; cvals, float eps) const</td></tr>
-<tr class="memdesc:a480fdd5cbef1198b1bcc293a0e31fd41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the symbolic expression given concrete variable values while emplacing the <code>assign</code> to input cvals.  <a href="structgymbo_1_1Sym.html#a480fdd5cbef1198b1bcc293a0e31fd41">More...</a><br /></td></tr>
-<tr class="separator:a480fdd5cbef1198b1bcc293a0e31fd41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa52f66231dead2c992175cbfe1f7785"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#aaa52f66231dead2c992175cbfe1f7785">eval</a> (const std::unordered_map&lt; int, float &gt; &amp;cvals, const float eps) const</td></tr>
 <tr class="memdesc:aaa52f66231dead2c992175cbfe1f7785"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the symbolic expression given concrete variable values.  <a href="structgymbo_1_1Sym.html#aaa52f66231dead2c992175cbfe1f7785">More...</a><br /></td></tr>
 <tr class="separator:aaa52f66231dead2c992175cbfe1f7785"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9bd0fda28d24cf901ec48443359a9a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Grad.html">Grad</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#ab9bd0fda28d24cf901ec48443359a9a2">agrad</a> (std::unordered_map&lt; int, float &gt; cvals, float eps) const</td></tr>
-<tr class="memdesc:ab9bd0fda28d24cf901ec48443359a9a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the gradient of the symbolic expression given concrete variable values while emplacing the <code>assign</code> to input cvals.  <a href="structgymbo_1_1Sym.html#ab9bd0fda28d24cf901ec48443359a9a2">More...</a><br /></td></tr>
-<tr class="separator:ab9bd0fda28d24cf901ec48443359a9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a268c0d5364dfe4b680612a43d8a947d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Grad.html">Grad</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1Sym.html#a268c0d5364dfe4b680612a43d8a947d9">grad</a> (const std::unordered_map&lt; int, float &gt; &amp;cvals, const float eps) const</td></tr>
 <tr class="memdesc:a268c0d5364dfe4b680612a43d8a947d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the gradient of the symbolic expression given concrete variable values.  <a href="structgymbo_1_1Sym.html#a268c0d5364dfe4b680612a43d8a947d9">More...</a><br /></td></tr>
 <tr class="separator:a268c0d5364dfe4b680612a43d8a947d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -414,98 +408,6 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a480fdd5cbef1198b1bcc293a0e31fd41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a480fdd5cbef1198b1bcc293a0e31fd41">&#9670;&nbsp;</a></span>aeval()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float gymbo::Sym::aeval </td>
-          <td>(</td>
-          <td class="paramtype">std::unordered_map&lt; int, float &gt;&#160;</td>
-          <td class="paramname"><em>cvals</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>eps</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Evaluates the symbolic expression given concrete variable values while emplacing the <code>assign</code> to input cvals. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cvals</td><td>Map of variable indices to concrete values. </td></tr>
-    <tr><td class="paramname">eps</td><td>The smallest positive value of the target type. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Result of the symbolic expression evaluation. </dd></dl>
-
-</div>
-</div>
-<a id="ab9bd0fda28d24cf901ec48443359a9a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9bd0fda28d24cf901ec48443359a9a2">&#9670;&nbsp;</a></span>agrad()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structgymbo_1_1Grad.html">Grad</a> gymbo::Sym::agrad </td>
-          <td>(</td>
-          <td class="paramtype">std::unordered_map&lt; int, float &gt;&#160;</td>
-          <td class="paramname"><em>cvals</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>eps</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Computes the gradient of the symbolic expression given concrete variable values while emplacing the <code>assign</code> to input cvals. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cvals</td><td>Map of variable indices to concrete values. </td></tr>
-    <tr><td class="paramname">eps</td><td>Small value to handle numerical instability. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Gradient of the symbolic expression. </dd></dl>
-
-</div>
-</div>
 <a id="a3ce2eadb078a74719486a0995caddf42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3ce2eadb078a74719486a0995caddf42">&#9670;&nbsp;</a></span>copy()</h2>
 

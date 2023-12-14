@@ -6,8 +6,6 @@ Implementation of symbolic execution for randomized programs.
 
 
 {\ttfamily \#include \char`\"{}symbolic.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}type.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
 Include dependency graph for psymbolic.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -15,6 +13,11 @@ Include dependency graph for psymbolic.\+h\+:\nopagebreak
 \includegraphics[width=350pt]{psymbolic_8h__incl}
 \end{center}
 \end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structgymbo_1_1PSExecutor}{gymbo\+::\+PSExecutor}}
+\begin{DoxyCompactList}\small\item\em Represents a derived class for symbolic execution engine for probabilistic programs. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
@@ -27,12 +30,8 @@ void \mbox{\hyperlink{namespacegymbo_a3b2c855687acd2541bb6d6bcbf80a9cb}{gymbo\+:
 \begin{DoxyCompactList}\small\item\em Perform probabilistic branching based on symbolic execution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_ac945fcc71ddc6b734f8444f51d21f219}{gymbo\+::verbose\+\_\+pconstraints}} (int verbose\+\_\+level, bool is\+\_\+unknown\+\_\+path\+\_\+constraint, bool is\+\_\+target, bool is\+\_\+sat, int pc, std\+::string constraints\+\_\+str, Sym\+State \&state, const std\+::unordered\+\_\+map$<$ int, float $>$ \&params)
 \begin{DoxyCompactList}\small\item\em Prints verbose information about probabilistic path constraints. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespacegymbo_a0fb4d560e0d77f7e34155365da1b0ee0}{gymbo\+::solve\+\_\+pconstraints}} (bool \&is\+\_\+sat, bool is\+\_\+target, int pc, std\+::unordered\+\_\+set$<$ int $>$ \&random\+\_\+vars, GDOptimizer \&optimizer, Sym\+State \&state, Path\+Constraints\+Table \&constraints\+\_\+cache, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
-\begin{DoxyCompactList}\small\item\em Solves path constraints and updates the symbolic state. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a9f454957ed3d5dc4ac39c4624c90c14a}{gymbo\+::update\+\_\+prob\+\_\+constraints\+\_\+table}} (int pc, Sym\+State \&state, Prob\+Path\+Constraints\+Table \&prob\+\_\+constraints\+\_\+table)
-\begin{DoxyCompactList}\small\item\em Updates the table of probabilistic path constraints. \end{DoxyCompactList}\item 
-Trace \mbox{\hyperlink{namespacegymbo_a8baa020b76300a7ebce8757cdedfed43}{gymbo\+::run\+\_\+pgymbo}} (Prog \&prog, std\+::unordered\+\_\+set$<$ int $>$ \&random\+\_\+vars, GDOptimizer \&optimizer, Sym\+State \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, Path\+Constraints\+Table \&constraints\+\_\+cache, Prob\+Path\+Constraints\+Table \&prob\+\_\+constraints\+\_\+table, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level, bool return\+\_\+trace=false)
-\begin{DoxyCompactList}\small\item\em Run probabilistic symbolic execution on a program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Updates the table of probabilistic path constraints. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}

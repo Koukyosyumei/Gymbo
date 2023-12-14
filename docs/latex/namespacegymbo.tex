@@ -7,6 +7,12 @@ struct \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}
 \begin{DoxyCompactList}\small\item\em Gradient Descent Optimizer for Symbolic Path Constraints. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgymbo_1_1Node}{Node}}
 \begin{DoxyCompactList}\small\item\em Structure representing a node in the Abstract Syntax Tree (AST). \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1PSExecutor}{PSExecutor}}
+\begin{DoxyCompactList}\small\item\em Represents a derived class for symbolic execution engine for probabilistic programs. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1BaseExecutor}{Base\+Executor}}
+\begin{DoxyCompactList}\small\item\em Represents the base class for symbolic execution engine. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1SExecutor}{SExecutor}}
+\begin{DoxyCompactList}\small\item\em Represents a derived class for symbolic execution engine for deterministic programs. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgymbo_1_1Token}{Token}}
 \begin{DoxyCompactList}\small\item\em Structure representing a token. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgymbo_1_1Instr}{Instr}}
@@ -181,22 +187,14 @@ void \mbox{\hyperlink{namespacegymbo_a3b2c855687acd2541bb6d6bcbf80a9cb}{pbranch}
 \begin{DoxyCompactList}\small\item\em Perform probabilistic branching based on symbolic execution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_ac945fcc71ddc6b734f8444f51d21f219}{verbose\+\_\+pconstraints}} (int verbose\+\_\+level, bool is\+\_\+unknown\+\_\+path\+\_\+constraint, bool is\+\_\+target, bool is\+\_\+sat, int pc, std\+::string constraints\+\_\+str, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, const std\+::unordered\+\_\+map$<$ int, float $>$ \&params)
 \begin{DoxyCompactList}\small\item\em Prints verbose information about probabilistic path constraints. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespacegymbo_a0fb4d560e0d77f7e34155365da1b0ee0}{solve\+\_\+pconstraints}} (bool \&is\+\_\+sat, bool is\+\_\+target, int pc, std\+::unordered\+\_\+set$<$ int $>$ \&random\+\_\+vars, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
-\begin{DoxyCompactList}\small\item\em Solves path constraints and updates the symbolic state. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a9f454957ed3d5dc4ac39c4624c90c14a}{update\+\_\+prob\+\_\+constraints\+\_\+table}} (int pc, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&prob\+\_\+constraints\+\_\+table)
 \begin{DoxyCompactList}\small\item\em Updates the table of probabilistic path constraints. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{namespacegymbo_a8baa020b76300a7ebce8757cdedfed43}{run\+\_\+pgymbo}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, std\+::unordered\+\_\+set$<$ int $>$ \&random\+\_\+vars, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, \mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&prob\+\_\+constraints\+\_\+table, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level, bool return\+\_\+trace=false)
-\begin{DoxyCompactList}\small\item\em Run probabilistic symbolic execution on a program. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}{initialize\+\_\+params}} (std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, bool ignore\+\_\+memory)
 \begin{DoxyCompactList}\small\item\em Initialize Parameter Values from Memory. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a63b32e7da04b65b80a7eafb27af0714a}{smt\+\_\+union\+\_\+solver}} (bool \&is\+\_\+sat, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory)
 \begin{DoxyCompactList}\small\item\em SMT Solver with Unified Loss Function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_acbe8003da6e623ec5435c2b7c92c092a}{smt\+\_\+dpll\+\_\+solver}} (bool \&is\+\_\+sat, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory)
 \begin{DoxyCompactList}\small\item\em SMT Solver using DPLL as its backend. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{namespacegymbo_aa13abbc332896d34bc320950bdacfdf9}{run\+\_\+gymbo}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level, bool return\+\_\+trace=false)
-\begin{DoxyCompactList}\small\item\em Symbolically Execute a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespacegymbo_a8de7e0823e44be83e0579851777fc0a1}{sym\+Step}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$state, \mbox{\hyperlink{classgymbo_1_1Instr}{Instr}} \&instr, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$ $>$ \&result)
-\begin{DoxyCompactList}\small\item\em Symbolically Execute a Single Instruction of a Program. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a66355dbaf96e028b8ab57ca1568fab0d}{is\+\_\+target\+\_\+pc}} (const std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, int pc)
 \begin{DoxyCompactList}\small\item\em Checks if the given program counter (pc) is a target program counter. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a115388f029bdc666672c0f0d5133f6da}{explore\+\_\+further}} (int max\+Depth, int max\+SAT, int max\+UNSAT)
@@ -209,8 +207,8 @@ void \mbox{\hyperlink{namespacegymbo_a685c67ee7cb00b108285989f3216d60c}{verbose\
 \begin{DoxyCompactList}\small\item\em Prints a verbose representation before solving constraints. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_ab6c27c7bcfbbb14bda7b07bd976a47bd}{verbose\+\_\+post}} (int verbose\+\_\+level)
 \begin{DoxyCompactList}\small\item\em Prints a verbose representation after solving constraints. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespacegymbo_ae191cbcb7e0123a98305d1a640cb8b95}{solve\+\_\+constraints}} (bool \&is\+\_\+sat, bool is\+\_\+target, int pc, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
-\begin{DoxyCompactList}\small\item\em Solves path constraints and updates the cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a8de7e0823e44be83e0579851777fc0a1}{sym\+Step}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$state, \mbox{\hyperlink{classgymbo_1_1Instr}{Instr}} \&instr, std\+::vector$<$ \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} $\ast$ $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Symbolically Execute a Single Instruction of a Program. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_aab49b70724bec7c8b7ee2a6a2fd31771}{is\+\_\+alpha}} (char c)
 \begin{DoxyCompactList}\small\item\em Checks if a character is an alphabetical character or underscore. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegymbo_a9f75e72416f1f4de36d005b6935c0136}{is\+\_\+alnum}} (char c)
@@ -1444,98 +1442,6 @@ relational = add (\char`\"{}$<$\char`\"{} add $\vert$ \char`\"{}$<$=\char`\"{} a
 \begin{DoxyReturn}{Returns}
 An AST node representing the relational expression. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegymbo_aa13abbc332896d34bc320950bdacfdf9}\label{namespacegymbo_aa13abbc332896d34bc320950bdacfdf9}} 
-\index{gymbo@{gymbo}!run\_gymbo@{run\_gymbo}}
-\index{run\_gymbo@{run\_gymbo}!gymbo@{gymbo}}
-\doxysubsubsection{\texorpdfstring{run\_gymbo()}{run\_gymbo()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} gymbo\+::run\+\_\+gymbo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{int}]{max\+Depth,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level,  }\item[{bool}]{return\+\_\+trace = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Symbolically Execute a Program with Gradient Descent Optimization. 
-
-This function conducts symbolic execution of a given program while simultaneously optimizing the path constraints using the provided gradient descent optimizer, {\ttfamily \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em prog} & The program to symbolically execute. \\
-\hline
-{\em optimizer} & The gradient descent optimizer for parameter optimization. \\
-\hline
-{\em state} & The initial symbolic state of the program. \\
-\hline
-{\em target\+\_\+pcs} & The set of pc where gymbo executes path-\/constraints solving. If this set is empty or contains -\/1, gymbo solves all path-\/constraints. \\
-\hline
-{\em constraints\+\_\+cache} & A cache for previously found path constraints. \\
-\hline
-{\em max\+Depth} & The maximum depth of symbolic exploration. \\
-\hline
-{\em max\+SAT} & The maximum number of SAT constraints to collect. \\
-\hline
-{\em max\+UNSAT} & The maximum number of UNSAT constraints to collect. \\
-\hline
-{\em max\+\_\+num\+\_\+trials} & The maximum number of trials for each gradient descent. \\
-\hline
-{\em ignore\+\_\+memory} & If set to true, constraints derived from memory will be ignored. \\
-\hline
-{\em use\+\_\+dpll} & If set to true, use DPLL to decide the initial assignment for each term. \\
-\hline
-{\em verbose\+\_\+level} & The level of verbosity. \\
-\hline
-{\em return\+\_\+trace} & If set to true, save the trace at each pc and return them (default false). \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A trace of the symbolic execution. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{namespacegymbo_a8baa020b76300a7ebce8757cdedfed43}\label{namespacegymbo_a8baa020b76300a7ebce8757cdedfed43}} 
-\index{gymbo@{gymbo}!run\_pgymbo@{run\_pgymbo}}
-\index{run\_pgymbo@{run\_pgymbo}!gymbo@{gymbo}}
-\doxysubsubsection{\texorpdfstring{run\_pgymbo()}{run\_pgymbo()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} gymbo\+::run\+\_\+pgymbo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{random\+\_\+vars,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{\mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&}]{prob\+\_\+constraints\+\_\+table,  }\item[{int}]{max\+Depth,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level,  }\item[{bool}]{return\+\_\+trace = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Run probabilistic symbolic execution on a program. 
-
-This function performs probabilistic symbolic execution on a given program, considering variable distributions, symbolic states, and path constraints. It explores different execution paths and updates the constraints and probabilities accordingly.
-
-
-\begin{DoxyParams}{Parameters}
-{\em prog} & The program to be executed symbolically. \\
-\hline
-{\em random\+\_\+vars} & The set of random variables\textquotesingle{}IDs. \\
-\hline
-{\em optimizer} & The optimizer used for guided symbolic execution. \\
-\hline
-{\em state} & The initial symbolic state for execution. \\
-\hline
-{\em target\+\_\+pcs} & Set of target program counters for analysis. \\
-\hline
-{\em constraints\+\_\+cache} & Cache for storing and reusing path constraints. \\
-\hline
-{\em prob\+\_\+constraints\+\_\+table} & Table for storing probabilistic path constraints. \\
-\hline
-{\em max\+Depth} & Maximum exploration depth during symbolic execution. \\
-\hline
-{\em max\+SAT} & Maximum number of satisfiable paths to explore. \\
-\hline
-{\em max\+UNSAT} & Maximum number of unsatisfiable paths to explore. \\
-\hline
-{\em max\+\_\+num\+\_\+trials} & Maximum number of trials for satisfiability checking. \\
-\hline
-{\em ignore\+\_\+memory} & Flag to ignore memory updates during symbolic execution. \\
-\hline
-{\em use\+\_\+dpll} & Flag indicating whether to use the DPLL solver for satisfiability. \\
-\hline
-{\em verbose\+\_\+level} & Verbosity level for printing debug information. \\
-\hline
-{\em return\+\_\+trace} & Flag to indicate whether to return the symbolic execution trace. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-The symbolic execution trace containing states and child traces. 
-\end{DoxyReturn}
 \mbox{\Hypertarget{namespacegymbo_acbe8003da6e623ec5435c2b7c92c092a}\label{namespacegymbo_acbe8003da6e623ec5435c2b7c92c092a}} 
 \index{gymbo@{gymbo}!smt\_dpll\_solver@{smt\_dpll\_solver}}
 \index{smt\_dpll\_solver@{smt\_dpll\_solver}!gymbo@{gymbo}}
@@ -1584,86 +1490,6 @@ SMT Solver with Unified Loss Function.
 {\em max\+\_\+num\+\_\+trials} & The maximum number of trials for each gradient descent. \\
 \hline
 {\em ignore\+\_\+memory} & If set to true, constraints derived from memory will be ignored. \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{namespacegymbo_ae191cbcb7e0123a98305d1a640cb8b95}\label{namespacegymbo_ae191cbcb7e0123a98305d1a640cb8b95}} 
-\index{gymbo@{gymbo}!solve\_constraints@{solve\_constraints}}
-\index{solve\_constraints@{solve\_constraints}!gymbo@{gymbo}}
-\doxysubsubsection{\texorpdfstring{solve\_constraints()}{solve\_constraints()}}
-{\footnotesize\ttfamily void gymbo\+::solve\+\_\+constraints (\begin{DoxyParamCaption}\item[{bool \&}]{is\+\_\+sat,  }\item[{bool}]{is\+\_\+target,  }\item[{int}]{pc,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Solves path constraints and updates the cache. 
-
-This function solves path constraints, updates the cache, and prints verbose information if conditions are met.
-
-
-\begin{DoxyParams}{Parameters}
-{\em is\+\_\+sat} & Reference to a boolean indicating satisfiability. \\
-\hline
-{\em is\+\_\+target} & Flag indicating whether the program counter is a target. \\
-\hline
-{\em pc} & The program counter. \\
-\hline
-{\em optimizer} & Reference to the optimizer. \\
-\hline
-{\em state} & Reference to the symbolic state. \\
-\hline
-{\em constraints\+\_\+cache} & Reference to the path constraints cache. \\
-\hline
-{\em max\+SAT} & Reference to the maximum satisfiability limit. \\
-\hline
-{\em max\+UNSAT} & Reference to the maximum unsatisfiability limit. \\
-\hline
-{\em max\+\_\+num\+\_\+trials} & Maximum number of solver trials. \\
-\hline
-{\em ignore\+\_\+memory} & Flag indicating whether to ignore memory. \\
-\hline
-{\em use\+\_\+dpll} & Flag indicating whether to use the DPLL solver. \\
-\hline
-{\em verbose\+\_\+level} & The verbosity level. \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{namespacegymbo_a0fb4d560e0d77f7e34155365da1b0ee0}\label{namespacegymbo_a0fb4d560e0d77f7e34155365da1b0ee0}} 
-\index{gymbo@{gymbo}!solve\_pconstraints@{solve\_pconstraints}}
-\index{solve\_pconstraints@{solve\_pconstraints}!gymbo@{gymbo}}
-\doxysubsubsection{\texorpdfstring{solve\_pconstraints()}{solve\_pconstraints()}}
-{\footnotesize\ttfamily void gymbo\+::solve\+\_\+pconstraints (\begin{DoxyParamCaption}\item[{bool \&}]{is\+\_\+sat,  }\item[{bool}]{is\+\_\+target,  }\item[{int}]{pc,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{random\+\_\+vars,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Solves path constraints and updates the symbolic state. 
-
-This function checks the satisfiability of the path constraints using an SMT solver or a probabilistic branching algorithm. It updates the symbolic state based on the result and stores the solution in a cache for future use.
-
-
-\begin{DoxyParams}{Parameters}
-{\em is\+\_\+sat} & Whether the path constraints are satisfiable. \\
-\hline
-{\em is\+\_\+target} & Whether the program counter is a target. \\
-\hline
-{\em pc} & The program counter. \\
-\hline
-{\em random\+\_\+vars} & The set of random variable IDs. \\
-\hline
-{\em optimizer} & The optimizer used for guided symbolic execution. \\
-\hline
-{\em state} & The symbolic state. \\
-\hline
-{\em constraints\+\_\+cache} & Cache for storing and reusing path constraints. \\
-\hline
-{\em max\+SAT} & Maximum number of satisfiable paths to explore. \\
-\hline
-{\em max\+UNSAT} & Maximum number of unsatisfiable paths to explore. \\
-\hline
-{\em max\+\_\+num\+\_\+trials} & Maximum number of trials for satisfiability checking. \\
-\hline
-{\em ignore\+\_\+memory} & Flag to ignore memory updates during symbolic execution. \\
-\hline
-{\em use\+\_\+dpll} & Flag indicating whether to use the DPLL solver for satisfiability. \\
-\hline
-{\em verbose\+\_\+level} & Verbosity level for printing debug information. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{namespacegymbo_a086916a92edc60e687a056603995182e}\label{namespacegymbo_a086916a92edc60e687a056603995182e}} 

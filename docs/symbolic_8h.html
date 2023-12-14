@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -113,6 +114,15 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 <p><a href="symbolic_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1BaseExecutor.html">gymbo::BaseExecutor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the base class for symbolic execution engine.  <a href="structgymbo_1_1BaseExecutor.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SExecutor.html">gymbo::SExecutor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a derived class for symbolic execution engine for deterministic programs.  <a href="structgymbo_1_1SExecutor.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacegymbo"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html">gymbo</a></td></tr>
@@ -120,12 +130,6 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa13abbc332896d34bc320950bdacfdf9"><td class="memItemLeft" align="right" valign="top">Trace&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#aa13abbc332896d34bc320950bdacfdf9">gymbo::run_gymbo</a> (Prog &amp;prog, GDOptimizer &amp;optimizer, SymState &amp;state, std::unordered_set&lt; int &gt; &amp;target_pcs, PathConstraintsTable &amp;constraints_cache, int maxDepth, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level, bool return_trace=false)</td></tr>
-<tr class="memdesc:aa13abbc332896d34bc320950bdacfdf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Program with Gradient Descent Optimization.  <a href="namespacegymbo.html#aa13abbc332896d34bc320950bdacfdf9">More...</a><br /></td></tr>
-<tr class="separator:aa13abbc332896d34bc320950bdacfdf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8de7e0823e44be83e0579851777fc0a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a8de7e0823e44be83e0579851777fc0a1">gymbo::symStep</a> (SymState *state, Instr &amp;instr, std::vector&lt; SymState * &gt; &amp;result)</td></tr>
-<tr class="memdesc:a8de7e0823e44be83e0579851777fc0a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Single Instruction of a Program.  <a href="namespacegymbo.html#a8de7e0823e44be83e0579851777fc0a1">More...</a><br /></td></tr>
-<tr class="separator:a8de7e0823e44be83e0579851777fc0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66355dbaf96e028b8ab57ca1568fab0d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a66355dbaf96e028b8ab57ca1568fab0d">gymbo::is_target_pc</a> (const std::unordered_set&lt; int &gt; &amp;target_pcs, int pc)</td></tr>
 <tr class="memdesc:a66355dbaf96e028b8ab57ca1568fab0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given program counter (pc) is a target program counter.  <a href="namespacegymbo.html#a66355dbaf96e028b8ab57ca1568fab0d">More...</a><br /></td></tr>
 <tr class="separator:a66355dbaf96e028b8ab57ca1568fab0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,9 +148,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ab6c27c7bcfbbb14bda7b07bd976a47bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#ab6c27c7bcfbbb14bda7b07bd976a47bd">gymbo::verbose_post</a> (int verbose_level)</td></tr>
 <tr class="memdesc:ab6c27c7bcfbbb14bda7b07bd976a47bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a verbose representation after solving constraints.  <a href="namespacegymbo.html#ab6c27c7bcfbbb14bda7b07bd976a47bd">More...</a><br /></td></tr>
 <tr class="separator:ab6c27c7bcfbbb14bda7b07bd976a47bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae191cbcb7e0123a98305d1a640cb8b95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#ae191cbcb7e0123a98305d1a640cb8b95">gymbo::solve_constraints</a> (bool &amp;is_sat, bool is_target, int pc, GDOptimizer &amp;optimizer, SymState &amp;state, PathConstraintsTable &amp;constraints_cache, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
-<tr class="memdesc:ae191cbcb7e0123a98305d1a640cb8b95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves path constraints and updates the cache.  <a href="namespacegymbo.html#ae191cbcb7e0123a98305d1a640cb8b95">More...</a><br /></td></tr>
-<tr class="separator:ae191cbcb7e0123a98305d1a640cb8b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8de7e0823e44be83e0579851777fc0a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a8de7e0823e44be83e0579851777fc0a1">gymbo::symStep</a> (SymState *state, Instr &amp;instr, std::vector&lt; SymState * &gt; &amp;result)</td></tr>
+<tr class="memdesc:a8de7e0823e44be83e0579851777fc0a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Execute a Single Instruction of a Program.  <a href="namespacegymbo.html#a8de7e0823e44be83e0579851777fc0a1">More...</a><br /></td></tr>
+<tr class="separator:a8de7e0823e44be83e0579851777fc0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Core implementation of gradient-based symbolic execution. </p>

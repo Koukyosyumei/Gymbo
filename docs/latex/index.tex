@@ -8,6 +8,8 @@ One practical usage of Gymbo is debugging ML models like neural networks to dete
 
 
 
+Another unique feature of Gymbo is that it can track the probabilistic symbolic variables. We adopt the PBRANCH algorithm proposed in {\ttfamily \mbox{[}3\mbox{]}} and currently support the discrete uniform, bernoulli, and binomial distributions.
+
 \begin{quote}
 Please note that Gymbo is currently under development and may have bugs. \end{quote}
 Your feedback and contributions are always greatly appreciated.\hypertarget{index_install_sec}{}\doxysection{Install}\label{index_install_sec}
@@ -121,7 +123,7 @@ Since gymbo consists of the header-\/only library, you can easily create your ow
 \DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}{gymbo::compile\_ast}}(code, prg);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// execute gradient-\/based symbolie execution}}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_aa13abbc332896d34bc320950bdacfdf9}{gymbo::run\_gymbo}}(prg, optimizer, init, cache\_constraints, ...);}
+\DoxyCodeLine{gymbo::run\_gymbo(prg, optimizer, init, cache\_constraints, ...);}
 
 \end{DoxyCode}
 \hypertarget{index_python_sec}{}\doxysection{Python API}\label{index_python_sec}
