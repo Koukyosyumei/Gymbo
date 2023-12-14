@@ -1259,7 +1259,7 @@ struct SymState {
      * @param symbolic_stack Symbolic stack.
      * @param path_constraints Vector of symbolic path constraints.
      * @param p Symbolic probability of the state being reached.
-     * @paarm cond_p Symbolic conditional probability of the state being
+     * @param cond_p Symbolic conditional probability of the state being
      * reached.
      * @param has_observed_p_cond Flag indicating whether path_constraints
      * contains probabilistic path conditions.

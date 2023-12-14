@@ -18,7 +18,11 @@ struct \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}}
 struct \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}}
 \begin{DoxyCompactList}\small\item\em Represents a discrete probability distribution. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgymbo_1_1DiscreteUniformDist}{Discrete\+Uniform\+Dist}}
-\begin{DoxyCompactList}\small\item\em Represents a discrete uniform probability distribution derived from \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Represents a discrete uniform distribution derived from \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1BernoulliDist}{Bernoulli\+Dist}}
+\begin{DoxyCompactList}\small\item\em Represents a bernoulli distribution derived from \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgymbo_1_1BinomialDist}{Binomial\+Dist}}
+\begin{DoxyCompactList}\small\item\em Represents a binomial distribution derived from \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}}. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}}
 \begin{DoxyCompactList}\small\item\em Represents a symbolic probability with a numerator and denominator. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}}
@@ -173,15 +177,15 @@ std\+::pair$<$ std\+::unordered\+\_\+map$<$ std\+::string, int $>$, \mbox{\hyper
 \begin{DoxyCompactList}\small\item\em Compiles user input into a program, returning variable counts and the compiled program. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \mbox{\hyperlink{namespacegymbo_af40a70afb521e856bda968808b2b492e}{gexecute}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prg, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&init, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, int max\+\_\+depth, int max\+SAT, int max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
 \begin{DoxyCompactList}\small\item\em Symbolically Executes a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespacegymbo_aed8257f2dd65fda6917c46d75b3d24ec}{pbranch}} (std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state)
+void \mbox{\hyperlink{namespacegymbo_a3b2c855687acd2541bb6d6bcbf80a9cb}{pbranch}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state)
 \begin{DoxyCompactList}\small\item\em Perform probabilistic branching based on symbolic execution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_ac945fcc71ddc6b734f8444f51d21f219}{verbose\+\_\+pconstraints}} (int verbose\+\_\+level, bool is\+\_\+unknown\+\_\+path\+\_\+constraint, bool is\+\_\+target, bool is\+\_\+sat, int pc, std\+::string constraints\+\_\+str, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, const std\+::unordered\+\_\+map$<$ int, float $>$ \&params)
-\item 
-void \mbox{\hyperlink{namespacegymbo_a41efd89d5f5866be466734a6b0d5ea5d}{solve\+\_\+pconstraints}} (bool \&is\+\_\+sat, bool is\+\_\+target, int pc, std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
-\item 
+\begin{DoxyCompactList}\small\item\em Prints verbose information about probabilistic path constraints. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegymbo_a0fb4d560e0d77f7e34155365da1b0ee0}{solve\+\_\+pconstraints}} (bool \&is\+\_\+sat, bool is\+\_\+target, int pc, std\+::unordered\+\_\+set$<$ int $>$ \&random\+\_\+vars, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
+\begin{DoxyCompactList}\small\item\em Solves path constraints and updates the symbolic state. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a9f454957ed3d5dc4ac39c4624c90c14a}{update\+\_\+prob\+\_\+constraints\+\_\+table}} (int pc, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, \mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&prob\+\_\+constraints\+\_\+table)
-\item 
-\mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{namespacegymbo_af14aa75beebbdc447f479657e715104a}{run\+\_\+pgymbo}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, \mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&prob\+\_\+constraints\+\_\+table, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level, bool return\+\_\+trace=false)
+\begin{DoxyCompactList}\small\item\em Updates the table of probabilistic path constraints. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{namespacegymbo_a8baa020b76300a7ebce8757cdedfed43}{run\+\_\+pgymbo}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, std\+::unordered\+\_\+set$<$ int $>$ \&random\+\_\+vars, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&constraints\+\_\+cache, \mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&prob\+\_\+constraints\+\_\+table, int max\+Depth, int \&max\+SAT, int \&max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level, bool return\+\_\+trace=false)
 \begin{DoxyCompactList}\small\item\em Run probabilistic symbolic execution on a program. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}{initialize\+\_\+params}} (std\+::unordered\+\_\+map$<$ int, float $>$ \&params, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, bool ignore\+\_\+memory)
 \begin{DoxyCompactList}\small\item\em Initialize Parameter Values from Memory. \end{DoxyCompactList}\item 
@@ -1379,24 +1383,20 @@ Creates a new token and adds it as the next token of {\ttfamily cur}.
 \begin{DoxyReturn}{Returns}
 A pointer to the newly created token. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegymbo_aed8257f2dd65fda6917c46d75b3d24ec}\label{namespacegymbo_aed8257f2dd65fda6917c46d75b3d24ec}} 
+\mbox{\Hypertarget{namespacegymbo_a3b2c855687acd2541bb6d6bcbf80a9cb}\label{namespacegymbo_a3b2c855687acd2541bb6d6bcbf80a9cb}} 
 \index{gymbo@{gymbo}!pbranch@{pbranch}}
 \index{pbranch@{pbranch}!gymbo@{gymbo}}
 \doxysubsubsection{\texorpdfstring{pbranch()}{pbranch()}}
-{\footnotesize\ttfamily void gymbo\+::pbranch (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&}]{var2dist,  }\item[{std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&}]{D,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void gymbo\+::pbranch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Perform probabilistic branching based on symbolic execution. 
 
-Given a set of variable distributions, symbolic state, and path constraints, this function performs probabilistic branching. It computes the symbolic probability of the state being reached and updates the symbolic state accordingly.
+Given the symbolic state, this function performs probabilistic branching. It computes the symbolic probability of the state being reached and updates the symbolic state accordingly.
 
 
 \begin{DoxyParams}{Parameters}
-{\em var2dist} & A map of variable IDs to their discrete distributions. \\
-\hline
-{\em D} & A vector of vectors representing the all possible combinations of probabilistic variables. \\
-\hline
 {\em state} & The symbolic state for the current execution. \\
 \hline
 \end{DoxyParams}
@@ -1488,11 +1488,11 @@ This function conducts symbolic execution of a given program while simultaneousl
 \begin{DoxyReturn}{Returns}
 A trace of the symbolic execution. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegymbo_af14aa75beebbdc447f479657e715104a}\label{namespacegymbo_af14aa75beebbdc447f479657e715104a}} 
+\mbox{\Hypertarget{namespacegymbo_a8baa020b76300a7ebce8757cdedfed43}\label{namespacegymbo_a8baa020b76300a7ebce8757cdedfed43}} 
 \index{gymbo@{gymbo}!run\_pgymbo@{run\_pgymbo}}
 \index{run\_pgymbo@{run\_pgymbo}!gymbo@{gymbo}}
 \doxysubsubsection{\texorpdfstring{run\_pgymbo()}{run\_pgymbo()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} gymbo\+::run\+\_\+pgymbo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&}]{var2dist,  }\item[{std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&}]{D,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{\mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&}]{prob\+\_\+constraints\+\_\+table,  }\item[{int}]{max\+Depth,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level,  }\item[{bool}]{return\+\_\+trace = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} gymbo\+::run\+\_\+pgymbo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{random\+\_\+vars,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{\mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&}]{prob\+\_\+constraints\+\_\+table,  }\item[{int}]{max\+Depth,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level,  }\item[{bool}]{return\+\_\+trace = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1504,9 +1504,7 @@ This function performs probabilistic symbolic execution on a given program, cons
 \begin{DoxyParams}{Parameters}
 {\em prog} & The program to be executed symbolically. \\
 \hline
-{\em var2dist} & Map of variable IDs to their discrete distributions. \\
-\hline
-{\em D} & A vector of vectors representing the all possible combinations of probabilistic variables. \\
+{\em random\+\_\+vars} & The set of random variables\textquotesingle{}IDs. \\
 \hline
 {\em optimizer} & The optimizer used for guided symbolic execution. \\
 \hline
@@ -1627,12 +1625,47 @@ This function solves path constraints, updates the cache, and prints verbose inf
 {\em verbose\+\_\+level} & The verbosity level. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{namespacegymbo_a41efd89d5f5866be466734a6b0d5ea5d}\label{namespacegymbo_a41efd89d5f5866be466734a6b0d5ea5d}} 
+\mbox{\Hypertarget{namespacegymbo_a0fb4d560e0d77f7e34155365da1b0ee0}\label{namespacegymbo_a0fb4d560e0d77f7e34155365da1b0ee0}} 
 \index{gymbo@{gymbo}!solve\_pconstraints@{solve\_pconstraints}}
 \index{solve\_pconstraints@{solve\_pconstraints}!gymbo@{gymbo}}
 \doxysubsubsection{\texorpdfstring{solve\_pconstraints()}{solve\_pconstraints()}}
-{\footnotesize\ttfamily void gymbo\+::solve\+\_\+pconstraints (\begin{DoxyParamCaption}\item[{bool \&}]{is\+\_\+sat,  }\item[{bool}]{is\+\_\+target,  }\item[{int}]{pc,  }\item[{std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&}]{var2dist,  }\item[{std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&}]{D,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void gymbo\+::solve\+\_\+pconstraints (\begin{DoxyParamCaption}\item[{bool \&}]{is\+\_\+sat,  }\item[{bool}]{is\+\_\+target,  }\item[{int}]{pc,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{random\+\_\+vars,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \&}]{constraints\+\_\+cache,  }\item[{int \&}]{max\+SAT,  }\item[{int \&}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Solves path constraints and updates the symbolic state. 
+
+This function checks the satisfiability of the path constraints using an SMT solver or a probabilistic branching algorithm. It updates the symbolic state based on the result and stores the solution in a cache for future use.
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+\_\+sat} & Whether the path constraints are satisfiable. \\
+\hline
+{\em is\+\_\+target} & Whether the program counter is a target. \\
+\hline
+{\em pc} & The program counter. \\
+\hline
+{\em random\+\_\+vars} & The set of random variable IDs. \\
+\hline
+{\em optimizer} & The optimizer used for guided symbolic execution. \\
+\hline
+{\em state} & The symbolic state. \\
+\hline
+{\em constraints\+\_\+cache} & Cache for storing and reusing path constraints. \\
+\hline
+{\em max\+SAT} & Maximum number of satisfiable paths to explore. \\
+\hline
+{\em max\+UNSAT} & Maximum number of unsatisfiable paths to explore. \\
+\hline
+{\em max\+\_\+num\+\_\+trials} & Maximum number of trials for satisfiability checking. \\
+\hline
+{\em ignore\+\_\+memory} & Flag to ignore memory updates during symbolic execution. \\
+\hline
+{\em use\+\_\+dpll} & Flag indicating whether to use the DPLL solver for satisfiability. \\
+\hline
+{\em verbose\+\_\+level} & Verbosity level for printing debug information. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{namespacegymbo_a086916a92edc60e687a056603995182e}\label{namespacegymbo_a086916a92edc60e687a056603995182e}} 
 \index{gymbo@{gymbo}!startswith@{startswith}}
 \index{startswith@{startswith}!gymbo@{gymbo}}
@@ -1760,6 +1793,21 @@ A pointer to the constructed AST node.
 \doxysubsubsection{\texorpdfstring{update\_prob\_constraints\_table()}{update\_prob\_constraints\_table()}}
 {\footnotesize\ttfamily void gymbo\+::update\+\_\+prob\+\_\+constraints\+\_\+table (\begin{DoxyParamCaption}\item[{int}]{pc,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{\mbox{\hyperlink{namespacegymbo_a035e6fe34f819db35a5662ae0cf427d3}{Prob\+Path\+Constraints\+Table}} \&}]{prob\+\_\+constraints\+\_\+table }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Updates the table of probabilistic path constraints. 
+
+This function stores the path constraints and the corresponding probability of reaching the current state in a table for future reference.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pc} & The program counter. \\
+\hline
+{\em state} & The symbolic state. \\
+\hline
+{\em prob\+\_\+constraints\+\_\+table} & Table for storing probabilistic path constraints. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{namespacegymbo_a08e7c1f5fbe133aac3555ce9490af0dc}\label{namespacegymbo_a08e7c1f5fbe133aac3555ce9490af0dc}} 
 \index{gymbo@{gymbo}!valName@{valName}}
 \index{valName@{valName}!gymbo@{gymbo}}
@@ -1815,6 +1863,31 @@ This function prints a verbose for conflicts solving if the specified conditions
 \doxysubsubsection{\texorpdfstring{verbose\_pconstraints()}{verbose\_pconstraints()}}
 {\footnotesize\ttfamily void gymbo\+::verbose\+\_\+pconstraints (\begin{DoxyParamCaption}\item[{int}]{verbose\+\_\+level,  }\item[{bool}]{is\+\_\+unknown\+\_\+path\+\_\+constraint,  }\item[{bool}]{is\+\_\+target,  }\item[{bool}]{is\+\_\+sat,  }\item[{int}]{pc,  }\item[{std\+::string}]{constraints\+\_\+str,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{const std\+::unordered\+\_\+map$<$ int, float $>$ \&}]{params }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Prints verbose information about probabilistic path constraints. 
+
+This function prints the path constraints, whether they are satisfiable, the probability of reaching the current state, and other relevant information.
+
+
+\begin{DoxyParams}{Parameters}
+{\em verbose\+\_\+level} & The level of verbosity. \\
+\hline
+{\em is\+\_\+unknown\+\_\+path\+\_\+constraint} & Whether the path constraint is unknown. \\
+\hline
+{\em is\+\_\+target} & Whether the program counter is a target. \\
+\hline
+{\em is\+\_\+sat} & Whether the path constraint is satisfiable. \\
+\hline
+{\em pc} & The program counter. \\
+\hline
+{\em constraints\+\_\+str} & String representation of the path constraints. \\
+\hline
+{\em state} & The symbolic state. \\
+\hline
+{\em params} & Dictionary of symbolic variable values. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{namespacegymbo_ab6c27c7bcfbbb14bda7b07bd976a47bd}\label{namespacegymbo_ab6c27c7bcfbbb14bda7b07bd976a47bd}} 
 \index{gymbo@{gymbo}!verbose\_post@{verbose\_post}}
 \index{verbose\_post@{verbose\_post}!gymbo@{gymbo}}
