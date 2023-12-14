@@ -55,7 +55,7 @@ TEST(GymboGDTest, Count) {
 
     gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low,
                                  param_high, sign_grad, init_param_uniform_int,
-                                 false, seed);
+                                 seed);
 
     bool is_sat = false;
     gymbo::SymState state;

@@ -5,9 +5,8 @@
  */
 
 #pragma once
+
 #include "symbolic.h"
-#include "type.h"
-#include "utils.h"
 
 namespace gymbo {
 
@@ -100,92 +99,6 @@ inline void verbose_pconstraints(int verbose_level,
 }
 
 /**
- * @brief Solves path constraints and updates the symbolic state.
- *
- * This function checks the satisfiability of the path constraints using an SMT
- * solver or a probabilistic branching algorithm. It updates the symbolic state
- * based on the result and stores the solution in a cache for future use.
- *
- * @param is_sat Whether the path constraints are satisfiable.
- * @param is_target Whether the program counter is a target.
- * @param pc The program counter.
- * @param random_vars The set of random variable IDs.
- * @param optimizer The optimizer used for guided symbolic execution.
- * @param state The symbolic state.
- * @param constraints_cache Cache for storing and reusing path constraints.
- * @param maxSAT Maximum number of satisfiable paths to explore.
- * @param maxUNSAT Maximum number of unsatisfiable paths to explore.
- * @param max_num_trials Maximum number of trials for satisfiability checking.
- * @param ignore_memory Flag to ignore memory updates during symbolic execution.
- * @param use_dpll Flag indicating whether to use the DPLL solver for
- * satisfiability.
- * @param verbose_level Verbosity level for printing debug information.
- */
-inline void solve_pconstraints(bool &is_sat, bool is_target, int pc,
-                               std::unordered_set<int> &random_vars,
-                               GDOptimizer &optimizer, SymState &state,
-                               PathConstraintsTable &constraints_cache,
-                               int &maxSAT, int &maxUNSAT, int max_num_trials,
-                               bool ignore_memory, bool use_dpll,
-                               int verbose_level) {
-    std::string constraints_str = state.toString(false);
-
-    std::unordered_map<int, float> params = {};
-    initialize_params(params, state, ignore_memory);
-
-    bool is_unknown_path_constraint = true;
-
-    if (constraints_cache.find(constraints_str) != constraints_cache.end()) {
-        is_sat = constraints_cache[constraints_str].first;
-        params = constraints_cache[constraints_str].second;
-        is_unknown_path_constraint = false;
-    } else {
-        bool is_contain_prob_var = false;
-        std::unordered_set<int> unique_var_ids;
-        for (int i = 0; i < state.path_constraints.size(); i++) {
-            state.path_constraints[i].gather_var_ids(unique_var_ids);
-        }
-        for (int i : unique_var_ids) {
-            if (random_vars.find(i) != random_vars.end()) {
-                is_contain_prob_var = true;
-                break;
-            }
-        }
-
-        if (is_contain_prob_var) {
-            // call probabilistic branch algorithm
-            pbranch(state);
-            is_sat = true;
-        } else {
-            // solve deterministic path constraints
-            call_smt_solver(is_sat, state, params, optimizer, max_num_trials,
-                            ignore_memory, use_dpll);
-            if (is_sat) {
-                maxSAT--;
-            } else {
-                maxUNSAT--;
-            }
-
-            if (is_sat) {
-                state.p =
-                    new SymProb(new Sym(SymType::SCon, FloatToWord(0.0f)),
-                                new Sym(SymType::SCon, FloatToWord(0.0f)));
-                state.cond_p = state.p;
-            }
-        }
-
-        constraints_cache.emplace(constraints_str,
-                                  std::make_pair(is_sat, params));
-    }
-
-    if (verbose_level >= 1) {
-        verbose_pconstraints(verbose_level, is_unknown_path_constraint,
-                             is_target, is_sat, pc, constraints_str, state,
-                             params);
-    }
-}
-
-/**
  * @brief Updates the table of probabilistic path constraints.
  *
  * This function stores the path constraints and the corresponding probability
@@ -213,80 +126,175 @@ inline void update_prob_constraints_table(
 }
 
 /**
- * @brief Run probabilistic symbolic execution on a program.
- *
- * This function performs probabilistic symbolic execution on a given program,
- * considering variable distributions, symbolic states, and path constraints. It
- * explores different execution paths and updates the constraints and
- * probabilities accordingly.
- *
- * @param prog The program to be executed symbolically.
- * @param random_vars The set of random variables'IDs.
- * @param optimizer The optimizer used for guided symbolic execution.
- * @param state The initial symbolic state for execution.
- * @param target_pcs Set of target program counters for analysis.
- * @param constraints_cache Cache for storing and reusing path constraints.
- * @param prob_constraints_table Table for storing probabilistic path
- * constraints.
- * @param maxDepth Maximum exploration depth during symbolic execution.
- * @param maxSAT Maximum number of satisfiable paths to explore.
- * @param maxUNSAT Maximum number of unsatisfiable paths to explore.
- * @param max_num_trials Maximum number of trials for satisfiability checking.
- * @param ignore_memory Flag to ignore memory updates during symbolic execution.
- * @param use_dpll Flag indicating whether to use the DPLL solver for
- * satisfiability.
- * @param verbose_level Verbosity level for printing debug information.
- * @param return_trace Flag to indicate whether to return the symbolic execution
- * trace.
- * @return The symbolic execution trace containing states and child traces.
+ * @struct PSExecutor
+ * @brief Represents a derived class for symbolic execution engine for
+ * probabilistic programs.
  */
-inline Trace run_pgymbo(Prog &prog, std::unordered_set<int> &random_vars,
-                        GDOptimizer &optimizer, SymState &state,
-                        std::unordered_set<int> &target_pcs,
-                        PathConstraintsTable &constraints_cache,
-                        ProbPathConstraintsTable &prob_constraints_table,
-                        int maxDepth, int &maxSAT, int &maxUNSAT,
-                        int max_num_trials, bool ignore_memory, bool use_dpll,
-                        int verbose_level, bool return_trace = false) {
-    int pc = state.pc;
-    bool is_target = is_target_pc(target_pcs, pc);
-    bool is_sat = true;
+struct PSExecutor : public BaseExecutor {
+    const std::unordered_set<int>
+        &random_vars;  ///< Set of random variables'IDs.
+    const std::unordered_set<int>
+        &target_pcs;  ///< Set of target program counters for analysis.
+    PathConstraintsTable
+        constraints_cache;  ///< Cache for storing and reusing path constraints.
+    ProbPathConstraintsTable
+        prob_constraints_table;  ///< Table for storing probabilistic path
+                                 ///< constraints.
 
-    verbose_pre(verbose_level, pc, prog, state);
-    if (state.path_constraints.size() != 0 && is_target) {
-        solve_pconstraints(is_sat, is_target, pc, random_vars, optimizer, state,
-                           constraints_cache, maxSAT, maxUNSAT, max_num_trials,
-                           ignore_memory, use_dpll, verbose_level);
-    }
-    verbose_post(verbose_level);
+    /**
+     * @brief Constructor for PSExecutor.
+     *
+     * @param prog The program to symbolically execute.
+     * @param optimizer The gradient descent optimizer for parameter
+     * optimization.
+     * @param random_vars Set of random variables'IDs.
+     * @param target_pcs Set of pc where gymbo executes path-constraints
+     * solving. If this set is empty or contains -1, gymbo solves all
+     * path-constraints.
+     * @param maxSAT The maximum number of SAT constraints to collect.
+     * @param maxUNSAT The maximum number of UNSAT constraints to collect.
+     * @param max_num_trials The maximum number of trials for each gradient
+     * descent.
+     * @param ignore_memory If set to true, constraints derived from memory will
+     * be ignored.
+     * @param use_dpll If set to true, use DPLL to decide the initial assignment
+     * for each term.
+     * @param verbose_level The level of verbosity.
+     * @param return_trace If set to true, save the trace at each pc and return
+     * them (default false).
+     */
+    PSExecutor(Prog &prog, GDOptimizer &optimizer,
+               const std::unordered_set<int> &random_vars,
+               const std::unordered_set<int> &target_pcs, int maxSAT = 256,
+               int maxUNSAT = 256, int max_num_trials = 10,
+               bool ignore_memory = false, bool use_dpll = false,
+               int verbose_level = 0, bool return_trace = false)
+        : BaseExecutor(prog, optimizer, maxSAT, maxUNSAT, max_num_trials,
+                       ignore_memory, use_dpll, verbose_level, return_trace),
+          random_vars(random_vars),
+          target_pcs(target_pcs) {}
 
-    if (prog[pc].instr == InstrType::Done &&
-        state.path_constraints.size() > 0) {
-        update_prob_constraints_table(pc, state, prob_constraints_table);
-    }
+    /**
+     * @brief Solves path constraints and updates the symbolic state.
+     *
+     * This function checks the satisfiability of the path constraints using an
+     * SMT solver or a probabilistic branching algorithm. It updates the
+     * symbolic state based on the result and stores the solution in a cache for
+     * future use.
+     *
+     * @param is_target Whether the program counter is a target.
+     * @param pc The program counter.
+     * @param state The symbolic state.
+     * @return Flag indicating satisfifiability.
+     */
+    bool solve(bool is_target, int pc, SymState &state) {
+        std::string constraints_str = state.toString(false);
 
-    if ((prog[pc].instr == InstrType::Done) || (!is_sat)) {
-        return Trace(state, {});
-    } else if (explore_further(maxDepth, maxSAT, maxUNSAT)) {
-        Instr instr = prog[pc];
-        std::vector<SymState *> newStates;
-        symStep(&state, instr, newStates);
-        std::vector<Trace> children;
-        for (SymState *newState : newStates) {
-            Trace child = run_pgymbo(
-                prog, random_vars, optimizer, *newState, target_pcs,
-                constraints_cache, prob_constraints_table, maxDepth - 1, maxSAT,
-                maxUNSAT, max_num_trials, ignore_memory, use_dpll,
-                verbose_level, return_trace);
-            if (return_trace) {
-                children.push_back(child);
+        std::unordered_map<int, float> params = {};
+        initialize_params(params, state, ignore_memory);
+
+        bool is_sat = true;
+        bool is_unknown_path_constraint = true;
+
+        if (constraints_cache.find(constraints_str) !=
+            constraints_cache.end()) {
+            is_sat = constraints_cache[constraints_str].first;
+            params = constraints_cache[constraints_str].second;
+            is_unknown_path_constraint = false;
+        } else {
+            bool is_contain_prob_var = false;
+            std::unordered_set<int> unique_var_ids;
+            for (int i = 0; i < state.path_constraints.size(); i++) {
+                state.path_constraints[i].gather_var_ids(unique_var_ids);
             }
-        }
-        return Trace(state, children);
-    } else {
-        return Trace(state, {});
-    }
-}
+            for (int i : unique_var_ids) {
+                if (random_vars.find(i) != random_vars.end()) {
+                    is_contain_prob_var = true;
+                    break;
+                }
+            }
 
+            if (is_contain_prob_var) {
+                // call probabilistic branch algorithm
+                pbranch(state);
+                is_sat = true;
+            } else {
+                // solve deterministic path constraints
+                call_smt_solver(is_sat, state, params, optimizer,
+                                max_num_trials, ignore_memory, use_dpll);
+                if (is_sat) {
+                    maxSAT--;
+                } else {
+                    maxUNSAT--;
+                }
+
+                if (is_sat) {
+                    state.p =
+                        new SymProb(new Sym(SymType::SCon, FloatToWord(0.0f)),
+                                    new Sym(SymType::SCon, FloatToWord(0.0f)));
+                    state.cond_p = state.p;
+                }
+            }
+
+            constraints_cache.emplace(constraints_str,
+                                      std::make_pair(is_sat, params));
+        }
+
+        if (verbose_level >= 1) {
+            verbose_pconstraints(verbose_level, is_unknown_path_constraint,
+                                 is_target, is_sat, pc, constraints_str, state,
+                                 params);
+        }
+
+        return is_sat;
+    }
+
+    /**
+     * @brief Run probabilistic symbolic execution on a program.
+     *
+     * This function performs probabilistic symbolic execution on a given
+     * program, considering variable distributions, symbolic states, and path
+     * constraints. It explores different execution paths and updates the
+     * constraints and probabilities accordingly.
+     *
+     * @param state The initial symbolic state for execution.
+     * @param maxDepth Maximum exploration depth during symbolic execution.
+     * @return The symbolic execution trace containing states and child traces.
+     */
+    Trace run(SymState &state, int maxDepth = 256) {
+        int pc = state.pc;
+        bool is_target = is_target_pc(target_pcs, pc);
+        bool is_sat = true;
+
+        verbose_pre(verbose_level, pc, prog, state);
+        if (state.path_constraints.size() != 0 && is_target) {
+            is_sat = solve(is_target, pc, state);
+        }
+        verbose_post(verbose_level);
+
+        if (prog[pc].instr == InstrType::Done &&
+            state.path_constraints.size() > 0) {
+            update_prob_constraints_table(pc, state, prob_constraints_table);
+        }
+
+        if ((prog[pc].instr == InstrType::Done) || (!is_sat)) {
+            return Trace(state, {});
+        } else if (explore_further(maxDepth, maxSAT, maxUNSAT)) {
+            Instr instr = prog[pc];
+            std::vector<SymState *> newStates;
+            symStep(&state, instr, newStates);
+            std::vector<Trace> children;
+            for (SymState *newState : newStates) {
+                Trace child = run(*newState, maxDepth - 1);
+                if (return_trace) {
+                    children.push_back(child);
+                }
+            }
+            return Trace(state, children);
+        } else {
+            return Trace(state, {});
+        }
+    }
+};
 }  // namespace gymbo
 

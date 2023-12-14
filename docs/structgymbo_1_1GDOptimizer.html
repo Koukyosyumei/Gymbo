@@ -81,9 +81,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a892b038044ed58200d20ff4ce7a62e2d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1GDOptimizer.html#a892b038044ed58200d20ff4ce7a62e2d">GDOptimizer</a> (int <a class="el" href="structgymbo_1_1GDOptimizer.html#a7d5521480b4f536710d5a06897fa65bd">num_epochs</a>=100, float <a class="el" href="structgymbo_1_1GDOptimizer.html#a69430f01307c0007f0db762fd437abfa">lr</a>=1.0, float <a class="el" href="structgymbo_1_1GDOptimizer.html#a8f024c3699cac041ced908ddf6ba8877">eps</a>=1.0, float <a class="el" href="structgymbo_1_1GDOptimizer.html#a7a81435ec290f50a98eaff343ab61d63">param_low</a>=-10.0, float <a class="el" href="structgymbo_1_1GDOptimizer.html#ab14c4f9993f80b8e023a4c456c6e0b5f">param_high</a>=10.0, bool <a class="el" href="structgymbo_1_1GDOptimizer.html#a1dab2d9895b58c4dda052a00cf8058ee">sign_grad</a>=true, bool <a class="el" href="structgymbo_1_1GDOptimizer.html#a2a35f800649f9c57bc1f7d23f9f6110b">init_param_uniform_int</a>=true, bool <a class="el" href="structgymbo_1_1GDOptimizer.html#a76e7c59fa495bf56f25f26a84faf7112">contain_randomized_vars</a>=false, int <a class="el" href="structgymbo_1_1GDOptimizer.html#ab1631b9a0026ed9c12721df5900eb347">seed</a>=42)</td></tr>
-<tr class="memdesc:a892b038044ed58200d20ff4ce7a62e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="structgymbo_1_1GDOptimizer.html" title="Gradient Descent Optimizer for Symbolic Path Constraints.">GDOptimizer</a>.  <a href="structgymbo_1_1GDOptimizer.html#a892b038044ed58200d20ff4ce7a62e2d">More...</a><br /></td></tr>
-<tr class="separator:a892b038044ed58200d20ff4ce7a62e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac17fe6d6ef5d781ae590c0a8fb6e567b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1GDOptimizer.html#ac17fe6d6ef5d781ae590c0a8fb6e567b">GDOptimizer</a> (int <a class="el" href="structgymbo_1_1GDOptimizer.html#a7d5521480b4f536710d5a06897fa65bd">num_epochs</a>=100, float <a class="el" href="structgymbo_1_1GDOptimizer.html#a69430f01307c0007f0db762fd437abfa">lr</a>=1.0, float <a class="el" href="structgymbo_1_1GDOptimizer.html#a8f024c3699cac041ced908ddf6ba8877">eps</a>=1.0, float <a class="el" href="structgymbo_1_1GDOptimizer.html#a7a81435ec290f50a98eaff343ab61d63">param_low</a>=-10.0, float <a class="el" href="structgymbo_1_1GDOptimizer.html#ab14c4f9993f80b8e023a4c456c6e0b5f">param_high</a>=10.0, bool <a class="el" href="structgymbo_1_1GDOptimizer.html#a1dab2d9895b58c4dda052a00cf8058ee">sign_grad</a>=true, bool <a class="el" href="structgymbo_1_1GDOptimizer.html#a2a35f800649f9c57bc1f7d23f9f6110b">init_param_uniform_int</a>=true, int <a class="el" href="structgymbo_1_1GDOptimizer.html#ab1631b9a0026ed9c12721df5900eb347">seed</a>=42)</td></tr>
+<tr class="memdesc:ac17fe6d6ef5d781ae590c0a8fb6e567b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="structgymbo_1_1GDOptimizer.html" title="Gradient Descent Optimizer for Symbolic Path Constraints.">GDOptimizer</a>.  <a href="structgymbo_1_1GDOptimizer.html#ac17fe6d6ef5d781ae590c0a8fb6e567b">More...</a><br /></td></tr>
+<tr class="separator:ac17fe6d6ef5d781ae590c0a8fb6e567b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabe2fc9e0528d282c105a1e723d75f02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1GDOptimizer.html#aabe2fc9e0528d282c105a1e723d75f02">eval</a> (std::vector&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &gt; &amp;path_constraints, std::unordered_map&lt; int, float &gt; params)</td></tr>
 <tr class="memdesc:aabe2fc9e0528d282c105a1e723d75f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate if path constraints are satisfied for given parameters.  <a href="structgymbo_1_1GDOptimizer.html#aabe2fc9e0528d282c105a1e723d75f02">More...</a><br /></td></tr>
 <tr class="separator:aabe2fc9e0528d282c105a1e723d75f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,8 +128,8 @@ Public Attributes</h2></td></tr>
 <dd>
 The optimization process relies on the gradient information of the path constraints. The optimizer iteratively updates the parameters until the constraints are satisfied or a maximum number of epochs is reached. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a892b038044ed58200d20ff4ce7a62e2d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a892b038044ed58200d20ff4ce7a62e2d">&#9670;&nbsp;</a></span>GDOptimizer()</h2>
+<a id="ac17fe6d6ef5d781ae590c0a8fb6e567b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac17fe6d6ef5d781ae590c0a8fb6e567b">&#9670;&nbsp;</a></span>GDOptimizer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,12 +182,6 @@ The optimization process relies on the gradient information of the path constrai
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>contain_randomized_vars</em> = <code>false</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>seed</em> = <code>42</code>&#160;</td>
         </tr>
@@ -214,7 +208,6 @@ The optimization process relies on the gradient information of the path constrai
     <tr><td class="paramname">param_high</td><td>Upper bound for parameter initialization (default: 10). </td></tr>
     <tr><td class="paramname">sign_grad</td><td>If true, use sign gradient descent. Otherwise, use standard gradient descent. (default true). </td></tr>
     <tr><td class="paramname">init_param_uniform_int</td><td>Flag indicating whether initial parameter values are drawn from the uniform int distribution or uniform real distribution (default true). </td></tr>
-    <tr><td class="paramname">contain_randomized_vars</td><td>If true, use aeval and agrad. Otherwise, use eval and grad. </td></tr>
     <tr><td class="paramname">seed</td><td>Random seed for initializing parameter values (default: 42). </td></tr>
   </table>
   </dd>

@@ -26,6 +26,11 @@
  *
  * @image html /img/symbolic_nn.drawio.svg
  *
+ * Another unique feature of Gymbo is that it can track the probabilistic
+ * symbolic variables. We adopt the PBRANCH algorithm proposed in `[3]` and
+ * currently support the discrete uniform, bernoulli, and binomial
+ * distributions.
+ *
  * > Please note that Gymbo is currently under development and may have bugs.
  * Your feedback and contributions are always greatly appreciated.
  *

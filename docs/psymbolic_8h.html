@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -76,36 +77,40 @@ $(function() {
 <p>Implementation of symbolic execution for randomized programs.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="symbolic_8h_source.html">symbolic.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="type_8h_source.html">type.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for psymbolic.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="psymbolic_8h__incl.png" border="0" usemap="#alibgymbo_2psymbolic_8h" alt=""/></div>
 <map name="alibgymbo_2psymbolic_8h" id="alibgymbo_2psymbolic_8h">
-<area shape="rect" title="Implementation of symbolic execution for randomized programs." alt="" coords="253,5,420,32"/>
-<area shape="rect" href="symbolic_8h.html" title="Core implementation of gradient&#45;based symbolic execution." alt="" coords="206,80,299,107"/>
-<area shape="rect" href="type_8h.html" title="Implementatations of basic alias, types, and classes." alt="" coords="292,304,355,331"/>
-<area shape="rect" href="utils_8h.html" title="Utility funcitons and classes." alt="" coords="377,379,440,405"/>
-<area shape="rect" href="smt_8h.html" title="Core implementation of gradient&#45;based smt solver." alt="" coords="223,155,282,181"/>
-<area shape="rect" href="gd_8h.html" title="Implementation of gradient descent optimizer." alt="" coords="238,229,289,256"/>
-<area shape="rect" href="sat_8h.html" title="Implementation of SAT solver." alt="" coords="159,229,213,256"/>
-<area shape="rect" title=" " alt="" coords="195,304,267,331"/>
+<area shape="rect" title="Implementation of symbolic execution for randomized programs." alt="" coords="184,5,351,32"/>
+<area shape="rect" href="symbolic_8h.html" title="Core implementation of gradient&#45;based symbolic execution." alt="" coords="221,80,314,107"/>
+<area shape="rect" href="smt_8h.html" title="Core implementation of gradient&#45;based smt solver." alt="" coords="238,155,297,181"/>
+<area shape="rect" href="gd_8h.html" title="Implementation of gradient descent optimizer." alt="" coords="203,229,254,256"/>
+<area shape="rect" href="sat_8h.html" title="Implementation of SAT solver." alt="" coords="279,229,333,256"/>
+<area shape="rect" title=" " alt="" coords="139,304,211,331"/>
+<area shape="rect" href="type_8h.html" title="Implementatations of basic alias, types, and classes." alt="" coords="236,304,299,331"/>
 <area shape="rect" title=" " alt="" coords="5,379,129,405"/>
 <area shape="rect" title=" " alt="" coords="154,379,269,405"/>
 <area shape="rect" title=" " alt="" coords="293,379,353,405"/>
+<area shape="rect" href="utils_8h.html" title="Utility funcitons and classes." alt="" coords="377,379,440,405"/>
 <area shape="rect" title=" " alt="" coords="159,453,218,480"/>
 <area shape="rect" title=" " alt="" coords="243,453,305,480"/>
 <area shape="rect" title=" " alt="" coords="330,453,397,480"/>
 <area shape="rect" title=" " alt="" coords="421,453,487,480"/>
 <area shape="rect" title=" " alt="" coords="511,453,570,480"/>
 <area shape="rect" title=" " alt="" coords="595,453,657,480"/>
-<area shape="rect" title=" " alt="" coords="94,304,171,331"/>
+<area shape="rect" title=" " alt="" coords="323,304,401,331"/>
 </map>
 </div>
 </div>
 <p><a href="psymbolic_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html">gymbo::PSExecutor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a derived class for symbolic execution engine for probabilistic programs.  <a href="structgymbo_1_1PSExecutor.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacegymbo"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html">gymbo</a></td></tr>
@@ -119,15 +124,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ac945fcc71ddc6b734f8444f51d21f219"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#ac945fcc71ddc6b734f8444f51d21f219">gymbo::verbose_pconstraints</a> (int verbose_level, bool is_unknown_path_constraint, bool is_target, bool is_sat, int pc, std::string constraints_str, SymState &amp;state, const std::unordered_map&lt; int, float &gt; &amp;params)</td></tr>
 <tr class="memdesc:ac945fcc71ddc6b734f8444f51d21f219"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints verbose information about probabilistic path constraints.  <a href="namespacegymbo.html#ac945fcc71ddc6b734f8444f51d21f219">More...</a><br /></td></tr>
 <tr class="separator:ac945fcc71ddc6b734f8444f51d21f219"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fb4d560e0d77f7e34155365da1b0ee0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a0fb4d560e0d77f7e34155365da1b0ee0">gymbo::solve_pconstraints</a> (bool &amp;is_sat, bool is_target, int pc, std::unordered_set&lt; int &gt; &amp;random_vars, GDOptimizer &amp;optimizer, SymState &amp;state, PathConstraintsTable &amp;constraints_cache, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
-<tr class="memdesc:a0fb4d560e0d77f7e34155365da1b0ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves path constraints and updates the symbolic state.  <a href="namespacegymbo.html#a0fb4d560e0d77f7e34155365da1b0ee0">More...</a><br /></td></tr>
-<tr class="separator:a0fb4d560e0d77f7e34155365da1b0ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f454957ed3d5dc4ac39c4624c90c14a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a9f454957ed3d5dc4ac39c4624c90c14a">gymbo::update_prob_constraints_table</a> (int pc, SymState &amp;state, ProbPathConstraintsTable &amp;prob_constraints_table)</td></tr>
 <tr class="memdesc:a9f454957ed3d5dc4ac39c4624c90c14a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the table of probabilistic path constraints.  <a href="namespacegymbo.html#a9f454957ed3d5dc4ac39c4624c90c14a">More...</a><br /></td></tr>
 <tr class="separator:a9f454957ed3d5dc4ac39c4624c90c14a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8baa020b76300a7ebce8757cdedfed43"><td class="memItemLeft" align="right" valign="top">Trace&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a8baa020b76300a7ebce8757cdedfed43">gymbo::run_pgymbo</a> (Prog &amp;prog, std::unordered_set&lt; int &gt; &amp;random_vars, GDOptimizer &amp;optimizer, SymState &amp;state, std::unordered_set&lt; int &gt; &amp;target_pcs, PathConstraintsTable &amp;constraints_cache, ProbPathConstraintsTable &amp;prob_constraints_table, int maxDepth, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level, bool return_trace=false)</td></tr>
-<tr class="memdesc:a8baa020b76300a7ebce8757cdedfed43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run probabilistic symbolic execution on a program.  <a href="namespacegymbo.html#a8baa020b76300a7ebce8757cdedfed43">More...</a><br /></td></tr>
-<tr class="separator:a8baa020b76300a7ebce8757cdedfed43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of symbolic execution for randomized programs. </p>

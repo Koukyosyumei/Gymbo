@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
     gymbo::Prog prg;
     gymbo::GDOptimizer optimizer(num_itrs, step_size, eps, param_low,
                                  param_high, sign_grad, init_param_uniform_int,
-                                 true, seed);
+                                 seed);
     std::unordered_set<int> target_pcs;
 
     printf("Compiling the input program...\n");
@@ -89,16 +89,15 @@ int main(int argc, char *argv[]) {
 
     for (int door_switch : doow_switch_candidates) {
         gymbo::SymState init;
-        gymbo::PathConstraintsTable cache_constraints;
-        gymbo::ProbPathConstraintsTable probabilistic_constraints;
         init.set_concrete_val(var_counter["door_switch"], door_switch);
-        gymbo::run_pgymbo(prg, random_vars, optimizer, init, target_pcs,
-                          cache_constraints, probabilistic_constraints,
-                          max_depth, maxSAT, maxUNSAT, max_num_trials,
-                          ignore_memory, use_dpll, verbose_level);
 
-        int num_unique_path_constraints = cache_constraints.size();
-        int num_unique_final_states = probabilistic_constraints.size();
+        gymbo::PSExecutor executor(prg, optimizer, random_vars, target_pcs,
+                                   maxSAT, maxUNSAT, max_num_trials,
+                                   ignore_memory, use_dpll, verbose_level);
+        executor.run(init, max_depth);
+
+        int num_unique_path_constraints = executor.constraints_cache.size();
+        int num_unique_final_states = executor.prob_constraints_table.size();
 
         std::unordered_map<int, float> params;
 
@@ -109,7 +108,7 @@ int main(int argc, char *argv[]) {
             printf("\n#Total Final States: %d\n", num_unique_final_states);
             printf("List of Final States\n");
             float expected_value = 0.0f;
-            for (auto &cc : probabilistic_constraints) {
+            for (auto &cc : executor.prob_constraints_table) {
                 for (auto &ccv : cc.second) {
                     float p = std::get<2>(ccv).eval(params, eps, var2dist, D);
                     expected_value += p * gymbo::wordToFloat(std::get<1>(
