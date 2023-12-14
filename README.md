@@ -140,7 +140,8 @@ gymbo::generate_ast(token, user_input, code);
 gymbo::compile_ast(code, prg);
 
 // execute gradient-based symbolie execution
-gymbo::run_gymbo(prg, optimizer, init, cache_constraints, ...);
+gymbo::SExecutor executor(prg, optimizer, target_pcs);
+executor.run(init, max_depth);
 ```
 
 ## Python API
