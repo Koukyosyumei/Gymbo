@@ -52,8 +52,6 @@ int main(int argc, char *argv[]) {
                                  param_high, sign_grad, init_param_uniform_int,
                                  true, seed);
     gymbo::SymState init;
-    gymbo::PathConstraintsTable cache_constraints;
-    gymbo::ProbPathConstraintsTable probabilistic_constraints;
     std::unordered_set<int> target_pcs;
 
     printf("Compiling the input program...\n");
@@ -78,17 +76,17 @@ int main(int argc, char *argv[]) {
     std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
 
     printf("Start Symbolic Execution...\n");
-    gymbo::run_pgymbo(prg, random_vars, optimizer, init, target_pcs,
-                      cache_constraints, probabilistic_constraints, max_depth,
-                      maxSAT, maxUNSAT, max_num_trials, ignore_memory, use_dpll,
-                      verbose_level);
+    gymbo::PSExecutor executor(prg, optimizer, random_vars, target_pcs, maxSAT,
+                               maxUNSAT, max_num_trials, ignore_memory,
+                               use_dpll, verbose_level);
+    executor.run(init, max_depth);
     printf("---------------------------\n");
 
     printf("Result Summary\n");
     printf("#Loops Spent for Gradient Descent: %d\n", optimizer.num_used_itr);
 
-    int num_unique_path_constraints = cache_constraints.size();
-    int num_unique_final_states = probabilistic_constraints.size();
+    int num_unique_path_constraints = executor.constraints_cache.size();
+    int num_unique_final_states = executor.prob_constraints_table.size();
 
     std::unordered_map<int, float> params;
 
@@ -98,7 +96,7 @@ int main(int argc, char *argv[]) {
         printf("#Total Final States: %d\n", num_unique_final_states);
         if (verbose_level >= 0) {
             printf("List of Final States\n");
-            for (auto &cc : probabilistic_constraints) {
+            for (auto &cc : executor.prob_constraints_table) {
                 for (auto &ccv : cc.second) {
                     printf("pc=%d: prob=%f, %s, constraints=%s\n", cc.first,
                            std::get<2>(ccv).eval(params, eps, var2dist, D),
