@@ -102,15 +102,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0c79b2dc21deed032ff94afc3a94cb43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymProb.html#a0c79b2dc21deed032ff94afc3a94cb43">operator*</a> (<a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> other)</td></tr>
 <tr class="memdesc:a0c79b2dc21deed032ff94afc3a94cb43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies two <a class="el" href="structgymbo_1_1SymProb.html" title="Represents a symbolic probability with a numerator and denominator.">SymProb</a> instances.  <a href="structgymbo_1_1SymProb.html#a0c79b2dc21deed032ff94afc3a94cb43">More...</a><br /></td></tr>
 <tr class="separator:a0c79b2dc21deed032ff94afc3a94cb43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58b2cd3749634974dacf34fbb5267a27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymProb.html#a58b2cd3749634974dacf34fbb5267a27">pmul</a> (<a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> *other)</td></tr>
+<tr class="memdesc:a58b2cd3749634974dacf34fbb5267a27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies two <a class="el" href="structgymbo_1_1SymProb.html" title="Represents a symbolic probability with a numerator and denominator.">SymProb</a> instances.  <a href="structgymbo_1_1SymProb.html#a58b2cd3749634974dacf34fbb5267a27">More...</a><br /></td></tr>
+<tr class="separator:a58b2cd3749634974dacf34fbb5267a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f31b482f6a558a3f3a463f16ef9a936"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> *, <a class="el" href="structgymbo_1_1Sym.html">Sym</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymProb.html#a2f31b482f6a558a3f3a463f16ef9a936">marginalize</a> (std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;var2dist, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;D)</td></tr>
 <tr class="memdesc:a2f31b482f6a558a3f3a463f16ef9a936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marginalizes the <a class="el" href="structgymbo_1_1SymProb.html" title="Represents a symbolic probability with a numerator and denominator.">SymProb</a> over given variable assignments.  <a href="structgymbo_1_1SymProb.html#a2f31b482f6a558a3f3a463f16ef9a936">More...</a><br /></td></tr>
 <tr class="separator:a2f31b482f6a558a3f3a463f16ef9a936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af35f871a03f51d2ebff3d87e83d7596c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymProb.html#af35f871a03f51d2ebff3d87e83d7596c">eval</a> (std::unordered_map&lt; int, float &gt; &amp;params, float eps, std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;var2dist, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;D)</td></tr>
 <tr class="memdesc:af35f871a03f51d2ebff3d87e83d7596c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the <a class="el" href="structgymbo_1_1SymProb.html" title="Represents a symbolic probability with a numerator and denominator.">SymProb</a> for given parameters, epsilon, variable assignments, and distributions.  <a href="structgymbo_1_1SymProb.html#af35f871a03f51d2ebff3d87e83d7596c">More...</a><br /></td></tr>
 <tr class="separator:af35f871a03f51d2ebff3d87e83d7596c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af10f52f18a417e4cb920872769f090d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Sym.html">Sym</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymProb.html#af10f52f18a417e4cb920872769f090d8">query</a> (<a class="el" href="namespacegymbo.html#a4524c130985b8982d2787f9bafe27225">SymType</a> &amp;symtype, <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &amp;other, std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;var2dist, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;D)</td></tr>
-<tr class="memdesc:af10f52f18a417e4cb920872769f090d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queries the <a class="el" href="structgymbo_1_1SymProb.html" title="Represents a symbolic probability with a numerator and denominator.">SymProb</a> with a given symbolic type, another symbolic expression, and variable assignments.  <a href="structgymbo_1_1SymProb.html#af10f52f18a417e4cb920872769f090d8">More...</a><br /></td></tr>
-<tr class="separator:af10f52f18a417e4cb920872769f090d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd515bce0315739636795c3c28ebcf8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Sym.html">Sym</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymProb.html#abd515bce0315739636795c3c28ebcf8c">query</a> (<a class="el" href="namespacegymbo.html#a4524c130985b8982d2787f9bafe27225">SymType</a> symtype, <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &amp;other, std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;var2dist, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;D)</td></tr>
+<tr class="memdesc:abd515bce0315739636795c3c28ebcf8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queries the <a class="el" href="structgymbo_1_1SymProb.html" title="Represents a symbolic probability with a numerator and denominator.">SymProb</a> with a given symbolic type, another symbolic expression, and variable assignments.  <a href="structgymbo_1_1SymProb.html#abd515bce0315739636795c3c28ebcf8c">More...</a><br /></td></tr>
+<tr class="separator:abd515bce0315739636795c3c28ebcf8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -338,8 +341,43 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af10f52f18a417e4cb920872769f090d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af10f52f18a417e4cb920872769f090d8">&#9670;&nbsp;</a></span>query()</h2>
+<a id="a58b2cd3749634974dacf34fbb5267a27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58b2cd3749634974dacf34fbb5267a27">&#9670;&nbsp;</a></span>pmul()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a>* gymbo::SymProb::pmul </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> *&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiplies two <a class="el" href="structgymbo_1_1SymProb.html" title="Represents a symbolic probability with a numerator and denominator.">SymProb</a> instances. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The <a class="el" href="structgymbo_1_1SymProb.html" title="Represents a symbolic probability with a numerator and denominator.">SymProb</a> to multiply with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of the multiplication operation as a new <a class="el" href="structgymbo_1_1SymProb.html" title="Represents a symbolic probability with a numerator and denominator.">SymProb</a> instance. </dd></dl>
+
+</div>
+</div>
+<a id="abd515bce0315739636795c3c28ebcf8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd515bce0315739636795c3c28ebcf8c">&#9670;&nbsp;</a></span>query()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,7 +388,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structgymbo_1_1Sym.html">Sym</a> gymbo::SymProb::query </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacegymbo.html#a4524c130985b8982d2787f9bafe27225">SymType</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacegymbo.html#a4524c130985b8982d2787f9bafe27225">SymType</a>&#160;</td>
           <td class="paramname"><em>symtype</em>, </td>
         </tr>
         <tr>

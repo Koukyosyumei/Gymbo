@@ -1,5 +1,6 @@
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "../../libgymbo/compiler.h"
 #include "../../libgymbo/psymbolic.h"
@@ -73,6 +74,7 @@ int main(int argc, char *argv[]) {
     }
     printf("---\n");
 
+    std::unordered_set<int> random_vars = {0, 1};
     std::unordered_map<int, gymbo::DiscreteDist> var2dist = {
         {0, gymbo::DiscreteUniformDist(1, 3)},
         {1, gymbo::DiscreteUniformDist(1, 3)}};
@@ -90,7 +92,7 @@ int main(int argc, char *argv[]) {
         gymbo::PathConstraintsTable cache_constraints;
         gymbo::ProbPathConstraintsTable probabilistic_constraints;
         init.set_concrete_val(var_counter["door_switch"], door_switch);
-        gymbo::run_pgymbo(prg, var2dist, D, optimizer, init, target_pcs,
+        gymbo::run_pgymbo(prg, random_vars, optimizer, init, target_pcs,
                           cache_constraints, probabilistic_constraints,
                           max_depth, maxSAT, maxUNSAT, max_num_trials,
                           ignore_memory, use_dpll, verbose_level);

@@ -95,7 +95,13 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a discrete probability distribution.  <a href="structgymbo_1_1DiscreteDist.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1DiscreteUniformDist.html">DiscreteUniformDist</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a discrete uniform probability distribution derived from <a class="el" href="structgymbo_1_1DiscreteDist.html" title="Represents a discrete probability distribution.">DiscreteDist</a>.  <a href="structgymbo_1_1DiscreteUniformDist.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a discrete uniform distribution derived from <a class="el" href="structgymbo_1_1DiscreteDist.html" title="Represents a discrete probability distribution.">DiscreteDist</a>.  <a href="structgymbo_1_1DiscreteUniformDist.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1BernoulliDist.html">BernoulliDist</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a bernoulli distribution derived from <a class="el" href="structgymbo_1_1DiscreteDist.html" title="Represents a discrete probability distribution.">DiscreteDist</a>.  <a href="structgymbo_1_1BernoulliDist.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1BinomialDist.html">BinomialDist</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a binomial distribution derived from <a class="el" href="structgymbo_1_1DiscreteDist.html" title="Represents a discrete probability distribution.">DiscreteDist</a>.  <a href="structgymbo_1_1BinomialDist.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a symbolic probability with a numerator and denominator.  <a href="structgymbo_1_1SymProb.html#details">More...</a><br /></td></tr>
@@ -289,18 +295,21 @@ Functions</h2></td></tr>
 <tr class="memitem:af40a70afb521e856bda968808b2b492e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#af40a70afb521e856bda968808b2b492e">gexecute</a> (<a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;prg, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;init, std::unordered_set&lt; int &gt; &amp;target_pcs, int max_depth, int maxSAT, int maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
 <tr class="memdesc:af40a70afb521e856bda968808b2b492e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Executes a Program with Gradient Descent Optimization.  <a href="namespacegymbo.html#af40a70afb521e856bda968808b2b492e">More...</a><br /></td></tr>
 <tr class="separator:af40a70afb521e856bda968808b2b492e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed8257f2dd65fda6917c46d75b3d24ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#aed8257f2dd65fda6917c46d75b3d24ec">pbranch</a> (std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;var2dist, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;D, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state)</td></tr>
-<tr class="memdesc:aed8257f2dd65fda6917c46d75b3d24ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform probabilistic branching based on symbolic execution.  <a href="namespacegymbo.html#aed8257f2dd65fda6917c46d75b3d24ec">More...</a><br /></td></tr>
-<tr class="separator:aed8257f2dd65fda6917c46d75b3d24ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b2c855687acd2541bb6d6bcbf80a9cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a3b2c855687acd2541bb6d6bcbf80a9cb">pbranch</a> (<a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state)</td></tr>
+<tr class="memdesc:a3b2c855687acd2541bb6d6bcbf80a9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform probabilistic branching based on symbolic execution.  <a href="namespacegymbo.html#a3b2c855687acd2541bb6d6bcbf80a9cb">More...</a><br /></td></tr>
+<tr class="separator:a3b2c855687acd2541bb6d6bcbf80a9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac945fcc71ddc6b734f8444f51d21f219"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#ac945fcc71ddc6b734f8444f51d21f219">verbose_pconstraints</a> (int verbose_level, bool is_unknown_path_constraint, bool is_target, bool is_sat, int pc, std::string constraints_str, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, const std::unordered_map&lt; int, float &gt; &amp;params)</td></tr>
+<tr class="memdesc:ac945fcc71ddc6b734f8444f51d21f219"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints verbose information about probabilistic path constraints.  <a href="namespacegymbo.html#ac945fcc71ddc6b734f8444f51d21f219">More...</a><br /></td></tr>
 <tr class="separator:ac945fcc71ddc6b734f8444f51d21f219"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41efd89d5f5866be466734a6b0d5ea5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a41efd89d5f5866be466734a6b0d5ea5d">solve_pconstraints</a> (bool &amp;is_sat, bool is_target, int pc, std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;var2dist, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;D, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, <a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;constraints_cache, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
-<tr class="separator:a41efd89d5f5866be466734a6b0d5ea5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fb4d560e0d77f7e34155365da1b0ee0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a0fb4d560e0d77f7e34155365da1b0ee0">solve_pconstraints</a> (bool &amp;is_sat, bool is_target, int pc, std::unordered_set&lt; int &gt; &amp;random_vars, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, <a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;constraints_cache, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
+<tr class="memdesc:a0fb4d560e0d77f7e34155365da1b0ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves path constraints and updates the symbolic state.  <a href="namespacegymbo.html#a0fb4d560e0d77f7e34155365da1b0ee0">More...</a><br /></td></tr>
+<tr class="separator:a0fb4d560e0d77f7e34155365da1b0ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f454957ed3d5dc4ac39c4624c90c14a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a9f454957ed3d5dc4ac39c4624c90c14a">update_prob_constraints_table</a> (int pc, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, <a class="el" href="namespacegymbo.html#a035e6fe34f819db35a5662ae0cf427d3">ProbPathConstraintsTable</a> &amp;prob_constraints_table)</td></tr>
+<tr class="memdesc:a9f454957ed3d5dc4ac39c4624c90c14a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the table of probabilistic path constraints.  <a href="namespacegymbo.html#a9f454957ed3d5dc4ac39c4624c90c14a">More...</a><br /></td></tr>
 <tr class="separator:a9f454957ed3d5dc4ac39c4624c90c14a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af14aa75beebbdc447f479657e715104a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Trace.html">Trace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#af14aa75beebbdc447f479657e715104a">run_pgymbo</a> (<a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;prog, std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;var2dist, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;D, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, std::unordered_set&lt; int &gt; &amp;target_pcs, <a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;constraints_cache, <a class="el" href="namespacegymbo.html#a035e6fe34f819db35a5662ae0cf427d3">ProbPathConstraintsTable</a> &amp;prob_constraints_table, int maxDepth, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level, bool return_trace=false)</td></tr>
-<tr class="memdesc:af14aa75beebbdc447f479657e715104a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run probabilistic symbolic execution on a program.  <a href="namespacegymbo.html#af14aa75beebbdc447f479657e715104a">More...</a><br /></td></tr>
-<tr class="separator:af14aa75beebbdc447f479657e715104a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8baa020b76300a7ebce8757cdedfed43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Trace.html">Trace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a8baa020b76300a7ebce8757cdedfed43">run_pgymbo</a> (<a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;prog, std::unordered_set&lt; int &gt; &amp;random_vars, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, std::unordered_set&lt; int &gt; &amp;target_pcs, <a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> &amp;constraints_cache, <a class="el" href="namespacegymbo.html#a035e6fe34f819db35a5662ae0cf427d3">ProbPathConstraintsTable</a> &amp;prob_constraints_table, int maxDepth, int &amp;maxSAT, int &amp;maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level, bool return_trace=false)</td></tr>
+<tr class="memdesc:a8baa020b76300a7ebce8757cdedfed43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run probabilistic symbolic execution on a program.  <a href="namespacegymbo.html#a8baa020b76300a7ebce8757cdedfed43">More...</a><br /></td></tr>
+<tr class="separator:a8baa020b76300a7ebce8757cdedfed43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50a6f585caaa9c8ca66826268b46dcc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a50a6f585caaa9c8ca66826268b46dcc9">initialize_params</a> (std::unordered_map&lt; int, float &gt; &amp;params, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, bool ignore_memory)</td></tr>
 <tr class="memdesc:a50a6f585caaa9c8ca66826268b46dcc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Parameter Values from Memory.  <a href="namespacegymbo.html#a50a6f585caaa9c8ca66826268b46dcc9">More...</a><br /></td></tr>
 <tr class="separator:a50a6f585caaa9c8ca66826268b46dcc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2291,8 +2300,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aed8257f2dd65fda6917c46d75b3d24ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed8257f2dd65fda6917c46d75b3d24ec">&#9670;&nbsp;</a></span>pbranch()</h2>
+<a id="a3b2c855687acd2541bb6d6bcbf80a9cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b2c855687acd2541bb6d6bcbf80a9cb">&#9670;&nbsp;</a></span>pbranch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2303,25 +2312,9 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void gymbo::pbranch </td>
           <td>(</td>
-          <td class="paramtype">std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>var2dist</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; std::vector&lt; int &gt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>D</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
-          <td class="paramname"><em>state</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>state</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -2332,11 +2325,9 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Perform probabilistic branching based on symbolic execution. </p>
-<p>Given a set of variable distributions, symbolic state, and path constraints, this function performs probabilistic branching. It computes the symbolic probability of the state being reached and updates the symbolic state accordingly.</p>
+<p>Given the symbolic state, this function performs probabilistic branching. It computes the symbolic probability of the state being reached and updates the symbolic state accordingly.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">var2dist</td><td>A map of variable IDs to their discrete distributions. </td></tr>
-    <tr><td class="paramname">D</td><td>A vector of vectors representing the all possible combinations of probabilistic variables. </td></tr>
     <tr><td class="paramname">state</td><td>The symbolic state for the current execution. </td></tr>
   </table>
   </dd>
@@ -2554,8 +2545,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af14aa75beebbdc447f479657e715104a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af14aa75beebbdc447f479657e715104a">&#9670;&nbsp;</a></span>run_pgymbo()</h2>
+<a id="a8baa020b76300a7ebce8757cdedfed43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8baa020b76300a7ebce8757cdedfed43">&#9670;&nbsp;</a></span>run_pgymbo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2572,14 +2563,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>var2dist</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; std::vector&lt; int &gt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>D</em>, </td>
+          <td class="paramtype">std::unordered_set&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>random_vars</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2677,8 +2662,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">prog</td><td>The program to be executed symbolically. </td></tr>
-    <tr><td class="paramname">var2dist</td><td>Map of variable IDs to their discrete distributions. </td></tr>
-    <tr><td class="paramname">D</td><td>A vector of vectors representing the all possible combinations of probabilistic variables. </td></tr>
+    <tr><td class="paramname">random_vars</td><td>The set of random variables'IDs. </td></tr>
     <tr><td class="paramname">optimizer</td><td>The optimizer used for guided symbolic execution. </td></tr>
     <tr><td class="paramname">state</td><td>The initial symbolic state for execution. </td></tr>
     <tr><td class="paramname">target_pcs</td><td>Set of target program counters for analysis. </td></tr>
@@ -2961,8 +2945,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a41efd89d5f5866be466734a6b0d5ea5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41efd89d5f5866be466734a6b0d5ea5d">&#9670;&nbsp;</a></span>solve_pconstraints()</h2>
+<a id="a0fb4d560e0d77f7e34155365da1b0ee0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fb4d560e0d77f7e34155365da1b0ee0">&#9670;&nbsp;</a></span>solve_pconstraints()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2991,14 +2975,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::unordered_map&lt; int, <a class="el" href="structgymbo_1_1DiscreteDist.html">DiscreteDist</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>var2dist</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; std::vector&lt; int &gt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>D</em>, </td>
+          <td class="paramtype">std::unordered_set&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>random_vars</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -3066,6 +3044,27 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Solves path constraints and updates the symbolic state. </p>
+<p>This function checks the satisfiability of the path constraints using an SMT solver or a probabilistic branching algorithm. It updates the symbolic state based on the result and stores the solution in a cache for future use.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is_sat</td><td>Whether the path constraints are satisfiable. </td></tr>
+    <tr><td class="paramname">is_target</td><td>Whether the program counter is a target. </td></tr>
+    <tr><td class="paramname">pc</td><td>The program counter. </td></tr>
+    <tr><td class="paramname">random_vars</td><td>The set of random variable IDs. </td></tr>
+    <tr><td class="paramname">optimizer</td><td>The optimizer used for guided symbolic execution. </td></tr>
+    <tr><td class="paramname">state</td><td>The symbolic state. </td></tr>
+    <tr><td class="paramname">constraints_cache</td><td>Cache for storing and reusing path constraints. </td></tr>
+    <tr><td class="paramname">maxSAT</td><td>Maximum number of satisfiable paths to explore. </td></tr>
+    <tr><td class="paramname">maxUNSAT</td><td>Maximum number of unsatisfiable paths to explore. </td></tr>
+    <tr><td class="paramname">max_num_trials</td><td>Maximum number of trials for satisfiability checking. </td></tr>
+    <tr><td class="paramname">ignore_memory</td><td>Flag to ignore memory updates during symbolic execution. </td></tr>
+    <tr><td class="paramname">use_dpll</td><td>Flag indicating whether to use the DPLL solver for satisfiability. </td></tr>
+    <tr><td class="paramname">verbose_level</td><td>Verbosity level for printing debug information. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -3382,6 +3381,17 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Updates the table of probabilistic path constraints. </p>
+<p>This function stores the path constraints and the corresponding probability of reaching the current state in a table for future reference.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pc</td><td>The program counter. </td></tr>
+    <tr><td class="paramname">state</td><td>The symbolic state. </td></tr>
+    <tr><td class="paramname">prob_constraints_table</td><td>Table for storing probabilistic path constraints. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a08e7c1f5fbe133aac3555ce9490af0dc"></a>
@@ -3576,6 +3586,22 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Prints verbose information about probabilistic path constraints. </p>
+<p>This function prints the path constraints, whether they are satisfiable, the probability of reaching the current state, and other relevant information.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">verbose_level</td><td>The level of verbosity. </td></tr>
+    <tr><td class="paramname">is_unknown_path_constraint</td><td>Whether the path constraint is unknown. </td></tr>
+    <tr><td class="paramname">is_target</td><td>Whether the program counter is a target. </td></tr>
+    <tr><td class="paramname">is_sat</td><td>Whether the path constraint is satisfiable. </td></tr>
+    <tr><td class="paramname">pc</td><td>The program counter. </td></tr>
+    <tr><td class="paramname">constraints_str</td><td>String representation of the path constraints. </td></tr>
+    <tr><td class="paramname">state</td><td>The symbolic state. </td></tr>
+    <tr><td class="paramname">params</td><td>Dictionary of symbolic variable values. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

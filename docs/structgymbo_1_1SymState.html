@@ -83,7 +83,7 @@ Collaboration diagram for gymbo::SymState:</div>
 <div class="dyncontent">
 <div class="center"><img src="structgymbo_1_1SymState__coll__graph.png" border="0" usemap="#agymbo_1_1SymState_coll__map" alt="Collaboration graph"/></div>
 <map name="agymbo_1_1SymState_coll__map" id="agymbo_1_1SymState_coll__map">
-<area shape="rect" title="Struct representing the symbolic state of the symbolic execution." alt="" coords="85,216,224,243"/>
+<area shape="rect" title="Struct representing the symbolic state of the symbolic execution." alt="" coords="85,231,224,257"/>
 <area shape="rect" href="structgymbo_1_1SymProb.html" title="Represents a symbolic probability with a numerator and denominator." alt="" coords="5,119,139,146"/>
 <area shape="rect" href="structgymbo_1_1Sym.html" title="Struct representing a symbolic expression." alt="" coords="20,7,124,33"/>
 <area shape="rect" href="classgymbo_1_1Linkedlist.html" title=" " alt="" coords="163,112,311,153"/>
@@ -95,9 +95,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8cfdb464cd87ab23ce3f4f4861b7ade2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a8cfdb464cd87ab23ce3f4f4861b7ade2">SymState</a> ()</td></tr>
 <tr class="memdesc:a8cfdb464cd87ab23ce3f4f4861b7ade2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for symbolic state.  <a href="structgymbo_1_1SymState.html#a8cfdb464cd87ab23ce3f4f4861b7ade2">More...</a><br /></td></tr>
 <tr class="separator:a8cfdb464cd87ab23ce3f4f4861b7ade2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a314a85f75a22238332031c61606fa5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a1a314a85f75a22238332031c61606fa5">SymState</a> (int <a class="el" href="structgymbo_1_1SymState.html#a7dfef12dd646e4644c5931c4e65779ce">pc</a>, int <a class="el" href="structgymbo_1_1SymState.html#a4c7ebe9a103e0b7a60633cca1f82b88f">var_cnt</a>, <a class="el" href="namespacegymbo.html#a93394c86b71f9947e9d17b61013e600c">Mem</a> &amp;<a class="el" href="structgymbo_1_1SymState.html#ae2ea8fcc287983a5bc53e81893e5a2ea">mem</a>, <a class="el" href="namespacegymbo.html#ac714ceb538af2de2adce25193f0e5eaf">SMem</a> &amp;<a class="el" href="structgymbo_1_1SymState.html#a85b48b53e8e5301b88c53ba7d34f0b3c">smem</a>, <a class="el" href="classgymbo_1_1Linkedlist.html">Linkedlist</a>&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &gt; &amp;<a class="el" href="structgymbo_1_1SymState.html#a6aa224acae7f54e2f67a708be6cd0b42">symbolic_stack</a>, std::vector&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &gt; &amp;<a class="el" href="structgymbo_1_1SymState.html#a33bd74a7fdeee5aeecc51a750944efcc">path_constraints</a>, <a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> &amp;<a class="el" href="structgymbo_1_1SymState.html#aa941d2eb4b423e923097403edb47bf14">p</a>, bool <a class="el" href="structgymbo_1_1SymState.html#a1d35d88b07b580a6eb2de39a861793cd">has_observed_p_cond</a>)</td></tr>
-<tr class="memdesc:a1a314a85f75a22238332031c61606fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for symbolic state with specified values.  <a href="structgymbo_1_1SymState.html#a1a314a85f75a22238332031c61606fa5">More...</a><br /></td></tr>
-<tr class="separator:a1a314a85f75a22238332031c61606fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a230dffcb41f507b03f40d886d67a1bdb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a230dffcb41f507b03f40d886d67a1bdb">SymState</a> (int <a class="el" href="structgymbo_1_1SymState.html#a7dfef12dd646e4644c5931c4e65779ce">pc</a>, int <a class="el" href="structgymbo_1_1SymState.html#a4c7ebe9a103e0b7a60633cca1f82b88f">var_cnt</a>, <a class="el" href="namespacegymbo.html#a93394c86b71f9947e9d17b61013e600c">Mem</a> &amp;<a class="el" href="structgymbo_1_1SymState.html#ae2ea8fcc287983a5bc53e81893e5a2ea">mem</a>, <a class="el" href="namespacegymbo.html#ac714ceb538af2de2adce25193f0e5eaf">SMem</a> &amp;<a class="el" href="structgymbo_1_1SymState.html#a85b48b53e8e5301b88c53ba7d34f0b3c">smem</a>, <a class="el" href="classgymbo_1_1Linkedlist.html">Linkedlist</a>&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &gt; &amp;<a class="el" href="structgymbo_1_1SymState.html#a6aa224acae7f54e2f67a708be6cd0b42">symbolic_stack</a>, std::vector&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &gt; &amp;<a class="el" href="structgymbo_1_1SymState.html#a33bd74a7fdeee5aeecc51a750944efcc">path_constraints</a>, <a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> *<a class="el" href="structgymbo_1_1SymState.html#a0bf77b27d1f40432e784a7d5b03f2a2c">p</a>, <a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> *<a class="el" href="structgymbo_1_1SymState.html#a0dd842291d4e8fe797b05178b5e4e80e">cond_p</a>, bool <a class="el" href="structgymbo_1_1SymState.html#a1d35d88b07b580a6eb2de39a861793cd">has_observed_p_cond</a>)</td></tr>
+<tr class="memdesc:a230dffcb41f507b03f40d886d67a1bdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for symbolic state with specified values.  <a href="structgymbo_1_1SymState.html#a230dffcb41f507b03f40d886d67a1bdb">More...</a><br /></td></tr>
+<tr class="separator:a230dffcb41f507b03f40d886d67a1bdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5184bb760ff61b03f6573d59824fd9c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a5184bb760ff61b03f6573d59824fd9c3">copy</a> ()</td></tr>
 <tr class="memdesc:a5184bb760ff61b03f6573d59824fd9c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a copy object.  <a href="structgymbo_1_1SymState.html#a5184bb760ff61b03f6573d59824fd9c3">More...</a><br /></td></tr>
 <tr class="separator:a5184bb760ff61b03f6573d59824fd9c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,8 +125,10 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a6aa224acae7f54e2f67a708be6cd0b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33bd74a7fdeee5aeecc51a750944efcc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structgymbo_1_1Sym.html">Sym</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a33bd74a7fdeee5aeecc51a750944efcc">path_constraints</a></td></tr>
 <tr class="separator:a33bd74a7fdeee5aeecc51a750944efcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa941d2eb4b423e923097403edb47bf14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#aa941d2eb4b423e923097403edb47bf14">p</a></td></tr>
-<tr class="separator:aa941d2eb4b423e923097403edb47bf14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bf77b27d1f40432e784a7d5b03f2a2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a0bf77b27d1f40432e784a7d5b03f2a2c">p</a></td></tr>
+<tr class="separator:a0bf77b27d1f40432e784a7d5b03f2a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dd842291d4e8fe797b05178b5e4e80e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a0dd842291d4e8fe797b05178b5e4e80e">cond_p</a></td></tr>
+<tr class="separator:a0dd842291d4e8fe797b05178b5e4e80e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d35d88b07b580a6eb2de39a861793cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1SymState.html#a1d35d88b07b580a6eb2de39a861793cd">has_observed_p_cond</a></td></tr>
 <tr class="separator:a1d35d88b07b580a6eb2de39a861793cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -160,8 +162,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1a314a85f75a22238332031c61606fa5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a314a85f75a22238332031c61606fa5">&#9670;&nbsp;</a></span>SymState() <span class="overload">[2/2]</span></h2>
+<a id="a230dffcb41f507b03f40d886d67a1bdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a230dffcb41f507b03f40d886d67a1bdb">&#9670;&nbsp;</a></span>SymState() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -208,8 +210,14 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> *&#160;</td>
           <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> *&#160;</td>
+          <td class="paramname"><em>cond_p</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -240,6 +248,7 @@ Public Attributes</h2></td></tr>
     <tr><td class="paramname">symbolic_stack</td><td>Symbolic stack. </td></tr>
     <tr><td class="paramname">path_constraints</td><td>Vector of symbolic path constraints. </td></tr>
     <tr><td class="paramname">p</td><td>Symbolic probability of the state being reached. </td></tr>
+    <tr><td class="paramname">cond_p</td><td>Symbolic conditional probability of the state being reached. </td></tr>
     <tr><td class="paramname">has_observed_p_cond</td><td>Flag indicating whether path_constraints contains probabilistic path conditions. </td></tr>
   </table>
   </dd>
@@ -382,6 +391,21 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0dd842291d4e8fe797b05178b5e4e80e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dd842291d4e8fe797b05178b5e4e80e">&#9670;&nbsp;</a></span>cond_p</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a>* gymbo::SymState::cond_p</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Symbolic conditional probability of the state being reached </p>
+
+</div>
+</div>
 <a id="a1d35d88b07b580a6eb2de39a861793cd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1d35d88b07b580a6eb2de39a861793cd">&#9670;&nbsp;</a></span>has_observed_p_cond</h2>
 
@@ -412,14 +436,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa941d2eb4b423e923097403edb47bf14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa941d2eb4b423e923097403edb47bf14">&#9670;&nbsp;</a></span>p</h2>
+<a id="a0bf77b27d1f40432e784a7d5b03f2a2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bf77b27d1f40432e784a7d5b03f2a2c">&#9670;&nbsp;</a></span>p</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a> gymbo::SymState::p</td>
+          <td class="memname"><a class="el" href="structgymbo_1_1SymProb.html">SymProb</a>* gymbo::SymState::p</td>
         </tr>
       </table>
 </div><div class="memdoc">

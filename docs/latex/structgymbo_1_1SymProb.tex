@@ -29,11 +29,13 @@ std\+::string \mbox{\hyperlink{structgymbo_1_1SymProb_a3bacfa903804b63ec4a4892e9
 \begin{DoxyCompactList}\small\item\em Converts \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} to a string. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} \mbox{\hyperlink{structgymbo_1_1SymProb_a0c79b2dc21deed032ff94afc3a94cb43}{operator$\ast$}} (\mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} other)
 \begin{DoxyCompactList}\small\item\em Multiplies two \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} instances. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} $\ast$ \mbox{\hyperlink{structgymbo_1_1SymProb_a58b2cd3749634974dacf34fbb5267a27}{pmul}} (\mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} $\ast$other)
+\begin{DoxyCompactList}\small\item\em Multiplies two \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} instances. \end{DoxyCompactList}\item 
 std\+::pair$<$ \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} $\ast$ $>$ \mbox{\hyperlink{structgymbo_1_1SymProb_a2f31b482f6a558a3f3a463f16ef9a936}{marginalize}} (std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D)
 \begin{DoxyCompactList}\small\item\em Marginalizes the \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} over given variable assignments. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{structgymbo_1_1SymProb_af35f871a03f51d2ebff3d87e83d7596c}{eval}} (std\+::unordered\+\_\+map$<$ int, float $>$ \&params, float eps, std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D)
 \begin{DoxyCompactList}\small\item\em Evaluates the \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} for given parameters, epsilon, variable assignments, and distributions. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} \mbox{\hyperlink{structgymbo_1_1SymProb_af10f52f18a417e4cb920872769f090d8}{query}} (\mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225}{Sym\+Type}} \&symtype, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} \&other, std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D)
+\mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} \mbox{\hyperlink{structgymbo_1_1SymProb_abd515bce0315739636795c3c28ebcf8c}{query}} (\mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225}{Sym\+Type}} symtype, \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} \&other, std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&var2dist, std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&D)
 \begin{DoxyCompactList}\small\item\em Queries the \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} with a given symbolic type, another symbolic expression, and variable assignments. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -142,11 +144,29 @@ Multiplies two \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} instances.
 \begin{DoxyReturn}{Returns}
 Result of the multiplication operation as a new \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} instance. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{structgymbo_1_1SymProb_af10f52f18a417e4cb920872769f090d8}\label{structgymbo_1_1SymProb_af10f52f18a417e4cb920872769f090d8}} 
+\mbox{\Hypertarget{structgymbo_1_1SymProb_a58b2cd3749634974dacf34fbb5267a27}\label{structgymbo_1_1SymProb_a58b2cd3749634974dacf34fbb5267a27}} 
+\index{gymbo::SymProb@{gymbo::SymProb}!pmul@{pmul}}
+\index{pmul@{pmul}!gymbo::SymProb@{gymbo::SymProb}}
+\doxysubsubsection{\texorpdfstring{pmul()}{pmul()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}}$\ast$ gymbo\+::\+Sym\+Prob\+::pmul (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} $\ast$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Multiplies two \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} instances. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} to multiply with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result of the multiplication operation as a new \mbox{\hyperlink{structgymbo_1_1SymProb}{Sym\+Prob}} instance. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgymbo_1_1SymProb_abd515bce0315739636795c3c28ebcf8c}\label{structgymbo_1_1SymProb_abd515bce0315739636795c3c28ebcf8c}} 
 \index{gymbo::SymProb@{gymbo::SymProb}!query@{query}}
 \index{query@{query}!gymbo::SymProb@{gymbo::SymProb}}
 \doxysubsubsection{\texorpdfstring{query()}{query()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} gymbo\+::\+Sym\+Prob\+::query (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225}{Sym\+Type}} \&}]{symtype,  }\item[{\mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} \&}]{other,  }\item[{std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&}]{var2dist,  }\item[{std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&}]{D }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} gymbo\+::\+Sym\+Prob\+::query (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a4524c130985b8982d2787f9bafe27225}{Sym\+Type}}}]{symtype,  }\item[{\mbox{\hyperlink{structgymbo_1_1Sym}{Sym}} \&}]{other,  }\item[{std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{structgymbo_1_1DiscreteDist}{Discrete\+Dist}} $>$ \&}]{var2dist,  }\item[{std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&}]{D }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 

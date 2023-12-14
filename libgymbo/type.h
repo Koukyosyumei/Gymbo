@@ -545,10 +545,20 @@ struct Sym {
                 }
             }
             case (SymType::SAny): {
-                return cvals.at(var_idx);
+                if (cvals.find(var_idx) != cvals.end()) {
+                    return cvals[var_idx];
+                } else {
+                    fprintf(stderr,
+                            "\x1b[33m Warning!! var_%d should be specified to "
+                            "correctly evaluate this "
+                            "symbolic expression\x1b[39m\n",
+                            var_idx);
+                    return 0;
+                }
             }
             case (SymType::SEq): {
-                return std::abs(left->aeval(cvals, eps) - right->aeval(cvals, eps));
+                return std::abs(left->aeval(cvals, eps) -
+                                right->aeval(cvals, eps));
             }
             case (SymType::SNot): {
                 return left->aeval(cvals, eps) * (-1.0f) + eps;
@@ -624,10 +634,20 @@ struct Sym {
                 }
             }
             case (SymType::SAny): {
-                return cvals.at(var_idx);
+                if (cvals.find(var_idx) != cvals.end()) {
+                    return cvals.at(var_idx);
+                } else {
+                    fprintf(stderr,
+                            "\x1b[33m Warning!! var_%d should be specified to "
+                            "correctly evaluate this "
+                            "symbolic expression\x1b[39m\n",
+                            var_idx);
+                    return 0;
+                }
             }
             case (SymType::SEq): {
-                return std::abs(left->eval(cvals, eps) - right->eval(cvals, eps));
+                return std::abs(left->eval(cvals, eps) -
+                                right->eval(cvals, eps));
             }
             case (SymType::SNot): {
                 return left->eval(cvals, eps) * (-1.0f) + eps;
@@ -951,7 +971,8 @@ struct Sym {
  * @brief Represents a discrete probability distribution.
  */
 struct DiscreteDist {
-    std::vector<int> vals; /**< Vector to store possible discrete values. */
+    std::vector<int> vals;    /**< Vector to store possible discrete values. */
+    std::vector<float> probs; /** Probability of each value */
 
     /**
      * @brief Default constructor for DiscreteDist.
@@ -961,7 +982,7 @@ struct DiscreteDist {
 
 /**
  * @struct DiscreteUniformDist
- * @brief Represents a discrete uniform probability distribution derived from
+ * @brief Represents a discrete uniform distribution derived from
  * DiscreteDist.
  */
 struct DiscreteUniformDist : public DiscreteDist {
@@ -976,8 +997,54 @@ struct DiscreteUniformDist : public DiscreteDist {
      * low to high (inclusive).
      */
     DiscreteUniformDist(int low, int high) : low(low), high(high) {
+        float p = 1.0f / (1.0f + (float)high - (float)low);
         for (int i = low; i <= high; i++) {
             vals.emplace_back(i);
+            probs.emplace_back(p);
+        }
+    }
+};
+
+/**
+ * @struct BernoulliDist
+ * @brief Represents a bernoulli distribution derived from
+ * DiscreteDist.
+ */
+struct BernoulliDist : public DiscreteDist {
+    float p /** The probability of occurrance */;
+
+    BernoulliDist(float p) : p(p) {
+        vals = {0, 1};
+        probs = {1 - p, p};
+    }
+};
+
+/**
+ * @struct BinomialDist
+ * @brief Represents a binomial distribution derived from
+ * DiscreteDist.
+ */
+struct BinomialDist : public DiscreteDist {
+    int n;   /** The number of trial */
+    float p; /** The probability of occurrance */
+
+    BinomialDist(int n, float p) : n(n), p(p) {
+        std::vector<std::vector<long long>> v(n + 1,
+                                              std::vector<long long>(n + 1, 0));
+        for (int i = 0; i < v.size(); i++) {
+            v[i][0] = 1;
+            v[i][i] = 1;
+        }
+        for (int j = 1; j < v.size(); j++) {
+            for (int k = 1; k < j; k++) {
+                v[j][k] = (v[j - 1][k - 1] + v[j - 1][k]);
+            }
+        }
+
+        for (int i = 0; i <= n; i++) {
+            vals.emplace_back(i);
+            probs.emplace_back((float)v[n][i] * std::pow(p, (float)i) *
+                               std::pow(1.0f - p, (float)n - (float)i));
         }
     }
 };
@@ -1051,6 +1118,25 @@ struct SymProb {
     }
 
     /**
+     * @brief Multiplies two SymProb instances.
+     *
+     * @param other The SymProb to multiply with.
+     * @return Result of the multiplication operation as a new SymProb instance.
+     */
+    SymProb *pmul(SymProb *other) {
+        if (denominator->toString(true) == other->numerator->toString(true)) {
+            return new SymProb(numerator, other->denominator);
+        } else if (numerator->toString(true) ==
+                   other->denominator->toString(true)) {
+            return new SymProb(other->numerator, denominator);
+        } else {
+            return new SymProb(
+                new Sym(SymType::SMul, numerator, (other->numerator)),
+                new Sym(SymType::SMul, denominator, (other->denominator)));
+        }
+    }
+
+    /**
      * @brief Marginalizes the SymProb over given variable assignments.
      *
      * @param var2dist Map of variable index to DiscreteDist.
@@ -1067,17 +1153,22 @@ struct SymProb {
 
         for (int i = 0; i < total_num_pvar_combinations; i++) {
             int j = 0;
+            float tmp_p = 1.0f;
             std::unordered_map<int, float> tmp_assign;
             for (auto &vd : var2dist) {
                 tmp_assign.emplace(vd.first, D[i][j]);
+                tmp_p *= vd.second.probs[j];
                 j++;
             }
+            Sym *weight = new Sym(SymType::SCon, FloatToWord(tmp_p));
             q_numerator =
                 new Sym(SymType::SAdd, q_numerator,
-                        new Sym(SymType::SCnt, numerator, tmp_assign));
-            q_denominator =
-                new Sym(SymType::SAdd, q_denominator,
-                        new Sym(SymType::SCnt, denominator, tmp_assign));
+                        new Sym(SymType::SMul, weight,
+                                new Sym(SymType::SCnt, numerator, tmp_assign)));
+            q_denominator = new Sym(
+                SymType::SAdd, q_denominator,
+                new Sym(SymType::SMul, weight,
+                        new Sym(SymType::SCnt, denominator, tmp_assign)));
         }
 
         return std::make_pair(q_numerator, q_denominator);
@@ -1120,7 +1211,7 @@ struct SymProb {
      * @param D Vector of variable assignments.
      * @return Resulting Sym based on the query.
      */
-    Sym query(SymType &symtype, Sym &other,
+    Sym query(SymType symtype, Sym &other,
               std::unordered_map<int, DiscreteDist> &var2dist,
               std::vector<std::vector<int>> &D) {
         std::pair<Sym *, Sym *> mq = marginalize(var2dist, D);
@@ -1142,7 +1233,9 @@ struct SymState {
     Linkedlist<Sym> symbolic_stack; /**< Symbolic stack. */
     std::vector<Sym>
         path_constraints; /**< Vector of symbolic path constraints. */
-    SymProb p;            /**< Symbolic probability of the state being reached*/
+    SymProb *p;           /**< Symbolic probability of the state being reached*/
+    SymProb *cond_p; /**< Symbolic conditional probability of the state being
+                       reached*/
     bool has_observed_p_cond /**< Flag indicating whether path_constraints
                                 contains probabilistic path conditions. */
         ;
@@ -1150,7 +1243,12 @@ struct SymState {
     /**
      * @brief Default constructor for symbolic state.
      */
-    SymState() : pc(0), var_cnt(0), p(SymProb()), has_observed_p_cond(false){};
+    SymState()
+        : pc(0),
+          var_cnt(0),
+          p(new SymProb()),
+          cond_p(new SymProb()),
+          has_observed_p_cond(false){};
 
     /**
      * @brief Constructor for symbolic state with specified values.
@@ -1161,12 +1259,14 @@ struct SymState {
      * @param symbolic_stack Symbolic stack.
      * @param path_constraints Vector of symbolic path constraints.
      * @param p Symbolic probability of the state being reached.
+     * @param cond_p Symbolic conditional probability of the state being
+     * reached.
      * @param has_observed_p_cond Flag indicating whether path_constraints
      * contains probabilistic path conditions.
      */
     SymState(int pc, int var_cnt, Mem &mem, SMem &smem,
              Linkedlist<Sym> &symbolic_stack,
-             std::vector<Sym> &path_constraints, SymProb &p,
+             std::vector<Sym> &path_constraints, SymProb *p, SymProb *cond_p,
              bool has_observed_p_cond)
         : pc(pc),
           var_cnt(var_cnt),
@@ -1175,6 +1275,7 @@ struct SymState {
           symbolic_stack(symbolic_stack),
           path_constraints(path_constraints),
           p(p),
+          cond_p(cond_p),
           has_observed_p_cond(has_observed_p_cond) {}
 
     /**
@@ -1182,7 +1283,7 @@ struct SymState {
      */
     SymState *copy() {
         return new SymState(pc, var_cnt, mem, smem, symbolic_stack,
-                            path_constraints, p, has_observed_p_cond);
+                            path_constraints, p, cond_p, has_observed_p_cond);
     }
 
     /**

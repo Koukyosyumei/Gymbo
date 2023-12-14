@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['var_310',['Var',['../classgymbosat_1_1Var.html',1,'gymbosat']]]
+  ['token_315',['Token',['../structgymbo_1_1Token.html',1,'gymbo']]],
+  ['trace_316',['Trace',['../structgymbo_1_1Trace.html',1,'gymbo']]]
 ];
