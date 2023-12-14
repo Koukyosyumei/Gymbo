@@ -3,6 +3,50 @@
 #include "../../libgymbo/type.h"
 #include "gtest/gtest.h"
 
+TEST(GymboTypeTest, DiscreteUniformDist) {
+    gymbo::DiscreteUniformDist udist(1, 4);
+
+    std::vector<int> true_vals = {1, 2, 3, 4};
+    std::vector<float> true_probs = {0.25f, 0.25f, 0.25f, 0.25f};
+
+    ASSERT_EQ(udist.vals.size(), 4);
+    ASSERT_EQ(udist.probs.size(), 4);
+
+    for (int i = 0; i < 4; i++) {
+        ASSERT_EQ(udist.vals[i], true_vals[i]);
+        ASSERT_EQ(udist.probs[i], true_probs[i]);
+    }
+}
+
+TEST(GymboTypeTest, BernoulliDist) {
+    gymbo::BernoulliDist bdist(0.3);
+
+    std::vector<int> true_vals = {0, 1};
+    std::vector<float> true_probs = {0.7f, 0.3f};
+
+    ASSERT_EQ(bdist.vals.size(), 2);
+    ASSERT_EQ(bdist.probs.size(), 2);
+
+    for (int i = 0; i < 4; i++) {
+        ASSERT_EQ(bdist.vals[i], true_vals[i]);
+        ASSERT_EQ(bdist.probs[i], true_probs[i]);
+    }
+}
+
+TEST(GymboTypeTest, BinomialDist) {
+    gymbo::BinomialDist bdist(2, 0.1);
+    std::vector<int> true_vals = {0, 1, 2};
+    std::vector<float> true_probs = {0.9f * 0.9f, 2.0f * 0.1f * 0.9f, 0.1f * 0.1f};
+
+    ASSERT_EQ(bdist.vals.size(), 3);
+    ASSERT_EQ(bdist.probs.size(), 3);
+
+    for (int i = 0; i < 3; i++) {
+        ASSERT_EQ(bdist.vals[i], true_vals[i]);
+        ASSERT_EQ(bdist.probs[i], true_probs[i]);
+    }
+}
+
 TEST(GymboTypeTest, SymProbSimple) {
     gymbo::Word32 var_id_0 = 0;
     gymbo::Word32 var_id_1 = 1;

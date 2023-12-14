@@ -1044,7 +1044,7 @@ struct BinomialDist : public DiscreteDist {
         for (int i = 0; i <= n; i++) {
             vals.emplace_back(i);
             probs.emplace_back((float)v[n][i] * std::pow(p, (float)i) *
-                               std::pow(1.0f - p, (float)n - (float)i));
+                               std::pow(1.0f - p, (float)i));
         }
     }
 };
