@@ -414,7 +414,6 @@ struct BaseExecutor {
     /**
      * @brief Constructor for BaseExecutor.
      *
-     * @param prog The program to symbolically execute.
      * @param optimizer The gradient descent optimizer for parameter
      * optimization.
      * @param maxSAT The maximum number of SAT constraints to collect.
@@ -456,33 +455,7 @@ struct SExecutor : public BaseExecutor {
     PathConstraintsTable
         constraints_cache;  ///< Cache for storing and reusing path constraints.
 
-    /**
-     * @brief Constructor for SExecutor.
-     *
-     * @param prog The program to symbolically execute.
-     * @param optimizer The gradient descent optimizer for parameter
-     * optimization.
-     * @param target_pcs The set of pc where gymbo executes path-constraints
-     * solving. If this set is empty or contains -1, gymbo solves all
-     * path-constraints.
-     * @param maxSAT The maximum number of SAT constraints to collect.
-     * @param maxUNSAT The maximum number of UNSAT constraints to collect.
-     * @param max_num_trials The maximum number of trials for each gradient
-     * descent.
-     * @param ignore_memory If set to true, constraints derived from memory will
-     * be ignored.
-     * @param use_dpll If set to true, use DPLL to decide the initial assignment
-     * for each term.
-     * @param verbose_level The level of verbosity.
-     * @param return_trace If set to true, save the trace at each pc and return
-     * them (default false).
-     */
-    SExecutor(GDOptimizer optimizer, int maxSAT = 256, int maxUNSAT = 256,
-              int max_num_trials = 10, bool ignore_memory = false,
-              bool use_dpll = false, int verbose_level = 0,
-              bool return_trace = false)
-        : BaseExecutor(optimizer, maxSAT, maxUNSAT, max_num_trials,
-                       ignore_memory, use_dpll, verbose_level, return_trace) {}
+    using BaseExecutor::BaseExecutor;
 
     /**
      * @brief Solves path constraints and updates the cache.
@@ -537,6 +510,10 @@ struct SExecutor : public BaseExecutor {
      * simultaneously optimizing the path constraints using the provided
      * gradient descent optimizer, `GDOptimizer`.
      *
+     * @param prog The program to symbolically execute.
+     * @param target_pcs The set of pc where gymbo executes path-constraints
+     * solving. If this set is empty or contains -1, gymbo solves all
+     * path-constraints.
      * @param state The initial symbolic state of the program.
      * @param maxDepth The maximum depth of symbolic exploration.
      * @return A trace of the symbolic execution.

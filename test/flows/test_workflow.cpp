@@ -1,4 +1,5 @@
-#include "../../libgymbo/pipeline.h"
+#include "../../libgymbo/compiler.h"
+#include "../../libgymbo/symbolic.h"
 #include "gtest/gtest.h"
 
 int max_depth = 65536;

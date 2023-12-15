@@ -35,7 +35,6 @@ PYBIND11_MODULE(pylibgymbo, m) {
         .def("set_concrete_val", &gymbo::SymState::set_concrete_val);
 
     m.def("gcompile", &gymbo::gcompile, R"pbdoc(gcompile)pbdoc");
-    m.def("gexecute", &gymbo::gexecute, R"pbdoc(gexecute)pbdoc");
 
     py::class_<gymbo::GDOptimizer>(m, "GDOptimizer")
         .def(py::init<int, float, float, float, float, bool, bool, int>());

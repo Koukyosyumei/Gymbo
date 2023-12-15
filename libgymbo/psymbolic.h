@@ -133,41 +133,14 @@ inline void update_prob_constraints_table(
  * probabilistic programs.
  */
 struct PSExecutor : public BaseExecutor {
-    std::unordered_set<int> random_vars;
+    std::unordered_set<int> random_vars;  ///< Set of random variables'IDs.
     PathConstraintsTable
         constraints_cache;  ///< Cache for storing and reusing path constraints.
     ProbPathConstraintsTable
         prob_constraints_table;  ///< Table for storing probabilistic path
                                  ///< constraints.
 
-    /**
-     * @brief Constructor for PSExecutor.
-     *
-     * @param prog The program to symbolically execute.
-     * @param optimizer The gradient descent optimizer for parameter
-     * optimization.
-     * @param random_vars Set of random variables'IDs.
-     * @param target_pcs Set of pc where gymbo executes path-constraints
-     * solving. If this set is empty or contains -1, gymbo solves all
-     * path-constraints.
-     * @param maxSAT The maximum number of SAT constraints to collect.
-     * @param maxUNSAT The maximum number of UNSAT constraints to collect.
-     * @param max_num_trials The maximum number of trials for each gradient
-     * descent.
-     * @param ignore_memory If set to true, constraints derived from memory will
-     * be ignored.
-     * @param use_dpll If set to true, use DPLL to decide the initial assignment
-     * for each term.
-     * @param verbose_level The level of verbosity.
-     * @param return_trace If set to true, save the trace at each pc and return
-     * them (default false).
-     */
-    PSExecutor(GDOptimizer &optimizer, int maxSAT = 256, int maxUNSAT = 256,
-               int max_num_trials = 10, bool ignore_memory = false,
-               bool use_dpll = false, int verbose_level = 0,
-               bool return_trace = false)
-        : BaseExecutor(optimizer, maxSAT, maxUNSAT, max_num_trials,
-                       ignore_memory, use_dpll, verbose_level, return_trace) {}
+    using BaseExecutor::BaseExecutor;
 
     void register_random_var(int var_id) { random_vars.emplace(var_id); }
 
@@ -254,6 +227,10 @@ struct PSExecutor : public BaseExecutor {
      * constraints. It explores different execution paths and updates the
      * constraints and probabilities accordingly.
      *
+     * @param prog The program to symbolically execute.
+     * @param target_pcs Set of pc where gymbo executes path-constraints
+     * solving. If this set is empty or contains -1, gymbo solves all
+     * path-constraints.
      * @param state The initial symbolic state for execution.
      * @param maxDepth Maximum exploration depth during symbolic execution.
      * @return The symbolic execution trace containing states and child traces.
