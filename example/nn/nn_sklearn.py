@@ -102,39 +102,36 @@ if __name__ == "__main__":
         param_high,
         sign_grad,
         init_param_uniform_int,
-        False,
         seed,
     )
 
     # Execute attack
     start = time.time()
     target_pcs = {target_pc}
-    constraints = plg.gexecute(
-        prg,
+    executor = plg.SExecutor(
         optimizer,
-        init_symstate,
-        target_pcs,
-        max_depth,
         maxSAT,
         maxUNSAT,
         max_num_trials,
         ignore_memory,
         use_dpll,
         verbose_level,
+        False,
     )
+    executor.run(prg, target_pcs, init_symstate, max_depth)
     end = time.time()
 
     print(f"Execution Time [s]: {end - start}")
 
     # Check the performance of generated adversarial examples
     print("Result")
-    for j in range(len(constraints)):
+    for j in range(len(executor.constraints_cache)):
         x_adv = x_origin.copy()
 
-        if not list(constraints.values())[j][0]:
+        if not list(executor.constraints_cache.values())[j][0]:
             continue
 
-        vs = list(constraints.values())[j][1]
+        vs = list(executor.constraints_cache.values())[j][1]
 
         sv_dict = {}
         for i in symbolic_vars_id:

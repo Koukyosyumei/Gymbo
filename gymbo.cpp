@@ -121,12 +121,11 @@ int main(int argc, char *argv[]) {
         printf("----------------------------\n");
     }
 
-    gymbo::SExecutor executor(prg, optimizer, target_pcs, maxSAT, maxUNSAT,
-                              max_num_trials, ignore_memory, use_dpll,
-                              verbose_level);
+    gymbo::SExecutor executor(optimizer, maxSAT, maxUNSAT, max_num_trials,
+                              ignore_memory, use_dpll, verbose_level);
 
     printf("Start Symbolic Execution...\n");
-    executor.run(init, max_depth);
+    executor.run(prg, target_pcs, init, max_depth);
     printf("---------------------------\n");
 
     end = std::chrono::system_clock::now();

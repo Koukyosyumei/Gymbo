@@ -64,7 +64,6 @@ int main(int argc, char *argv[]) {
     }
     printf("---\n");
 
-    std::unordered_set<int> random_vars = {1, 2};
     std::unordered_map<int, gymbo::DiscreteDist> var2dist = {
         {1, gymbo::DiscreteUniformDist(1, 3)},
         {2, gymbo::DiscreteUniformDist(1, 3)}};
@@ -76,10 +75,11 @@ int main(int argc, char *argv[]) {
     std::vector<std::vector<int>> D = gymbo::cartesianProduct(val_candidates);
 
     printf("Start Symbolic Execution...\n");
-    gymbo::PSExecutor executor(prg, optimizer, random_vars, target_pcs, maxSAT,
-                               maxUNSAT, max_num_trials, ignore_memory,
-                               use_dpll, verbose_level);
-    executor.run(init, max_depth);
+    gymbo::PSExecutor executor(optimizer, maxSAT, maxUNSAT, max_num_trials,
+                               ignore_memory, use_dpll, verbose_level);
+    executor.register_random_var(1);
+    executor.register_random_var(2);
+    executor.run(prg, target_pcs, init, max_depth);
     printf("---------------------------\n");
 
     printf("Result Summary\n");

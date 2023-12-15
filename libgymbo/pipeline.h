@@ -74,8 +74,9 @@ inline PathConstraintsTable gexecute(Prog &prg, GDOptimizer &optimizer,
                                      int max_depth, int maxSAT, int maxUNSAT,
                                      int max_num_trials, bool ignore_memory,
                                      bool use_dpll, int verbose_level) {
-    SExecutor executor(prg, optimizer, target_pcs, maxSAT, maxUNSAT, max_num_trials, ignore_memory, use_dpll, verbose_level);
-    executor.run(init, max_depth);
+    SExecutor executor(optimizer, maxSAT, maxUNSAT, max_num_trials,
+                       ignore_memory, use_dpll, verbose_level);
+    executor.run(prg, target_pcs, init, max_depth);
 
     return executor.constraints_cache;
 }

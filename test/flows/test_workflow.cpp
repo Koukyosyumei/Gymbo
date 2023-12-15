@@ -51,10 +51,9 @@ TEST(GymboWorlflowTest, Block) {
     gymbo::generate_ast(token, user_input, code);
     gymbo::compile_ast(code, prg);
 
-    gymbo::SExecutor executor(prg, optimizer, target_pcs, maxSAT, maxUNSAT,
-                              max_num_trials, ignore_memory, use_dpll,
-                              verbose_level);
-    executor.run(init, max_depth);
+    gymbo::SExecutor executor(optimizer, maxSAT, maxUNSAT, max_num_trials,
+                              ignore_memory, use_dpll, verbose_level);
+    executor.run(prg, target_pcs, init, max_depth);
 
     int num_sat = 0;
     int num_unsat = 0;

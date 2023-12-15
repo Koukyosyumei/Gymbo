@@ -97,7 +97,9 @@ if __name__ == "__main__":
 
     adv_condition = (
         "("
-        + " || ".join([f"(y_{c} > y_{y_pred})" for c in range(num_classes) if y_pred != c])
+        + " || ".join(
+            [f"(y_{c} > y_{y_pred})" for c in range(num_classes) if y_pred != c]
+        )
         + ")"
     )
     perturbation_condition = (
@@ -139,35 +141,33 @@ if __name__ == "__main__":
         param_high,
         sign_grad,
         init_param_uniform_int,
-        False,
         seed,
     )
 
     # Execute attack
     target_pcs = {target_pc}
-    constraints = plg.gexecute(
-        prg,
+
+    executor = plg.SExecutor(
         optimizer,
-        init_symstate,
-        target_pcs,
-        max_depth,
         maxSAT,
         maxUNSAT,
         max_num_trials,
         ignore_memory,
         use_dpll,
         verbose_level,
+        False,
     )
+    executor.run(prg, target_pcs, init_symstate, max_depth)
 
     # Check the performance of generated adversarial examples
     print("Result:")
-    for j in range(len(constraints)):
+    for j in range(len(executor.constraints_cache)):
         x_adv = x_origin.clone()
 
-        if not list(constraints.values())[j][0]:
+        if not list(executor.constraints_cache.values())[j][0]:
             continue
 
-        vs = list(constraints.values())[j][1]
+        vs = list(executor.constraints_cache.values())[j][1]
 
         sv_dict = {}
         for i in symbolic_vars_id:
