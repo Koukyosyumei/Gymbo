@@ -5,9 +5,6 @@
  */
 
 #pragma once
-
-#include <unordered_set>
-
 #include "symbolic.h"
 
 namespace gymbo {

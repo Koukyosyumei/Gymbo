@@ -30,18 +30,16 @@ Collaboration diagram for gymbo\+::Base\+Executor\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structgymbo_1_1BaseExecutor_a34fcf8e00f701b88d777d6d04c69f5be}{Base\+Executor}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&\mbox{\hyperlink{structgymbo_1_1BaseExecutor_a8997937be91d3a8c5c1398d46be04b41}{prog}}, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&\mbox{\hyperlink{structgymbo_1_1BaseExecutor_a87e5057c2c5d9e2abd5d83ccb044f3cf}{optimizer}}, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a824a4c52632a08005a8a0264308a7372}{max\+SAT}}=256, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a4fff090ea20da5638a9c6801bc6d0a67}{max\+UNSAT}}=256, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a11bcbb9c82b00bc4c96481198464fea9}{max\+\_\+num\+\_\+trials}}=10, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a4be9366c810f0d7cc89a53f2763c5eff}{ignore\+\_\+memory}}=false, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_afcf1a585351b645d5ca9294a6e791ef4}{use\+\_\+dpll}}=false, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a8955bd4fe56d26bda2324b95f3700829}{verbose\+\_\+level}}=0, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a467faae223c1e02ced0eab62650e43db}{return\+\_\+trace}}=false)
+\mbox{\hyperlink{structgymbo_1_1BaseExecutor_ac50697ded09001c18e10a7ef980b1d8e}{Base\+Executor}} (\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a5be3e38314fe7cea470837a7ddea6f92}{optimizer}}, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a824a4c52632a08005a8a0264308a7372}{max\+SAT}}=256, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a4fff090ea20da5638a9c6801bc6d0a67}{max\+UNSAT}}=256, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a11bcbb9c82b00bc4c96481198464fea9}{max\+\_\+num\+\_\+trials}}=10, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a4be9366c810f0d7cc89a53f2763c5eff}{ignore\+\_\+memory}}=false, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_afcf1a585351b645d5ca9294a6e791ef4}{use\+\_\+dpll}}=false, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a8955bd4fe56d26bda2324b95f3700829}{verbose\+\_\+level}}=0, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a467faae223c1e02ced0eab62650e43db}{return\+\_\+trace}}=false)
 \begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{structgymbo_1_1BaseExecutor}{Base\+Executor}}. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_ab075472095a48ab173af2121f8156e21}{solve}} (bool is\+\_\+target, int pc, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state)=0
 \item 
-virtual \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a1bb7f2eef1613b0b0fdab9a315adf88b}{run}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, int max\+Depth)=0
+virtual \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a7df59ba85914f0e054a8f0b503711351}{run}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, int max\+Depth)=0
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \& \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a8997937be91d3a8c5c1398d46be04b41}{prog}}
-\begin{DoxyCompactList}\small\item\em The program to symbolically execute. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \& \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a87e5057c2c5d9e2abd5d83ccb044f3cf}{optimizer}}
+\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a5be3e38314fe7cea470837a7ddea6f92}{optimizer}}
 \item 
 int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a824a4c52632a08005a8a0264308a7372}{max\+SAT}}
 \begin{DoxyCompactList}\small\item\em The maximum number of SAT constraints to collect. \end{DoxyCompactList}\item 
@@ -63,11 +61,11 @@ bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a467faae223c1e02ced0eab62650e4
 Represents the base class for symbolic execution engine. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{structgymbo_1_1BaseExecutor_a34fcf8e00f701b88d777d6d04c69f5be}\label{structgymbo_1_1BaseExecutor_a34fcf8e00f701b88d777d6d04c69f5be}} 
+\mbox{\Hypertarget{structgymbo_1_1BaseExecutor_ac50697ded09001c18e10a7ef980b1d8e}\label{structgymbo_1_1BaseExecutor_ac50697ded09001c18e10a7ef980b1d8e}} 
 \index{gymbo::BaseExecutor@{gymbo::BaseExecutor}!BaseExecutor@{BaseExecutor}}
 \index{BaseExecutor@{BaseExecutor}!gymbo::BaseExecutor@{gymbo::BaseExecutor}}
 \doxysubsubsection{\texorpdfstring{BaseExecutor()}{BaseExecutor()}}
-{\footnotesize\ttfamily gymbo\+::\+Base\+Executor\+::\+Base\+Executor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{int}]{max\+SAT = {\ttfamily 256},  }\item[{int}]{max\+UNSAT = {\ttfamily 256},  }\item[{int}]{max\+\_\+num\+\_\+trials = {\ttfamily 10},  }\item[{bool}]{ignore\+\_\+memory = {\ttfamily false},  }\item[{bool}]{use\+\_\+dpll = {\ttfamily false},  }\item[{int}]{verbose\+\_\+level = {\ttfamily 0},  }\item[{bool}]{return\+\_\+trace = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily gymbo\+::\+Base\+Executor\+::\+Base\+Executor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}}]{optimizer,  }\item[{int}]{max\+SAT = {\ttfamily 256},  }\item[{int}]{max\+UNSAT = {\ttfamily 256},  }\item[{int}]{max\+\_\+num\+\_\+trials = {\ttfamily 10},  }\item[{bool}]{ignore\+\_\+memory = {\ttfamily false},  }\item[{bool}]{use\+\_\+dpll = {\ttfamily false},  }\item[{int}]{verbose\+\_\+level = {\ttfamily 0},  }\item[{bool}]{return\+\_\+trace = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -75,8 +73,6 @@ Constructor for \mbox{\hyperlink{structgymbo_1_1BaseExecutor}{Base\+Executor}}.
 
 
 \begin{DoxyParams}{Parameters}
-{\em prog} & The program to symbolically execute. \\
-\hline
 {\em optimizer} & The gradient descent optimizer for parameter optimization. \\
 \hline
 {\em max\+SAT} & The maximum number of SAT constraints to collect. \\
@@ -97,15 +93,15 @@ Constructor for \mbox{\hyperlink{structgymbo_1_1BaseExecutor}{Base\+Executor}}.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{structgymbo_1_1BaseExecutor_a1bb7f2eef1613b0b0fdab9a315adf88b}\label{structgymbo_1_1BaseExecutor_a1bb7f2eef1613b0b0fdab9a315adf88b}} 
+\mbox{\Hypertarget{structgymbo_1_1BaseExecutor_a7df59ba85914f0e054a8f0b503711351}\label{structgymbo_1_1BaseExecutor_a7df59ba85914f0e054a8f0b503711351}} 
 \index{gymbo::BaseExecutor@{gymbo::BaseExecutor}!run@{run}}
 \index{run@{run}!gymbo::BaseExecutor@{gymbo::BaseExecutor}}
 \doxysubsubsection{\texorpdfstring{run()}{run()}}
-{\footnotesize\ttfamily virtual \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} gymbo\+::\+Base\+Executor\+::run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{int}]{max\+Depth }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} gymbo\+::\+Base\+Executor\+::run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{int}]{max\+Depth }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
-Implemented in \mbox{\hyperlink{structgymbo_1_1SExecutor_a64982735ba6a105b0c62cf74051a2143}{gymbo\+::\+SExecutor}}, and \mbox{\hyperlink{structgymbo_1_1PSExecutor_ab65d626e276b646170315c25c0422270}{gymbo\+::\+PSExecutor}}.
+Implemented in \mbox{\hyperlink{structgymbo_1_1SExecutor_a51286f8002b2465f71bf648b94b646cc}{gymbo\+::\+SExecutor}}, and \mbox{\hyperlink{structgymbo_1_1PSExecutor_a180bdab3a4656e692125dc345fe887bd}{gymbo\+::\+PSExecutor}}.
 
 \mbox{\Hypertarget{structgymbo_1_1BaseExecutor_ab075472095a48ab173af2121f8156e21}\label{structgymbo_1_1BaseExecutor_ab075472095a48ab173af2121f8156e21}} 
 \index{gymbo::BaseExecutor@{gymbo::BaseExecutor}!solve@{solve}}
@@ -152,23 +148,13 @@ The maximum number of SAT constraints to collect.
 
 The maximum number of UNSAT constraints to collect. 
 
-\mbox{\Hypertarget{structgymbo_1_1BaseExecutor_a87e5057c2c5d9e2abd5d83ccb044f3cf}\label{structgymbo_1_1BaseExecutor_a87e5057c2c5d9e2abd5d83ccb044f3cf}} 
+\mbox{\Hypertarget{structgymbo_1_1BaseExecutor_a5be3e38314fe7cea470837a7ddea6f92}\label{structgymbo_1_1BaseExecutor_a5be3e38314fe7cea470837a7ddea6f92}} 
 \index{gymbo::BaseExecutor@{gymbo::BaseExecutor}!optimizer@{optimizer}}
 \index{optimizer@{optimizer}!gymbo::BaseExecutor@{gymbo::BaseExecutor}}
 \doxysubsubsection{\texorpdfstring{optimizer}{optimizer}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}\& gymbo\+::\+Base\+Executor\+::optimizer}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} gymbo\+::\+Base\+Executor\+::optimizer}
 
-The gradient descent optimizer for parameter optimization. \mbox{\Hypertarget{structgymbo_1_1BaseExecutor_a8997937be91d3a8c5c1398d46be04b41}\label{structgymbo_1_1BaseExecutor_a8997937be91d3a8c5c1398d46be04b41}} 
-\index{gymbo::BaseExecutor@{gymbo::BaseExecutor}!prog@{prog}}
-\index{prog@{prog}!gymbo::BaseExecutor@{gymbo::BaseExecutor}}
-\doxysubsubsection{\texorpdfstring{prog}{prog}}
-{\footnotesize\ttfamily \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}}\& gymbo\+::\+Base\+Executor\+::prog}
-
-
-
-The program to symbolically execute. 
-
-\mbox{\Hypertarget{structgymbo_1_1BaseExecutor_a467faae223c1e02ced0eab62650e43db}\label{structgymbo_1_1BaseExecutor_a467faae223c1e02ced0eab62650e43db}} 
+The gradient descent optimizer for parameter optimization. \mbox{\Hypertarget{structgymbo_1_1BaseExecutor_a467faae223c1e02ced0eab62650e43db}\label{structgymbo_1_1BaseExecutor_a467faae223c1e02ced0eab62650e43db}} 
 \index{gymbo::BaseExecutor@{gymbo::BaseExecutor}!return\_trace@{return\_trace}}
 \index{return\_trace@{return\_trace}!gymbo::BaseExecutor@{gymbo::BaseExecutor}}
 \doxysubsubsection{\texorpdfstring{return\_trace}{return\_trace}}

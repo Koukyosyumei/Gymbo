@@ -100,39 +100,35 @@ Collaboration diagram for gymbo::PSExecutor:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0fff2788f4ab8d8fc38efd7a75ad893c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html#a0fff2788f4ab8d8fc38efd7a75ad893c">PSExecutor</a> (<a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;<a class="el" href="structgymbo_1_1BaseExecutor.html#a8997937be91d3a8c5c1398d46be04b41">prog</a>, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;<a class="el" href="structgymbo_1_1BaseExecutor.html#a87e5057c2c5d9e2abd5d83ccb044f3cf">optimizer</a>, const std::unordered_set&lt; int &gt; &amp;<a class="el" href="structgymbo_1_1PSExecutor.html#a430a7c78b9f5c858a9ccd65afc3d4382">random_vars</a>, const std::unordered_set&lt; int &gt; &amp;<a class="el" href="structgymbo_1_1PSExecutor.html#a4c3b3472372599e446057e7354aa505f">target_pcs</a>, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a824a4c52632a08005a8a0264308a7372">maxSAT</a>=256, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a4fff090ea20da5638a9c6801bc6d0a67">maxUNSAT</a>=256, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a11bcbb9c82b00bc4c96481198464fea9">max_num_trials</a>=10, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#a4be9366c810f0d7cc89a53f2763c5eff">ignore_memory</a>=false, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#afcf1a585351b645d5ca9294a6e791ef4">use_dpll</a>=false, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a8955bd4fe56d26bda2324b95f3700829">verbose_level</a>=0, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#a467faae223c1e02ced0eab62650e43db">return_trace</a>=false)</td></tr>
-<tr class="memdesc:a0fff2788f4ab8d8fc38efd7a75ad893c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="structgymbo_1_1PSExecutor.html" title="Represents a derived class for symbolic execution engine for probabilistic programs.">PSExecutor</a>.  <a href="structgymbo_1_1PSExecutor.html#a0fff2788f4ab8d8fc38efd7a75ad893c">More...</a><br /></td></tr>
-<tr class="separator:a0fff2788f4ab8d8fc38efd7a75ad893c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a37d705557ea3bb094f65a376c4c919"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html#a4a37d705557ea3bb094f65a376c4c919">register_random_var</a> (int var_id)</td></tr>
+<tr class="separator:a4a37d705557ea3bb094f65a376c4c919"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad20d28e31b9411155eeeeabf5abaeac2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html#ad20d28e31b9411155eeeeabf5abaeac2">solve</a> (bool is_target, int pc, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state)</td></tr>
 <tr class="memdesc:ad20d28e31b9411155eeeeabf5abaeac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves path constraints and updates the symbolic state.  <a href="structgymbo_1_1PSExecutor.html#ad20d28e31b9411155eeeeabf5abaeac2">More...</a><br /></td></tr>
 <tr class="separator:ad20d28e31b9411155eeeeabf5abaeac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab65d626e276b646170315c25c0422270"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Trace.html">Trace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html#ab65d626e276b646170315c25c0422270">run</a> (<a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, int maxDepth=256)</td></tr>
-<tr class="memdesc:ab65d626e276b646170315c25c0422270"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run probabilistic symbolic execution on a program.  <a href="structgymbo_1_1PSExecutor.html#ab65d626e276b646170315c25c0422270">More...</a><br /></td></tr>
-<tr class="separator:ab65d626e276b646170315c25c0422270"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a180bdab3a4656e692125dc345fe887bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1Trace.html">Trace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html#a180bdab3a4656e692125dc345fe887bd">run</a> (<a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;prog, std::unordered_set&lt; int &gt; &amp;target_pcs, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state, int maxDepth=256)</td></tr>
+<tr class="memdesc:a180bdab3a4656e692125dc345fe887bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run probabilistic symbolic execution on a program.  <a href="structgymbo_1_1PSExecutor.html#a180bdab3a4656e692125dc345fe887bd">More...</a><br /></td></tr>
+<tr class="separator:a180bdab3a4656e692125dc345fe887bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac50697ded09001c18e10a7ef980b1d8e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html#ac50697ded09001c18e10a7ef980b1d8e">BaseExecutor</a> (<a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> <a class="el" href="structgymbo_1_1BaseExecutor.html#a5be3e38314fe7cea470837a7ddea6f92">optimizer</a>, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a824a4c52632a08005a8a0264308a7372">maxSAT</a>=256, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a4fff090ea20da5638a9c6801bc6d0a67">maxUNSAT</a>=256, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a11bcbb9c82b00bc4c96481198464fea9">max_num_trials</a>=10, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#a4be9366c810f0d7cc89a53f2763c5eff">ignore_memory</a>=false, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#afcf1a585351b645d5ca9294a6e791ef4">use_dpll</a>=false, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a8955bd4fe56d26bda2324b95f3700829">verbose_level</a>=0, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#a467faae223c1e02ced0eab62650e43db">return_trace</a>=false)</td></tr>
+<tr class="memdesc:ac50697ded09001c18e10a7ef980b1d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="structgymbo_1_1BaseExecutor.html" title="Represents the base class for symbolic execution engine.">BaseExecutor</a>.  <a href="structgymbo_1_1PSExecutor.html#ac50697ded09001c18e10a7ef980b1d8e">More...</a><br /></td></tr>
+<tr class="separator:ac50697ded09001c18e10a7ef980b1d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structgymbo_1_1BaseExecutor"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structgymbo_1_1BaseExecutor')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structgymbo_1_1BaseExecutor.html">gymbo::BaseExecutor</a></td></tr>
-<tr class="memitem:a34fcf8e00f701b88d777d6d04c69f5be inherit pub_methods_structgymbo_1_1BaseExecutor"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1BaseExecutor.html#a34fcf8e00f701b88d777d6d04c69f5be">BaseExecutor</a> (<a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;<a class="el" href="structgymbo_1_1BaseExecutor.html#a8997937be91d3a8c5c1398d46be04b41">prog</a>, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;<a class="el" href="structgymbo_1_1BaseExecutor.html#a87e5057c2c5d9e2abd5d83ccb044f3cf">optimizer</a>, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a824a4c52632a08005a8a0264308a7372">maxSAT</a>=256, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a4fff090ea20da5638a9c6801bc6d0a67">maxUNSAT</a>=256, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a11bcbb9c82b00bc4c96481198464fea9">max_num_trials</a>=10, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#a4be9366c810f0d7cc89a53f2763c5eff">ignore_memory</a>=false, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#afcf1a585351b645d5ca9294a6e791ef4">use_dpll</a>=false, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a8955bd4fe56d26bda2324b95f3700829">verbose_level</a>=0, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#a467faae223c1e02ced0eab62650e43db">return_trace</a>=false)</td></tr>
-<tr class="memdesc:a34fcf8e00f701b88d777d6d04c69f5be inherit pub_methods_structgymbo_1_1BaseExecutor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="structgymbo_1_1BaseExecutor.html" title="Represents the base class for symbolic execution engine.">BaseExecutor</a>.  <a href="structgymbo_1_1BaseExecutor.html#a34fcf8e00f701b88d777d6d04c69f5be">More...</a><br /></td></tr>
-<tr class="separator:a34fcf8e00f701b88d777d6d04c69f5be inherit pub_methods_structgymbo_1_1BaseExecutor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac50697ded09001c18e10a7ef980b1d8e inherit pub_methods_structgymbo_1_1BaseExecutor"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1BaseExecutor.html#ac50697ded09001c18e10a7ef980b1d8e">BaseExecutor</a> (<a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> <a class="el" href="structgymbo_1_1BaseExecutor.html#a5be3e38314fe7cea470837a7ddea6f92">optimizer</a>, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a824a4c52632a08005a8a0264308a7372">maxSAT</a>=256, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a4fff090ea20da5638a9c6801bc6d0a67">maxUNSAT</a>=256, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a11bcbb9c82b00bc4c96481198464fea9">max_num_trials</a>=10, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#a4be9366c810f0d7cc89a53f2763c5eff">ignore_memory</a>=false, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#afcf1a585351b645d5ca9294a6e791ef4">use_dpll</a>=false, int <a class="el" href="structgymbo_1_1BaseExecutor.html#a8955bd4fe56d26bda2324b95f3700829">verbose_level</a>=0, bool <a class="el" href="structgymbo_1_1BaseExecutor.html#a467faae223c1e02ced0eab62650e43db">return_trace</a>=false)</td></tr>
+<tr class="memdesc:ac50697ded09001c18e10a7ef980b1d8e inherit pub_methods_structgymbo_1_1BaseExecutor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="structgymbo_1_1BaseExecutor.html" title="Represents the base class for symbolic execution engine.">BaseExecutor</a>.  <a href="structgymbo_1_1BaseExecutor.html#ac50697ded09001c18e10a7ef980b1d8e">More...</a><br /></td></tr>
+<tr class="separator:ac50697ded09001c18e10a7ef980b1d8e inherit pub_methods_structgymbo_1_1BaseExecutor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a430a7c78b9f5c858a9ccd65afc3d4382"><td class="memItemLeft" align="right" valign="top">const std::unordered_set&lt; int &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html#a430a7c78b9f5c858a9ccd65afc3d4382">random_vars</a></td></tr>
-<tr class="memdesc:a430a7c78b9f5c858a9ccd65afc3d4382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set of random variables'IDs.  <a href="structgymbo_1_1PSExecutor.html#a430a7c78b9f5c858a9ccd65afc3d4382">More...</a><br /></td></tr>
-<tr class="separator:a430a7c78b9f5c858a9ccd65afc3d4382"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c3b3472372599e446057e7354aa505f"><td class="memItemLeft" align="right" valign="top">const std::unordered_set&lt; int &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html#a4c3b3472372599e446057e7354aa505f">target_pcs</a></td></tr>
-<tr class="memdesc:a4c3b3472372599e446057e7354aa505f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set of target program counters for analysis.  <a href="structgymbo_1_1PSExecutor.html#a4c3b3472372599e446057e7354aa505f">More...</a><br /></td></tr>
-<tr class="separator:a4c3b3472372599e446057e7354aa505f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17671e8308b45544fae07dcbd1c1aa6c"><td class="memItemLeft" align="right" valign="top">std::unordered_set&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html#a17671e8308b45544fae07dcbd1c1aa6c">random_vars</a></td></tr>
+<tr class="memdesc:a17671e8308b45544fae07dcbd1c1aa6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set of random variables'IDs.  <a href="structgymbo_1_1PSExecutor.html#a17671e8308b45544fae07dcbd1c1aa6c">More...</a><br /></td></tr>
+<tr class="separator:a17671e8308b45544fae07dcbd1c1aa6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2539e874335ed3a4932b970b56c68731"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html#a2539e874335ed3a4932b970b56c68731">constraints_cache</a></td></tr>
 <tr class="memdesc:a2539e874335ed3a4932b970b56c68731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cache for storing and reusing path constraints.  <a href="structgymbo_1_1PSExecutor.html#a2539e874335ed3a4932b970b56c68731">More...</a><br /></td></tr>
 <tr class="separator:a2539e874335ed3a4932b970b56c68731"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acce527624db36d3db3c92c7c60047140"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegymbo.html#a035e6fe34f819db35a5662ae0cf427d3">ProbPathConstraintsTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1PSExecutor.html#acce527624db36d3db3c92c7c60047140">prob_constraints_table</a></td></tr>
 <tr class="separator:acce527624db36d3db3c92c7c60047140"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_structgymbo_1_1BaseExecutor"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structgymbo_1_1BaseExecutor')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="structgymbo_1_1BaseExecutor.html">gymbo::BaseExecutor</a></td></tr>
-<tr class="memitem:a8997937be91d3a8c5c1398d46be04b41 inherit pub_attribs_structgymbo_1_1BaseExecutor"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1BaseExecutor.html#a8997937be91d3a8c5c1398d46be04b41">prog</a></td></tr>
-<tr class="memdesc:a8997937be91d3a8c5c1398d46be04b41 inherit pub_attribs_structgymbo_1_1BaseExecutor"><td class="mdescLeft">&#160;</td><td class="mdescRight">The program to symbolically execute.  <a href="structgymbo_1_1BaseExecutor.html#a8997937be91d3a8c5c1398d46be04b41">More...</a><br /></td></tr>
-<tr class="separator:a8997937be91d3a8c5c1398d46be04b41 inherit pub_attribs_structgymbo_1_1BaseExecutor"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87e5057c2c5d9e2abd5d83ccb044f3cf inherit pub_attribs_structgymbo_1_1BaseExecutor"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1BaseExecutor.html#a87e5057c2c5d9e2abd5d83ccb044f3cf">optimizer</a></td></tr>
-<tr class="separator:a87e5057c2c5d9e2abd5d83ccb044f3cf inherit pub_attribs_structgymbo_1_1BaseExecutor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5be3e38314fe7cea470837a7ddea6f92 inherit pub_attribs_structgymbo_1_1BaseExecutor"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1BaseExecutor.html#a5be3e38314fe7cea470837a7ddea6f92">optimizer</a></td></tr>
+<tr class="separator:a5be3e38314fe7cea470837a7ddea6f92 inherit pub_attribs_structgymbo_1_1BaseExecutor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a824a4c52632a08005a8a0264308a7372 inherit pub_attribs_structgymbo_1_1BaseExecutor"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgymbo_1_1BaseExecutor.html#a824a4c52632a08005a8a0264308a7372">maxSAT</a></td></tr>
 <tr class="memdesc:a824a4c52632a08005a8a0264308a7372 inherit pub_attribs_structgymbo_1_1BaseExecutor"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum number of SAT constraints to collect.  <a href="structgymbo_1_1BaseExecutor.html#a824a4c52632a08005a8a0264308a7372">More...</a><br /></td></tr>
 <tr class="separator:a824a4c52632a08005a8a0264308a7372 inherit pub_attribs_structgymbo_1_1BaseExecutor"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,9 +149,9 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a derived class for symbolic execution engine for probabilistic programs. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a0fff2788f4ab8d8fc38efd7a75ad893c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0fff2788f4ab8d8fc38efd7a75ad893c">&#9670;&nbsp;</a></span>PSExecutor()</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac50697ded09001c18e10a7ef980b1d8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac50697ded09001c18e10a7ef980b1d8e">&#9670;&nbsp;</a></span>BaseExecutor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -164,75 +160,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">gymbo::PSExecutor::PSExecutor </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;&#160;</td>
-          <td class="paramname"><em>prog</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;&#160;</td>
-          <td class="paramname"><em>optimizer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::unordered_set&lt; int &gt; &amp;&#160;</td>
-          <td class="paramname"><em>random_vars</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::unordered_set&lt; int &gt; &amp;&#160;</td>
-          <td class="paramname"><em>target_pcs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>maxSAT</em> = <code>256</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>maxUNSAT</em> = <code>256</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>max_num_trials</em> = <code>10</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>ignore_memory</em> = <code>false</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>use_dpll</em> = <code>false</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>verbose_level</em> = <code>0</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>return_trace</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">gymbo::BaseExecutor::BaseExecutor</td>
         </tr>
       </table>
   </td>
@@ -242,13 +170,10 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor for <a class="el" href="structgymbo_1_1PSExecutor.html" title="Represents a derived class for symbolic execution engine for probabilistic programs.">PSExecutor</a>. </p>
+<p>Constructor for <a class="el" href="structgymbo_1_1BaseExecutor.html" title="Represents the base class for symbolic execution engine.">BaseExecutor</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">prog</td><td>The program to symbolically execute. </td></tr>
     <tr><td class="paramname">optimizer</td><td>The gradient descent optimizer for parameter optimization. </td></tr>
-    <tr><td class="paramname">random_vars</td><td>Set of random variables'IDs. </td></tr>
-    <tr><td class="paramname">target_pcs</td><td>Set of pc where gymbo executes path-constraints solving. If this set is empty or contains -1, gymbo solves all path-constraints. </td></tr>
     <tr><td class="paramname">maxSAT</td><td>The maximum number of SAT constraints to collect. </td></tr>
     <tr><td class="paramname">maxUNSAT</td><td>The maximum number of UNSAT constraints to collect. </td></tr>
     <tr><td class="paramname">max_num_trials</td><td>The maximum number of trials for each gradient descent. </td></tr>
@@ -262,9 +187,34 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab65d626e276b646170315c25c0422270"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab65d626e276b646170315c25c0422270">&#9670;&nbsp;</a></span>run()</h2>
+<a id="a4a37d705557ea3bb094f65a376c4c919"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a37d705557ea3bb094f65a376c4c919">&#9670;&nbsp;</a></span>register_random_var()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gymbo::PSExecutor::register_random_var </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>var_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a180bdab3a4656e692125dc345fe887bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a180bdab3a4656e692125dc345fe887bd">&#9670;&nbsp;</a></span>run()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -275,6 +225,18 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structgymbo_1_1Trace.html">Trace</a> gymbo::PSExecutor::run </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;&#160;</td>
+          <td class="paramname"><em>prog</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unordered_set&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target_pcs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
           <td class="paramname"><em>state</em>, </td>
         </tr>
@@ -301,6 +263,8 @@ Public Attributes</h2></td></tr>
 <p>This function performs probabilistic symbolic execution on a given program, considering variable distributions, symbolic states, and path constraints. It explores different execution paths and updates the constraints and probabilities accordingly.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">prog</td><td>The program to symbolically execute. </td></tr>
+    <tr><td class="paramname">target_pcs</td><td>Set of pc where gymbo executes path-constraints solving. If this set is empty or contains -1, gymbo solves all path-constraints. </td></tr>
     <tr><td class="paramname">state</td><td>The initial symbolic state for execution. </td></tr>
     <tr><td class="paramname">maxDepth</td><td>Maximum exploration depth during symbolic execution. </td></tr>
   </table>
@@ -308,7 +272,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The symbolic execution trace containing states and child traces. </dd></dl>
 
-<p>Implements <a class="el" href="structgymbo_1_1BaseExecutor.html#a1bb7f2eef1613b0b0fdab9a315adf88b">gymbo::BaseExecutor</a>.</p>
+<p>Implements <a class="el" href="structgymbo_1_1BaseExecutor.html#a7df59ba85914f0e054a8f0b503711351">gymbo::BaseExecutor</a>.</p>
 
 </div>
 </div>
@@ -400,35 +364,19 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a430a7c78b9f5c858a9ccd65afc3d4382"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a430a7c78b9f5c858a9ccd65afc3d4382">&#9670;&nbsp;</a></span>random_vars</h2>
+<a id="a17671e8308b45544fae07dcbd1c1aa6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17671e8308b45544fae07dcbd1c1aa6c">&#9670;&nbsp;</a></span>random_vars</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const std::unordered_set&lt;int&gt;&amp; gymbo::PSExecutor::random_vars</td>
+          <td class="memname">std::unordered_set&lt;int&gt; gymbo::PSExecutor::random_vars</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Set of random variables'IDs. </p>
-
-</div>
-</div>
-<a id="a4c3b3472372599e446057e7354aa505f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c3b3472372599e446057e7354aa505f">&#9670;&nbsp;</a></span>target_pcs</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::unordered_set&lt;int&gt;&amp; gymbo::PSExecutor::target_pcs</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set of target program counters for analysis. </p>
 
 </div>
 </div>

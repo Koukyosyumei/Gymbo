@@ -5,8 +5,6 @@
  */
 
 #pragma once
-#include <unordered_set>
-
 #include "smt.h"
 
 namespace gymbo {

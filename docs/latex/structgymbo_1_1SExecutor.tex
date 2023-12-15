@@ -30,17 +30,15 @@ Collaboration diagram for gymbo\+::SExecutor\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structgymbo_1_1SExecutor_a1e49054e42b3ce4e091af098ad7302f3}{SExecutor}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&\mbox{\hyperlink{structgymbo_1_1BaseExecutor_a8997937be91d3a8c5c1398d46be04b41}{prog}}, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&\mbox{\hyperlink{structgymbo_1_1BaseExecutor_a87e5057c2c5d9e2abd5d83ccb044f3cf}{optimizer}}, const std\+::unordered\+\_\+set$<$ int $>$ \&\mbox{\hyperlink{structgymbo_1_1SExecutor_ac05dd7a27bedc684136a19afacb100c6}{target\+\_\+pcs}}, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a824a4c52632a08005a8a0264308a7372}{max\+SAT}}=256, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a4fff090ea20da5638a9c6801bc6d0a67}{max\+UNSAT}}=256, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a11bcbb9c82b00bc4c96481198464fea9}{max\+\_\+num\+\_\+trials}}=10, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a4be9366c810f0d7cc89a53f2763c5eff}{ignore\+\_\+memory}}=false, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_afcf1a585351b645d5ca9294a6e791ef4}{use\+\_\+dpll}}=false, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a8955bd4fe56d26bda2324b95f3700829}{verbose\+\_\+level}}=0, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a467faae223c1e02ced0eab62650e43db}{return\+\_\+trace}}=false)
-\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{structgymbo_1_1SExecutor}{SExecutor}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{structgymbo_1_1SExecutor_a59f5891ef952677a333d5040978cddfd}{solve}} (bool is\+\_\+target, int pc, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state)
 \begin{DoxyCompactList}\small\item\em Solves path constraints and updates the cache. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{structgymbo_1_1SExecutor_a64982735ba6a105b0c62cf74051a2143}{run}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, int max\+Depth=256)
-\begin{DoxyCompactList}\small\item\em Symbolically Execute a Program with Gradient Descent Optimization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} \mbox{\hyperlink{structgymbo_1_1SExecutor_a51286f8002b2465f71bf648b94b646cc}{run}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prog, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, int max\+Depth=256)
+\begin{DoxyCompactList}\small\item\em Symbolically Execute a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgymbo_1_1SExecutor_ac50697ded09001c18e10a7ef980b1d8e}{Base\+Executor}} (\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a5be3e38314fe7cea470837a7ddea6f92}{optimizer}}, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a824a4c52632a08005a8a0264308a7372}{max\+SAT}}=256, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a4fff090ea20da5638a9c6801bc6d0a67}{max\+UNSAT}}=256, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a11bcbb9c82b00bc4c96481198464fea9}{max\+\_\+num\+\_\+trials}}=10, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a4be9366c810f0d7cc89a53f2763c5eff}{ignore\+\_\+memory}}=false, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_afcf1a585351b645d5ca9294a6e791ef4}{use\+\_\+dpll}}=false, int \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a8955bd4fe56d26bda2324b95f3700829}{verbose\+\_\+level}}=0, bool \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a467faae223c1e02ced0eab62650e43db}{return\+\_\+trace}}=false)
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{structgymbo_1_1BaseExecutor}{Base\+Executor}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const std\+::unordered\+\_\+set$<$ int $>$ \& \mbox{\hyperlink{structgymbo_1_1SExecutor_ac05dd7a27bedc684136a19afacb100c6}{target\+\_\+pcs}}
-\begin{DoxyCompactList}\small\item\em Set of target program counters for analysis. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \mbox{\hyperlink{structgymbo_1_1SExecutor_acfa19f2c340c7a057f5c9457af201feb}{constraints\+\_\+cache}}
 \begin{DoxyCompactList}\small\item\em Cache for storing and reusing path constraints. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -48,24 +46,20 @@ const std\+::unordered\+\_\+set$<$ int $>$ \& \mbox{\hyperlink{structgymbo_1_1SE
 \doxysubsection{Detailed Description}
 Represents a derived class for symbolic execution engine for deterministic programs. 
 
-\doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{structgymbo_1_1SExecutor_a1e49054e42b3ce4e091af098ad7302f3}\label{structgymbo_1_1SExecutor_a1e49054e42b3ce4e091af098ad7302f3}} 
-\index{gymbo::SExecutor@{gymbo::SExecutor}!SExecutor@{SExecutor}}
-\index{SExecutor@{SExecutor}!gymbo::SExecutor@{gymbo::SExecutor}}
-\doxysubsubsection{\texorpdfstring{SExecutor()}{SExecutor()}}
-{\footnotesize\ttfamily gymbo\+::\+SExecutor\+::\+SExecutor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{const std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{int}]{max\+SAT = {\ttfamily 256},  }\item[{int}]{max\+UNSAT = {\ttfamily 256},  }\item[{int}]{max\+\_\+num\+\_\+trials = {\ttfamily 10},  }\item[{bool}]{ignore\+\_\+memory = {\ttfamily false},  }\item[{bool}]{use\+\_\+dpll = {\ttfamily false},  }\item[{int}]{verbose\+\_\+level = {\ttfamily 0},  }\item[{bool}]{return\+\_\+trace = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structgymbo_1_1SExecutor_ac50697ded09001c18e10a7ef980b1d8e}\label{structgymbo_1_1SExecutor_ac50697ded09001c18e10a7ef980b1d8e}} 
+\index{gymbo::SExecutor@{gymbo::SExecutor}!BaseExecutor@{BaseExecutor}}
+\index{BaseExecutor@{BaseExecutor}!gymbo::SExecutor@{gymbo::SExecutor}}
+\doxysubsubsection{\texorpdfstring{BaseExecutor()}{BaseExecutor()}}
+{\footnotesize\ttfamily gymbo\+::\+Base\+Executor\+::\+Base\+Executor\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor for \mbox{\hyperlink{structgymbo_1_1SExecutor}{SExecutor}}. 
+Constructor for \mbox{\hyperlink{structgymbo_1_1BaseExecutor}{Base\+Executor}}. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em prog} & The program to symbolically execute. \\
-\hline
 {\em optimizer} & The gradient descent optimizer for parameter optimization. \\
-\hline
-{\em target\+\_\+pcs} & The set of pc where gymbo executes path-\/constraints solving. If this set is empty or contains -\/1, gymbo solves all path-\/constraints. \\
 \hline
 {\em max\+SAT} & The maximum number of SAT constraints to collect. \\
 \hline
@@ -82,14 +76,11 @@ Constructor for \mbox{\hyperlink{structgymbo_1_1SExecutor}{SExecutor}}.
 {\em return\+\_\+trace} & If set to true, save the trace at each pc and return them (default false). \\
 \hline
 \end{DoxyParams}
-
-
-\doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{structgymbo_1_1SExecutor_a64982735ba6a105b0c62cf74051a2143}\label{structgymbo_1_1SExecutor_a64982735ba6a105b0c62cf74051a2143}} 
+\mbox{\Hypertarget{structgymbo_1_1SExecutor_a51286f8002b2465f71bf648b94b646cc}\label{structgymbo_1_1SExecutor_a51286f8002b2465f71bf648b94b646cc}} 
 \index{gymbo::SExecutor@{gymbo::SExecutor}!run@{run}}
 \index{run@{run}!gymbo::SExecutor@{gymbo::SExecutor}}
 \doxysubsubsection{\texorpdfstring{run()}{run()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} gymbo\+::\+SExecutor\+::run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{int}]{max\+Depth = {\ttfamily 256} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgymbo_1_1Trace}{Trace}} gymbo\+::\+SExecutor\+::run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prog,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{state,  }\item[{int}]{max\+Depth = {\ttfamily 256} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -99,6 +90,10 @@ This function conducts symbolic execution of a given program while simultaneousl
 
 
 \begin{DoxyParams}{Parameters}
+{\em prog} & The program to symbolically execute. \\
+\hline
+{\em target\+\_\+pcs} & The set of pc where gymbo executes path-\/constraints solving. If this set is empty or contains -\/1, gymbo solves all path-\/constraints. \\
+\hline
 {\em state} & The initial symbolic state of the program. \\
 \hline
 {\em max\+Depth} & The maximum depth of symbolic exploration. \\
@@ -109,7 +104,7 @@ A trace of the symbolic execution.
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a1bb7f2eef1613b0b0fdab9a315adf88b}{gymbo\+::\+Base\+Executor}}.
+Implements \mbox{\hyperlink{structgymbo_1_1BaseExecutor_a7df59ba85914f0e054a8f0b503711351}{gymbo\+::\+Base\+Executor}}.
 
 \mbox{\Hypertarget{structgymbo_1_1SExecutor_a59f5891ef952677a333d5040978cddfd}\label{structgymbo_1_1SExecutor_a59f5891ef952677a333d5040978cddfd}} 
 \index{gymbo::SExecutor@{gymbo::SExecutor}!solve@{solve}}
@@ -151,16 +146,6 @@ Implements \mbox{\hyperlink{structgymbo_1_1BaseExecutor_ab075472095a48ab173af212
 
 
 Cache for storing and reusing path constraints. 
-
-\mbox{\Hypertarget{structgymbo_1_1SExecutor_ac05dd7a27bedc684136a19afacb100c6}\label{structgymbo_1_1SExecutor_ac05dd7a27bedc684136a19afacb100c6}} 
-\index{gymbo::SExecutor@{gymbo::SExecutor}!target\_pcs@{target\_pcs}}
-\index{target\_pcs@{target\_pcs}!gymbo::SExecutor@{gymbo::SExecutor}}
-\doxysubsubsection{\texorpdfstring{target\_pcs}{target\_pcs}}
-{\footnotesize\ttfamily const std\+::unordered\+\_\+set$<$int$>$\& gymbo\+::\+SExecutor\+::target\+\_\+pcs}
-
-
-
-Set of target program counters for analysis. 
 
 
 
