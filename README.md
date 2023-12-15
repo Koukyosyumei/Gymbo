@@ -140,7 +140,9 @@ gymbo::generate_ast(token, user_input, code);
 gymbo::compile_ast(code, prg);
 
 // execute gradient-based symbolie execution
-gymbo::run_gymbo(prg, optimizer, init, cache_constraints, ...);
+gymbo::SExecutor executor(optimizer, maxSAT, maxUNSAT, max_num_trials,
+                          ignore_memory, use_dpll, verbose_level);
+executor.run(prg, target_pcs, init, max_depth);
 ```
 
 ## Python API
@@ -191,7 +193,10 @@ adv_condition = (
 
 optimizer = plg.GDOptimizer(num_itrs, step_size, ...)
 var_counter, prg = plg.gcompile(mlp_code)
-constraints = plg.gexecute(prg, init_symstate, optimizer, target_pcs, ...)
+
+plg.SExecutor executor(optimizer, maxSAT, maxUNSAT, max_num_trials,
+                       ignore_memory, use_dpll, verbose_level);
+executor.run(prg, target_pcs, init, max_depth);
 ```
 
 ## Acknowledgement
