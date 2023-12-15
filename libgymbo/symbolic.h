@@ -395,9 +395,8 @@ inline void symStep(SymState *state, Instr &instr,
  * @brief Represents the base class for symbolic execution engine.
  */
 struct BaseExecutor {
-    Prog &prog;              ///< The program to symbolically execute.
-    GDOptimizer &optimizer;  ///< The gradient descent optimizer for parameter
-                             ///< optimization.
+    GDOptimizer optimizer;  ///< The gradient descent optimizer for parameter
+                            ///< optimization.
     int maxSAT;    ///< The maximum number of SAT constraints to collect.
     int maxUNSAT;  ///< The maximum number of UNSAT constraints to collect.
     int max_num_trials;  ///< The maximum number of trials for each gradient
@@ -413,7 +412,6 @@ struct BaseExecutor {
     /**
      * @brief Constructor for BaseExecutor.
      *
-     * @param prog The program to symbolically execute.
      * @param optimizer The gradient descent optimizer for parameter
      * optimization.
      * @param maxSAT The maximum number of SAT constraints to collect.
@@ -428,12 +426,11 @@ struct BaseExecutor {
      * @param return_trace If set to true, save the trace at each pc and return
      * them (default false).
      */
-    BaseExecutor(Prog &prog, GDOptimizer &optimizer, int maxSAT = 256,
-                 int maxUNSAT = 256, int max_num_trials = 10,
-                 bool ignore_memory = false, bool use_dpll = false,
-                 int verbose_level = 0, bool return_trace = false)
-        : prog(prog),
-          optimizer(optimizer),
+    BaseExecutor(GDOptimizer optimizer, int maxSAT = 256, int maxUNSAT = 256,
+                 int max_num_trials = 10, bool ignore_memory = false,
+                 bool use_dpll = false, int verbose_level = 0,
+                 bool return_trace = false)
+        : optimizer(optimizer),
           maxSAT(maxSAT),
           maxUNSAT(maxUNSAT),
           max_num_trials(max_num_trials),
@@ -443,7 +440,8 @@ struct BaseExecutor {
           return_trace(return_trace){};
 
     virtual bool solve(bool is_target, int pc, SymState &state) = 0;
-    virtual Trace run(SymState &state, int maxDepth) = 0;
+    virtual Trace run(Prog &prog, std::unordered_set<int> &target_pcs,
+                      SymState &state, int maxDepth) = 0;
 };
 
 /**
@@ -452,40 +450,10 @@ struct BaseExecutor {
  * deterministic programs.
  */
 struct SExecutor : public BaseExecutor {
-    const std::unordered_set<int>
-        &target_pcs;  ///< Set of target program counters for analysis.
     PathConstraintsTable
         constraints_cache;  ///< Cache for storing and reusing path constraints.
 
-    /**
-     * @brief Constructor for SExecutor.
-     *
-     * @param prog The program to symbolically execute.
-     * @param optimizer The gradient descent optimizer for parameter
-     * optimization.
-     * @param target_pcs The set of pc where gymbo executes path-constraints
-     * solving. If this set is empty or contains -1, gymbo solves all
-     * path-constraints.
-     * @param maxSAT The maximum number of SAT constraints to collect.
-     * @param maxUNSAT The maximum number of UNSAT constraints to collect.
-     * @param max_num_trials The maximum number of trials for each gradient
-     * descent.
-     * @param ignore_memory If set to true, constraints derived from memory will
-     * be ignored.
-     * @param use_dpll If set to true, use DPLL to decide the initial assignment
-     * for each term.
-     * @param verbose_level The level of verbosity.
-     * @param return_trace If set to true, save the trace at each pc and return
-     * them (default false).
-     */
-    SExecutor(Prog &prog, GDOptimizer &optimizer,
-              const std::unordered_set<int> &target_pcs, int maxSAT = 256,
-              int maxUNSAT = 256, int max_num_trials = 10,
-              bool ignore_memory = false, bool use_dpll = false,
-              int verbose_level = 0, bool return_trace = false)
-        : BaseExecutor(prog, optimizer, maxSAT, maxUNSAT, max_num_trials,
-                       ignore_memory, use_dpll, verbose_level, return_trace),
-          target_pcs(target_pcs) {}
+    using BaseExecutor::BaseExecutor;
 
     /**
      * @brief Solves path constraints and updates the cache.
@@ -540,11 +508,16 @@ struct SExecutor : public BaseExecutor {
      * simultaneously optimizing the path constraints using the provided
      * gradient descent optimizer, `GDOptimizer`.
      *
+     * @param prog The program to symbolically execute.
+     * @param target_pcs The set of pc where gymbo executes path-constraints
+     * solving. If this set is empty or contains -1, gymbo solves all
+     * path-constraints.
      * @param state The initial symbolic state of the program.
      * @param maxDepth The maximum depth of symbolic exploration.
      * @return A trace of the symbolic execution.
      */
-    Trace run(SymState &state, int maxDepth = 256) {
+    Trace run(Prog &prog, std::unordered_set<int> &target_pcs, SymState &state,
+              int maxDepth = 256) {
         int pc = state.pc;
         bool is_target = is_target_pc(target_pcs, pc);
         bool is_sat = true;
@@ -564,7 +537,7 @@ struct SExecutor : public BaseExecutor {
             symStep(&state, instr, newStates);
             std::vector<Trace> children;
             for (SymState *newState : newStates) {
-                Trace child = run(*newState, maxDepth - 1);
+                Trace child = run(prog, target_pcs, *newState, maxDepth - 1);
                 if (return_trace) {
                     children.push_back(child);
                 }

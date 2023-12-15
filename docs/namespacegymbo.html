@@ -301,9 +301,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a7b970a9d85276e2bd460b29fec762ec3"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::unordered_map&lt; std::string, int &gt;, <a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a7b970a9d85276e2bd460b29fec762ec3">gcompile</a> (char *user_input)</td></tr>
 <tr class="memdesc:a7b970a9d85276e2bd460b29fec762ec3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compiles user input into a program, returning variable counts and the compiled program.  <a href="namespacegymbo.html#a7b970a9d85276e2bd460b29fec762ec3">More...</a><br /></td></tr>
 <tr class="separator:a7b970a9d85276e2bd460b29fec762ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af40a70afb521e856bda968808b2b492e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#af40a70afb521e856bda968808b2b492e">gexecute</a> (<a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;prg, <a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;optimizer, <a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;init, std::unordered_set&lt; int &gt; &amp;target_pcs, int max_depth, int maxSAT, int maxUNSAT, int max_num_trials, bool ignore_memory, bool use_dpll, int verbose_level)</td></tr>
-<tr class="memdesc:af40a70afb521e856bda968808b2b492e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Symbolically Executes a Program with Gradient Descent Optimization.  <a href="namespacegymbo.html#af40a70afb521e856bda968808b2b492e">More...</a><br /></td></tr>
-<tr class="separator:af40a70afb521e856bda968808b2b492e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b2c855687acd2541bb6d6bcbf80a9cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegymbo.html#a3b2c855687acd2541bb6d6bcbf80a9cb">pbranch</a> (<a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;state)</td></tr>
 <tr class="memdesc:a3b2c855687acd2541bb6d6bcbf80a9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform probabilistic branching based on symbolic execution.  <a href="namespacegymbo.html#a3b2c855687acd2541bb6d6bcbf80a9cb">More...</a><br /></td></tr>
 <tr class="separator:a3b2c855687acd2541bb6d6bcbf80a9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1698,116 +1695,6 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="af40a70afb521e856bda968808b2b492e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af40a70afb521e856bda968808b2b492e">&#9670;&nbsp;</a></span>gexecute()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacegymbo.html#aea0120f1cdc1417f9b6b8480ac562389">PathConstraintsTable</a> gymbo::gexecute </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacegymbo.html#a9b6a88c2be45a5e3fd3f053681f89733">Prog</a> &amp;&#160;</td>
-          <td class="paramname"><em>prg</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structgymbo_1_1GDOptimizer.html">GDOptimizer</a> &amp;&#160;</td>
-          <td class="paramname"><em>optimizer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structgymbo_1_1SymState.html">SymState</a> &amp;&#160;</td>
-          <td class="paramname"><em>init</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::unordered_set&lt; int &gt; &amp;&#160;</td>
-          <td class="paramname"><em>target_pcs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>max_depth</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>maxSAT</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>maxUNSAT</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>max_num_trials</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>ignore_memory</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>use_dpll</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>verbose_level</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Symbolically Executes a Program with Gradient Descent Optimization. </p>
-<p>This function conducts symbolic execution of a given program while simultaneously optimizing the path constraints using the provided gradient descent optimizer, <code><a class="el" href="structgymbo_1_1GDOptimizer.html" title="Gradient Descent Optimizer for Symbolic Path Constraints.">GDOptimizer</a></code>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">prg</td><td>The program to symbolically execute. </td></tr>
-    <tr><td class="paramname">optimizer</td><td>The gradient descent optimizer for parameter optimization. </td></tr>
-    <tr><td class="paramname">init</td><td>The initial symbolic state of the program. </td></tr>
-    <tr><td class="paramname">target_pcs</td><td>The set of program counters where gymbo executes path-constraints solving. If this set is empty or contains -1, gymbo solves all path-constraints. </td></tr>
-    <tr><td class="paramname">max_depth</td><td>The maximum depth of symbolic exploration. </td></tr>
-    <tr><td class="paramname">maxSAT</td><td>The maximum number of SAT constraints to collect. </td></tr>
-    <tr><td class="paramname">maxUNSAT</td><td>The maximum number of UNSAT constraints to collect. </td></tr>
-    <tr><td class="paramname">max_num_trials</td><td>The maximum number of trials for each gradient descent. </td></tr>
-    <tr><td class="paramname">ignore_memory</td><td>If set to true, constraints derived from memory will be ignored. </td></tr>
-    <tr><td class="paramname">use_dpll</td><td>If set to true, use DPLL to decide the initial assignment for each term. </td></tr>
-    <tr><td class="paramname">verbose_level</td><td>The level of verbosity. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A set of extracted path constraints and their satisfiability. </dd></dl>
 
 </div>
 </div>

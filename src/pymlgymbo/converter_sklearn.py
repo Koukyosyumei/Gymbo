@@ -1,6 +1,4 @@
-def dump_sklearn_MLP(
-    clf, feature_vars, indent_char="", endl="\n", precision=8
-):
+def dump_sklearn_MLP(clf, feature_vars, indent_char="", endl="\n", precision=8):
     """
     Generate code representation of a trained scikit-learn MLPClassifier.
 

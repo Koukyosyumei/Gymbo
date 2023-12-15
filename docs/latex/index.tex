@@ -123,7 +123,9 @@ Since gymbo consists of the header-\/only library, you can easily create your ow
 \DoxyCodeLine{\mbox{\hyperlink{namespacegymbo_a1af6d97f4c122833601a9b054a23009a}{gymbo::compile\_ast}}(code, prg);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// execute gradient-\/based symbolie execution}}
-\DoxyCodeLine{gymbo::run\_gymbo(prg, optimizer, init, cache\_constraints, ...);}
+\DoxyCodeLine{\mbox{\hyperlink{structgymbo_1_1SExecutor}{gymbo::SExecutor}} executor(optimizer, maxSAT, maxUNSAT, max\_num\_trials,}
+\DoxyCodeLine{                          ignore\_memory, use\_dpll, verbose\_level);}
+\DoxyCodeLine{executor.run(prg, target\_pcs, init, max\_depth);}
 
 \end{DoxyCode}
 \hypertarget{index_python_sec}{}\doxysection{Python API}\label{index_python_sec}
@@ -142,7 +144,9 @@ Since gymbo consists of the header-\/only library, you can easily create your ow
 \DoxyCodeLine{var\_counter, prg = plg.gcompile(inp)}
 \DoxyCodeLine{}
 \DoxyCodeLine{optimizer = plg.GDOptimizer(num\_itrs, step\_size, ...)}
-\DoxyCodeLine{constraints = plg.gexecute(prg, init\_symstate, optimizer, ...)}
+\DoxyCodeLine{executor = plg.SExecutor(optimizer, maxSAT, maxUNSAT, max\_num\_trials,}
+\DoxyCodeLine{                         ignore\_memory, use\_dpll, verbose\_level)}
+\DoxyCodeLine{executor.run(prg, target\_pcs, init, max\_depth)}
 
 \end{DoxyCode}
 \hypertarget{index_pymlgymbo_sec}{}\doxysubsection{pymlgymbo\+: Debugging Machine Learning Models}\label{index_pymlgymbo_sec}
@@ -173,7 +177,10 @@ The following code generates the adversarial examples against a neural network, 
 \DoxyCodeLine{}
 \DoxyCodeLine{optimizer = plg.GDOptimizer(num\_itrs, step\_size, ...)}
 \DoxyCodeLine{var\_counter, prg = plg.gcompile(mlp\_code)}
-\DoxyCodeLine{constraints = plg.gexecute(prg, init\_symstate, optimizer, target\_pcs, ...)}
+\DoxyCodeLine{}
+\DoxyCodeLine{executor = plg.SExecutor(optimizer, maxSAT, maxUNSAT, max\_num\_trials,}
+\DoxyCodeLine{                         ignore\_memory, use\_dpll, verbose\_level)}
+\DoxyCodeLine{executor.run(prg, target\_pcs, init, max\_depth)}
 
 \end{DoxyCode}
 \hypertarget{index_acknowledgement_sec}{}\doxysection{Acknowledgement}\label{index_acknowledgement_sec}

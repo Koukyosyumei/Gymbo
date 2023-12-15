@@ -181,8 +181,6 @@ void \mbox{\hyperlink{namespacegymbo_a5e7728b7fbac9bf79ae665cf9b94f443}{generate
 \begin{DoxyCompactList}\small\item\em Parses a C-\/like language program into an AST. \end{DoxyCompactList}\item 
 std\+::pair$<$ std\+::unordered\+\_\+map$<$ std\+::string, int $>$, \mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} $>$ \mbox{\hyperlink{namespacegymbo_a7b970a9d85276e2bd460b29fec762ec3}{gcompile}} (char $\ast$user\+\_\+input)
 \begin{DoxyCompactList}\small\item\em Compiles user input into a program, returning variable counts and the compiled program. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} \mbox{\hyperlink{namespacegymbo_af40a70afb521e856bda968808b2b492e}{gexecute}} (\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&prg, \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&optimizer, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&init, std\+::unordered\+\_\+set$<$ int $>$ \&target\+\_\+pcs, int max\+\_\+depth, int max\+SAT, int max\+UNSAT, int max\+\_\+num\+\_\+trials, bool ignore\+\_\+memory, bool use\+\_\+dpll, int verbose\+\_\+level)
-\begin{DoxyCompactList}\small\item\em Symbolically Executes a Program with Gradient Descent Optimization. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_a3b2c855687acd2541bb6d6bcbf80a9cb}{pbranch}} (\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state)
 \begin{DoxyCompactList}\small\item\em Perform probabilistic branching based on symbolic execution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacegymbo_ac945fcc71ddc6b734f8444f51d21f219}{verbose\+\_\+pconstraints}} (int verbose\+\_\+level, bool is\+\_\+unknown\+\_\+path\+\_\+constraint, bool is\+\_\+target, bool is\+\_\+sat, int pc, std\+::string constraints\+\_\+str, \mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&state, const std\+::unordered\+\_\+map$<$ int, float $>$ \&params)
@@ -1098,46 +1096,6 @@ Parses a C-\/like language program into an AST.
 {\em code} & The vector to store Ast nodes \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{namespacegymbo_af40a70afb521e856bda968808b2b492e}\label{namespacegymbo_af40a70afb521e856bda968808b2b492e}} 
-\index{gymbo@{gymbo}!gexecute@{gexecute}}
-\index{gexecute@{gexecute}!gymbo@{gymbo}}
-\doxysubsubsection{\texorpdfstring{gexecute()}{gexecute()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{namespacegymbo_aea0120f1cdc1417f9b6b8480ac562389}{Path\+Constraints\+Table}} gymbo\+::gexecute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegymbo_a9b6a88c2be45a5e3fd3f053681f89733}{Prog}} \&}]{prg,  }\item[{\mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}} \&}]{optimizer,  }\item[{\mbox{\hyperlink{structgymbo_1_1SymState}{Sym\+State}} \&}]{init,  }\item[{std\+::unordered\+\_\+set$<$ int $>$ \&}]{target\+\_\+pcs,  }\item[{int}]{max\+\_\+depth,  }\item[{int}]{max\+SAT,  }\item[{int}]{max\+UNSAT,  }\item[{int}]{max\+\_\+num\+\_\+trials,  }\item[{bool}]{ignore\+\_\+memory,  }\item[{bool}]{use\+\_\+dpll,  }\item[{int}]{verbose\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Symbolically Executes a Program with Gradient Descent Optimization. 
-
-This function conducts symbolic execution of a given program while simultaneously optimizing the path constraints using the provided gradient descent optimizer, {\ttfamily \mbox{\hyperlink{structgymbo_1_1GDOptimizer}{GDOptimizer}}}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em prg} & The program to symbolically execute. \\
-\hline
-{\em optimizer} & The gradient descent optimizer for parameter optimization. \\
-\hline
-{\em init} & The initial symbolic state of the program. \\
-\hline
-{\em target\+\_\+pcs} & The set of program counters where gymbo executes path-\/constraints solving. If this set is empty or contains -\/1, gymbo solves all path-\/constraints. \\
-\hline
-{\em max\+\_\+depth} & The maximum depth of symbolic exploration. \\
-\hline
-{\em max\+SAT} & The maximum number of SAT constraints to collect. \\
-\hline
-{\em max\+UNSAT} & The maximum number of UNSAT constraints to collect. \\
-\hline
-{\em max\+\_\+num\+\_\+trials} & The maximum number of trials for each gradient descent. \\
-\hline
-{\em ignore\+\_\+memory} & If set to true, constraints derived from memory will be ignored. \\
-\hline
-{\em use\+\_\+dpll} & If set to true, use DPLL to decide the initial assignment for each term. \\
-\hline
-{\em verbose\+\_\+level} & The level of verbosity. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A set of extracted path constraints and their satisfiability. 
-\end{DoxyReturn}
 \mbox{\Hypertarget{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}\label{namespacegymbo_a50a6f585caaa9c8ca66826268b46dcc9}} 
 \index{gymbo@{gymbo}!initialize\_params@{initialize\_params}}
 \index{initialize\_params@{initialize\_params}!gymbo@{gymbo}}

@@ -74,7 +74,6 @@ int main(int argc, char *argv[]) {
     }
     printf("---\n");
 
-    std::unordered_set<int> random_vars = {0, 1};
     std::unordered_map<int, gymbo::DiscreteDist> var2dist = {
         {0, gymbo::DiscreteUniformDist(1, 3)},
         {1, gymbo::DiscreteUniformDist(1, 3)}};
@@ -91,10 +90,11 @@ int main(int argc, char *argv[]) {
         gymbo::SymState init;
         init.set_concrete_val(var_counter["door_switch"], door_switch);
 
-        gymbo::PSExecutor executor(prg, optimizer, random_vars, target_pcs,
-                                   maxSAT, maxUNSAT, max_num_trials,
+        gymbo::PSExecutor executor(optimizer, maxSAT, maxUNSAT, max_num_trials,
                                    ignore_memory, use_dpll, verbose_level);
-        executor.run(init, max_depth);
+        executor.register_random_var(0);
+        executor.register_random_var(1);
+        executor.run(prg, target_pcs, init, max_depth);
 
         int num_unique_path_constraints = executor.constraints_cache.size();
         int num_unique_final_states = executor.prob_constraints_table.size();
