@@ -130,7 +130,6 @@ std::vector<gymbo::Node *> code;
 gymbo::Prog prg;
 gymbo::GDOptimizer optimizer(num_itrs, step_size);
 gymbo::SymState init;
-gymbo::PathConstraintsTable cache_constraints;
 
 // tokenize the input source code
 gymbo::Token *token = gymbo::tokenize(user_input);
