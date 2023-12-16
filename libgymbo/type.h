@@ -482,7 +482,22 @@ struct Sym {
                 return new Sym(SymType::SNot, left->psimplify(cvals));
             }
             case (SymType::SCnt): {
-                return new Sym(SymType::SCnt, left->psimplify(cvals));
+                Sym *predicate;
+                if (assign.size() == 0) {
+                    predicate = left->psimplify(cvals);
+                } else {
+                    Mem nvals(cvals);
+                    for (const auto &a : assign) {
+                        nvals.emplace(a.first, FloatToWord(a.second));
+                    }
+                    predicate = left->psimplify(nvals);
+                }
+
+                if (predicate->symtype == SymType::SCon) {
+                    return new Sym(SymType::SCon, FloatToWord(1.0));
+                } else {
+                    return new Sym(SymType::SCnt, predicate);
+                }
             }
             default: {
                 return this;
@@ -1029,8 +1044,9 @@ struct SymProb {
               std::unordered_map<int, DiscreteDist> &var2dist,
               std::vector<std::vector<int>> &D) {
         std::pair<Sym *, Sym *> mq = marginalize(var2dist, D);
-        Sym *q_left = mq.first;
-        Sym *q_right = mq.second;
+        Mem dummy_mem;
+        Sym *q_left = mq.first->psimplify(dummy_mem);
+        Sym *q_right = mq.second->psimplify(dummy_mem);
         q_right = new Sym(SymType::SMul, q_right, &other);
         return Sym(symtype, q_left, q_right);
     }
