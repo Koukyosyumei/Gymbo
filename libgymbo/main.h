@@ -31,6 +31,9 @@
  * currently support the discrete uniform, bernoulli, and binomial
  * distributions.
  *
+ * @image html /img/gymbo_prob_intuition.drawio.svg
+ *
+ *
  * > Please note that Gymbo is currently under development and may have bugs.
  * Your feedback and contributions are always greatly appreciated.
  *

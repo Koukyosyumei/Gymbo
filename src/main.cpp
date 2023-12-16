@@ -5,7 +5,9 @@
 
 #include <unordered_map>
 
+#include "../libgymbo/compiler.h"
 #include "../libgymbo/pipeline.h"
+#include "../libgymbo/symbolic.h"
 
 #define STRINGIFY(x) #x
 #define MACRO_STRINGIFY(x) STRINGIFY(x)

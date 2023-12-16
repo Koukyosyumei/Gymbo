@@ -35,38 +35,20 @@ if __name__ == "__main__":
     for i, instr in enumerate(prg):
         print(i, instr.toString())
 
-    init_symstate = plg.SymState()
-
-    target_pc = {12}
-    constraints = plg.gexecute(
-        prg,
-        optimizer,
-        init_symstate,
-        target_pc,
-        max_depth,
-        maxSAT,
-        maxUNSAT,
-        max_num_trials,
-        ignore_memory,
-        use_dpll,
-        verbose_level,
-    )
-    print("target_pcs: ", target_pc)
-    print(constraints)
+    init = plg.SymState()
 
     target_pc = {-1}
-    constraints = plg.gexecute(
-        prg,
+    executor = plg.SExecutor(
         optimizer,
-        init_symstate,
-        target_pc,
-        max_depth,
         maxSAT,
         maxUNSAT,
         max_num_trials,
         ignore_memory,
         use_dpll,
         verbose_level,
+        False
     )
+    executor.run(prg, target_pc, init, max_depth)
+
     print("target_pcs: ", target_pc)
-    print(constraints)
+    print(executor.constraints_cache)
