@@ -15,6 +15,8 @@ One practical usage of Gymbo is debugging ML models like neural networks to dete
 
 Another unique feature of Gymbo is that it can track the probabilistic symbolic variables. We adopt the PBRANCH algorithm proposed in `[3]` and currently support the discrete uniform, bernoulli, and binomial distributions.
 
+<img src="img/gymbo_prob_intuition.drawio.svg">
+
 ## Install
 
 ```bash
