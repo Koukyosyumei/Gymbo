@@ -13,6 +13,7 @@ import os
 import pytest
 
 import gymbo
+from gymbo.parser import parse_addr
 
 HERE = os.path.dirname(__file__)
 EX = os.path.join(HERE, os.pardir, "examples")
@@ -72,6 +73,26 @@ def test_hello_emits_bytes():
 
 def test_cat_echoes_to_sentinel():
     assert out("cat.gym", input=[72, 105, 0]) == [72.0, 105.0]
+
+
+# ---- parser address operands ----
+@pytest.mark.parametrize(
+    ("token", "expected"),
+    [("0", 0), ("-17", -17), ("[0]", 0), ("[-17]", -17)],
+)
+def test_parse_addr_accepts_bare_and_bracketed_integer_boundaries(token, expected):
+    assert parse_addr(token) == expected
+
+
+@pytest.mark.parametrize("token", ["", "[]", "[1", "1]", "1.0"])
+def test_parse_addr_rejects_malformed_or_non_integer_tokens(token):
+    with pytest.raises(ValueError):
+        parse_addr(token)
+
+
+def test_parse_addr_requires_a_string_token():
+    with pytest.raises(AttributeError):
+        parse_addr(None)
 
 
 # ---- SIGMOID: a branchless differentiable gate, same in both interpreters ----
